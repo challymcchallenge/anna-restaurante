@@ -17,6 +17,10 @@ const STROKE: Record<string, string> = {
   book: '<path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/>',
   'chevron-right': '<path d="m9 18 6-6-6-6"/>',
   'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+  'chevron-left': '<path d="m15 18-6-6 6-6"/>',
+  door: '<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16"/><path d="M2 21h20"/><path d="M9 12h.01"/>',
+  minus: '<path d="M5 12h14"/>',
+  plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
   image:
     '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
   award:
@@ -33,6 +37,8 @@ const STROKE: Record<string, string> = {
 }
 
 const FILL: Record<string, string> = {
+  // Ornament de separare în bara de cazare: patru romburi (desenat pentru proiect; nu un caracter Unicode).
+  ornament: '<path d="M12 4.5 15 7.5 12 10.5 9 7.5Z M16.5 9 19.5 12 16.5 15 13.5 12Z M12 13.5 15 16.5 12 19.5 9 16.5Z M7.5 9 10.5 12 7.5 15 4.5 12Z"/>',
   facebook:
     '<path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/>',
   instagram:

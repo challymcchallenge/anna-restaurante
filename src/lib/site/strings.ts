@@ -24,12 +24,25 @@ export const UI = {
     arrive: 'Sosire',
     depart: 'Plecare',
     guests: 'Oaspeți',
+    roomsGuests: 'Camere și oaspeți',
     adults: 'Adulți',
     children: 'Copii',
     continue: 'Continuă',
     close: 'Închide',
     departAfterArrive: 'Plecarea trebuie să fie după sosire.',
     mobileNote: 'Cerere de ofertă, confirmată de hotel',
+    chooseArrive: 'Alege data sosirii',
+    chooseDepart: 'Alege data plecării',
+    prevMonth: 'Luna anterioară',
+    nextMonth: 'Luna următoare',
+    weekdays: ['L', 'Ma', 'Mi', 'J', 'V', 'S', 'D'],
+    weekdaysLong: ['luni', 'marți', 'miercuri', 'joi', 'vineri', 'sâmbătă', 'duminică'],
+    room: (n: number) => `Camera ${n}`,
+    addRoom: 'Adaugă cameră',
+    removeRoom: 'Șterge camera',
+    fewer: (what: string) => `Mai puțini: ${what.toLowerCase()}`,
+    more: (what: string) => `Mai mulți: ${what.toLowerCase()}`,
+    today: 'azi',
   },
   reservationsPhone: 'Rezervări mese',
   eventsPhone: 'Saloane și evenimente',
@@ -53,6 +66,13 @@ export const UI = {
   pause: 'Oprește derularea imaginilor',
   play: 'Pornește derularea imaginilor',
 } as const
+
+/** Plural românesc: 1 adult, 2 adulți, 20 de adulți. */
+export function plural(n: number, one: string, many: string): string {
+  if (n === 1) return `1 ${one}`
+  const rest = n % 100
+  return n >= 20 && (rest === 0 || rest >= 20) ? `${n} de ${many}` : `${n} ${many}`
+}
 
 export const DAY_LABELS: Record<string, string> = {
   mon: 'Luni',
