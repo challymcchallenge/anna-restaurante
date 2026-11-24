@@ -16,6 +16,8 @@ const DESKTOP = '(min-width: 1024px)'
  * Un cadru al copertei: imaginea de telefon (9:16) sub 1024 px, cea de desktop (16:9) de la 1024 px,
  * fiecare în AVIF și WebP. Dacă lipsește una, se folosește cealaltă.
  */
+const MOBILE_SIZES = '88vw'
+
 function Frame({
   desktop,
   mobile,
@@ -41,8 +43,10 @@ function Frame({
     <picture className={className}>
       {ds.avif && <source media={DESKTOP} type="image/avif" {...set(ds.avif)} sizes="100vw" />}
       {ds.webp && <source media={DESKTOP} type="image/webp" {...set(ds.webp)} sizes="100vw" />}
-      {ms.avif && <source type="image/avif" {...set(ms.avif)} sizes="100vw" />}
-      {ms.webp && <source type="image/webp" {...set(ms.webp)} sizes="100vw" />}
+      {/* Pe telefon, coperta cere o variantă cu ~12% sub densitatea ecranului: sub umbra copertei nu
+          se vede, iar fișierul are cam jumătate din mărime pe 4G (D-60, LCP cu fotografiile reale). */}
+      {ms.avif && <source type="image/avif" {...set(ms.avif)} sizes={MOBILE_SIZES} />}
+      {ms.webp && <source type="image/webp" {...set(ms.webp)} sizes={MOBILE_SIZES} />}
       <img
         {...(deferred ? { 'data-src': ms.src } : { src: ms.src })}
         width={ms.width || undefined}
