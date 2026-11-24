@@ -16,6 +16,7 @@ import {
 } from '@/lib/site/wines'
 
 import { ExampleTag } from './Bits'
+import { ChipFilter } from './ChipFilter'
 
 /**
  * Lista de vinuri (D-46): pe Acasă în formatul închis, la /catalog-vinuri în formatul deschis.
@@ -60,26 +61,12 @@ export function GroupLogo({
 
 export function WineFilter({ name, types }: { name: string; types: WineType[] }) {
   if (types.length < 2) return null
-  const options: { value: string; label: string }[] = [
-    { value: 'all', label: UI.allWines },
-    ...types.map((t) => ({ value: t, label: typeLabel(t) })),
-  ]
   return (
-    <fieldset className="wine-filter">
-      <legend className="sr-only">{UI.wineFilter}</legend>
-      {options.map((o) => (
-        <span key={o.value} className="wine-chip">
-          <input
-            type="radio"
-            name={name}
-            id={`${name}-${o.value}`}
-            value={o.value}
-            defaultChecked={o.value === 'all'}
-          />
-          <label htmlFor={`${name}-${o.value}`}>{o.label}</label>
-        </span>
-      ))}
-    </fieldset>
+    <ChipFilter
+      name={name}
+      legend={UI.wineFilter}
+      options={[{ value: 'all', label: UI.allWines }, ...types.map((t) => ({ value: t, label: typeLabel(t) }))]}
+    />
   )
 }
 

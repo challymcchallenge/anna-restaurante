@@ -69,6 +69,14 @@ export const UI = {
       return 'Vezi site-ul hotelului'
     }
   },
+  /** Galeria (F3 pasul 8) */
+  galleryFilter: 'Categoria',
+  allPhotos: 'Toate',
+  enlarge: (label: string) => (label ? `Mărește: ${label}` : 'Mărește fotografia'),
+  galleryDialog: 'Galerie: fotografia mărită',
+  galleryCount: (i: number, n: number) => `${i} din ${n}`,
+  close: 'Închide',
+  clip: 'Clip',
   /** Lista de vinuri (D-46) */
   wineListTitle: 'Lista de vinuri',
   nonVintage: 'NV',

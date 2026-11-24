@@ -27,7 +27,7 @@ export function WineSearch({ boardId }: { boardId: string }) {
     if (!board) return
     const terms = norm(query).split(/\s+/).filter(Boolean)
     const apply = () => {
-      const type = board.querySelector<HTMLInputElement>('.wine-filter input:checked')?.value ?? 'all'
+      const type = board.querySelector<HTMLInputElement>('.chip-filter input:checked')?.value ?? 'all'
       let visible = 0
       board.querySelectorAll<HTMLElement>('.wine-group').forEach((group) => {
         let inGroup = 0
@@ -53,7 +53,7 @@ export function WineSearch({ boardId }: { boardId: string }) {
   }, [query, boardId])
 
   const reset = () => {
-    const all = document.getElementById(boardId)?.querySelector<HTMLInputElement>('.wine-filter input[value="all"]')
+    const all = document.getElementById(boardId)?.querySelector<HTMLInputElement>('.chip-filter input[value="all"]')
     if (all) {
       all.checked = true
       all.dispatchEvent(new Event('change', { bubbles: true }))

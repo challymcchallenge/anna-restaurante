@@ -9,6 +9,8 @@ import type {
   DishCategory,
   Event,
   Faq,
+  Gallery,
+  GalleryCategory,
   GroupLink,
   HomePage,
   LegalPage,
@@ -52,6 +54,8 @@ export type SiteData = {
   /** F3 pasul 7: tipurile de camere și recenziile hotelului (content-model 4.9, 5.6). */
   roomTypes: RoomType[]
   hotelReviews: Review[]
+  /** F3 pasul 8: elementele de galerie bifate „Pe Acasă” (cel mult 8), cu fișierul și categoria. */
+  galleryHome: Gallery[]
 }
 
 /** Începutul zilei de azi în ora României, ca o seară de azi să rămână în agendă toată ziua. */
@@ -119,6 +123,7 @@ async function load(hostname: string): Promise<SiteData | null> {
     faqs,
     roomTypes,
     hotelReviews,
+    galleryHome,
   ] = await Promise.all([
       payload.find({ collection: 'settings', where: own, limit: 1, depth: 1 }),
       // depth 2: clipurile din hero aduc și varianta eficientă și imaginea de început.
@@ -173,6 +178,8 @@ async function load(hostname: string): Promise<SiteData | null> {
         limit: 3,
         depth: 0,
       }),
+      // depth 2: clipurile aduc și posterul, cu variantele lui.
+      payload.find({ collection: 'gallery', where: of([{ onHome: { equals: true } }]), sort: '_order', limit: 8, depth: 2 }),
     ])
 
 
@@ -192,6 +199,7 @@ async function load(hostname: string): Promise<SiteData | null> {
     faqs: faqs.docs,
     roomTypes: roomTypes.docs,
     hotelReviews: hotelReviews.docs,
+    galleryHome: galleryHome.docs,
   }
 }
 
@@ -231,3 +239,22 @@ async function loadWineList(tenantId: number): Promise<WineRow[]> {
 const wineListCached = unstable_cache(loadWineList, ['wine-list', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
 export const getWineList = cache((tenantId: number) => wineListCached(tenantId))
+
+/**
+ * Galeria completă de la /galerie (S-05, F-30): elementele active, în ordinea din panou, și
+ * categoriile care au cel puțin un element. Separat de `getSite`, ca Acasă să nu încarce tot.
+ */
+async function loadGallery(tenantId: number): Promise<{ items: Gallery[]; categories: GalleryCategory[] }> {
+  const payload = await getPayload({ config: await config })
+  const of: Where = { and: [{ tenant: { equals: tenantId } }, active] }
+  const [items, categories] = await Promise.all([
+    payload.find({ collection: 'gallery', where: of, sort: '_order', limit: 500, pagination: false, depth: 2 }),
+    payload.find({ collection: 'gallery-categories', where: of, sort: '_order', limit: 30, depth: 0 }),
+  ])
+  const used = new Set(items.docs.map((i) => (typeof i.category === 'object' ? i.category?.id : i.category)))
+  return { items: items.docs, categories: categories.docs.filter((c) => used.has(c.id)) }
+}
+
+const galleryCached = unstable_cache(loadGallery, ['gallery', BUILD], { tags: [SITE_TAG], revalidate: 600 })
+
+export const getGallery = cache((tenantId: number) => galleryCached(tenantId))

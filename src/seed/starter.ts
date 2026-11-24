@@ -33,6 +33,11 @@ type SeedFile = {
   tenantSlug: string
   settings?: Record<string, unknown>
   homePage?: Record<string, unknown>
+  /**
+   * Elementele unei colecții. Valorile pot face trimitere la fișiere din `media`
+   * (`{ "$media": "cheie" }`) sau la documente deja create (`{ "$ref": { "collection": "…",
+   * "where": { "name": "…" } } }`, de exemplu categoria unui element de galerie, F3 pasul 8).
+   */
   collections?: Partial<Record<CollectionSlug, Record<string, unknown>[]>>
   media?: SeedMedia[]
   /** Câmp din Setări restaurant → `key` din `media`. Se completează doar câmpurile goale. */
@@ -207,6 +212,39 @@ export async function seedStarterContent({
     const ctx = { seed: true }
     const now = new Date().toISOString()
     const alreadyLogged = Object.keys(log).length
+    /** Id-urile fișierelor din `media`, după cheie (completate la încărcare). */
+    const ids: Record<string, number | string> = {}
+
+    /** `{ "$media": "cheie" }` → id-ul fișierului; `{ "$ref": … }` → id-ul documentului găsit. */
+    const resolveRefs = async (value: unknown): Promise<unknown> => {
+      if (Array.isArray(value)) return Promise.all(value.map(resolveRefs))
+      if (!isPlainObject(value)) return value
+      if (typeof value.$media === 'string') {
+        const id = ids[value.$media]
+        if (id === undefined) throw new Error(`[seed] fișierul „${value.$media}” nu există în media`)
+        return id
+      }
+      if (isPlainObject(value.$ref)) {
+        const ref = value.$ref as { collection: CollectionSlug; where: Record<string, string> }
+        const { docs: found } = await payload.find({
+          collection: ref.collection,
+          where: {
+            and: [
+              { tenant: { equals: tenant.id } },
+              ...Object.entries(ref.where).map(([k, v]) => ({ [k]: { equals: v } })),
+            ],
+          },
+          limit: 1,
+          depth: 0,
+          req,
+        })
+        if (!found[0]) throw new Error(`[seed] ${ref.collection} ${JSON.stringify(ref.where)} nu există`)
+        return found[0].id
+      }
+      return Object.fromEntries(
+        await Promise.all(Object.entries(value).map(async ([k, v]) => [k, await resolveRefs(v)] as const)),
+      )
+    }
 
     /**
      * O colecție se aplică o singură dată: dacă apare în jurnal, nu se mai atinge (poate fi golită
@@ -220,27 +258,27 @@ export async function seedStarterContent({
         req,
       })
       if (totalDocs === 0) {
+        let count = 0
         for (const item of items) {
-          await payload.create({
-            collection,
-            data: { ...(resolveValues(item) as object), ...base } as any,
-            req,
-            context: ctx,
-          })
+          let data: unknown
+          try {
+            data = await resolveRefs(resolveValues(item))
+          } catch (error) {
+            // Un fișier șters intenționat din panou nu oprește build-ul: elementul se sare.
+            payload.logger.warn(`${(error as Error).message}; sar peste un element din ${collection}.`)
+            continue
+          }
+          await payload.create({ collection, data: { ...(data as object), ...base } as any, req, context: ctx })
+          count++
         }
-        created[collection] = items.length
+        created[collection] = count
       }
       log[collection] = now
     }
 
+
     if (seed.settings) await applyOnce('settings', [seed.settings])
     if (seed.homePage) await applyOnce('home-page', [seed.homePage])
-    for (const [collection, items] of Object.entries(seed.collections ?? {}) as [
-      CollectionSlug,
-      Record<string, unknown>[],
-    ][]) {
-      await applyOnce(collection, items)
-    }
 
     for (const list of seed.lists ?? []) {
       const key = `list:${list.collection}:${list.version}`
@@ -278,7 +316,6 @@ export async function seedStarterContent({
       log[key] = now
     }
 
-    const ids: Record<string, number | string> = {}
     if (seed.media?.length) {
       for (const item of seed.media) {
         const { docs: found } = await payload.find({
@@ -337,6 +374,14 @@ export async function seedStarterContent({
           }
         }
       }
+    }
+
+    // Colecțiile se aplică după încărcarea fișierelor, ca elementele să le poată folosi ($media).
+    for (const [collection, items] of Object.entries(seed.collections ?? {}) as [
+      CollectionSlug,
+      Record<string, unknown>[],
+    ][]) {
+      await applyOnce(collection, items)
     }
 
     for (const fill of seed.mediaFill ?? []) {

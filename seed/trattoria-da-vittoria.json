@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026.",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49).",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -550,6 +550,88 @@
       {
         "reason": "Alte motive",
         "explanation": "Vă rugăm să ne relatați incidentul mai jos."
+      }
+    ],
+    "gallery": [
+      {
+        "file": {
+          "$media": "fotoCuptor"
+        },
+        "category": {
+          "$ref": {
+            "collection": "gallery-categories",
+            "where": {
+              "name": "Restaurant"
+            }
+          }
+        },
+        "caption": "Pizza scoasă din cuptorul cu lemne",
+        "onHome": true,
+        "placeholder": true
+      },
+      {
+        "file": {
+          "$media": "fotoPizza"
+        },
+        "category": {
+          "$ref": {
+            "collection": "gallery-categories",
+            "where": {
+              "name": "Preparate"
+            }
+          }
+        },
+        "caption": "Pizza Margherita",
+        "onHome": true,
+        "placeholder": true
+      },
+      {
+        "file": {
+          "$media": "fotoPaste"
+        },
+        "category": {
+          "$ref": {
+            "collection": "gallery-categories",
+            "where": {
+              "name": "Preparate"
+            }
+          }
+        },
+        "caption": "Paste cu sos de roșii",
+        "onHome": true,
+        "placeholder": true
+      },
+      {
+        "file": {
+          "$media": "fotoVin"
+        },
+        "category": {
+          "$ref": {
+            "collection": "gallery-categories",
+            "where": {
+              "name": "Vinuri"
+            }
+          }
+        },
+        "caption": "Un pahar de roșu",
+        "onHome": true,
+        "placeholder": true
+      },
+      {
+        "file": {
+          "$media": "fotoRecomandari"
+        },
+        "category": {
+          "$ref": {
+            "collection": "gallery-categories",
+            "where": {
+              "name": "Preparate"
+            }
+          }
+        },
+        "caption": "Paste cu legume",
+        "onHome": true,
+        "placeholder": true
       }
     ]
   },

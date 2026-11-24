@@ -581,23 +581,23 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .wines-cta { display: flex; justify-content: center; margin-top: var(--s7); }
 
 /* Filtrul pe tip: butoane radio afișate ca jetoane; merge fără JavaScript (:has) */
-.wine-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); min-width: 0; margin: var(--s6) 0 0; padding: 0; border: 0; }
-.wine-chip { position: relative; display: inline-flex; }
-.wine-chip input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
-.wine-chip label {
+.chip-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); min-width: 0; margin: var(--s6) 0 0; padding: 0; border: 0; }
+.chip { position: relative; display: inline-flex; }
+.chip input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.chip label {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s4); border: 1px solid var(--ghost-border);
   border-radius: var(--radius-btn); font: 600 15px/1 var(--font-text); color: var(--c-on-dark);
   transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
 }
-.wine-chip input:hover + label { border-color: var(--c-accent); }
-.wine-chip input:checked + label { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-on-accent); }
-.wine-chip input:focus-visible + label { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.chip input:hover + label { border-color: var(--c-accent); }
+.chip input:checked + label { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-on-accent); }
+.chip input:focus-visible + label { outline: 2px solid var(--c-accent); outline-offset: 3px; }
 .wine-board [hidden] { display: none !important; }
-.wine-board:has(.wine-filter input[value='sparkling']:checked) .wine-group:not([data-type='sparkling']),
-.wine-board:has(.wine-filter input[value='white']:checked) .wine-group:not([data-type='white']),
-.wine-board:has(.wine-filter input[value='rose']:checked) .wine-group:not([data-type='rose']),
-.wine-board:has(.wine-filter input[value='red']:checked) .wine-group:not([data-type='red']),
-.wine-board:has(.wine-filter input[value='dessert']:checked) .wine-group:not([data-type='dessert']) { display: none; }
+.wine-board:has(.chip-filter input[value='sparkling']:checked) .wine-group:not([data-type='sparkling']),
+.wine-board:has(.chip-filter input[value='white']:checked) .wine-group:not([data-type='white']),
+.wine-board:has(.chip-filter input[value='rose']:checked) .wine-group:not([data-type='rose']),
+.wine-board:has(.chip-filter input[value='red']:checked) .wine-group:not([data-type='red']),
+.wine-board:has(.chip-filter input[value='dessert']:checked) .wine-group:not([data-type='dessert']) { display: none; }
 
 .wine-groups { display: grid; gap: var(--s6); margin-top: var(--s6); }
 .wine-group-title {
@@ -613,8 +613,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 @media (min-width: 1024px) {
   .wines-logo img, .cover-logo img { height: 40px; }
   .wine-groups { grid-template-columns: 1fr 1fr; column-gap: var(--s8); row-gap: var(--s7); margin-top: var(--s7); }
-  .wine-board:has(.wine-filter input:not([value='all']):checked) .wine-groups { grid-template-columns: 1fr; }
-  .wine-board:has(.wine-filter input:not([value='all']):checked) .wine-items { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s8); }
+  .wine-board:has(.chip-filter input:not([value='all']):checked) .wine-groups { grid-template-columns: 1fr; }
+  .wine-board:has(.chip-filter input:not([value='all']):checked) .wine-items { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s8); }
   .wine-name, .wine-price { font-size: 22px; }
 }
 
@@ -696,11 +696,11 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 /* Pe foaia mai deschisă (desktop), textul secundar e puțin mai închis, ca să rămână peste 5:1. */
 .wine-sheet { max-width: 760px; margin-inline: auto; --c-text-2: color-mix(in srgb, var(--c-text) 78%, var(--c-bg)); }
 .wine-tools { display: grid; gap: var(--s4); }
-.wine-sheet .wine-filter { justify-content: flex-start; margin: 0; }
-.wine-sheet .wine-chip label { color: var(--c-text); border-color: var(--line-paper-strong); }
-.wine-sheet .wine-chip input:hover + label { border-color: var(--c-text); }
-.wine-sheet .wine-chip input:checked + label { background: var(--c-text); border-color: var(--c-text); color: var(--c-bg); }
-.wine-sheet .wine-chip input:focus-visible + label { outline-color: var(--c-accent-2); }
+.wine-sheet .chip-filter { justify-content: flex-start; margin: 0; }
+.paper-section .chip label { color: var(--c-text); border-color: var(--line-paper-strong); }
+.paper-section .chip input:hover + label { border-color: var(--c-text); }
+.paper-section .chip input:checked + label { background: var(--c-text); border-color: var(--c-text); color: var(--c-bg); }
+.paper-section .chip input:focus-visible + label { outline-color: var(--c-accent-2); }
 .wine-search { position: relative; }
 .wine-search .icon { position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); color: var(--c-text-2); pointer-events: none; }
 .wine-search input {
@@ -894,4 +894,84 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .hotel-reviews { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); column-gap: var(--s7); }
   .hotel-reviews blockquote p { max-width: 40ch; }
   .hotel-room-name { font-size: 26px; }
+}
+
+/* ---------- Galeria (F3 pasul 8, S-05, F-30, F-31): mozaic pe categorii ---------- */
+/* Rândul are 0,42 din lățimea unei coloane: pătrat = 1 × 2 (≈ 4:3), înalt = 1 × 3 (≈ 4:5), lat = 2 × 3 (≈ 3:2). */
+.gal-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s3) var(--s5); }
+.gal-frame { container-type: inline-size; margin-top: var(--s6); }
+.gal-mosaic {
+  --cols: 2; --gap: var(--s2);
+  list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: dense; gap: var(--gap);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.42);
+}
+.gal-item { position: relative; min-width: 0; grid-row: span 2; }
+.gal-item--tall { grid-row: span 3; }
+.gal-item--wide { grid-column: span 2; grid-row: span 3; }
+.gal-link { display: block; width: 100%; height: 100%; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.gal-link picture, .gal-link img { width: 100%; height: 100%; }
+.gal-link img { object-fit: cover; transition: transform 700ms var(--ease-out); }
+.gal-link:hover img { transform: scale(1.03); }
+.gal-link:focus-visible { outline: 2px solid var(--c-accent-2); outline-offset: 3px; }
+.gal-play { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.gal-play .icon { width: 56px; height: 56px; padding: 16px; border-radius: 50%; background: color-mix(in srgb, var(--c-dark) 72%, transparent); color: var(--c-on-dark); }
+.gallery .section-cta { margin-top: var(--s6); }
+.gallery-page { padding-top: var(--s6); }
+.gal-board .chip-filter { justify-content: flex-start; margin: 0; }
+.gal-board .gal-frame { margin-top: var(--s5); }
+.gal-credits { margin-top: var(--s6); font-size: 14px; color: var(--c-text-2); }
+/* Acasă: celula e aproape pătrată (0,8); plăcile din așezarea fixă */
+.gal-mosaic--home { grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.8); }
+.gal-mosaic--home .gal-item { grid-row: span 1; }
+.gal-mosaic--home .gal-item--big, .gal-mosaic--home .gal-item--solo { grid-column: span 2; grid-row: span 2; }
+.gal-mosaic--home .gal-item--w2, .gal-mosaic--home .gal-item--w4 { grid-column: span 2; }
+@media (min-width: 1024px) {
+  .gal-mosaic { --cols: 4; --gap: var(--s3); }
+  .gal-mosaic--home .gal-item--w4, .gal-mosaic--home .gal-item--solo { grid-column: span 4; }
+  .gal-mosaic--home .gal-item--solo { grid-row: span 2; }
+}
+
+/* Fotografia mare: dialog nativ pe tot ecranul, pe copertă */
+.lightbox {
+  width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; overflow: hidden;
+  background: var(--c-dark); color: var(--c-on-dark);
+}
+.lightbox::backdrop { background: var(--c-dark); }
+.lightbox[open] { display: grid; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); }
+html:has(.lightbox[open]) { overflow: hidden; }
+.lightbox-figure {
+  display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: var(--s4); width: 100%; height: 100%; min-height: 0; margin: 0;
+  padding: calc(var(--s8) + env(safe-area-inset-top, 0px)) var(--s4) calc(var(--s7) + 48px + env(safe-area-inset-bottom, 0px));
+}
+.lightbox-media { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 0; overflow: hidden; }
+.lightbox-media picture { display: contents; }
+.lightbox-media img, .lightbox-media video {
+  display: block; width: auto; height: auto; max-width: 100%; max-height: min(100%, calc(100dvh - 220px)); object-fit: contain; border-radius: var(--radius-box);
+}
+.lightbox-caption { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1) var(--s4); max-width: 70ch; font-size: 15px; line-height: 1.45; text-align: center; }
+.lightbox-count { color: var(--c-on-dark-2); font-variant-numeric: tabular-nums; }
+.lightbox .icon-btn {
+  position: absolute; z-index: 2; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0;
+  border: 1px solid var(--ghost-border); border-radius: 50%; background: var(--c-dark); color: var(--c-on-dark); cursor: pointer;
+  transition: border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.lightbox .icon-btn:hover { border-color: var(--c-accent); color: var(--c-accent); }
+.lightbox .icon-btn:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.lightbox .icon-btn .icon { width: 22px; height: 22px; }
+.lightbox-close { position: absolute; z-index: 2; top: calc(var(--s4) + env(safe-area-inset-top, 0px)); right: var(--s4); margin: 0; }
+.lightbox-close .icon-btn { position: static; }
+.lightbox-prev, .lightbox-next { bottom: calc(var(--s4) + env(safe-area-inset-bottom, 0px)); }
+.lightbox-prev { left: var(--s4); }
+.lightbox-next { right: var(--s4); }
+@media (min-width: 768px) {
+  .lightbox-figure { padding: var(--s8) calc(var(--s4) + 64px) var(--s6); }
+  .lightbox-prev, .lightbox-next { top: 50%; bottom: auto; transform: translateY(-50%); }
+  .lightbox-prev { left: var(--s5); }
+  .lightbox-next { right: var(--s5); }
+  .lightbox-close { right: var(--s5); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open] .lightbox-media > * { animation: lightbox-in 280ms var(--ease-out); }
+  @keyframes lightbox-in { from { opacity: 0; transform: scale(0.985); } }
 }

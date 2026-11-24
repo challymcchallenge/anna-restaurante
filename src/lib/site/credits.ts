@@ -32,6 +32,14 @@ export function pageMediaCredits(site: SiteData): string[] {
     refs.push(...((section(home, 'hotel')?.photos ?? []) as MediaRef[]), ...site.roomTypes.map((r) => r.photo))
   }
 
+  // F3 pasul 8: galeria de pe Acasă (fotografia sau posterul clipului).
+  if (isOn(home, 'gallery')) {
+    for (const item of site.galleryHome ?? []) {
+      const file = asMedia(item.file as MediaRef)
+      refs.push(file?.kind === 'clip' ? (file.poster as MediaRef) : file)
+    }
+  }
+
   const credits = refs
     .map(asMedia)
     .filter((m): m is Media => Boolean(m?.credit))
