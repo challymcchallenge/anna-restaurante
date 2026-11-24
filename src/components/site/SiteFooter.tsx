@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
@@ -146,11 +147,11 @@ export function SiteFooter({ site }: { site: SiteData }) {
               <ul className="footer-links">
                 {site.legalPages.map((p) => (
                   <li key={p.id}>
-                    <a href={`/${p.slug}`}>{p.title}</a>
+                    <Link href={`/${p.slug}`}>{p.title}</Link>
                   </li>
                 ))}
                 <li>
-                  <a href="/formular-de-reclamatie">{UI.complaints}</a>
+                  <Link href="/formular-de-reclamatie">{UI.complaints}</Link>
                 </li>
               </ul>
               <p className="footer-lang">

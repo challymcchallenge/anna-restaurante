@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza.",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”.",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -476,7 +476,7 @@
         "title": "Termeni și condiții",
         "slug": "termeni",
         "content": {
-          "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25)."
+          "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Despre site\nSite-ul prezintă restaurantul Trattoria da Vittoria, Strada Victoriei nr. 8, Târgu Jiu, parte a Grupului ANNA. [de completat: firma care administrează restaurantul, CUI, sediul social]\n\n## Rezervări de masă\nRezervările de masă se fac în fereastra ialoc și sunt confirmate de ialoc și de restaurant.\n\n## Cereri prin formular\nCererile trimise prin formular (eveniment privat, curs de pizza pentru copii, cazare, întrebare) nu sunt rezervări confirmate. Restaurantul, sau Hotel ANNA pentru cazare, te contactează pentru confirmare.\n\n## Prețuri\nPrețurile afișate pe site, de exemplu în lista de vinuri, sunt în lei. [de confirmat: prețul valabil este cel din restaurant în ziua consumației]\n\n## Conținutul site-ului\n[de completat de jurist: drepturile asupra textelor, fotografiilor și mărcilor]\n\n## Contact\nRezervări mese: +40 356 630 238. Saloane și evenimente: +40 764 816 462."
         },
         "placeholder": true
       },
@@ -484,7 +484,7 @@
         "title": "Politica de confidențialitate",
         "slug": "confidentialitate",
         "content": {
-          "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25). Trebuie să menționeze serviciile terțe ale ferestrei de rezervare ialoc: Google Analytics și PostHog (F0, ialoc.md)."
+          "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Cine răspunde de date\n[de completat de jurist: operatorul de date, CUI, sediul, adresa de contact pentru datele personale]\n\n## Ce date primim\nCând trimiți o cerere sau o sesizare prin formular, păstrăm ce ai scris: numele, telefonul, emailul, mesajul și detaliile cererii (de exemplu datele sejurului, numărul de invitați sau motivul sesizării), împreună cu acordul tău și momentul în care l-ai dat. Nu cerem date despre sănătate.\n\n## De ce le folosim\nDoar ca să-ți răspundem la cerere. Cererile de cazare merg la Hotel ANNA, iar celelalte la echipa restaurantului.\n\n## Unde se păstrează\n- Baza de date: Supabase, în Uniunea Europeană (Irlanda).\n- Serverele site-ului: Vercel, în Uniunea Europeană (Dublin).\n- [de completat: cât timp se păstrează cererile]\n\n## Servicii terțe\n- Rezervările de masă se fac în fereastra ialoc, care încarcă Google Analytics (fără cookies, cu consimțământul refuzat) și PostHog.\n- Harta Google se încarcă doar dacă apeși „Arată harta”.\n- [din faza 5] Emailurile de confirmare pleacă prin Resend.\n\n## Drepturile tale\n[de completat de jurist: dreptul de acces, de rectificare, de ștergere, de opoziție, plângerea la ANSPDCP și cum ne contactezi]"
         },
         "placeholder": true
       },
@@ -492,7 +492,7 @@
         "title": "Politica de cookies",
         "slug": "cookies",
         "content": {
-          "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25)."
+          "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Ce cookies folosește site-ul\nSite-ul public nu scrie cookies și nu păstrează nimic în browserul tău. Panoul de administrare folosește un cookie de sesiune, doar pentru personalul restaurantului.\n\n## Servicii terțe\n- Fereastra de rezervare ialoc nu setează cookies în configurația actuală (verificat pe 24.11.2026).\n- Harta Google, după ce apeși „Arată harta”, poate seta cookies Google.\n\n## Notă pentru jurist\nDacă în contul ialoc se pornesc pixelii de marketing (Google Ads, Meta, TikTok), e nevoie de un banner de consimțământ.\n\n## Cum controlezi cookies\n[de completat de jurist]"
         },
         "placeholder": true
       }
@@ -2714,6 +2714,45 @@
       },
       "to": {
         "$richText": "Din pagina Evenimente private sau la telefon +40 764 816 462."
+      }
+    },
+    {
+      "collection": "legal-pages",
+      "match": {
+        "slug": "termeni"
+      },
+      "field": "content",
+      "from": {
+        "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25)."
+      },
+      "to": {
+        "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Despre site\nSite-ul prezintă restaurantul Trattoria da Vittoria, Strada Victoriei nr. 8, Târgu Jiu, parte a Grupului ANNA. [de completat: firma care administrează restaurantul, CUI, sediul social]\n\n## Rezervări de masă\nRezervările de masă se fac în fereastra ialoc și sunt confirmate de ialoc și de restaurant.\n\n## Cereri prin formular\nCererile trimise prin formular (eveniment privat, curs de pizza pentru copii, cazare, întrebare) nu sunt rezervări confirmate. Restaurantul, sau Hotel ANNA pentru cazare, te contactează pentru confirmare.\n\n## Prețuri\nPrețurile afișate pe site, de exemplu în lista de vinuri, sunt în lei. [de confirmat: prețul valabil este cel din restaurant în ziua consumației]\n\n## Conținutul site-ului\n[de completat de jurist: drepturile asupra textelor, fotografiilor și mărcilor]\n\n## Contact\nRezervări mese: +40 356 630 238. Saloane și evenimente: +40 764 816 462."
+      }
+    },
+    {
+      "collection": "legal-pages",
+      "match": {
+        "slug": "confidentialitate"
+      },
+      "field": "content",
+      "from": {
+        "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25). Trebuie să menționeze serviciile terțe ale ferestrei de rezervare ialoc: Google Analytics și PostHog (F0, ialoc.md)."
+      },
+      "to": {
+        "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Cine răspunde de date\n[de completat de jurist: operatorul de date, CUI, sediul, adresa de contact pentru datele personale]\n\n## Ce date primim\nCând trimiți o cerere sau o sesizare prin formular, păstrăm ce ai scris: numele, telefonul, emailul, mesajul și detaliile cererii (de exemplu datele sejurului, numărul de invitați sau motivul sesizării), împreună cu acordul tău și momentul în care l-ai dat. Nu cerem date despre sănătate.\n\n## De ce le folosim\nDoar ca să-ți răspundem la cerere. Cererile de cazare merg la Hotel ANNA, iar celelalte la echipa restaurantului.\n\n## Unde se păstrează\n- Baza de date: Supabase, în Uniunea Europeană (Irlanda).\n- Serverele site-ului: Vercel, în Uniunea Europeană (Dublin).\n- [de completat: cât timp se păstrează cererile]\n\n## Servicii terțe\n- Rezervările de masă se fac în fereastra ialoc, care încarcă Google Analytics (fără cookies, cu consimțământul refuzat) și PostHog.\n- Harta Google se încarcă doar dacă apeși „Arată harta”.\n- [din faza 5] Emailurile de confirmare pleacă prin Resend.\n\n## Drepturile tale\n[de completat de jurist: dreptul de acces, de rectificare, de ștergere, de opoziție, plângerea la ANSPDCP și cum ne contactezi]"
+      }
+    },
+    {
+      "collection": "legal-pages",
+      "match": {
+        "slug": "cookies"
+      },
+      "field": "content",
+      "from": {
+        "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25)."
+      },
+      "to": {
+        "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Ce cookies folosește site-ul\nSite-ul public nu scrie cookies și nu păstrează nimic în browserul tău. Panoul de administrare folosește un cookie de sesiune, doar pentru personalul restaurantului.\n\n## Servicii terțe\n- Fereastra de rezervare ialoc nu setează cookies în configurația actuală (verificat pe 24.11.2026).\n- Harta Google, după ce apeși „Arată harta”, poate seta cookies Google.\n\n## Notă pentru jurist\nDacă în contul ialoc se pornesc pixelii de marketing (Google Ads, Meta, TikTok), e nevoie de un banner de consimțământ.\n\n## Cum controlezi cookies\n[de completat de jurist]"
       }
     }
   ],

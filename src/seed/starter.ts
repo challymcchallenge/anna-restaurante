@@ -118,35 +118,52 @@ function fillEmpty(
   return { patch, paths }
 }
 
-/** Text simplu → document Lexical (paragrafe separate prin rând gol). */
+const textNode = (text: string) => ({
+  type: 'text',
+  text,
+  format: 0,
+  style: '',
+  mode: 'normal',
+  detail: 0,
+  version: 1,
+})
+const blockBase = { format: '', indent: 0, version: 1, direction: 'ltr' }
+
+/** Un bloc de text → noduri Lexical. Titlul („## ”, „### ”) ține doar primul rând; restul blocului se citește separat. */
+function blockNodes(block: string): unknown[] {
+  const [first, ...rest] = block.split('\n')
+  const heading = first.match(/^(#{2,3}) (.+)$/)
+  if (heading) {
+    const node = { type: 'heading', tag: heading[1].length === 2 ? 'h2' : 'h3', ...blockBase, children: [textNode(heading[2])] }
+    return rest.length ? [node, ...blockNodes(rest.join('\n'))] : [node]
+  }
+  const lines = block.split('\n')
+  if (lines.every((l) => l.startsWith('- '))) {
+    return [
+      {
+        type: 'list',
+        listType: 'bullet',
+        start: 1,
+        tag: 'ul',
+        ...blockBase,
+        children: lines.map((l, i) => ({ type: 'listitem', value: i + 1, ...blockBase, children: [textNode(l.slice(2))] })),
+      },
+    ]
+  }
+  return [{ type: 'paragraph', ...blockBase, textFormat: 0, textStyle: '', children: [textNode(block)] }]
+}
+
+/**
+ * Text simplu → document Lexical. Blocurile se despart prin rând gol; un rând care începe cu
+ * „## ” sau „### ” la începutul blocului devine titlu (h2, h3), iar un bloc cu toate rândurile
+ * „- …” devine listă (F3 pasul 10).
+ */
 export function toLexical(text: string) {
   return {
     root: {
       type: 'root',
-      format: '',
-      indent: 0,
-      version: 1,
-      direction: 'ltr',
-      children: text.split(/\n{2,}/).map((paragraph) => ({
-        type: 'paragraph',
-        format: '',
-        indent: 0,
-        version: 1,
-        direction: 'ltr',
-        textFormat: 0,
-        textStyle: '',
-        children: [
-          {
-            type: 'text',
-            text: paragraph,
-            format: 0,
-            style: '',
-            mode: 'normal',
-            detail: 0,
-            version: 1,
-          },
-        ],
-      })),
+      ...blockBase,
+      children: text.split(/\n{2,}/).flatMap(blockNodes),
     },
   }
 }

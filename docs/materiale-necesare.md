@@ -55,7 +55,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | 25 | Cursurile de pizza: vârstă, durată, preț, locuri, cum se confirmă înscrierea. **F3: rândurile apar pe Acasă și pe pagina cursului imediat ce completezi câmpurile** | Pagina Acasă → Cursuri de pizza | F3 | Q-11, OQ #6 |
 | 26 | Termenul de răspuns pe fiecare subiect (cazare, salon, curs, întrebare, sesizare) | Setări → Cereri și emailuri | F3 | Q-34, OQ #7 |
 | ~~27~~ | ~~Destinatarii emailurilor pe subiect și adresa de copie~~ — **primite: D-51** (toate subiectele pornite) | Setări → Cereri și emailuri | — | D-51 |
-| 28 | Textele juridice: termeni, confidențialitate, cookies | Pagini legale (3 pagini provizorii) | F5 | Q-25, OQ #9 |
+| 28 | Textele juridice: termeni, confidențialitate, cookies | Pagini legale: acum ciorne factuale cu „[de completat]” pentru jurist (D-53); juristul le corectează direct în panou și debifează „Provizoriu” | F5 | Q-25, OQ #9 |
 | 29 | ID-ul contului de statistici existent | Setări → Integrări → ID statistici | F5 | D-32 |
 | 30 | Logo-ul oficial al premiului Wine Spectator, cu nivelul și anul | Premii și distincții | la primire | D-20 |
 

@@ -133,6 +133,9 @@ export const UI = {
     complaintOff: 'Momentan primim sesizările la telefon:',
     noSubjects: 'Momentan primim cererile la telefon.',
   },
+  /** Paginile legale (F3 pasul 10) */
+  legalUpdated: (date: string) => `Actualizat la ${date}`,
+  legalToc: 'Cuprins',
   /** Galeria (F3 pasul 8) */
   galleryFilter: 'Categoria',
   galleryMeta: (restaurant: string, count: number, categories: string[]) =>

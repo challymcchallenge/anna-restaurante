@@ -258,3 +258,33 @@ async function loadGallery(tenantId: number): Promise<{ items: Gallery[]; catego
 const galleryCached = unstable_cache(loadGallery, ['gallery', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
 export const getGallery = cache((tenantId: number) => galleryCached(tenantId))
+
+/**
+ * O pagină proprie după adresa scurtă (F3 pasul 10): pagina legală activă cu acest `slug` sau,
+ * dacă nu există, redirecționarea activă din panou (R5, de exemplu /valori-nutritionale).
+ */
+async function loadSlug(
+  tenantId: number,
+  slug: string,
+): Promise<{ page: LegalPage | null; redirect: { to: string; permanent: boolean } | null }> {
+  const payload = await getPayload({ config: await config })
+  const { docs } = await payload.find({
+    collection: 'legal-pages',
+    where: { and: [{ tenant: { equals: tenantId } }, active, { slug: { equals: slug } }] },
+    limit: 1,
+    depth: 0,
+  })
+  if (docs[0]) return { page: docs[0], redirect: null }
+  const { docs: redirects } = await payload.find({
+    collection: 'redirects',
+    where: { and: [{ tenant: { equals: tenantId } }, active, { from: { in: [`/${slug}`, `/${slug}/`] } }] },
+    limit: 1,
+    depth: 0,
+  })
+  const r = redirects[0]
+  return { page: null, redirect: r ? { to: r.to, permanent: r.permanent !== false } : null }
+}
+
+const slugCached = unstable_cache(loadSlug, ['slug-page', BUILD], { tags: [SITE_TAG], revalidate: 600 })
+
+export const getSlugPage = cache((tenantId: number, slug: string) => slugCached(tenantId, slug))

@@ -1082,3 +1082,27 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .map-frame { border: 0; }
 .map-note { margin-top: var(--s2); font-size: 13px; line-height: 1.45; color: var(--c-text-2); }
 .contact-home-side { min-width: 0; }
+
+/* ---------- Paginile legale (F3 pasul 10, content-model 5.12) ---------- */
+.legal-page { padding-top: var(--s7); }
+.legal-grid { display: grid; gap: var(--s7); }
+.legal-body { min-width: 0; max-width: 70ch; }
+.legal-body .section-tag { margin-bottom: var(--s5); }
+.legal-text { font-size: 17px; line-height: 1.65; }
+.legal-text > * + * { margin-top: var(--s4); }
+.paper-section .legal-text h2 { margin-top: var(--s7); font-size: clamp(26px, 6vw, 32px); line-height: 1.15; max-width: none; scroll-margin-top: 112px; }
+.paper-section .legal-text h3 { margin-top: var(--s6); font: 400 22px/1.25 var(--font-display); scroll-margin-top: 112px; }
+.legal-text h2:first-child { margin-top: 0; }
+.legal-text ul, .legal-text ol { padding-left: 1.3em; }
+.legal-text li + li { margin-top: var(--s2); }
+.legal-text a { color: var(--c-accent-2); text-underline-offset: 0.2em; }
+.legal-toc { align-self: start; padding: var(--s5); border: 1px solid var(--line-paper); border-radius: var(--radius-box); }
+.legal-toc-title { font: 600 12px/1.3 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent-ink); }
+.legal-toc ol { margin: var(--s3) 0 0; padding-left: 1.3em; display: grid; gap: var(--s2); }
+.legal-toc a { display: inline-block; min-height: 32px; padding: 4px 0; color: var(--c-text); text-decoration: none; }
+.legal-toc a:hover { color: var(--c-accent-2); text-decoration: underline; }
+@media (min-width: 1024px) {
+  .legal-grid { grid-template-columns: minmax(220px, 3fr) minmax(0, 8fr); gap: var(--s8); }
+  .legal-grid--single { grid-template-columns: minmax(0, 1fr); }
+  .legal-toc { position: sticky; top: 112px; }
+}
