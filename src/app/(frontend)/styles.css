@@ -852,6 +852,9 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .prose { margin-top: var(--s5); max-width: 65ch; }
 .prose p + p, .prose ul, .prose ol { margin-top: var(--s4); }
 .prose ul, .prose ol { padding-left: 1.2em; }
+.prose h2, .prose h3 { margin-top: var(--s6); font-size: 24px; line-height: 1.2; }
+.prose h2 + *, .prose h3 + * { margin-top: var(--s3); }
+.prose li + li { margin-top: var(--s2); }
 .course-side { display: grid; gap: var(--s5); align-content: start; justify-items: start; }
 .course-photo { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
 .course-photo picture, .course-photo img { width: 100%; height: 100%; object-fit: cover; }

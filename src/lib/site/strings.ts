@@ -137,6 +137,9 @@ export const UI = {
   legalUpdated: (date: string) => `Actualizat la ${date}`,
   legalToc: 'Cuprins',
   /** Descrierea paginii legale pentru motoarele de căutare: titlul, restaurantul și secțiunile, cel mult 160 de caractere. */
+  /** Descrierea Acasă când subtitlul din hero e gol (F3 pasul 12): numele, adresa și programul din Setări. */
+  homeMeta: (restaurant: string, address: string, hours: string[]) =>
+    [`${restaurant}${address ? `, ${address}` : ''}.`, hours.length ? `Program: ${hours.join(', ')}.` : ''].filter(Boolean).join(' '),
   legalMeta: (title: string, restaurant: string, sections: string[]) => {
     // Doar prima literă devine mică, și doar la un cuvânt obișnuit („Hotel ANNA” → „hotel ANNA”, „ANPC” rămâne).
     const lower = (t: string) => (/^\p{Lu}\p{Ll}/u.test(t) ? t[0].toLocaleLowerCase('ro-RO') + t.slice(1) : t)

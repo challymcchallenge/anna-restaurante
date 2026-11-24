@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”.",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54).",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -95,7 +95,7 @@
     },
     "stay": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 2,
       "menuLabel": "Cazare",
       "title": "Cazare la Hotel ANNA",
@@ -106,11 +106,12 @@
     },
     "kitchen": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 3,
       "menuLabel": "Bucătăria",
-      "title": "Bucătăria. Descoperă meniul, fel cu fel.",
-      "buttonLabel": "Vezi meniul complet"
+      "title": "Bucătăria, de la antipasti la desert.",
+      "buttonLabel": "Vezi meniul complet",
+      "intro": "Pizza, paste și risotto, pește, vită și deserturi, iar dimineața micul dejun Buona Mattina. Tot meniul, cu valorile nutriționale, e în meniul digital."
     },
     "wines": {
       "enabled": true,
@@ -122,7 +123,7 @@
     },
     "reviews": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 5,
       "menuLabel": "Recenzii",
       "title": "Nu ne crede pe cuvânt.",
@@ -130,20 +131,20 @@
     },
     "parties": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 6,
       "menuLabel": "Petreceri",
       "title": "Weekendul începe la Trattoria.",
-      "intro": "Seri cu DJ, artiști și formații. Rezervă-ți masa din timp.",
-      "emptyMessage": "Pregătim următoarea seară"
+      "intro": "Seri cu DJ, formații și artiști invitați. Alegi seara din agendă și îți rezervi masa direct pentru data ei.",
+      "emptyMessage": "Pregătim următoarea seară și o anunțăm aici. Până atunci, te așteptăm la masă în orice zi."
     },
     "privateEvents": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 7,
       "menuLabel": "Evenimente private",
       "title": "Un salon doar al vostru.",
-      "intro": "Onomastici, botezuri, tăieri de moț, prezentări, teambuilding.",
+      "intro": "Avem două saloane: Salon Trattoria, la etaj, și Salon Vittoria, la mansardă. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
       "eventTypes": [
         {
           "label": "Onomastici"
@@ -169,10 +170,10 @@
       "order": 8,
       "menuLabel": "Cursuri de pizza",
       "title": "Azi gătesc cei mici.",
-      "shortText": "Pentru o zi, copiii devin mici maeștri pizzaioli! Vor descoperi secretele preparării pizzei, vor întinde aluatul, vor alege ingredientele preferate și își vor pregăti propria pizza.",
+      "shortText": "Pentru o zi, copiii devin pizzaioli. Întind aluatul cu mâinile lor, își aleg ingredientele preferate și își pregătesc propria pizza.",
       "buttonLabel": "Înscrie copilul",
       "fullText": {
-        "$richText": "Pentru o zi, copiii devin mici maeștri pizzaioli! Vor descoperi secretele preparării pizzei, vor întinde aluatul, vor alege ingredientele preferate și își vor pregăti propria pizza.\n\nDetaliile (vârsta, durata, prețul, numărul de locuri) se completează după confirmarea localului (Q-11)."
+        "$richText": "Fiecare copil primește aluatul lui. Îl întinde, își alege ingredientele și își pregătește pizza așa cum îi place.\n\n### Cum îl înscrii\n- Apeși „Înscrie copilul” și ne scrii câți copii vin, vârstele lor și data dorită.\n- Te sunăm noi să confirmăm data și locurile.\n- Alergiile le discutăm la telefon, la confirmare."
       }
     },
     "hotel": {
@@ -181,7 +182,7 @@
       "order": 9,
       "menuLabel": "Hotel ANNA",
       "title": "După cină, rămâi peste noapte.",
-      "intro": "Cazare la Hotel ANNA, pe Bd. Ecaterina Teodoroiu 17, în Târgu Jiu. Trimite o cerere; recepția hotelului îți confirmă disponibilitatea.",
+      "intro": "Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Alegi datele și camerele, trimiți cererea de aici, iar recepția hotelului îți confirmă oferta prin telefon sau email.",
       "hotelName": "Hotel ANNA",
       "hotelAddress": "Bd. Ecaterina Teodoroiu 17, Târgu Jiu",
       "hotelUrl": "https://www.hotelanna.ro",
@@ -190,7 +191,7 @@
     },
     "gallery": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 10,
       "menuLabel": "Galerie",
       "title": "Trattoria, în imagini.",
@@ -198,11 +199,11 @@
     },
     "contact": {
       "enabled": true,
-      "placeholder": true,
+      "placeholder": false,
       "order": 11,
       "menuLabel": "Contact",
       "title": "Spune-ne ce plănuiești.",
-      "intro": "Cu ce te putem ajuta?"
+      "intro": "Masa o rezervi direct. Pentru un eveniment, un curs de pizza sau o cameră la Hotel ANNA, alegi subiectul și te sunăm noi."
     },
     "footer": {
       "copyright": "© Trattoria da Vittoria. Toate drepturile rezervate.",
@@ -2754,6 +2755,106 @@
       "to": {
         "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul la 24.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Ce cookies folosește site-ul\nSite-ul public nu scrie cookies și nu păstrează nimic în browserul tău. Panoul de administrare folosește un cookie de sesiune, doar pentru personalul restaurantului.\n\n## Servicii terțe\n- Fereastra de rezervare ialoc nu setează cookies în configurația actuală (verificat pe 24.11.2026).\n- Harta Google, după ce apeși „Arată harta”, poate seta cookies Google.\n\n## Notă pentru jurist\nDacă în contul ialoc se pornesc pixelii de marketing (Google Ads, Meta, TikTok), e nevoie de un banner de consimțământ.\n\n## Cum controlezi cookies\n[de completat de jurist]"
       }
+    },
+    {
+      "collection": "home-page",
+      "field": "kitchen.title",
+      "from": "Bucătăria. Descoperă meniul, fel cu fel.",
+      "to": "Bucătăria, de la antipasti la desert."
+    },
+    {
+      "collection": "home-page",
+      "field": "kitchen.intro",
+      "from": null,
+      "to": "Pizza, paste și risotto, pește, vită și deserturi, iar dimineața micul dejun Buona Mattina. Tot meniul, cu valorile nutriționale, e în meniul digital."
+    },
+    {
+      "collection": "home-page",
+      "field": "parties.intro",
+      "from": "Seri cu DJ, artiști și formații. Rezervă-ți masa din timp.",
+      "to": "Seri cu DJ, formații și artiști invitați. Alegi seara din agendă și îți rezervi masa direct pentru data ei."
+    },
+    {
+      "collection": "home-page",
+      "field": "parties.emptyMessage",
+      "from": "Pregătim următoarea seară",
+      "to": "Pregătim următoarea seară și o anunțăm aici. Până atunci, te așteptăm la masă în orice zi."
+    },
+    {
+      "collection": "home-page",
+      "field": "privateEvents.intro",
+      "from": "Onomastici, botezuri, tăieri de moț, prezentări, teambuilding.",
+      "to": "Avem două saloane: Salon Trattoria, la etaj, și Salon Vittoria, la mansardă. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea."
+    },
+    {
+      "collection": "home-page",
+      "field": "pizza.shortText",
+      "from": "Pentru o zi, copiii devin mici maeștri pizzaioli! Vor descoperi secretele preparării pizzei, vor întinde aluatul, vor alege ingredientele preferate și își vor pregăti propria pizza.",
+      "to": "Pentru o zi, copiii devin pizzaioli. Întind aluatul cu mâinile lor, își aleg ingredientele preferate și își pregătesc propria pizza."
+    },
+    {
+      "collection": "home-page",
+      "field": "pizza.fullText",
+      "from": {
+        "$richText": "Pentru o zi, copiii devin mici maeștri pizzaioli! Vor descoperi secretele preparării pizzei, vor întinde aluatul, vor alege ingredientele preferate și își vor pregăti propria pizza.\n\nDetaliile (vârsta, durata, prețul, numărul de locuri) se completează după confirmarea localului (Q-11)."
+      },
+      "to": {
+        "$richText": "Fiecare copil primește aluatul lui. Îl întinde, își alege ingredientele și își pregătește pizza așa cum îi place.\n\n### Cum îl înscrii\n- Apeși „Înscrie copilul” și ne scrii câți copii vin, vârstele lor și data dorită.\n- Te sunăm noi să confirmăm data și locurile.\n- Alergiile le discutăm la telefon, la confirmare."
+      }
+    },
+    {
+      "collection": "home-page",
+      "field": "hotel.intro",
+      "from": "Cazare la Hotel ANNA, pe Bd. Ecaterina Teodoroiu 17, în Târgu Jiu. Trimite o cerere; recepția hotelului îți confirmă disponibilitatea.",
+      "to": "Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Alegi datele și camerele, trimiți cererea de aici, iar recepția hotelului îți confirmă oferta prin telefon sau email."
+    },
+    {
+      "collection": "home-page",
+      "field": "contact.intro",
+      "from": "Cu ce te putem ajuta?",
+      "to": "Masa o rezervi direct. Pentru un eveniment, un curs de pizza sau o cameră la Hotel ANNA, alegi subiectul și te sunăm noi."
+    },
+    {
+      "collection": "home-page",
+      "field": "stay.placeholder",
+      "from": true,
+      "to": false
+    },
+    {
+      "collection": "home-page",
+      "field": "kitchen.placeholder",
+      "from": true,
+      "to": false
+    },
+    {
+      "collection": "home-page",
+      "field": "reviews.placeholder",
+      "from": true,
+      "to": false
+    },
+    {
+      "collection": "home-page",
+      "field": "parties.placeholder",
+      "from": true,
+      "to": false
+    },
+    {
+      "collection": "home-page",
+      "field": "privateEvents.placeholder",
+      "from": true,
+      "to": false
+    },
+    {
+      "collection": "home-page",
+      "field": "gallery.placeholder",
+      "from": true,
+      "to": false
+    },
+    {
+      "collection": "home-page",
+      "field": "contact.placeholder",
+      "from": true,
+      "to": false
     }
   ],
   "requestsFill": {

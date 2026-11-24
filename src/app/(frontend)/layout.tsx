@@ -9,6 +9,7 @@ import { PhoneBar, SiteFooter } from '@/components/site/SiteFooter'
 import { SiteHeader } from '@/components/site/SiteHeader'
 import { isIndexingAllowed } from '@/lib/indexing'
 import { getSite } from '@/lib/site/data'
+import { hoursSummary } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
 import { UI } from '@/lib/site/strings'
@@ -30,7 +31,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const s = site.settings
   const title = [site.tenant.name, s?.tagline].filter(Boolean).join(' · ')
-  const description = section(site.home, 'hero')?.subtitle || undefined
+  const address = [s?.address?.street, s?.address?.city].filter(Boolean).join(', ')
+  const description =
+    section(site.home, 'hero')?.subtitle || UI.homeMeta(site.tenant.name, address, hoursSummary(s?.hours))
   const favicon = asMedia(s?.favicon)
   const share = asMedia(s?.shareImage)
   return {
