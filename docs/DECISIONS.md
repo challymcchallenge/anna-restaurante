@@ -38,6 +38,10 @@ Ultima actualizare: 24.11.2026
 | D-30 | Rețele sociale | Instagram (D-18), YouTube https://www.youtube.com/@AnnaEvents, TikTok https://www.tiktok.com/@anna.events |
 | D-31 | Buget | Servicii plătite doar unde e neapărat nevoie; se preferă variante gratuite sau cu cel mai bun raport calitate-preț. |
 | D-32 | Recomandările DESI | Acceptate pentru întrebările deschise care aveau o recomandare, cu excepțiile din D-28, D-29, D-30, D-31. |
+| D-33 | Efecte, sunet, 3D, temă (GATE 0, 24.11.2026) | **După lansare (R2).** Efectele sezoniere, sunetul de fundal, animațiile 3D și comutatorul de temă nu intră în lansare. Rezolvă contradicția C1 (design D-32 / Q-15, Q-16 față de PLAN F4 și ADR-010). |
+| D-34 | Motorul de traducere (GATE 0, 24.11.2026) | **Claude Haiku 5.5 prin API**, cu protecția termenilor prin marcaje `{n}`. Cheia (`TRANSLATE_API_KEY`) o pune Alin în Vercel înainte de F4. |
+| D-35 | Video, varianta eficientă (GATE 0, 24.11.2026) | **Se păstrează AV1** (HEVC pe dispozitivele Apple), alături de H.264. Pe clipul real: −43% față de H.264. |
+| D-36 | Email (24.11.2026) | Domeniul de trimitere și testul Resend se fac **la final**, odată cu mutarea DNS a domeniului de pe vechiul hosting. Site-ul vechi rămâne activ până atunci. |
 
 ## Linkuri-cheie
 

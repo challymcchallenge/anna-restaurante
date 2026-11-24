@@ -10,9 +10,9 @@ Estimarea în sesiuni este orientativă și se reface după faza 0.
 | F1 Panou și model de conținut | 2–3 | **3–4** | 13 colecții + setări pe restaurant + traduceri pe câmp + panou în română. Încărcarea media are nevoie de o componentă proprie în panou (conversie în browser, HEIC, video, punct focal) |
 | F2 Direcție de design | 1–2 | 1–2 | — |
 | F3 Site public | 6–8 | 6–8 | — |
-| F4 Efecte, sunet, traduceri | 3–4 | **3–4 sau 1–2** | 1–2 dacă efectele, sunetul, 3D și comutatorul de temă rămân în R2, după lansare (D-32 acceptă Q-15 și Q-16; vezi contradicția C1 din raportul GATE 0) |
+| F4 Traduceri și FAQ | 3–4 | **1–2** | Efectele, sunetul, 3D și tema trec după lansare (D-33) |
 | F5 Verificare și lansare | 2 | 2 | Include testul de email cu domeniul verificat (mutat din F0 la decizia lui Alin) |
-| **Total** | **15–21** | **16–22** (sau **14–20** cu efectele în R2) | |
+| **Total** | **15–21** | **14–20** | Decis la GATE 0 (D-33) |
 
 ---
 
@@ -37,9 +37,16 @@ Estimarea în sesiuni este orientativă și se reface după faza 0.
 1. Colecțiile și setările din `design/content-model.md`, cu câmpurile marcate „se traduce” / „nu se traduce” (ADR-007).
 2. Roluri Administrator și Editor (ADR-002). Comutator de restaurant.
 3. Biblioteca media cu fluxul de încărcare din `design/flows/flow-incarcare-media.mmd` (ADR-004, ADR-005).
-4. Modulele: Evenimente și seri tematice, Recenzii, Premii și distincții, Vinuri, Saloane, Cursuri de pizza, Galerie, FAQ, Sunete, Efecte sezoniere, Cereri primite.
+4. Modulele: Evenimente și seri tematice, Recenzii, Premii și distincții, Vinuri, Saloane, Cursuri de pizza, Galerie, FAQ, Cereri primite. (Sunete și Efecte sezoniere trec în R2, D-33.)
 5. Conținut provizoriu etichetat „Exemplu · de înlocuit” + contor în panou.
 6. Lista de materiale lipsă pentru Alin: `docs/materiale-necesare.md`.
+
+**Intrări din F0** (vezi `docs/ADR.md` → „Actualizări după faza 0” și `docs/spikes/`)
+- Încărcarea media se face într-o componentă proprie în panou: master de 2560 px în browser, HEIC prin `heic-to`, video prin `mediabunny` (H.264 + AV1/HEVC + poster), limita de 30 s, acceptare după extensie. Logo-urile rămân PNG/SVG; BADGE neatins.
+- Variante pe server: AVIF q55 e2 + WebP q78 e4, lățimi 640–2560, secvențial. Fișierele se servesc din URL-ul public Supabase.
+- Panoul în română. Restaurantele de pe producție: Trattoria (id 1) și Citybar (id 2, de probă).
+- Propunere de securitate: RLS activat și drepturile `anon`/`authenticated` revocate pe tabelele din `public`, ca protecție suplimentară (advisors: 0 probleme acum).
+- De primit de la Alin: lista de vinuri (OQ #5), linkul de Facebook (C2).
 
 **GATE 1:** Alin adaugă din panou, singur, o seară tematică, o fotografie și un vin. Editorul de probă nu poate deschide Premii și Setări.
 

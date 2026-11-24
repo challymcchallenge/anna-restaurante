@@ -13,11 +13,11 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | 7 | Termenul de răspuns promis pe fiecare subiect (cazare, salon, curs, sesizare) | F3 | Alin |
 | 8 | Acordul părinților pentru fotografiile cu copii | F3 | Alin |
 | 9 | Texte legale: termeni, confidențialitate, cookies | F5 | Alin |
-| 10 | Domeniul de trimitere pentru emailuri (ex. un subdomeniu al davittoria.ro) | F0 | Alin |
+| 10 | Domeniul de trimitere pentru emailuri (ex. un subdomeniu al davittoria.ro) | **F5** (D-36: la final, cu mutarea DNS) | Alin |
 | 11 | Linkurile către celelalte site-uri ale Grupului ANNA pentru footer | F3 | Alin |
 | 12 | Confirmarea celor 8 categorii din slider (propunerea DESI, acceptată prin D-32) | F3 | Alin |
 
-## De verificat tehnic (faza 0)
+## De verificat tehnic (faza 0) — **toate rezolvate pe 24.11.2026**, vezi `docs/spikes/` și `docs/2026_11_24_Trattoria_GATE0.md`
 
 | # | Ce | ADR |
 |---|---|---|
@@ -27,3 +27,4 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | T4 | Motorul de traducere automată, pornind de la cele gratuite | ADR-007 |
 | T5 | Costul real al proiectului Supabase suplimentar în organizația Pro | ADR-006 |
 | T6 | Dacă meniul digital permite legături directe pe categorie | — |
+| 13 | Linkul paginii de Facebook a Trattoriei (apare în footer și Contact în design; lipsește din D-18/D-30) | F3 | Alin |

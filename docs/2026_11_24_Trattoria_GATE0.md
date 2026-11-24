@@ -1,6 +1,6 @@
 # GATE 0 · Trattoria da Vittoria — raport faza 0
 
-Data: 24.11.2026 · Stare: **aștept „GO” de la Alin**. Detaliile fiecărui test sunt în `docs/spikes/`.
+Data: 24.11.2026 · Stare: **GO primit de la Alin (24.11.2026). Deciziile: D-33 (efecte după lansare), D-34 (Claude Haiku 5.5), D-35 (AV1 păstrat).** F0 închis. Detaliile fiecărui test sunt în `docs/spikes/`.
 
 ## 1. ADR-uri marcate TEST F0
 

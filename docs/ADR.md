@@ -104,3 +104,25 @@ Fapte verificate în documentația oficială pe 24.11.2026 sunt marcate `[verifi
 - **Conținut provizoriu:** etichetat vizibil „Exemplu · de înlocuit”; panoul arată câte elemente provizorii au rămas.
 - **Adrese:** `/catalog-vinuri` și `/formular-de-reclamatie` se păstrează; `/valori-nutritionale` → redirecționare către meniul digital.
 - **Footer site public:** credit discret, centrat, pe 2 rânduri: „Made with ❤️ by BizTech Consulting SRL” / „www.biztech.ro / +40772295031” (link către https://www.biztech.ro și `tel:+40772295031`).
+
+---
+
+## Actualizări după faza 0 (aprobate de Alin la GATE 0, 24.11.2026)
+
+Detaliile și cifrele sunt în `docs/spikes/` și `docs/2026_11_24_Trattoria_GATE0.md`. Textul ADR-urilor de mai sus rămâne pentru istoric; unde diferă, aceste actualizări câștigă.
+
+- **ADR-001:** Payload 3.94.1, Next.js 16.4.6. Node pe Vercel: 26.x; cerința Payload este `^22.23.5 || ^24.22.3 || >=26.13.1`.
+- **ADR-002:** confirmat (21/21 verificări). Restaurantul se găsește după „Domeniu” și „Adrese pe care se servește site-ul”. Primul cont creat devine Administrator.
+- **ADR-003:** confirmat. Conexiunea se face **doar prin Shared pooler (Supavisor, IPv4, port 6543)**; Dedicated pooler și conexiunea directă merg numai pe IPv6, pe care Vercel nu îl are. Bucket-ul `media` e public. `clientUploads` e obligatoriu pentru video. Fișierele se vor servi direct din URL-ul public Supabase (F1).
+- **ADR-004:** confirmat, cu 4 ajustări:
+  1. AVIF calitate 55, efort 2; WebP calitate 78, efort 4;
+  2. lățimi 640/960/1280/1920/2560, generate secvențial (aproximativ 9 s per fotografie pe Vercel);
+  3. HEIC decodat în browser cu `heic-to` (serverul nu poate);
+  4. Logo: PNG sau SVG, fără conversie în JPEG; BADGE: fișierul oficial, neatins.
+- **ADR-005:** confirmat. Conversia se face prin WebCodecs cu `mediabunny` (MPL-2.0). Ieșiri: H.264 + AV1, sau HEVC pe Apple (D-35), plus poster. Clipurile se acceptă și după extensie (`.mov`, `.mp4`).
+- **ADR-006:** funcțiile Vercel rulează în **dub1 (Dublin)** (`vercel.json`), lângă Supabase eu-west-1. Protecția Vercel este Standard Protection.
+- **ADR-007:** motorul de traducere este **Claude Haiku 5.5** (D-34), cu marcaje `{n}` pentru termenii care nu se traduc.
+- **ADR-008:** confirmat. În modul popup, fereastra se deschide prin opțiunea `selector`; scriptul se încarcă la primul clic, care apoi se retransmite. `defaultDate` funcționează pentru rezervarea cu data serii. În configurația actuală ialoc nu setează cookies, deci nu e nevoie de banner [PRESUPUNERE juridică, Q-25].
+- **ADR-009:** testul de email se mută în F5 (D-36). Limită: 50 de cereri cu copie pe zi pe planul gratuit Resend.
+- **ADR-010:** efectele, sunetul, 3D și tema trec în **R2, după lansare** (D-33).
+- **ADR-012:** confirmat pe producție: meta `noindex`, `X-Robots-Tag`, `robots.txt`; `*.vercel.app` nu se indexează niciodată.
