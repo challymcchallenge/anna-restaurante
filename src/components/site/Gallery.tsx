@@ -77,7 +77,7 @@ export function GalleryTile({
   id?: string
   /** Pe Acasă: placa din așezarea fixă; altfel forma vine din proporțiile fișierului. */
   tile?: HomeTile
-  /** Primele plăci din /galerie, vizibile la deschidere: se încarcă imediat (LCP). */
+  /** Prima placă din /galerie (elementul LCP): se încarcă imediat, cu prioritate mare. */
   priority?: boolean
 }) {
   const { image, clip } = galleryVisual(item)
