@@ -97,7 +97,7 @@ Alte constatări:
 | Probă | Ce lipsește |
 |---|---|
 | Fotografie reală de pe telefon (iPhone și Android): timp și master | Tu deschizi `/spike/f0-media.html` pe telefon, după ce treci Vercel pe Standard Protection |
-| Încărcarea masterului în Supabase Storage prin Payload (`clientUploads`) și citirea publică | Variabilele `S3_*` în Vercel. Preflight-ul CORS e deja verificat: `Access-Control-Allow-Origin: *`, PUT și `If-None-Match` permise |
+| ~~Încărcarea în Supabase Storage prin Payload și citirea publică~~ | **Făcut pe 24.11.2026:** JPEG de 311.164 octeți încărcat din panou; citire prin Payload 200 (0,95 s) și prin URL-ul public Supabase 200 (1,7 s) |
 
 ---
 

@@ -56,6 +56,7 @@ Ultima verificare: **24.11.2026**. Sursa versiunilor: registrul npm (`npm view`)
 | Conexiune la baza de date | Supavisor **Shared pooler**, mod Transaction, port 6543 (IPv4). Dedicated pooler și conexiunea directă merg doar pe IPv6 și nu sunt accesibile de pe Vercel |
 | Migrații pe producție | `20261124_102321_initial` (batch 1), 24.11.2026 |
 | Restaurante în producție | Trattoria da Vittoria (id 1, cu adresa temporară Vercel) și Citybar & Josper Grill (id 2, de probă), create prin SQL pe 24.11.2026 |
+| Test Storage pe producție | 1 fotografie încărcată din panou (24.11.2026), citită prin Payload și prin URL-ul public: ambele 200 |
 | Securitate Supabase (advisors) | 0 probleme. Tabelele din `public` nu au drepturi SELECT/INSERT/UPDATE/DELETE pentru `anon`/`authenticated`. RLS oprit; propunere de protecție suplimentară în F1 |
 
 ---
