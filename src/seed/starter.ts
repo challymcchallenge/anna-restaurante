@@ -77,7 +77,9 @@ type SeedFile = {
     subjects: Record<string, { active?: boolean; recipients?: string[]; cc?: string[] }>
   }
   swaps?: {
-    collection: 'settings' | 'home-page'
+    /** Setări, Pagina Acasă sau o colecție (atunci cu `match`, de exemplu întrebarea unei FAQ). */
+    collection: CollectionSlug
+    match?: Record<string, string>
     field: string
     from?: unknown
     to?: unknown
@@ -147,6 +149,19 @@ export function toLexical(text: string) {
       })),
     },
   }
+}
+
+/** Textul simplu al unui document Lexical (paragrafele despărțite de un rând gol), ca în `toLexical`. */
+export function lexicalText(doc: unknown): string | null {
+  const root = isPlainObject(doc) && isPlainObject(doc.root) ? (doc.root as { children?: unknown[] }) : null
+  if (!root) return null
+  return (root.children ?? [])
+    .map((p) =>
+      ((isPlainObject(p) ? (p.children as unknown[]) : []) ?? [])
+        .map((t) => (isPlainObject(t) && typeof t.text === 'string' ? t.text : ''))
+        .join(''),
+    )
+    .join('\n\n')
 }
 
 /** Data relativă: `{ "$inDays": 18, "time": "20:00" }` → ISO, ora României. */
@@ -429,14 +444,21 @@ export async function seedStarterContent({
     }
 
     for (const swap of seed.swaps ?? []) {
-      const key = `swap:${swap.collection}:${swap.field}`
+      const key = swap.match
+        ? `swap:${swap.collection}:${JSON.stringify(swap.match)}:${swap.field}`
+        : `swap:${swap.collection}:${swap.field}`
       if (log[key]) continue
       const from = swap.fromMedia !== undefined ? ids[swap.fromMedia] : swap.from
       const to = swap.toMedia !== undefined ? ids[swap.toMedia] : swap.to
       if (to === undefined || (swap.fromMedia !== undefined && from === undefined)) continue
       const { docs: targets } = await payload.find({
         collection: swap.collection,
-        where: { tenant: { equals: tenant.id } },
+        where: {
+          and: [
+            { tenant: { equals: tenant.id } },
+            ...Object.entries(swap.match ?? {}).map(([k, v]) => ({ [k]: { equals: v } })),
+          ],
+        },
         limit: 1,
         depth: 0,
         req,
@@ -446,9 +468,16 @@ export async function seedStarterContent({
       const [group, leaf] = swap.field.includes('.') ? swap.field.split('.', 2) : [null, swap.field]
       const container = (group ? (target[group] as Record<string, unknown> | undefined) : target) ?? {}
       const current = container[leaf]
-      const same = isEmpty(from) ? isEmpty(current) : current === from
+      // Text formatat: se compară textul simplu, iar valoarea nouă devine document Lexical.
+      const rich = isPlainObject(from) && typeof from.$richText === 'string'
+      const same = rich
+        ? lexicalText(current) === (from as { $richText: string }).$richText
+        : isEmpty(from)
+          ? isEmpty(current)
+          : current === from
       if (same) {
-        const data = group ? { [group]: { ...container, [leaf]: to } } : { [leaf]: to }
+        const value = resolveValues(to)
+        const data = group ? { [group]: { ...container, [leaf]: value } } : { [leaf]: value }
         await payload.update({
           collection: swap.collection,
           id: target.id as number,

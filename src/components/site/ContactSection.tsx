@@ -41,6 +41,7 @@ export function ContactDetails({ site }: { site: SiteData }) {
   const address = [s?.address?.street, s?.address?.city].filter(Boolean).join(', ')
   const telR = telHref(s?.phoneReservations)
   const telE = telHref(s?.phoneEvents)
+  const telP = telHref(s?.phonePizza)
   const map = mapHref(site)
   return (
     <ul className="contact-list">
@@ -59,6 +60,15 @@ export function ContactDetails({ site }: { site: SiteData }) {
           <span>
             <span className="contact-note">{UI.eventsPhone}</span>
             <a href={telE}>{s.phoneEvents}</a>
+          </span>
+        </li>
+      )}
+      {s?.phonePizza && telP && (
+        <li>
+          <Icon name="phone" />
+          <span>
+            <span className="contact-note">{UI.pizzaPhone}</span>
+            <a href={telP}>{s.phonePizza}</a>
           </span>
         </li>
       )}

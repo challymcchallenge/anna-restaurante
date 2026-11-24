@@ -46,6 +46,7 @@ export const UI = {
   },
   reservationsPhone: 'Rezervări mese',
   eventsPhone: 'Saloane și evenimente',
+  pizzaPhone: 'Înscrieri curs pizza copii',
   daily: 'Zilnic',
   closed: 'închis',
   awardsTitle: 'Premii și distincții',

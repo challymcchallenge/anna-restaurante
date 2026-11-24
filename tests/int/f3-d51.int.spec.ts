@@ -6,7 +6,8 @@ import { beforeAll, describe, expect, it } from 'vitest'
 import config from '@/payload.config'
 import { mapQuery } from '@/components/site/ContactSection'
 import type { SiteData } from '@/lib/site/data'
-import { seedStarterContent } from '@/seed/starter'
+import { validatePhone } from '@/fields'
+import { lexicalText, seedStarterContent } from '@/seed/starter'
 
 /**
  * D-51 (răspunsurile G6): destinatarii pe subiect intră o singură dată din seed, fără să atingă un
@@ -70,5 +71,19 @@ describe('D-51 · destinatari, recepția hotelului, harta', () => {
     )
     expect(mapQuery(site({ street: 'x', city: 'y', lat: 45.0355, lng: 23.2741 }))).toBe('45.0355,23.2741')
     expect(mapQuery(site({}))).toBeNull()
+  })
+
+  it('D-52: telefoanele cu prefix internațional; telefonul pentru cursul de pizza; FAQ actualizată', async () => {
+    expect(validatePhone('0764 816 462')).toMatch(/prefixul internațional/)
+    expect(validatePhone('+40 764 816 462')).toBe(true)
+    expect(validatePhone('+40 72')).toMatch(/prea scurt/)
+    const s = await settingsOf()
+    expect([s.phoneReservations, s.phoneEvents, s.phonePizza]).toEqual(['+40 356 630 238', '+40 764 816 462', '+40 727 417 498'])
+    const { docs } = await payload.find({
+      collection: 'faqs',
+      where: { and: [{ tenant: { equals: tenantId } }, { question: { equals: 'Cum rezerv un salon pentru un eveniment?' } }] },
+      depth: 0,
+    })
+    expect(lexicalText(docs[0]?.answer)).toBe('Din pagina Evenimente private sau la telefon +40 764 816 462.')
   })
 })

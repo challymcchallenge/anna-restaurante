@@ -6,6 +6,7 @@ import * as migration_20261124_125150_gate1_reasons_seed_log from './20261124_12
 import * as migration_20261124_143006_f2_theme from './20261124_143006_f2_theme';
 import * as migration_20261124_180408_f3_vinuri_logo_grup from './20261124_180408_f3_vinuri_logo_grup';
 import * as migration_20261124_210257_f3_hotel_receptie from './20261124_210257_f3_hotel_receptie';
+import * as migration_20261124_211206_f3_telefon_pizza from './20261124_211206_f3_telefon_pizza';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20261124_210257_f3_hotel_receptie.up,
     down: migration_20261124_210257_f3_hotel_receptie.down,
-    name: '20261124_210257_f3_hotel_receptie'
+    name: '20261124_210257_f3_hotel_receptie',
+  },
+  {
+    up: migration_20261124_211206_f3_telefon_pizza.up,
+    down: migration_20261124_211206_f3_telefon_pizza.down,
+    name: '20261124_211206_f3_telefon_pizza'
   },
 ];

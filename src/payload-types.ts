@@ -1217,6 +1217,10 @@ export interface Setting {
    */
   phoneEvents?: string | null;
   /**
+   * În Contact, în footer și la „Înscrie copilul”, dacă subiectul e oprit (D-52).
+   */
+  phonePizza?: string | null;
+  /**
    * Câte un rând pe zi.
    */
   hours?:
@@ -2204,6 +2208,7 @@ export interface SettingsSelect<T extends boolean = true> {
       };
   phoneReservations?: T;
   phoneEvents?: T;
+  phonePizza?: T;
   hours?:
     | T
     | {

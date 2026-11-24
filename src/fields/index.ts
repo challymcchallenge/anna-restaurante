@@ -315,12 +315,14 @@ export const url = (o: Omit<BaseOpts, 'localized' | 'nt'>): TextField =>
   text({ ...o, validate: o.validate ?? (validateUrl as Validate) })
 
 /** Telefon: cifre, spații, +, cratime și paranteze; minimum 9 cifre. */
+/** Telefoanele din panou: cu prefixul internațional (D-52), de exemplu +40 356 630 238. */
 export const validatePhone = (value: unknown): true | string => {
   if (!value) return true
-  if (typeof value !== 'string' || !/^[+\d][\d\s().-]*$/.test(value)) {
-    return 'Număr invalid. Exemplu: +40 356 630 238'
+  if (typeof value !== 'string' || !/^\+[1-9][\d\s().-]*$/.test(value)) {
+    return 'Folosește prefixul internațional. Exemplu: +40 356 630 238'
   }
-  return value.replace(/\D/g, '').length >= 9 ? true : 'Număr prea scurt.'
+  const digits = value.replace(/\D/g, '').length
+  return digits >= 10 && digits <= 15 ? true : 'Număr prea scurt sau prea lung.'
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

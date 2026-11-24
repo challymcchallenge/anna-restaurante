@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md).",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza.",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -10,7 +10,7 @@
       "country": "România"
     },
     "phoneReservations": "+40 356 630 238",
-    "phoneEvents": "0764 816 462",
+    "phoneEvents": "+40 764 816 462",
     "hours": [
       {
         "day": "mon",
@@ -79,7 +79,8 @@
       "complaint": {
         "active": false
       }
-    }
+    },
+    "phonePizza": "+40 727 417 498"
   },
   "homePage": {
     "hero": {
@@ -394,7 +395,7 @@
       {
         "question": "Cum rezerv un salon pentru un eveniment?",
         "answer": {
-          "$richText": "Din pagina Evenimente private sau la telefon 0764 816 462."
+          "$richText": "Din pagina Evenimente private sau la telefon +40 764 816 462."
         },
         "group": "home",
         "placeholder": true
@@ -2689,6 +2690,31 @@
       "field": "hotel.hotelEmail",
       "from": null,
       "to": "rezervari@hotelanna.ro"
+    },
+    {
+      "collection": "settings",
+      "field": "phoneEvents",
+      "from": "0764 816 462",
+      "to": "+40 764 816 462"
+    },
+    {
+      "collection": "settings",
+      "field": "phonePizza",
+      "from": null,
+      "to": "+40 727 417 498"
+    },
+    {
+      "collection": "faqs",
+      "match": {
+        "question": "Cum rezerv un salon pentru un eveniment?"
+      },
+      "field": "answer",
+      "from": {
+        "$richText": "Din pagina Evenimente private sau la telefon 0764 816 462."
+      },
+      "to": {
+        "$richText": "Din pagina Evenimente private sau la telefon +40 764 816 462."
+      }
     }
   ],
   "requestsFill": {

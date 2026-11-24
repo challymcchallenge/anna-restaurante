@@ -306,6 +306,12 @@ export const Settings: CollectionConfig = {
                 }),
               ],
             },
+            text({
+              name: 'phonePizza',
+              label: 'Telefon înscrieri curs pizza copii',
+              description: 'În Contact, în footer și la „Înscrie copilul”, dacă subiectul e oprit (D-52).',
+              validate: validatePhone as any,
+            }),
             {
               name: 'hours',
               label: 'Program',

@@ -19,7 +19,7 @@ export function formContext(site: SiteData) {
   const phone = (p: string | null | undefined) => (p && telHref(p) ? { phone: p, tel: telHref(p) as string } : undefined)
   const urgent: ContactFormProps['urgent'] = {
     privateEvent: phone(s?.phoneEvents ?? s?.phoneReservations),
-    pizzaCourse: phone(s?.phoneReservations),
+    pizzaCourse: phone(s?.phonePizza) ?? phone(s?.phoneReservations),
     // D-51: la cazare, recepția Hotel ANNA (din Pagina Acasă → Hotel), altfel rezervările restaurantului.
     accommodation: (() => {
       const hotel = site.home?.hotel

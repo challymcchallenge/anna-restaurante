@@ -372,7 +372,7 @@ export function Pizza({ site, id }: { site: SiteData; id: string }) {
             <RequestButton
               href={requestHref(site.settings, 'pizzaCourse')}
               label={s?.buttonLabel || ''}
-              phone={site.settings?.phoneReservations}
+              phone={site.settings?.phonePizza || site.settings?.phoneReservations}
             />
             <Link className="text-link" href="/cursuri-pizza-copii">
               {UI.aboutCourse}

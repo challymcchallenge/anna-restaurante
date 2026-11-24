@@ -30,6 +30,7 @@ export function SiteFooter({ site }: { site: SiteData }) {
   const hours = hoursSummary(s?.hours)
   const telR = telHref(s?.phoneReservations)
   const telE = telHref(s?.phoneEvents)
+  const telP = telHref(s?.phonePizza)
   // Footerul e pe copertă: varianta pentru fundal închis, cu rezervă pe cea obișnuită.
   const groupLogo = asMedia(s?.logoGroupDark) ?? asMedia(s?.logoGroup)
   const groupName = groupLogo?.alt || UI.groupTitle
@@ -73,6 +74,15 @@ export function SiteFooter({ site }: { site: SiteData }) {
                 <span>
                   <span className="footer-note">{UI.eventsPhone}</span>
                   <a href={telE}>{s.phoneEvents}</a>
+                </span>
+              </p>
+            )}
+            {s?.phonePizza && telP && (
+              <p className="footer-line">
+                <Icon name="phone" />
+                <span>
+                  <span className="footer-note">{UI.pizzaPhone}</span>
+                  <a href={telP}>{s.phonePizza}</a>
                 </span>
               </p>
             )}

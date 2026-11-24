@@ -42,7 +42,7 @@ export default async function PizzaPage() {
             <RequestButton
               href={requestHref(site.settings, 'pizzaCourse')}
               label={s?.buttonLabel || ''}
-              phone={site.settings?.phoneReservations}
+              phone={site.settings?.phonePizza || site.settings?.phoneReservations}
             />
           </aside>
         </div>
