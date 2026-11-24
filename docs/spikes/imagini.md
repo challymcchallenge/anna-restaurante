@@ -81,7 +81,7 @@ Mărimile variantelor pentru interior.jpg, cu setarea aleasă:
 
 ## Concluzie
 
-ADR-004 **se confirmă**, cu 3 ajustări, pe care le propun:
+ADR-004 **se confirmă**, cu 4 ajustări (a 4-a: logo-urile nu se transformă în JPEG, vezi rezultatele de pe laptop), pe care le propun:
 
 1. **AVIF: calitate 55, efort 2** în loc de setarea implicită (34 s → 7–9 s per fotografie, aceeași calitate măsurată).
 2. **HEIC se decodează în browser** cu `heic-to` (LGPL-3.0, se încarcă doar la un fișier HEIC). Serverul nu poate decoda HEIC.
@@ -91,6 +91,19 @@ Alte constatări:
 - O fotografie durează aproximativ **9–10 s pe Vercel**, în timpul încărcării. Asta e sub limita de 300 s a funcției. Dacă devine incomod pentru Editor (de exemplu o galerie de 20 de fotografii = aproximativ 3 minute), mutăm generarea într-o sarcină de fundal (Payload Jobs) în F1.
 - Funcțiile Vercel rulau implicit în iad1 (SUA). Le-am mutat în dub1 (Dublin, `vercel.json` → `regions`), lângă Supabase eu-west-1.
 - SSIM nu surprinde bine netezirea specifică AVIF. Calitatea finală se verifică vizual în F1, pe fotografiile reale ale Trattoriei.
+
+## Rezultate pe laptopul lui Alin (24.11.2026)
+
+Windows, Chrome 157, 8 nuclee, 16 GB.
+
+| Fișier | Intrare | Master | JPEG | WebP | Timp total |
+|---|---|---|---|---|---|
+| IMG_6512.PNG | 6,95 MB, 2528×1684 | 2528×1684 (nemicșorat) | 1,07 MB | 0,71 MB | 141 ms |
+| Logo_ANNA_EVENTS_insigna.png | 1,20 MB, 1009×1008 | 1009×1008 | 0,13 MB | 0,08 MB | 42 ms |
+| Logo_Developer_BizTech - Insigna.png | 4,58 MB, 2048×2048 | 2048×2048 | 0,41 MB | 0,43 MB | 139 ms |
+| Logo_Trattoria_Insigna2.png | 1,34 MB, 1024×1024 | 1024×1024 | 0,17 MB | 0,14 MB | 36 ms |
+
+**Constatare importantă: logo-urile nu trebuie transformate în JPEG.** Masterul JPEG pierde transparența fișierelor PNG (fundalul transparent devine plin). În F1, fișierele de tip **Logo** se păstrează PNG, sau WebP fără pierderi cu transparență, iar SVG-urile rămân neschimbate. Fișierele de tip **BADGE** (logo-ul oficial al premiului) nu se convertesc deloc (content-model 1, D-10). Pentru grafice PNG, WebP nu e întotdeauna mai mic decât JPEG (logo-ul BizTech: 431 KB față de 408 KB).
 
 ## De făcut (necesită variabile sau telefonul tău)
 

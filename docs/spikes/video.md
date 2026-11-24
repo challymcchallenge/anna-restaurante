@@ -39,15 +39,30 @@ Codecuri disponibile în acest Chromium: H.264, VP9 și AV1 (decodare și codare
 
 Biblioteca se încarcă în 0,3–0,7 s, dintr-un CDN.
 
+## Rezultate pe laptopul lui Alin (24.11.2026)
+
+Windows 10/11, Chrome 157, 8 nuclee, 16 GB RAM. Clip real al restaurantului: `Evenimente_Trattoria_1.mov`, filmat cu iPhone, **HEVC** (`hvc1.2.4.L123.B0`), 1080×1920, 10,27 s, 16,5 MB.
+
+| Ieșire | Mărime | Debit | Timp conversie | Viteză |
+|---|---|---|---|---|
+| MP4 H.264 | **4,71 MB** | 3,67 Mbps | **2,2 s** | 4,7× timp real |
+| MP4 AV1 | **2,68 MB** (−43% față de H.264) | 2,08 Mbps | **7,9 s** | 1,3× |
+| Poster JPEG | 182 KB | — | 0,86 s | — |
+
+- Pe material real, AV1 iese cu **43% mai mic** decât H.264 (pe clipul de test din container: doar 15%).
+- Extrapolat la 30 s: aproximativ **6,6 s pentru H.264 și 23 s pentru AV1** pe laptop. [PRESUPUNERE] Extrapolare liniară.
+- HEVC de pe iPhone se decodează în Chrome pe Windows. Câmpul `type` al fișierului `.mov` vine gol pe Windows, deci în F1 acceptăm clipurile și după extensie (`.mov`, `.mp4`).
+- Încărcat pe server: 7,6 MB pentru 10 s. Peste limita de 4,5 MB, deci confirmă din nou că `clientUploads` e necesar pentru video.
+
 ## Concluzie
 
 - **ADR-005 se confirmă** pentru laptop: un clip de 30 s se convertește în **10–16 s (H.264)**, respectiv **25–38 s (AV1)**, pe un procesor fără accelerare hardware. Un laptop real, care are de obicei codare H.264 hardware, ar trebui să fie mai rapid. [PRESUPUNERE] Neverificat pe laptopul tău.
 - Pe server ajung **aproximativ 22,5 MB per clip** (H.264 + AV1 + poster). Asta depășește limita de 4,5 MB a Vercel, deci **`clientUploads` (ADR-003) este obligatoriu pentru video**.
-- AV1 iese doar cu 15% mai mic decât H.264 la presetarea „medium”. În F1 reglez debitul pe codec, cu verificare vizuală. Dacă diferența rămâne mică, putem renunța la a doua variantă și scurtăm timpul la jumătate. Decizia o iei tu.
+- Pe clipul de test, AV1 a ieșit doar cu 15% mai mic; **pe clipul real al lui Alin, cu 43% mai mic**. Recomand să păstrăm varianta AV1. În F1 reglez debitul pe codec, cu verificare vizuală. Dacă diferența rămâne mică, putem renunța la a doua variantă și scurtăm timpul la jumătate. Decizia o iei tu.
 - Safari nu codează AV1 prin WebCodecs. Pe Mac și iPhone, varianta eficientă va fi HEVC (cu hardware Apple), alegerea se face automat în pagină. Neprobat aici, rămâne pentru proba pe telefon.
 - Mux nu este necesar.
 
-## De făcut de tine (aproximativ 5 minute)
+## De făcut de tine (aproximativ 5 minute) — laptop: FĂCUT; telefon: rămâne
 
 1. Treci Vercel pe Standard Protection (`docs/2026_11_24_Trattoria_Variabile_Mediu.md`, pasul 1).
 2. Pe telefon (ideal iPhone și un Android), deschide https://anna-restaurante-alinlabau-9308s-projects.vercel.app/spike/f0-media.html
