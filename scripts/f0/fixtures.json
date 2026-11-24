@@ -1,0 +1,17 @@
+{
+  "_nota": "Date de probă pentru F0 (dovada separării între restaurante). Doar pentru baza locală / de test. Toate serile sunt provizorii.",
+  "tenants": [
+    {
+      "name": "Trattoria da Vittoria",
+      "slug": "trattoria-da-vittoria",
+      "hosts": ["trattoria.localhost"],
+      "events": ["Exemplu · de înlocuit — Seară DJ", "Exemplu · de înlocuit — Seară cu formație"]
+    },
+    {
+      "name": "Citybar & Josper Grill",
+      "slug": "citybar-josper-grill",
+      "hosts": ["citybar.localhost"],
+      "events": ["Exemplu · de înlocuit — Seară cu artist invitat"]
+    }
+  ]
+}

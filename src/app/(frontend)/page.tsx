@@ -1,58 +1,54 @@
 import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
 import { getPayload } from 'payload'
 import React from 'react'
-import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
+import { getTenantByHost } from '@/lib/tenant'
 import './styles.css'
 
+/**
+ * Pagină de verificare F0: arată restaurantul găsit după adresă și serile lui.
+ * Site-ul real (hero, secțiuni) se construiește în F3.
+ */
 export default async function HomePage() {
   const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+  const payload = await getPayload({ config: await config })
+  const tenant = await getTenantByHost(payload, headers.get('host'))
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  if (!tenant) {
+    return (
+      <div className="home">
+        <div className="content">
+          <h1>Niciun restaurant configurat pentru această adresă</h1>
+          <p>Adresa se adaugă din panou: Restaurante → Adrese pe care se servește site-ul.</p>
+        </div>
+      </div>
+    )
+  }
+
+  const { docs: events } = await payload.find({
+    collection: 'events',
+    depth: 0,
+    limit: 10,
+    sort: 'startsAt',
+    where: { and: [{ tenant: { equals: tenant.id } }, { active: { equals: true } }] },
+  })
 
   return (
     <div className="home">
       <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/3.x/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/3.x/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
+        <h1>{tenant.name}</h1>
+        <p>Site în construcție (F0).</p>
+        <h2>Seri tematice</h2>
+        {events.length === 0 && <p>Nicio seară introdusă.</p>}
+        <ul>
+          {events.map((event) => (
+            <li key={event.id} data-tenant={tenant.slug}>
+              {event.name}
+              {event.placeholder && <span className="placeholder"> · Exemplu · de înlocuit</span>}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

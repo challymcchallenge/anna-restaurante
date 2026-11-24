@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { multiTenantPlugin } from '@payloadcms/plugin-multi-tenant'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
@@ -7,9 +8,13 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
+import { adminOnlyField, isAdmin } from './access/roles'
+import { Events } from './collections/Events'
 import { Media } from './collections/Media'
+import { Tenants } from './collections/Tenants'
 import { Users } from './collections/Users'
 import { parseFromAddress } from './lib/email'
+import type { Config } from './payload-types'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,7 +37,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Tenants, Users, Media, Events],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -54,6 +59,27 @@ export default buildConfig({
     : undefined,
   sharp,
   plugins: [
+    // Un panou, mai multe restaurante, separate complet (ADR-002, D-12).
+    multiTenantPlugin<Config>({
+      tenantsSlug: 'tenants',
+      collections: {
+        media: {},
+        events: {},
+      },
+      // Administratorul vede toate restaurantele.
+      userHasAccessToAllTenants: (user) => isAdmin(user),
+      tenantsArrayField: {
+        includeDefaultField: true,
+        // Doar Administratorul atribuie restaurante; un Editor nu se poate adăuga singur la altul.
+        arrayFieldAccess: { create: adminOnlyField, update: adminOnlyField },
+        tenantFieldAccess: { create: adminOnlyField, update: adminOnlyField },
+      },
+      i18n: {
+        translations: {
+          en: { 'nav-tenantSelector-label': 'Restaurant' },
+        },
+      },
+    }),
     // Supabase Storage prin API-ul compatibil S3, încărcare directă din browser (ADR-003).
     // Fără variabilele S3 (dezvoltare locală), fișierele rămân pe disc.
     s3Storage({
