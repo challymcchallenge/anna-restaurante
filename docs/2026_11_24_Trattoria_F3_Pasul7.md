@@ -68,6 +68,8 @@ O problemă găsită pe capturi și reparată înainte de publicare: clasele `.r
 - **Pasul 8:** galeria mozaic pe categorii.
 - **Pasul 9:** Contact cu formularul, pagina de sesizări și proba ialoc cu data serii (G4-1).
 
+Pagina HTML a raportului (privată): https://claude.ai/artifact/GRtdrB3zztE7wzQutnfbkj
+
 ---
 
 100% AI Solutions & Agentic Work-Flows for SMEs
