@@ -57,6 +57,26 @@ export function HeroMotion({
     return () => window.removeEventListener('load', start)
   }, [video, allowed])
 
+  // Slideshow: cadrele 2…n primesc adresele abia după încărcarea paginii, ca fotografia principală
+  // (LCP) să nu împartă rețeaua cu ele (D-60). Fără mișcare permisă, nu se descarcă deloc.
+  useEffect(() => {
+    if (video || frames < 2 || !allowed) return
+    const arm = () =>
+      document.querySelectorAll<HTMLElement>('.hero-frame [data-srcset], .hero-frame [data-src]').forEach((el) => {
+        // Întâi <source>, apoi <img> (ordinea din document): browserul alege sursa corectă.
+        if (el.dataset.srcset) el.setAttribute('srcset', el.dataset.srcset)
+        if (el.dataset.src) el.setAttribute('src', el.dataset.src)
+        delete el.dataset.srcset
+        delete el.dataset.src
+      })
+    if (document.readyState === 'complete') {
+      const t = window.setTimeout(arm, 300)
+      return () => window.clearTimeout(t)
+    }
+    window.addEventListener('load', arm, { once: true })
+    return () => window.removeEventListener('load', arm)
+  }, [video, frames, allowed])
+
   // Slideshow: cadrul activ se schimbă la 6 s (clasa `is-active`, tranziția e în CSS).
   useEffect(() => {
     if (video || frames < 2 || !allowed || paused) return

@@ -20,11 +20,14 @@ function Frame({
   desktop,
   mobile,
   priority,
+  deferred = false,
   className,
 }: {
   desktop: Media | null
   mobile: Media | null
   priority: boolean
+  /** Cadrele 2…n din slideshow: adresele stau în `data-*` până după încărcarea paginii (HeroMotion). */
+  deferred?: boolean
   className?: string
 }) {
   const d = desktop ?? mobile
@@ -32,14 +35,16 @@ function Frame({
   if (!d || !m) return null
   const ds = pictureSources(d, 1920)
   const ms = pictureSources(m, 960)
+  // Un cadru amânat nu cere nimic la deschidere: fotografia LCP (primul cadru) are rețeaua singură (D-60).
+  const set = (v: string | null) => (deferred ? { 'data-srcset': v ?? undefined } : { srcSet: v ?? undefined })
   return (
     <picture className={className}>
-      {ds.avif && <source media={DESKTOP} type="image/avif" srcSet={ds.avif} sizes="100vw" />}
-      {ds.webp && <source media={DESKTOP} type="image/webp" srcSet={ds.webp} sizes="100vw" />}
-      {ms.avif && <source type="image/avif" srcSet={ms.avif} sizes="100vw" />}
-      {ms.webp && <source type="image/webp" srcSet={ms.webp} sizes="100vw" />}
+      {ds.avif && <source media={DESKTOP} type="image/avif" {...set(ds.avif)} sizes="100vw" />}
+      {ds.webp && <source media={DESKTOP} type="image/webp" {...set(ds.webp)} sizes="100vw" />}
+      {ms.avif && <source type="image/avif" {...set(ms.avif)} sizes="100vw" />}
+      {ms.webp && <source type="image/webp" {...set(ms.webp)} sizes="100vw" />}
       <img
-        src={ms.src}
+        {...(deferred ? { 'data-src': ms.src } : { src: ms.src })}
         width={ms.width || undefined}
         height={ms.height || undefined}
         alt={m.alt ?? ''}
@@ -92,6 +97,7 @@ export function Hero({ site, id }: { site: SiteData; id: string }) {
             desktop={f.desktop}
             mobile={f.mobile}
             priority={i === 0}
+            deferred={i > 0}
             className={`hero-frame${i === 0 ? ' is-active' : ''}`}
           />
         ))}
