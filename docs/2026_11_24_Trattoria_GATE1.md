@@ -104,7 +104,7 @@ F1 era estimat la 3–4 sesiuni; s-a făcut într-una. Total: **13–17 sesiuni*
 | D-37 | Editorul vede în meniu „Cereri primite”, doar cu subiectele Curs de pizza și Întrebare; schimbă doar „Stare”. Tabloul de bord arată „Cereri noi”. Probat: 4 cereri de test, Editorul vede 2, nu poate modifica Cazare și nu poate șterge |
 | D-39 | Cele 9 motive de sesizare, cu explicația lor, în colecția „Motive de sesizare”. **Abatere de la content-model 5.9**: am adăugat câmpul „Explicație” (120 de caractere, pe limbi), ca textul de pe site-ul actual să rămână întreg. Cel mai lung text are ~95 de caractere, peste limita de 80 a unui singur câmp |
 | Conținutul de pornire | Jurnal pe colecție: o colecție nouă din `seed/*.json` se aplică la următorul build; una golită intenționat din panou nu se mai completează. Probat pe copia producției: recenziile șterse au rămas șterse, motivele s-au adăugat |
-| Propunere | Pe pagina descărcată de pe davittoria.ro apar linkul de Facebook și adresele celor 10 site-uri ale grupului. **Nu le-am aplicat**; aștept confirmarea ta (vezi `docs/OPEN-QUESTIONS.md`, #13 și #17) |
+| D-40 | Facebook pus în Setări; cele 11 linkuri ale grupului completate (0 provizorii), inclusiv Fabrica Mezeluri GorjANNA, adăugată de Alin, și „Hotel ANNA” cu www.hotelanna.ro. Aplicat direct pe producție (Supabase, doar câmpurile goale) și în `seed/trattoria-da-vittoria.json` pentru instalări noi. Verificat prin API-ul Payload: 11 linkuri, în ordine |
 
 ---
 

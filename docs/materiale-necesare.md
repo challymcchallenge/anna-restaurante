@@ -42,8 +42,8 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | 17 | **Lista reală de vinuri** (nume, producător, tip, regiune, an, preț la sticlă și la pahar, volum) | Vinuri. Acum sunt 5 exemple, marcate „Provizoriu” | **F1 → F3** | OQ #5, Q-35 |
 | 18 | Recenziile reale, pentru restaurant și pentru hotel | Recenzii (4 exemple acum) | F3 | D-06, OQ #4 |
 | ~~19~~ | ~~Cele 9 motive de sesizare~~ — **gata** (D-39) | Motive de sesizare | — | D-39 |
-| 20 | Adresele celor 6 site-uri ale grupului fără link: Anna Delivery, Cofetăria Anna, Piscina Anna Summer Events, Anna Events, Riviera Events, Hotel Anna Junior. **Găsite pe davittoria.ro; doar confirmarea ta** | Linkuri grup | F3 | OQ #11, #17 |
-| 21 | Linkul paginii de Facebook a Trattoriei. **Găsit pe davittoria.ro; doar confirmarea ta** | Setări → Contact și program → Rețele sociale | F3 | C2, OQ #13 |
+| ~~20~~ | ~~Adresele site-urilor grupului~~ — **gata** (D-40, 11 linkuri) | Linkuri grup | — | D-40 |
+| ~~21~~ | ~~Linkul paginii de Facebook~~ — **gata** (D-40) | Setări → Rețele sociale | — | D-40 |
 | 22 | Poziția restaurantului pe hartă (latitudine, longitudine) | Setări → Contact și program → Adresă | F3 | content-model R2 |
 | 23 | Răspunsurile la cele 7 întrebări frecvente (sau altele) | Întrebări frecvente | F3 | Q-24 |
 | 24 | Descrierile saloanelor și a camerelor; confirmarea capacităților 25 / 40 și a amplasării (etaj / mansardă) | Saloane, Tipuri de camere | F3 | A-08 |
@@ -56,7 +56,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 
 ## 4. Deja completate din `docs/DECISIONS.md`
 
-Motivele de sesizare (D-39), tagline (D-01), adresa (Strada Victoriei nr. 8, Târgu Jiu), telefoanele (D-17), programul zilnic 8:00–24:00 (content-model R2), Instagram, YouTube, TikTok (D-18, D-30), linkul de recenzie Google, ID-ul ialoc 4385 (D-03), meniul digital, destinatarul pentru Cazare (D-15), redirecționarea `/valori-nutritionale` (D-19).
+Motivele de sesizare (D-39), Facebook și cele 11 linkuri ale grupului (D-40), tagline (D-01), adresa (Strada Victoriei nr. 8, Târgu Jiu), telefoanele (D-17), programul zilnic 8:00–24:00 (content-model R2), Instagram, YouTube, TikTok (D-18, D-30), linkul de recenzie Google, ID-ul ialoc 4385 (D-03), meniul digital, destinatarul pentru Cazare (D-15), redirecționarea `/valori-nutritionale` (D-19).
 
 ---
 

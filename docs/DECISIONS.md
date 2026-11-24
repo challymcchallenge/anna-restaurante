@@ -45,6 +45,7 @@ Ultima actualizare: 24.11.2026 (GATE 1)
 | D-37 | Cereri primite (GATE 1, 24.11.2026) | **Editorul (Social Media Managerul) vede cererile pentru cursurile de pizza pentru copii (înscrieri) și întrebările (mesaje)** și le schimbă starea. Cazarea, evenimentele private și sesizările rămân la Administrator și la destinatarii de email. Datele trimise de vizitator nu se modifică din panou. |
 | D-38 | Presupunerile din GATE 1 (24.11.2026) | **Acceptate**: doar limba română activă până la F4; clipurile fără sunet; 50 MB maximum după conversie; „Provizoriu” oprit implicit la elementele noi; subiectele fără destinatar rămân oprite; paginile legale la `/termeni`, `/confidentialitate`, `/cookies`. |
 | D-39 | Motive de sesizare (GATE 1, 24.11.2026) | **Preluate de pe https://davittoria.ro/formular-de-reclamatie/** (cele 9, cu explicația lor). Cu acordul lui Alin. Fiecare motiv are „Motiv” + „Explicație”. |
+| D-40 | Facebook și linkurile grupului (24.11.2026) | **Confirmate de Alin.** Facebook: https://www.facebook.com/p/Trattoria-da-Vittoria-100083393292155/ (rezolvă C2). Linkuri grup (11): Anna Delivery, Cofetăria Anna (dolcessa.ro), CityBar & Josper Grill, SuperBistro, Terasa Anna, Piscina Anna Summer Events, Anna Events, Riviera Events, **Hotel ANNA (www.hotelanna.ro)**, Hotel Anna Junior și **Fabrica Mezeluri GorjANNA (www.gorjanna.ro)**, adăugată de Alin. |
 
 ## Linkuri-cheie
 

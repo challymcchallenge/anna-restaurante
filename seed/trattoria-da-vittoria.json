@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39).",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40).",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -51,7 +51,8 @@
     "social": {
       "instagram": "https://www.instagram.com/trattoriadavittoria/",
       "youtube": "https://www.youtube.com/@AnnaEvents",
-      "tiktok": "https://www.tiktok.com/@anna.events"
+      "tiktok": "https://www.tiktok.com/@anna.events",
+      "facebook": "https://www.facebook.com/p/Trattoria-da-Vittoria-100083393292155/"
     },
     "googleReviewUrl": "https://g.page/r/CcvVjOcZMWuYEBM/review",
     "ialocId": "4385",
@@ -475,11 +476,11 @@
     "group-links": [
       {
         "name": "Anna Delivery",
-        "placeholder": true
+        "url": "https://www.anna-delivery.ro/"
       },
       {
         "name": "Cofetăria Anna",
-        "placeholder": true
+        "url": "https://dolcessa.ro/"
       },
       {
         "name": "CityBar & Josper Grill",
@@ -495,23 +496,27 @@
       },
       {
         "name": "Piscina Anna Summer Events",
-        "placeholder": true
+        "url": "https://www.annasummerevents.ro/"
       },
       {
         "name": "Anna Events",
-        "placeholder": true
+        "url": "https://www.annaevents.ro/"
       },
       {
         "name": "Riviera Events",
-        "placeholder": true
+        "url": "https://www.rivieraevents.ro/"
       },
       {
-        "name": "Hotel Anna",
+        "name": "Hotel ANNA",
         "url": "https://www.hotelanna.ro"
       },
       {
         "name": "Hotel Anna Junior",
-        "placeholder": true
+        "url": "https://hotelannajunior.ro/"
+      },
+      {
+        "name": "Fabrica Mezeluri GorjANNA",
+        "url": "https://www.gorjanna.ro"
       }
     ],
     "legal-pages": [
