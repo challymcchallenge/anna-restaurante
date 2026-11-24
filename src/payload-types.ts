@@ -1264,6 +1264,33 @@ export interface Setting {
         id?: string | null;
       }[]
     | null;
+  navigation?:
+    | {
+        target:
+          | 'stay'
+          | 'kitchen'
+          | 'wines'
+          | 'reviews'
+          | 'parties'
+          | 'privateEvents'
+          | 'pizza'
+          | 'hotel'
+          | 'gallery'
+          | 'contact'
+          | 'pagePrivateEvents'
+          | 'pageParties'
+          | 'pagePizza'
+          | 'pageGallery'
+          | 'pageWines'
+          | 'pageContact';
+        display: 'header' | 'more' | 'hidden';
+        /**
+         * Gol = eticheta din Pagina Acasă (la secțiuni) sau numele paginii.
+         */
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   /**
    * ID-ul localului în ialoc.ro (D-03). Nu se traduce: aceeași valoare în toate limbile.
    */
@@ -2242,6 +2269,14 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         name?: T;
         url?: T;
+        id?: T;
+      };
+  navigation?:
+    | T
+    | {
+        target?: T;
+        display?: T;
+        label?: T;
         id?: T;
       };
   ialocId?: T;

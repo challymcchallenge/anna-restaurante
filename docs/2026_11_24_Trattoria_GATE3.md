@@ -211,6 +211,17 @@ Teste: 71/71 (4 noi).
 
 G7-1 … G7-3 sunt aprobate de jurist. Paginile legale rămân „Provizoriu” până se completează ce e între paranteze drepte. Teste: 72/72.
 
+## 12. După GATE 3: antetul și meniul de navigare (D-60)
+
+| Cerere | Cum e acum |
+|---|---|
+| Logo de 2× la deschidere, 1,5× la scroll | Telefon: 96 px → 72 px. Desktop: 144 px → 108 px (înainte 48 / 72 px). Logo-ul atârnă sub bară, ca un sigiliu, cu o umbră fină |
+| Antet transparent la deschidere | Fără bară proprie; umbra de sus a copertei e mai ușoară, ca să se vadă fotografia. Textul din antet trece de 4,5:1 |
+| Antetul de acum, la scroll | Bara plină apare de la primul scroll și rămâne sus, pe orice pagină și acum și pe telefon |
+| Meniul din panou | **Setări → Meniu de navigare**: ținta, eticheta și afișarea („În antet” / „Doar în «Mai mult»” / „Ascuns”) pentru fiecare rând; ordinea se schimbă trăgând rândurile. Completat cu meniul de acum |
+
+Teste: 75/75 (3 noi). Migrația: `20261124_231318_f3_meniu_navigare`.
+
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
 Pagina HTML a raportului (privată): https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP

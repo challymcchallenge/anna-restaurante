@@ -33,7 +33,7 @@
   --accent-2-press: color-mix(in srgb, var(--c-accent-2), #000000 22%);
 
   color-scheme: light;
-  scroll-padding-top: var(--s5);
+  scroll-padding-top: calc(var(--header-h) + var(--s5)); /* antetul rămâne sus și pe telefon (D-60) */
   scroll-padding-bottom: calc(var(--bar-h) + var(--s4));
 }
 @media (min-width: 1024px) {
@@ -153,13 +153,28 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .award-link { display: inline-block; border-radius: 6px; }
 @media (min-width: 1024px) { .award-text { font-size: 14px; } }
 
-/* ---------- Antet: peste copertă; pe desktop rămâne compact după primul ecran ---------- */
-.site-header { position: absolute; top: 0; left: 0; right: 0; z-index: 30; color: var(--c-on-dark); }
-.header-in { height: var(--header-h); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--s4); }
+/* ---------- Antet (D-60): transparent peste copertă cât pagina stă sus, plin de la primul scroll ---------- */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30; color: var(--c-on-dark);
+  border-bottom: 1px solid transparent;
+}
+.site-header:not([data-stuck='true']) .header-in { text-shadow: 0 1px 12px rgb(0 0 0 / 0.55); }
+.site-header[data-stuck='true'] {
+  background: color-mix(in srgb, var(--c-dark) 96%, transparent);
+  border-bottom-color: var(--line-cover);
+  box-shadow: 0 12px 30px -20px rgb(0 0 0 / 0.7);
+}
+.header-in { height: var(--header-h); display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: 100%; align-items: center; gap: var(--s4); }
 .header-left { justify-self: start; display: flex; align-items: center; min-width: 0; }
-.brand { justify-self: center; display: block; width: 48px; height: 48px; border-radius: 50%; }
-.brand img { width: 100%; height: 100%; object-fit: contain; }
-.brand--text { width: auto; height: auto; font: 400 20px/1 var(--font-display); text-decoration: none; }
+/* Logo-ul: de 2× la deschidere, 1,5× după scroll (D-60); e mai mare decât bara și atârnă sub ea, ca un sigiliu. */
+.brand { justify-self: center; align-self: start; display: block; width: 96px; height: 96px; margin-top: 8px; border-radius: 50%; }
+.site-header[data-stuck='true'] .brand { width: 72px; height: 72px; margin-top: 4px; }
+.brand img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.35)); }
+.brand--text { align-self: center; margin-top: 0; width: auto; height: auto; font: 400 20px/1 var(--font-display); text-decoration: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .site-header { transition: top 320ms var(--ease-out), background-color 320ms var(--ease-out), border-color 320ms var(--ease-out), box-shadow 320ms var(--ease-out); }
+  .brand { transition: width 320ms var(--ease-out), height 320ms var(--ease-out), margin-top 320ms var(--ease-out); }
+}
 .nav-toggle, .nav-close {
   display: inline-flex; align-items: center; justify-content: center;
   width: 48px; height: 48px; margin-left: -12px; padding: 0;
@@ -172,9 +187,11 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .header-phone, .header-cta { display: none; }
 
 @media (min-width: 1024px) {
-  .site-header { top: 24px; transition: transform 320ms var(--ease-out), background-color 320ms var(--ease-out); }
+  .site-header { top: 24px; }
+  .site-header[data-stuck='true'] { top: 0; }
   .nav-toggle { display: none; }
-  .brand { width: 72px; height: 72px; }
+  .brand { width: 144px; height: 144px; margin-top: 8px; }
+  .site-header[data-stuck='true'] .brand { width: 108px; height: 108px; margin-top: 6px; }
   .nav-main { display: flex; align-items: center; gap: var(--s5); }
   .nav-main ul { display: flex; gap: var(--s5); list-style: none; margin: 0; padding: 0; }
   .nav-main li.tier-2, .nav-main li.tier-3 { display: none; }
@@ -190,17 +207,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .header-phone .icon { width: 16px; height: 16px; color: var(--c-accent); }
   .header-cta { display: inline-flex; min-height: 44px; }
 
-  /* Antetul compact, după hero */
-  .site-header[data-stuck='true'] {
-    position: fixed; top: 0;
-    background: color-mix(in srgb, var(--c-dark) 96%, transparent);
-    border-bottom: 1px solid var(--line-cover);
-    box-shadow: 0 12px 30px -20px rgb(0 0 0 / 0.7);
-    animation: header-in 320ms var(--ease-out);
-  }
-  .site-header[data-stuck='true'] .header-in { height: 64px; }
-  .site-header[data-stuck='true'] .brand { width: 48px; height: 48px; }
-  @keyframes header-in { from { transform: translateY(-100%); } to { transform: none; } }
+  .site-header[data-stuck='true'] .header-in { height: 72px; }
 }
 @media (min-width: 1280px) {
   .nav-main li.tier-2 { display: list-item; }
@@ -216,7 +223,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .nav-panel::backdrop { background: rgb(10 6 6 / 0.6); }
 .nav-panel-in { min-height: 100%; display: flex; flex-direction: column; padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom)); }
 .nav-panel-head { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
-.brand--panel { width: 48px; height: 48px; }
+.brand--panel { width: 48px; height: 48px; margin-top: 0; align-self: center; }
 .nav-panel-list { list-style: none; margin: var(--s5) 0 0; padding: 0; border-top: 1px solid var(--line-cover); }
 .nav-panel-list li { border-bottom: 1px solid var(--line-cover); }
 .nav-panel-list a {
@@ -313,10 +320,10 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 78%, transparent) 0, transparent 120px),
+    linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 62%, transparent) 0, transparent 140px),
     linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 96%, transparent) 0%, color-mix(in srgb, var(--c-dark) 90%, transparent) 42%, color-mix(in srgb, var(--c-dark) 25%, transparent) 70%, transparent 85%);
 }
-.hero-tag { top: calc(var(--header-h) + var(--s2)); right: var(--edge); }
+.hero-tag { top: calc(8px + 96px + var(--s2)); right: var(--edge); }
 .cover-frame { display: none; }
 .hero-in { position: relative; padding-top: calc(var(--header-h) + var(--s8)); padding-bottom: var(--s5); }
 .hero h1 { font-size: clamp(40px, 11vw, 48px); line-height: 1.02; letter-spacing: -0.01em; max-width: 11ch; }
@@ -444,11 +451,11 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .hero-frame img, .hero-video { object-position: 62% 50%; }
   .hero::before {
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 92%, transparent) 0, color-mix(in srgb, var(--c-dark) 60%, transparent) 120px, transparent 240px),
+      linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 84%, transparent) 0, color-mix(in srgb, var(--c-dark) 45%, transparent) 130px, transparent 230px),
       linear-gradient(90deg, color-mix(in srgb, var(--c-dark) 95%, transparent) 0%, color-mix(in srgb, var(--c-dark) 88%, transparent) 34%, color-mix(in srgb, var(--c-dark) 30%, transparent) 60%, transparent 76%),
       linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 85%, transparent) 0, transparent 260px);
   }
-  .hero-tag { top: calc(24px + var(--header-h) + var(--s4)); right: calc(var(--edge) + var(--s5)); }
+  .hero-tag { top: calc(24px + var(--header-h) + var(--s6)); right: calc(var(--edge) + var(--s5)); }
   .hero-pause { top: calc(24px + var(--header-h) + var(--s4) + 44px); right: calc(var(--edge) + var(--s5)); }
   /* Chenarul dublu de folio al copertei */
   .cover-frame {
@@ -456,7 +463,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
     border: 1px solid var(--line-cover-strong);
     box-shadow: inset 0 0 0 5px transparent, inset 0 0 0 6px color-mix(in srgb, var(--c-accent) 30%, transparent);
   }
-  .hero-in { padding-top: calc(24px + var(--header-h) + var(--s8)); padding-bottom: var(--s7); }
+  .hero-in { padding-top: calc(24px + 8px + 144px + var(--s5)); padding-bottom: var(--s7); }
   .hero-copy { max-width: 620px; }
   .hero h1 { font-size: 80px; line-height: 0.98; max-width: 10ch; }
   .hero-award { margin-top: var(--s6); }

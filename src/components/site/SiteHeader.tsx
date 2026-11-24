@@ -48,7 +48,7 @@ export function Language({ site, className = 'lang' }: { site: SiteData; classNa
 }
 
 export function SiteHeader({ site }: { site: SiteData }) {
-  const items = navItems(site.home)
+  const items = navItems(site.home, site.settings?.navigation)
   const hasMoreLg = items.some((i) => i.tier > 1)
   const hasMoreXl = items.some((i) => i.tier > 2)
   const phone = site.settings?.phoneReservations ?? null

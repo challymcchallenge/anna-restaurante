@@ -3,6 +3,7 @@ import type { CollectionConfig, Field } from 'payload'
 import { adminAreaAccess, hiddenForEditors } from '../access/roles'
 import { emailList, media, select, text, url, validateHexColor, validatePhone } from '../fields'
 import { LOCALES } from '../lib/locales'
+import { NAV_DISPLAY_OPTIONS, NAV_TARGET_OPTIONS } from '../lib/site/sections'
 import { fontOptions } from '../theme/fonts'
 import { validateColorField } from '../theme/theme'
 import { REQUEST_SUBJECTS } from './AdminAreas'
@@ -377,6 +378,37 @@ export const Settings: CollectionConfig = {
                     url({ name: 'url', label: 'Adresă', required: true }),
                   ],
                 },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Meniu de navigare',
+          description:
+            'Ordinea rândurilor e ordinea din meniu: trage-le cu mânerul din stânga. „În antet” apare sus cât încape, restul în „Mai mult”; pe telefon toate sunt în meniul care se deschide. O secțiune oprită din Pagina Acasă nu apare. Lista goală = meniul se face singur din secțiunile Acasă (D-60).',
+          fields: [
+            {
+              name: 'navigation',
+              label: 'Elemente',
+              type: 'array',
+              maxRows: 16,
+              labels: { singular: 'Element', plural: 'Elemente' },
+              admin: { initCollapsed: true, components: { RowLabel: '/components/admin/NavRowLabel#NavRowLabel' } },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    select({ name: 'target', label: 'Duce la', required: true, options: NAV_TARGET_OPTIONS }),
+                    select({ name: 'display', label: 'Afișare', required: true, defaultValue: 'header', options: NAV_DISPLAY_OPTIONS }),
+                  ],
+                },
+                text({
+                  name: 'label',
+                  label: 'Etichetă',
+                  max: 20,
+                  localized: true,
+                  description: 'Gol = eticheta din Pagina Acasă (la secțiuni) sau numele paginii.',
+                }),
               ],
             },
           ],

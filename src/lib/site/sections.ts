@@ -51,6 +51,55 @@ export function orderedSections(home: HomePage | null) {
     )
 }
 
+/** Numele secțiunilor, pentru panou (meniul de navigare) și ca etichetă de rezervă. */
+export const SECTION_LABELS: Record<Exclude<SectionKey, 'hero'>, string> = {
+  stay: 'Cazare (bara din hero)',
+  kitchen: 'Bucătăria',
+  wines: 'Vinuri',
+  reviews: 'Recenzii',
+  parties: 'Petreceri',
+  privateEvents: 'Evenimente private',
+  pizza: 'Cursuri de pizza',
+  hotel: 'Hotel',
+  gallery: 'Galerie',
+  contact: 'Contact',
+}
+
+/** Paginile proprii care pot sta în meniu, cu adresa și numele lor implicit. */
+export const NAV_PAGES = {
+  pagePrivateEvents: { href: '/evenimente-private', label: 'Evenimente private' },
+  pageParties: { href: '/petreceri', label: 'Petreceri' },
+  pagePizza: { href: '/cursuri-pizza-copii', label: 'Cursuri de pizza' },
+  pageGallery: { href: '/galerie', label: 'Galerie' },
+  pageWines: { href: '/catalog-vinuri', label: 'Lista de vinuri' },
+  pageContact: { href: '/contact', label: 'Contact' },
+} as const
+
+type NavPage = keyof typeof NAV_PAGES
+export type NavTarget = Exclude<SectionKey, 'hero'> | NavPage
+export type NavDisplay = 'header' | 'more' | 'hidden'
+
+/** Țintele din „Setări → Meniu de navigare”: secțiunile de pe Acasă, apoi paginile proprii. */
+export const NAV_TARGET_OPTIONS: { value: NavTarget; label: string }[] = [
+  ...(Object.entries(SECTION_LABELS) as [Exclude<SectionKey, 'hero'>, string][]).map(([value, label]) => ({
+    value,
+    label: `Acasă · ${label}`,
+  })),
+  ...(Object.entries(NAV_PAGES) as [NavPage, { label: string }][]).map(([value, p]) => ({
+    value,
+    label: `Pagina ${p.label}`,
+  })),
+]
+
+export const NAV_DISPLAY_OPTIONS: { value: NavDisplay; label: string }[] = [
+  { value: 'header', label: 'În antet (cât încape)' },
+  { value: 'more', label: 'Doar în „Mai mult”' },
+  { value: 'hidden', label: 'Ascuns' },
+]
+
+/** Un rând din „Setări → Meniu de navigare”. */
+export type NavEntry = { target?: string | null; label?: string | null; display?: string | null }
+
 export type NavItem = {
   id: string
   href: string
@@ -69,10 +118,42 @@ const GAP_PX = 24
 const MORE_PX = 120
 const BUDGET = { lg: 380, xl: 508 } as const
 
-export function navItems(home: HomePage | null): NavItem[] {
-  const items = orderedSections(home)
+type Candidate = { id: string; href: string; label: string; moreOnly: boolean }
+
+/** Meniul automat: secțiunile pornite, cu etichetă în meniu, în ordinea de pe Acasă. */
+function autoItems(home: HomePage | null): Candidate[] {
+  return orderedSections(home)
     .filter((s) => s.key !== 'hero' && s.data?.menuLabel)
-    .map((s) => ({ id: s.id, href: `/#${s.id}`, label: s.data?.menuLabel as string }))
+    .map((s) => ({ id: s.id, href: `/#${s.id}`, label: s.data?.menuLabel as string, moreOnly: false }))
+}
+
+/**
+ * Meniul din „Setări → Meniu de navigare” (D-60): ordinea rândurilor, eticheta (gol = cea din
+ * Pagina Acasă sau numele paginii), afișarea. O secțiune oprită nu apare, ca să nu ducă nicăieri.
+ */
+function settingsItems(home: HomePage | null, nav: NavEntry[]): Candidate[] {
+  const out: Candidate[] = []
+  for (const entry of nav) {
+    if (!entry?.target || entry.display === 'hidden') continue
+    const moreOnly = entry.display === 'more'
+    const custom = entry.label?.trim()
+    if (entry.target in NAV_PAGES) {
+      const page = NAV_PAGES[entry.target as NavPage]
+      out.push({ id: entry.target, href: page.href, label: custom || page.label, moreOnly })
+      continue
+    }
+    const meta = SECTIONS.find((s) => s.key === entry.target)
+    if (!meta || meta.key === 'hero' || !meta.built || !isOn(home, meta.key)) continue
+    const label = custom || section(home, meta.key)?.menuLabel || SECTION_LABELS[meta.key]
+    out.push({ id: meta.id, href: `/#${meta.id}`, label, moreOnly })
+  }
+  return out
+}
+
+export function navItems(home: HomePage | null, nav?: NavEntry[] | null): NavItem[] {
+  const all = nav?.length ? settingsItems(home, nav) : autoItems(home)
+  // Lățimile se socotesc doar pe cele care pot sta în antet; cele „Doar în «Mai mult»” stau în panou.
+  const items = all.filter((i) => !i.moreOnly)
 
   const width = (label: string) => label.length * CHAR_PX + GAP_PX
   const fits = (budget: number) => {
@@ -90,5 +171,7 @@ export function navItems(home: HomePage | null): NavItem[] {
   }
   const lg = fits(BUDGET.lg)
   const xl = fits(BUDGET.xl)
-  return items.map((i, n) => ({ ...i, tier: lg[n] ? 1 : xl[n] ? 2 : 3 }))
+  const tierOf = new Map<Candidate, NavItem['tier']>()
+  items.forEach((i, n) => tierOf.set(i, lg[n] ? 1 : xl[n] ? 2 : 3))
+  return all.map((c) => ({ id: c.id, href: c.href, label: c.label, tier: tierOf.get(c) ?? 3 }))
 }

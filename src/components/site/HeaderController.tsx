@@ -6,8 +6,8 @@ import { useEffect } from 'react'
  * Comportamentul antetului, fără să-l randeze (markup-ul rămâne pe server):
  * - butoanele `[data-nav-open]` deschid panoul de navigare (`<dialog>` nativ: focus în panou,
  *   Esc închide, restul paginii inert); un link din panou îl închide;
- * - pe desktop, după primul ecran, antetul rămâne sus, compact, ca „Rezervă o masă” să fie
- *   mereu la un gest distanță (PRODUCT.md, principiul 1). Pe telefon face asta bara de jos.
+ * - antetul e transparent cât pagina stă sus, cu logo-ul mare; la primul scroll devine plin,
+ *   cu logo-ul mai mic, și rămâne sus (D-60), ca „Rezervă o masă” să fie la un gest distanță.
  */
 export function HeaderController() {
   useEffect(() => {
@@ -31,23 +31,23 @@ export function HeaderController() {
     document.addEventListener('click', onClick)
     panel?.addEventListener('close', onClose)
 
-    // Antetul compact: apare după ce hero-ul a ieșit din ecran.
-    const hero = document.querySelector('[data-hero]')
-    let observer: IntersectionObserver | null = null
-    if (header && hero && 'IntersectionObserver' in window) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          header.dataset.stuck = String(!entry.isIntersecting)
-        },
-        { rootMargin: '-120px 0px 0px 0px' },
-      )
-      observer.observe(hero)
+    // Antetul plin: de la primii pixeli de scroll, pe orice pagină (D-60).
+    let frame = 0
+    const update = () => {
+      frame = 0
+      if (header) header.dataset.stuck = String(window.scrollY > 8)
     }
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
 
     return () => {
       document.removeEventListener('click', onClick)
       panel?.removeEventListener('close', onClose)
-      observer?.disconnect()
+      window.removeEventListener('scroll', onScroll)
+      if (frame) window.cancelAnimationFrame(frame)
     }
   }, [])
   return null
