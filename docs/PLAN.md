@@ -4,15 +4,15 @@ Regulă: **o fază pe sesiune de Claude Code**. La fiecare poartă (GATE) lucrul
 
 Estimarea în sesiuni este orientativă și se reface după faza 0.
 
-| Fază | Sesiuni (estimare inițială) | Sesiuni (refăcută după F0, 24.11.2026) | Motiv |
-|---|---|---|---|
-| F0 Pregătire și teste | 1–2 | 1 + 0,5 | Rămân: conexiunea Supabase și încărcarea S3 după variabile, proba pe telefon |
-| F1 Panou și model de conținut | 2–3 | **3–4** | 13 colecții + setări pe restaurant + traduceri pe câmp + panou în română. Încărcarea media are nevoie de o componentă proprie în panou (conversie în browser, HEIC, video, punct focal) |
-| F2 Direcție de design | 1–2 | 1–2 | — |
-| F3 Site public | 6–8 | 6–8 | — |
-| F4 Traduceri și FAQ | 3–4 | **1–2** | Efectele, sunetul, 3D și tema trec după lansare (D-33) |
-| F5 Verificare și lansare | 2 | 2 | Include testul de email cu domeniul verificat (mutat din F0 la decizia lui Alin) |
-| **Total** | **15–21** | **14–20** | Decis la GATE 0 (D-33) |
+| Fază | Sesiuni (estimare inițială) | Sesiuni (refăcută după F0, 24.11.2026) | Real / refăcută după F1 (24.11.2026) | Motiv |
+|---|---|---|---|---|
+| F0 Pregătire și teste | 1–2 | 1 + 0,5 | **1,5 (real)** | Rămân: conexiunea Supabase și încărcarea S3 după variabile, proba pe telefon |
+| F1 Panou și model de conținut | 2–3 | **3–4** | **1 (real)** + proba ta | 13 colecții + setări pe restaurant + traduceri pe câmp + panou în română. Încărcarea media are nevoie de o componentă proprie în panou (conversie în browser, HEIC, video, punct focal) |
+| F2 Direcție de design | 1–2 | 1–2 | 1–2 | — |
+| F3 Site public | 6–8 | 6–8 | 6–8 | — |
+| F4 Traduceri și FAQ | 3–4 | **1–2** | 1–2 | Efectele, sunetul, 3D și tema trec după lansare (D-33) |
+| F5 Verificare și lansare | 2 | 2 | 2 | Include testul de email cu domeniul verificat (mutat din F0 la decizia lui Alin) |
+| **Total** | **15–21** | **14–20** | **13–17** | Decis la GATE 0 (D-33) |
 
 ---
 
@@ -49,6 +49,8 @@ Estimarea în sesiuni este orientativă și se reface după faza 0.
 - De primit de la Alin: lista de vinuri (OQ #5), linkul de Facebook (C2).
 
 **GATE 1:** Alin adaugă din panou, singur, o seară tematică, o fotografie și un vin. Editorul de probă nu poate deschide Premii și Setări.
+
+**Stare (24.11.2026):** construită și pusă în producție; testele automate ale porții trec (14 de integrare, 7 în browser). Aștept proba lui Alin și „GO”. Raport: `docs/2026_11_24_Trattoria_GATE1.md`.
 
 ## Faza 2 — Direcție de design
 

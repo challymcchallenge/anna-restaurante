@@ -8,7 +8,7 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | 2 | Clipul video pentru hero și setul de fotografii pe categorii | F2 | Alin |
 | 3 | Ce anume se animă în 3D pe desktop | F4 | Alin |
 | 4 | Lista de recenzii (restaurant și hotel) | F3 | Alin |
-| 5 | Lista reală de vinuri și câmpurile fiecărui vin | F1 | Alin |
+| 5 | Lista reală de vinuri și câmpurile fiecărui vin. Colecția există, cu 5 exemple provizorii; câmpurile se pot ajusta după lista reală | **F3** (mutat din F1: nu blochează panoul) | Alin |
 | 6 | Cursurile de pizza: frecvență, vârste, locuri, preț, cum se confirmă înscrierea | F3 | Alin |
 | 7 | Termenul de răspuns promis pe fiecare subiect (cazare, salon, curs, sesizare) | F3 | Alin |
 | 8 | Acordul părinților pentru fotografiile cu copii | F3 | Alin |
@@ -28,3 +28,13 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | T5 | Costul real al proiectului Supabase suplimentar în organizația Pro | ADR-006 |
 | T6 | Dacă meniul digital permite legături directe pe categorie | — |
 | 13 | Linkul paginii de Facebook a Trattoriei (apare în footer și Contact în design; lipsește din D-18/D-30) | F3 | Alin |
+
+## Întrebări noi după F1 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_GATE1.md`, secțiunea 5
+
+| # | Întrebare | Până la | Cine răspunde |
+|---|---|---|---|
+| 14 | Cererile primite: le vede doar Administratorul (propunerea mea) sau și Editorul? | F3 | Alin |
+| 15 | Destinatarii de email pentru Eveniment privat, Curs de pizza, Întrebare, Sesizare și adresa de copie (se pun în panou) | F3 | Alin |
+| 16 | Cele 9 motive de sesizare de pe site-ul actual (le pot prelua eu de pe davittoria.ro, dacă îmi dai voie să accesez site-ul) | F3 | Alin |
+| 17 | Adresele site-urilor grupului fără link (6 din 10) | F3 | Alin |
+| 18 | Poziția pe hartă a restaurantului (latitudine, longitudine) | F3 | Alin |

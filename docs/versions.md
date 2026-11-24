@@ -1,6 +1,6 @@
 # Versiuni, prețuri și limite verificate
 
-Ultima verificare: **24.11.2026**. Sursa versiunilor: registrul npm (`npm view`) și `package.json` / `pnpm-lock.yaml`. Sursa prețurilor și limitelor: paginile oficiale ale furnizorilor, citite pe 24.11.2026. Ce nu s-a putut citi pe pagina oficială este marcat **neverificat**.
+Ultima verificare: **24.11.2026** (F0; completat în F1). Sursa versiunilor: registrul npm (`npm view`) și `package.json` / `pnpm-lock.yaml`. Sursa prețurilor și limitelor: paginile oficiale ale furnizorilor, citite pe 24.11.2026. Ce nu s-a putut citi pe pagina oficială este marcat **neverificat**.
 
 ## Stack (ADR-001)
 
@@ -18,6 +18,9 @@ Ultima verificare: **24.11.2026**. Sursa versiunilor: registrul npm (`npm view`)
 | TypeScript | 5.7.3 | — | Din șablonul Payload |
 | Playwright (teste) | 1.63.0 | — | Din șablonul Payload |
 | PostgreSQL | Supabase: 17.12 · container: 16 | — | Proiectul Supabase `anna-restaurante` (eu-west-1) rulează Postgres 17 |
+| `@payloadcms/translations` (F1) | 3.94.1 | 3.94.1 | Interfața panoului în română. Două etichete corectate în config („Localitate” → „Limba conținutului”) |
+| `heic-to` (F1) | 1.6.7 | 1.6.7, publicată 27.10.2026 | Decodare HEIC în browser, doar în panou. LGPL-3.0, încărcată separat (3,2 MB), doar la un fișier HEIC |
+| `mediabunny` (F1) | 1.66.3 | 1.66.4, publicată 24.11.2026, 10:36 UTC | Conversie video prin WebCodecs, doar în panou. MPL-2.0, încărcată separat (765 KB). Rămânem pe 1.66.3, probată în F0; 1.66.4 are câteva ore |
 
 ## Servicii: prețuri și limite
 
@@ -57,7 +60,9 @@ Ultima verificare: **24.11.2026**. Sursa versiunilor: registrul npm (`npm view`)
 | Migrații pe producție | `20261124_102321_initial` (batch 1), 24.11.2026 |
 | Restaurante în producție | Trattoria da Vittoria (id 1, cu adresa temporară Vercel) și Citybar & Josper Grill (id 2, de probă), create prin SQL pe 24.11.2026 |
 | Test Storage pe producție | 1 fotografie încărcată din panou (24.11.2026), citită prin Payload și prin URL-ul public: ambele 200 |
-| Securitate Supabase (advisors) | 0 probleme. Tabelele din `public` nu au drepturi SELECT/INSERT/UPDATE/DELETE pentru `anon`/`authenticated`. RLS oprit; propunere de protecție suplimentară în F1 |
+| Securitate Supabase (advisors) | F0: 0 probleme. **F1: RLS pornit pe toate tabelele din `public`** (fără politici; Payload este proprietarul tabelelor și nu e afectat) |
+| Migrații pe producție (F1) | `20261124_120825_f1_content_model`, `20261124_121504_f1_tenants_order`, `20261124_122707_f1_starter_flag` (batch 2, 24.11.2026, 581 + 421 + 137 ms pe build-ul Vercel) |
+| Conținut de pornire (F1) | `seed/trattoria-da-vittoria.json`, aplicat o singură dată de `scripts/seed-starter.ts` după migrații |
 
 ---
 
