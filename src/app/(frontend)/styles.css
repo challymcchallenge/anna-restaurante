@@ -693,7 +693,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .cover-logo { display: block; margin-top: var(--s5); }
 .page-award { display: grid; justify-items: start; gap: var(--s3); margin-top: var(--s5); }
 .wine-page { padding-top: var(--s6); }
-.wine-sheet { max-width: 760px; margin-inline: auto; }
+/* Pe foaia mai deschisă (desktop), textul secundar e puțin mai închis, ca să rămână peste 5:1. */
+.wine-sheet { max-width: 760px; margin-inline: auto; --c-text-2: color-mix(in srgb, var(--c-text) 78%, var(--c-bg)); }
 .wine-tools { display: grid; gap: var(--s4); }
 .wine-sheet .wine-filter { justify-content: flex-start; margin: 0; }
 .wine-sheet .wine-chip label { color: var(--c-text); border-color: var(--line-paper-strong); }

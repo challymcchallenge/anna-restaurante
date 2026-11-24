@@ -80,6 +80,8 @@ export const UI = {
   wineNoResultsHint: 'Încearcă alt cuvânt sau vezi toate vinurile.',
   wineClear: 'Vezi toate vinurile',
   wineCount: (n: number) => (n === 1 ? '1 vin' : n < 20 ? `${n} vinuri` : `${n} de vinuri`),
+  wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
+    `Lista de vinuri ${restaurant}: ${count}${countries.length ? ` din ${countries.length > 1 ? `${countries.slice(0, -1).join(', ')} și ${countries[countries.length - 1]}` : countries[0]}` : ''}, cu prețul la sticlă și la pahar.`,
   winePageNote: 'Prețurile sunt în lei, pentru sticla de 0,75 l, dacă nu e scris altfel. Vinurile care nu sunt în stoc nu apar în listă.',
   ratingLabel: (n: number) => `Notă ${n} din 5`,
   sources: { google: 'Google', tripadvisor: 'TripAdvisor', facebook: 'Facebook', other: '' } as Record<

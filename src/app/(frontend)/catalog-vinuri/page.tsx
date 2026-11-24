@@ -22,7 +22,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const site = await getSite((await headers()).get('host'))
   if (!site) return {}
   const w = section(site.home, 'wines')
-  return { title: `${w?.title || UI.wineListTitle} · ${site.tenant.name}`, description: w?.intro || undefined }
+  // Fără text introductiv în panou: descrierea se compune din listă (numărul de vinuri, țările).
+  const wines = w?.intro ? [] : await getWineList(site.tenant.id)
+  const countries = [...new Set(wines.map((x) => x.country).filter((c): c is string => Boolean(c)))]
+  return {
+    title: `${w?.title || UI.wineListTitle} · ${site.tenant.name}`,
+    description: w?.intro || UI.wineMetaDescription(site.tenant.name, UI.wineCount(wines.length), countries),
+  }
 }
 
 export default async function WineListPage() {
