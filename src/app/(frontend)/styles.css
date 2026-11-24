@@ -397,8 +397,8 @@ select.field-input { appearance: none; cursor: pointer; padding-right: var(--s5)
       linear-gradient(90deg, color-mix(in srgb, var(--c-dark) 95%, transparent) 0%, color-mix(in srgb, var(--c-dark) 88%, transparent) 34%, color-mix(in srgb, var(--c-dark) 30%, transparent) 60%, transparent 76%),
       linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 85%, transparent) 0, transparent 260px);
   }
-  .hero-tag { top: auto; bottom: 212px; right: calc(var(--edge) + var(--s5)); }
-  .hero-pause { top: auto; bottom: 212px; right: calc(var(--edge) + var(--s5) + 220px); }
+  .hero-tag { top: calc(24px + var(--header-h) + var(--s4)); right: calc(var(--edge) + var(--s5)); }
+  .hero-pause { top: calc(24px + var(--header-h) + var(--s4) + 44px); right: calc(var(--edge) + var(--s5)); }
   /* Chenarul dublu de folio al copertei */
   .cover-frame {
     display: block; position: absolute; inset: 24px; z-index: 0; pointer-events: none;
@@ -437,6 +437,144 @@ select.field-input { appearance: none; cursor: pointer; padding-right: var(--s5)
   @keyframes frame-draw { from { clip-path: inset(0 100% 100% 0); } to { clip-path: inset(0 0 0 0); } }
   .rise { animation: rise 700ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms + 200ms); }
   @keyframes rise { from { transform: translateY(12px); opacity: 0.001; } to { transform: none; opacity: 1; } }
+}
+
+/* ---------- Secțiunile: pagini de hârtie și pagini de copertă ---------- */
+.paper-section { padding: var(--s8) 0; background: var(--c-bg); color: var(--c-text); }
+.cover-section { padding: var(--s8) 0; background: var(--c-dark); color: var(--c-on-dark); }
+.paper-section h2, .cover-section h2 { font-size: clamp(32px, 9vw, 40px); line-height: 1.08; letter-spacing: -0.01em; max-width: 16ch; }
+.section-intro { margin-top: var(--s4); color: var(--c-text-2); max-width: 44ch; }
+.cover-section .section-intro { color: var(--c-on-dark-2); }
+.section-tag { margin-top: var(--s4); }
+.section-cta { margin-top: var(--s6); }
+.photo-tag { left: var(--s3); bottom: var(--s3); }
+.row-tag { margin-left: var(--s2); }
+@media (min-width: 1024px) {
+  .paper-section, .cover-section { padding: var(--s9) 0; }
+  .paper-section h2, .cover-section h2 { font-size: 52px; }
+}
+
+/* Bucătăria: rânduri de meniu cu linie de puncte; fotografia categoriei alături */
+.kitchen-grid { display: grid; gap: var(--s6); }
+.kitchen-photos {
+  position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-box);
+  background: color-mix(in srgb, var(--c-text) 8%, var(--c-bg));
+}
+.kitchen-photo { position: absolute; inset: 0; }
+.kitchen-photo picture { height: 100%; }
+.kitchen-photo img { width: 100%; height: 100%; object-fit: cover; }
+.kitchen-photo:not(.is-default) { display: none; }
+.menu-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-paper); }
+.menu-row { border-bottom: 1px solid var(--line-paper); }
+.menu-row a, .menu-row-static {
+  /* Telefon: numele și linia de puncte pe un rând, nota dedesubt; desktop: nota la capătul liniei. */
+  display: grid; grid-template-columns: minmax(0, max-content) minmax(16px, 1fr); grid-template-areas: 'name dots' 'note note';
+  align-items: baseline; column-gap: var(--s3); row-gap: 2px;
+  min-height: 56px; padding: var(--s4) 0; text-decoration: none;
+  transition: color 160ms var(--ease-out);
+}
+.menu-name { grid-area: name; }
+.menu-dots { grid-area: dots; }
+.menu-note { grid-area: note; }
+.menu-row a:hover, .menu-row a:focus-visible { color: var(--c-accent-2); }
+.menu-name { font: 400 24px/1.15 var(--font-display); }
+.menu-dots { border-bottom: 1px dotted var(--line-paper-strong); transform: translateY(-5px); }
+.menu-note { font-size: 15px; color: var(--c-text-2); }
+@media (min-width: 1024px) {
+  .kitchen-grid {
+    grid-template-columns: 5fr 7fr; column-gap: var(--s8); row-gap: var(--s6); align-items: start;
+    grid-template-areas: 'head menu' 'photos menu';
+  }
+  .kitchen-grid--text { grid-template-areas: 'head menu'; }
+  .kitchen-head { grid-area: head; }
+  .kitchen-photos { grid-area: photos; }
+  .kitchen-menu { grid-area: menu; }
+  .kitchen-photo:not(.is-default) { display: block; }
+  .kitchen-photo { opacity: 0; transition: opacity 420ms var(--ease-out); }
+  .kitchen-photo.is-default { opacity: 1; }
+  .kitchen-photo img { transition: transform 900ms var(--ease-out); }
+  .kitchen-grid:has(.menu-row[data-photo]:is(:hover, :focus-within)) .kitchen-photo { opacity: 0; }
+  .kitchen-grid:has(.menu-row:is(:hover, :focus-within)) .kitchen-photo img { transform: scale(1.03); }
+  .menu-row a, .menu-row-static { grid-template-columns: minmax(0, max-content) minmax(16px, 1fr) auto; grid-template-areas: 'name dots note'; }
+  .menu-name { font-size: 28px; }
+  .menu-note { font-size: 16px; text-align: right; }
+}
+@media (min-width: 1024px) {
+.kitchen-grid:has(.menu-row[data-photo='0']:is(:hover, :focus-within)) .kitchen-photo[data-photo='0'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='1']:is(:hover, :focus-within)) .kitchen-photo[data-photo='1'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='2']:is(:hover, :focus-within)) .kitchen-photo[data-photo='2'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='3']:is(:hover, :focus-within)) .kitchen-photo[data-photo='3'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='4']:is(:hover, :focus-within)) .kitchen-photo[data-photo='4'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='5']:is(:hover, :focus-within)) .kitchen-photo[data-photo='5'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='6']:is(:hover, :focus-within)) .kitchen-photo[data-photo='6'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='7']:is(:hover, :focus-within)) .kitchen-photo[data-photo='7'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='8']:is(:hover, :focus-within)) .kitchen-photo[data-photo='8'] { opacity: 1; }
+.kitchen-grid:has(.menu-row[data-photo='9']:is(:hover, :focus-within)) .kitchen-photo[data-photo='9'] { opacity: 1; }
+}
+
+/* Vinuri: lista de vinuri, pe copertă; insigna premiului în antet (D-20) */
+.wines-head { display: grid; justify-items: center; text-align: center; }
+.wines-head h2, .wines-head .section-intro { margin-inline: auto; }
+.wines-award { display: grid; justify-items: center; gap: var(--s3); margin-bottom: var(--s6); }
+.wines-line { font-size: 15px; color: var(--c-on-dark-2); max-width: 44ch; }
+.wines-body {
+  display: grid; gap: var(--s6); margin-top: var(--s7); padding-top: var(--s6);
+  border-top: 1px solid var(--line-cover-strong);
+  box-shadow: inset 0 4px 0 -3px var(--line-cover);
+}
+.wine-list { list-style: none; margin: 0; padding: 0; }
+.wine {
+  display: grid; grid-template-columns: minmax(0, auto) minmax(16px, 1fr) auto; align-items: start; gap: var(--s3);
+  padding: var(--s4) 0; border-bottom: 1px solid var(--line-cover);
+}
+.wine-name { font: 400 22px/1.2 var(--font-display); }
+.wine-producer { margin-top: 2px; font-size: 15px; color: var(--c-on-dark); }
+.wine-meta { margin-top: var(--s1); font-size: 14px; line-height: 1.5; color: var(--c-on-dark-2); }
+.wine-meta .row-tag { margin-top: var(--s2); margin-left: 0; display: flex; width: max-content; }
+.wine-dots { border-bottom: 1px dotted var(--line-cover-strong); margin-top: 1.05em; }
+.wine-price { display: grid; justify-items: end; text-align: right; }
+.wine-amount { font: 400 22px/1.2 var(--font-display); color: var(--c-accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wine-unit { font-size: 13px; color: var(--c-on-dark-2); white-space: nowrap; }
+.wines-photo { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-box); order: -1; }
+.wines-photo picture { height: 100%; }
+.wines-photo img { width: 100%; height: 100%; object-fit: cover; }
+.wines-cta { display: flex; justify-content: center; margin-top: var(--s7); }
+@media (min-width: 1024px) {
+  .wines-body { grid-template-columns: 7fr 5fr; column-gap: var(--s8); align-items: start; }
+  .wines-body--list { grid-template-columns: 1fr; }
+  .wines-body--list .wine-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s8); }
+  .wines-photo { order: 0; aspect-ratio: 4 / 5; position: sticky; top: 96px; }
+  .wine-name, .wine-amount { font-size: 26px; }
+  .wine-meta .row-tag { display: inline-flex; margin: 0 0 0 var(--s2); }
+}
+
+/* Ce spun oaspeții: un citat mare și două mai mici */
+.reviews-grid { display: grid; gap: var(--s6); }
+.review-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s5); }
+.review { border-top: 1px solid var(--line-paper); padding-top: var(--s5); }
+.review figure, .review blockquote { margin: 0; }
+.review blockquote p { font: 400 22px/1.35 var(--font-display); text-wrap: pretty; }
+.review--lead blockquote p { font-size: 28px; line-height: 1.25; }
+.review figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); margin-top: var(--s4); }
+.review-author { font-weight: 600; font-size: 15px; }
+.review-source { font-size: 14px; color: var(--c-text-2); }
+.review-source a { color: inherit; }
+.review-stars { display: inline-flex; gap: 2px; color: var(--c-accent-ink); }
+.review-stars .icon { width: 16px; height: 16px; }
+.review-stars .icon.is-on { fill: currentColor; }
+.reviews-cta { margin-top: var(--s2); }
+.review figcaption .row-tag { margin-left: 0; }
+@media (min-width: 1024px) {
+  .reviews-grid {
+    grid-template-columns: 4fr 8fr; column-gap: var(--s8); row-gap: var(--s6); align-items: start;
+    grid-template-areas: 'head list' 'cta list';
+  }
+  .reviews-head { grid-area: head; }
+  .review-list { grid-area: list; grid-template-columns: 1fr 1fr; column-gap: var(--s7); row-gap: var(--s7); }
+  .reviews-cta { grid-area: cta; margin-top: 0; }
+  .review--lead { grid-column: 1 / -1; }
+  .review--lead blockquote p { font-size: 38px; line-height: 1.2; max-width: 26ch; }
+  .review blockquote p { font-size: 24px; }
 }
 
 /* Fără restaurant pentru adresă */
