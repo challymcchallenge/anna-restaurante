@@ -116,12 +116,13 @@ export function SiteHeader({ site }: { site: SiteData }) {
       <dialog id="nav-panel" className="nav-panel" aria-label={UI.navLabel}>
         <div className="wrap nav-panel-in">
           <div className="nav-panel-head">
-            <Brand site={site} className="brand brand--panel" />
+            {/* Primul element din panou: focusul cade pe „Închide” la deschidere. */}
             <form method="dialog">
               <button className="nav-close" type="submit" aria-label={UI.closeNav}>
                 <Icon name="x" />
               </button>
             </form>
+            <Brand site={site} className="brand brand--panel" />
           </div>
           <nav aria-label={UI.navLabel}>
             <ul className="nav-panel-list">

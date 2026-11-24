@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40).",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill).",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -57,7 +57,9 @@
     "googleReviewUrl": "https://g.page/r/CcvVjOcZMWuYEBM/review",
     "ialocId": "4385",
     "digitalMenuUrl": "https://www.meniudigital.ro/trattoriadavittoria",
-    "activeLocales": ["ro"],
+    "activeLocales": [
+      "ro"
+    ],
     "requests": {
       "privateEvent": {
         "active": false
@@ -67,7 +69,9 @@
       },
       "accommodation": {
         "active": true,
-        "recipients": ["rezervari@hotelanna.ro"]
+        "recipients": [
+          "rezervari@hotelanna.ro"
+        ]
       },
       "question": {
         "active": false
@@ -549,7 +553,12 @@
       {
         "name": "Wine Spectator Restaurant Award",
         "organization": "Wine Spectator",
-        "placements": ["hero", "wines-section", "wines-page", "footer"],
+        "placements": [
+          "hero",
+          "wines-section",
+          "wines-page",
+          "footer"
+        ],
         "placeholder": true
       }
     ],
@@ -627,6 +636,54 @@
       "kind": "logo",
       "title": "Pictogramă de filă Trattoria",
       "alt": "Trattoria da Vittoria"
+    },
+    {
+      "key": "fotoCuptor",
+      "file": "media/trattoria-da-vittoria/provizorii/cuptor-pizza-1920.webp",
+      "kind": "photo",
+      "title": "Exemplu · de înlocuit: pizza în cuptorul cu lemne (desktop)",
+      "alt": "Pizza scoasă cu lopata din cuptorul cu lemne, seara",
+      "credit": "Jared Tarbell, CC BY 2.0, Wikimedia Commons"
+    },
+    {
+      "key": "fotoCuptorTelefon",
+      "file": "media/trattoria-da-vittoria/provizorii/cuptor-pizza-telefon.webp",
+      "kind": "photo",
+      "title": "Exemplu · de înlocuit: pizza în cuptorul cu lemne (telefon)",
+      "alt": "Pizza scoasă cu lopata din cuptorul cu lemne, seara",
+      "credit": "Jared Tarbell, CC BY 2.0, Wikimedia Commons"
+    },
+    {
+      "key": "fotoPizza",
+      "file": "media/trattoria-da-vittoria/provizorii/pizza-margherita.webp",
+      "kind": "photo",
+      "title": "Exemplu · de înlocuit: pizza Margherita",
+      "alt": "Pizza Margherita cu busuioc proaspăt",
+      "credit": "ノボホショコロトソ, CC BY 4.0, Wikimedia Commons"
+    },
+    {
+      "key": "fotoPaste",
+      "file": "media/trattoria-da-vittoria/provizorii/paste.webp",
+      "kind": "photo",
+      "title": "Exemplu · de înlocuit: paste",
+      "alt": "Farfurie cu paste lungi și sos de roșii",
+      "credit": "David Adam Kess, CC BY-SA 4.0, Wikimedia Commons"
+    },
+    {
+      "key": "fotoRecomandari",
+      "file": "media/trattoria-da-vittoria/provizorii/paste-legume.webp",
+      "kind": "photo",
+      "title": "Exemplu · de înlocuit: paste cu legume",
+      "alt": "Farfurie cu paste scurte, legume și roșii cherry",
+      "credit": "Ella Olsson, CC BY 2.0, Wikimedia Commons"
+    },
+    {
+      "key": "fotoVin",
+      "file": "media/trattoria-da-vittoria/provizorii/vin-rosu.webp",
+      "kind": "photo",
+      "title": "Exemplu · de înlocuit: sticlă și pahar de vin roșu",
+      "alt": "Sticlă și pahar de vin roșu",
+      "credit": "congerdesign, CC0, Wikimedia Commons"
     }
   ],
   "settingsMedia": {
@@ -646,5 +703,49 @@
     "fontHeading": "belleza",
     "fontText": "hanken-grotesk",
     "defaultTheme": "light"
-  }
+  },
+  "mediaFill": [
+    {
+      "collection": "home-page",
+      "field": "hero.posterDesktop",
+      "media": "fotoCuptor"
+    },
+    {
+      "collection": "home-page",
+      "field": "hero.posterMobile",
+      "media": "fotoCuptorTelefon"
+    },
+    {
+      "collection": "dish-categories",
+      "match": {
+        "name": "Recomandări din partea casei"
+      },
+      "field": "photo",
+      "media": "fotoRecomandari"
+    },
+    {
+      "collection": "dish-categories",
+      "match": {
+        "name": "Pasta e Risotto"
+      },
+      "field": "photo",
+      "media": "fotoPaste"
+    },
+    {
+      "collection": "dish-categories",
+      "match": {
+        "name": "Pizza"
+      },
+      "field": "photo",
+      "media": "fotoPizza"
+    },
+    {
+      "collection": "wines",
+      "match": {
+        "name": "Chianti Classico DOCG"
+      },
+      "field": "photo",
+      "media": "fotoVin"
+    }
+  ]
 }

@@ -42,6 +42,13 @@ type SeedFile = {
    * Grupurile (de exemplu `colors`) se completează câmp cu câmp; ce a pus Administratorul nu se atinge.
    */
   settingsFill?: Record<string, unknown>
+  /**
+   * F3: fișiere din `media` puse în câmpuri goale ale altor colecții (posterul hero, fotografia unei
+   * categorii sau a unui vin). `field` poate fi un grup („hero.posterDesktop”); `match` alege
+   * documentul după câmpuri simple (de exemplu numele). Fiecare rând se aplică o singură dată
+   * (jurnalul `mediaFill:…`): un câmp golit intenționat din panou nu se mai completează.
+   */
+  mediaFill?: { collection: CollectionSlug; match?: Record<string, string>; field: string; media: string }[]
 }
 
 const isEmpty = (v: unknown) => v === null || v === undefined || v === ''
@@ -215,8 +222,8 @@ export async function seedStarterContent({
       await applyOnce(collection, items)
     }
 
+    const ids: Record<string, number | string> = {}
     if (seed.media?.length) {
-      const ids: Record<string, number | string> = {}
       for (const item of seed.media) {
         const { docs: found } = await payload.find({
           collection: 'media',
@@ -274,6 +281,40 @@ export async function seedStarterContent({
           }
         }
       }
+    }
+
+    for (const fill of seed.mediaFill ?? []) {
+      const key = `mediaFill:${fill.collection}:${JSON.stringify(fill.match ?? {})}:${fill.field}`
+      if (log[key] || ids[fill.media] === undefined) continue
+      const { docs: targets } = await payload.find({
+        collection: fill.collection,
+        where: {
+          and: [
+            { tenant: { equals: tenant.id } },
+            ...Object.entries(fill.match ?? {}).map(([k, v]) => ({ [k]: { equals: v } })),
+          ],
+        },
+        limit: 1,
+        depth: 0,
+        req,
+      })
+      const target = targets[0] as unknown as Record<string, unknown> | undefined
+      if (!target) continue
+      const [group, leaf] = fill.field.includes('.') ? fill.field.split('.', 2) : [null, fill.field]
+      const container = (group ? (target[group] as Record<string, unknown> | undefined) : target) ?? {}
+      if (isEmpty(container[leaf])) {
+        // Grupul se trimite întreg, cu valorile existente, ca nimic din el să nu se piardă.
+        const data = group ? { [group]: { ...container, [leaf]: ids[fill.media] } } : { [leaf]: ids[fill.media] }
+        await payload.update({
+          collection: fill.collection,
+          id: target.id as number,
+          data: data as any,
+          req,
+          context: ctx,
+        })
+        created.mediaFill = (created.mediaFill ?? 0) + 1
+      }
+      log[key] = now
     }
 
     if (seed.settingsFill) {

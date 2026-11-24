@@ -214,7 +214,6 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .nav-panel::backdrop { background: rgb(10 6 6 / 0.6); }
 .nav-panel-in { min-height: 100%; display: flex; flex-direction: column; padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom)); }
 .nav-panel-head { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
-.nav-panel-head form { order: -1; }
 .brand--panel { width: 48px; height: 48px; }
 .nav-panel-list { list-style: none; margin: var(--s5) 0 0; padding: 0; border-top: 1px solid var(--line-cover); }
 .nav-panel-list li { border-bottom: 1px solid var(--line-cover); }
@@ -293,6 +292,151 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .site-footer { padding: var(--s9) 0 var(--s6); }
   .footer-grid { grid-template-columns: 4fr 5fr 3fr; gap: var(--s8); }
   .footer-links--cols { columns: 2; }
+}
+
+/* ---------- Hero: coperta. Fotografia sau clipul pe toată lățimea, umbra caldă dinspre stânga ---------- */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: calc(100svh - var(--bar-h));
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: var(--c-dark); color: var(--c-on-dark);
+}
+.hero-media { position: absolute; inset: 0; }
+.hero-frame, .hero-video { position: absolute; inset: 0; z-index: -2; }
+.hero-frame img, .hero-video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.hero-frame { opacity: 0; transition: opacity 1200ms var(--ease-out); }
+.hero-frame.is-active { opacity: 1; }
+.hero-video { opacity: 0; transition: opacity 700ms var(--ease-out); }
+.hero-video.is-playing { opacity: 1; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 78%, transparent) 0, transparent 120px),
+    linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 96%, transparent) 0%, color-mix(in srgb, var(--c-dark) 90%, transparent) 42%, color-mix(in srgb, var(--c-dark) 25%, transparent) 70%, transparent 85%);
+}
+.hero-tag { top: calc(var(--header-h) + var(--s2)); right: var(--edge); }
+.cover-frame { display: none; }
+.hero-in { position: relative; padding-top: calc(var(--header-h) + var(--s8)); padding-bottom: var(--s5); }
+.hero h1 { font-size: clamp(40px, 11vw, 48px); line-height: 1.02; letter-spacing: -0.01em; max-width: 11ch; }
+.hero-award { margin-top: var(--s5); }
+.hero-sub { margin-top: var(--s4); font-size: 18px; line-height: 1.45; max-width: 34ch; }
+.hero-actions { display: none; }
+.hero-pause {
+  position: absolute; z-index: 5; right: var(--edge); top: calc(var(--header-h) + var(--s8) + var(--s2));
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0;
+  border: 1px solid var(--ghost-border); border-radius: 50%; background: color-mix(in srgb, var(--c-dark) 55%, transparent);
+  color: var(--c-on-dark); cursor: pointer;
+}
+.hero-pause .icon { width: 16px; height: 16px; }
+.hero-pause:hover { border-color: var(--c-accent); }
+
+/* ---------- Cererea de cazare: o fâșie de hârtie, ca o notă prinsă de meniu (D-15) ---------- */
+.stay { margin-top: var(--s5); }
+.stay-row { display: none; }
+.stay-mobile {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s4);
+  width: 100%; min-height: 72px; padding: var(--s4) var(--s5);
+  border: 0; border-radius: var(--radius-box); cursor: pointer; text-align: left;
+  background: var(--c-bg); color: var(--c-text);
+  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+}
+.stay-mobile:active { transform: scale(0.99); }
+.stay-mobile-title { display: block; font: 400 21px/1.2 var(--font-display); }
+.stay-mobile-note { display: block; margin-top: 2px; font: 400 14px/1.35 var(--font-text); color: var(--c-text-2); }
+.stay-mobile .icon { width: 24px; height: 24px; color: var(--c-accent-2); }
+
+.stay-sheet {
+  width: 100%; max-width: none; max-height: 92dvh; margin: auto 0 0; padding: var(--s5) var(--edge) calc(var(--s6) + env(safe-area-inset-bottom));
+  border: 0; border-radius: 14px 14px 0 0; background: var(--c-bg); color: var(--c-text);
+  box-shadow: 0 -20px 50px -20px rgb(0 0 0 / 0.6);
+}
+.stay-sheet::backdrop { background: rgb(10 6 6 / 0.6); }
+.stay-sheet-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
+.stay-sheet .nav-close { margin: 0 -12px 0 0; color: var(--c-text); }
+.stay-sheet .stay-note { margin-top: var(--s2); }
+.stay-sheet .stay-tag { margin-top: var(--s3); }
+.stay-sheet-fields { display: grid; gap: var(--s5); margin: var(--s6) 0 var(--s6); }
+.stay-sheet .stay-submit { width: 100%; min-height: 52px; }
+@media (prefers-reduced-motion: no-preference) {
+  .stay-sheet[open] { animation: sheet-in 380ms var(--ease-out); }
+  @keyframes sheet-in { from { transform: translateY(32px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+.stay-title { font: 400 24px/1.15 var(--font-display); }
+.stay-note { font: 400 14px/1.4 var(--font-text); color: var(--c-text-2); }
+
+.field { position: relative; display: block; min-width: 0; margin: 0; padding: 0; border: 0; }
+.field-label {
+  display: flex; align-items: center; gap: var(--s2); padding: 0;
+  font: 600 12px/1 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent-ink);
+}
+.field-label .icon { width: 16px; height: 16px; }
+.field-input {
+  display: block; width: 100%; min-height: 44px; margin-top: var(--s2); padding: var(--s2) 0;
+  font: 400 18px/1.2 var(--font-text); color: var(--c-text); font-variant-numeric: tabular-nums;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line-paper-strong); border-radius: 0;
+  transition: border-color 160ms var(--ease-out);
+}
+.field-input:hover { border-bottom-color: var(--c-accent-2); }
+.field-input:focus-visible { outline: 2px solid var(--c-accent-2); outline-offset: 2px; box-shadow: none; }
+.field-input[aria-invalid='true'] { border-bottom: 2px solid var(--c-text); }
+select.field-input { appearance: none; cursor: pointer; padding-right: var(--s5);
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 10px) 55%, calc(100% - 5px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+.field-error { margin-top: var(--s2); font: 600 13px/1.35 var(--font-text); color: var(--c-text); }
+.guests { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s1); }
+.guest { display: block; min-width: 0; }
+.guest-label { display: block; margin-top: var(--s2); font: 500 13px/1.2 var(--font-text); color: var(--c-text-2); }
+.guest .field-input { margin-top: 2px; }
+
+@media (min-width: 1024px) {
+  .hero { min-height: 100svh; max-height: 1000px; }
+  .hero-frame img, .hero-video { object-position: 62% 50%; }
+  .hero::before {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 92%, transparent) 0, color-mix(in srgb, var(--c-dark) 60%, transparent) 120px, transparent 240px),
+      linear-gradient(90deg, color-mix(in srgb, var(--c-dark) 95%, transparent) 0%, color-mix(in srgb, var(--c-dark) 88%, transparent) 34%, color-mix(in srgb, var(--c-dark) 30%, transparent) 60%, transparent 76%),
+      linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 85%, transparent) 0, transparent 260px);
+  }
+  .hero-tag { top: auto; bottom: 212px; right: calc(var(--edge) + var(--s5)); }
+  .hero-pause { top: auto; bottom: 212px; right: calc(var(--edge) + var(--s5) + 220px); }
+  /* Chenarul dublu de folio al copertei */
+  .cover-frame {
+    display: block; position: absolute; inset: 24px; z-index: 0; pointer-events: none;
+    border: 1px solid var(--line-cover-strong);
+    box-shadow: inset 0 0 0 5px transparent, inset 0 0 0 6px color-mix(in srgb, var(--c-accent) 30%, transparent);
+  }
+  .hero-in { padding-top: calc(24px + var(--header-h) + var(--s8)); padding-bottom: var(--s7); }
+  .hero-copy { max-width: 620px; }
+  .hero h1 { font-size: 80px; line-height: 0.98; max-width: 10ch; }
+  .hero-award { margin-top: var(--s6); }
+  .hero-sub { font-size: 20px; margin-top: var(--s5); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
+  .stay { margin-top: var(--s7); }
+  .stay-mobile { display: none; }
+  .stay-row {
+    display: grid; grid-template-columns: minmax(200px, 1.3fr) 1fr 1fr minmax(190px, 1.2fr) auto; align-items: end; gap: var(--s5);
+    padding: var(--s5) var(--s5) var(--s5) var(--s6); border-radius: var(--radius-box);
+    background: var(--c-bg); color: var(--c-text); box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.7);
+  }
+  .stay-head { align-self: center; }
+  .stay-row .stay-title { font-size: 26px; line-height: 1.1; }
+  .stay-row .stay-note { margin-top: 4px; font-size: 13px; }
+  .stay-row .stay-tag { margin-top: var(--s2); }
+  .stay-row .field-error { position: absolute; left: 0; top: 100%; white-space: nowrap; }
+  .stay-row .stay-submit { min-height: 56px; }
+  .stay-row .guests { gap: var(--s3); }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .stay-row { grid-template-columns: 1fr 1fr minmax(170px, 1.2fr) auto; }
+  .stay-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: var(--s4); flex-wrap: wrap; }
+}
+
+/* Momentul de mișcare (unul): chenarul de folio se trasează o dată, textul urcă 12 px din starea vizibilă. */
+@media (prefers-reduced-motion: no-preference) {
+  .cover-frame { animation: frame-draw 1100ms var(--ease-out) both 150ms; }
+  @keyframes frame-draw { from { clip-path: inset(0 100% 100% 0); } to { clip-path: inset(0 0 0 0); } }
+  .rise { animation: rise 700ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms + 200ms); }
+  @keyframes rise { from { transform: translateY(12px); opacity: 0.001; } to { transform: none; opacity: 1; } }
 }
 
 /* Fără restaurant pentru adresă */

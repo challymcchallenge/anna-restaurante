@@ -102,7 +102,13 @@ async function load(hostname: string): Promise<SiteData | null> {
   }
 }
 
-const loadCached = unstable_cache(load, ['site-data'], { tags: [SITE_TAG], revalidate: 600 })
+/**
+ * Cheia include deploy-ul: pe Vercel, cache-ul `unstable_cache` trece de la un deploy la altul, iar
+ * conținutul de pornire (seed) rulează la build, în afara unei cereri Next, deci nu-l poate goli.
+ */
+const BUILD = process.env.VERCEL_DEPLOYMENT_ID ?? process.env.VERCEL_GIT_COMMIT_SHA ?? 'local'
+
+const loadCached = unstable_cache(load, ['site-data', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
 /** O singură încărcare pe cerere (antetul, pagina și footerul folosesc aceleași date). */
 export const getSite = cache(async (host: string | null | undefined): Promise<SiteData | null> => {
