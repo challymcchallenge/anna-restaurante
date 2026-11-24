@@ -175,6 +175,8 @@ Ce a cerut Alin: „GO B, dar culorile butoanelor să fie mai atractive (poate o
 | `docs/design-system.md` | Culori, contraste, tipografie, spațiere, componente, mișcare, fotografie, tema pe restaurant, verificare |
 | Tema pe restaurant | Setări → Culori: 6 roluri (fundal, text, fundal închis, text pe fundal închis, accent, accent secundar), cu 5 perechi verificate la 4,5:1 la salvare. Variabile CSS în `src/theme/theme.ts`. Migrația `20261124_143006_f2_theme` (4 coloane). Trattoria primește tema B prin `settingsFill`, doar în câmpurile goale |
 | Teste | Integrare **20/20** (4 noi pentru temă). `tsc` fără erori, lint 0 erori, build local reușit |
+| Aplicat pe producție | Deploy `dpl_B9f94cbyAu26Lz9iF5Dez9fJDqL4` READY în 56 s. Migrația `f2_theme` a rulat în 141 ms. Conținutul de pornire a raportat `{"media":1,"settingsMedia":1,"settingsFill":9}`. Verificat prin SQL de citire: Trattoria are cele 6 culori, Belleza + Hanken Grotesk, tema deschisă, logo (3), logo grup (4) și pictograma de filă (6). Biblioteca media are 4 logo-uri, fără dubluri |
+| **Incident (rezolvat)** | Push-ul pe ramura sesiunii a pornit un build de **preview** în paralel cu producția. Preview-ul folosește aceeași bază de date și a încercat aceeași migrație. A picat la prima instrucțiune („type already exists”), într-o tranzacție, fără efecte și fără să ruleze conținutul de pornire. Cauza era în `scripts/vercel-build.sh` din F0. Reparat: migrațiile și conținutul de pornire rulează acum doar când `VERCEL_ENV=production` |
 | Contractul direcției pentru F3 | `.impeccable/surfaces/design-f2-directia-b-carta-html.md` (Impeccable), legat de `src/app/(frontend)/page.tsx` |
 
 ## 13. Fișiere
