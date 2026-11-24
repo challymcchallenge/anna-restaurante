@@ -32,7 +32,8 @@ function Brand({ site, className }: { site: SiteData; className: string }) {
       <picture>
         {s.avif && <source type="image/avif" srcSet={s.avif} sizes={BRAND_SIZES} />}
         {s.webp && <source type="image/webp" srcSet={s.webp} sizes={BRAND_SIZES} />}
-        <img src={s.src} width={s.width || 144} height={s.height || 144} alt="" fetchPriority="high" />
+        {/* Fără fetchPriority="high": banda rămâne pentru fotografia copertei (LCP, D-60). */}
+        <img src={s.src} width={s.width || 144} height={s.height || 144} alt="" />
       </picture>
     </Link>
   )
