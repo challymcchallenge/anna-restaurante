@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Test F0 · conversie media în browser</title>
+<style>
+  :root { --bg:#fff; --fg:#1b1b1b; --muted:#666; --line:#ddd; --ok:#1f7a3a; --bad:#b3261e; --acc:#7a1f1f; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141414; --fg:#eee; --muted:#aaa; --line:#333; --ok:#6fd08c; --bad:#ff8a80; --acc:#e7a1a1; } }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--fg); font:16px/1.45 system-ui, sans-serif; max-width:960px; margin-inline:auto; }
+  h1 { font-size:1.3rem; } h2 { font-size:1.1rem; margin-top:2rem; border-top:1px solid var(--line); padding-top:1rem; }
+  p.note { color:var(--muted); font-size:.9rem; }
+  label.btn { display:inline-block; padding:12px 16px; border:2px solid var(--acc); border-radius:10px; cursor:pointer; font-weight:600; min-height:44px; }
+  input[type=file] { position:absolute; left:-9999px; }
+  .card { border:1px solid var(--line); border-radius:10px; padding:12px; margin:10px 0; overflow-wrap:anywhere; }
+  .ok { color:var(--ok); } .bad { color:var(--bad); }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; } td { padding:3px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { color:var(--muted); width:45%; }
+  progress { width:100%; height:14px; }
+  pre { white-space:pre-wrap; font-size:.8rem; border:1px solid var(--line); border-radius:8px; padding:8px; max-height:300px; overflow:auto; }
+  button { padding:12px 16px; border-radius:10px; border:2px solid var(--acc); background:transparent; color:var(--fg); font-weight:600; min-height:44px; }
+</style>
+</head>
+<body>
+<h1>Test F0 · conversie foto și video în browser</h1>
+<p class="note">Pagină temporară de test (ADR-004, ADR-005). Fișierele nu pleacă de pe dispozitiv: totul se face local, în browser. La final apeși „Copiază rezultatele” și mi le trimiți.</p>
+
+<h2>1. Fotografii (JPG, PNG, HEIC)</h2>
+<p class="note">Alege 1–3 fotografii mari, ideal direct din camera telefonului. Rezultatul: o variantă „master” de cel mult 2560 px pe latura lungă.</p>
+<label class="btn">Alege fotografii<input id="photos" type="file" accept="image/*,.heic,.heif" multiple></label>
+<div id="photoOut"></div>
+
+<h2>2. Clip video (cel mult 30 de secunde)</h2>
+<p class="note">Alege un clip filmat cu telefonul. Se creează: MP4 H.264, o variantă mai eficientă (AV1, HEVC sau VP9, după ce știe dispozitivul) și o imagine de început. Fără sunet (fundal de hero).</p>
+<label class="btn">Alege un clip<input id="video" type="file" accept="video/*"></label>
+<div id="videoOut"></div>
+
+<h2>3. Rezultate</h2>
+<button id="copy" type="button">Copiază rezultatele</button>
+<pre id="json">{}</pre>
+
+<script type="module">
+const LIBS = {
+  heicTo: 'https://cdn.jsdelivr.net/npm/heic-to@1.6.7/dist/iife/heic-to.js',
+  mediabunny: 'https://cdn.jsdelivr.net/npm/mediabunny@1.66.3/dist/bundles/mediabunny.min.mjs',
+};
+const MAX_SIDE = 2560, JPEG_Q = 0.9, WEBP_Q = 0.85, MAX_SECONDS = 30, VIDEO_MAX_SIDE = 1920;
+const results = {
+  device: { ua: navigator.userAgent, cores: navigator.hardwareConcurrency ?? null, memoryGB: navigator.deviceMemory ?? null, screen: `${screen.width}x${screen.height}@${devicePixelRatio}` },
+  photos: [], video: null,
+};
+window.__f0 = results;
+const $ = (id) => document.getElementById(id);
+const mb = (n) => (n / 1e6).toFixed(2) + ' MB';
+const ms = (n) => Math.round(n) + ' ms';
+const now = () => performance.now();
+const show = () => { $('json').textContent = JSON.stringify(results, null, 2); };
+show();
+
+function loadScript(src) {
+  return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error('nu s-a încărcat ' + src)); document.head.append(s); });
+}
+let heicReady = null;
+const ensureHeic = () => (heicReady ??= loadScript(LIBS.heicTo));
+let mbReady = null;
+const ensureMediabunny = () => (mbReady ??= import(LIBS.mediabunny));
+
+function table(rows) {
+  return '<table>' + rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('') + '</table>';
+}
+function looksHeic(file) {
+  return /hei[cf]$/i.test(file.type) || /\.hei[cf]$/i.test(file.name);
+}
+function canvasToBlob(canvas, type, q) {
+  return new Promise((res) => canvas.toBlob(res, type, q));
+}
+
+async function processPhoto(file) {
+  const card = document.createElement('div'); card.className = 'card'; card.textContent = 'Se procesează ' + file.name + '…';
+  $('photoOut').append(card);
+  const r = { name: file.name, type: file.type || '?', inputBytes: file.size };
+  try {
+    const t0 = now();
+    let bitmap, decoder = 'browser';
+    try {
+      bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    } catch (e) {
+      if (!looksHeic(file)) throw e;
+      const tl = now(); await ensureHeic(); r.heicLibLoadMs = Math.round(now() - tl);
+      bitmap = await window.HeicTo({ blob: file, type: 'bitmap' });
+      decoder = 'heic-to (wasm)';
+    }
+    const t1 = now();
+    r.decoder = decoder; r.inputSize = `${bitmap.width}x${bitmap.height}`; r.decodeMs = Math.round(t1 - t0);
+    const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
+    const w = Math.round(bitmap.width * scale), h = Math.round(bitmap.height * scale);
+    const resized = await createImageBitmap(bitmap, { resizeWidth: w, resizeHeight: h, resizeQuality: 'high' });
+    const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(resized, 0, 0);
+    const t2 = now(); r.resizeMs = Math.round(t2 - t1);
+    const jpeg = await canvasToBlob(canvas, 'image/jpeg', JPEG_Q);
+    const t3 = now(); r.jpegEncodeMs = Math.round(t3 - t2);
+    const webp = await canvasToBlob(canvas, 'image/webp', WEBP_Q);
+    r.masterSize = `${w}x${h}`; r.masterJpegBytes = jpeg.size;
+    r.masterWebpBytes = webp && webp.type === 'image/webp' ? webp.size : null;
+    r.totalMs = Math.round(t3 - t0);
+    r.under4_5MB = jpeg.size < 4.5e6;
+    bitmap.close?.(); resized.close?.();
+    const url = URL.createObjectURL(jpeg);
+    card.innerHTML = `<strong>${file.name}</strong>` + table([
+      ['Intrare', `${mb(file.size)} · ${r.inputSize} · ${r.type}`],
+      ['Decodor', decoder + (r.heicLibLoadMs ? ` (bibliotecă încărcată în ${ms(r.heicLibLoadMs)})` : '')],
+      ['Master', `${r.masterSize} · JPEG ${mb(jpeg.size)}` + (r.masterWebpBytes ? ` · WebP ${mb(r.masterWebpBytes)}` : ' · WebP: nu se poate în acest browser')],
+      ['Timp: decodare / micșorare / JPEG', `${ms(r.decodeMs)} / ${ms(r.resizeMs)} / ${ms(r.jpegEncodeMs)}`],
+      ['Timp total', `<strong>${ms(r.totalMs)}</strong>`],
+      ['Sub limita de 4,5 MB a Vercel', r.under4_5MB ? '<span class="ok">da</span>' : '<span class="bad">nu</span>'],
+    ]) + `<p><a href="${url}" download="master-${file.name.replace(/\.[^.]+$/, '')}.jpg">Descarcă masterul</a></p>`;
+  } catch (e) {
+    r.error = String(e && e.message || e);
+    card.innerHTML = `<strong>${file.name}</strong><p class="bad">Eroare: ${r.error}</p>`;
+  }
+  results.photos.push(r); show();
+  return r;
+}
+
+async function processVideo(file) {
+  const out = $('videoOut'); out.innerHTML = '';
+  const card = document.createElement('div'); card.className = 'card'; out.append(card);
+  const r = { name: file.name, type: file.type || '?', inputBytes: file.size, outputs: [] };
+  results.video = r;
+  const log = (html) => { card.innerHTML = `<strong>${file.name}</strong> · ${mb(file.size)}` + html; };
+  try {
+    log('<p>Se încarcă biblioteca…</p>');
+    const tl = now();
+    const MB = await ensureMediabunny();
+    r.libLoadMs = Math.round(now() - tl);
+    const input = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS });
+    const duration = await input.computeDuration();
+    const track = await input.getPrimaryVideoTrack();
+    r.durationS = Math.round(duration * 100) / 100;
+    r.inputSize = track ? `${track.displayWidth}x${track.displayHeight}` : '?';
+    r.inputCodec = track ? await track.getCodecParameterString?.() ?? track.codec : '?';
+    if (duration > MAX_SECONDS + 0.5) {
+      r.rejected = true;
+      log(`<p class="bad">Clip respins: are ${duration.toFixed(1)} s; limita este ${MAX_SECONDS} s (D-24).</p>`);
+      r.done = true; show(); return r;
+    }
+    const portrait = track.displayHeight > track.displayWidth;
+    const size = portrait ? { height: Math.min(VIDEO_MAX_SIDE, track.displayHeight) } : { width: Math.min(VIDEO_MAX_SIDE, track.displayWidth) };
+
+    // Imaginea de început (poster).
+    const tp = now();
+    const sink = new MB.CanvasSink(track, { ...size });
+    const first = await sink.getCanvas(await track.getFirstTimestamp());
+    const posterBlob = first.canvas.convertToBlob ? await first.canvas.convertToBlob({ type: 'image/jpeg', quality: 0.85 }) : await canvasToBlob(first.canvas, 'image/jpeg', 0.85);
+    r.poster = { bytes: posterBlob.size, ms: Math.round(now() - tp) };
+
+    const candidates = ['av1', 'hevc', 'vp9'];
+    let efficient = null;
+    for (const c of candidates) { if (await MB.canEncodeVideo(c, { width: 1920, height: 1080 })) { efficient = c; break; } }
+    const jobs = [{ label: 'MP4 H.264', codec: 'avc', container: 'mp4' }];
+    if (efficient) jobs.push({ label: `Variantă eficientă (${efficient.toUpperCase()})`, codec: efficient, container: efficient === 'vp9' ? 'webm' : 'mp4' });
+    else r.efficientCodec = 'niciunul disponibil';
+
+    for (const job of jobs) {
+      const prog = document.createElement('progress'); prog.max = 1; prog.value = 0;
+      log(`<p>Se convertește: ${job.label}…</p>`); card.append(prog);
+      const t0 = now();
+      const inp = new MB.Input({ source: new MB.BlobSource(file), formats: MB.ALL_FORMATS });
+      const output = new MB.Output({
+        format: job.container === 'webm' ? new MB.WebMOutputFormat() : new MB.Mp4OutputFormat({ fastStart: 'in-memory' }),
+        target: new MB.BufferTarget(),
+      });
+      const conv = await MB.Conversion.init({
+        input: inp, output,
+        video: { ...size, codec: job.codec, quality: MB.QUALITY_MEDIUM, forceTranscode: true },
+        audio: { discard: true },
+        showWarnings: false,
+      });
+      if (!conv.isValid) throw new Error(`${job.label}: conversie imposibilă (${conv.discardedTracks.map((d) => d.reason).join(', ')})`);
+      conv.onProgress = (p) => { prog.value = p; };
+      await conv.execute();
+      const bytes = output.target.buffer.byteLength;
+      const secs = (now() - t0) / 1000;
+      r.outputs.push({ label: job.label, codec: job.codec, container: job.container, bytes, seconds: Math.round(secs * 10) / 10, speedX: Math.round((duration / secs) * 100) / 100, mbps: Math.round((bytes * 8 / duration / 1e6) * 100) / 100 });
+      show();
+    }
+    log(table([
+      ['Intrare', `${r.inputSize} · ${r.durationS} s · ${r.inputCodec} · ${mb(file.size)}`],
+      ['Bibliotecă încărcată în', ms(r.libLoadMs)],
+      ['Imagine de început', `${mb(r.poster.bytes)} în ${ms(r.poster.ms)}`],
+      ...r.outputs.map((o) => [o.label, `<strong>${mb(o.bytes)}</strong> (${o.mbps} Mbps) în <strong>${o.seconds} s</strong> (${o.speedX}× timp real)`]),
+      ['Total încărcat pe server', mb(r.outputs.reduce((s, o) => s + o.bytes, 0) + r.poster.bytes)],
+    ]));
+  } catch (e) {
+    r.error = String(e && e.message || e);
+    log(`<p class="bad">Eroare: ${r.error}</p>`);
+  }
+  r.done = true; show();
+  return r;
+}
+
+$('photos').addEventListener('change', async (e) => { for (const f of e.target.files) await processPhoto(f); results.photosDone = true; show(); });
+$('video').addEventListener('change', (e) => { if (e.target.files[0]) processVideo(e.target.files[0]); });
+$('copy').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(JSON.stringify(results, null, 2)); $('copy').textContent = 'Copiat ✓'; }
+  catch { $('copy').textContent = 'Selectează textul de mai jos și copiază-l manual'; }
+});
+</script>
+</body>
+</html>

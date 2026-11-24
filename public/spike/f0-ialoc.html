@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Test F0 · ialoc</title>
+<style>
+  body { margin:0 auto; padding:16px; max-width:720px; font:16px/1.45 system-ui, sans-serif; }
+  button, a.btn { display:inline-block; padding:12px 18px; border-radius:10px; border:2px solid #7a1f1f; background:#7a1f1f; color:#fff; font-weight:600; min-height:44px; text-decoration:none; }
+  p.note { color:#666; font-size:.9rem; } pre { white-space:pre-wrap; font-size:.8rem; border:1px solid #ddd; padding:8px; border-radius:8px; }
+</style>
+</head>
+<body>
+<h1>Test F0 · rezervare masă prin ialoc</h1>
+<p class="note">Pagină temporară (ADR-008). Scriptul ialoc NU se încarcă la deschiderea paginii, ci doar la apăsarea butonului. Dacă nu răspunde în 6 secunde, butonul devine „Sună pentru rezervare”.</p>
+<p><button id="book" type="button">Rezervă o masă</button></p>
+<pre id="log"></pre>
+<script>
+(function () {
+  // Parametrii vin din URL ca să nu fie nimic specific unui restaurant în cod.
+  var q = new URLSearchParams(location.search);
+  var VENUE = q.get('venue') || '';
+  var LOCALE = q.get('locale') || 'ro';
+  var PHONE = q.get('phone') || '';
+  var TRACKING = q.get('tracking') !== 'false';
+  var TIMEOUT_MS = Number(q.get('timeout') || 6000);
+  var DATE = q.get('date') || null; // rezervare cu data serii (content-model 5.4)
+  var state = window.__ialoc = { t0: performance.now(), scriptRequested: null, scriptLoaded: null, ready: null, error: null, fallback: false, events: [] };
+  var log = function (m) { state.events.push(Math.round(performance.now()) + ' ms · ' + m); document.getElementById('log').textContent = state.events.join('\n'); };
+  log('pagina încărcată; ialoc neîncărcat');
+
+  var loading = null;
+  function loadIaloc() {
+    if (loading) return loading;
+    loading = new Promise(function (resolve, reject) {
+      state.scriptRequested = performance.now();
+      // Fragmentul oficial ialoc (v2.ialoc.ro/widget-setup), rulat doar la cerere.
+      !function(e,t,i,n,s,o,c,a,d,r){if(!e[n]){for(;a<c.length;)s(o,c[a++]);(d=t.createElement(i)).async=1,d.src="https://widget.ialoc.ro/embed.js",d.onerror=function(){reject(new Error('embed.js nu s-a încărcat'))},d.onload=function(){state.scriptLoaded=performance.now();log('embed.js încărcat')},(r=t.getElementsByTagName(i)[0]).parentNode.insertBefore(d,r),e[n]=o}}(window,document,"script","ialocEmbedWidget",function(e,t){e[t]=function(){e._q.push([t,arguments])}},{_q:[]},"init show hide".split(" "),0);
+      var timer = setTimeout(function () { reject(new Error('embed.js nu a răspuns în ' + TIMEOUT_MS + ' ms')); }, TIMEOUT_MS);
+      window.ialocEmbedWidget.init({
+        venueId: VENUE,
+        source: 'ialoc-widget-embed',
+        locale: LOCALE,
+        embedMode: 'popup',
+        // În modul popup, widgetul deschide fereastra la clic pe elementele din selector.
+        selector: '#book',
+        conversionTracking: TRACKING,
+        defaultDate: DATE || undefined,
+        onWidgetReady: function () { state.ready = performance.now(); log('fereastra ialoc încărcată (onWidgetReady)'); },
+        onWidgetError: function (e) { state.widgetError = String(e && e.message || e); log('onWidgetError ' + state.widgetError); },
+      });
+      var check = setInterval(function () {
+        if (window.__ialocEmbedWidgetLoaded) { clearInterval(check); clearTimeout(timer); resolve(); }
+      }, 25);
+    });
+    return loading;
+  }
+  function fallback(err) {
+    state.error = String(err && err.message || err); state.fallback = true; log('rezervă: ' + state.error);
+    var b = document.getElementById('book');
+    var a = document.createElement('a'); a.className = 'btn'; a.id = 'call'; a.href = 'tel:' + PHONE.replace(/\s+/g, ''); a.textContent = 'Sună pentru rezervare';
+    b.replaceWith(a);
+  }
+  var ready = false;
+  document.getElementById('book').addEventListener('click', function (e) {
+    if (ready) return; // după încărcare, clicul îl preia widgetul ialoc
+    e.preventDefault();
+    log('click Rezervă o masă: se încarcă ialoc');
+    loadIaloc().then(function () {
+      ready = true;
+      log('ialoc inițializat; retransmit clicul');
+      document.getElementById('book').click();
+    }, fallback);
+  });
+})();
+</script>
+</body>
+</html>
