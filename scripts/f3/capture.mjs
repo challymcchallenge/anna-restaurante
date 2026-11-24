@@ -22,6 +22,8 @@ for (const [name, vp] of sizes) {
     await p.goto(url, { waitUntil: 'networkidle' })
     await p.evaluate(() => document.fonts.ready)
     if (full) {
+      // content-visibility: auto nu desenează secțiunile din afara ecranului; captura întreagă le cere pe toate.
+      await p.addStyleTag({ content: '.paper-section,.cover-section,.site-footer{content-visibility:visible!important}' })
       // Derulare pas cu pas, ca imaginile cu loading="lazy" să se încarce; apoi înapoi sus.
       await p.evaluate(async () => {
         for (let y = 0; y < document.documentElement.scrollHeight; y += 400) {

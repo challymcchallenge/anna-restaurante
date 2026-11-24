@@ -19,6 +19,13 @@ export function pageMediaCredits(site: SiteData): string[] {
   }
   if (isOn(home, 'kitchen')) refs.push(...site.dishCategories.map((c) => c.photo))
   if (isOn(home, 'wines')) refs.push(...site.wines.map((w) => w.photo))
+  // F3 pașii 4–6: afișele serilor, fotografiile saloanelor, fotografia și galeria cursului.
+  if (isOn(home, 'parties')) refs.push(...site.eventsUpcoming.map((e) => e.poster))
+  if (isOn(home, 'privateEvents')) refs.push(...site.salons.flatMap((x) => (x.photos ?? []) as MediaRef[]))
+  if (isOn(home, 'pizza')) {
+    const pizza = section(home, 'pizza')
+    refs.push(pizza?.photo, ...((pizza?.gallery ?? []) as MediaRef[]))
+  }
 
   const credits = refs
     .map(asMedia)

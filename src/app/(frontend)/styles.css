@@ -540,6 +540,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: var(--s4);
   overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
   scrollbar-width: thin; scrollbar-color: var(--line-paper-strong) transparent;
+  /* Chrome numără altfel coloanele în procente ale benzii în lățimea paginii; vopseaua rămâne în bandă. */
+  contain: paint;
 }
 .cat { scroll-snap-align: start; min-width: 0; }
 .cat-card { display: block; text-decoration: none; border-radius: var(--radius-box); }
@@ -547,16 +549,16 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .cat-visual picture, .cat-visual img { width: 100%; height: 100%; }
 .cat-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
 .cat-card:hover .cat-visual img { transform: scale(1.03); }
-/* Fără fotografie: pagina de titlu a capitolului, pe copertă */
-.cat-chapter {
+/* Fără fotografie: pagina de titlu a capitolului, pe copertă (categorii, saloane, seri, curs) */
+.chapter {
   position: absolute; inset: 0; display: grid; place-items: center; padding: var(--s6); text-align: center;
   color: var(--c-on-dark); font: 400 28px/1.15 var(--font-display);
 }
-.cat-chapter::before {
+.chapter::before {
   content: ""; position: absolute; inset: var(--s3);
   border: 1px solid var(--line-cover-strong); box-shadow: inset 0 0 0 5px var(--c-dark), inset 0 0 0 6px var(--line-cover);
 }
-.cat-chapter span { position: relative; max-width: 10ch; text-wrap: balance; }
+.chapter > span { position: relative; max-width: 12ch; text-wrap: balance; }
 .cat-name { display: block; margin-top: var(--s4); font: 400 24px/1.15 var(--font-display); transition: color 160ms var(--ease-out); }
 .cat-note { display: block; margin-top: var(--s1); font-size: 15px; color: var(--c-text-2); }
 .cat-card:hover .cat-name { color: var(--c-accent-2); }
@@ -632,6 +634,166 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .review--lead blockquote p { font-size: 38px; line-height: 1.2; max-width: 26ch; }
   .review blockquote p { font-size: 24px; }
 }
+
+/* ---------- F3 pașii 4–6: piese comune ---------- */
+.chapter { background: var(--c-dark); }
+.cover-section .chapter { background: color-mix(in srgb, var(--c-dark), #ffffff 5%); }
+.chapter--date > span { display: grid; justify-items: center; gap: var(--s1); max-width: none; }
+.chapter--date b { font: 400 96px/0.9 var(--font-display); color: var(--c-accent); font-variant-numeric: lining-nums; }
+.chapter--date em { font: 400 28px/1.1 var(--font-display); font-style: normal; }
+.chapter--date small { margin-top: var(--s2); font: 600 12px/1.3 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-on-dark-2); }
+.text-link {
+  display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px;
+  font: 600 15px/1.2 var(--font-text); color: var(--c-text); text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 calc(100% - 10px);
+  transition: background-size 220ms var(--ease-out), color 160ms var(--ease-out);
+}
+.text-link:hover { background-size: 100% 1px; color: var(--c-accent-2); }
+.text-link .icon { width: 16px; height: 16px; }
+.text-link--dark { color: var(--c-on-dark); }
+.text-link--dark:hover { color: var(--c-accent); }
+.types { list-style: none; margin: var(--s5) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+.types li { padding: 6px 14px; border: 1px solid var(--line-paper-strong); border-radius: 999px; font: 500 14px/1.3 var(--font-text); }
+.types--dark li { border-color: var(--line-cover-strong); color: var(--c-on-dark); }
+.mini-title { margin-top: var(--s6); font: 600 12px/1.3 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent-ink); }
+.mini-title + .types { margin-top: var(--s3); }
+.private-cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s6); }
+.paper-section--warm { background: color-mix(in srgb, var(--c-text) 4%, var(--c-bg)); }
+
+/* Coperta paginilor proprii */
+.page-cover {
+  position: relative; isolation: isolate; overflow: hidden; background: var(--c-dark); color: var(--c-on-dark);
+  padding: calc(var(--header-h) + var(--s6)) 0 var(--s8);
+}
+.page-cover-in { position: relative; }
+.back-link { display: inline-flex; align-items: center; gap: var(--s1); min-height: 44px; margin-left: -6px; font: 500 14px/1 var(--font-text); color: var(--c-on-dark-2); text-decoration: none; }
+.back-link:hover { color: var(--c-accent); }
+.back-link .icon { width: 18px; height: 18px; }
+.page-cover h1 { margin-top: var(--s4); font-size: clamp(40px, 10vw, 52px); line-height: 1.04; letter-spacing: -0.01em; max-width: 16ch; }
+.page-intro { margin-top: var(--s4); font-size: 18px; line-height: 1.5; max-width: 52ch; color: var(--c-on-dark); }
+@media (min-width: 1024px) {
+  .page-cover { padding: calc(24px + var(--header-h) + var(--s8)) 0 var(--s9); }
+  .page-cover h1 { font-size: 72px; line-height: 1; }
+  .page-intro { font-size: 20px; }
+}
+
+/* ---------- Petreceri și agenda (S-03) ---------- */
+.event-track {
+  --gutter: max(var(--edge), calc((100vw - var(--container)) / 2));
+  list-style: none; margin: var(--s6) 0 0; padding: 0 var(--gutter) var(--s4);
+  display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: var(--s4);
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin; scrollbar-color: var(--line-cover-strong) transparent;
+  contain: paint;
+}
+.event-track > li { scroll-snap-align: start; min-width: 0; }
+.event { display: flex; flex-direction: column; height: 100%; }
+.event-visual { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.event-visual picture, .event-visual img { width: 100%; height: 100%; }
+.event-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
+.event:hover .event-visual img { transform: scale(1.03); }
+.event-plate {
+  position: absolute; left: var(--s3); bottom: var(--s3); display: grid; justify-items: center; min-width: 64px; padding: var(--s2) var(--s3);
+  background: var(--c-bg); color: var(--c-text); border-radius: var(--radius-box); font: 600 12px/1.2 var(--font-text); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.event-plate b { font: 400 30px/1 var(--font-display); letter-spacing: 0; }
+.event-name { margin-top: var(--s4); font-size: 26px; line-height: 1.15; }
+.event-when { margin-top: var(--s2); font-weight: 600; }
+.event-when::first-letter { text-transform: uppercase; }
+.event-meta, .event-desc { margin-top: var(--s1); font-size: 15px; color: var(--c-text-2); }
+.cover-section .event-meta, .cover-section .event-desc { color: var(--c-on-dark-2); }
+.event .row-tag { margin: var(--s2) 0 0; align-self: flex-start; }
+.event-cta { margin-top: auto; padding-top: var(--s4); }
+.paper-section .event .btn-ghost { color: var(--c-text); border-color: var(--line-paper-strong); }
+.paper-section .event .btn-ghost:hover { border-color: var(--c-accent-2); background: color-mix(in srgb, var(--c-accent-2) 8%, transparent); }
+.no-events { display: grid; justify-items: start; gap: var(--s4); margin-top: var(--s6); max-width: 52ch; }
+.no-events-msg { font: 400 28px/1.2 var(--font-display); }
+.no-events-follow { color: var(--c-text-2); }
+.cover-section .no-events-follow { color: var(--c-on-dark-2); }
+.agenda-grid { list-style: none; margin: var(--s6) 0 0; padding: 0; display: grid; gap: var(--s7) var(--s5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.archive-grid { list-style: none; margin: var(--s6) 0 0; padding: 0; display: grid; gap: var(--s4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.archive-item picture, .archive-item img, .archive-item video { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-box); display: block; background: var(--c-dark); }
+.archive-name { margin-top: var(--s2); font-size: 15px; color: var(--c-text-2); }
+@media (min-width: 1024px) {
+  .event-track { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; gap: var(--s6); margin-top: var(--s7); }
+  .agenda-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s7) var(--s6); }
+  .archive-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); }
+}
+
+/* ---------- Evenimente private (S-02) ---------- */
+.private-grid { display: grid; gap: var(--s7); }
+.salons { display: grid; gap: var(--s6); }
+.salon-link { display: block; border-radius: var(--radius-box); }
+.salon-visual { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.salon-visual picture, .salon-visual img { width: 100%; height: 100%; }
+.salon-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
+.salon-link:hover img { transform: scale(1.03); }
+.salon-name { margin-top: var(--s4); font-size: 26px; }
+.salon-where { margin-top: var(--s1); font-weight: 600; color: var(--c-accent-ink); }
+.salon-desc { margin-top: var(--s2); color: var(--c-text-2); max-width: 52ch; }
+.salon .row-tag { margin: var(--s3) 0 0; }
+@media (min-width: 1024px) {
+  .private-grid { grid-template-columns: 4fr 8fr; gap: var(--s8); align-items: start; }
+  .salons { grid-template-columns: 1fr 1fr; gap: var(--s5); }
+}
+.salon-page-grid { display: grid; gap: var(--s6); }
+.salon-text h2 { max-width: none; }
+.photo-track {
+  list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 88%; gap: var(--s3);
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--line-paper-strong) transparent;
+  contain: paint;
+}
+.photo-track li { scroll-snap-align: start; }
+.photo-track img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-box); }
+@media (min-width: 1024px) {
+  .salon-page-grid { grid-template-columns: 7fr 5fr; gap: var(--s8); align-items: center; }
+  .salon-page--flip .salon-gallery { order: 2; }
+}
+.cta-band-in { display: grid; gap: var(--s5); }
+.cta-band-title { font: 400 clamp(28px, 6vw, 44px)/1.1 var(--font-display); max-width: 20ch; }
+.cta-band .private-cta { margin-top: 0; }
+@media (min-width: 1024px) { .cta-band-in { grid-template-columns: 1fr auto; align-items: center; } }
+
+/* Întrebări frecvente */
+.faq-grid { display: grid; gap: var(--s5); }
+.faq-list { border-top: 1px solid var(--line-paper); }
+.faq-item { border-bottom: 1px solid var(--line-paper); }
+.faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s4); min-height: 64px; padding: var(--s3) 0;
+  cursor: pointer; list-style: none; font: 400 22px/1.25 var(--font-display);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary .icon { width: 20px; height: 20px; color: var(--c-accent-ink); transition: transform 200ms var(--ease-out); }
+.faq-item[open] summary .icon { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--c-accent-2); }
+.faq-answer { padding: 0 0 var(--s5); color: var(--c-text-2); max-width: 65ch; }
+.faq-answer p + p { margin-top: var(--s3); }
+.faq-answer .row-tag { margin: var(--s3) 0 0; }
+@media (min-width: 1024px) { .faq-grid { grid-template-columns: 4fr 8fr; gap: var(--s8); } }
+
+/* ---------- Cursuri de pizza (S-04) ---------- */
+.pizza-grid { display: grid; gap: var(--s6); }
+.pizza-visual { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.pizza-visual picture, .pizza-visual img { width: 100%; height: 100%; }
+.pizza-visual img { object-fit: cover; }
+.pizza-text .section-intro { max-width: 52ch; }
+.details { margin: var(--s5) 0 0; border-top: 1px solid var(--line-paper); }
+.details-row { display: grid; grid-template-columns: max-content minmax(16px, 1fr) auto; align-items: baseline; gap: var(--s3); padding: var(--s3) 0; border-bottom: 1px solid var(--line-paper); }
+.details-row dt { font: 400 20px/1.2 var(--font-display); }
+.details-row dd { margin: 0; font-variant-numeric: tabular-nums; }
+.details-dots { border-bottom: 1px dotted var(--line-paper-strong); transform: translateY(-5px); }
+@media (min-width: 1024px) {
+  .pizza-grid { grid-template-columns: 6fr 5fr; gap: var(--s8); align-items: center; }
+}
+.course-grid { display: grid; gap: var(--s7); }
+.prose { margin-top: var(--s5); max-width: 65ch; }
+.prose p + p, .prose ul, .prose ol { margin-top: var(--s4); }
+.prose ul, .prose ol { padding-left: 1.2em; }
+.course-side { display: grid; gap: var(--s5); align-content: start; justify-items: start; }
+.course-photo { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.course-photo picture, .course-photo img { width: 100%; height: 100%; object-fit: cover; }
+.course-side .details { width: 100%; margin: 0; }
+@media (min-width: 1024px) { .course-grid { grid-template-columns: 7fr 5fr; gap: var(--s8); align-items: start; } }
 
 /* Fără restaurant pentru adresă */
 .no-site main { max-width: 640px; margin: 15vh auto; padding: 0 var(--edge); }

@@ -7,10 +7,13 @@ import config from '@/payload.config'
 import type {
   Award,
   DishCategory,
+  Event,
+  Faq,
   GroupLink,
   HomePage,
   LegalPage,
   Review,
+  Salon,
   Setting,
   Tenant,
   Wine,
@@ -37,6 +40,23 @@ export type SiteData = {
   dishCategories: DishCategory[]
   wines: Wine[]
   reviews: Review[]
+  /** F3 pașii 4–6 */
+  salons: Salon[]
+  /** Serile de azi încolo, în ordine; o seară trecută iese singură (content-model 5.4). */
+  eventsUpcoming: Event[]
+  /** Serile trecute, cele mai noi întâi (arhiva foto). */
+  eventsPast: Event[]
+  faqs: Faq[]
+}
+
+/** Începutul zilei de azi în ora României, ca o seară de azi să rămână în agendă toată ziua. */
+function startOfTodayBucharest(): string {
+  const ymd = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Bucharest' }).format(new Date())
+  const probe = new Date(`${ymd}T12:00:00Z`)
+  const hour = Number(
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Bucharest', hour: '2-digit', hour12: false }).format(probe),
+  )
+  return new Date(Date.UTC(Number(ymd.slice(0, 4)), Number(ymd.slice(5, 7)) - 1, Number(ymd.slice(8, 10)), -(hour - 12))).toISOString()
 }
 
 const active: Where = { active: { equals: true } }
@@ -51,7 +71,8 @@ async function load(hostname: string): Promise<SiteData | null> {
   })
   const own: Where = { tenant: { equals: tenant.id } }
 
-  const [settings, home, awards, groupLinks, legalPages, dishCategories, wines, reviews] =
+  const today = startOfTodayBucharest()
+  const [settings, home, awards, groupLinks, legalPages, dishCategories, wines, reviews, salons, upcoming, past, faqs] =
     await Promise.all([
       payload.find({ collection: 'settings', where: own, limit: 1, depth: 1 }),
       // depth 2: clipurile din hero aduc și varianta eficientă și imaginea de început.
@@ -80,6 +101,22 @@ async function load(hostname: string): Promise<SiteData | null> {
         limit: 3,
         depth: 0,
       }),
+      payload.find({ collection: 'salons', where: of(), sort: '_order', limit: 10, depth: 1 }),
+      payload.find({
+        collection: 'events',
+        where: of([{ startsAt: { greater_than_equal: today } }]),
+        sort: 'startsAt',
+        limit: 24,
+        depth: 1,
+      }),
+      payload.find({
+        collection: 'events',
+        where: of([{ startsAt: { less_than: today } }]),
+        sort: '-startsAt',
+        limit: 12,
+        depth: 1,
+      }),
+      payload.find({ collection: 'faqs', where: of(), sort: '_order', limit: 50, depth: 0 }),
     ])
 
   // Vinurile: pe tip (spumant, alb, rosé, roșu, desert), apoi în ordinea din panou (content-model 5.2).
@@ -99,6 +136,10 @@ async function load(hostname: string): Promise<SiteData | null> {
     dishCategories: dishCategories.docs,
     wines: sortedWines,
     reviews: reviews.docs,
+    salons: salons.docs,
+    eventsUpcoming: upcoming.docs,
+    eventsPast: past.docs,
+    faqs: faqs.docs,
   }
 }
 

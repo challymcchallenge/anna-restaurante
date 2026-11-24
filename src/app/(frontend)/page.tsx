@@ -1,6 +1,7 @@
 import { headers } from 'next/headers'
 import React from 'react'
 
+import { Parties, Pizza, PrivateEvents } from '@/components/site/Events'
 import { Hero } from '@/components/site/Hero'
 import { Kitchen, Reviews, Wines } from '@/components/site/Restaurant'
 import { getSite } from '@/lib/site/data'
@@ -26,6 +27,12 @@ export default async function HomePage() {
             return <Wines key={s.key} site={site} id={s.id} />
           case 'reviews':
             return <Reviews key={s.key} site={site} id={s.id} />
+          case 'parties':
+            return <Parties key={s.key} site={site} id={s.id} />
+          case 'privateEvents':
+            return <PrivateEvents key={s.key} site={site} id={s.id} />
+          case 'pizza':
+            return <Pizza key={s.key} site={site} id={s.id} />
           // „stay” (cererea de cazare) stă în hero, la baza copertei.
           default:
             return null

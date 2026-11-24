@@ -58,3 +58,35 @@ export function price(value: number | null | undefined, locale = 'ro-RO'): strin
 export function todayIso(): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Bucharest' }).format(new Date())
 }
+
+const BUC = 'Europe/Bucharest'
+
+/** Părțile datei unei seri, în ora României: „sâmbătă”, „12”, „decembrie”, „dec.”, „20:00”. */
+export function eventParts(iso: string, locale = 'ro-RO') {
+  const d = new Date(iso)
+  const part = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(locale, { ...o, timeZone: BUC }).format(d)
+  return {
+    weekday: part({ weekday: 'long' }),
+    day: part({ day: 'numeric' }),
+    month: part({ month: 'long' }),
+    monthShort: part({ month: 'short' }),
+    time: part({ hour: '2-digit', minute: '2-digit', hour12: false }),
+    ymd: new Intl.DateTimeFormat('en-CA', { timeZone: BUC }).format(d),
+  }
+}
+
+/** „sâmbătă, 12 decembrie · 20:00” */
+export function eventWhen(iso: string, locale = 'ro-RO'): string {
+  const p = eventParts(iso, locale)
+  return `${p.weekday}, ${p.day} ${p.month} · ${p.time}`
+}
+
+/** Identificator de ancoră din nume: „Salon Trattoria” → „salon-trattoria”. */
+export function slugify(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}

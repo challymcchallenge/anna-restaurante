@@ -50,7 +50,7 @@ export function Kitchen({ site, id }: { site: SiteData; id: string }) {
                     <Picture media={photo} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 30vw, 72vw" />
                   ) : (
                     // Fără fotografie: pagina de titlu a capitolului, pe copertă, cu chenar de folio.
-                    <span className="cat-chapter" aria-hidden="true">
+                    <span className="chapter" aria-hidden="true">
                       <span>{c.name}</span>
                     </span>
                   )}
