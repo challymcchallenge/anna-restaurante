@@ -466,7 +466,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   /* Titlul și nota, pe copertă, deasupra barei */
   .stay-caption { display: flex; align-items: baseline; flex-wrap: wrap; gap: var(--s2) var(--s4); margin-bottom: var(--s3); color: var(--c-on-dark); }
   .stay-caption .stay-title { font-size: 22px; }
-  .stay-caption .stay-note { color: var(--c-on-dark-2); }
+  /* Peste fotografie: textul plin pe copertă (cu varianta 75% ieșea 5,01:1 peste peretele luminos al cuptorului). */
+  .stay-caption .stay-note { color: var(--c-on-dark); }
   /* Bara-pastilă: câmpurile, ornamentele de folio dintre ele și butonul */
   .sbar--bar {
     display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.35fr) auto auto;

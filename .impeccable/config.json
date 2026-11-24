@@ -45,7 +45,10 @@
         "value": "*",
         "files": [
           "src/app/(frontend)/styles.css",
-          "http://localhost:3000/"
+          "http://localhost:3000/",
+          "http://localhost:3000/evenimente-private",
+          "http://localhost:3000/petreceri",
+          "http://localhost:3000/cursuri-pizza-copii"
         ],
         "createdAt": "2026-11-24T16:20:00.000Z",
         "reason": "user confirmed: GO B la GATE 2 (D-41); hârtia vine din Setări restaurant (colors.background, #F5EDE0 pentru Trattoria), derivată din marmura logo-ului; site-ul F3 folosește tema aprobată"
