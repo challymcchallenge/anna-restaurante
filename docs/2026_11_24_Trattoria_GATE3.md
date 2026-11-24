@@ -162,11 +162,11 @@ Ai extras 14 recenzii de pe profilurile Google: 7 pentru restaurant și 7 pentru
 
 Cum le-am preluat:
 - **Numele:** scurtate la prenume și inițială. La hotel apar prenumele și țara, cum erau în extras.
-- **Citatele:** în engleză, cum erau în extras, cu „…” unde fuseseră scurtate; am scos doar emoticoanele.
+- **Citatele:** în română (D-56, la cererea ta), traduse de mine din extrasul în engleză, cu „…” unde fuseseră scurtate; am scos emoticoanele. Formularea poate diferi de original; originalul exact se poate pune din panou.
 - **Data:** extrasul nu are luna, deci sub citat apare doar „Google”. Câmpul „Luna și anul” a devenit opțional; îl poți completa din panou.
-- **Limba:** câmp nou, „Limba recenziei”. Citatul englezesc e marcat `lang="en"`, ca cititoarele de ecran să-l pronunțe corect (WCAG 3.1.2), iar în F4 știm din ce limbă se traduce.
+- **Limba:** câmp nou, „Limba recenziei”, acum „Română” la toate. O recenzie lăsată în altă limbă primește `lang` corect (WCAG 3.1.2), iar în F4 știm din ce limbă se traduce.
 
-**[PRESUPUNERE] De verificat de tine:** câteva citate ale oaspeților din România par traduse automat de Google (de exemplu Mihaela și Christian). Dacă originalul e în română, pune-l pe acela din panou și alege „Română” la limbă: pe site-ul în română e mai credibil.
+**De verificat de tine:** Christopher (Australia), Zompara (Serbia), Ana (Olanda), Danijel și Enna au scris probabil în engleză. Le-am tradus și pe ele, cum ai cerut.
 
 Teste: 66/66 (3 noi). Migrația: `20261124_221615_f3_recenzii_limba`.
 

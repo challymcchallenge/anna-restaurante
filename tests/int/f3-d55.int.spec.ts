@@ -11,7 +11,7 @@ import type { Review } from '@/payload-types'
 import { seedStarterContent } from '@/seed/starter'
 
 /**
- * D-55: recenziile reale de pe Google înlocuiesc o singură dată exemplele; o recenzie adăugată din
+ * D-55, D-56: recenziile reale de pe Google, în română, înlocuiesc o singură dată exemplele; o recenzie adăugată din
  * panou rămâne; citatul în altă limbă primește `lang`; fără dată apare doar sursa. Doar local.
  */
 
@@ -45,7 +45,9 @@ describe('D-55 · recenziile reale', () => {
     expect(hotel.filter((r) => !r.placeholder).map((r) => r.author).slice(0, 3)).toEqual(['Mihaela, România', 'Christopher, Australia', 'Adina, România'])
     const all = [...restaurant, ...hotel]
     expect(all.filter((r) => r.placeholder)).toHaveLength(0)
-    expect(all.filter((r) => r.source === 'google' && r.language === 'en' && r.rating === 5 && !r.date).length).toBeGreaterThanOrEqual(14)
+    expect(all.filter((r) => r.source === 'google' && r.language === 'ro' && r.rating === 5 && !r.date).length).toBeGreaterThanOrEqual(14)
+    // D-56: în română, la cererea lui Alin.
+    expect(restaurant[0].text).toMatch(/^De departe cel mai bun restaurant din oraș\./)
     for (const r of all) expect(r.text, r.author).not.toMatch(/\p{Extended_Pictographic}/u)
   })
 

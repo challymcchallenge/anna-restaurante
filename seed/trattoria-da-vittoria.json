@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists).",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists). D-56: recenziile în română (swaps pe autor și grup, doar unde textul e încă cel în engleză).",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -2661,7 +2661,7 @@
       ]
     },
     {
-      "$comment": "Recenziile reale de pe profilurile Google ale restaurantului și Hotel ANNA, extrase de Alin pe 24.11.2026 (D-55). Înlocuiesc o singură dată recenziile-exemplu („Provizoriu”). Numele scurtate la prenume și inițială; fără dată (nu era în extras); emoticoanele scoase din citate.",
+      "$comment": "Recenziile reale de pe profilurile Google ale restaurantului și Hotel ANNA, extrase de Alin pe 24.11.2026 (D-55). Înlocuiesc o singură dată recenziile-exemplu („Provizoriu”). Numele scurtate la prenume și inițială; fără dată (nu era în extras); emoticoanele scoase din citate. D-56: textele sunt în română, la cererea lui Alin (originalele sunt în română); traduse din extrasul în engleză.",
       "collection": "reviews",
       "version": "2026-11-24-google",
       "matchOn": [
@@ -2672,114 +2672,114 @@
         {
           "author": "Dodo D.",
           "group": "restaurant",
-          "text": "Best restaurant in town by far. Reasonable prices, good atmosphere and great food.",
+          "text": "De departe cel mai bun restaurant din oraș. Prețuri rezonabile, atmosferă bună și mâncare excelentă.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Mihai M.",
           "group": "restaurant",
-          "text": "Probably the best and unique restaurant in Targu Jiu… The interior design is breathtaking, lighting is warming, there's also a piano… attention to details is amazing.",
+          "text": "Probabil cel mai bun și mai deosebit restaurant din Târgu Jiu… Designul interior îți taie respirația, lumina e caldă, există și un pian… atenția la detalii e uimitoare.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Vlad D.",
           "group": "restaurant",
-          "text": "Best food in town. Pizza, mozzarella focaccia, ribs are excellent. Big thanks to the cubana Chica for her service.",
+          "text": "Cea mai bună mâncare din oraș. Pizza, focaccia cu mozzarella și coastele sunt excelente. Mulțumiri mari cubanezei Chica pentru servire.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Alin T.",
           "group": "restaurant",
-          "text": "One of the best pizzas I've eaten (Sicilian pizza)… Bresaola was the same quality… New York cheesecake and lava cake were very good.",
+          "text": "Una dintre cele mai bune pizza pe care le-am mâncat (pizza siciliană)… Bresaola a fost de aceeași calitate… Cheesecake-ul New York și lava cake-ul au fost foarte bune.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Alexandra-Ioana M.",
           "group": "restaurant",
-          "text": "Chic place for a relaxed evening out in the city center! Lively atmosphere, tasty food and lovely garnished beverages and dishes! Nice!",
+          "text": "Un loc cochet pentru o seară relaxantă în centrul orașului! Atmosferă plină de viață, mâncare gustoasă, băuturi și preparate frumos ornate! Frumos!",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Danijel D.",
           "group": "restaurant",
-          "text": "Place is best on whole city, it is fancy, service is good, food is perfect! Estera was really helpful and made us feel like we are at home!",
+          "text": "Locul e cel mai bun din tot orașul, e elegant, servirea e bună, mâncarea e perfectă! Estera ne-a ajutat foarte mult și ne-a făcut să ne simțim ca acasă!",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Enna S.",
           "group": "restaurant",
-          "text": "Amazing experience ! Fast service , amazing food, GREAT atmosphere",
+          "text": "O experiență uimitoare! Servire rapidă, mâncare uimitoare, atmosferă GROZAVĂ",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Mihaela, România",
           "group": "hotel",
-          "text": "The breakfast far exceeded expectations, being superior to many offers from multi-star hotels… the number of stars is inferior to the quality.",
+          "text": "Micul dejun a depășit cu mult așteptările, fiind superior multor oferte din hoteluri cu mai multe stele… numărul de stele e sub calitatea oferită.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Christopher, Australia",
           "group": "hotel",
-          "text": "Very kind and helpful lady at reception who was able to find us secure undercover parking… The hotel is luxurious, quiet, very comfortable.",
+          "text": "O doamnă foarte amabilă și săritoare la recepție ne-a găsit o parcare acoperită și sigură… Hotelul este luxos, liniștit, foarte confortabil.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Adina, România",
           "group": "hotel",
-          "text": "The rooms are spacious and the bathrooms are the most unique… won't find this anywhere else in Europe - japanese toilettes and techy shower. Flawless.",
+          "text": "Camerele sunt spațioase, iar băile sunt cu totul deosebite… nu găsești așa ceva nicăieri altundeva în Europa: toalete japoneze și duș high-tech. Impecabil.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Ramona, România",
           "group": "hotel",
-          "text": "Top-notch bathroom facilities, smart Japanese-style toilet. Extremely clean throughout. Pet-friendly. Nice, large bed, Netflix, complimentary water and coffee.",
+          "text": "Baie de cea mai bună calitate, toaletă inteligentă în stil japonez. Extrem de curat peste tot. Primitor cu animalele de companie. Pat mare și comod, Netflix, apă și cafea din partea casei.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Zompara, Serbia",
           "group": "hotel",
-          "text": "Everything was more than perfect. The best room we had in our 4 days stay in Romania.",
+          "text": "Totul a fost mai mult decât perfect. Cea mai bună cameră din cele 4 zile petrecute în România.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Ana, Olanda",
           "group": "hotel",
-          "text": "The apartment is huge, and all the facilities are new and modern. The location is very central.",
+          "text": "Apartamentul este uriaș, iar toate dotările sunt noi și moderne. Locația este foarte centrală.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         },
         {
           "author": "Christian, România",
           "group": "hotel",
-          "text": "Very modern and comfortable, really high-tech furnishings, futuristic and luxurious feeling.",
+          "text": "Foarte modern și confortabil, cu mobilier cu adevărat high-tech, o senzație futuristă și luxoasă.",
           "source": "google",
           "rating": 5,
-          "language": "en"
+          "language": "ro"
         }
       ]
     }
@@ -2978,6 +2978,286 @@
       "field": "contact.placeholder",
       "from": true,
       "to": false
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Dodo D.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "Best restaurant in town by far. Reasonable prices, good atmosphere and great food.",
+      "to": "De departe cel mai bun restaurant din oraș. Prețuri rezonabile, atmosferă bună și mâncare excelentă."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Dodo D.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Mihai M.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "Probably the best and unique restaurant in Targu Jiu… The interior design is breathtaking, lighting is warming, there's also a piano… attention to details is amazing.",
+      "to": "Probabil cel mai bun și mai deosebit restaurant din Târgu Jiu… Designul interior îți taie respirația, lumina e caldă, există și un pian… atenția la detalii e uimitoare."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Mihai M.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Vlad D.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "Best food in town. Pizza, mozzarella focaccia, ribs are excellent. Big thanks to the cubana Chica for her service.",
+      "to": "Cea mai bună mâncare din oraș. Pizza, focaccia cu mozzarella și coastele sunt excelente. Mulțumiri mari cubanezei Chica pentru servire."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Vlad D.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Alin T.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "One of the best pizzas I've eaten (Sicilian pizza)… Bresaola was the same quality… New York cheesecake and lava cake were very good.",
+      "to": "Una dintre cele mai bune pizza pe care le-am mâncat (pizza siciliană)… Bresaola a fost de aceeași calitate… Cheesecake-ul New York și lava cake-ul au fost foarte bune."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Alin T.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Alexandra-Ioana M.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "Chic place for a relaxed evening out in the city center! Lively atmosphere, tasty food and lovely garnished beverages and dishes! Nice!",
+      "to": "Un loc cochet pentru o seară relaxantă în centrul orașului! Atmosferă plină de viață, mâncare gustoasă, băuturi și preparate frumos ornate! Frumos!"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Alexandra-Ioana M.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Danijel D.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "Place is best on whole city, it is fancy, service is good, food is perfect! Estera was really helpful and made us feel like we are at home!",
+      "to": "Locul e cel mai bun din tot orașul, e elegant, servirea e bună, mâncarea e perfectă! Estera ne-a ajutat foarte mult și ne-a făcut să ne simțim ca acasă!"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Danijel D.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Enna S.",
+        "group": "restaurant"
+      },
+      "field": "text",
+      "from": "Amazing experience ! Fast service , amazing food, GREAT atmosphere",
+      "to": "O experiență uimitoare! Servire rapidă, mâncare uimitoare, atmosferă GROZAVĂ"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Enna S.",
+        "group": "restaurant"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Mihaela, România",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "The breakfast far exceeded expectations, being superior to many offers from multi-star hotels… the number of stars is inferior to the quality.",
+      "to": "Micul dejun a depășit cu mult așteptările, fiind superior multor oferte din hoteluri cu mai multe stele… numărul de stele e sub calitatea oferită."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Mihaela, România",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Christopher, Australia",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "Very kind and helpful lady at reception who was able to find us secure undercover parking… The hotel is luxurious, quiet, very comfortable.",
+      "to": "O doamnă foarte amabilă și săritoare la recepție ne-a găsit o parcare acoperită și sigură… Hotelul este luxos, liniștit, foarte confortabil."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Christopher, Australia",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Adina, România",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "The rooms are spacious and the bathrooms are the most unique… won't find this anywhere else in Europe - japanese toilettes and techy shower. Flawless.",
+      "to": "Camerele sunt spațioase, iar băile sunt cu totul deosebite… nu găsești așa ceva nicăieri altundeva în Europa: toalete japoneze și duș high-tech. Impecabil."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Adina, România",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Ramona, România",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "Top-notch bathroom facilities, smart Japanese-style toilet. Extremely clean throughout. Pet-friendly. Nice, large bed, Netflix, complimentary water and coffee.",
+      "to": "Baie de cea mai bună calitate, toaletă inteligentă în stil japonez. Extrem de curat peste tot. Primitor cu animalele de companie. Pat mare și comod, Netflix, apă și cafea din partea casei."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Ramona, România",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Zompara, Serbia",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "Everything was more than perfect. The best room we had in our 4 days stay in Romania.",
+      "to": "Totul a fost mai mult decât perfect. Cea mai bună cameră din cele 4 zile petrecute în România."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Zompara, Serbia",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Ana, Olanda",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "The apartment is huge, and all the facilities are new and modern. The location is very central.",
+      "to": "Apartamentul este uriaș, iar toate dotările sunt noi și moderne. Locația este foarte centrală."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Ana, Olanda",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Christian, România",
+        "group": "hotel"
+      },
+      "field": "text",
+      "from": "Very modern and comfortable, really high-tech furnishings, futuristic and luxurious feeling.",
+      "to": "Foarte modern și confortabil, cu mobilier cu adevărat high-tech, o senzație futuristă și luxoasă."
+    },
+    {
+      "collection": "reviews",
+      "match": {
+        "author": "Christian, România",
+        "group": "hotel"
+      },
+      "field": "language",
+      "from": "en",
+      "to": "ro"
     }
   ],
   "requestsFill": {
