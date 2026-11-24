@@ -93,6 +93,13 @@ describe('F3 pasul 12 · textele finale', () => {
     await setIntro(swap.to)
   })
 
+  it('D-57: subtitlul din hero se pune doar dacă e gol, în limita de 90', async () => {
+    const swap = swaps.find((x) => x.field === 'hero.subtitle')!
+    expect(swap.from).toBeNull()
+    expect(String(swap.to).length).toBeLessThanOrEqual(90)
+    expect((await home()).hero.subtitle).toBe(swap.to)
+  })
+
   it('Descrierea Acasă fără subtitlu: numele, adresa și programul din Setări', () => {
     expect(UI.homeMeta('Restaurant X', 'Strada Y nr. 1, Oraș', ['Zilnic 8:00–24:00'])).toBe(
       'Restaurant X, Strada Y nr. 1, Oraș. Program: Zilnic 8:00–24:00.',

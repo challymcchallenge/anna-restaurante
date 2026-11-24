@@ -62,7 +62,7 @@ Fiecare text se schimbă o singură dată și doar dacă e încă cel vechi. Un 
 
 Sunt întrebările G8-2 și G8-3. Recenziile reale au venit după GATE 3 (D-55, secțiunea 9).
 
-**Pe producție, subtitlul din hero e gol.** A fost golit din panou; pe baza locală e încă „Vă așteptăm cu drag și vă servim cu plăcere!”. Nu l-am repus (G8-1). Acasă primește acum descrierea pentru căutare din nume, adresă și program: „Trattoria da Vittoria, Strada Victoriei nr. 8, Târgu Jiu. Program: Zilnic 8:00–24:00.”
+**Pe producție, subtitlul din hero era gol** (golit din panou). După GATE 3 ai ales subtitlul propus (G8-1, D-57). Acasă primește acum descrierea pentru căutare din nume, adresă și program: „Trattoria da Vittoria, Strada Victoriei nr. 8, Târgu Jiu. Program: Zilnic 8:00–24:00.”
 
 ## 4. Cifrele, pe producție
 
@@ -136,7 +136,7 @@ Pe baza locală, cu toate subiectele pornite ca pe producție (D-51), am trimis 
 
 | # | Întrebare | Ce propun |
 |---|---|---|
-| G8-1 | Subtitlul din hero e gol pe producție. Îl lași gol, îl pui pe cel vechi sau pui unul nou? | Unul nou, cu ce și unde: „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” (85 de caractere). Îl pun eu sau îl scrii tu în Pagina Acasă → Hero |
+| ~~G8-1~~ | ~~Subtitlul din hero~~ | **Rezolvat: D-57**, „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” |
 | G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune? (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele) | Îmi dai 2–3 fapte și rescriu titlul Bucătăriei și subtitlul |
 | G8-3 | Descrierile saloanelor și camerelor și răspunsurile la întrebări: le scrii tu sau le iau de pe davittoria.ro și hotelanna.ro? | Le iau eu de pe site-urile voastre (cerere de rețea, cu acordul tău) și le marchez „de verificat” |
 | ~~G8-4~~ | ~~Recenziile reale~~ | **Rezolvat: D-55**, 7 + 7 de pe Google, pe site |
