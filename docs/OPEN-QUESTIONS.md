@@ -99,5 +99,12 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 |---|---|---|---|
 | ~~G8-1~~ | ~~Subtitlul din hero~~ — **rezolvat: D-57**, „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” | — | — |
 | G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele)? | F4 | Alin |
-| G8-3 | Descrierile saloanelor și camerelor și răspunsurile la întrebările frecvente: le scrii tu sau le iau de pe davittoria.ro și hotelanna.ro (cerere de rețea, cu acordul tău)? | F4 | Alin |
+| ~~G8-3~~ | ~~Descrierile saloanelor și camerelor și răspunsurile la întrebări~~ — **rezolvat: D-58** (5 răspunsuri rămân la G9-1) | — | — |
 | ~~G8-4~~ | ~~Recenziile reale: iau 3–4 recenzii publice din profilul Google, cu numele scurtat și sursa?~~ — **rezolvat: D-55** | — | — |
+
+## Întrebări noi după G8-3 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_GATE3.md`, secțiunea 10
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G9-1 | Răspunsurile pe care nu le-am găsit pe site-uri: există parcare la restaurant? Aveți preparate vegetariene? Se poate aduce tortul de acasă? Se plătește un avans pentru evenimente? Până la ce oră poate dura un eveniment? | F4 (se traduc) | Alin / managerul |
+| G9-2 | Apartamentele VIP Riviera se rezervă la +40 742 220 060, nu prin recepția Hotel ANNA. Le scot din formularul de cazare sau las cererea să meargă la hotel? | F4 | Alin |

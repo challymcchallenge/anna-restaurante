@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists). D-56: recenziile în română (swaps pe autor și grup, doar unde textul e încă cel în engleză). D-57: subtitlul din hero (G8-1), pus doar dacă e gol.",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists). D-56: recenziile în română (swaps pe autor și grup, doar unde textul e încă cel în engleză). D-57: subtitlul din hero (G8-1), pus doar dacă e gol. D-58 (G8-3): descrierile saloanelor (davittoria.ro), ale camerelor și faptele hotelului (hotelanna.ro, 24.11.2026), răspunsurile la întrebări; o singură dată, doar unde textul e încă cel vechi.",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -182,12 +182,14 @@
       "order": 9,
       "menuLabel": "Hotel ANNA",
       "title": "După cină, rămâi peste noapte.",
-      "intro": "Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Alegi datele și camerele, trimiți cererea de aici, iar recepția hotelului îți confirmă oferta prin telefon sau email.",
+      "intro": "Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Micul dejun e inclus, parcarea e gratuită, iar copiii până la 5 ani stau gratuit. Alegi datele și camerele, trimiți cererea de aici, iar recepția îți confirmă oferta prin telefon sau email.",
       "hotelName": "Hotel ANNA",
       "hotelAddress": "Bd. Ecaterina Teodoroiu 17, Târgu Jiu",
       "hotelUrl": "https://www.hotelanna.ro",
       "hotelPhone": "+40 253 206 333",
-      "hotelEmail": "rezervari@hotelanna.ro"
+      "hotelEmail": "rezervari@hotelanna.ro",
+      "priceFrom": 320,
+      "priceNote": "pe noapte, cu mic dejun inclus"
     },
     "gallery": {
       "enabled": true,
@@ -345,26 +347,26 @@
         "name": "Salon Trattoria",
         "location": "la etaj",
         "capacity": 25,
-        "description": "Descriere de înlocuit: atmosfera, dotările și tipurile de evenimente potrivite pentru salon.",
+        "description": "Un cadru intim pentru mesele la care fiecare invitat contează: o aniversare în familie, o onomastică, o tăiere de moț. Atmosfera e caldă, iar priveliștea de sus face restul. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
         "placeholder": true
       },
       {
         "name": "Salon Vittoria",
         "location": "la mansardă",
         "capacity": 40,
-        "description": "Descriere de înlocuit: atmosfera, dotările și tipurile de evenimente potrivite pentru salon.",
+        "description": "Cel mai încăpător salon al nostru, cu o atmosferă rafinată, pentru botezuri, aniversări rotunde sau o cină de firmă. Meniul îl gândim împreună cu tine, iar priveliștea de la mansardă rămâne în poze. Alegi data, iar managerul de evenimente te sună să stabiliți detaliile.",
         "placeholder": true
       }
     ],
     "room-types": [
       {
         "name": "Camere Premium",
-        "description": "Descriere scurtă, de înlocuit.",
+        "description": "Proaspăt renovate, cu paturi comode și lenjerii de calitate superioară. Dimineața te așteaptă bufetul suedez, cu mezeluri din mezelăria proprie.",
         "placeholder": true
       },
       {
         "name": "Apartamente VIP Riviera",
-        "description": "Descriere scurtă, de înlocuit.",
+        "description": "Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică sau o nuntă de aur. Rezervări: +40 742 220 060.",
         "placeholder": true
       }
     ],
@@ -2782,6 +2784,81 @@
           "language": "ro"
         }
       ]
+    },
+    {
+      "$comment": "G8-3 (D-58): răspunsurile din davittoria.ro și din faptele confirmate, cu un îndemn. Întrebările fără răspuns rămân „Provizoriu”. Înlocuiește o singură dată întrebările marcate „Provizoriu”; ce e scris din panou rămâne.",
+      "collection": "faqs",
+      "version": "2026-11-24-g83",
+      "matchOn": [
+        "question",
+        "group"
+      ],
+      "items": [
+        {
+          "question": "Pot veni cu copiii?",
+          "group": "home",
+          "answer": {
+            "$richText": "Da, copiii sunt bineveniți. Pentru ei organizăm cursuri de pizza, unde își fac singuri pizza, iar pentru tăieri de moț și aniversări avem două saloane. Îl înscrii de pe pagina Cursuri de pizza."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Cum rezerv un salon pentru un eveniment?",
+          "group": "home",
+          "answer": {
+            "$richText": "Apeși „Rezervă salonul”, alegi data și ne spui câți invitați vin. Te sunăm noi cu disponibilitatea. Dacă vrei să vorbești direct cu managerul de evenimente, inclusiv despre un meniu personalizat: +40 764 816 462."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Aveți parcare?",
+          "group": "home",
+          "answer": {
+            "$richText": "Răspuns de confirmat de local."
+          },
+          "placeholder": true
+        },
+        {
+          "question": "Aveți preparate vegetariene?",
+          "group": "home",
+          "answer": {
+            "$richText": "Răspuns de confirmat de local."
+          },
+          "placeholder": true
+        },
+        {
+          "question": "Puteți pregăti un meniu personalizat?",
+          "group": "private-events",
+          "answer": {
+            "$richText": "Da. Meniul și cateringul le stabilim împreună cu tine, după ocazie și numărul de invitați. Sună managerul de evenimente la +40 764 816 462 sau trimite cererea din formular, iar noi te sunăm."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Putem aduce tortul nostru?",
+          "group": "private-events",
+          "answer": {
+            "$richText": "Răspuns de confirmat de local."
+          },
+          "placeholder": true
+        },
+        {
+          "question": "Se plătește un avans?",
+          "group": "private-events",
+          "answer": {
+            "$richText": "Răspuns de confirmat de local."
+          },
+          "placeholder": true
+        },
+        {
+          "question": "Până la ce oră poate dura evenimentul?",
+          "group": "private-events",
+          "answer": {
+            "$richText": "Răspuns de confirmat de local."
+          },
+          "placeholder": true
+        }
+      ]
     }
   ],
   "swaps": [
@@ -3264,6 +3341,61 @@
       "field": "hero.subtitle",
       "from": null,
       "to": "Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu."
+    },
+    {
+      "collection": "salons",
+      "match": {
+        "name": "Salon Trattoria"
+      },
+      "field": "description",
+      "from": "Descriere de înlocuit: atmosfera, dotările și tipurile de evenimente potrivite pentru salon.",
+      "to": "Un cadru intim pentru mesele la care fiecare invitat contează: o aniversare în familie, o onomastică, o tăiere de moț. Atmosfera e caldă, iar priveliștea de sus face restul. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea."
+    },
+    {
+      "collection": "salons",
+      "match": {
+        "name": "Salon Vittoria"
+      },
+      "field": "description",
+      "from": "Descriere de înlocuit: atmosfera, dotările și tipurile de evenimente potrivite pentru salon.",
+      "to": "Cel mai încăpător salon al nostru, cu o atmosferă rafinată, pentru botezuri, aniversări rotunde sau o cină de firmă. Meniul îl gândim împreună cu tine, iar priveliștea de la mansardă rămâne în poze. Alegi data, iar managerul de evenimente te sună să stabiliți detaliile."
+    },
+    {
+      "collection": "room-types",
+      "match": {
+        "name": "Camere Premium"
+      },
+      "field": "description",
+      "from": "Descriere scurtă, de înlocuit.",
+      "to": "Proaspăt renovate, cu paturi comode și lenjerii de calitate superioară. Dimineața te așteaptă bufetul suedez, cu mezeluri din mezelăria proprie."
+    },
+    {
+      "collection": "room-types",
+      "match": {
+        "name": "Apartamente VIP Riviera"
+      },
+      "field": "description",
+      "from": "Descriere scurtă, de înlocuit.",
+      "to": "Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică sau o nuntă de aur. Rezervări: +40 742 220 060."
+    },
+    {
+      "collection": "home-page",
+      "field": "hotel.intro",
+      "from": "Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Alegi datele și camerele, trimiți cererea de aici, iar recepția hotelului îți confirmă oferta prin telefon sau email.",
+      "to": "Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Micul dejun e inclus, parcarea e gratuită, iar copiii până la 5 ani stau gratuit. Alegi datele și camerele, trimiți cererea de aici, iar recepția îți confirmă oferta prin telefon sau email.",
+      "version": "g8-3"
+    },
+    {
+      "collection": "home-page",
+      "field": "hotel.priceFrom",
+      "from": null,
+      "to": 320
+    },
+    {
+      "collection": "home-page",
+      "field": "hotel.priceNote",
+      "from": null,
+      "to": "pe noapte, cu mic dejun inclus"
     }
   ],
   "requestsFill": {

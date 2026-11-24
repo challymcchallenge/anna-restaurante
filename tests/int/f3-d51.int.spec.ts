@@ -84,6 +84,8 @@ describe('D-51 · destinatari, recepția hotelului, harta', () => {
       where: { and: [{ tenant: { equals: tenantId } }, { question: { equals: 'Cum rezerv un salon pentru un eveniment?' } }] },
       depth: 0,
     })
-    expect(lexicalText(docs[0]?.answer)).toBe('Din pagina Evenimente private sau la telefon +40 764 816 462.')
+    // D-58 a rescris răspunsul; D-52 cere doar numărul în format internațional.
+    expect(lexicalText(docs[0]?.answer)).toContain('+40 764 816 462')
+    expect(lexicalText(docs[0]?.answer)).not.toMatch(/\b0764/)
   })
 })

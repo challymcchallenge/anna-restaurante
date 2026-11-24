@@ -138,7 +138,7 @@ Pe baza locală, cu toate subiectele pornite ca pe producție (D-51), am trimis 
 |---|---|---|
 | ~~G8-1~~ | ~~Subtitlul din hero~~ | **Rezolvat: D-57**, „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” |
 | G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune? (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele) | Îmi dai 2–3 fapte și rescriu titlul Bucătăriei și subtitlul |
-| G8-3 | Descrierile saloanelor și camerelor și răspunsurile la întrebări: le scrii tu sau le iau de pe davittoria.ro și hotelanna.ro? | Le iau eu de pe site-urile voastre (cerere de rețea, cu acordul tău) și le marchez „de verificat” |
+| ~~G8-3~~ | ~~Descrieri și răspunsuri~~ | **Rezolvat: D-58** (secțiunea 10); 5 răspunsuri rămân la G9-1 |
 | ~~G8-4~~ | ~~Recenziile reale~~ | **Rezolvat: D-55**, 7 + 7 de pe Google, pe site |
 | G7-1 … G7-3 | Juristul, adresele vechi, termenul de păstrare a cererilor (din pasul 10) | Rămân deschise |
 
@@ -169,6 +169,32 @@ Cum le-am preluat:
 **De verificat de tine:** Christopher (Australia), Zompara (Serbia), Ana (Olanda), Danijel și Enna au scris probabil în engleză. Le-am tradus și pe ele, cum ai cerut.
 
 Teste: 66/66 (3 noi). Migrația: `20261124_221615_f3_recenzii_limba`.
+
+## 10. După GATE 3: saloane, camere, hotel și întrebări (D-58)
+
+Am luat faptele de pe davittoria.ro și hotelanna.ro (24.11.2026; sursele sunt în `docs/f3/2026_11_24_Trattoria_Surse_G8-3.md`). Le-am scris cu o scenă pe care oaspetele și-o poate imagina, cu beneficii concrete și cu un singur îndemn la final. N-am adăugat nimic ce nu scrie pe site-urile voastre.
+
+| Unde | Text nou |
+|---|---|
+| Salon Trattoria | Un cadru intim pentru mesele la care fiecare invitat contează: o aniversare în familie, o onomastică, o tăiere de moț. Atmosfera e caldă, iar priveliștea de sus face restul. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea. |
+| Salon Vittoria | Cel mai încăpător salon al nostru, cu o atmosferă rafinată, pentru botezuri, aniversări rotunde sau o cină de firmă. Meniul îl gândim împreună cu tine, iar priveliștea de la mansardă rămâne în poze. Alegi data, iar managerul de evenimente te sună să stabiliți detaliile. |
+| Camere Premium | Proaspăt renovate, cu paturi comode și lenjerii de calitate superioară. Dimineața te așteaptă bufetul suedez, cu mezeluri din mezelăria proprie. |
+| Apartamente VIP Riviera | Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică sau o nuntă de aur. Rezervări: +40 742 220 060. |
+| Hotel · text | Hotel ANNA face parte din Grupul ANNA, ca și Trattoria. Micul dejun e inclus, parcarea e gratuită, iar copiii până la 5 ani stau gratuit. Alegi datele și camerele, trimiți cererea de aici, iar recepția îți confirmă oferta prin telefon sau email. |
+| Hotel · preț | de la 320 lei · pe noapte, cu mic dejun inclus |
+| Întrebare: Pot veni cu copiii? | Da, copiii sunt bineveniți. Pentru ei organizăm cursuri de pizza, unde își fac singuri pizza, iar pentru tăieri de moț și aniversări avem două saloane. Îl înscrii de pe pagina Cursuri de pizza. |
+| Întrebare: Cum rezerv un salon…? | Apeși „Rezervă salonul”, alegi data și ne spui câți invitați vin. Te sunăm noi cu disponibilitatea. Dacă vrei să vorbești direct cu managerul de evenimente, inclusiv despre un meniu personalizat: +40 764 816 462. |
+| Întrebare nouă: Puteți pregăti un meniu personalizat? | Da. Meniul și cateringul le stabilim împreună cu tine, după ocazie și numărul de invitați. Sună managerul de evenimente la +40 764 816 462 sau trimite cererea din formular, iar noi te sunăm. |
+
+**Pe scurt:**
+- **Eticheta „Exemplu”:** rămâne pe saloane și camere până vin fotografiile, pentru că panoul cere fotografii pentru un element care nu e provizoriu.
+- **Răspunsuri care lipsesc:** cinci întrebări n-au răspuns pe site-uri (G9-1).
+- **Apartamentele VIP Riviera** nu sunt la adresa hotelului și se rezervă la alt număr (G9-2).
+- **Prețul de 320 lei** e cel de pe hotelanna.ro azi. Când se schimbă la hotel, îl schimbi din panou.
+
+**Adresele site-ului vechi** (pentru G7-2): le-am notat din harta site-ului, în același fișier de surse; redirecționările le hotărâm în F5.
+
+Teste: 71/71 (4 noi).
 
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 

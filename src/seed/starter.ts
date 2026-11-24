@@ -85,6 +85,8 @@ type SeedFile = {
     to?: unknown
     fromMedia?: string
     toMedia?: string
+    /** A doua schimbare a aceluiași câmp (de exemplu un text final rescris): cheie nouă în jurnal. */
+    version?: string
   }[]
 }
 
@@ -461,9 +463,10 @@ export async function seedStarterContent({
     }
 
     for (const swap of seed.swaps ?? []) {
-      const key = swap.match
-        ? `swap:${swap.collection}:${JSON.stringify(swap.match)}:${swap.field}`
-        : `swap:${swap.collection}:${swap.field}`
+      const key =
+        (swap.match
+          ? `swap:${swap.collection}:${JSON.stringify(swap.match)}:${swap.field}`
+          : `swap:${swap.collection}:${swap.field}`) + (swap.version ? `:${swap.version}` : '')
       if (log[key]) continue
       const from = swap.fromMedia !== undefined ? ids[swap.fromMedia] : swap.from
       const to = swap.toMedia !== undefined ? ids[swap.toMedia] : swap.to
