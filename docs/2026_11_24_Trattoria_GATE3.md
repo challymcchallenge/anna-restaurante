@@ -220,7 +220,21 @@ G7-1 … G7-3 sunt aprobate de jurist. Paginile legale rămân „Provizoriu” 
 | Antetul de acum, la scroll | Bara plină apare de la primul scroll și rămâne sus, pe orice pagină și acum și pe telefon |
 | Meniul din panou | **Setări → Meniu de navigare**: ținta, eticheta și afișarea („În antet” / „Doar în «Mai mult»” / „Ascuns”) pentru fiecare rând; ordinea se schimbă trăgând rândurile. Completat cu meniul de acum |
 
-Teste: 75/75 (3 noi). Migrația: `20261124_231318_f3_meniu_navigare`.
+**Performanța.** Pe producție, hero-ul are acum 5 fotografii reale în slideshow, puse din panou. Toate se descărcau la deschidere, iar Acasă scăzuse la 78–81. Am făcut trei remedieri:
+- cadrele 2…5 se descarcă după încărcarea paginii;
+- pe telefon, coperta cere o variantă cu aproximativ 12% sub densitatea ecranului (85 KB în loc de 157 KB);
+- logo-ul nu mai cere prioritate ridicată.
+
+| Pagina (Lighthouse mobil, producție) | Performanță | Accesibilitate | CLS |
+|---|---|---|---|
+| Acasă | 86 / 86 / 85 | 100 | 0 |
+| `/galerie` | 88 / 94 | 100 | 0 |
+| `/contact` | 90 | 100 | 0 |
+| `/evenimente-private` | 97 | 100 | 0 |
+
+Contrastul textelor din antet peste fotografie: telefon 6,85:1, „Mai mult” 13,73:1, „Rezervă o masă” 8,53:1. Pe desktop, un rând din lista de vinuri iese sub prag doar când trece pe sub medalion la derulare. E un efect al antetului fix, nu o culoare greșită.
+
+Capturi: `design/f3/capturi/2026_11_24_Trattoria_D60_*.webp`. Teste: 75/75 (3 noi). Migrația: `20261124_231318_f3_meniu_navigare`.
 
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
