@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists). D-56: recenziile în română (swaps pe autor și grup, doar unde textul e încă cel în engleză). D-57: subtitlul din hero (G8-1), pus doar dacă e gol. D-58 (G8-3): descrierile saloanelor (davittoria.ro), ale camerelor și faptele hotelului (hotelanna.ro, 24.11.2026), răspunsurile la întrebări; o singură dată, doar unde textul e încă cel vechi.",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists). D-56: recenziile în română (swaps pe autor și grup, doar unde textul e încă cel în engleză). D-57: subtitlul din hero (G8-1), pus doar dacă e gol. D-58 (G8-3): descrierile saloanelor (davittoria.ro), ale camerelor și faptele hotelului (hotelanna.ro, 24.11.2026), răspunsurile la întrebări; o singură dată, doar unde textul e încă cel vechi. D-59 (G8-2, G9-1, G9-2): cuptorul pe lemne și ingredientele din Italia, cateringul și platourile la saloane, răspunsurile la întrebări, aceeași recepție pentru VIP Riviera.",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -109,9 +109,9 @@
       "placeholder": false,
       "order": 3,
       "menuLabel": "Bucătăria",
-      "title": "Bucătăria, de la antipasti la desert.",
+      "title": "Cuptor pe lemne, făină și ingrediente din Italia.",
       "buttonLabel": "Vezi meniul complet",
-      "intro": "Pizza, paste și risotto, pește, vită și deserturi, iar dimineața micul dejun Buona Mattina. Tot meniul, cu valorile nutriționale, e în meniul digital."
+      "intro": "Rețetele sunt ale casei: pizza din cuptorul pe lemne, paste și risotto, pește, vită și deserturi. Dimineața, Buona Mattina. Tot meniul e în meniul digital."
     },
     "wines": {
       "enabled": true,
@@ -144,7 +144,7 @@
       "order": 7,
       "menuLabel": "Evenimente private",
       "title": "Un salon doar al vostru.",
-      "intro": "Avem două saloane: Salon Trattoria, la etaj, și Salon Vittoria, la mansardă. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
+      "intro": "Două saloane, la etaj și la mansardă, cu catering la cerere și o gamă largă de platouri pentru orice eveniment. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
       "eventTypes": [
         {
           "label": "Onomastici"
@@ -251,7 +251,7 @@
       },
       {
         "name": "Pizza",
-        "shortText": "Clasice și rețete ale casei",
+        "shortText": "Din cuptorul pe lemne, cu făină din Italia",
         "placeholder": true
       },
       {
@@ -348,14 +348,36 @@
         "location": "la etaj",
         "capacity": 25,
         "description": "Un cadru intim pentru mesele la care fiecare invitat contează: o aniversare în familie, o onomastică, o tăiere de moț. Atmosfera e caldă, iar priveliștea de sus face restul. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
-        "placeholder": true
+        "placeholder": true,
+        "amenities": [
+          {
+            "label": "Catering la cerere"
+          },
+          {
+            "label": "Meniu personalizat"
+          },
+          {
+            "label": "Platouri pentru evenimente"
+          }
+        ]
       },
       {
         "name": "Salon Vittoria",
         "location": "la mansardă",
         "capacity": 40,
         "description": "Cel mai încăpător salon al nostru, cu o atmosferă rafinată, pentru botezuri, aniversări rotunde sau o cină de firmă. Meniul îl gândim împreună cu tine, iar priveliștea de la mansardă rămâne în poze. Alegi data, iar managerul de evenimente te sună să stabiliți detaliile.",
-        "placeholder": true
+        "placeholder": true,
+        "amenities": [
+          {
+            "label": "Catering la cerere"
+          },
+          {
+            "label": "Meniu personalizat"
+          },
+          {
+            "label": "Platouri pentru evenimente"
+          }
+        ]
       }
     ],
     "room-types": [
@@ -366,7 +388,7 @@
       },
       {
         "name": "Apartamente VIP Riviera",
-        "description": "Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică sau o nuntă de aur. Rezervări: +40 742 220 060.",
+        "description": "Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică, o aniversare sau o nuntă de aur.",
         "placeholder": true
       }
     ],
@@ -2859,6 +2881,49 @@
           "placeholder": true
         }
       ]
+    },
+    {
+      "$comment": "G9-1 (D-59): răspunsurile date de Alin pe 24.11.2026. Înlocuiesc o singură dată întrebările rămase „Provizoriu” (parcare, vegetarian, tort, avans, ora de final); detaliile evenimentelor se stabilesc la telefon.",
+      "collection": "faqs",
+      "version": "2026-11-24-g9",
+      "matchOn": [
+        "question",
+        "group"
+      ],
+      "items": [
+        {
+          "question": "Aveți parcare?",
+          "group": "home",
+          "answer": {
+            "$richText": "Da. Vizavi de restaurant e o parcare cu peste 150 de locuri."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Aveți preparate vegetariene sau vegane?",
+          "group": "home",
+          "answer": {
+            "$richText": "Da, avem preparate vegetariene și vegane, pentru orice preferință. Le găsești în meniul digital."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Pot veni cu animalul de companie?",
+          "group": "home",
+          "answer": {
+            "$richText": "Da, animalele de companie sunt binevenite la Trattoria."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Cum stabilim detaliile evenimentului?",
+          "group": "private-events",
+          "answer": {
+            "$richText": "La telefon, cu managerul de evenimente: +40 764 816 462. Stabilim împreună cateringul, tortul, amenajarea salonului și programul serii."
+          },
+          "placeholder": false
+        }
+      ]
     }
   ],
   "swaps": [
@@ -3396,6 +3461,98 @@
       "field": "hotel.priceNote",
       "from": null,
       "to": "pe noapte, cu mic dejun inclus"
+    },
+    {
+      "collection": "home-page",
+      "field": "kitchen.title",
+      "from": "Bucătăria, de la antipasti la desert.",
+      "to": "Cuptor pe lemne, făină și ingrediente din Italia.",
+      "version": "g8-2"
+    },
+    {
+      "collection": "home-page",
+      "field": "kitchen.intro",
+      "from": "Pizza, paste și risotto, pește, vită și deserturi, iar dimineața micul dejun Buona Mattina. Tot meniul, cu valorile nutriționale, e în meniul digital.",
+      "to": "Rețetele sunt ale casei: pizza din cuptorul pe lemne, paste și risotto, pește, vită și deserturi. Dimineața, Buona Mattina. Tot meniul e în meniul digital.",
+      "version": "g8-2"
+    },
+    {
+      "collection": "home-page",
+      "field": "privateEvents.intro",
+      "from": "Avem două saloane: Salon Trattoria, la etaj, și Salon Vittoria, la mansardă. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
+      "to": "Două saloane, la etaj și la mansardă, cu catering la cerere și o gamă largă de platouri pentru orice eveniment. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea.",
+      "version": "g8-2"
+    },
+    {
+      "collection": "dish-categories",
+      "match": {
+        "name": "Pizza"
+      },
+      "field": "shortText",
+      "from": "Clasice și rețete ale casei",
+      "to": "Din cuptorul pe lemne, cu făină din Italia"
+    },
+    {
+      "collection": "salons",
+      "match": {
+        "name": "Salon Trattoria"
+      },
+      "field": "amenities",
+      "from": null,
+      "to": [
+        {
+          "label": "Catering la cerere"
+        },
+        {
+          "label": "Meniu personalizat"
+        },
+        {
+          "label": "Platouri pentru evenimente"
+        }
+      ]
+    },
+    {
+      "collection": "salons",
+      "match": {
+        "name": "Salon Vittoria"
+      },
+      "field": "amenities",
+      "from": null,
+      "to": [
+        {
+          "label": "Catering la cerere"
+        },
+        {
+          "label": "Meniu personalizat"
+        },
+        {
+          "label": "Platouri pentru evenimente"
+        }
+      ]
+    },
+    {
+      "collection": "room-types",
+      "match": {
+        "name": "Apartamente VIP Riviera"
+      },
+      "field": "description",
+      "from": "Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică sau o nuntă de aur. Rezervări: +40 742 220 060.",
+      "to": "Pe malul Jiului, în complexul Riviera Events, cu acces la o grădină plină de flori. Pentru o seară romantică, o aniversare sau o nuntă de aur.",
+      "version": "g9-2"
+    },
+    {
+      "collection": "faqs",
+      "match": {
+        "question": "Puteți pregăti un meniu personalizat?",
+        "group": "private-events"
+      },
+      "field": "answer",
+      "from": {
+        "$richText": "Da. Meniul și cateringul le stabilim împreună cu tine, după ocazie și numărul de invitați. Sună managerul de evenimente la +40 764 816 462 sau trimite cererea din formular, iar noi te sunăm."
+      },
+      "to": {
+        "$richText": "Da. Pregătim catering la cerere și o gamă largă de platouri, pentru orice eveniment. Meniul îl stabilim împreună cu tine, la telefon, cu managerul de evenimente: +40 764 816 462."
+      }
     }
   ],
   "requestsFill": {

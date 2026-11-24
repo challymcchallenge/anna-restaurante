@@ -136,6 +136,7 @@ export const UI = {
   /** Paginile legale (F3 pasul 10) */
   legalUpdated: (date: string) => `Actualizat la ${date}`,
   legalToc: 'Cuprins',
+  amenitiesOf: (salon: string) => `Dotări: ${salon}`,
   /** Descrierea paginii legale pentru motoarele de căutare: titlul, restaurantul și secțiunile, cel mult 160 de caractere. */
   /** Descrierea Acasă când subtitlul din hero e gol (F3 pasul 12): numele, adresa și programul din Setări. */
   homeMeta: (restaurant: string, address: string, hours: string[]) =>

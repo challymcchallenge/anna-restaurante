@@ -58,7 +58,8 @@ describe('F3 pasul 12 · textele finale', () => {
 
   it('Pe baza locală: textele noi sunt pe Acasă; eticheta rămâne doar unde sunt fotografii demo', async () => {
     const h = await home()
-    expect(h.kitchen.title).toBe('Bucătăria, de la antipasti la desert.')
+    // D-59 a rescris titlul (G8-2); valoarea finală e cea din seed.
+    expect(h.kitchen.title).toBe((seed as unknown as { homePage: { kitchen: { title: string } } }).homePage.kitchen.title)
     expect(h.contact.intro).toMatch(/te sunăm noi\.$/)
     expect(lexicalText(h.pizza.fullText)).toContain('Cum îl înscrii')
     expect(lexicalText(h.pizza.fullText)).not.toContain('Q-11')

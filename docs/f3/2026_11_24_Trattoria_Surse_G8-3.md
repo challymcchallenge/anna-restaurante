@@ -23,7 +23,9 @@ Citite pe 24.11.2026, cu acordul lui Alin („G8-3 OK, ia-le de pe davittoria.ro
 | `/mic-dejun/` | Bufet suedez, 7:00–10:00 (8:00–11:00 în weekend), preparate din mezelăria proprie | Camere Premium |
 | `/apartamente-vip-riviera/` | Pe malul Jiului, în complexul ANNA – Riviera Events; grădină plină de flori; pentru întâlniri romantice, aniversări, nunți de aur; rezervări la 0742220060 | Apartamente VIP Riviera |
 
-## Ce nu am găsit (rămâne „Provizoriu”)
+**Corecție (D-59, Alin):** Apartamentele VIP Riviera au aceeași recepție ca Hotel ANNA, așa că numărul separat a ieșit din descriere.
+
+## Ce nu am găsit (rezolvat de Alin, D-59)
 
 - Parcarea la restaurant: cea de pe hotelanna.ro e la hotel, nu pe Strada Victoriei.
 - Preparatele vegetariene la Trattoria: hotelanna.ro vorbește despre restaurantul hotelului.

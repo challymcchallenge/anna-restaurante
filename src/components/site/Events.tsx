@@ -256,6 +256,8 @@ export function Parties({ site, id }: { site: SiteData; id: string }) {
 export function SalonCard({ salon, sizes, href }: { salon: Salon; sizes: string; href?: string }) {
   const photo = asMedia((salon.photos as (number | Media)[] | null | undefined)?.[0])
   const where = [salon.location, UI.upTo(salon.capacity)].filter(Boolean).join(' · ')
+  // Dotările din panou (content-model 5.5), de exemplu „Catering la cerere” (D-59).
+  const amenities = (salon.amenities ?? []).map((a) => a.label).filter(Boolean)
   const visual = (
     <span className="salon-visual">
       {photo ? <Picture media={photo} sizes={sizes} /> : <Chapter>{salon.name}</Chapter>}
@@ -273,6 +275,13 @@ export function SalonCard({ salon, sizes, href }: { salon: Salon; sizes: string;
       <h3 className="salon-name">{salon.name}</h3>
       <p className="salon-where">{where.charAt(0).toUpperCase() + where.slice(1)}</p>
       <p className="salon-desc">{salon.description}</p>
+      {amenities.length > 0 && (
+        <ul className="types salon-amenities" aria-label={UI.amenitiesOf(salon.name)}>
+          {amenities.map((a) => (
+            <li key={a}>{a}</li>
+          ))}
+        </ul>
+      )}
       {salon.placeholder && <ExampleTag className="row-tag" />}
     </article>
   )

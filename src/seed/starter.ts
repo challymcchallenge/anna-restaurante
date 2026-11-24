@@ -90,7 +90,8 @@ type SeedFile = {
   }[]
 }
 
-const isEmpty = (v: unknown) => v === null || v === undefined || v === ''
+// O listă goală (de exemplu „Dotări” necompletate) contează tot ca valoare goală (D-59).
+const isEmpty = (v: unknown) => v === null || v === undefined || v === '' || (Array.isArray(v) && v.length === 0)
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   Boolean(v) && typeof v === 'object' && !Array.isArray(v)
 

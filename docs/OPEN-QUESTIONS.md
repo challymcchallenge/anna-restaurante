@@ -89,16 +89,16 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G7-1 | Cine e juristul grupului și cum lucrează: corectează ciornele legale direct în panou sau trimite textul? (Q-25) | F5 | Alin |
-| G7-2 | Fac lista adreselor de pe davittoria.ro înainte de mutarea domeniului (D-36), ca să nu dea 404? Cere o cerere de rețea spre davittoria.ro, cu acordul tău | F5 | Alin |
-| G7-3 | Cât timp păstrăm cererile și sesizările în panou? Termenul intră în Politica de confidențialitate | F5 | Alin + jurist |
+| ~~G7-1~~ | ~~Juristul și ciornele legale~~ — **rezolvat: D-59** | — | — |
+| ~~G7-2~~ | ~~Lista adreselor de pe davittoria.ro~~ — **rezolvat: D-59** | — | — |
+| ~~G7-3~~ | ~~Cât timp păstrăm cererile~~ — **rezolvat: D-59** | — | — |
 
 ## Întrebări noi la GATE 3 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_GATE3.md`, secțiunea 7
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
 | ~~G8-1~~ | ~~Subtitlul din hero~~ — **rezolvat: D-57**, „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” | — | — |
-| G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele)? | F4 | Alin |
+| ~~G8-2~~ | ~~Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune?~~ — **rezolvat: D-59** | — | — |
 | ~~G8-3~~ | ~~Descrierile saloanelor și camerelor și răspunsurile la întrebări~~ — **rezolvat: D-58** (5 răspunsuri rămân la G9-1) | — | — |
 | ~~G8-4~~ | ~~Recenziile reale: iau 3–4 recenzii publice din profilul Google, cu numele scurtat și sursa?~~ — **rezolvat: D-55** | — | — |
 
@@ -106,5 +106,5 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G9-1 | Răspunsurile pe care nu le-am găsit pe site-uri: există parcare la restaurant? Aveți preparate vegetariene? Se poate aduce tortul de acasă? Se plătește un avans pentru evenimente? Până la ce oră poate dura un eveniment? | F4 (se traduc) | Alin / managerul |
-| G9-2 | Apartamentele VIP Riviera se rezervă la +40 742 220 060, nu prin recepția Hotel ANNA. Le scot din formularul de cazare sau las cererea să meargă la hotel? | F4 | Alin |
+| ~~G9-1~~ | ~~Răspunsurile pe care nu le-am găsit pe site-uri~~ — **rezolvat: D-59** | — | — |
+| ~~G9-2~~ | ~~Apartamentele VIP Riviera în formularul de cazare~~ — **rezolvat: D-59** | — | — |

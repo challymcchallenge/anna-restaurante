@@ -50,7 +50,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | ~~20~~ | ~~Adresele site-urilor grupului~~ — **gata** (D-40, 11 linkuri) | Linkuri grup | — | D-40 |
 | ~~21~~ | ~~Linkul paginii de Facebook~~ — **gata** (D-40) | Setări → Rețele sociale | — | D-40 |
 | 22 | Poziția restaurantului pe hartă (latitudine, longitudine). **F3 pasul 9: fără ea, „Vezi pe hartă” caută după adresă în Google Maps; cu ea, duce exact la punct** | Setări → Contact și program → Adresă | F3 | content-model R2 |
-| 23 | Răspunsurile la întrebările frecvente. **D-58: 3 au răspuns (copii, rezervarea salonului, meniu personalizat); 5 rămân (G9-1): parcare, vegetarian, tort, avans, ora de final** | FAQ | F3 | Q-23, G9-1 |
+| 23 | Răspunsurile la întrebările frecvente. **Toate au răspuns (D-58, D-59): 5 pe Acasă, 2 la Evenimente private** | FAQ | F3 | D-59 |
 | 24 | Descrierile saloanelor și a camerelor; confirmarea capacităților 25 / 40 și a amplasării (etaj / mansardă). **D-58: descrierile sunt scrise din davittoria.ro și hotelanna.ro; lipsesc fotografiile (#11, #12)** | Saloane, Tipuri de camere | F3 | D-58 |
 | 25 | Cursurile de pizza: vârstă, durată, preț, locuri, cum se confirmă înscrierea. **F3: rândurile apar pe Acasă și pe pagina cursului imediat ce completezi câmpurile** | Pagina Acasă → Cursuri de pizza | F3 | Q-11, OQ #6 |
 | 26 | Termenul de răspuns pe fiecare subiect (cazare, salon, curs, întrebare, sesizare) | Setări → Cereri și emailuri | F3 | Q-34, OQ #7 |

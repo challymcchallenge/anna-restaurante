@@ -44,20 +44,35 @@ describe('D-58 · saloane, camere, hotel, întrebări', () => {
     }
     const rooms = await all('room-types')
     for (const r of rooms) expect(String(r.description).length, String(r.name)).toBeLessThanOrEqual(160)
-    expect(rooms.find((r) => r.name === 'Apartamente VIP Riviera')?.description).toContain('+40 742 220 060')
+    // D-59 (G9-2): aceeași recepție ca Hotel ANNA, deci fără alt număr în descriere.
+    const vip = String(rooms.find((r) => r.name === 'Apartamente VIP Riviera')?.description)
+    expect(vip).toContain('Riviera Events')
+    expect(vip).not.toMatch(/742/)
   })
 
-  it('Întrebări: 8, fără dubluri; 3 cu răspuns și îndemn, celelalte „Provizoriu”', async () => {
+  it('Întrebări (D-59): 7, fără dubluri, toate cu răspuns; 5 pe Acasă', async () => {
     const faqs = await all('faqs')
-    expect(faqs).toHaveLength(8)
-    expect(new Set(faqs.map((f) => `${f.group}|${f.question}`)).size).toBe(8)
-    const answered = faqs.filter((f) => !f.placeholder)
-    expect(answered.map((f) => f.question)).toEqual([
-      'Pot veni cu copiii?',
-      'Cum rezerv un salon pentru un eveniment?',
-      'Puteți pregăti un meniu personalizat?',
-    ])
-    for (const f of answered) expect(lexicalText(f.answer)).not.toMatch(/de confirmat/)
+    expect(faqs).toHaveLength(7)
+    expect(new Set(faqs.map((f) => `${f.group}|${f.question}`)).size).toBe(7)
+    expect(faqs.filter((f) => f.placeholder)).toHaveLength(0)
+    expect(faqs.filter((f) => f.group === 'home')).toHaveLength(5)
+    for (const f of faqs) expect(lexicalText(f.answer), String(f.question)).not.toMatch(/de confirmat/)
+    const parking = faqs.find((f) => f.question === 'Aveți parcare?')
+    expect(lexicalText(parking?.answer)).toContain('peste 150 de locuri')
+  })
+
+  it('D-59: dotările saloanelor, Pizza din cuptorul pe lemne, titlul Bucătăriei', async () => {
+    for (const s of await all('salons'))
+      expect((s.amenities as { label: string }[]).map((a) => a.label), String(s.name)).toEqual([
+        'Catering la cerere',
+        'Meniu personalizat',
+        'Platouri pentru evenimente',
+      ])
+    const pizza = (await payload.find({ collection: 'dish-categories', where: { and: [{ tenant: { equals: tenantId } }, { name: { equals: 'Pizza' } }] }, depth: 0 })).docs[0]
+    expect(pizza.shortText).toBe('Din cuptorul pe lemne, cu făină din Italia')
+    const h = (await payload.find({ collection: 'home-page', where: { tenant: { equals: tenantId } }, limit: 1, depth: 0 })).docs[0] as unknown as Record<string, Record<string, string>>
+    expect(h.kitchen.title).toBe('Cuptor pe lemne, făină și ingrediente din Italia.')
+    expect(h.privateEvents.intro).toMatch(/catering la cerere și o gamă largă de platouri/)
   })
 
   it('Hotel: micul dejun, parcarea, copiii; prețul „de la 320”', async () => {

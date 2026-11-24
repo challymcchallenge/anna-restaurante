@@ -137,7 +137,7 @@ Pe baza locală, cu toate subiectele pornite ca pe producție (D-51), am trimis 
 | # | Întrebare | Ce propun |
 |---|---|---|
 | ~~G8-1~~ | ~~Subtitlul din hero~~ | **Rezolvat: D-57**, „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” |
-| G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune? (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele) | Îmi dai 2–3 fapte și rescriu titlul Bucătăriei și subtitlul |
+| ~~G8-2~~ | ~~Ce are doar bucătăria voastră~~ | **Rezolvat: D-59** (secțiunea 11) |
 | ~~G8-3~~ | ~~Descrieri și răspunsuri~~ | **Rezolvat: D-58** (secțiunea 10); 5 răspunsuri rămân la G9-1 |
 | ~~G8-4~~ | ~~Recenziile reale~~ | **Rezolvat: D-55**, 7 + 7 de pe Google, pe site |
 | G7-1 … G7-3 | Juristul, adresele vechi, termenul de păstrare a cererilor (din pasul 10) | Rămân deschise |
@@ -195,6 +195,21 @@ Am luat faptele de pe davittoria.ro și hotelanna.ro (24.11.2026; sursele sunt �
 **Adresele site-ului vechi** (pentru G7-2): le-am notat din harta site-ului, în același fișier de surse; redirecționările le hotărâm în F5.
 
 Teste: 71/71 (4 noi).
+
+## 11. După GATE 3: bucătăria, saloanele, întrebările (D-59)
+
+| Unde | Acum |
+|---|---|
+| Bucătăria · titlu | Cuptor pe lemne, făină și ingrediente din Italia. |
+| Bucătăria · text | Rețetele sunt ale casei: pizza din cuptorul pe lemne, paste și risotto, pește, vită și deserturi. Dimineața, Buona Mattina. Tot meniul e în meniul digital. |
+| Categoria Pizza | Din cuptorul pe lemne, cu făină din Italia |
+| Evenimente private · text | Două saloane, la etaj și la mansardă, cu catering la cerere și o gamă largă de platouri pentru orice eveniment. Ne spui data și câți invitați vin, iar noi te sunăm cu disponibilitatea. |
+| Cardurile saloanelor | Dotări: Catering la cerere · Meniu personalizat · Platouri pentru evenimente |
+| Întrebări pe Acasă (5) | copiii, rezervarea salonului, parcarea (peste 150 de locuri, vizavi), preparate vegetariene și vegane, animalele de companie |
+| Întrebări la Evenimente private (2) | meniul personalizat (catering și platouri), „Cum stabilim detaliile evenimentului?” (la telefon, +40 764 816 462) |
+| Apartamente VIP Riviera | fără numărul separat: aceeași recepție ca Hotel ANNA (G9-2) |
+
+G7-1 … G7-3 sunt aprobate de jurist. Paginile legale rămân „Provizoriu” până se completează ce e între paranteze drepte. Teste: 72/72.
 
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
