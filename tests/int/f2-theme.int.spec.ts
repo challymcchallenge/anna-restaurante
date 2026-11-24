@@ -66,6 +66,8 @@ describe('F2 · tema pe restaurant', () => {
     for (const r of report) expect(r.ratio, r.label).toBeGreaterThanOrEqual(4.5)
     // Textul secundar (70% text peste fundal) rămâne peste prag: #635953 pe hârtie.
     expect(contrastRatio('#635953', DEFAULT_THEME_COLORS.background)).toBeGreaterThanOrEqual(4.5)
+    // F3: folio pe hârtie (45% accent peste text, ≈ #745D3B), pentru etichetele câmpurilor.
+    expect(contrastRatio('#745D3B', DEFAULT_THEME_COLORS.background)).toBeGreaterThanOrEqual(4.5)
   })
 
   it('Variabilele CSS: valorile lipsă se completează din direcția B', () => {

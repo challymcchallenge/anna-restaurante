@@ -25,6 +25,12 @@ const eslintConfig = [
     },
   },
   {
+    // ADR-004: imaginile site-ului public sunt variantele AVIF/WebP generate la încărcare, servite cu
+    // <picture> și srcset, fără transformare la cerere (next/image ar cere optimizare pe Vercel).
+    files: ['src/components/site/**'],
+    rules: { '@next/next/no-img-element': 'off' },
+  },
+  {
     ignores: [
       '.next/',
       'src/payload-types.ts',

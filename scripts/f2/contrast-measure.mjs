@@ -6,7 +6,8 @@
  * (minim) și percentila 5. Așa se măsoară și textul așezat peste fotografie/video, nu doar culorile
  * declarate în CSS.
  *
- * Utilizare: node scripts/f2/contrast-measure.mjs <pagina.html> <eticheta> <ieșire.json> [light|dark]
+ * Utilizare: node scripts/f2/contrast-measure.mjs <pagina.html | http://…> <eticheta> <ieșire.json> [light|dark]
+ * (F3: acceptă și adresa site-ului pornit local, de exemplu http://localhost:3000/.)
  * Rulează pe 390 × 844 (telefon) și 1440 × 900 (desktop), cu animațiile încheiate.
  */
 import { createRequire } from 'module'
@@ -57,7 +58,7 @@ for (const [device, viewport] of [
 ]) {
   const ctx = await browser.newContext({ viewport, deviceScaleFactor: 1, reducedMotion: 'no-preference', colorScheme: scheme })
   const page = await ctx.newPage()
-  await page.goto('file://' + path.resolve(file))
+  await page.goto(/^https?:\/\//.test(file) ? file : 'file://' + path.resolve(file))
   await page.evaluate(() => document.fonts.ready)
   await page.waitForTimeout(1800)
 

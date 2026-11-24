@@ -1,0 +1,155 @@
+import Link from 'next/link'
+import React from 'react'
+
+import type { SiteData } from '@/lib/site/data'
+import { telHref } from '@/lib/site/format'
+import { asMedia, pictureSources } from '@/lib/site/media'
+import { navItems, section } from '@/lib/site/sections'
+import { UI } from '@/lib/site/strings'
+import { LOCALES } from '@/lib/locales'
+
+import { BookButton } from './Bits'
+import { Icon } from './Icons'
+import { HeaderController } from './HeaderController'
+
+/** Logo-ul principal, pe copertă (medalionul se vede bine pe fundal închis, GATE 2). */
+function Brand({ site, className }: { site: SiteData; className: string }) {
+  const logo = asMedia(site.settings?.logoDark) ?? asMedia(site.settings?.logo)
+  const name = site.tenant.name
+  if (!logo) {
+    return (
+      <Link className={`${className} brand--text`} href="/">
+        {name}
+      </Link>
+    )
+  }
+  const s = pictureSources(logo, 640)
+  return (
+    <Link className={className} href="/" aria-label={UI.homeLink(name)}>
+      <picture>
+        {s.avif && <source type="image/avif" srcSet={s.avif} sizes="72px" />}
+        {s.webp && <source type="image/webp" srcSet={s.webp} sizes="72px" />}
+        <img src={s.src} width={s.width || 72} height={s.height || 72} alt="" fetchPriority="high" />
+      </picture>
+    </Link>
+  )
+}
+
+/** Limba: deocamdată doar româna este activă (D-28, D-38); selectorul complet vine în F4. */
+export function Language({ site, className = 'lang' }: { site: SiteData; className?: string }) {
+  const code = (site.settings?.activeLocales?.[0] ?? 'ro') as string
+  const label = LOCALES.find((l) => l.code === code)?.label ?? code
+  return (
+    <span className={className}>
+      <span aria-hidden="true">{code.toUpperCase()}</span>
+      <span className="sr-only">{UI.languageCurrent(label)}</span>
+    </span>
+  )
+}
+
+export function SiteHeader({ site }: { site: SiteData }) {
+  const items = navItems(site.home)
+  const hasMoreLg = items.some((i) => i.tier > 1)
+  const hasMoreXl = items.some((i) => i.tier > 2)
+  const phone = site.settings?.phoneReservations ?? null
+  const tel = telHref(phone)
+  const bookLabel = section(site.home, 'hero')?.bookLabel || 'Rezervă o masă'
+
+  return (
+    <>
+      <header className="site-header" data-header="">
+        <div className="wrap header-in">
+          <div className="header-left">
+            <button
+              className="nav-toggle"
+              type="button"
+              data-nav-open=""
+              aria-controls="nav-panel"
+              aria-expanded="false"
+              aria-label={UI.openNav}
+            >
+              <Icon name="menu" />
+            </button>
+            {items.length > 0 && (
+              <nav className="nav-main" aria-label={UI.navLabel}>
+                <ul>
+                  {items.map((item) => (
+                    <li key={item.id} className={`tier-${item.tier}`}>
+                      <a href={item.href}>{item.label}</a>
+                    </li>
+                  ))}
+                </ul>
+                {hasMoreLg && (
+                  <button
+                    className={`nav-more${hasMoreXl ? '' : ' nav-more--lg-only'}`}
+                    type="button"
+                    data-nav-open=""
+                    aria-controls="nav-panel"
+                    aria-expanded="false"
+                  >
+                    {UI.moreNav}
+                    <Icon name="chevron-down" />
+                  </button>
+                )}
+              </nav>
+            )}
+          </div>
+          <Brand site={site} className="brand" />
+          <div className="header-right">
+            {phone && tel && (
+              <a className="header-phone" href={tel}>
+                <Icon name="phone" />
+                {phone}
+              </a>
+            )}
+            <Language site={site} />
+            <BookButton
+              label={bookLabel}
+              ialocId={site.settings?.ialocId}
+              tel={tel}
+              className="btn btn-primary header-cta"
+            />
+          </div>
+        </div>
+      </header>
+
+      <dialog id="nav-panel" className="nav-panel" aria-label={UI.navLabel}>
+        <div className="wrap nav-panel-in">
+          <div className="nav-panel-head">
+            <Brand site={site} className="brand brand--panel" />
+            <form method="dialog">
+              <button className="nav-close" type="submit" aria-label={UI.closeNav}>
+                <Icon name="x" />
+              </button>
+            </form>
+          </div>
+          <nav aria-label={UI.navLabel}>
+            <ul className="nav-panel-list">
+              {items.map((item) => (
+                <li key={item.id}>
+                  <a href={item.href} data-nav-close="">
+                    <span className="nav-panel-label">{item.label}</span>
+                    <Icon name="chevron-right" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="nav-panel-foot">
+            {phone && tel && (
+              <a className="nav-panel-phone" href={tel}>
+                <Icon name="phone" />
+                <span>
+                  <span className="nav-panel-phone-label">{UI.reservationsPhone}</span>
+                  {phone}
+                </span>
+              </a>
+            )}
+            <Language site={site} className="lang lang--panel" />
+          </div>
+        </div>
+      </dialog>
+      <HeaderController />
+    </>
+  )
+}

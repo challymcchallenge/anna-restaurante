@@ -1,55 +1,28 @@
-import { headers as getHeaders } from 'next/headers.js'
-import { getPayload } from 'payload'
+import { headers } from 'next/headers'
 import React from 'react'
 
-import config from '@/payload.config'
-import { getTenantByHost } from '@/lib/tenant'
-import './styles.css'
+import { Hero } from '@/components/site/Hero'
+import { getSite } from '@/lib/site/data'
+import { orderedSections } from '@/lib/site/sections'
 
 /**
- * Pagină de verificare F0: arată restaurantul găsit după adresă și serile lui.
- * Site-ul real (hero, secțiuni) se construiește în F3.
+ * Acasă (S-01): secțiunile pornite din panou, în ordinea din panou (content-model 4).
+ * Tagline-ul vine din Setări; secțiunile încă neconstruite în F3 nu apar (PLAN F3, pașii 4–9).
  */
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payload = await getPayload({ config: await config })
-  const tenant = await getTenantByHost(payload, headers.get('host'))
-
-  if (!tenant) {
-    return (
-      <div className="home">
-        <div className="content">
-          <h1>Niciun restaurant configurat pentru această adresă</h1>
-          <p>Adresa se adaugă din panou: Restaurante → Adrese pe care se servește site-ul.</p>
-        </div>
-      </div>
-    )
-  }
-
-  const { docs: events } = await payload.find({
-    collection: 'events',
-    depth: 0,
-    limit: 10,
-    sort: 'startsAt',
-    where: { and: [{ tenant: { equals: tenant.id } }, { active: { equals: true } }] },
-  })
+  const site = await getSite((await headers()).get('host'))
+  if (!site) return null
 
   return (
-    <div className="home">
-      <div className="content">
-        <h1>{tenant.name}</h1>
-        <p>Site în construcție (F0).</p>
-        <h2>Seri tematice</h2>
-        {events.length === 0 && <p>Nicio seară introdusă.</p>}
-        <ul>
-          {events.map((event) => (
-            <li key={event.id} data-tenant={tenant.slug}>
-              {event.name}
-              {event.placeholder && <span className="placeholder"> · Exemplu · de înlocuit</span>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <>
+      {orderedSections(site.home).map((s) => {
+        switch (s.key) {
+          case 'hero':
+            return <Hero key={s.key} site={site} id={s.id} />
+          default:
+            return null
+        }
+      })}
+    </>
   )
 }

@@ -32,6 +32,7 @@ import { Wines } from './collections/Wines'
 import { parseFromAddress } from './lib/email'
 import { DEFAULT_LOCALE, LOCALES } from './lib/locales'
 import { publicFileUrl, supabasePublicBase } from './lib/media/publicUrl'
+import { withSiteRevalidation } from './lib/site/revalidate'
 import type { Config } from './payload-types'
 
 const filename = fileURLToPath(import.meta.url)
@@ -77,26 +78,26 @@ export default buildConfig({
     defaultLocale: DEFAULT_LOCALE,
     fallback: true,
   },
+  // Tot ce apare pe site golește cache-ul site-ului public la salvare (F3, src/lib/site/revalidate.ts).
   collections: [
-    HomePage,
-    Events,
-    DishCategories,
-    Wines,
-    Reviews,
-    Salons,
-    RoomTypes,
-    Gallery,
-    GalleryCategories,
-    Faqs,
-    ComplaintReasons,
-    GroupLinks,
-    LegalPages,
-    Media,
+    ...[
+      HomePage,
+      Events,
+      DishCategories,
+      Wines,
+      Reviews,
+      Salons,
+      RoomTypes,
+      Gallery,
+      GalleryCategories,
+      Faqs,
+      ComplaintReasons,
+      GroupLinks,
+      LegalPages,
+      Media,
+    ].map(withSiteRevalidation),
     Submissions,
-    Settings,
-    Awards,
-    Redirects,
-    Tenants,
+    ...[Settings, Awards, Redirects, Tenants].map(withSiteRevalidation),
     Users,
   ],
   editor: lexicalEditor(),

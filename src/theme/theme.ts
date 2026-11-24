@@ -125,6 +125,8 @@ export function themeCssVars(settings: ThemeSettings | null | undefined): Record
     '--c-on-dark': c.textOnDark,
     '--c-on-dark-2': `color-mix(in srgb, ${c.textOnDark} 75%, ${c.surfaceDark})`,
     '--c-accent': c.accent,
+    // Folio pe hârtie (etichete, rame): 45% accent spre text; cu valorile implicite ≈ #745D3B, 5,39:1 (testat).
+    '--c-accent-ink': `color-mix(in srgb, ${c.accent} 45%, ${c.text})`,
     '--c-on-accent': c.surfaceDark,
     '--c-accent-2': c.accent2,
     '--c-on-accent-2': c.background,
