@@ -56,7 +56,7 @@ Windows 10/11, Chrome 157, 8 nuclee, 16 GB RAM. Clip real al restaurantului: `Ev
 
 ## Concluzie
 
-- **ADR-005 se confirmă** pentru laptop: un clip de 30 s se convertește în **10–16 s (H.264)**, respectiv **25–38 s (AV1)**, pe un procesor fără accelerare hardware. Un laptop real, care are de obicei codare H.264 hardware, ar trebui să fie mai rapid. [PRESUPUNERE] Neverificat pe laptopul tău.
+- **ADR-005 se confirmă** pentru laptop. În container (fără accelerare hardware), un clip de 30 s se convertește în 10–16 s (H.264), respectiv 25–38 s (AV1). **Pe laptopul lui Alin**, clipul real de 10,3 s s-a convertit în **2,2 s (H.264)** și **7,9 s (AV1)**, adică de 2–3 ori mai repede.
 - Pe server ajung **aproximativ 22,5 MB per clip** (H.264 + AV1 + poster). Asta depășește limita de 4,5 MB a Vercel, deci **`clientUploads` (ADR-003) este obligatoriu pentru video**.
 - Pe clipul de test, AV1 a ieșit doar cu 15% mai mic; **pe clipul real al lui Alin, cu 43% mai mic**. Recomand să păstrăm varianta AV1. În F1 reglez debitul pe codec, cu verificare vizuală. Dacă diferența rămâne mică, putem renunța la a doua variantă și scurtăm timpul la jumătate. Decizia o iei tu.
 - Safari nu codează AV1 prin WebCodecs. Pe Mac și iPhone, varianta eficientă va fi HEVC (cu hardware Apple), alegerea se face automat în pagină. Neprobat aici, rămâne pentru proba pe telefon.
