@@ -4,7 +4,7 @@ import { getPayload } from 'payload'
 import React from 'react'
 
 import { ContactForm } from '@/components/site/ContactForm'
-import { ContactDetails } from '@/components/site/ContactSection'
+import { ContactDetails, ContactMap } from '@/components/site/ContactSection'
 import { PageCover } from '@/components/site/Events'
 import config from '@/payload.config'
 import { formContext } from '@/lib/site/contact-context'
@@ -71,6 +71,7 @@ export default async function ComplaintPage() {
               {UI.form.faster}
             </h2>
             <ContactDetails site={site} />
+            <ContactMap site={site} />
           </aside>
         </div>
       </section>

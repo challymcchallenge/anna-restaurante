@@ -871,6 +871,10 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .hotel-grid { display: grid; gap: var(--s7); }
 .hotel-where { display: flex; align-items: flex-start; gap: var(--s2); margin-top: var(--s5); font-weight: 600; color: var(--c-on-dark); }
 .hotel-where .icon { flex: none; width: 18px; height: 18px; margin-top: 3px; color: var(--c-accent); }
+.hotel-reach { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin-top: var(--s3); padding-left: 26px; }
+.hotel-reach a { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; color: var(--c-on-dark); font-weight: 600; text-decoration: none; font-variant-numeric: tabular-nums; }
+.hotel-reach a:hover { color: var(--c-accent); text-decoration: underline; }
+.hotel-reach .icon { width: 16px; height: 16px; color: var(--c-accent); }
 .hotel-price { margin-top: var(--s3); color: var(--c-on-dark-2); }
 .hotel-price b { font: 400 24px/1 var(--font-display); color: var(--c-accent); }
 .hotel-photos { display: grid; gap: var(--s3); }
@@ -1060,3 +1064,21 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .cf-done-title .icon { width: 28px; height: 28px; color: var(--c-accent-2); }
 .cf-done-summary { font-weight: 600; }
 .cf-done .btn { margin-top: var(--s3); }
+
+/* Harta schiță (G6-2, D-51): desen pe hârtie; harta Google doar la clic */
+.map-sketch { margin: var(--s6) 0 0; }
+.map-paper, .map-frame { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--line-paper-strong); border-radius: var(--radius-box); overflow: hidden; }
+.map-paper { background: color-mix(in srgb, var(--c-bg), #ffffff 45%); }
+.map-drawing { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-blocks path { fill: color-mix(in srgb, var(--c-text) 6%, transparent); stroke: color-mix(in srgb, var(--c-text) 14%, transparent); stroke-width: 1; }
+.map-streets path { fill: none; stroke: color-mix(in srgb, var(--c-text) 22%, transparent); stroke-width: 7; stroke-linecap: round; }
+.map-main { fill: none; stroke: var(--c-accent); stroke-width: 12; stroke-linecap: round; opacity: 0.85; }
+.map-label { font: 600 12px var(--font-text); letter-spacing: 0.06em; fill: var(--c-text); }
+.map-pin path { fill: var(--c-accent-2); }
+.map-pin-halo { fill: color-mix(in srgb, var(--c-accent-2) 16%, transparent); }
+.map-pin-dot { fill: var(--c-bg); }
+.map-show { position: absolute; left: 50%; bottom: var(--s4); transform: translateX(-50%); }
+.map-show:hover { transform: translateX(-50%) translateY(-1px); }
+.map-frame { border: 0; }
+.map-note { margin-top: var(--s2); font-size: 13px; line-height: 1.45; color: var(--c-text-2); }
+.contact-home-side { min-width: 0; }

@@ -79,8 +79,8 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| G6-1 | Pe producție, în Setări → Cereri și emailuri e pornit doar subiectul Cazare. Pe `/contact` apare deci doar Cazare (plus „Rezerv o masă”), iar pagina de sesizări dă telefonul. Îmi dai destinatarii pentru Eveniment privat, Curs de pizza, Întrebare și Sesizare (#27), ca să le pornești? Cererile se salvează în panou și fără email; emailurile pleacă din F5 | F3 GATE | Alin |
-| G6-2 | Harta: am pus „Vezi pe hartă” (deschide Google Maps), fără hartă încorporată. O hartă încorporată ar încărca un serviciu terț la fiecare vizită (cookies, viteză). Propun una care se încarcă doar la clic. O vrei? | F3 GATE | Alin |
-| G6-3 | Fotografia bonului la sesizări (content-model 7, opțional): nu am făcut-o, pentru că încărcarea de fișiere de către vizitatori cere verificări de siguranță. Propun s-o fac în F5, ca atașament la emailul către manager, fără să rămână pe server. De acord? | F5 | Alin |
-| G6-4 | Pe confirmarea unei cereri de cazare, „Dacă este urgent” arată acum telefonul de rezervări al restaurantului. Vrei telefonul recepției Hotel ANNA? Dacă da, îmi dai numărul și adaug câmpul în Setări | F3 GATE | Alin |
+| ~~G6-1~~ | ~~Pe producție, în Setări → Cereri și emailuri e pornit doar subiectul Cazare. Pe `/contact` apare deci doar Cazare (plus „Rezerv o masă”), iar pagina de sesizări dă telefonul. Îmi dai destinatarii pentru Eveniment privat, Curs de pizza, Întrebare și Sesizare (#27), ca să le pornești? Cererile se salvează în panou și fără email; emailurile pleacă din F5~~ — **rezolvat: D-51** | — | — |
+| ~~G6-2~~ | ~~Harta: am pus „Vezi pe hartă” (deschide Google Maps), fără hartă încorporată. O hartă încorporată ar încărca un serviciu terț la fiecare vizită (cookies, viteză). Propun una care se încarcă doar la clic. O vrei?~~ — **rezolvat: D-51** | — | — |
+| ~~G6-3~~ | ~~Fotografia bonului la sesizări (content-model 7, opțional): nu am făcut-o, pentru că încărcarea de fișiere de către vizitatori cere verificări de siguranță. Propun s-o fac în F5, ca atașament la emailul către manager, fără să rămână pe server. De acord?~~ — **rezolvat: D-51** | — | — |
+| ~~G6-4~~ | ~~Pe confirmarea unei cereri de cazare, „Dacă este urgent” arată acum telefonul de rezervări al restaurantului. Vrei telefonul recepției Hotel ANNA? Dacă da, îmi dai numărul și adaug câmpul în Setări~~ — **rezolvat: D-51** | — | — |
 

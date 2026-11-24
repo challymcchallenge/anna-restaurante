@@ -27,7 +27,7 @@ export type ContactFormProps = {
   roomTypes: { id: number; name: string }[]
   reasons: { id: number; reason: string; explanation?: string | null }[]
   hotelName?: string | null
-  urgent: Partial<Record<Subject, { phone: string; tel: string }>>
+  urgent: Partial<Record<Subject, { phone: string; tel: string; email?: string }>>
   responseTimes: Partial<Record<Subject, string>>
   book?: { label: string; tel: string | null; ialoc: boolean }
 }
@@ -117,6 +117,12 @@ export function ContactForm(props: ContactFormProps) {
         {urgent && (
           <p>
             {UI.form.urgent} <a href={urgent.tel}>{urgent.phone}</a>
+            {urgent.email && (
+              <>
+                {' · '}
+                <a href={`mailto:${urgent.email}`}>{urgent.email}</a>
+              </>
+            )}
           </p>
         )}
         <Link className="btn btn-secondary" href="/">

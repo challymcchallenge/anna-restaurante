@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { ContactForm } from '@/components/site/ContactForm'
-import { ContactDetails } from '@/components/site/ContactSection'
+import { ContactDetails, ContactMap } from '@/components/site/ContactSection'
 import { PageCover } from '@/components/site/Events'
 import { Icon } from '@/components/site/Icons'
 import { formContext, roomsFromQuery } from '@/lib/site/contact-context'
@@ -84,6 +84,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               {UI.form.faster}
             </h2>
             <ContactDetails site={site} />
+            <ContactMap site={site} />
           </aside>
         </div>
       </section>

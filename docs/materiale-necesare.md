@@ -54,7 +54,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | 24 | Descrierile saloanelor și a camerelor; confirmarea capacităților 25 / 40 și a amplasării (etaj / mansardă) | Saloane, Tipuri de camere | F3 | A-08 |
 | 25 | Cursurile de pizza: vârstă, durată, preț, locuri, cum se confirmă înscrierea. **F3: rândurile apar pe Acasă și pe pagina cursului imediat ce completezi câmpurile** | Pagina Acasă → Cursuri de pizza | F3 | Q-11, OQ #6 |
 | 26 | Termenul de răspuns pe fiecare subiect (cazare, salon, curs, întrebare, sesizare) | Setări → Cereri și emailuri | F3 | Q-34, OQ #7 |
-| 27 | Destinatarii emailurilor pentru Eveniment privat, Curs de pizza, Întrebare, Sesizare (Cazare are deja rezervari@hotelanna.ro) și adresa ta de copie. **F3: cât timp subiectul e oprit, „Rezervă salonul” sună managerul și „Înscrie copilul” sună la rezervări; după ce pornești subiectul, butonul deschide formularul** | Setări → Cereri și emailuri | F3 | D-15, ADR-009 |
+| ~~27~~ | ~~Destinatarii emailurilor pe subiect și adresa de copie~~ — **primite: D-51** (toate subiectele pornite) | Setări → Cereri și emailuri | — | D-51 |
 | 28 | Textele juridice: termeni, confidențialitate, cookies | Pagini legale (3 pagini provizorii) | F5 | Q-25, OQ #9 |
 | 29 | ID-ul contului de statistici existent | Setări → Integrări → ID statistici | F5 | D-32 |
 | 30 | Logo-ul oficial al premiului Wine Spectator, cu nivelul și anul | Premii și distincții | la primire | D-20 |

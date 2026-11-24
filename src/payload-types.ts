@@ -392,6 +392,14 @@ export interface HomePage {
     hotelAddress: string;
     hotelUrl?: string | null;
     /**
+     * Apare în secțiune și la „Dacă este urgent” după o cerere de cazare (D-51). Nu se traduce: aceeași valoare în toate limbile.
+     */
+    hotelPhone?: string | null;
+    /**
+     * Apare în secțiune, lângă telefon. Nu se traduce: aceeași valoare în toate limbile.
+     */
+    hotelEmail?: string | null;
+    /**
      * Apare doar dacă este completat și confirmat.
      */
     priceFrom?: number | null;
@@ -1737,6 +1745,8 @@ export interface HomePageSelect<T extends boolean = true> {
         hotelName?: T;
         hotelAddress?: T;
         hotelUrl?: T;
+        hotelPhone?: T;
+        hotelEmail?: T;
         priceFrom?: T;
         priceNote?: T;
         photos?: T;

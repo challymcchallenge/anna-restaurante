@@ -10,6 +10,7 @@ import { UI } from '@/lib/site/strings'
 import { BookButton, ExampleTag, ExternalLink } from './Bits'
 import { FaqList } from './Events'
 import { Icon } from './Icons'
+import { MapSketch } from './MapSketch'
 
 /** Linkul spre hartă: după coordonate, dacă sunt în Setări, altfel după adresă (fără cheie de API). */
 export function mapHref(site: SiteData): string | null {
@@ -17,6 +18,21 @@ export function mapHref(site: SiteData): string | null {
   if (a?.lat != null && a?.lng != null) return `https://www.google.com/maps/search/?api=1&query=${a.lat},${a.lng}`
   const text = [a?.street, a?.city, a?.country].filter(Boolean).join(', ')
   return text ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(text)}` : null
+}
+
+/** Ce caută harta: coordonatele din Setări, dacă există, altfel adresa. */
+export function mapQuery(site: SiteData): string | null {
+  const a = site.settings?.address
+  if (a?.lat != null && a?.lng != null) return `${a.lat},${a.lng}`
+  const text = [a?.street, a?.city, a?.country].filter(Boolean).join(', ')
+  return text || null
+}
+
+/** Schița hărții, cu harta reală la clic (G6-2, D-51). */
+export function ContactMap({ site }: { site: SiteData }) {
+  const query = mapQuery(site)
+  if (!query) return null
+  return <MapSketch query={query} name={site.tenant.name} street={site.settings?.address?.street} />
 }
 
 /** Datele de contact din Setări (R2): telefoanele, adresa cu harta, programul. */
@@ -121,7 +137,10 @@ export function ContactSection({ site, id }: { site: SiteData; id: string }) {
               </p>
             )}
           </div>
-          <ContactDetails site={site} />
+          <div className="contact-home-side">
+            <ContactDetails site={site} />
+            <ContactMap site={site} />
+          </div>
         </div>
       </section>
       <FaqList faqs={faqs} group="home" />

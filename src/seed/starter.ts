@@ -66,6 +66,16 @@ type SeedFile = {
    * (jurnalul `swap:<colecție>:<câmp>`): ce a schimbat Administratorul din panou nu se atinge.
    * `field` poate fi un grup („wines.title”). `fromMedia` / `toMedia` sunt chei din `media`.
    */
+  /**
+   * F3 (D-51): destinatarii și copiile pe subiect (Setări → Cereri și emailuri), date de Alin.
+   * O singură dată pe versiune (jurnalul `requests:<versiune>`). Un subiect se completează doar dacă
+   * destinatarii lui actuali sunt goi sau sunt toți în lista nouă: ce a scris altfel Administratorul
+   * din panou nu se atinge.
+   */
+  requestsFill?: {
+    version: string
+    subjects: Record<string, { active?: boolean; recipients?: string[]; cc?: string[] }>
+  }
   swaps?: {
     collection: 'settings' | 'home-page'
     field: string
@@ -449,6 +459,39 @@ export async function seedStarterContent({
         created.swaps = (created.swaps ?? 0) + 1
       }
       log[key] = now
+    }
+
+    if (seed.requestsFill && !log[`requests:${seed.requestsFill.version}`]) {
+      const { docs: settingsDocs } = await payload.find({
+        collection: 'settings',
+        where: { tenant: { equals: tenant.id } },
+        limit: 1,
+        depth: 0,
+        req,
+      })
+      const current = settingsDocs[0] as unknown as Record<string, unknown> | undefined
+      if (current) {
+        const requests = { ...((current.requests as Record<string, Record<string, unknown>>) ?? {}) }
+        const changed: string[] = []
+        for (const [subject, next] of Object.entries(seed.requestsFill.subjects)) {
+          const cur = requests[subject] ?? {}
+          const existing = (cur.recipients as string[] | null | undefined) ?? []
+          if (!existing.every((r) => next.recipients?.includes(r))) continue
+          requests[subject] = { ...cur, ...next }
+          changed.push(subject)
+        }
+        if (changed.length) {
+          await payload.update({
+            collection: 'settings',
+            id: current.id as number,
+            data: { requests } as any,
+            req,
+            context: ctx,
+          })
+          created.requests = changed.length
+        }
+        log[`requests:${seed.requestsFill.version}`] = now
+      }
     }
 
     if (seed.settingsFill) {

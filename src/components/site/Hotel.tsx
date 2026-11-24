@@ -1,7 +1,7 @@
 import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
-import { monthYear, price } from '@/lib/site/format'
+import { monthYear, price, telHref } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
@@ -39,6 +39,17 @@ export function Hotel({ site, id }: { site: SiteData; id: string }) {
             <p className="hotel-where">
               <Icon name="map-pin" />
               {where}
+            </p>
+          )}
+          {(s?.hotelPhone || s?.hotelEmail) && (
+            <p className="hotel-reach">
+              {s?.hotelPhone && telHref(s.hotelPhone) && (
+                <a href={telHref(s.hotelPhone) as string}>
+                  <Icon name="phone" />
+                  {s.hotelPhone}
+                </a>
+              )}
+              {s?.hotelEmail && <a href={`mailto:${s.hotelEmail}`}>{s.hotelEmail}</a>}
             </p>
           )}
           {s?.priceFrom != null && (

@@ -1,7 +1,7 @@
 import type { CollectionConfig, Field, Tab } from 'payload'
 
 import { adminOnly, authenticated } from '../access/roles'
-import { media, richText, sectionFlags, select, text, textarea, url } from '../fields'
+import { media, richText, sectionFlags, select, text, textarea, url, validatePhone } from '../fields'
 
 /**
  * Pagina Acasă: secțiunile din content-model 4 (structura hibridă, D-11).
@@ -194,6 +194,26 @@ export const HomePage: CollectionConfig = {
             ],
           },
           url({ name: 'hotelUrl', label: 'Site-ul hotelului' }),
+          {
+            type: 'row',
+            fields: [
+              text({
+                name: 'hotelPhone',
+                label: 'Telefonul recepției',
+                max: 30,
+                nt: true,
+                validate: validatePhone as never,
+                description: 'Apare în secțiune și la „Dacă este urgent” după o cerere de cazare (D-51).',
+              }),
+              text({
+                name: 'hotelEmail',
+                label: 'Emailul recepției',
+                max: 80,
+                nt: true,
+                description: 'Apare în secțiune, lângă telefon.',
+              }),
+            ],
+          },
           {
             type: 'row',
             fields: [

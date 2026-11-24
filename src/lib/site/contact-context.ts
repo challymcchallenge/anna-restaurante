@@ -20,7 +20,12 @@ export function formContext(site: SiteData) {
   const urgent: ContactFormProps['urgent'] = {
     privateEvent: phone(s?.phoneEvents ?? s?.phoneReservations),
     pizzaCourse: phone(s?.phoneReservations),
-    accommodation: phone(s?.phoneReservations),
+    // D-51: la cazare, recepția Hotel ANNA (din Pagina Acasă → Hotel), altfel rezervările restaurantului.
+    accommodation: (() => {
+      const hotel = site.home?.hotel
+      const p = phone(hotel?.hotelPhone) ?? phone(s?.phoneReservations)
+      return p ? { ...p, email: hotel?.hotelEmail || undefined } : undefined
+    })(),
     question: phone(s?.phoneReservations),
     complaint: phone(s?.phoneReservations),
   }
