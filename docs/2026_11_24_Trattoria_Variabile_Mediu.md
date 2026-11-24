@@ -12,7 +12,7 @@ Proiect: `anna-restaurante` (ref `fmkqpdwqvpwspsxmmkxh`, eu-west-1). Bucket-ul `
 
 | Valoare | Unde o găsești |
 |---|---|
-| Șirul de conectare la baza de date | Panoul proiectului → butonul **Connect** (sus) → **Transaction pooler** (portul 6543). Înlocuiești `[YOUR-PASSWORD]` cu parola bazei de date. Dacă nu o mai ai: Project Settings → Database → Reset database password |
+| Șirul de conectare la baza de date | Panoul proiectului → butonul **Connect** (sus) → tab-ul **Direct** → **Shared pooler**, modul Transaction (portul 6543). **Nu** „Dedicated pooler” și nici „Direct connection”: ambele merg doar pe IPv6, iar Vercel nu are IPv6 (eroarea `ENETUNREACH` din 24.11.2026). Șirul corect are utilizatorul `postgres.fmkqpdwqvpwspsxmmkxh` și hostul `…pooler.supabase.com`. Nu cumpăra add-on-ul IPv4 (4 $/lună): nu e necesar. Înlocuiești `[YOUR-PASSWORD]` cu parola bazei de date. Dacă nu o mai ai: Project Settings → Database → Reset database password |
 | Cheile S3 | Storage → Settings (S3 Connection) → **New access key**. Primești un *Access key ID* și un *Secret access key*; al doilea se vede o singură dată |
 
 Panoul proiectului: https://supabase.com/dashboard/project/fmkqpdwqvpwspsxmmkxh
@@ -34,7 +34,7 @@ Mediu: **Production** și **Preview**. Variabilele secrete le marchezi **Sensiti
 | `NEXT_PUBLIC_SITE_URL` | `https://anna-restaurante-alinlabau-9308s-projects.vercel.app` — **pus de Claude Code** | nu |
 | `ALLOW_INDEXING` | `false` — **pus de Claude Code** | nu |
 
-**Rămân pentru Alin cele 4 secrete:** `DATABASE_URI`, `PAYLOAD_SECRET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` (Production + Preview, tip Sensitive).
+**Cele 4 secrete au fost puse de Alin pe 24.11.2026 (verificat: 9 variabile prezente).** Erau: `DATABASE_URI`, `PAYLOAD_SECRET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` (Production + Preview, tip Sensitive).
 
 Nu se pun acum:
 - `RESEND_API_KEY` și `EMAIL_FROM`: la final, odată cu domeniul de trimitere (decizia ta din 24.11.2026).
