@@ -8,8 +8,9 @@ import type { CollectionSlug, Payload, PayloadRequest } from 'payload'
  *
  * Rulează după toate migrațiile (scripts/seed-starter.ts, apelat din scripts/vercel-build.sh), nu ca
  * migrație: folosește API-ul Payload, care presupune schema completă.
- * Se aplică o singură dată pe restaurant (câmpul „Conținut de pornire aplicat la”). Dacă o rulare se
- * oprește la jumătate, următoarea completează doar colecțiile goale, fără dubluri.
+ * Fiecare colecție se aplică o singură dată pe restaurant (jurnalul `starterContentLog`): o colecție
+ * nouă adăugată mai târziu în fișier se aplică la următorul build, iar una golită intenționat din panou
+ * nu se mai completează. Dacă restaurantul are deja elemente într-o colecție, aceasta doar se notează.
  * Restaurantele fără fișier nu primesc nimic.
  */
 
@@ -100,37 +101,43 @@ export async function seedStarterContent({
       payload.logger.info(`[seed] ${file}: restaurantul „${seed.tenantSlug}” nu există; sar peste.`)
       continue
     }
-    if (tenant.starterContentAt) {
-      payload.logger.info(`[seed] ${seed.tenantSlug}: aplicat deja la ${tenant.starterContentAt}; sar peste.`)
-      continue
-    }
+    const log: Record<string, string> = { ...((tenant.starterContentLog as Record<string, string>) ?? {}) }
     const created: Record<string, number> = {}
     const base = { tenant: tenant.id }
     const ctx = { seed: true }
+    const now = new Date().toISOString()
+    const alreadyLogged = Object.keys(log).length
 
-    const ensureSingle = async (collection: 'settings' | 'home-page', data?: Record<string, unknown>) => {
-      if (!data) return
+    /**
+     * O colecție se aplică o singură dată: dacă apare în jurnal, nu se mai atinge (poate fi golită
+     * intenționat din panou). Dacă restaurantul are deja elemente în ea, doar se notează în jurnal.
+     */
+    const applyOnce = async (collection: CollectionSlug, items: Record<string, unknown>[]) => {
+      if (log[collection]) return
       const { totalDocs } = await payload.count({ collection, where: { tenant: { equals: tenant.id } }, req })
-      if (totalDocs > 0) return
-      await payload.create({ collection, data: { ...(resolveValues(data) as object), ...base } as any, req, context: ctx })
-      created[collection] = 1
-    }
-    await ensureSingle('settings', seed.settings)
-    await ensureSingle('home-page', seed.homePage)
-
-    for (const [collection, items] of Object.entries(seed.collections ?? {}) as [CollectionSlug, Record<string, unknown>[]][]) {
-      const { totalDocs } = await payload.count({ collection, where: { tenant: { equals: tenant.id } }, req })
-      if (totalDocs > 0) continue
-      for (const item of items) {
-        await payload.create({ collection, data: { ...(resolveValues(item) as object), ...base } as any, req, context: ctx })
+      if (totalDocs === 0) {
+        for (const item of items) {
+          await payload.create({ collection, data: { ...(resolveValues(item) as object), ...base } as any, req, context: ctx })
+        }
+        created[collection] = items.length
       }
-      created[collection] = items.length
+      log[collection] = now
     }
 
+    if (seed.settings) await applyOnce('settings', [seed.settings])
+    if (seed.homePage) await applyOnce('home-page', [seed.homePage])
+    for (const [collection, items] of Object.entries(seed.collections ?? {}) as [CollectionSlug, Record<string, unknown>[]][]) {
+      await applyOnce(collection, items)
+    }
+
+    if (Object.keys(log).length === alreadyLogged) {
+      payload.logger.info(`[seed] ${seed.tenantSlug}: nimic nou de aplicat.`)
+      continue
+    }
     await payload.update({
       collection: 'tenants',
       id: tenant.id,
-      data: { starterContentAt: new Date().toISOString() },
+      data: { starterContentAt: Object.keys(created).length ? now : (tenant.starterContentAt ?? now), starterContentLog: log },
       req,
     })
     payload.logger.info(`[seed] ${seed.tenantSlug}: ${JSON.stringify(created)}`)

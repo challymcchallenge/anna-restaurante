@@ -80,13 +80,21 @@ export const Tenants: CollectionConfig = {
       defaultValue: true,
     },
     {
+      // Ce colecții din seed/<identificator>.json s-au aplicat deja: { colecție: dată }.
+      // O colecție aplicată nu se mai completează, chiar dacă între timp a fost golită din panou.
+      name: 'starterContentLog',
+      label: 'Jurnal conținut de pornire',
+      type: 'json',
+      admin: { readOnly: true, hidden: true },
+    },
+    {
       name: 'starterContentAt',
-      label: 'Conținut de pornire aplicat la',
+      label: 'Conținut de pornire aplicat ultima dată la',
       type: 'date',
       admin: {
         readOnly: true,
         position: 'sidebar',
-        description: 'Completat automat, o singură dată, din seed/<identificator>.json. Gol = nu s-a aplicat.',
+        description: 'Completat automat din seed/<identificator>.json. Fiecare colecție se aplică o singură dată. Gol = nu s-a aplicat.',
         date: { pickerAppearance: 'dayAndTime' },
       },
     },

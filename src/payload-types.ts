@@ -466,8 +466,17 @@ export interface Tenant {
    */
   allowIndexing?: boolean | null;
   active?: boolean | null;
+  starterContentLog?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
-   * Completat automat, o singură dată, din seed/<identificator>.json. Gol = nu s-a aplicat.
+   * Completat automat din seed/<identificator>.json. Fiecare colecție se aplică o singură dată. Gol = nu s-a aplicat.
    */
   starterContentAt?: string | null;
   updatedAt: string;
@@ -963,6 +972,10 @@ export interface ComplaintReason {
   tenant?: (number | null) | Tenant;
   reason: string;
   /**
+   * Apare sub motiv, în formularul de sesizare.
+   */
+  explanation?: string | null;
+  /**
    * Oprit = nu apare pe site, dar rămâne în panou.
    */
   active?: boolean | null;
@@ -1044,7 +1057,7 @@ export interface LegalPage {
   createdAt: string;
 }
 /**
- * Create de formularele site-ului. Fiecare cerere rămâne aici chiar dacă emailul nu a plecat.
+ * Create de formularele site-ului. Fiecare cerere rămâne aici chiar dacă emailul nu a plecat. Din panou se schimbă doar „Stare”.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "submissions".
@@ -1907,6 +1920,7 @@ export interface ComplaintReasonsSelect<T extends boolean = true> {
   _order?: T;
   tenant?: T;
   reason?: T;
+  explanation?: T;
   active?: T;
   placeholder?: T;
   updatedAt?: T;
@@ -2279,6 +2293,7 @@ export interface TenantsSelect<T extends boolean = true> {
       };
   allowIndexing?: T;
   active?: T;
+  starterContentLog?: T;
   starterContentAt?: T;
   updatedAt?: T;
   createdAt?: T;

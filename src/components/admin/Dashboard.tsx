@@ -92,6 +92,14 @@ export async function Dashboard({ payload, user }: Props) {
     overrideAccess: false,
   })
 
+  // Cereri noi: Administratorul le vede pe toate, Editorul doar cursurile de pizza și întrebările (D-37).
+  const newRequests = await payload.count({
+    collection: 'submissions',
+    where: byTenant({ status: { equals: 'new' } }),
+    user,
+    overrideAccess: false,
+  })
+
   const missing: string[] = []
   if (admin && !tenantId) {
     missing.push('Alege un restaurant din comutatorul „Restaurant” din meniu, ca să vezi ce lipsește din Setările lui.')
@@ -142,6 +150,18 @@ export async function Dashboard({ payload, user }: Props) {
             </li>
           )}
         </ul>
+      </section>
+
+      <section className={`anna-dashboard__card${newRequests.totalDocs > 0 ? ' anna-dashboard__card--warn' : ''}`}>
+        <h3>
+          Cereri noi: <strong data-testid="new-requests">{newRequests.totalDocs}</strong>
+        </h3>
+        <p>
+          {admin
+            ? 'Toate subiectele.'
+            : 'Înscrieri la cursurile de pizza pentru copii și întrebări.'}{' '}
+          <Link href="/admin/collections/submissions?where[status][equals]=new">Vezi cererile noi</Link>
+        </p>
       </section>
 
       <section className="anna-dashboard__card">

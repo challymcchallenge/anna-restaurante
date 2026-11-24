@@ -1,6 +1,6 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig, FieldAccess } from 'payload'
 
-import { adminAreaAccess, adminOnly, hiddenForEditors } from '../access/roles'
+import { adminAreaAccess, adminOnly, hiddenForEditors, isAdmin } from '../access/roles'
 import { contentFlags, media, select, text, url } from '../fields'
 
 /**
@@ -132,9 +132,25 @@ export const REQUEST_SUBJECTS = [
 ] as const
 
 /**
+ * Subiectele pe care le vede și Editorul (D-37, GATE 1): Social Media Managerul se ocupă de
+ * cursurile de pizza pentru copii (înscrieri) și de mesaje (Întrebare). Celelalte (cazare,
+ * evenimente private, sesizări) rămân la Administrator și la destinatarii de email.
+ */
+export const EDITOR_REQUEST_SUBJECTS = ['pizzaCourse', 'question'] as const
+
+const submissionsAccess: Access = ({ req }) => {
+  if (!req.user) return false
+  if (isAdmin(req.user as { role?: 'administrator' | 'editor' })) return true
+  return { subject: { in: [...EDITOR_REQUEST_SUBJECTS] } }
+}
+
+/** Datele trimise de vizitator nu se modifică din panou; se schimbă doar „Stare”. */
+const submittedData: { update: FieldAccess } = { update: () => false }
+
+/**
  * Cereri primite (content-model 7, ADR-009). Le creează formularele site-ului (F3), nu personalul.
  * Fiecare cerere se salvează întâi aici, apoi pleacă pe email. Ecranul de lucru cu stări vine în R2 (F-52).
- * [PRESUPUNERE] Doar Administratorul le vede: conțin date personale; destinatarii primesc emailul.
+ * Administratorul vede toate cererile; Editorul doar cursurile de pizza și întrebările (D-37).
  */
 export const Submissions: CollectionConfig = {
   slug: 'submissions',
@@ -143,22 +159,22 @@ export const Submissions: CollectionConfig = {
     group: 'Cereri',
     useAsTitle: 'name',
     defaultColumns: ['createdAt', 'subject', 'name', 'phone', 'emailSent', 'status'],
-    hidden: hiddenForEditors,
-    description: 'Create de formularele site-ului. Fiecare cerere rămâne aici chiar dacă emailul nu a plecat.',
+    description:
+      'Create de formularele site-ului. Fiecare cerere rămâne aici chiar dacă emailul nu a plecat. Din panou se schimbă doar „Stare”.',
   },
   defaultSort: '-createdAt',
   access: {
-    read: adminOnly,
+    read: submissionsAccess,
     // Doar serverul creează cereri (formularele din F3, prin Local API).
     create: () => false,
-    update: adminOnly,
+    update: submissionsAccess,
     delete: adminOnly,
   },
   fields: [
     {
       type: 'row',
       fields: [
-        select({ name: 'subject', label: 'Subiect', required: true, options: [...REQUEST_SUBJECTS] }),
+        { ...select({ name: 'subject', label: 'Subiect', required: true, options: [...REQUEST_SUBJECTS] }), access: submittedData },
         select({
           name: 'status',
           label: 'Stare',
@@ -175,16 +191,17 @@ export const Submissions: CollectionConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'name', label: 'Nume', type: 'text', maxLength: 80 },
-        { name: 'phone', label: 'Telefon', type: 'text', required: true, maxLength: 30 },
-        { name: 'email', label: 'Email', type: 'email', required: true },
+        { name: 'name', label: 'Nume', type: 'text', maxLength: 80, access: submittedData },
+        { name: 'phone', label: 'Telefon', type: 'text', required: true, maxLength: 30, access: submittedData },
+        { name: 'email', label: 'Email', type: 'email', required: true, access: submittedData },
       ],
     },
-    { name: 'message', label: 'Mesaj', type: 'textarea', maxLength: 2000 },
+    { name: 'message', label: 'Mesaj', type: 'textarea', maxLength: 2000, access: submittedData },
     {
       name: 'details',
       label: 'Detalii pe subiect',
       type: 'group',
+      access: submittedData,
       fields: [
         // Eveniment privat
         { name: 'eventType', label: 'Tip de eveniment', type: 'text', maxLength: 60, admin: { condition: (d) => d?.subject === 'privateEvent' } },
@@ -210,8 +227,8 @@ export const Submissions: CollectionConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'consent', label: 'Acord pentru prelucrarea datelor', type: 'checkbox', required: true },
-        { name: 'consentAt', label: 'Momentul acordului', type: 'date', admin: { date: { pickerAppearance: 'dayAndTime' } } },
+        { name: 'consent', label: 'Acord pentru prelucrarea datelor', type: 'checkbox', required: true, access: submittedData },
+        { name: 'consentAt', label: 'Momentul acordului', type: 'date', access: submittedData, admin: { date: { pickerAppearance: 'dayAndTime' } } },
       ],
     },
     {

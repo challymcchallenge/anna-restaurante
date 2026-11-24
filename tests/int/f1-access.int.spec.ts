@@ -74,12 +74,58 @@ describe('F1 · roluri, restaurante, media', () => {
     await payload.delete({ collection: 'users', where: { email: { like: `.${tag}@example.test` } } })
   })
 
-  it.each(['awards', 'settings', 'redirects', 'submissions'] as const)(
+  it.each(['awards', 'settings', 'redirects'] as const)(
     'Editorul nu poate citi „%s”',
     async (collection) => {
       await expect(payload.find({ collection, user: editor, overrideAccess: false })).rejects.toThrow()
     },
   )
+
+  it('Cereri (D-37): Editorul vede doar cursurile de pizza și întrebările; schimbă doar „Stare”', async () => {
+    const make = (subject: string) =>
+      payload.create({
+        collection: 'submissions',
+        data: {
+          subject,
+          name: `Test ${tag}`,
+          phone: '+40 700 000 000',
+          email: `cerere.${tag}@example.test`,
+          consent: true,
+          tenant: tenantA,
+        } as any,
+        overrideAccess: true,
+      })
+    const ids: Record<string, number | string> = {}
+    for (const subject of ['pizzaCourse', 'question', 'accommodation', 'complaint']) {
+      const doc = await make(subject)
+      ids[subject] = doc.id
+      created.push({ collection: 'submissions', id: doc.id })
+    }
+    const seen = await payload.find({
+      collection: 'submissions',
+      where: { email: { equals: `cerere.${tag}@example.test` } },
+      user: editor,
+      overrideAccess: false,
+    })
+    expect(seen.docs.map((d) => d.subject).sort()).toEqual(['pizzaCourse', 'question'])
+
+    const updated = await payload.update({
+      collection: 'submissions',
+      id: ids.pizzaCourse,
+      data: { status: 'in-progress', name: 'Schimbat' } as any,
+      user: editor,
+      overrideAccess: false,
+    })
+    expect(updated.status).toBe('in-progress')
+    expect(updated.name).toBe(`Test ${tag}`)
+
+    await expect(
+      payload.update({ collection: 'submissions', id: ids.accommodation, data: { status: 'resolved' } as any, user: editor, overrideAccess: false }),
+    ).rejects.toThrow()
+    await expect(
+      payload.delete({ collection: 'submissions', id: ids.question, user: editor, overrideAccess: false }),
+    ).rejects.toThrow()
+  })
 
   it('Editorul vede doar contul propriu și restaurantul propriu', async () => {
     const users = await payload.find({ collection: 'users', user: editor, overrideAccess: false })

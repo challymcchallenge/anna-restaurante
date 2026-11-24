@@ -120,14 +120,25 @@ export const Faqs: CollectionConfig = {
   ],
 }
 
-/** Motive de sesizare (content-model 5.9). Lista de pornire: cele 9 de pe site-ul actual (D-32). */
+/** Motive de sesizare (content-model 5.9). Lista de pornire: cele 9 de pe site-ul actual (D-32, preluate pe 24.11.2026). */
 export const ComplaintReasons: CollectionConfig = {
   slug: 'complaint-reasons',
   labels: { singular: 'Motiv de sesizare', plural: 'Motive de sesizare' },
   orderable: true,
   admin: { group: 'Conținut', useAsTitle: 'reason', defaultColumns: ['reason', 'active'] },
   access: contentAccess,
-  fields: [text({ name: 'reason', label: 'Motiv', max: 80, required: true, localized: true }), ...contentFlags()],
+  fields: [
+    text({ name: 'reason', label: 'Motiv', max: 80, required: true, localized: true }),
+    // Adăugat la GATE 1: motivele de pe site-ul actual au și o explicație scurtă (D-39).
+    text({
+      name: 'explanation',
+      label: 'Explicație',
+      max: 120,
+      localized: true,
+      description: 'Apare sub motiv, în formularul de sesizare.',
+    }),
+    ...contentFlags(),
+  ],
 }
 
 /** Linkuri grup, în footer (content-model 5.11). */
