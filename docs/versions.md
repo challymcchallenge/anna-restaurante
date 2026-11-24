@@ -22,6 +22,20 @@ Ultima verificare: **24.11.2026** (F0; completat în F1). Sursa versiunilor: reg
 | `heic-to` (F1) | 1.6.7 | 1.6.7, publicată 27.10.2026 | Decodare HEIC în browser, doar în panou. LGPL-3.0, încărcată separat (3,2 MB), doar la un fișier HEIC |
 | `mediabunny` (F1) | 1.66.3 | 1.66.4, publicată 24.11.2026, 10:36 UTC | Conversie video prin WebCodecs, doar în panou. MPL-2.0, încărcată separat (765 KB). Rămânem pe 1.66.3, probată în F0; 1.66.4 are câteva ore |
 
+## Skill-uri de design (F2, instalate pe 24.11.2026, la cererea lui Alin)
+
+Instalate cu metoda recomandată de fiecare autor, în proiect (`.claude/skills/`, salvate în repo) și global (`~/.claude/skills/` din containerul cloud; **se pierde la închiderea sesiunii**). Documentația fiecăruia a fost citită înainte de folosire.
+
+| Skill | Sursă | Versiune / commit | Comanda folosită | Ce instalează |
+|---|---|---|---|---|
+| Impeccable | github.com/pbakaus/impeccable (Apache-2.0) | npm `impeccable` 4.10.0 (publicat 18.11.2026); motor binar 0.1.27, verificat SHA-256 | `npx impeccable@4.10.0 install --providers=claude --scope=project -y` și `--scope=global` | skill `impeccable`, 5 agenți `impeccable-*` în `.claude/agents/`, hook de verificare design în `.claude/settings.json` (mutat din `settings.local.json`) |
+| Taste (tasteskill 2.5.1) | github.com/Leonxlnx/taste-skill | commit `6c0b5c7` (22.11.2026), notat în `skills-lock.json` | `npx skills@1.9.0 add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend -a claude-code -y` și `-g` | skill `design-taste-frontend` (40 MB, 1.631 de fișiere, inclusiv fotografii și scripturi de verificare) |
+| UI UX Pro Max | github.com/nextlevelbuilder/ui-ux-pro-max-skill | CLI npm `ui-ux-pro-max-cli` 2.15.0 (publicat 13.08.2026; fișierele lui diferă de commit-ul `a4fc248` din repo, publicat azi) | `npx ui-ux-pro-max-cli@2.15.0 init --ai claude` și `--global` | skill-urile `ui-ux-pro-max`, `design`, `design-system`, `brand`, `banner-design`, `slides`, `ui-styling` |
+
+Conflicte cu regulile proiectului (câștigă `CLAUDE.md` și `docs/DECISIONS.md`): Taste cere fără numere de telefon reale și fără adresă completă (regula 9) și fără hero întunecat la localuri; proiectul are telefoanele D-17 și adresa decisă. Impeccable cere un interviu pentru `PRODUCT.md`: făcut cu Alin pe 24.11.2026 (3 întrebări).
+
+Pe calculatorul tău, pentru instalare globală: aceleași comenzi cu `--scope=global` / `-g` / `--global`, rulate în terminal.
+
 ## Servicii: prețuri și limite
 
 | # | Fapt | Valoare | Sursă oficială | Stare |
