@@ -31,7 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function LegalPage({ params }: Props) {
-  const r = await resolve((await params).slug)
+  const { slug } = await params
+  // O singură adresă pe pagină: /TERMENI → /termeni (308).
+  const decoded = decodeURIComponent(slug)
+  if (decoded !== decoded.toLowerCase()) permanentRedirect(`/${encodeURIComponent(decoded.toLowerCase())}`)
+  const r = await resolve(slug)
   if (!r) notFound()
   if (!r.page) {
     if (r.redirect) (r.redirect.permanent ? permanentRedirect : redirect)(r.redirect.to)
