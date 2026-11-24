@@ -36,6 +36,27 @@ Conflicte cu regulile proiectului (câștigă `CLAUDE.md` și `docs/DECISIONS.md
 
 Pe calculatorul tău, pentru instalare globală: aceleași comenzi cu `--scope=global` / `-g` / `--global`, rulate în terminal.
 
+## Fonturi (F2, 24.11.2026)
+
+Setul aprobat (D-42), servit din `public/fonts/`; sursa: pachetele npm `@fontsource/*` 5.3.0, licență OFL 1.1 (textul licenței lângă fișiere). Diacriticele (U+0218–021B, ă â î) au fost verificate cu fontTools în fiecare fișier.
+
+| Font | Pachet | Greutăți | Rol |
+|---|---|---|---|
+| Belleza | `@fontsource/belleza` 5.3.0 | 400 | titluri (Trattoria) |
+| Tenor Sans | `@fontsource/tenor-sans` 5.3.0 | 400 | titluri |
+| Hanken Grotesk | `@fontsource/hanken-grotesk` 5.3.0 | 400, 500, 600 | text (Trattoria) |
+| Host Grotesk | `@fontsource/host-grotesk` 5.3.0 | 400, 500, 600 | text |
+| Alex Brush | `@fontsource/alex-brush` 5.3.0 | 400 | doar litera „V” din pictograma de filă (D-43), convertită în contur |
+
+Fonturile de pe vineyard.co.za (citit pe 24.11.2026; nu se cumpără, D-42):
+
+| # | Fapt | Valoare | Sursă oficială | Stare |
+|---|---|---|---|---|
+| F-1 | Optima Nova Regular (Linotype), licență web | 57,99 USD / 10.000 de afișări pe lună; 104,09 / 25.000; 144,98 / 50.000. Licența Desktop pentru 1 utilizator: 57,99 USD | https://www.myfonts.com/products/pro-regular-optima-nova-lt-1078902 | verificat |
+| F-2 | Durata licenței web MyFonts | „Majoritatea fonturilor web au licență anuală” (FAQ MyFonts); pentru Linotype nu e precizat | https://www.myfonts.com/pages/faq | **neverificat** pentru Optima Nova |
+| F-3 | PP Mori (Pangram Pangram) | „Licenses start at $40”; licența se cumpără pe fiecare greutate și utilizare; prețul pe afișări îl calculează site-ul în browser | https://pangrampangram.com/products/mori | parțial; prețul exact **neverificat** |
+| F-4 | Durata licenței Pangram pentru firme | 1 an, apoi reînnoire | https://pangrampangram.com/pages/faq | verificat |
+
 ## Servicii: prețuri și limite
 
 | # | Fapt | Valoare | Sursă oficială | Stare |

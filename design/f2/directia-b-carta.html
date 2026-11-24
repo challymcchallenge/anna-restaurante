@@ -11,7 +11,8 @@
 <style>
 /* Direcția B · „Carta”: meniul și lista de vinuri de seară.
    Coperta e închisă (vin aproape negru), auriul de folio vine din inelul logo-ului, paginile sunt hârtie crem.
-   Semnătura: chenarul dublu de folio al copertei și rândurile de meniu cu linie de puncte. */
+   Semnătura: chenarul dublu de folio al copertei și rândurile de meniu cu linie de puncte.
+   Butoane (GO B, D-41): principal = folio auriu cu luciu, pe copertă; secundar = verde smarald, pe hârtie. */
 :root {
   --c-bg: #F5EDE0;          /* hârtie */
   --c-text: #241A17;        /* cerneală */
@@ -22,8 +23,9 @@
   --c-cream-2: #BDAE9C;     /* text secundar pe copertă */
   --c-foil: #D6AE66;        /* folio auriu, pe copertă */
   --c-foil-deep: #7A5628;   /* folio pe hârtie */
-  --c-wine: #7B2333;        /* bordo */
-  --c-accent: #7B2333;
+  --c-green: #14613F;       /* verde smarald, din familia verdelui din steagul logo-ului (D-41) */
+  --c-green-deep: #0F4F33;  /* verde la apăsare */
+  --c-accent: #14613F;
   --c-selection: #D6AE66; --c-selection-text: #1C1416;
   --c-focus: #D6AE66; --c-focus-halo: rgba(28, 20, 22, 0.85);
   --c-shadow: rgba(28, 20, 22, 0.6);
@@ -82,7 +84,7 @@
 .stay-mobile { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); width: 100%; min-height: 72px; padding: var(--s4) var(--s5); border: 0; border-radius: 4px; cursor: pointer; text-align: left; background: var(--c-bg); color: var(--c-text); }
 .stay-mobile-title { display: block; font: 400 21px/1.2 var(--font-display); }
 .stay-mobile-note { display: block; margin-top: 2px; font: 400 14px/1.35 var(--font-text); color: var(--c-text-2); }
-.stay-mobile .icon { width: 24px; height: 24px; color: var(--c-wine); }
+.stay-mobile .icon { width: 24px; height: 24px; color: var(--c-green); }
 .stay-row { display: none; }
 
 @media (min-width: 1024px) {
@@ -107,11 +109,11 @@
   .stay-title { font: 400 26px/1.1 var(--font-display); }
   .stay-note { margin-top: 4px; font: 400 13px/1.4 var(--font-text); color: var(--c-text-2); }
   .field { border: 0; border-bottom: 1px solid rgba(36, 26, 23, 0.28); background: none; text-align: left; cursor: pointer; font: inherit; padding: var(--s2) 0 var(--s3); color: inherit; transition: border-color 160ms var(--ease-out); }
-  .field:hover { border-bottom-color: var(--c-wine); }
+  .field:hover { border-bottom-color: var(--c-green); }
   .field-label { display: flex; align-items: center; gap: var(--s2); font: 600 12px/1 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-foil-deep); }
   .field-label .icon { width: 16px; height: 16px; }
   .field-value { display: block; margin-top: var(--s2); font: 400 18px/1.2 var(--font-text); }
-  .stay-row .btn { background: var(--c-wine); color: var(--c-cream); min-height: 56px; }
+  .stay-row .btn { min-height: 56px; }
 }
 
 /* Secțiunea următoare: Bucătăria ca o pagină de meniu. */
@@ -122,14 +124,14 @@
 .menu-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(36, 26, 23, 0.22); }
 .menu-list li { border-bottom: 1px solid rgba(36, 26, 23, 0.22); }
 .menu-list a { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s3); padding: var(--s4) 0; text-decoration: none; transition: color 160ms var(--ease-out); }
-.menu-list a:hover { color: var(--c-wine); }
+.menu-list a:hover { color: var(--c-green); }
 .menu-name { font: 400 24px/1.15 var(--font-display); }
 .menu-dots { border-bottom: 1px dotted rgba(36, 26, 23, 0.45); transform: translateY(-5px); }
 .menu-note { font-size: 15px; color: var(--c-text-2); text-align: right; }
 .kitchen-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; }
 .kitchen-photo img { width: 100%; height: 100%; object-fit: cover; }
 .kitchen-photo .example-tag { left: var(--s3); bottom: var(--s3); }
-.kitchen-more { margin-top: var(--s5); background: var(--c-wine); color: var(--c-cream); }
+.kitchen-more { margin-top: var(--s5); }
 @media (min-width: 1024px) {
   .kitchen { padding: var(--s9) 0; }
   .kitchen-grid { grid-template-columns: 5fr 7fr; gap: var(--s8); align-items: start; }
@@ -137,6 +139,13 @@
   .menu-name { font-size: 28px; }
   .menu-note { font-size: 16px; }
 }
+
+/* Butoane: principalul are luciu de folio (lumină sus, umbră caldă jos), secundarul e verde smarald. */
+.btn-primary { background: linear-gradient(180deg, #E2BD78 0%, #CFA45A 100%); color: var(--c-cover); box-shadow: inset 0 1px 0 rgba(255, 248, 230, 0.45), 0 10px 22px -12px rgba(0, 0, 0, 0.7); }
+.btn-primary:hover { background: linear-gradient(180deg, #E8C684 0%, #D6AE66 100%); }
+.btn-green { background: var(--c-green); color: var(--c-bg); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 10px 22px -12px rgba(20, 97, 63, 0.75); }
+.btn-green:hover { background: #17704A; }
+.btn-green:active { background: var(--c-green-deep); }
 
 /* Bara de jos pe telefon */
 .phone-bar .btn-ghost { color: var(--c-cream); border-color: rgba(243, 233, 218, 0.45); }
@@ -214,7 +223,7 @@
           <button class="field" type="button"><span class="field-label"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Sosire</span><span class="field-value">Alege data</span></button>
           <button class="field" type="button"><span class="field-label"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Plecare</span><span class="field-value">Alege data</span></button>
           <button class="field" type="button"><span class="field-label"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Oaspeți</span><span class="field-value">2 adulți · 1 cameră</span></button>
-          <button class="btn" type="submit">Cere ofertă de cazare</button>
+          <button class="btn btn-green" type="submit">Cere ofertă de cazare</button>
         </div>
       </form>
     </div>
@@ -238,7 +247,7 @@
           <li><a href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener"><span class="menu-name">Deserturi</span><span class="menu-dots" aria-hidden="true"></span><span class="menu-note">Finalul dulce al mesei</span></a></li>
           <li><a href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener"><span class="menu-name">Buona Mattina</span><span class="menu-dots" aria-hidden="true"></span><span class="menu-note">Mic dejun</span></a></li>
         </ul>
-        <a class="btn kitchen-more" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Vezi meniul complet</a>
+        <a class="btn btn-green kitchen-more" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Vezi meniul complet</a>
       </div>
     </div>
   </section>

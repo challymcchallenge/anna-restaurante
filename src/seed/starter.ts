@@ -37,6 +37,41 @@ type SeedFile = {
   media?: SeedMedia[]
   /** Câmp din Setări restaurant → `key` din `media`. Se completează doar câmpurile goale. */
   settingsMedia?: Record<string, string>
+  /**
+   * Valori din Setări completate doar unde câmpul e gol (F2: tema direcției alese, D-41, D-42).
+   * Grupurile (de exemplu `colors`) se completează câmp cu câmp; ce a pus Administratorul nu se atinge.
+   */
+  settingsFill?: Record<string, unknown>
+}
+
+const isEmpty = (v: unknown) => v === null || v === undefined || v === ''
+const isPlainObject = (v: unknown): v is Record<string, unknown> =>
+  Boolean(v) && typeof v === 'object' && !Array.isArray(v)
+
+/** Câmpurile din `fill` care lipsesc în `current`; grupurile se întorc întregi, cu valorile existente păstrate. */
+function fillEmpty(
+  current: Record<string, unknown>,
+  fill: Record<string, unknown>,
+  prefix = '',
+): { patch: Record<string, unknown>; paths: string[] } {
+  const patch: Record<string, unknown> = {}
+  const paths: string[] = []
+  for (const [key, value] of Object.entries(fill)) {
+    if (isPlainObject(value)) {
+      const currentGroup = isPlainObject(current[key])
+        ? (current[key] as Record<string, unknown>)
+        : {}
+      const inner = fillEmpty(currentGroup, value, `${prefix}${key}.`)
+      if (inner.paths.length) {
+        patch[key] = { ...currentGroup, ...inner.patch }
+        paths.push(...inner.paths)
+      }
+    } else if (isEmpty(current[key])) {
+      patch[key] = value
+      paths.push(prefix + key)
+    }
+  }
+  return { patch, paths }
 }
 
 /** Text simplu → document Lexical (paragrafe separate prin rând gol). */
@@ -56,7 +91,17 @@ export function toLexical(text: string) {
         direction: 'ltr',
         textFormat: 0,
         textStyle: '',
-        children: [{ type: 'text', text: paragraph, format: 0, style: '', mode: 'normal', detail: 0, version: 1 }],
+        children: [
+          {
+            type: 'text',
+            text: paragraph,
+            format: 0,
+            style: '',
+            mode: 'normal',
+            detail: 0,
+            version: 1,
+          },
+        ],
       })),
     },
   }
@@ -71,7 +116,11 @@ function relativeDate(spec: { $inDays: number; time?: string }) {
   const probe = new Date(`${ymd}T12:00:00Z`)
   const offsetH =
     Number(
-      new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Bucharest', hour: '2-digit', hour12: false }).format(probe),
+      new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Bucharest',
+        hour: '2-digit',
+        hour12: false,
+      }).format(probe),
     ) - 12
   const utc = new Date(`${ymd}T00:00:00Z`)
   utc.setUTCHours(h - offsetH, m, 0, 0)
@@ -83,7 +132,8 @@ function resolveValues(value: unknown): unknown {
   if (value && typeof value === 'object') {
     const obj = value as Record<string, unknown>
     if (typeof obj.$richText === 'string') return toLexical(obj.$richText)
-    if (typeof obj.$inDays === 'number') return relativeDate(obj as { $inDays: number; time?: string })
+    if (typeof obj.$inDays === 'number')
+      return relativeDate(obj as { $inDays: number; time?: string })
     return Object.fromEntries(
       Object.entries(obj)
         .filter(([key]) => key !== '$comment')
@@ -105,7 +155,10 @@ export async function seedStarterContent({
   if (!fs.existsSync(dir)) return []
   const report: { tenant: string; created: Record<string, number> }[] = []
 
-  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort()) {
+  for (const file of fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.json'))
+    .sort()) {
     const seed = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8')) as SeedFile
     const { docs } = await payload.find({
       collection: 'tenants',
@@ -119,7 +172,9 @@ export async function seedStarterContent({
       payload.logger.info(`[seed] ${file}: restaurantul „${seed.tenantSlug}” nu există; sar peste.`)
       continue
     }
-    const log: Record<string, string> = { ...((tenant.starterContentLog as Record<string, string>) ?? {}) }
+    const log: Record<string, string> = {
+      ...((tenant.starterContentLog as Record<string, string>) ?? {}),
+    }
     const created: Record<string, number> = {}
     const base = { tenant: tenant.id }
     const ctx = { seed: true }
@@ -132,10 +187,19 @@ export async function seedStarterContent({
      */
     const applyOnce = async (collection: CollectionSlug, items: Record<string, unknown>[]) => {
       if (log[collection]) return
-      const { totalDocs } = await payload.count({ collection, where: { tenant: { equals: tenant.id } }, req })
+      const { totalDocs } = await payload.count({
+        collection,
+        where: { tenant: { equals: tenant.id } },
+        req,
+      })
       if (totalDocs === 0) {
         for (const item of items) {
-          await payload.create({ collection, data: { ...(resolveValues(item) as object), ...base } as any, req, context: ctx })
+          await payload.create({
+            collection,
+            data: { ...(resolveValues(item) as object), ...base } as any,
+            req,
+            context: ctx,
+          })
         }
         created[collection] = items.length
       }
@@ -144,7 +208,10 @@ export async function seedStarterContent({
 
     if (seed.settings) await applyOnce('settings', [seed.settings])
     if (seed.homePage) await applyOnce('home-page', [seed.homePage])
-    for (const [collection, items] of Object.entries(seed.collections ?? {}) as [CollectionSlug, Record<string, unknown>[]][]) {
+    for (const [collection, items] of Object.entries(seed.collections ?? {}) as [
+      CollectionSlug,
+      Record<string, unknown>[],
+    ][]) {
       await applyOnce(collection, items)
     }
 
@@ -165,7 +232,13 @@ export async function seedStarterContent({
         if (log[`media:${item.key}`]) continue
         const doc = await payload.create({
           collection: 'media',
-          data: { kind: item.kind, title: item.title, alt: item.alt, credit: item.credit, ...base } as any,
+          data: {
+            kind: item.kind,
+            title: item.title,
+            alt: item.alt,
+            credit: item.credit,
+            ...base,
+          } as any,
           filePath: path.join(dir, item.file),
           req,
           context: ctx,
@@ -189,10 +262,41 @@ export async function seedStarterContent({
             if (!current[field] && ids[key] !== undefined) patch[field] = ids[key]
           }
           if (Object.keys(patch).length) {
-            await payload.update({ collection: 'settings', id: current.id as number, data: patch as any, req, context: ctx })
+            await payload.update({
+              collection: 'settings',
+              id: current.id as number,
+              data: patch as any,
+              req,
+              context: ctx,
+            })
             created.settingsMedia = Object.keys(patch).length
             log[`settingsMedia:${Object.keys(patch).sort().join(',')}`] = now
           }
+        }
+      }
+    }
+
+    if (seed.settingsFill) {
+      const { docs: settingsDocs } = await payload.find({
+        collection: 'settings',
+        where: { tenant: { equals: tenant.id } },
+        limit: 1,
+        depth: 0,
+        req,
+      })
+      const current = settingsDocs[0] as unknown as Record<string, unknown> | undefined
+      if (current) {
+        const { patch, paths } = fillEmpty(current, seed.settingsFill)
+        if (paths.length) {
+          await payload.update({
+            collection: 'settings',
+            id: current.id as number,
+            data: patch as any,
+            req,
+            context: ctx,
+          })
+          created.settingsFill = paths.length
+          log[`settingsFill:${paths.sort().join(',')}`] = now
         }
       }
     }
@@ -204,7 +308,10 @@ export async function seedStarterContent({
     await payload.update({
       collection: 'tenants',
       id: tenant.id,
-      data: { starterContentAt: Object.keys(created).length ? now : (tenant.starterContentAt ?? now), starterContentLog: log },
+      data: {
+        starterContentAt: Object.keys(created).length ? now : (tenant.starterContentAt ?? now),
+        starterContentLog: log,
+      },
       req,
     })
     payload.logger.info(`[seed] ${seed.tenantSlug}: ${JSON.stringify(created)}`)

@@ -14,8 +14,8 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | ~~1~~ | ~~Logo Trattoria, varianta principală~~ — **primit (F2)**: PNG transparent 1024 × 1024, în Biblioteca media și în Logo principal din 24.11.2026 (deploy `dpl_9YX6qkL7k2aDqxo1MzorMUpiiJKB`) (`seed/media/trattoria-da-vittoria/`). Un SVG ar fi și mai clar la dimensiuni mici, dacă există | — | Setări restaurant → Identitate → Logo principal | — | OQ #1 |
 | ~~2~~ | ~~Logo Trattoria pe fundal închis~~ — **nu mai e necesar (F2)**: medalionul se vede bine și pe fundal închis | — | … → Logo pe fundal închis | — | R1 (opțional) |
 | ~~3~~ | ~~Logo Grupul ANNA~~ — **primit (F2)**: PNG transparent, în Logo grup din 24.11.2026 | — | … → Logo grup | — | R1 |
-| 4 | Pictograma de filă (favicon). Medalionul nu se citește la 32 px; propunere F2: un „V” din script-ul logo-ului, pe fond crem (îl pot desena eu, G2-4) | SVG sau PNG pătrat, minimum 512 px | … → Pictogramă de filă | F3 | R1 |
-| 5 | Culorile și fonturile: **propuse în F2** (două direcții, `docs/2026_11_24_Trattoria_GATE2.md`); se închid la alegerea ta (G2-1). Dacă există totuși un ghid de brand, trimite-l | PDF sau listă de coduri #RRGGBB | — | GATE 2 | OQ #1, Q-17 |
+| ~~4~~ | ~~Pictograma de filă~~ — **gata (F2, D-43)**: desenată de Claude Code (`design/brand/favicon/`), în Biblioteca media și în Setări la următorul build | — | … → Pictogramă de filă | — | R1 |
+| ~~5~~ | ~~Culorile și fonturile~~ — **decise (D-41, D-42)**: `docs/design-system.md`; în Setări la următorul build | — | — | — | OQ #1, Q-17 |
 | 6 | Imaginea de distribuire pe rețele | 1200 × 630 px | … → Imagine de distribuire implicită | F3 | R1, SHARE |
 
 ## 2. Fotografii și clipuri
@@ -34,7 +34,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | 14 | Galerie pe categorii (Restaurant, Preparate, Vinuri, Petreceri, Hotel, Evenimente) | min. 1600 px pe latura lungă | 6–8 pe Acasă, restul în galerie | F3 |
 | 15 | Afișele serilor tematice | 4:5 | câte unul pe seară | la fiecare seară |
 | 16 | Acordul părinților pentru fotografiile cu copii | confirmare scrisă | — | F3 (Q-25, OQ #8) |
-| 31 | Fotografiile pentru direcția aleasă în F2, în locul celor 5 fotografii provizorii din machete (Wikimedia Commons, `design/f2/assets/foto/credits.json`). A · Cotto: lumină de zi, făină, mâini, paste, aluat. B · Carta: seară, cuptorul, pahare, oameni la masă (fără fețe recognoscibile fără acord) | ca la 9 și 10 | 5–8 | F3 |
+| 31 | Fotografiile pentru direcția aleasă în F2, în locul celor 5 fotografii provizorii din machete (Wikimedia Commons, `design/f2/assets/foto/credits.json`). Direcția aleasă e B · Carta: seară, lumină caldă, cuptorul, pahare, prim-planuri de preparate, oameni la masă (fără fețe recognoscibile fără acord) | ca la 9 și 10 | 5–8 | F3 |
 
 ## 3. Texte și liste
 

@@ -2,7 +2,7 @@
 
 Sursa de adevăr pentru proiect. Dacă un fișier din `design/` sau `docs/` contrazice această listă, câștigă lista. O decizie se schimbă doar de către Alin.
 
-Ultima actualizare: 24.11.2026 (GATE 1)
+Ultima actualizare: 24.11.2026 (GATE 2)
 
 | ID | Subiect | Decizie |
 |---|---|---|
@@ -46,6 +46,9 @@ Ultima actualizare: 24.11.2026 (GATE 1)
 | D-38 | Presupunerile din GATE 1 (24.11.2026) | **Acceptate**: doar limba română activă până la F4; clipurile fără sunet; 50 MB maximum după conversie; „Provizoriu” oprit implicit la elementele noi; subiectele fără destinatar rămân oprite; paginile legale la `/termeni`, `/confidentialitate`, `/cookies`. |
 | D-39 | Motive de sesizare (GATE 1, 24.11.2026) | **Preluate de pe https://davittoria.ro/formular-de-reclamatie/** (cele 9, cu explicația lor). Cu acordul lui Alin. Fiecare motiv are „Motiv” + „Explicație”. |
 | D-40 | Facebook și linkurile grupului (24.11.2026) | **Confirmate de Alin.** Facebook: https://www.facebook.com/p/Trattoria-da-Vittoria-100083393292155/ (rezolvă C2). Linkuri grup (11): Anna Delivery, Cofetăria Anna (dolcessa.ro), CityBar & Josper Grill, SuperBistro, Terasa Anna, Piscina Anna Summer Events, Anna Events, Riviera Events, **Hotel ANNA (www.hotelanna.ro)**, Hotel Anna Junior și **Fabrica Mezeluri GorjANNA (www.gorjanna.ro)**, adăugată de Alin. |
+| D-41 | Direcția de design (GATE 2, 24.11.2026) | **B · Carta**: copertă închisă `#1C1416` cu folio auriu `#D6AE66`, pagini de hârtie `#F5EDE0`. **Butoanele bordo devin verzi**: verde smarald `#14613F` (din familia verdelui din steagul logo-ului), butonul principal auriu cu luciu de folio. Detalii: `docs/design-system.md`. |
+| D-42 | Fonturi (GATE 2, 24.11.2026) | **Gratuite (OFL)**, găzduite pe site. Setul aprobat G3 are **4 fonturi**: Belleza și Tenor Sans (titluri), Hanken Grotesk și Host Grotesk (text); Trattoria: Belleza + Hanken Grotesk. Originalele de pe vineyard.co.za (Optima Nova + PP Mori, ≥ 178 USD în primul an) nu se cumpără. Alin a cerut și variante: `design/f2/fonturi.html` (8 perechi). |
+| D-43 | Pictograma de filă (GATE 2, 24.11.2026) | **Desenată de Claude Code**: disc în culoarea copertei, inel de folio, „V” din script-ul Alex Brush (OFL), cel mai apropiat de logo. Fișiere în `design/brand/favicon/`; în Setări → Pictogramă de filă. |
 
 ## Linkuri-cheie
 

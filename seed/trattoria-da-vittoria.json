@@ -620,10 +620,31 @@
       "kind": "logo",
       "title": "Logo BizTech Consulting (realizator)",
       "alt": "BizTech Consulting"
+    },
+    {
+      "key": "favicon",
+      "file": "media/trattoria-da-vittoria/pictograma-trattoria-512.png",
+      "kind": "logo",
+      "title": "Pictogramă de filă Trattoria",
+      "alt": "Trattoria da Vittoria"
     }
   ],
   "settingsMedia": {
     "logo": "logoTrattoria",
-    "logoGroup": "logoAnna"
+    "logoGroup": "logoAnna",
+    "favicon": "favicon"
+  },
+  "settingsFill": {
+    "colors": {
+      "background": "#F5EDE0",
+      "text": "#241A17",
+      "surfaceDark": "#1C1416",
+      "textOnDark": "#F3E9DA",
+      "accent": "#D6AE66",
+      "accent2": "#14613F"
+    },
+    "fontHeading": "belleza",
+    "fontText": "hanken-grotesk",
+    "defaultTheme": "light"
   }
 }

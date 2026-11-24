@@ -1,6 +1,6 @@
 # GATE 2 · Trattoria da Vittoria — raport faza 2 (direcție de design)
 
-Data: 24.11.2026 · Stare: **aștept alegerea lui Alin (A sau B)** · Commit-uri: `22083c5` (skill-uri, PRODUCT.md), `a373348` (direcții, contrast, logo-uri) și următoarele, pe `main`
+Data: 24.11.2026 · Stare: **GO primit: B · Carta, cu butoane verzi (D-41); fonturi gratuite, setul de 4 (D-42); pictograma desenată (D-43). F2 închis** · Commit-uri: `22083c5` (skill-uri, PRODUCT.md), `a373348` (direcții, contrast, logo-uri) și următoarele, pe `main`
 
 ## 1. Concluzie
 
@@ -155,19 +155,36 @@ Conflicte, rezolvate după `CLAUDE.md`:
 | G2-3 | Setul aprobat G3 (fonturile din care aleg toate restaurantele) | toate 4 fonturile verificate. Fiecare restaurant alege câte un font pentru titluri și unul pentru text |
 | G2-4 | Pictograma de filă (favicon) | un „V” din script-ul logo-ului; îl desenez eu, dacă vrei |
 
-## 11. După GO (în aceeași fază)
+## 11. Planul pentru după GO
 
 1. `docs/design-system.md`: tokenii direcției alese, tipografia, spațierea, componentele (buton, insignă, bara de cazare, bara de jos, eticheta „Exemplu”), mișcarea și stilul foto.
 2. Variabilele de temă pe restaurant: câmpurile „Font titluri” și „Font text” în Setări, din setul aprobat G3 (migrație nouă), plus culorile direcției puse în Setările Trattoriei. Panoul verifică deja contrastul de 4,5:1 la salvare.
 3. Contractul direcției, în fișa de suprafață Impeccable, pentru F3.
 
-## 12. Fișiere
+## 12. După GO (24.11.2026)
+
+Ce a cerut Alin: „GO B, dar culorile butoanelor să fie mai atractive (poate o paletă de verde pentru cele roșii?), fonturi gratuite, dar și câteva variante de font potrivite pentru restaurant și hotel (plus cât ar costa fonturile vineyard), setul de 4, desenează tu favicon-ul.”
+
+| Cerere | Rezultat |
+|---|---|
+| Butoane mai atractive, verde în loc de roșu | Bordo `#7B2333` → **verde smarald `#14613F`**, din familia verdelui din steag (`#036625` măsurat, prea strident pentru butoane). Butonul principal: folio cu luciu (`#E2BD78` → `#CFA45A`), lumină interioară și umbră caldă. Contrast măsurat: auriu 8,63:1, verde 6,43:1; minimul paginii 6,43 pe telefon și 5,67 pe desktop. Verdele nu se folosește pe copertă (2,42:1). Comparația celor 3 verzi și a bordo-ului e în istoricul sesiunii; ales: smarald |
+| Variante de fonturi pentru restaurant și hotel | `design/f2/fonturi.html`: **8 perechi** OFL pe copertă și pe hârtie, cu butoanele noi: Belleza + Hanken (aleasă), Tenor + Host, Bodoni Moda + Hanken, Cormorant Garamond + Albert Sans, Gilda Display + Jost, Cinzel + Figtree, Bellefair + Mulish, Forum + Schibsted. Toate trec testul ș ț ă â î. Respinse: Marcellus, Italiana, Della Respira și Cagliostro (fără ș și ț cu virgulă) |
+| Cât costă fonturile vineyard | **Optima Nova Regular:** 57,99 USD pentru 10.000 de afișări pe lună (MyFonts; 104,09 / 25.000; 144,98 / 50.000). **PP Mori:** „de la 40 USD” pe licență și greutate; pentru firme, 1 an. **Estimare: ≥ 178 USD în primul an** pentru Trattoria (Optima Nova Regular + 3 greutăți Mori), Mori anual, și licențe separate pe fiecare restaurant. Detalii și surse: `docs/versions.md`, F-1…F-4 |
+| Setul de 4 | `src/theme/fonts.ts`; în Setări: „Font titluri” (Belleza / Tenor Sans), „Font text” (Hanken / Host) |
+| Favicon desenat | `design/brand/favicon/`: SVG detaliat, SVG pentru 16–48 px, PNG 512 / 192 / 180 / 48 / 32 / 16, ICO. În Biblioteca media și în Setări → Pictogramă de filă |
+| `docs/design-system.md` | Culori, contraste, tipografie, spațiere, componente, mișcare, fotografie, tema pe restaurant, verificare |
+| Tema pe restaurant | Setări → Culori: 6 roluri (fundal, text, fundal închis, text pe fundal închis, accent, accent secundar), cu 5 perechi verificate la 4,5:1 la salvare. Variabile CSS în `src/theme/theme.ts`. Migrația `20261124_143006_f2_theme` (4 coloane). Trattoria primește tema B prin `settingsFill`, doar în câmpurile goale |
+| Teste | Integrare **20/20** (4 noi pentru temă). `tsc` fără erori, lint 0 erori, build local reușit |
+| Contractul direcției pentru F3 | `.impeccable/surfaces/design-f2-directia-b-carta-html.md` (Impeccable), legat de `src/app/(frontend)/page.tsx` |
+
+## 13. Fișiere
 
 - Machete: `design/f2/directia-a-cotto.html`, `design/f2/directia-b-carta.html`
 - Pagina de comparație: `design/2026_11_24_Trattoria_Directii_F2.html`, publicată privat la https://claude.ai/artifact/EdsBx1Fghq6us6soUPfBG5
 - Capturi: `design/f2/capturi/f2-a-cotto-{telefon,desktop}[-pagina].webp`, `design/f2/capturi/f2-b-carta-{telefon,desktop}[-pagina].webp`
 - Contrast: `docs/f2/contrast-*.json`, `scripts/f2/contrast-measure.mjs`, `scripts/f2/capture.mjs`
 - Context pentru skill-uri: `PRODUCT.md`
+- După GO: `docs/design-system.md`, `design/f2/fonturi.html`, `design/brand/favicon/`, `src/theme/`, `src/migrations/20261124_143006_f2_theme.ts`, `tests/int/f2-theme.int.spec.ts`, `.impeccable/surfaces/design-f2-directia-b-carta-html.md`
 
 ---
 

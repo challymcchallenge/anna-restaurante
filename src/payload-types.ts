@@ -1125,7 +1125,7 @@ export interface Setting {
    */
   favicon?: (number | null) | Media;
   /**
-   * Panoul verifică contrastul textului pe fundal: minimum 4,5:1; sub prag nu se poate salva. Paleta finală vine din direcția de design (F2).
+   * Tema site-ului (docs/design-system.md). Panoul verifică 5 perechi la minimum 4,5:1 (text/fundal, text/fundal închis, accent/fundal închis, cele două butoane); sub prag nu se poate salva. Gol = valorile direcției B · Carta.
    */
   colors?: {
     /**
@@ -1139,12 +1139,28 @@ export interface Setting {
     /**
      * Format #RRGGBB.
      */
+    surfaceDark?: string | null;
+    /**
+     * Format #RRGGBB.
+     */
+    textOnDark?: string | null;
+    /**
+     * Format #RRGGBB.
+     */
     accent?: string | null;
     /**
      * Format #RRGGBB.
      */
     accent2?: string | null;
   };
+  /**
+   * Din setul aprobat (G3, D-42). Gol = Belleza.
+   */
+  fontHeading?: ('belleza' | 'tenor-sans') | null;
+  /**
+   * Din setul aprobat (G3, D-42). Gol = Hanken Grotesk.
+   */
+  fontText?: ('hanken-grotesk' | 'host-grotesk') | null;
   /**
    * O singură temă la lansare; comutatorul pentru vizitatori vine în R2 (D-33). Alegerea: Q-17.
    */
@@ -2147,9 +2163,13 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         background?: T;
         text?: T;
+        surfaceDark?: T;
+        textOnDark?: T;
         accent?: T;
         accent2?: T;
       };
+  fontHeading?: T;
+  fontText?: T;
   defaultTheme?: T;
   shareImage?: T;
   address?:

@@ -1,7 +1,7 @@
 {
  "page": "design/f2/directia-b-carta.html",
- "label": "B · Carta",
- "measuredAt": "2026-11-24T13:58:47.607Z",
+ "label": "B · Carta (verde)",
+ "measuredAt": "2026-11-24T14:24:54.682Z",
  "method": "pixel-sampling WCAG 2.x, p5 of background pixels under each text line",
  "lines": [
   {
@@ -107,8 +107,8 @@
    "fontSize": 15,
    "fontWeight": 600,
    "color": "#1C1416",
-   "min": 8.7,
-   "p5": 8.7,
+   "min": 8.63,
+   "p5": 8.63,
    "large": false,
    "pass45": true
   },
@@ -370,9 +370,9 @@
    "selector": "div.wrap > div > a.btn",
    "fontSize": 15,
    "fontWeight": 600,
-   "color": "#F3E9DA",
-   "min": 8.2,
-   "p5": 8.2,
+   "color": "#F5EDE0",
+   "min": 6.43,
+   "p5": 6.43,
    "large": false,
    "pass45": true
   },
@@ -515,8 +515,8 @@
    "fontSize": 15,
    "fontWeight": 600,
    "color": "#1C1416",
-   "min": 8.7,
-   "p5": 8.7,
+   "min": 8.54,
+   "p5": 8.63,
    "large": false,
    "pass45": true
   },
@@ -587,8 +587,8 @@
    "fontSize": 15,
    "fontWeight": 600,
    "color": "#1C1416",
-   "min": 8.7,
-   "p5": 8.7,
+   "min": 8.63,
+   "p5": 8.63,
    "large": false,
    "pass45": true
   },
@@ -706,9 +706,9 @@
    "selector": "form.stay > div.stay-row > button.btn",
    "fontSize": 15,
    "fontWeight": 600,
-   "color": "#F3E9DA",
-   "min": 8.2,
-   "p5": 8.2,
+   "color": "#F5EDE0",
+   "min": 6.43,
+   "p5": 6.43,
    "large": false,
    "pass45": true
   },
@@ -934,9 +934,9 @@
    "selector": "div.wrap > div > a.btn",
    "fontSize": 15,
    "fontWeight": 600,
-   "color": "#F3E9DA",
-   "min": 8.2,
-   "p5": 8.2,
+   "color": "#F5EDE0",
+   "min": 6.43,
+   "p5": 6.43,
    "large": false,
    "pass45": true
   },

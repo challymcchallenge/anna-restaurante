@@ -4,7 +4,7 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| 1 | Materialele de brand: ~~logo-uri (Trattoria, ANNA)~~ **primite în F2**; culorile și fonturile propuse în F2 (G2-1, G2-2) | GATE 2 | Alin |
+| ~~1~~ | ~~Materialele de brand~~ — **rezolvat în F2**: logo-uri primite, culori și fonturi decise (D-41, D-42), pictogramă desenată (D-43) | — | — |
 | 2 | Clipul video pentru hero și setul de fotografii pe categorii (amânat la cererea lui Alin; machetele folosesc fotografii provizorii) | F3 | Alin |
 | 3 | Ce anume se animă în 3D pe desktop | F4 | Alin |
 | 4 | Lista de recenzii (restaurant și hotel) | F3 | Alin |
@@ -43,7 +43,8 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| G2-1 | Direcția de design: A · Cotto sau B · Carta (propunerea mea: B) | GATE 2 | Alin |
-| G2-2 | Fonturi OFL gratuite sau originalele plătite de pe vineyard.co.za (Optima + PP Mori; preț neverificat) | GATE 2 | Alin |
-| G2-3 | Setul aprobat G3: toate cele 4 fonturi verificate, din care alege fiecare restaurant | GATE 2 | Alin |
-| G2-4 | Pictograma de filă: un „V” din script-ul logo-ului, desenat de Claude Code | F3 | Alin |
+| ~~G2-1~~ | ~~Direcția de design~~ — **rezolvat: D-41**, B · Carta cu butoane verzi | — | — |
+| ~~G2-2~~ | ~~Fonturi gratuite sau plătite~~ — **rezolvat: D-42**, gratuite | — | — |
+| ~~G2-3~~ | ~~Setul aprobat G3~~ — **rezolvat: D-42**, cele 4 | — | — |
+| ~~G2-4~~ | ~~Pictograma de filă~~ — **rezolvat: D-43**, desenată | — | — |
+| G2-5 | Dintre variantele de fonturi din `design/f2/fonturi.html`, vrei vreuna în locul perechii Belleza + Hanken Grotesk sau adăugată în set? (Implicit: rămâne Belleza + Hanken Grotesk) | F3 | Alin |

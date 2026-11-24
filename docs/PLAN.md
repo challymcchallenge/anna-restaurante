@@ -8,7 +8,7 @@ Estimarea în sesiuni este orientativă și se reface după faza 0.
 |---|---|---|---|---|
 | F0 Pregătire și teste | 1–2 | 1 + 0,5 | **1,5 (real)** | Rămân: conexiunea Supabase și încărcarea S3 după variabile, proba pe telefon |
 | F1 Panou și model de conținut | 2–3 | **3–4** | **1 (real)** | 13 colecții + setări pe restaurant + traduceri pe câmp + panou în română. Încărcarea media are nevoie de o componentă proprie în panou (conversie în browser, HEIC, video, punct focal) |
-| F2 Direcție de design | 1–2 | 1–2 | **1 (real, până la GATE 2)** | Instalarea skill-urilor de design și interviul Impeccable au intrat în aceeași sesiune |
+| F2 Direcție de design | 1–2 | 1–2 | **1 (real)** | Instalarea skill-urilor de design și interviul Impeccable au intrat în aceeași sesiune |
 | F3 Site public | 6–8 | 6–8 | 6–8 | — |
 | F4 Traduceri și FAQ | 3–4 | **1–2** | 1–2 | Efectele, sunetul, 3D și tema trec după lansare (D-33) |
 | F5 Verificare și lansare | 2 | 2 | 2 | Include testul de email cu domeniul verificat (mutat din F0 la decizia lui Alin) |
@@ -62,7 +62,7 @@ Estimarea în sesiuni este orientativă și se reface după faza 0.
 
 **GATE 2:** Alin alege o direcție.
 
-**Stare (24.11.2026):** **la GATE 2, aștept alegerea.** Două direcții, A · Cotto și B · Carta, pe telefon și desktop; contrast măsurat pe randare ≥ 5,09:1 (A) și ≥ 5,67:1 (B). Skill-urile Impeccable, Taste și UI UX Pro Max sunt instalate în proiect. Logo-urile intră în Biblioteca media prin conținutul de pornire. Raport: `docs/2026_11_24_Trattoria_GATE2.md`. După GO: `docs/design-system.md`, câmpurile de fonturi (G3) și culorile în Setări.
+**Stare (24.11.2026):** **GO primit: B · Carta, cu butoane verzi (D-41), fonturi gratuite, setul aprobat de 4 (D-42), pictograma desenată (D-43).** F2 închis. Livrate: `docs/design-system.md`, tema pe restaurant (`src/theme/`, câmpurile de culori și fonturi din Setări, migrația `20261124_143006_f2_theme`), planșa de fonturi `design/f2/fonturi.html`. Raport: `docs/2026_11_24_Trattoria_GATE2.md`.
 
 ## Faza 3 — Site public
 

@@ -18,9 +18,18 @@ let tenantId: number
 describe('F2 · logo-uri în Biblioteca media', () => {
   beforeAll(async () => {
     payload = await getPayload({ config: await config })
-    const { docs } = await payload.find({ collection: 'tenants', where: { slug: { equals: 'trattoria-da-vittoria' } }, limit: 1 })
+    const { docs } = await payload.find({
+      collection: 'tenants',
+      where: { slug: { equals: 'trattoria-da-vittoria' } },
+      limit: 1,
+    })
     tenantId = (docs[0]?.id ??
-      (await payload.create({ collection: 'tenants', data: { name: 'Trattoria da Vittoria', slug: 'trattoria-da-vittoria' } as any })).id) as number
+      (
+        await payload.create({
+          collection: 'tenants',
+          data: { name: 'Trattoria da Vittoria', slug: 'trattoria-da-vittoria' } as any,
+        })
+      ).id) as number
   })
 
   it('Încarcă cele 3 logo-uri ca „Logo” și le leagă în Setări', async () => {
@@ -33,12 +42,21 @@ describe('F2 · logo-uri în Biblioteca media', () => {
     })
     const byTitle = Object.fromEntries(media.map((m: any) => [m.title, m]))
     expect(Object.keys(byTitle)).toEqual(
-      expect.arrayContaining(['Logo Trattoria da Vittoria', 'Logo Grupul ANNA', 'Logo BizTech Consulting (realizator)']),
+      expect.arrayContaining([
+        'Logo Trattoria da Vittoria',
+        'Logo Grupul ANNA',
+        'Logo BizTech Consulting (realizator)',
+      ]),
     )
     expect(byTitle['Logo Trattoria da Vittoria'].mimeType).toBe('image/png')
     expect(byTitle['Logo Trattoria da Vittoria'].width).toBe(1024)
 
-    const { docs: settings } = await payload.find({ collection: 'settings', where: { tenant: { equals: tenantId } }, limit: 1, depth: 0 })
+    const { docs: settings } = await payload.find({
+      collection: 'settings',
+      where: { tenant: { equals: tenantId } },
+      limit: 1,
+      depth: 0,
+    })
     expect(settings[0].logo).toBe(byTitle['Logo Trattoria da Vittoria'].id)
     expect(settings[0].logoGroup).toBe(byTitle['Logo Grupul ANNA'].id)
   })
@@ -48,7 +66,12 @@ describe('F2 · logo-uri în Biblioteca media', () => {
     for (const r of report) expect(r.created).toEqual({})
     const { totalDocs } = await payload.count({
       collection: 'media',
-      where: { and: [{ tenant: { equals: tenantId } }, { title: { equals: 'Logo Trattoria da Vittoria' } }] },
+      where: {
+        and: [
+          { tenant: { equals: tenantId } },
+          { title: { equals: 'Logo Trattoria da Vittoria' } },
+        ],
+      },
     })
     expect(totalDocs).toBe(1)
   })

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Fonturi Trattoria · variante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600&family=Belleza&family=Bellefair&family=Bodoni+Moda:wght@400;500&family=Cinzel:wght@400;500&family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;600&family=Forum&family=Gilda+Display&family=Hanken+Grotesk:wght@400;600&family=Host+Grotesk:wght@400;600&family=Jost:wght@400;500&family=Mulish:wght@400;600&family=Schibsted+Grotesk:wght@400;600&family=Tenor+Sans&display=swap&subset=latin-ext">
+<style>
+/* Planșa de fonturi pentru direcția B · Carta: fiecare pereche pe coperta închisă și pe pagina de hârtie, cu butoanele aprobate (auriu, verde smarald). */
+:root {
+  --cover: #1C1416; --cream: #F3E9DA; --paper: #F5EDE0; --ink: #241A17; --ink-2: #5A4A42; --foil: #D6AE66; --foil-deep: #7A5628; --green: #14613F;
+  --ui: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 var(--ui); }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { background: var(--cover); color: var(--cream); padding-block: 40px 32px; }
+header h1 { font: 400 clamp(32px, 5vw, 52px)/1.05 'Belleza', serif; margin: 0 0 10px; text-wrap: balance; }
+header p { margin: 0; max-width: 70ch; color: #D9CDBD; }
+a { color: var(--green); text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+h2.sec { font: 400 30px/1.15 'Belleza', serif; margin: 40px 0 8px; }
+p.note { color: var(--ink-2); max-width: 72ch; margin: 0 0 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 540px), 1fr)); gap: 20px; margin: 16px 0 32px; }
+.pair { border-radius: 6px; overflow: hidden; border: 1px solid #DDD1C0; background: var(--paper); min-width: 0; }
+.cover { background: var(--cover); color: var(--cream); padding: 24px; }
+.cover .tag { font: 600 12px/1 var(--ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--foil); }
+.cover .tag.on { color: var(--cover); background: var(--foil); padding: 4px 8px; border-radius: 999px; }
+.cover .d { font-size: 40px; line-height: 1.04; margin: 14px 0 8px; letter-spacing: -0.005em; }
+.cover .ro { font-size: 22px; line-height: 1.2; color: #E9DDCB; }
+.page { padding: 22px 24px 24px; }
+.page .h2 { font-size: 28px; line-height: 1.12; margin: 0 0 10px; }
+.page .t { font-size: 16.5px; line-height: 1.55; color: var(--ink); margin: 0 0 14px; }
+.menu { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; border-top: 1px solid rgba(36, 26, 23, 0.2); border-bottom: 1px solid rgba(36, 26, 23, 0.2); padding: 10px 0; margin-bottom: 16px; }
+.menu .n { font-size: 22px; }
+.menu .dots { border-bottom: 1px dotted rgba(36, 26, 23, 0.45); transform: translateY(-5px); }
+.menu .s { font-size: 14.5px; color: var(--ink-2); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.b { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; font-weight: 600; font-size: 15px; }
+.b.gold { background: linear-gradient(180deg, #E2BD78 0%, #CFA45A 100%); color: var(--cover); }
+.b.green { background: var(--green); color: var(--paper); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 13px/1.4 var(--ui); color: var(--ink-2); padding: 12px 24px 16px; border-top: 1px solid #E5DBCC; }
+.meta strong { color: var(--ink); font-weight: 600; }
+.tbl { overflow-x: auto; margin: 8px 0 24px; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid #DDD1C0; vertical-align: top; }
+th { font-size: 13px; color: var(--ink-2); font-weight: 600; }
+td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+footer { text-align: center; font-size: 13px; color: var(--ink-2); padding-block: 32px 40px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Fonturi pentru Trattoria da Vittoria</h1>
+    <p>Opt perechi gratuite (licență OFL), potrivite pentru restaurant și hotel, toate cu ș, ț, ă, â, î verificate în fișierul fontului. Fiecare e pusă pe coperta și pe pagina direcției B, cu butoanele aprobate. Primele două fac parte din setul aprobat de 4.</p>
+  </div>
+</header>
+<main class="wrap">
+  <h2 class="sec">Perechile</h2>
+  <p class="note">Mărimea e pentru stilul 400, subseturile latin + latin-ext (fișiere WOFF2 găzduite pe site). Contează la viteza pe telefon (Lighthouse ≥ 85).</p>
+  <div class="grid">
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Belleza',serif"><span class="tag on">Aleasă · în setul aprobat</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Belleza',serif">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Hanken Grotesk',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Belleza',serif">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Hanken Grotesk',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Hanken Grotesk',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Belleza</strong> + <strong>Hanken Grotesk</strong></span><span>Cea mai apropiată de Optima + PP Mori (vineyard.co.za)</span><span>27,7 + 22,0 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Tenor Sans',serif"><span class="tag">În setul aprobat</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Tenor Sans',serif">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Host Grotesk',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Tenor Sans',serif">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Host Grotesk',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Host Grotesk',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Tenor Sans</strong> + <strong>Host Grotesk</strong></span><span>Optima mai lată, ca o inscripție</span><span>31,7 + 21,2 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Bodoni Moda',serif"><span class="tag">Variantă</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Bodoni Moda',serif">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Hanken Grotesk',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Bodoni Moda',serif">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Hanken Grotesk',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Hanken Grotesk',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Bodoni Moda</strong> + <strong>Hanken Grotesk</strong></span><span>Bodoni: litera italiană clasică (Parma); hotel de lux</span><span>22,4 + 22,0 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Cormorant Garamond',serif;font-weight:500"><span class="tag">Variantă</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Cormorant Garamond',serif;font-weight:600">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Albert Sans',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Cormorant Garamond',serif;font-weight:600">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Albert Sans',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Albert Sans',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Cormorant Garamond</strong> + <strong>Albert Sans</strong></span><span>Clasicul listelor de vinuri; foarte răspândit</span><span>42,5 + 17,0 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Gilda Display',serif"><span class="tag">Variantă</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Gilda Display',serif">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Jost',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Gilda Display',serif">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Jost',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Jost',sans-serif;font-weight:500"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Gilda Display</strong> + <strong>Jost</strong></span><span>Eleganță de hotel din anii ’30</span><span>32,9 + 15,4 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Cinzel',serif"><span class="tag">Variantă</span><div class="d" style="font-size:34px">The Best Restaurant in Town</div><div class="ro" style="font-size:19px">Seri tematice · Ș Ț Ă Â Î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Cinzel',serif;font-size:24px">Bucătăria. Descoperă meniul.</div><p class="t" style="font-family:'Figtree',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Cinzel',serif;font-size:19px">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Figtree',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Figtree',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Cinzel</strong> + <strong>Figtree</strong></span><span>Inscripție romană, numai majuscule: bun doar pentru titluri scurte</span><span>21,5 + 17,2 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Bellefair',serif"><span class="tag">Variantă</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Bellefair',serif">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Mulish',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Bellefair',serif">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Mulish',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Mulish',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Bellefair</strong> + <strong>Mulish</strong></span><span>Subțire și luxos, de hotel-boutique</span><span>27,2 + 25,8 KB</span></div>
+    </article>
+
+    <article class="pair">
+      <div class="cover" style="font-family:'Forum',serif"><span class="tag">Variantă</span><div class="d">The Best Restaurant in Town</div><div class="ro">Seri tematice · Ș Ț Ă Â Î ș ț ă â î</div></div>
+      <div class="page"><div class="h2" style="font-family:'Forum',serif">Bucătăria. Descoperă meniul, fel cu fel.</div><p class="t" style="font-family:'Schibsted Grotesk',sans-serif">Vă așteptăm cu drag și vă servim cu plăcere! Rezervă o masă sau cere ofertă de cazare la Hotel ANNA.</p><div class="menu"><span class="n" style="font-family:'Forum',serif">Pasta e Risotto</span><span class="dots" aria-hidden="true"></span><span class="s" style="font-family:'Schibsted Grotesk',sans-serif">Inima trattoriei</span></div><div class="btns" style="font-family:'Schibsted Grotesk',sans-serif"><span class="b gold">Rezervă o masă</span><span class="b green">Cere ofertă de cazare</span></div></div>
+      <div class="meta"><span><strong>Forum</strong> + <strong>Schibsted Grotesk</strong></span><span>Roman, solid, foarte lizibil</span><span>43,4 + 35,0 KB</span></div>
+    </article>
+  </div>
+
+  <h2 class="sec">Respinse</h2>
+  <p class="note">Fără ș și ț cu virgulă (U+0218–021B): <strong>Marcellus</strong>, <strong>Italiana</strong>, <strong>Della Respira</strong>, <strong>Cagliostro</strong>. Lăsat deoparte intenționat: <strong>Playfair Display</strong>, prea folosit pe site-urile de restaurant.</p>
+
+  <h2 class="sec">Cât ar costa fonturile de pe vineyard.co.za</h2>
+  <p class="note">Prețuri citite pe 24.11.2026, pe paginile oficiale. Vineyard folosește „Optima” (Linotype). Pe MyFonts se vinde acum ca <strong>Optima Nova</strong> [PRESUPUNERE: e aceeași familie]. Pentru text folosesc <strong>PP Mori</strong> (Pangram Pangram), cu 3 greutăți: 400, 500, 600.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Font</th><th>Unde</th><th>Licența web</th><th>Preț</th><th>Durata</th></tr></thead>
+    <tbody>
+      <tr><td>Optima Nova Regular (un stil)</td><td>MyFonts (Linotype)</td><td>10.000 / 25.000 / 50.000 de afișări de pagină pe lună</td><td class="n">57,99 / 104,09 / 144,98 USD</td><td>MyFonts: „majoritatea fonturilor web au licență anuală”; pentru Linotype <strong>neverificat</strong></td></tr>
+      <tr><td>PP Mori, 3 greutăți</td><td>pangrampangram.com</td><td>după afișări de pagină, pe fiecare greutate</td><td class="n">de la 40 USD pe licență; prețul exact pe afișări <strong>neverificat</strong> (calculatorul de pe site rulează doar în browser)</td><td>pentru firme: <strong>1 an</strong>, apoi se reînnoiește (FAQ Pangram)</td></tr>
+      <tr><td><strong>Estimare pentru Trattoria</strong></td><td colspan="2">Optima Nova Regular la 10.000 de afișări + 3 greutăți PP Mori</td><td class="n"><strong>≥ 178 USD în primul an</strong> (57,99 + 3 × 40)</td><td>PP Mori se plătește din nou în fiecare an. Fiecare restaurant al grupului, pe domeniul lui, cere licențe proprii</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Recomandarea rămâne cea gratuită (D-31): Belleza + Hanken Grotesk sunt la 0 USD, se găzduiesc pe site și le pot folosi toate cele 4 restaurante.</p>
+</main>
+<footer class="wrap">
+  <div>100% AI Solutions &amp; Agentic Work-Flows for SMEs</div>
+  <div>Made with ❤️ by BizTech Consulting SRL</div>
+  <div>Alin Labau - AI Project Manager | +40 772 295 031 | www.biztech.ro</div>
+</footer>
+</body>
+</html>
