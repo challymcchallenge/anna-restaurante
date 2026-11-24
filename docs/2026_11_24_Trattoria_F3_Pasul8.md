@@ -74,6 +74,8 @@ SEO e 66, din cauza `noindex` (ADR-012). Prima versiune a paginii `/galerie` ave
 
 **Pasul 9:** pagina Contact, cu datele, harta și formularul cu subiect. Formularul primește datele din bara de cazare și de la butoanele „Rezervă salonul”, „Înscrie copilul” și „Cere ofertă de cazare”. Tot la pasul 9: pagina de sesizări și proba ialoc cu data serii (G4-1, cu testul de rețea spre ialoc aprobat). Emailurile prin Resend rămân pentru F5 (D-36).
 
+Pagina HTML a raportului pașilor 8–9 (privată): https://claude.ai/artifact/RKZ6gD1ZHf82MPY2RZMDRY
+
 ---
 
 100% AI Solutions & Agentic Work-Flows for SMEs
