@@ -440,6 +440,8 @@ select.field-input { appearance: none; cursor: pointer; padding-right: var(--s5)
 }
 
 /* ---------- Secțiunile: pagini de hârtie și pagini de copertă ---------- */
+/* Sub primul ecran: browserul nu așază și nu desenează secțiunile până se apropie de ecran (Lighthouse TBT). */
+.paper-section, .cover-section, .site-footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 .paper-section { padding: var(--s8) 0; background: var(--c-bg); color: var(--c-text); }
 .cover-section { padding: var(--s8) 0; background: var(--c-dark); color: var(--c-on-dark); }
 .paper-section h2, .cover-section h2 { font-size: clamp(32px, 9vw, 40px); line-height: 1.08; letter-spacing: -0.01em; max-width: 16ch; }

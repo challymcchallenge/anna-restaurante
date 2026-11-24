@@ -39,6 +39,16 @@
         ],
         "createdAt": "2026-11-24T14:39:47.325Z",
         "reason": "user confirmed: GO B la GATE 2 (D-41); hârtia #F5EDE0 e culoarea aprobată a direcției, derivată din marmura logo-ului"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "src/app/(frontend)/styles.css",
+          "http://localhost:3000/"
+        ],
+        "createdAt": "2026-11-24T16:20:00.000Z",
+        "reason": "user confirmed: GO B la GATE 2 (D-41); hârtia vine din Setări restaurant (colors.background, #F5EDE0 pentru Trattoria), derivată din marmura logo-ului; site-ul F3 folosește tema aprobată"
       }
     ]
   }
