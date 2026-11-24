@@ -63,7 +63,7 @@ export default async function GalleryPage() {
           <div className="gal-frame">
             <ul className="gal-mosaic">
               {items.map((item, i) => (
-                <GalleryTile key={item.id} item={item} id={`g-${item.id}`} priority={i < 2} />
+                <GalleryTile key={item.id} item={item} id={`g-${item.id}`} priority={i === 0} />
               ))}
             </ul>
           </div>
