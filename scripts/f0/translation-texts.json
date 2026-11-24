@@ -1,0 +1,9 @@
+{
+  "_nota": "Texte de probă pentru testul F0 „traduceri” (ADR-007). Nu sunt conținut al site-ului. Termenii din doNotTranslate nu trebuie traduși.",
+  "doNotTranslate": ["Risotto ai funghi porcini", "Carnaroli", "Parmigiano Reggiano", "Salon Vittoria", "The Best Restaurant in Town"],
+  "texts": {
+    "meniu": "Risotto ai funghi porcini: orez Carnaroli gătit lent în supă de legume, cu hribi, unt și Parmigiano Reggiano maturat 24 de luni. Un fel de mâncare cald și cremos, perfect pentru serile reci de toamnă.",
+    "eveniment": "Vineri seara, DJ-ul nostru aduce cele mai bune hituri din anii '90 și 2000. Rezervă-ți masa din timp: locurile din Salon Vittoria se ocupă repede. Intrare liberă."
+  },
+  "targets": ["en", "it", "fr", "de", "zh", "sv"]
+}

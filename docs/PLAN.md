@@ -4,15 +4,15 @@ Regulă: **o fază pe sesiune de Claude Code**. La fiecare poartă (GATE) lucrul
 
 Estimarea în sesiuni este orientativă și se reface după faza 0.
 
-| Fază | Sesiuni (estimare) |
-|---|---|
-| F0 Pregătire și teste | 1–2 |
-| F1 Panou și model de conținut | 2–3 |
-| F2 Direcție de design | 1–2 |
-| F3 Site public | 6–8 |
-| F4 Efecte, sunet, traduceri | 3–4 |
-| F5 Verificare și lansare | 2 |
-| **Total** | **15–21** |
+| Fază | Sesiuni (estimare inițială) | Sesiuni (refăcută după F0, 24.11.2026) | Motiv |
+|---|---|---|---|
+| F0 Pregătire și teste | 1–2 | 1 + 0,5 | Rămân: conexiunea Supabase și încărcarea S3 după variabile, proba pe telefon |
+| F1 Panou și model de conținut | 2–3 | **3–4** | 13 colecții + setări pe restaurant + traduceri pe câmp + panou în română. Încărcarea media are nevoie de o componentă proprie în panou (conversie în browser, HEIC, video, punct focal) |
+| F2 Direcție de design | 1–2 | 1–2 | — |
+| F3 Site public | 6–8 | 6–8 | — |
+| F4 Efecte, sunet, traduceri | 3–4 | **3–4 sau 1–2** | 1–2 dacă efectele, sunetul, 3D și comutatorul de temă rămân în R2, după lansare (D-32 acceptă Q-15 și Q-16; vezi contradicția C1 din raportul GATE 0) |
+| F5 Verificare și lansare | 2 | 2 | Include testul de email cu domeniul verificat (mutat din F0 la decizia lui Alin) |
+| **Total** | **15–21** | **16–22** (sau **14–20** cu efectele în R2) | |
 
 ---
 
