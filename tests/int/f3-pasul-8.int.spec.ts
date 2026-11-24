@@ -52,7 +52,9 @@ function holes(tiles: string[], cols: number): number {
       }
     }
   }
-  return grid.reduce((sum, row) => sum + Array.from({ length: cols }, (_, x) => (row[x] ? 0 : 1)).reduce((a, b) => a + b, 0), 0)
+  let empty = 0
+  for (const row of grid) for (let x = 0; x < cols; x++) if (!row?.[x]) empty++
+  return empty
 }
 
 describe('F3 · pasul 8 · Galerie', () => {
