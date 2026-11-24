@@ -48,3 +48,12 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | ~~G2-3~~ | ~~Setul aprobat G3~~ — **rezolvat: D-42**, cele 4 | — | — |
 | ~~G2-4~~ | ~~Pictograma de filă~~ — **rezolvat: D-43**, desenată | — | — |
 | G2-5 | Dintre variantele de fonturi din `design/f2/fonturi.html`, vrei vreuna în locul perechii Belleza + Hanken Grotesk sau adăugată în set? (Implicit: rămâne Belleza + Hanken Grotesk) | F3 | Alin |
+
+## Întrebări noi după F3, pașii 1–3 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_F3_Pasii1-3.md`, secțiunea 8
+
+| # | Întrebare | Până la | Cine răspunde |
+|---|---|---|---|
+| G3-1 | Categoriile din Bucătăria: rânduri de meniu cu fotografie alături (macheta B aprobată la GATE 2, `docs/design-system.md`) sau slider de carduri cu fotografie (cuvântul din PLAN F3 și wireframe-ul S-01)? Am construit rândurile; contradicția e semnalată | F3 pasul 4 | Alin |
+| G3-2 | Antetul compact care rămâne sus pe desktop după primul ecran (nou față de machetă, ca „Rezervă o masă” să fie mereu la un clic) — îl păstrăm? | F3 pasul 4 | Alin |
+| G3-3 | Linkurile spre pagini încă neconstruite (`/contact` din cererea de cazare, `/catalog-vinuri`, paginile legale, `/formular-de-reclamatie`) dau 404 până la pașii 9–10. Le las vizibile (implicit) sau le ascund până atunci? | F3 pasul 4 | Alin |
+| G3-4 | Fotografiile provizorii din F2 (Wikimedia, cu credit) sunt acum în Biblioteca media pe producție. Rămân până vin cele reale (implicit) sau le scot? | F3 | Alin |

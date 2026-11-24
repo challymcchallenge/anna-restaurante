@@ -1,6 +1,6 @@
 # Materiale necesare — Trattoria da Vittoria
 
-Data: 24.11.2026 · Actualizat în F2 · Lista se actualizează la fiecare fază. Coloana „Până la” arată faza înaintea căreia e nevoie de material.
+Data: 24.11.2026 · Actualizat în F3 (pașii 1–3) · Lista se actualizează la fiecare fază. Coloana „Până la” arată faza înaintea căreia e nevoie de material.
 
 Unde se pun: totul se încarcă sau se scrie din panou, cu Trattoria aleasă în comutatorul „Restaurant”.
 Panoul: https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin
@@ -26,22 +26,25 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 |---|---|---|---|---|
 | 7 | Clip hero pentru desktop (în machete: fotografie provizorie) | 16:9, fără sunet, ≤ 30 s | 1 | F3 (amânat la cererea ta) |
 | 8 | Clip hero pentru telefon (în machete: fotografie provizorie) | 9:16, fără sunet, ≤ 30 s | 1 | F3 (amânat la cererea ta) |
-| 9 | Poster hero desktop / telefon (imaginea care apare înaintea clipului) | 16:9, min. 2400 × 1350 · 9:16, min. 1080 × 1920 | 2 | F3 (amânat la cererea ta) |
-| 10 | Câte o fotografie pentru fiecare din cele 8 categorii de preparate | 4:5, min. 1080 × 1350 | 8 | F3 |
+| 9 | Poster hero desktop / telefon (imaginea care apare înaintea clipului). **F3: acum stă o fotografie provizorie** (pizza în cuptor, Wikimedia), cu „Exemplu · de înlocuit” pe hero. Se înlocuiește în Pagina Acasă → Hero → Poster desktop / Poster telefon | 16:9, min. 2400 × 1350 · 9:16, min. 1080 × 1920 | 2 | F3 (amânat la cererea ta) |
+| 10 | Câte o fotografie pentru fiecare din cele 8 categorii de preparate. **F3: 3 provizorii** (Recomandări din partea casei, Pasta e Risotto, Pizza), **5 lipsesc** (Antipasti, Preparate Marine, Preparate Vită, Deserturi, Buona Mattina). Pe desktop, fotografia se schimbă când treci peste rândul categoriei. Unde: Categorii de preparate → Fotografie | 4:5, min. 1080 × 1350 | 8 | F3 |
 | 11 | Saloanele Trattoria și Vittoria | 3:2, min. 1800 × 1200 | 3–10 pe salon | F3 |
 | 12 | Hotel ANNA și cele 2 tipuri de camere | 3:2 | 3 + 2 | F3 |
 | 13 | Cursul de pizza pentru copii | 3:2 | 1 + galerie (cel mult 12) | F3 |
 | 14 | Galerie pe categorii (Restaurant, Preparate, Vinuri, Petreceri, Hotel, Evenimente) | min. 1600 px pe latura lungă | 6–8 pe Acasă, restul în galerie | F3 |
 | 15 | Afișele serilor tematice | 4:5 | câte unul pe seară | la fiecare seară |
 | 16 | Acordul părinților pentru fotografiile cu copii | confirmare scrisă | — | F3 (Q-25, OQ #8) |
-| 31 | Fotografiile pentru direcția aleasă în F2, în locul celor 5 fotografii provizorii din machete (Wikimedia Commons, `design/f2/assets/foto/credits.json`). Direcția aleasă e B · Carta: seară, lumină caldă, cuptorul, pahare, prim-planuri de preparate, oameni la masă (fără fețe recognoscibile fără acord) | ca la 9 și 10 | 5–8 | F3 |
+| 31 | Fotografiile pentru direcția aleasă în F2, în locul celor 5 fotografii provizorii din machete (Wikimedia Commons, `design/f2/assets/foto/credits.json`). **F3: cele 6 provizorii sunt acum în Biblioteca media a Trattoriei, cu titlul „Exemplu · de înlocuit: …” și creditul lor (apare într-un rând în footer). Le ștergi din panou când pui fotografiile tale; nu mai revin.** Direcția aleasă e B · Carta: seară, lumină caldă, cuptorul, pahare, prim-planuri de preparate, oameni la masă (fără fețe recognoscibile fără acord) | ca la 9 și 10 | 5–8 | F3 |
 
 ## 3. Texte și liste
 
 | # | Material | Unde în panou | Până la | Sursa |
 |---|---|---|---|---|
-| 17 | **Lista reală de vinuri** (nume, producător, tip, regiune, an, preț la sticlă și la pahar, volum) | Vinuri. Acum sunt 5 exemple, marcate „Provizoriu” | **F1 → F3** | OQ #5, Q-35 |
-| 18 | Recenziile reale, pentru restaurant și pentru hotel | Recenzii (4 exemple acum) | F3 | D-06, OQ #4 |
+| 17 | **Lista reală de vinuri** (nume, producător, tip, regiune, an, preț la sticlă și la pahar, volum). **F3: secțiunea Vinuri de pe Acasă arată cele 5 exemple, fiecare cu „Exemplu · de înlocuit”**; bifa „Recomandat” alege ce apare (cel mult 10) | Vinuri. Acum sunt 5 exemple, marcate „Provizoriu” | **F1 → F3** | OQ #5, Q-35 |
+| 18 | Recenziile reale, pentru restaurant și pentru hotel. **F3: Acasă arată primele 3 din grupul Restaurant, fiecare cu „Exemplu · de înlocuit”**; legătura „Lasă o recenzie” merge deja la recenzia Google | Recenzii (4 exemple acum) | F3 | D-06, OQ #4 |
+| 32 (nou, F3) | Textul introductiv pentru **Bucătăria** și pentru **Vinuri** (câmpul e gol, secțiunile arată doar titlul). Un rând, cel mult 160 de caractere fiecare | Pagina Acasă → Bucătăria / Vinuri → Text introductiv | F3 | content-model 4.3, 4.4 |
+| 33 (nou, F3) | Rândul de lângă insigna premiului în secțiunea Vinuri (gol acum) | Premii și distincții → Wine Spectator → Rând de text | F3 | content-model 5.10 |
+| 34 (nou, F3, opțional) | Fotografii ale sticlelor de vin (4:5). Primul vin recomandat care are fotografie apare mare în secțiunea Vinuri; acum e o fotografie provizorie pe Chianti Classico DOCG | Vinuri → Fotografie | F3 | content-model 5.2 |
 | ~~19~~ | ~~Cele 9 motive de sesizare~~ — **gata** (D-39) | Motive de sesizare | — | D-39 |
 | ~~20~~ | ~~Adresele site-urilor grupului~~ — **gata** (D-40, 11 linkuri) | Linkuri grup | — | D-40 |
 | ~~21~~ | ~~Linkul paginii de Facebook~~ — **gata** (D-40) | Setări → Rețele sociale | — | D-40 |

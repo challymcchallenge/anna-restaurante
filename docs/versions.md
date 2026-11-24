@@ -1,6 +1,6 @@
 # Versiuni, prețuri și limite verificate
 
-Ultima verificare: **24.11.2026** (F0; completat în F1). Sursa versiunilor: registrul npm (`npm view`) și `package.json` / `pnpm-lock.yaml`. Sursa prețurilor și limitelor: paginile oficiale ale furnizorilor, citite pe 24.11.2026. Ce nu s-a putut citi pe pagina oficială este marcat **neverificat**.
+Ultima verificare: **24.11.2026** (F0; completat în F1, F2, F3). Sursa versiunilor: registrul npm (`npm view`) și `package.json` / `pnpm-lock.yaml`. Sursa prețurilor și limitelor: paginile oficiale ale furnizorilor, citite pe 24.11.2026. Ce nu s-a putut citi pe pagina oficială este marcat **neverificat**.
 
 ## Stack (ADR-001)
 
@@ -56,6 +56,15 @@ Fonturile de pe vineyard.co.za (citit pe 24.11.2026; nu se cumpără, D-42):
 | F-2 | Durata licenței web MyFonts | „Majoritatea fonturilor web au licență anuală” (FAQ MyFonts); pentru Linotype nu e precizat | https://www.myfonts.com/pages/faq | **neverificat** pentru Optima Nova |
 | F-3 | PP Mori (Pangram Pangram) | „Licenses start at $40”; licența se cumpără pe fiecare greutate și utilizare; prețul pe afișări îl calculează site-ul în browser | https://pangrampangram.com/products/mori | parțial; prețul exact **neverificat** |
 | F-4 | Durata licenței Pangram pentru firme | 1 an, apoi reînnoire | https://pangrampangram.com/pages/faq | verificat |
+
+## F3 · site public (24.11.2026)
+
+| Ce | Versiune | Folosire | Licență | Sursă |
+|---|---|---|---|---|
+| Iconițele site-ului (contur) | `lucide-static` 1.79.0 | 18 iconițe copiate ca simboluri SVG în `src/components/site/Icons.tsx`; nu e dependență | ISC | registrul npm, 24.11.2026 |
+| Iconițele rețelelor sociale | `simple-icons` 16.38.1 | Facebook, Instagram, YouTube, TikTok, copiate ca SVG; nu e dependență | CC0-1.0 | registrul npm, 24.11.2026 |
+| Lighthouse (măsurare) | 13.6.0 (publicat 27.10.2026) | `npx lighthouse@13.6.0`, mobil implicit (simulare), Chromium 1243 din container; nu e dependență | Apache-2.0 | registrul npm, 24.11.2026 |
+| Next.js: cache fără Cache Components | 16.4.6 | `unstable_cache` + `revalidateTag(tag, { expire: 0 })` (forma cu un singur argument e învechită în 16) | — | `node_modules/next/dist/docs/01-app/02-guides/caching-without-cache-components.md`, `.../revalidateTag.md` |
 
 ## Servicii: prețuri și limite
 
