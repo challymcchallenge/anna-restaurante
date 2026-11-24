@@ -82,6 +82,24 @@ GATE 2: îmi arăți cele două direcții, cu contrastele măsurate, și aștep�
 
 ---
 
+## PROMPTUL F3 (copy-paste, sesiunea pentru Faza 3, pașii 1–3 · după GATE 2, 24.11.2026)
+
+Propunere Claude Code; ajustează pașii dacă vrei altă împărțire (F3 are 6–8 sesiuni).
+
+```
+Continuăm proiectul Trattoria da Vittoria. Citește CLAUDE.md, docs/DECISIONS.md, docs/ADR.md, docs/PLAN.md, docs/OPEN-QUESTIONS.md și tot ce s-a adăugat în docs/ de la ultima fază (docs/2026_11_24_Trattoria_GATE2.md, docs/design-system.md, docs/materiale-necesare.md, docs/versions.md), plus PRODUCT.md și .impeccable/surfaces/. Spune-mi în 5 rânduri unde am rămas, pe baza fișierelor și a istoricului git.
+
+Apoi rulează Faza 3 din docs/PLAN.md (Site public), pașii 1–3: antet, navigare și footer; hero cu bara de cazare; secțiunea Restaurant (categorii, vinuri recomandate, recenzii). Aceleași reguli ca până acum: te oprești după pasul 3, raportezi cifre reale și aștepți „GO”. Lucrezi autonom pe main; mă oprești doar unde e nevoie de mine.
+
+Pentru F3:
+- Construiești pe direcția B · Carta din docs/design-system.md și pe tema din src/theme: culorile și fonturile se citesc din Setări restaurant; nimic specific Trattoriei în componente.
+- Folosești skill-urile de design instalate (Impeccable, Taste, UI UX Pro Max) cum recomandă documentația lor; contractul direcției e în .impeccable/surfaces/.
+- Conținutul vine din panou; ce lipsește rămâne „Exemplu · de înlocuit” și îmi spui ce lipsește, cu calea din docs/materiale-necesare.md.
+- Măsori și raportezi: contrastul pe randare (scripts/f2/contrast-measure.mjs) și Lighthouse pe mobil (performanță ≥ 85, accesibilitate ≥ 95).
+```
+
+---
+
 ## Note de utilizare
 
 - **Faza 0 are un punct de oprire la pasul b):** Claude Code îți spune ce variabile lipsesc, tu le completezi în `.env.local` și în Vercel, apoi confirmi. Cheile nu trec prin conversație.

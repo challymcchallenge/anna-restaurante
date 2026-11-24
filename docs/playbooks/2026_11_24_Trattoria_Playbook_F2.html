@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Playbook — Trattoria da Vittoria · F2 Direcție de design</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Belleza&family=Hanken+Grotesk:wght@400;600&family=JetBrains+Mono:wght@400&display=swap&subset=latin-ext">
+<style>
+:root {
+  --bg: #F5EDE0; --surface: #FFFCF6; --fg: #241A17; --muted: #5A4A42; --line: #DDD1C0;
+  --accent: #14613F; --accent-soft: #E3EEE7; --verify-bg: #fdf0c8; --verify-fg: #6b4a00; --code-bg: #f1ece6;
+  --font-display: "Belleza", "Optima", "Candara", sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171412; --surface: #201b18; --fg: #f0ebe6; --muted: #b2a79e; --line: #3a322c;
+    --accent: #D6AE66; --accent-soft: #3a2f1d; --verify-bg: #3d3115; --verify-fg: #f2cf7a; --code-bg: #2a231f; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171412; --surface: #201b18; --fg: #f0ebe6; --muted: #b2a79e; --line: #3a322c;
+  --accent: #D6AE66; --accent-soft: #3a2f1d; --verify-bg: #3d3115; --verify-fg: #f2cf7a; --code-bg: #2a231f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.6 var(--font-body); }
+.page { max-width: 960px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; }
+header.top h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 4vw, 38px); line-height: 1.15; margin: 0 0 8px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+nav.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 10px; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13.5px; }
+nav.bar a { color: var(--muted); text-decoration: none; }
+nav.bar a:hover, nav.bar a:focus-visible { color: var(--accent); text-decoration: underline; outline: none; }
+section { scroll-margin-top: 64px; padding-top: 28px; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 23px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0 0 10px; max-width: 72ch; }
+ul, ol { margin: 0 0 12px; padding-left: 22px; max-width: 76ch; }
+li { margin-bottom: 4px; }
+ul.checklist { list-style: none; padding-left: 0; }
+a { color: var(--accent); overflow-wrap: anywhere; }
+code { font-family: var(--font-mono); font-size: 12.5px; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+mark.verify { background: var(--verify-bg); color: var(--verify-fg); padding: 1px 4px; border-radius: 3px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); margin: 0 0 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 11px; border-bottom: 1px solid var(--line); }
+th { background: var(--bg); color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+figure.diagram { margin: 0 0 16px; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+figure.diagram pre { margin: 0; background: transparent; }
+details.prompt { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); margin: 0 0 10px; }
+details.prompt summary { cursor: pointer; padding: 10px 14px; }
+details.prompt summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.prompt__bar { display: flex; justify-content: flex-end; padding: 0 14px; }
+button.copy { font: 600 12.5px var(--font-body); color: var(--accent); background: var(--accent-soft); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+button.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+details.prompt pre { margin: 8px 14px 14px; padding: 12px; background: var(--code-bg); border-radius: 6px; overflow-x: auto; white-space: pre-wrap; font: 12.5px/1.55 var(--font-mono); }
+details.prompt pre code { background: none; padding: 0; }
+p.top { font-size: 12.5px; margin-top: 6px; }
+p.top a { color: var(--muted); }
+footer.credits { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media print { nav.bar, button.copy, .prompt__bar { display: none !important; } details.prompt { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="page" id="top"><header class="top"><h1>Playbook — Trattoria da Vittoria · F2 Direcție de design</h1><p class="meta">Mod: proiect · Stare: stabil (GATE 2 cu „GO B”, 24.11.2026) · Actualizat: 2026-11-24 · Faza următoare: F3 Site public · <a href="https://claude.ai/artifact/EdsBx1Fghq6us6soUPfBG5">pagina de comparație F2</a></p></header>
+<nav class="bar" aria-label="Secțiuni"><a href="#tl-dr">TL;DR</a><a href="#context-si-obiective">Context</a><a href="#cerinte">Cerințe</a><a href="#arhitectura">Arhitectură</a><a href="#stack-si-unelte">Stack</a><a href="#cum-s-a-construit">Cum s-a construit</a><a href="#fluxuri">Fluxuri</a><a href="#prompturi">Prompturi</a><a href="#pasi-de-reconstruire">Reconstruire</a><a href="#checklist-de-refolosire">Refolosire</a><a href="#lectii-invatate">Lecții</a><a href="#probleme-deschise-si-pasii-urmatori">Pașii următori</a><a href="#surse">Surse</a></nav>
+<section id="tl-dr"><h2>TL;DR</h2>
+<ul>
+<li><strong>Ce este:</strong> direcția vizuală a site-ului Trattoria da Vittoria, aleasă dintre două variante. Alin a ales <strong>B · Carta</strong>, construită ca „meniul de seară”: copertă închisă <code>#1C1416</code> cu folio auriu <code>#D6AE66</code> și pagini de hârtie <code>#F5EDE0</code>. La GO a cerut butoane verzi, deci butonul secundar e verde smarald <code>#14613F</code> (D-41).</li>
+<li><strong>Ce rezolvă:</strong> un sistem de design pe restaurant. Culorile și fonturile se aleg în panou (Setări restaurant), iar panoul nu salvează o pereche text/fundal sub 4,5:1. Fonturile sunt gratuite, cu un set aprobat de 4 (D-42). Pictograma de filă e desenată (D-43).</li>
+<li><strong>Rezultat:</strong> contrastul a fost măsurat pe pixelii reali de sub text. Direcția B are minimum <strong>6,43:1 pe telefon și 5,67:1 pe desktop</strong>, pe 82 de rânduri. Testele de integrare: <strong>20/20</strong>. Pe producție au ajuns migrația <code>f2_theme</code>, 4 logo-uri în Biblioteca media și tema completă în Setările Trattoriei. F2 s-a făcut într-o sesiune (estimarea: 1–2).</li>
+<li><strong>Refolosire:</strong> un restaurant nou își alege culorile (verificate automat) și fonturile din set, apoi încarcă logo-ul și favicon-ul. Componentele citesc doar variabilele CSS din <code>src/theme/theme.ts</code>.</li>
+</ul>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="context-si-obiective"><h2>Context și obiective</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Detaliu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problemă</td>
+<td>Site premium pentru un restaurant italian din Târgu Jiu, la nivelul de calitate al vineyard.co.za, fără să copieze referința. Panoul e refolosit de 4 restaurante (ADR-002)</td>
+</tr>
+<tr>
+<td>Vizitatorul nr. 1</td>
+<td>Localnicii care aleg unde iau cina sau unde sărbătoresc (interviul Impeccable cu Alin, PRODUCT.md)</td>
+</tr>
+<tr>
+<td>Anti-obiective (Alin)</td>
+<td>Să nu pară „rece și intimidant”; să nu fie „kitsch italian”</td>
+</tr>
+<tr>
+<td>Obiectivul F2</td>
+<td>Două direcții, fiecare cu Acasă pe telefon și pe desktop (hero, bara de cazare, insigna premiului), contrast măsurat. După alegere: <code>docs/design-system.md</code> și variabilele de temă pe restaurant (PLAN F2)</td>
+</tr>
+<tr>
+<td>Criteriul GATE 2</td>
+<td>Alin alege o direcție</td>
+</tr>
+<tr>
+<td>Constrângeri</td>
+<td>Fonturi cu ș, ț, ă, â, î. Contrast ≥ 4,5:1 raportat cu cifre. Efectele, sunetul, 3D și comutatorul de temă rămân în R2 (D-33). Buget minim (D-31). O singură fază pe sesiune, direct pe <code>main</code> (D-08)</td>
+</tr>
+</tbody>
+</table></div>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="cerinte"><h2>Cerințe</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Tip</th>
+<th>Cerință</th>
+<th>Stare</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Funcțională</td>
+<td>Două direcții, Acasă pe telefon (390 px) și desktop (1440 px): hero, bara de cazare, insigna premiului</td>
+<td>✅ A · Cotto și B · Carta (<code>design/f2/</code>)</td>
+</tr>
+<tr>
+<td>Funcțională</td>
+<td>Pornire de la wireframe-urile S-01 / S-01b și de la <code>design/content-model.md</code></td>
+<td>✅ bara fixă de jos pe telefon, insigna de 72/96 px, cazarea ca buton pe telefon</td>
+</tr>
+<tr>
+<td>Funcțională</td>
+<td>Logo-urile în Biblioteca media a Trattoriei</td>
+<td>✅ Trattoria, ANNA, BizTech + pictograma de filă, prin conținutul de pornire</td>
+</tr>
+<tr>
+<td>Funcțională</td>
+<td>Hero: clip și postere mai târziu, „putem genera ceva temporar”</td>
+<td>✅ fotografii provizorii de pe Wikimedia Commons, cu credite, marcate „Exemplu · de înlocuit”</td>
+</tr>
+<tr>
+<td>Funcțională</td>
+<td>Culori și fonturi elegante, potrivite cu logo-ul, fonturi ca pe vineyard.co.za</td>
+<td>✅ Optima → Belleza / Tenor Sans; PP Mori → Hanken / Host Grotesk</td>
+</tr>
+<tr>
+<td>Funcțională (GO)</td>
+<td>Butoane mai atractive, verde în loc de roșu</td>
+<td>✅ verde smarald <code>#14613F</code> + auriu cu luciu de folio</td>
+</tr>
+<tr>
+<td>Funcțională (GO)</td>
+<td>Variante de fonturi pentru restaurant și hotel, plus prețul fonturilor vineyard</td>
+<td>✅ <code>design/f2/fonturi.html</code> (8 perechi); prețurile în <code>docs/versions.md</code> F-1…F-4</td>
+</tr>
+<tr>
+<td>Funcțională (GO)</td>
+<td>Setul de 4 fonturi, favicon desenat</td>
+<td>✅ <code>src/theme/fonts.ts</code>, <code>design/brand/favicon/</code></td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Setul aprobat devine câmpul de fonturi din Setări restaurant</td>
+<td>✅ „Font titluri” / „Font text” + migrația <code>20261124_143006_f2_theme</code></td>
+</tr>
+<tr>
+<td>Nefuncțională</td>
+<td>Diacriticele românești în fonturi</td>
+<td>✅ fontTools pe fișiere: U+0218–021B, ă, â, î</td>
+</tr>
+<tr>
+<td>Nefuncțională</td>
+<td>Contrast ≥ 4,5:1 verificat și raportat</td>
+<td>✅ măsurat pe pixeli; panoul refuză 5 perechi sub prag</td>
+</tr>
+<tr>
+<td>Nefuncțională</td>
+<td>Lighthouse mobil ≥ 85 / ≥ 95</td>
+<td><mark class="verify">⚠️ de verificat</mark> nu se măsoară în F2 (machete statice); în F3</td>
+</tr>
+<tr>
+<td>Securitate</td>
+<td>Nicio cheie în repo; migrațiile pe producție doar din build-ul de producție</td>
+<td>✅ garda <code>VERCEL_ENV=production</code> în <code>scripts/vercel-build.sh</code></td>
+</tr>
+</tbody>
+</table></div>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="arhitectura"><h2>Arhitectură</h2>
+<p>Tema e pe restaurant. Administratorul completează culorile și fonturile în Setări (Payload). Panoul validează contrastul cu aceleași reguli ca site-ul (<code>validateColorField</code>). <code>src/theme/theme.ts</code> transformă Setările în variabile CSS și reguli <code>@font-face</code>, care servesc doar fonturile alese, din <code>public/fonts/</code>. Componentele din F3 folosesc doar variabilele. La build-ul de producție, conținutul de pornire completează tema și logo-urile numai în câmpurile goale. Machetele și instrumentele de verificare (contrast, Impeccable) stau în afara aplicației: <code>design/f2/</code>, <code>scripts/f2/</code>.</p>
+<figure class="diagram"><pre class="mermaid">flowchart LR
+  ADM[&quot;Administrator · panou /admin&quot;] --&gt;|&quot;culori + fonturi&quot;| SET[&quot;Setări restaurant (Payload)&quot;]
+  SET --&gt;|&quot;validateColorField · 5 perechi ≥ 4,5:1&quot;| SET
+  SEED[&quot;seed/trattoria-da-vittoria.json · settingsFill + media&quot;] --&gt;|&quot;doar câmpuri goale&quot;| SET
+  SET --&gt; DB[(&quot;Supabase Postgres&quot;)]
+  SEED --&gt;|&quot;logo-uri, favicon&quot;| ST[(&quot;Supabase Storage&quot;)]
+  SET --&gt; THEME[&quot;src/theme · themeCssVars + fontFaceCss&quot;]
+  FONTS[&quot;public/fonts · setul de 4 (OFL)&quot;] --&gt; THEME
+  THEME --&gt;|&quot;variabile CSS --c-*, --font-*&quot;| SITE[&quot;Site public (F3)&quot;]
+  ST --&gt; SITE</pre></figure>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="stack-si-unelte"><h2>Stack și unelte</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Strat</th>
+<th>Unealtă / serviciu</th>
+<th>Versiune</th>
+<th>De ce</th>
+<th>Cost / licență</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aplicație</td>
+<td>Next.js + Payload CMS (din F0/F1)</td>
+<td>16.4.6 / 3.94.1</td>
+<td>Stackul aprobat (D-23)</td>
+<td>conturile Pro existente</td>
+</tr>
+<tr>
+<td>Skill design</td>
+<td>Impeccable (<code>npx impeccable install</code>)</td>
+<td>4.10.0, motor 0.1.27 (SHA-256 verificat)</td>
+<td>Interviu <code>PRODUCT.md</code>, <code>concept-seed</code>, craft-floor, detector, <code>first-viewport</code>, contractul direcției</td>
+<td>Apache-2.0, gratuit</td>
+</tr>
+<tr>
+<td>Skill design</td>
+<td>Taste (<code>design-taste-frontend</code>)</td>
+<td>2.5.1, commit <code>6c0b5c7</code></td>
+<td>Reguli pentru localuri, căutare de fotografii provizorii (<code>photos.mjs</code>)</td>
+<td>gratuit</td>
+</tr>
+<tr>
+<td>Skill design</td>
+<td>UI UX Pro Max (<code>ui-ux-pro-max-cli</code>)</td>
+<td>2.15.0</td>
+<td>Căutare <code>--design-system</code>, baza de fonturi Google, lista de verificare</td>
+<td>gratuit</td>
+</tr>
+<tr>
+<td>Skill design</td>
+<td>design-elevation (design-skills)</td>
+<td><mark class="verify">⚠️ de verificat</mark> versiunea pluginului</td>
+<td>Protocolul de rafinare</td>
+<td>gratuit</td>
+</tr>
+<tr>
+<td>Proces</td>
+<td>superpowers:brainstorming</td>
+<td><mark class="verify">⚠️ de verificat</mark> versiunea pluginului</td>
+<td>Pornire; închis pentru că Alin a cerut lucru autonom</td>
+<td>gratuit</td>
+</tr>
+<tr>
+<td>Fonturi</td>
+<td>Belleza, Tenor Sans, Hanken Grotesk, Host Grotesk (<code>@fontsource/*</code>)</td>
+<td>5.3.0</td>
+<td>Cele mai apropiate de Optima + PP Mori, cu diacritice RO</td>
+<td>OFL 1.1, 0 USD</td>
+</tr>
+<tr>
+<td>Fonturi</td>
+<td>Alex Brush</td>
+<td>5.3.0</td>
+<td>Litera „V” din favicon, convertită în contur</td>
+<td>OFL 1.1</td>
+</tr>
+<tr>
+<td>Verificare fonturi</td>
+<td>fontTools (Python)</td>
+<td>4.68.0</td>
+<td>Verificarea U+0218–021B în fișiere</td>
+<td>MIT, gratuit</td>
+</tr>
+<tr>
+<td>Capturi și contrast</td>
+<td>Playwright + Chromium (din container)</td>
+<td>1.63.0</td>
+<td>Machete, capturi 390/1440, măsurarea pe pixeli</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td>Fotografii provizorii</td>
+<td>Wikimedia Commons (prin Taste <code>photos.mjs search/fetch</code>)</td>
+<td>—</td>
+<td>5 fotografii cu licență liberă (CC0, CC BY, CC BY-SA), cu credite</td>
+<td>gratuit, cu atribuire</td>
+</tr>
+<tr>
+<td>Generare imagini</td>
+<td>Hugging Face (FLUX.1-Krea-dev)</td>
+<td>—</td>
+<td>Încercat; <code>invoke</code> dezactivat în sesiune (<code>gradio=none</code>)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Conectori</td>
+<td>Vercel MCP, Supabase MCP, Artifact</td>
+<td>—</td>
+<td>Verificarea deploy-urilor, SQL doar de citire, publicarea paginilor</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="cum-s-a-construit"><h2>Cum s-a construit</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Ora (UTC)</th>
+<th>Commit</th>
+<th>Pas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13:29</td>
+<td><code>22083c5</code></td>
+<td>Skill-urile Impeccable, Taste și UI UX Pro Max instalate în proiect (și global, în containerul cloud). Interviul Impeccable (3 întrebări) → <code>PRODUCT.md</code></td>
+</tr>
+<tr>
+<td>14:00</td>
+<td><code>a373348</code></td>
+<td>Două direcții, A · Cotto și B · Carta (<code>design/f2/</code>). Fonturile verificate, fotografiile provizorii, scripturile de contrast și capturi, logo-urile în conținutul de pornire (test nou, 2/2)</td>
+</tr>
+<tr>
+<td>14:08</td>
+<td><code>d54ad82</code></td>
+<td>Raportul GATE 2 și pagina de comparație (publicată ca artifact). Producția: 3 logo-uri, Logo principal și Logo grup completate</td>
+</tr>
+<tr>
+<td>14:09</td>
+<td><code>2ea21dc</code></td>
+<td>Rezultatul de pe producție notat în raport</td>
+</tr>
+<tr>
+<td>—</td>
+<td>—</td>
+<td><strong>GATE 2: „GO B”</strong>, cu verde la butoane, variante de fonturi, setul de 4 și favicon</td>
+</tr>
+<tr>
+<td>14:36</td>
+<td><code>51e4c6e</code></td>
+<td>Butoane verzi, planșa de 8 perechi de fonturi, favicon, <code>src/theme</code>, câmpurile din Setări, migrația <code>f2_theme</code>, <code>docs/design-system.md</code>. Teste 20/20</td>
+</tr>
+<tr>
+<td>14:37</td>
+<td><code>e732e42</code></td>
+<td>Garda de build: migrațiile și conținutul de pornire doar la producție (după incidentul cu preview-ul)</td>
+</tr>
+<tr>
+<td>14:39</td>
+<td><code>4464a1a</code></td>
+<td>Excepția detectorului pentru planșa de fonturi (crem aprobat în D-41)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Decizii cheie</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Decizie</th>
+<th>Opțiuni</th>
+<th>Aleasă</th>
+<th>Motiv</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cum se aleg direcțiile</td>
+<td>7 direcții ordonate de mine; tragerea la sorți Impeccable; propunerea UI UX Pro Max</td>
+<td>Tragerea Impeccable (poziția 6 → A · Cotto) + alegerea mea nr. 1 (B · Carta)</td>
+<td>Regula Impeccable: direcția trasă + o singură alegere a autorului; exact cele două cerute de Alin</td>
+</tr>
+<tr>
+<td>Direcția</td>
+<td>A · Cotto (zi, teracotă) / B · Carta (seară, copertă și folio)</td>
+<td><strong>B</strong> (Alin, D-41)</td>
+<td>Vizitatorul nr. 1 vine la cină; vinurile și premiul în față</td>
+</tr>
+<tr>
+<td>Culoarea butonului secundar</td>
+<td>Bordo <code>#7B2333</code>; verdele din steag <code>#036625</code>; smarald <code>#14613F</code>; basilico <code>#2E6B45</code></td>
+<td><strong>Smarald</strong></td>
+<td>Cererea lui Alin. Verdele din steag ieșea prea strident; smaraldul are 6,43:1 și se potrivește cu auriul</td>
+</tr>
+<tr>
+<td>Fonturi</td>
+<td>Optima Nova + PP Mori (plătite) / echivalente OFL</td>
+<td><strong>OFL</strong> (D-42)</td>
+<td>≥ 178 USD în primul an pentru un singur restaurant; PP Mori se reînnoiește anual</td>
+</tr>
+<tr>
+<td>Setul aprobat G3</td>
+<td>Doar perechea aleasă / toate 4 cele verificate</td>
+<td><strong>4</strong> (D-42)</td>
+<td>Fiecare restaurant alege fără cod nou</td>
+</tr>
+<tr>
+<td>Câmpurile de culoare</td>
+<td>4 câmpuri (F1) / 6 roluri</td>
+<td><strong>6 roluri</strong> + 5 perechi verificate</td>
+<td>Direcția B are fundal închis și text pe el; contrastul se verifică pe fiecare pereche folosită</td>
+</tr>
+<tr>
+<td>Fotografii provizorii</td>
+<td>Generare AI / Wikimedia Commons / pete de culoare</td>
+<td><strong>Wikimedia</strong></td>
+<td>Generarea nu mergea în sesiune; Taste recomandă fotografii cu licență, nu fundaluri goale</td>
+</tr>
+<tr>
+<td>Fonturile pe site</td>
+<td><code>next/font/local</code> / <code>public/fonts</code> + <code>@font-face</code> generat</td>
+<td><strong><code>public/fonts</code></strong></td>
+<td>Fontul se alege la runtime, pe restaurant; se descarcă doar fonturile alese</td>
+</tr>
+<tr>
+<td>Migrațiile la build</td>
+<td>Pe orice build / doar la producție</td>
+<td><strong>Doar producție</strong></td>
+<td>Preview-ul folosește aceeași bază de date (incidentul din F2)</td>
+</tr>
+</tbody>
+</table></div>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="fluxuri"><h2>Fluxuri</h2>
+<p><strong>1. Cum s-a ales direcția</strong></p>
+<figure class="diagram"><pre class="mermaid">flowchart LR
+  P[&quot;PRODUCT.md · 3 întrebări cu Alin&quot;] --&gt; L[&quot;7 direcții posibile, ordonate&quot;]
+  L --&gt; R{&quot;concept-seed Impeccable&quot;}
+  R --&gt;|&quot;poziția 6&quot;| A[&quot;A · Cotto&quot;]
+  L --&gt;|&quot;alegerea mea, nr. 1&quot;| B[&quot;B · Carta&quot;]
+  A --&gt; M[&quot;Machete 390 + 1440&quot;]
+  B --&gt; M
+  M --&gt; C[&quot;Contrast pe pixeli + detect + first-viewport&quot;]
+  C --&gt; G([&quot;GATE 2&quot;])
+  G --&gt;|&quot;GO B + verde&quot;| D[&quot;design-system.md + temă în Setări&quot;]</pre></figure>
+<p><strong>2. Măsurarea contrastului pe randare (<code>scripts/f2/contrast-measure.mjs</code>)</strong></p>
+<figure class="diagram"><pre class="mermaid">flowchart TD
+  O[&quot;Pagina în Chromium · 390×844 și 1440×900&quot;] --&gt; T[&quot;Rândurile de text vizibile (Range.getClientRects)&quot;]
+  T --&gt; V{&quot;Textul e acoperit? (elementFromPoint)&quot;}
+  V --&gt;|&quot;da, de ex. sub bara fixă&quot;| X[&quot;Nu se măsoară&quot;]
+  V --&gt;|&quot;nu&quot;| H[&quot;Captură cu textul ascuns&quot;]
+  H --&gt; S[&quot;Fiecare pixel de sub rând vs. culoarea textului&quot;]
+  S --&gt; R[&quot;Percentila 5 și minimul · prag 4,5:1&quot;]
+  R --&gt; J[&quot;docs/f2/contrast-*.json&quot;]</pre></figure>
+<p><strong>3. Tema unui restaurant, de la panou la site</strong></p>
+<figure class="diagram"><pre class="mermaid">sequenceDiagram
+  participant A as Administrator
+  participant P as Panou (Setări)
+  participant V as validateColorField
+  participant DB as Postgres
+  participant S as Site (F3)
+  A-&gt;&gt;P: alege culori și fonturi
+  P-&gt;&gt;V: verifică 5 perechi
+  V--&gt;&gt;P: sub 4,5:1 → nu salvează
+  P-&gt;&gt;DB: salvează
+  S-&gt;&gt;DB: citește Setările restaurantului
+  S-&gt;&gt;S: themeStyleSheet → @font-face + :root{--c-*}</pre></figure>
+<p><strong>4. Build-ul pe Vercel, după garda din F2</strong></p>
+<figure class="diagram"><pre class="mermaid">flowchart LR
+  PUSH[&quot;git push&quot;] --&gt; E{&quot;VERCEL_ENV&quot;}
+  E --&gt;|&quot;production&quot;| MIG[&quot;payload migrate&quot;]
+  MIG --&gt; SEED[&quot;conținut de pornire · doar câmpuri goale&quot;]
+  SEED --&gt; NB[&quot;next build&quot;]
+  E --&gt;|&quot;preview&quot;| NB</pre></figure>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="prompturi"><h2>Prompturi</h2>
+<details class="prompt"><summary>Promptul F2 — scris de Alin, 24.11.2026 (cu cele 3 logo-uri atașate: ANNA, BizTech, Trattoria)</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>Continuăm proiectul Trattoria da Vittoria. Citește CLAUDE.md, docs/DECISIONS.md, docs/ADR.md, docs/PLAN.md, docs/OPEN-QUESTIONS.md și tot ce s-a adăugat în docs/ de la ultima fază (docs/2026_11_24_Trattoria_GATE1.md, docs/materiale-necesare.md, docs/versions.md, docs/img/). Spune-mi în 5 rânduri unde am rămas, pe baza fișierelor și a istoricului git.
+
+Apoi rulează Faza 2 din docs/PLAN.md (Direcție de design), pas cu pas, cu aceleași reguli ca până acum: o singură fază, te oprești la GATE 2, raportezi cifre reale și aștepți „GO”. Lucrezi autonom pe main; mă oprești doar unde e nevoie de mine.
+
+Pentru F2:
+- Pornești de la wireframe-urile din design/ și de la design/content-model.md. Referința vineyard.co.za e nivel de calitate, nu model de copiat.
+- Înainte să folosești un skill de design (Taste, Impeccable, UI UX Pro și celelalte instalate), citește-i documentația și folosește doar comenzile și componentele pe care le returnează efectiv.
+- Materialele de brand (logo-uri,) le adaugam în Biblioteca media a restaurantului Trattoria. 
+-clipul și posterele pentru hero le adaugam mai tarziu, putem genera ceva temporar
+-culori, fonturi vreau sa imi propui ceva elegant care sa se potriveasca cu logoul nostru si tema italiana, fonturile imi plac cele de pe  [vineyard.co.za](https://www.vineyard.co.za/)
+Ce lipsește, lucrezi pe conținut provizoriu marcat „Exemplu · de înlocuit” și îmi spui exact ce lipsește, cu calea din docs/materiale-necesare.md.
+- Fonturile alese acoperă diacriticele românești (ș, ț, ă, â, î). Setul aprobat devine câmpul de fonturi din Setări restaurant (amânat din F1).
+- Contrast text/fundal minimum 4,5:1, verificat și raportat cu cifre. Efectele sezoniere, sunetul, 3D și comutatorul de temă rămân în R2 (D-33).
+- Livrabile: două direcții, fiecare cu Acasă pe telefon și pe desktop (hero, bara de cazare, insigna premiului), apoi docs/design-system.md și variabilele de temă pe restaurant pentru direcția aleasă.
+
+GATE 2: îmi arăți cele două direcții, cu contrastele măsurate, și aștepți să aleg una.</code></pre></details>
+<details class="prompt"><summary>Cererea din timpul lucrului — instalarea skill-urilor (Alin)</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>instaleaza aici la proiect si global Taste, Impeccable și UI UX Pro si folosestele cum e mai recomandat</code></pre></details>
+<details class="prompt"><summary>Comenzile de instalare folosite (recomandate de autori)</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>npx -y impeccable@4.10.0 install --providers=claude --scope=project -y
+npx -y impeccable@4.10.0 install --providers=claude --scope=global -y
+npx -y skills@1.9.0 add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend -a claude-code -y
+npx -y skills@1.9.0 add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend -a claude-code -g -y
+npx -y ui-ux-pro-max-cli@2.15.0 init --ai claude
+npx -y ui-ux-pro-max-cli@2.15.0 init --ai claude --global</code></pre></details>
+<details class="prompt"><summary>Interviul Impeccable pentru PRODUCT.md — întrebările și răspunsurile lui Alin</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>1. „Trattoria da Vittoria (F2, direcția de design): cine este vizitatorul nr. 1 pe care trebuie să-l convingă pagina Acasă în primele 5 secunde?”
+   → „Localnici, cină și ocazii”
+2. „Trattoria da Vittoria: ce poate spune adevărat Trattoria și niciun alt restaurant din Târgu Jiu nu poate? (alege 1–2)”
+   → „cursuri de pizza pentru copii,Vinurile,Bucătăria italiană autentică,Totul într-un loc, Grupul ANNA,Serile și atmosfera”
+3. „Trattoria da Vittoria: ce ar face site-ul să pară greșit pentru voi, chiar dacă arată „frumos”?”
+   → „Rece și intimidant,Kitsch italian”</code></pre></details>
+<details class="prompt"><summary>GO la GATE 2 (Alin)</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>GO B, dar culorile butoanelor sa fie mai atractive (poate putem folosi o paleta de verde pentru cele rosii ?)fonturi gratuite dar as mai vrea cateva variante de font prezentate potrivite pentru restaurant/hotel (+i cat ar costa fonturile wineyard), setul de 4, desenează tu favicon-ul</code></pre></details>
+<details class="prompt"><summary>Contractul direcției B — .impeccable/surfaces/design-f2-directia-b-carta-html.md (pentru verificarea finală din F3)</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>THESIS: Acasă e meniul de seară al casei: o copertă închisă cu folio care se deschide în pagini de hârtie. Refuză hero-ul generic cu fotografie și buton centrat peste un gradient negru.
+OWN-WORLD: copertă #1C1416, folio #D6AE66 (din inelul logo-ului, cu luciu pe butonul principal), hârtie #F5EDE0, cerneală #241A17, verde smarald #14613F pentru butonul secundar. Belleza la titluri, Hanken Grotesk la text. Chenar dublu de folio pe copertă, rânduri de meniu cu linie de puncte, butoane-pastilă.
+STORY: vizitatorul vede focul și masa, înțelege că e cel mai bun loc din oraș (tagline-ul, insigna premiului) și rezervă; apoi răsfoiește meniul, vinurile, cazarea și serile.
+FIRST VIEWPORT: fotografia sau clipul pe toată lățimea, umbră caldă din stânga; în stânga tagline-ul mare, insigna rezervată 96 px (72 px pe telefon), subtitlul, „Rezervă o masă” (auriu) și „Meniu”; jos fâșia de hârtie a cazării. Pe telefon acțiunea stă în bara fixă de jos.
+FORM: Carta dei vini, poziția 1 din 7 (alegerea Impeccable; tragerea a dat poziția 6, Cotto); aleasă de Alin la GATE 2 (GO B, 24.11.2026). seed:a309c5956e16fe6f
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance</code></pre></details>
+<details class="prompt"><summary>Promptul F3 — propunere pentru sesiunea următoare (și în docs/META-PROMPT.md)</summary><div class="prompt__bar"><button type="button" class="copy">Copiază</button></div><pre><code>Continuăm proiectul Trattoria da Vittoria. Citește CLAUDE.md, docs/DECISIONS.md, docs/ADR.md, docs/PLAN.md, docs/OPEN-QUESTIONS.md și tot ce s-a adăugat în docs/ de la ultima fază (docs/2026_11_24_Trattoria_GATE2.md, docs/design-system.md, docs/materiale-necesare.md, docs/versions.md), plus PRODUCT.md și .impeccable/surfaces/. Spune-mi în 5 rânduri unde am rămas, pe baza fișierelor și a istoricului git.
+
+Apoi rulează Faza 3 din docs/PLAN.md (Site public), pașii 1–3: antet, navigare și footer; hero cu bara de cazare; secțiunea Restaurant (categorii, vinuri recomandate, recenzii). Aceleași reguli ca până acum: te oprești după pasul 3, raportezi cifre reale și aștepți „GO”. Lucrezi autonom pe main; mă oprești doar unde e nevoie de mine.
+
+Pentru F3:
+- Construiești pe direcția B · Carta din docs/design-system.md și pe tema din src/theme: culorile și fonturile se citesc din Setări restaurant; nimic specific Trattoriei în componente.
+- Folosești skill-urile de design instalate (Impeccable, Taste, UI UX Pro Max) cum recomandă documentația lor; contractul direcției e în .impeccable/surfaces/.
+- Conținutul vine din panou; ce lipsește rămâne „Exemplu · de înlocuit” și îmi spui ce lipsește, cu calea din docs/materiale-necesare.md.
+- Măsori și raportezi: contrastul pe randare (scripts/f2/contrast-measure.mjs) și Lighthouse pe mobil (performanță ≥ 85, accesibilitate ≥ 95).</code></pre></details>
+<p>Regulile proiectului (<code>CLAUDE.md</code>, masterprompt) sunt neschimbate; textul complet e în Playbook F1.</p>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="pasi-de-reconstruire"><h2>Pași de reconstruire</h2>
+<p>De la zero, local, pe o bază Postgres proprie (testele refuză orice bază care nu e locală):</p>
+<ol>
+<li><code>git clone https://github.com/challymcchallenge/anna-restaurante &amp;&amp; cd anna-restaurante</code></li>
+<li><code>pnpm install --frozen-lockfile</code> (Node ≥ 22.23.5, pnpm 10.28.0)</li>
+<li>Pornește Postgres și creează o bază locală. Exportă <code>DATABASE_URI=postgres://&lt;user&gt;:&lt;parolă&gt;@localhost:5432/&lt;baza&gt;</code> și <code>PAYLOAD_SECRET=&lt;orice-text-local&gt;</code>. Valorile reale nu intră în repo.</li>
+<li><code>pnpm payload migrate</code> (include <code>20261124_143006_f2_theme</code>) și <code>pnpm generate:types</code></li>
+<li><code>pnpm test:int</code> → 20/20 (F1 13, API 1, logo-uri 2, temă 4)</li>
+<li>Machetele: deschide <code>design/f2/directia-b-carta.html</code> și <code>design/f2/fonturi.html</code> în browser</li>
+<li>Contrastul: <code>node scripts/f2/contrast-measure.mjs design/f2/directia-b-carta.html "B" docs/f2/contrast-b-carta.json</code> (adaugă <code>dark</code> ca al 4-lea argument pentru tema închisă)</li>
+<li>Capturile: <code>node scripts/f2/capture.mjs design/f2/directia-b-carta.html design/f2/capturi/f2-b-carta</code></li>
+<li>Verificările Impeccable: <code>.claude/skills/impeccable/scripts/impeccable detect design/f2/directia-b-carta.html</code> și <code>… first-viewport design/f2/directia-b-carta.html --thesis ".hero" --action ".hero-actions .btn-primary"</code></li>
+<li><code>pnpm build</code> local, apoi push pe <code>main</code>. Vercel rulează migrația și conținutul de pornire doar la producție.</li>
+<li>Skill-urile pe un calculator nou: comenzile din „Comenzile de instalare folosite”, cu <code>--scope=global</code> / <code>-g</code> / <code>--global</code></li>
+</ol>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="checklist-de-refolosire"><h2>Checklist de refolosire</h2>
+<p>Pentru un restaurant nou al grupului (Citybar, SuperBistro, Terasa Anna):</p>
+<ul class="checklist">
+<li>☐ Logo-ul principal, logo-ul grupului și pictograma de filă în Biblioteca media (sau în <code>seed/&lt;slug&gt;.json</code> → <code>media</code> + <code>settingsMedia</code>)</li>
+<li>☐ Culorile în Setări → Culori (6 roluri). Panoul refuză o pereche sub 4,5:1</li>
+<li>☐ „Font titluri” și „Font text” din setul aprobat; un font nou intră doar după verificarea U+0218–021B și o migrație</li>
+<li>☐ Fotografiile proprii în locul celor provizorii (formatele HERO-L/P, CARD-P, CARD-L)</li>
+<li>☐ Măsurarea contrastului pe paginile reale (<code>scripts/f2/contrast-measure.mjs</code>)</li>
+<li>☐ Licențele: fonturile OFL se pot folosi pe toate domeniile; fonturile plătite cer licență pe fiecare domeniu</li>
+</ul>
+<p>Pentru un alt client (alt proiect):</p>
+<ul class="checklist">
+<li>☐ Interviul Impeccable → <code>PRODUCT.md</code> (vizitatorul nr. 1, diferențele, anti-obiectivele)</li>
+<li>☐ <code>concept-seed</code> + 7 direcții ordonate; arăți direcția trasă și alegerea ta</li>
+<li>☐ Fonturile: <code>npm pack @fontsource/&lt;font&gt;</code> + fontTools pe limbile clientului</li>
+<li>☐ Contrastul măsurat pe randare, nu doar pe perechile de culori</li>
+<li>☐ Garda <code>VERCEL_ENV=production</code> dacă preview-urile folosesc baza de producție</li>
+</ul>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="lectii-invatate"><h2>Lecții învățate</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Ce</th>
+<th>Lecția</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skill-urile cerute lipseau din sesiunea cloud</td>
+<td>Se instalează la cerere, cu comanda autorului. Globalul din container dispare la închidere; doar instalarea în proiect rămâne (salvată în repo)</td>
+</tr>
+<tr>
+<td>9 din 17 fișiere WebP descărcate de Taste erau corupte</td>
+<td>Fiecare imagine descărcată se decodează (PIL) înainte de folosire; cele corupte s-au refăcut din sursa Wikimedia</td>
+</tr>
+<tr>
+<td>Wikimedia: miniaturile de 400 px dădeau 400; descărcarea în paralel era limitată</td>
+<td>Lățimi standard (500 / 960 / 1280 / 1920), descărcare secvențială cu reîncercări</td>
+</tr>
+<tr>
+<td>Detectorul static Impeccable a dat contrast fals (textul crem comparat cu fundalul paginii)</td>
+<td>Contrastul se măsoară pe randare, pixel cu pixel. Excepțiile se notează îngust, pe fișier, cu motiv și dovadă</td>
+</tr>
+<tr>
+<td>Textul de sub bara fixă de jos ieșea „2,5:1”</td>
+<td>Verificare de vizibilitate (<code>elementFromPoint</code>) înainte de măsurare</td>
+</tr>
+<tr>
+<td>Telefonul și „RO” din antet stăteau peste tencuiala luminoasă (4,18 / 4,29)</td>
+<td>Umbra de sus întărită → 7,71 / 7,84. Fără măsurare pe pixeli, problema nu se vedea</td>
+</tr>
+<tr>
+<td><code>tsc</code> a prins o eroare de tip care ar fi stricat build-ul Vercel</td>
+<td>Înainte de push: <code>tsc</code>, testele, <code>pnpm build</code> local</td>
+</tr>
+<tr>
+<td>Un preview a rulat aceeași migrație pe baza de producție, în paralel</td>
+<td>Migrațiile și conținutul de pornire rulează doar la <code>VERCEL_ENV=production</code>; verificat pe ambele build-uri</td>
+</tr>
+<tr>
+<td>Marcellus, Italiana, Della Respira și Cagliostro n-au ș și ț cu virgulă</td>
+<td>Fontul se verifică în fișier (cmap), nu după „latin-ext” din listă</td>
+</tr>
+<tr>
+<td>Verdele pe copertă: 2,42:1</td>
+<td>Pe fundalul închis butonul rămâne auriu; verdele doar pe hârtie</td>
+</tr>
+<tr>
+<td>Taste interzice telefoanele reale și hero-urile întunecate la localuri</td>
+<td>Regulile proiectului (D-17) și brief-ul câștigă; conflictul se notează</td>
+</tr>
+<tr>
+<td>Prettier a reformatat fișiere mai vechi (printWidth 100)</td>
+<td>Diferențe mari la primul commit; de rulat o dată pe tot repo-ul, separat</td>
+</tr>
+</tbody>
+</table></div>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="probleme-deschise-si-pasii-urmatori"><h2>Probleme deschise și pașii următori</h2>
+<ul>
+<li><strong>F3 · Site public</strong>, într-o sesiune nouă: promptul e mai sus și în <code>docs/META-PROMPT.md</code> (pașii 1–3).</li>
+<li><strong>G2-5 (opțional):</strong> o variantă de font din <code>design/f2/fonturi.html</code> în locul perechii Belleza + Hanken Grotesk.</li>
+<li><strong>Materiale</strong> (<code>docs/materiale-necesare.md</code>): clipurile și posterele hero (#7–9), fotografiile de seară în locul celor provizorii (#31).</li>
+<li><mark class="verify">⚠️ de verificat</mark> durata licenței web Optima Nova (MyFonts: „majoritatea” licențelor web sunt anuale) și prețul exact PP Mori pe afișări. Nu sunt necesare cât timp rămân fonturile gratuite.</li>
+<li><strong>Lighthouse pe mobil:</strong> se măsoară în F3, pe paginile reale.</li>
+<li><strong>La finalul F3:</strong> revizia de final Impeccable și <code>DESIGN.md</code> scris din site-ul construit (linia FINISH din contract).</li>
+</ul>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<section id="surse"><h2>Surse</h2>
+<ul>
+<li>Repo: https://github.com/challymcchallenge/anna-restaurante (main, <code>22083c5</code>…<code>4464a1a</code>)</li>
+<li><code>docs/2026_11_24_Trattoria_GATE2.md</code>, <code>docs/design-system.md</code>, <code>docs/DECISIONS.md</code> (D-41…D-43), <code>docs/PLAN.md</code>, <code>docs/versions.md</code>, <code>docs/materiale-necesare.md</code>, <code>docs/META-PROMPT.md</code></li>
+<li><code>PRODUCT.md</code>, <code>.impeccable/surfaces/design-f2-directia-b-carta-html.md</code>, <code>.impeccable/config.json</code></li>
+<li><code>design/f2/</code> (machete, capturi, <code>fonturi.html</code>), <code>design/brand/favicon/</code>, <code>docs/f2/contrast-*.json</code></li>
+<li><code>src/theme/</code>, <code>src/collections/Settings.ts</code>, <code>src/migrations/20261124_143006_f2_theme.ts</code>, <code>scripts/vercel-build.sh</code>, <code>tests/int/f2-*.int.spec.ts</code></li>
+<li>Pagina de comparație (privată): https://claude.ai/artifact/EdsBx1Fghq6us6soUPfBG5</li>
+<li>Deploy-uri Vercel: <code>dpl_9YX6qkL7k2aDqxo1MzorMUpiiJKB</code>, <code>dpl_B9f94cbyAu26Lz9iF5Dez9fJDqL4</code>, <code>dpl_Bzygf5oQfeYipoRuXcVWwY1tfd3G</code> (producție); <code>dpl_6m1jJb8Tn4bJVnpQW26QbXY9rBpW</code> (preview eșuat), <code>dpl_AYhq3a7ye5r3dAE89LVNKyV8sWqj</code> (preview cu gardă)</li>
+<li>Prețuri: https://www.myfonts.com/products/pro-regular-optima-nova-lt-1078902, https://pangrampangram.com/products/mori, https://pangrampangram.com/pages/faq (citite pe 24.11.2026)</li>
+<li>Conversația Claude Code din 24.11.2026, sesiunea F2</li>
+</ul>
+<p class="top"><a href="#top">↑ Sus</a></p>
+</section>
+<footer class="credits"><span>100% AI Solutions &amp; Agentic Work-Flows for SMEs</span><span>Made with ❤️ by BizTech Consulting SRL</span><span>Alin Labau - AI Project Manager | +40 772 295 031 | www.biztech.ro</span></footer></div>
+<script>
+document.querySelectorAll('details.prompt button.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var code = btn.closest('details').querySelector('pre code');
+    var text = code ? code.textContent : '';
+    var done = function () { btn.textContent = 'Copiat'; setTimeout(function () { btn.textContent = 'Copiază'; }, 2000); };
+    try { navigator.clipboard.writeText(text).then(done, function () { select(code); }); } catch (e) { select(code); }
+  });
+});
+function select(node) { try { var r = document.createRange(); r.selectNodeContents(node); var s = getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {} }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+<script>try { mermaid.initialize({ startOnLoad: true, securityLevel: 'strict', theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default' }); } catch (e) {}</script>
+</body>
+</html>
