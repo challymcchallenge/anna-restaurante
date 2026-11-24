@@ -466,6 +466,10 @@ export interface Tenant {
    */
   allowIndexing?: boolean | null;
   active?: boolean | null;
+  /**
+   * Completat automat, o singură dată, din seed/<identificator>.json. Gol = nu s-a aplicat.
+   */
+  starterContentAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2275,6 +2279,7 @@ export interface TenantsSelect<T extends boolean = true> {
       };
   allowIndexing?: T;
   active?: T;
+  starterContentAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

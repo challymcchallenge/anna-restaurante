@@ -4,8 +4,13 @@ import type { CollectionSlug, Payload, PayloadRequest } from 'payload'
 
 /**
  * Conținut de pornire (F1, PLAN pasul 5). Citește fișierele `seed/<slug-restaurant>.json` (date, nu cod)
- * și le aplică restaurantului cu acel slug, doar unde nu există încă nimic. Se poate rula de mai multe
- * ori fără dubluri. Restaurantele fără fișier nu primesc nimic.
+ * și le aplică restaurantului cu acel slug.
+ *
+ * Rulează după toate migrațiile (scripts/seed-starter.ts, apelat din scripts/vercel-build.sh), nu ca
+ * migrație: folosește API-ul Payload, care presupune schema completă.
+ * Se aplică o singură dată pe restaurant (câmpul „Conținut de pornire aplicat la”). Dacă o rulare se
+ * oprește la jumătate, următoarea completează doar colecțiile goale, fără dubluri.
+ * Restaurantele fără fișier nu primesc nimic.
  */
 
 type SeedFile = {
@@ -95,6 +100,10 @@ export async function seedStarterContent({
       payload.logger.info(`[seed] ${file}: restaurantul „${seed.tenantSlug}” nu există; sar peste.`)
       continue
     }
+    if (tenant.starterContentAt) {
+      payload.logger.info(`[seed] ${seed.tenantSlug}: aplicat deja la ${tenant.starterContentAt}; sar peste.`)
+      continue
+    }
     const created: Record<string, number> = {}
     const base = { tenant: tenant.id }
     const ctx = { seed: true }
@@ -118,6 +127,12 @@ export async function seedStarterContent({
       created[collection] = items.length
     }
 
+    await payload.update({
+      collection: 'tenants',
+      id: tenant.id,
+      data: { starterContentAt: new Date().toISOString() },
+      req,
+    })
     payload.logger.info(`[seed] ${seed.tenantSlug}: ${JSON.stringify(created)}`)
     report.push({ tenant: seed.tenantSlug, created })
   }

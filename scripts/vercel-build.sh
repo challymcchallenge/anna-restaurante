@@ -6,6 +6,9 @@ set -e
 if [ -n "$DATABASE_URI" ] && [ -d src/migrations ]; then
   echo "[vercel-build] payload migrate"
   pnpm payload migrate
+  # Conținutul de pornire (seed/*.json), o singură dată pe restaurant, după toate migrațiile (F1).
+  echo "[vercel-build] conținut de pornire"
+  pnpm payload run scripts/seed-starter.ts
 else
   echo "[vercel-build] DATABASE_URI lipsă sau fără src/migrations: sar peste migrații"
 fi

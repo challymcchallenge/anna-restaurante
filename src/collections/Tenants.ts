@@ -79,5 +79,16 @@ export const Tenants: CollectionConfig = {
       type: 'checkbox',
       defaultValue: true,
     },
+    {
+      name: 'starterContentAt',
+      label: 'Conținut de pornire aplicat la',
+      type: 'date',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+        description: 'Completat automat, o singură dată, din seed/<identificator>.json. Gol = nu s-a aplicat.',
+        date: { pickerAppearance: 'dayAndTime' },
+      },
+    },
   ],
 }
