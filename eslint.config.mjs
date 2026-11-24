@@ -39,6 +39,8 @@ const eslintConfig = [
       'public/spike/',
       'test-results/',
       'playwright-report/',
+      // Skill-urile de design instalate (Impeccable, Taste, UI UX Pro Max): cod terț, nu al site-ului.
+      '.claude/',
     ],
   },
 ]

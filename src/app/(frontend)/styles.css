@@ -259,7 +259,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .site-footer { background: var(--c-dark); color: var(--c-on-dark); padding: var(--s8) 0 calc(var(--s6) + var(--bar-h) + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-cover); }
 .footer-grid { display: grid; gap: var(--s7); }
 .footer-title { font: 400 24px/1.15 var(--font-display); margin-bottom: var(--s4); }
-.footer-title--logo img { width: 56px; height: 56px; object-fit: contain; }
+.footer-logo img { display: block; height: 30px; width: auto; }
 .footer-line { display: flex; align-items: flex-start; gap: var(--s3); margin-top: var(--s3); font-size: 16px; }
 .footer-line .icon { width: 18px; height: 18px; margin-top: 3px; color: var(--c-accent); }
 .footer-line a { text-decoration: none; font-variant-numeric: tabular-nums; }
@@ -571,40 +571,51 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .cat-name { font-size: 26px; }
 }
 
-/* Vinuri: lista de vinuri, pe copertă; insigna premiului în antet (D-20) */
+/* Vinuri: lista de vinuri pe copertă (D-46, poza 6); logo-ul grupului deasupra; insigna în antet (D-20) */
 .wines-head { display: grid; justify-items: center; text-align: center; }
 .wines-head h2, .wines-head .section-intro { margin-inline: auto; }
-.wines-award { display: grid; justify-items: center; gap: var(--s3); margin-bottom: var(--s6); }
+.wines-logo img, .cover-logo img { display: block; height: 32px; width: auto; }
+.wines-logo { margin-bottom: var(--s5); }
+.wines-award { display: grid; justify-items: center; gap: var(--s3); margin-top: var(--s5); }
 .wines-line { font-size: 15px; color: var(--c-on-dark-2); max-width: 44ch; }
-.wines-body {
-  display: grid; gap: var(--s6); margin-top: var(--s7); padding-top: var(--s6);
-  border-top: 1px solid var(--line-cover-strong);
-  box-shadow: inset 0 4px 0 -3px var(--line-cover);
-}
-.wine-list { list-style: none; margin: 0; padding: 0; }
-.wine {
-  display: grid; grid-template-columns: minmax(0, auto) minmax(16px, 1fr) auto; align-items: start; gap: var(--s3);
-  padding: var(--s4) 0; border-bottom: 1px solid var(--line-cover);
-}
-.wine-name { font: 400 22px/1.2 var(--font-display); }
-.wine-producer { margin-top: 2px; font-size: 15px; color: var(--c-on-dark); }
-.wine-meta { margin-top: var(--s1); font-size: 14px; line-height: 1.5; color: var(--c-on-dark-2); }
-.wine-meta .row-tag { margin-top: var(--s2); margin-left: 0; display: flex; width: max-content; }
-.wine-dots { border-bottom: 1px dotted var(--line-cover-strong); margin-top: 1.05em; }
-.wine-price { display: grid; justify-items: end; text-align: right; }
-.wine-amount { font: 400 22px/1.2 var(--font-display); color: var(--c-accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.wine-unit { font-size: 13px; color: var(--c-on-dark-2); white-space: nowrap; }
-.wines-photo { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-box); order: -1; }
-.wines-photo picture { height: 100%; }
-.wines-photo img { width: 100%; height: 100%; object-fit: cover; }
 .wines-cta { display: flex; justify-content: center; margin-top: var(--s7); }
+
+/* Filtrul pe tip: butoane radio afișate ca jetoane; merge fără JavaScript (:has) */
+.wine-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); min-width: 0; margin: var(--s6) 0 0; padding: 0; border: 0; }
+.wine-chip { position: relative; display: inline-flex; }
+.wine-chip input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.wine-chip label {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s4); border: 1px solid var(--ghost-border);
+  border-radius: var(--radius-btn); font: 600 15px/1 var(--font-text); color: var(--c-on-dark);
+  transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.wine-chip input:hover + label { border-color: var(--c-accent); }
+.wine-chip input:checked + label { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-on-accent); }
+.wine-chip input:focus-visible + label { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.wine-board [hidden] { display: none !important; }
+.wine-board:has(.wine-filter input[value='sparkling']:checked) .wine-group:not([data-type='sparkling']),
+.wine-board:has(.wine-filter input[value='white']:checked) .wine-group:not([data-type='white']),
+.wine-board:has(.wine-filter input[value='rose']:checked) .wine-group:not([data-type='rose']),
+.wine-board:has(.wine-filter input[value='red']:checked) .wine-group:not([data-type='red']),
+.wine-board:has(.wine-filter input[value='dessert']:checked) .wine-group:not([data-type='dessert']) { display: none; }
+
+.wine-groups { display: grid; gap: var(--s6); margin-top: var(--s6); }
+.wine-group-title {
+  font: 600 13px/1.3 var(--font-text); letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-accent);
+  padding-bottom: var(--s3); border-bottom: 1px solid var(--line-cover-strong);
+}
+.wine-items { list-style: none; margin: 0; padding: 0; }
+.wine-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s4); padding: var(--s4) 0; border-bottom: 1px solid var(--line-cover); }
+.wine-name { font: 400 20px/1.25 var(--font-display); text-wrap: pretty; }
+.wine-price { font: 400 20px/1.25 var(--font-display); color: var(--c-accent); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.wine-meta { grid-column: 1 / -1; margin-top: var(--s1); font-size: 14px; line-height: 1.5; color: var(--c-on-dark-2); }
+.wine-meta .row-tag { margin-top: var(--s2); margin-left: 0; display: flex; width: max-content; }
 @media (min-width: 1024px) {
-  .wines-body { grid-template-columns: 7fr 5fr; column-gap: var(--s8); align-items: start; }
-  .wines-body--list { grid-template-columns: 1fr; }
-  .wines-body--list .wine-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s8); }
-  .wines-photo { order: 0; aspect-ratio: 4 / 5; position: sticky; top: 96px; }
-  .wine-name, .wine-amount { font-size: 26px; }
-  .wine-meta .row-tag { display: inline-flex; margin: 0 0 0 var(--s2); }
+  .wines-logo img, .cover-logo img { height: 40px; }
+  .wine-groups { grid-template-columns: 1fr 1fr; column-gap: var(--s8); row-gap: var(--s7); margin-top: var(--s7); }
+  .wine-board:has(.wine-filter input:not([value='all']):checked) .wine-groups { grid-template-columns: 1fr; }
+  .wine-board:has(.wine-filter input:not([value='all']):checked) .wine-items { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s8); }
+  .wine-name, .wine-price { font-size: 22px; }
 }
 
 /* Ce spun oaspeții: un citat mare și două mai mici */
@@ -676,6 +687,54 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .page-cover { padding: calc(24px + var(--header-h) + var(--s8)) 0 var(--s9); }
   .page-cover h1 { font-size: 72px; line-height: 1; }
   .page-intro { font-size: 20px; }
+}
+
+/* ---------- Lista de vinuri, /catalog-vinuri (S-23, D-46, poza 7): foaia de hârtie ---------- */
+.cover-logo { display: block; margin-top: var(--s5); }
+.page-award { display: grid; justify-items: start; gap: var(--s3); margin-top: var(--s5); }
+.wine-page { padding-top: var(--s6); }
+.wine-sheet { max-width: 760px; margin-inline: auto; }
+.wine-tools { display: grid; gap: var(--s4); }
+.wine-sheet .wine-filter { justify-content: flex-start; margin: 0; }
+.wine-sheet .wine-chip label { color: var(--c-text); border-color: var(--line-paper-strong); }
+.wine-sheet .wine-chip input:hover + label { border-color: var(--c-text); }
+.wine-sheet .wine-chip input:checked + label { background: var(--c-text); border-color: var(--c-text); color: var(--c-bg); }
+.wine-sheet .wine-chip input:focus-visible + label { outline-color: var(--c-accent-2); }
+.wine-search { position: relative; }
+.wine-search .icon { position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); color: var(--c-text-2); pointer-events: none; }
+.wine-search input {
+  width: 100%; min-height: 48px; padding: 0 var(--s4) 0 46px; border: 1px solid var(--line-paper-strong); border-radius: var(--radius-btn);
+  background: transparent; font: 400 16px/1.2 var(--font-text); color: var(--c-text);
+}
+.wine-search input::placeholder { color: var(--c-text-2); opacity: 1; }
+.wine-search input:focus-visible { outline: 2px solid var(--c-accent-2); outline-offset: 2px; }
+.wine-empty { display: grid; justify-items: start; gap: var(--s2); padding: var(--s5); border: 1px solid var(--line-paper-strong); border-radius: var(--radius-box); }
+.wine-empty-title { font: 400 22px/1.25 var(--font-display); }
+.wine-empty .btn { margin-top: var(--s2); }
+.wine-sheet .wine-group { margin-top: var(--s7); }
+.wine-group-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); padding-bottom: var(--s3); border-bottom: 1px solid var(--line-paper-strong); }
+.wine-sheet h2.wine-group-title { max-width: none; padding: 0; border: 0; font: 600 13px/1.3 var(--font-text); letter-spacing: 0.18em; color: var(--c-accent-ink); }
+.wine-legend { font-size: 13px; color: var(--c-text-2); white-space: nowrap; }
+.wine-origin { margin-top: var(--s5); }
+.wine-origin-title { font: 400 18px/1.3 var(--font-display); color: var(--c-text-2); }
+.wine-lines { list-style: none; margin: var(--s1) 0 0; padding: 0; }
+.wine-line { display: grid; grid-template-columns: minmax(0, 1fr) auto 3.6em; column-gap: var(--s4); align-items: baseline; padding: var(--s3) 0; }
+.wine-line-name { font: 400 17px/1.35 var(--font-text); text-wrap: pretty; }
+.wine-line-name strong { font-weight: 600; }
+.wine-line-year, .wine-line-price { font: 400 17px/1.35 var(--font-text); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+.wine-line-year abbr { text-decoration: none; }
+.wine-line-detail { grid-column: 1 / -1; margin-top: 2px; font-size: 14px; line-height: 1.45; color: var(--c-text-2); }
+.wine-line-detail .row-tag { margin-left: var(--s2); }
+.wine-sheet-foot { display: grid; justify-items: center; gap: var(--s5); margin-top: var(--s8); padding-top: var(--s5); border-top: 1px solid var(--line-paper); text-align: center; }
+.wine-note { font-size: 14px; line-height: 1.5; color: var(--c-text-2); max-width: 56ch; }
+.wine-sheet-logo img { display: block; height: 28px; width: auto; }
+@media (min-width: 1024px) {
+  .wine-page { padding-top: var(--s8); }
+  .wine-sheet {
+    padding: var(--s8) var(--s8) var(--s7); border: 1px solid var(--line-paper);
+    background: color-mix(in srgb, var(--c-bg), #ffffff 40%); box-shadow: 0 24px 48px -32px var(--shadow-warm);
+  }
+  .wine-line-name, .wine-line-year, .wine-line-price { font-size: 18px; }
 }
 
 /* ---------- Petreceri și agenda (S-03) ---------- */

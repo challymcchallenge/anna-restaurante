@@ -18,7 +18,7 @@ export function pageMediaCredits(site: SiteData): string[] {
     for (const slide of hero?.slides ?? []) refs.push(slide.desktop, slide.mobile)
   }
   if (isOn(home, 'kitchen')) refs.push(...site.dishCategories.map((c) => c.photo))
-  if (isOn(home, 'wines')) refs.push(...site.wines.map((w) => w.photo))
+  // Lista de vinuri nu arată fotografii (D-46).
   // F3 pașii 4–6: afișele serilor, fotografiile saloanelor, fotografia și galeria cursului.
   if (isOn(home, 'parties')) refs.push(...site.eventsUpcoming.map((e) => e.poster))
   if (isOn(home, 'privateEvents')) refs.push(...site.salons.flatMap((x) => (x.photos ?? []) as MediaRef[]))

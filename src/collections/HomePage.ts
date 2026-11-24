@@ -130,7 +130,7 @@ export const HomePage: CollectionConfig = {
           'wines',
           'Vinuri',
           [title(), intro(), button('Vezi lista de vinuri', 'Duce la /catalog-vinuri.')],
-          'Cardurile sunt vinurile bifate „Recomandat” (cel mult 10).',
+          'Lista arată vinurile bifate „Recomandat” (cel mult 5 din fiecare tip), pe tipuri, cu filtre. Deasupra titlului: logo-ul grupului pe fundal închis (Setări).',
         ),
         section(
           'reviews',

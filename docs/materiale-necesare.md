@@ -40,11 +40,11 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 
 | # | Material | Unde în panou | Până la | Sursa |
 |---|---|---|---|---|
-| 17 | **Lista reală de vinuri** (nume, producător, tip, regiune, an, preț la sticlă și la pahar, volum). **F3: secțiunea Vinuri de pe Acasă arată cele 5 exemple, fiecare cu „Exemplu · de înlocuit”**; bifa „Recomandat” alege ce apare (cel mult 10) | Vinuri. Acum sunt 5 exemple, marcate „Provizoriu” | **F1 → F3** | OQ #5, Q-35 |
+| ~~17~~ | ~~Lista reală de vinuri~~ — **primită (PDF din 19.11.2026), importată: D-46.** Rămân verificările din G5-2 … G5-4 | Vinuri | F3 | D-46 |
 | 18 | Recenziile reale, pentru restaurant și pentru hotel. **F3: Acasă arată primele 3 din grupul Restaurant, fiecare cu „Exemplu · de înlocuit”**; legătura „Lasă o recenzie” merge deja la recenzia Google | Recenzii (4 exemple acum) | F3 | D-06, OQ #4 |
 | 32 (nou, F3) | Textul introductiv pentru **Bucătăria** și pentru **Vinuri** (câmpul e gol, secțiunile arată doar titlul). Un rând, cel mult 160 de caractere fiecare | Pagina Acasă → Bucătăria / Vinuri → Text introductiv | F3 | content-model 4.3, 4.4 |
 | 33 (nou, F3) | Rândul de lângă insigna premiului în secțiunea Vinuri (gol acum) | Premii și distincții → Wine Spectator → Rând de text | F3 | content-model 5.10 |
-| 34 (nou, F3, opțional) | Fotografii ale sticlelor de vin (4:5). Primul vin recomandat care are fotografie apare mare în secțiunea Vinuri; acum e o fotografie provizorie pe Chianti Classico DOCG | Vinuri → Fotografie | F3 | content-model 5.2 |
+| ~~34~~ | ~~Fotografii ale sticlelor de vin~~ — **nu mai e nevoie**: lista de vinuri nu arată fotografii (D-46); câmpul rămâne pentru portalul de vinuri (D-14) | Vinuri → Fotografie | — | D-46 |
 | ~~19~~ | ~~Cele 9 motive de sesizare~~ — **gata** (D-39) | Motive de sesizare | — | D-39 |
 | ~~20~~ | ~~Adresele site-urilor grupului~~ — **gata** (D-40, 11 linkuri) | Linkuri grup | — | D-40 |
 | ~~21~~ | ~~Linkul paginii de Facebook~~ — **gata** (D-40) | Setări → Rețele sociale | — | D-40 |

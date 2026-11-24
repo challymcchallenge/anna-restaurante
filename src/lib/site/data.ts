@@ -38,7 +38,8 @@ export type SiteData = {
   groupLinks: GroupLink[]
   legalPages: LegalPage[]
   dishCategories: DishCategory[]
-  wines: Wine[]
+  /** Recomandatele (D-46), pe tip. */
+  wines: WineRow[]
   reviews: Review[]
   /** F3 pașii 4–6 */
   salons: Salon[]
@@ -60,6 +61,33 @@ function startOfTodayBucharest(): string {
 }
 
 const active: Where = { active: { equals: true } }
+
+/** Câmpurile unui vin pe care le afișează lista (Acasă și /catalog-vinuri). */
+const WINE_FIELDS = {
+  name: true,
+  producer: true,
+  type: true,
+  country: true,
+  region: true,
+  appellation: true,
+  vintage: true,
+  grapes: true,
+  priceBottle: true,
+  volume: true,
+  priceGlass: true,
+  placeholder: true,
+} as const
+
+export type WineRow = Pick<Wine, 'id' | keyof typeof WINE_FIELDS>
+
+/** Vinurile: pe tip (spumant, alb, rosé, roșu, desert), apoi în ordinea din panou (content-model 5.2). */
+function byType<T extends { type: Wine['type'] }>(wines: T[]): T[] {
+  const rank = (w: T) => WINE_TYPES.findIndex((t) => t.value === w.type)
+  return wines
+    .map((w, i) => ({ w, i }))
+    .sort((a, b) => rank(a.w) - rank(b.w) || a.i - b.i)
+    .map(({ w }) => w)
+}
 
 async function load(hostname: string): Promise<SiteData | null> {
   const payload = await getPayload({ config: await config })
@@ -87,12 +115,14 @@ async function load(hostname: string): Promise<SiteData | null> {
         depth: 0,
       }),
       payload.find({ collection: 'dish-categories', where: of(), sort: '_order', limit: 10, depth: 1 }),
+      // Recomandatele de pe Acasă: cel mult 5 din fiecare tip (D-46), fără fotografii.
       payload.find({
         collection: 'wines',
         where: of([{ featured: { equals: true } }, { available: { equals: true } }]),
         sort: '_order',
-        limit: 10,
-        depth: 1,
+        limit: 25,
+        depth: 0,
+        select: WINE_FIELDS,
       }),
       payload.find({
         collection: 'reviews',
@@ -119,12 +149,6 @@ async function load(hostname: string): Promise<SiteData | null> {
       payload.find({ collection: 'faqs', where: of(), sort: '_order', limit: 50, depth: 0 }),
     ])
 
-  // Vinurile: pe tip (spumant, alb, rosé, roșu, desert), apoi în ordinea din panou (content-model 5.2).
-  const typeRank = (w: Wine) => WINE_TYPES.findIndex((t) => t.value === w.type)
-  const sortedWines = wines.docs
-    .map((w, i) => ({ w, i }))
-    .sort((a, b) => typeRank(a.w) - typeRank(b.w) || a.i - b.i)
-    .map(({ w }) => w)
 
   return {
     tenant,
@@ -134,7 +158,7 @@ async function load(hostname: string): Promise<SiteData | null> {
     groupLinks: groupLinks.docs,
     legalPages: legalPages.docs,
     dishCategories: dishCategories.docs,
-    wines: sortedWines,
+    wines: byType(wines.docs as WineRow[]),
     reviews: reviews.docs,
     salons: salons.docs,
     eventsUpcoming: upcoming.docs,
@@ -157,3 +181,25 @@ export const getSite = cache(async (host: string | null | undefined): Promise<Si
   const hostname = host.split(':')[0].toLowerCase()
   return loadCached(hostname)
 })
+
+/**
+ * Lista completă de la /catalog-vinuri (S-23, D-46): vinurile active și disponibile, pe tip, apoi în
+ * ordinea din panou. Separat de `getSite`, ca Acasă să nu încarce toată lista.
+ */
+async function loadWineList(tenantId: number): Promise<WineRow[]> {
+  const payload = await getPayload({ config: await config })
+  const { docs } = await payload.find({
+    collection: 'wines',
+    where: { and: [{ tenant: { equals: tenantId } }, active, { available: { equals: true } }] },
+    sort: '_order',
+    limit: 1000,
+    pagination: false,
+    depth: 0,
+    select: WINE_FIELDS,
+  })
+  return byType(docs as WineRow[])
+}
+
+const wineListCached = unstable_cache(loadWineList, ['wine-list', BUILD], { tags: [SITE_TAG], revalidate: 600 })
+
+export const getWineList = cache((tenantId: number) => wineListCached(tenantId))

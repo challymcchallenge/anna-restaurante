@@ -45,6 +45,8 @@ describe('F2 · logo-uri în Biblioteca media', () => {
       expect.arrayContaining([
         'Logo Trattoria da Vittoria',
         'Logo Grupul ANNA',
+        'Logo Grupul ANNA, orizontal, pe fundal deschis',
+        'Logo Grupul ANNA, orizontal, pe fundal închis',
         'Logo BizTech Consulting (realizator)',
       ]),
     )
@@ -58,7 +60,9 @@ describe('F2 · logo-uri în Biblioteca media', () => {
       depth: 0,
     })
     expect(settings[0].logo).toBe(byTitle['Logo Trattoria da Vittoria'].id)
-    expect(settings[0].logoGroup).toBe(byTitle['Logo Grupul ANNA'].id)
+    // D-46: logo-ul orizontal al grupului, negru pe fundal deschis și alb pe fundal închis.
+    expect(settings[0].logoGroup).toBe(byTitle['Logo Grupul ANNA, orizontal, pe fundal deschis'].id)
+    expect(settings[0].logoGroupDark).toBe(byTitle['Logo Grupul ANNA, orizontal, pe fundal închis'].id)
   })
 
   it('A doua rulare nu dublează logo-urile', async () => {

@@ -49,6 +49,26 @@ type SeedFile = {
    * (jurnalul `mediaFill:…`): un câmp golit intenționat din panou nu se mai completează.
    */
   mediaFill?: { collection: CollectionSlug; match?: Record<string, string>; field: string; media: string }[]
+  /**
+   * F3 (D-46): o listă reală care înlocuiește exemplele unei colecții (de exemplu lista de vinuri).
+   * Se aplică o singură dată pe versiune (jurnalul `list:<colecție>:<versiune>`): șterge doar
+   * elementele bifate „Provizoriu” (exemplele de pornire), apoi adaugă rândurile care nu există deja
+   * (potrivire pe câmpurile din `matchOn`). Ce a adăugat Administratorul nu se atinge.
+   */
+  lists?: { collection: CollectionSlug; version: string; matchOn: string[]; items: Record<string, unknown>[] }[]
+  /**
+   * Valori schimbate o singură dată și doar dacă au rămas cele puse de conținutul de pornire
+   * (jurnalul `swap:<colecție>:<câmp>`): ce a schimbat Administratorul din panou nu se atinge.
+   * `field` poate fi un grup („wines.title”). `fromMedia` / `toMedia` sunt chei din `media`.
+   */
+  swaps?: {
+    collection: 'settings' | 'home-page'
+    field: string
+    from?: unknown
+    to?: unknown
+    fromMedia?: string
+    toMedia?: string
+  }[]
 }
 
 const isEmpty = (v: unknown) => v === null || v === undefined || v === ''
@@ -222,6 +242,42 @@ export async function seedStarterContent({
       await applyOnce(collection, items)
     }
 
+    for (const list of seed.lists ?? []) {
+      const key = `list:${list.collection}:${list.version}`
+      if (log[key]) continue
+      const { docs: examples } = await payload.delete({
+        collection: list.collection,
+        where: { and: [{ tenant: { equals: tenant.id } }, { placeholder: { equals: true } }] },
+        req,
+        context: ctx,
+      })
+      const { docs: existing } = await payload.find({
+        collection: list.collection,
+        where: { tenant: { equals: tenant.id } },
+        limit: 2000,
+        depth: 0,
+        pagination: false,
+        req,
+      })
+      const signature = (doc: Record<string, unknown>) =>
+        JSON.stringify(list.matchOn.map((f) => (isEmpty(doc[f]) ? null : doc[f])))
+      const known = new Set(existing.map((d) => signature(d as unknown as Record<string, unknown>)))
+      let added = 0
+      for (const item of list.items) {
+        if (known.has(signature(item))) continue
+        await payload.create({
+          collection: list.collection,
+          data: { ...(resolveValues(item) as object), ...base } as any,
+          req,
+          context: ctx,
+        })
+        added++
+      }
+      created[`${list.collection}:lista`] = added
+      if (examples.length) created[`${list.collection}:exemple-sterse`] = examples.length
+      log[key] = now
+    }
+
     const ids: Record<string, number | string> = {}
     if (seed.media?.length) {
       for (const item of seed.media) {
@@ -313,6 +369,39 @@ export async function seedStarterContent({
           context: ctx,
         })
         created.mediaFill = (created.mediaFill ?? 0) + 1
+      }
+      log[key] = now
+    }
+
+    for (const swap of seed.swaps ?? []) {
+      const key = `swap:${swap.collection}:${swap.field}`
+      if (log[key]) continue
+      const from = swap.fromMedia !== undefined ? ids[swap.fromMedia] : swap.from
+      const to = swap.toMedia !== undefined ? ids[swap.toMedia] : swap.to
+      if (to === undefined || (swap.fromMedia !== undefined && from === undefined)) continue
+      const { docs: targets } = await payload.find({
+        collection: swap.collection,
+        where: { tenant: { equals: tenant.id } },
+        limit: 1,
+        depth: 0,
+        req,
+      })
+      const target = targets[0] as unknown as Record<string, unknown> | undefined
+      if (!target) continue
+      const [group, leaf] = swap.field.includes('.') ? swap.field.split('.', 2) : [null, swap.field]
+      const container = (group ? (target[group] as Record<string, unknown> | undefined) : target) ?? {}
+      const current = container[leaf]
+      const same = isEmpty(from) ? isEmpty(current) : current === from
+      if (same) {
+        const data = group ? { [group]: { ...container, [leaf]: to } } : { [leaf]: to }
+        await payload.update({
+          collection: swap.collection,
+          id: target.id as number,
+          data: data as any,
+          req,
+          context: ctx,
+        })
+        created.swaps = (created.swaps ?? 0) + 1
       }
       log[key] = now
     }

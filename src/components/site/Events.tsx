@@ -27,11 +27,14 @@ export function PageCover({
   intro,
   children,
   placeholder,
+  above,
 }: {
   title: string
   intro?: string | null
   children?: React.ReactNode
   placeholder?: boolean
+  /** Deasupra titlului (de exemplu logo-ul grupului la lista de vinuri). */
+  above?: React.ReactNode
 }) {
   return (
     <section className="page-cover" data-hero="" aria-labelledby="page-title">
@@ -41,6 +44,7 @@ export function PageCover({
           <Icon name="chevron-left" />
           {UI.home}
         </Link>
+        {above}
         <h1 id="page-title" className="rise" style={{ '--i': 0 } as React.CSSProperties}>
           {title}
         </h1>

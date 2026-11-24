@@ -135,8 +135,21 @@ export const Settings: CollectionConfig = {
                   label: 'Logo grup',
                   kinds: ['logo'],
                   format: 'LOGO',
-                  description: 'În footer.',
+                  description: 'Pe fundal deschis: deasupra listei de la /catalog-vinuri.',
                 }),
+                media({
+                  name: 'logoGroupDark',
+                  label: 'Logo grup pe fundal închis',
+                  kinds: ['logo'],
+                  format: 'LOGO',
+                  description:
+                    'În footer și deasupra listei de vinuri de pe Acasă. Dacă lipsește, se folosește logo-ul grupului.',
+                }),
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
                 media({
                   name: 'favicon',
                   label: 'Pictogramă de filă',

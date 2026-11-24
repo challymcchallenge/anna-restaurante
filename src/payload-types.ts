@@ -705,7 +705,7 @@ export interface DishCategory {
   createdAt: string;
 }
 /**
- * Catalogul de la /catalog-vinuri. Cele bifate „Recomandat” apar în sliderul de pe Acasă (cel mult 10).
+ * Lista de la /catalog-vinuri, grupată pe tip, apoi pe țară și regiune, în ordinea de aici. Cele bifate „Recomandat” apar pe Acasă (cel mult 5 din fiecare tip).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "wines".
@@ -715,21 +715,25 @@ export interface Wine {
   _order?: string | null;
   tenant?: (number | null) | Tenant;
   /**
+   * Apare îngroșat, înaintea numelui: „Dom Pérignon” Vintage Brut. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  producer?: string | null;
+  /**
    * Nu se traduce: aceeași valoare în toate limbile.
    */
   name: string;
-  /**
-   * Nu se traduce: aceeași valoare în toate limbile.
-   */
-  producer?: string | null;
   type: 'sparkling' | 'white' | 'rose' | 'red' | 'dessert';
+  /**
+   * Ca pe etichetă: A.O.C. Champagne, D.O.C.G. Barolo, D.O.C. – C.M.D. Recaș. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  appellation?: string | null;
   country?: string | null;
   /**
-   * Nu se traduce: aceeași valoare în toate limbile.
+   * Grupează lista sub țară: Champagne, Toscana, Banat. Nu se traduce: aceeași valoare în toate limbile.
    */
   region?: string | null;
   /**
-   * Patru cifre; gol = fără an.
+   * Patru cifre; gol = fără an (pe site apare „NV”).
    */
   vintage?: number | null;
   /**
@@ -739,16 +743,16 @@ export interface Wine {
   priceBottle: number;
   volume: '0.375' | '0.75' | '1.5';
   /**
-   * Gol = nu se servește la pahar.
+   * Gol = nu se servește la pahar. Cu preț, vinul apare și la „Vinuri la pahar”.
    */
   priceGlass?: number | null;
   description?: string | null;
   /**
-   * CARD-P · 4:5 · minimum 1080 × 1350 px
+   * CARD-P · 4:5 · minimum 1080 × 1350 px · Pentru portalul de vinuri (D-14); lista de pe site nu arată fotografii (D-46).
    */
   photo?: (number | null) | Media;
   /**
-   * Apare în sliderul de pe Acasă; cel mult 10.
+   * Apare în lista de pe Acasă; cel mult 5 din fiecare tip.
    */
   featured?: boolean | null;
   /**
@@ -756,7 +760,7 @@ export interface Wine {
    */
   available?: boolean | null;
   /**
-   * Pentru legarea ulterioară cu portalul de vinuri (D-14). Nu se traduce: aceeași valoare în toate limbile.
+   * Pentru legarea ulterioară cu portalul de vinuri (D-14); la import, rândul din inventar. Nu se traduce: aceeași valoare în toate limbile.
    */
   externalCode?: string | null;
   /**
@@ -1117,9 +1121,13 @@ export interface Setting {
    */
   logoDark?: (number | null) | Media;
   /**
-   * LOGO · SVG; dacă nu există, PNG transparent de minimum 600 px lățime · În footer.
+   * LOGO · SVG; dacă nu există, PNG transparent de minimum 600 px lățime · Pe fundal deschis: deasupra listei de la /catalog-vinuri.
    */
   logoGroup?: (number | null) | Media;
+  /**
+   * LOGO · SVG; dacă nu există, PNG transparent de minimum 600 px lățime · În footer și deasupra listei de vinuri de pe Acasă. Dacă lipsește, se folosește logo-ul grupului.
+   */
+  logoGroupDark?: (number | null) | Media;
   /**
    * SVG sau PNG pătrat, minimum 512 px. Obligatoriu înainte de lansare.
    */
@@ -1807,9 +1815,10 @@ export interface DishCategoriesSelect<T extends boolean = true> {
 export interface WinesSelect<T extends boolean = true> {
   _order?: T;
   tenant?: T;
-  name?: T;
   producer?: T;
+  name?: T;
   type?: T;
+  appellation?: T;
   country?: T;
   region?: T;
   vintage?: T;
@@ -2157,6 +2166,7 @@ export interface SettingsSelect<T extends boolean = true> {
   logo?: T;
   logoDark?: T;
   logoGroup?: T;
+  logoGroupDark?: T;
   favicon?: T;
   colors?:
     | T

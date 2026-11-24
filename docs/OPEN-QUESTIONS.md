@@ -62,6 +62,15 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| G4-1 | „Rezervă masă” pe cardul unei seri: să deschidă fereastra ialoc cu data serii preselectată? Câmpul „Rezervare cu data serii” există; nu l-am legat încă, pentru că ar cere o a doua inițializare ialoc, neprobată (F0 a probat doar una). Acum deschide fereastra obișnuită | F3 pasul 9 | Alin |
-| G4-2 | PLAN F3 pasul 4 pomenește „agenda lunii” la Evenimente private; wireframe-ul S-02 nu o are. Agenda serilor e pe `/petreceri`. Vrei și pe pagina saloanelor o listă a serilor din luna curentă? | F3 pasul 9 | Alin |
-| G4-3 | Câte camere poate avea o cerere de cazare? Am pus cel mult 4 [PRESUPUNERE]; maximele de adulți (6) și copii (4) se aplică pe cameră | F3 pasul 9 | Alin |
+| ~~G4-1~~ | ~~„Rezervă masă” pe cardul unei seri: să deschidă fereastra ialoc cu data serii preselectată? Câmpul „Rezervare cu data serii” există; nu l-am legat încă, pentru că ar cere o a doua inițializare ialoc, neprobată (F0 a probat doar una). Acum deschide fereastra obișnuită~~ — **rezolvat: D-47** | — | — |
+| ~~G4-2~~ | ~~PLAN F3 pasul 4 pomenește „agenda lunii” la Evenimente private; wireframe-ul S-02 nu o are. Agenda serilor e pe `/petreceri`. Vrei și pe pagina saloanelor o listă a serilor din luna curentă?~~ — **rezolvat: D-47** | — | — |
+| ~~G4-3~~ | ~~Câte camere poate avea o cerere de cazare? Am pus cel mult 4 [PRESUPUNERE]; maximele de adulți (6) și copii (4) se aplică pe cameră~~ — **rezolvat: D-47** | — | — |
+
+## Întrebări noi după lista de vinuri (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_F3_Vinuri.md`
+
+| # | Întrebare | Până la | Cine răspunde |
+|---|---|---|---|
+| G5-1 | Confirmi cele 20 de vinuri recomandate pe Acasă (5 din fiecare tip)? Le schimbi din panou: Vinuri → bifa „Recomandat” | F3 GATE | Alin |
+| G5-2 | Soiurile: PDF-ul nu le are. Le-am pus doar la 19 vinuri (din poza 7 sau impuse de denumire). Le completez și la celelalte, după fișele producătorilor, sau rămân doar denumirea de origine? | F3 GATE | Alin |
+| G5-3 | Culoarea a 4 vinuri e dedusă [PRESUPUNERE]: Familia Vlădoi Brizza și Recaș Muse Day = alb; Domaine de Belle Mare Le Rivage = rosé (nota din PDF); Domeniul Coroanei Segarcea Demidulce = desert. Corect? | F3 GATE | Alin |
+| G5-4 | Rândurile „De verificat pe etichetă” (33) și „Decizie de stoc / preț” (11) din PDF sunt pe site, cu excepția Pinot Grigio Friuli „2026” (ascuns). Le verifici în panou (Vinuri, coloana „Cod extern” = rândul din inventar) și oprești „Disponibil” la ce nu mai vinzi? | înainte de lansare | Alin |

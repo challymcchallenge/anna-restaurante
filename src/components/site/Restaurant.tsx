@@ -1,16 +1,18 @@
+import Link from 'next/link'
 import React from 'react'
 
-import { WINE_TYPES } from '@/collections/Wines'
 import type { SiteData } from '@/lib/site/data'
-import { monthYear, price } from '@/lib/site/format'
+import { monthYear } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
 import { UI } from '@/lib/site/strings'
+import { byTypeGroups, typesIn } from '@/lib/site/wines'
 
 import { AwardBadge, awardsFor, ExampleTag, ExternalLink } from './Bits'
 import { Icon } from './Icons'
 import { Picture } from './Picture'
 import { SliderArrows } from './SliderArrows'
+import { GroupLogo, WineFilter, WineItem } from './WineList'
 
 /**
  * Secțiunea Restaurant (PLAN F3 pasul 3, content-model 4.3–4.5): Bucătăria, Vinuri, Ce spun oaspeții.
@@ -86,83 +88,61 @@ export function Kitchen({ site, id }: { site: SiteData; id: string }) {
   )
 }
 
-/* ---------- Vinuri: lista de vinuri, pe copertă ---------- */
-
-const typeLabel = (t: string) => WINE_TYPES.find((w) => w.value === t)?.label ?? t
-const volumeLabel = (v: string | null | undefined) => (v ? `${v.replace('.', ',')} l` : '')
+/* ---------- Vinuri: lista de vinuri, pe copertă (D-46, poza 6 a lui Alin) ---------- */
 
 export function Wines({ site, id }: { site: SiteData; id: string }) {
   const w = section(site.home, 'wines')
   const award = awardsFor(site.awards, 'wines-section')[0]
   const wines = site.wines
-  const visual = wines.map((x) => ({ wine: x, photo: asMedia(x.photo) })).find((x) => x.photo)
   const titleId = `${id}-titlu`
 
   return (
     <section className="wines cover-section" id={id} aria-labelledby={titleId}>
       <div className="wrap">
         <header className="wines-head">
+          <GroupLogo site={site} onDark className="wines-logo" />
+          <h2 id={titleId}>{w?.title}</h2>
+          {w?.intro && <p className="section-intro">{w.intro}</p>}
+          {w?.placeholder && <ExampleTag className="section-tag" />}
           {award && (
             <div className="wines-award">
               <AwardBadge award={award} size="section" />
               {award.line && <p className="wines-line">{award.line}</p>}
             </div>
           )}
-          <h2 id={titleId}>{w?.title}</h2>
-          {w?.intro && <p className="section-intro">{w.intro}</p>}
-          {w?.placeholder && <ExampleTag className="section-tag" />}
         </header>
 
-        <div className={`wines-body${visual ? '' : ' wines-body--list'}`}>
-          {wines.length > 0 && (
-            <ul className="wine-list">
-              {wines.map((x) => {
-                const meta = [
-                  typeLabel(x.type),
-                  [x.region, x.country].filter(Boolean).join(', '),
-                  x.vintage ? String(x.vintage) : null,
-                ].filter(Boolean)
-                return (
-                  <li key={x.id} className="wine">
-                    <div className="wine-main">
-                      <h3 className="wine-name">{x.name}</h3>
-                      {x.producer && <p className="wine-producer">{x.producer}</p>}
-                      <p className="wine-meta">
-                        {meta.join(' · ')}
-                        {x.placeholder && <ExampleTag className="row-tag" />}
-                      </p>
-                    </div>
-                    <span className="wine-dots" aria-hidden="true" />
-                    <p className="wine-price">
-                      <span className="wine-amount">{price(x.priceBottle)}</span>
-                      <span className="wine-unit">
-                        {UI.bottle} {volumeLabel(x.volume)}
-                      </span>
-                      {x.priceGlass != null && (
-                        <span className="wine-unit">
-                          {price(x.priceGlass)} {UI.glass}
-                        </span>
-                      )}
-                    </p>
-                  </li>
-                )
-              })}
-            </ul>
-          )}
-          {visual?.photo && (
-            <div className="wines-photo">
-              <Picture media={visual.photo} sizes="(min-width: 1024px) 34vw, 100vw" />
-              {visual.wine.placeholder && <ExampleTag floating className="photo-tag" />}
+        {wines.length > 0 && (
+          <div className="wine-board">
+            <WineFilter name={`${id}-tip`} types={typesIn(wines)} />
+            <div className="wine-groups">
+              {byTypeGroups(wines).map((g) => (
+                <section
+                  key={g.type}
+                  className="wine-group"
+                  data-type={g.type}
+                  aria-labelledby={`${id}-${g.type}`}
+                >
+                  <h3 id={`${id}-${g.type}`} className="wine-group-title">
+                    {UI.wineGroups[g.type]}
+                  </h3>
+                  <ul className="wine-items">
+                    {g.wines.map((x) => (
+                      <WineItem key={x.id} wine={x} />
+                    ))}
+                  </ul>
+                </section>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {w?.buttonLabel && (
           <div className="wines-cta">
-            <a className="btn btn-ghost" href="/catalog-vinuri">
+            <Link className="btn btn-ghost" href="/catalog-vinuri">
               <Icon name="wine" />
               {w.buttonLabel}
-            </a>
+            </Link>
           </div>
         )}
       </div>

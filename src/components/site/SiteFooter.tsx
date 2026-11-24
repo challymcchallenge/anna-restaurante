@@ -2,7 +2,7 @@ import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
 import { hoursSummary, telHref } from '@/lib/site/format'
-import { asMedia, pictureSources } from '@/lib/site/media'
+import { asMedia } from '@/lib/site/media'
 import { pageMediaCredits } from '@/lib/site/credits'
 import { section } from '@/lib/site/sections'
 import { UI } from '@/lib/site/strings'
@@ -10,6 +10,7 @@ import { UI } from '@/lib/site/strings'
 import { AwardBadge, awardsFor, BookButton, ExampleTag, ExternalLink } from './Bits'
 import { Icon, type IconName } from './Icons'
 import { Language } from './SiteHeader'
+import { GroupLogo } from './WineList'
 
 const SOCIAL: { key: 'facebook' | 'instagram' | 'youtube' | 'tiktok'; label: string }[] = [
   { key: 'facebook', label: 'Facebook' },
@@ -29,7 +30,8 @@ export function SiteFooter({ site }: { site: SiteData }) {
   const hours = hoursSummary(s?.hours)
   const telR = telHref(s?.phoneReservations)
   const telE = telHref(s?.phoneEvents)
-  const groupLogo = asMedia(s?.logoGroup)
+  // Footerul e pe copertă: varianta pentru fundal închis, cu rezervă pe cea obișnuită.
+  const groupLogo = asMedia(s?.logoGroupDark) ?? asMedia(s?.logoGroup)
   const groupName = groupLogo?.alt || UI.groupTitle
   const awards = awardsFor(site.awards, 'footer')
   const credits = pageMediaCredits(site)
@@ -97,17 +99,7 @@ export function SiteFooter({ site }: { site: SiteData }) {
           {site.groupLinks.length > 0 && (
             <section className="footer-col footer-group" aria-labelledby="f-group">
               <h2 id="f-group" className="footer-title footer-title--logo">
-                {groupLogo ? (
-                  <img
-                    src={pictureSources(groupLogo, 640).src}
-                    width={56}
-                    height={56}
-                    alt={groupName}
-                    loading="lazy"
-                  />
-                ) : (
-                  groupName
-                )}
+                {groupLogo ? <GroupLogo site={site} onDark className="footer-logo" /> : groupName}
               </h2>
               <ul className="footer-links footer-links--cols">
                 {site.groupLinks.map((l) => (

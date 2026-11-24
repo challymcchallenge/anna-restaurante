@@ -179,7 +179,7 @@ describe('F1 · roluri, restaurante, media', () => {
     ).toMatch(/startsAt: .*viitor/)
   })
 
-  it('Editorul adaugă un vin; recomandate cel mult 10', async () => {
+  it('Editorul adaugă un vin; recomandate cel mult 5 din fiecare tip (D-46)', async () => {
     const wine = await payload.create({
       collection: 'wines',
       data: { name: `Vin test ${tag}`, type: 'red', priceBottle: 99, volume: '0.75', tenant: tenantA },
@@ -189,11 +189,14 @@ describe('F1 · roluri, restaurante, media', () => {
     created.push({ collection: 'wines', id: wine.id })
     expect(wine.name).toBe(`Vin test ${tag}`)
 
-    const { totalDocs } = await payload.count({
-      collection: 'wines',
-      where: { and: [{ featured: { equals: true } }, { tenant: { equals: tenantA } }] },
-    })
-    for (let i = totalDocs; i < 10; i++) {
+    const featuredOf = async (type: 'white' | 'dessert') =>
+      (
+        await payload.count({
+          collection: 'wines',
+          where: { and: [{ featured: { equals: true } }, { type: { equals: type } }, { tenant: { equals: tenantA } }] },
+        })
+      ).totalDocs
+    for (let i = await featuredOf('white'); i < 5; i++) {
       const w = await payload.create({
         collection: 'wines',
         data: { name: `Rec ${i} ${tag}`, type: 'white', priceBottle: 50, volume: '0.75', featured: true, tenant: tenantA },
@@ -204,10 +207,19 @@ describe('F1 · roluri, restaurante, media', () => {
       await errorText(
         payload.create({
           collection: 'wines',
-          data: { name: `Al 11-lea ${tag}`, type: 'white', priceBottle: 50, volume: '0.75', featured: true, tenant: tenantA },
+          data: { name: `Al 6-lea ${tag}`, type: 'white', priceBottle: 50, volume: '0.75', featured: true, tenant: tenantA },
         }),
       ),
-    ).toMatch(/featured: .*10 vinuri/)
+    ).toMatch(/featured: .*5 vinuri recomandate de tipul Alb/)
+    // Alt tip are propria limită.
+    if ((await featuredOf('dessert')) < 5) {
+      const d = await payload.create({
+        collection: 'wines',
+        data: { name: `Desert ${tag}`, type: 'dessert', priceBottle: 50, volume: '0.75', featured: true, tenant: tenantA },
+      })
+      created.push({ collection: 'wines', id: d.id })
+      expect(d.featured).toBe(true)
+    }
   })
 
   it('Garda media: refuză o fotografie neconvertită (> 2560 px), acceptă masterul și face 10 variante', async () => {

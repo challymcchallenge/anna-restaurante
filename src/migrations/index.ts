@@ -4,6 +4,7 @@ import * as migration_20261124_121504_f1_tenants_order from './20261124_121504_f
 import * as migration_20261124_122707_f1_starter_flag from './20261124_122707_f1_starter_flag';
 import * as migration_20261124_125150_gate1_reasons_seed_log from './20261124_125150_gate1_reasons_seed_log';
 import * as migration_20261124_143006_f2_theme from './20261124_143006_f2_theme';
+import * as migration_20261124_180408_f3_vinuri_logo_grup from './20261124_180408_f3_vinuri_logo_grup';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20261124_143006_f2_theme.up,
     down: migration_20261124_143006_f2_theme.down,
-    name: '20261124_143006_f2_theme'
+    name: '20261124_143006_f2_theme',
+  },
+  {
+    up: migration_20261124_180408_f3_vinuri_logo_grup.up,
+    down: migration_20261124_180408_f3_vinuri_logo_grup.down,
+    name: '20261124_180408_f3_vinuri_logo_grup'
   },
 ];

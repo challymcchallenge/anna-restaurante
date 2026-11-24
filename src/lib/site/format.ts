@@ -54,6 +54,11 @@ export function price(value: number | null | undefined, locale = 'ro-RO'): strin
   return `${n} ${UI.currency}`
 }
 
+/** Doar suma, fără monedă (lista de vinuri are moneda în legendă: „0,75 l · lei”). */
+export function amount(value: number | null | undefined, locale = 'ro-RO'): string | null {
+  return price(value, locale)?.replace(` ${UI.currency}`, '') ?? null
+}
+
 /** Data de azi (AAAA-LL-ZZ) în ora României, pentru câmpurile de dată. */
 export function todayIso(): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Bucharest' }).format(new Date())
