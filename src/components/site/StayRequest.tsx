@@ -16,7 +16,11 @@ import { plural, UI } from '@/lib/site/strings'
 
 /** Iconiță din setul paginii (simbolurile sunt în pagină, src/components/site/Icons.tsx). */
 const I = ({ name, className }: { name: string; className?: string }) => (
-  <svg className={['icon', className].filter(Boolean).join(' ')} aria-hidden="true" focusable="false">
+  <svg
+    className={['icon', className].filter(Boolean).join(' ')}
+    aria-hidden="true"
+    focusable="false"
+  >
     <use href={`#i-${name}`} />
   </svg>
 )
@@ -44,7 +48,8 @@ const ym = (iso: string) => ({ y: Number(iso.slice(0, 4)), m: Number(iso.slice(5
 const fmt = (iso: string, o: Intl.DateTimeFormatOptions) =>
   new Intl.DateTimeFormat('ro-RO', { ...o, timeZone: 'UTC' }).format(toUtc(iso))
 const short = (iso: string) => fmt(iso, { day: 'numeric', month: 'short', year: 'numeric' })
-const long = (iso: string) => fmt(iso, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+const long = (iso: string) =>
+  fmt(iso, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 const title = (y: number, m: number) => {
   const t = fmt(`${y}-${String(m).padStart(2, '0')}-01`, { month: 'long', year: 'numeric' })
   return t.charAt(0).toUpperCase() + t.slice(1)
@@ -93,7 +98,12 @@ function Calendar({
     if (v.y !== view.y || v.m !== view.m) setView(v)
   }
   const onKey = (e: React.KeyboardEvent) => {
-    const steps: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }
+    const steps: Record<string, number> = {
+      ArrowLeft: -1,
+      ArrowRight: 1,
+      ArrowUp: -7,
+      ArrowDown: 7,
+    }
     if (e.key in steps) {
       e.preventDefault()
       move(addDays(focus, steps[e.key]))
@@ -449,10 +459,25 @@ type Props = {
   tag?: React.ReactNode
 }
 
-export function StayRequest({ id, title, note, buttonLabel, maxAdults, maxChildren, today, tag }: Props) {
+export function StayRequest({
+  id,
+  title,
+  note,
+  buttonLabel,
+  maxAdults,
+  maxChildren,
+  today,
+  tag,
+}: Props) {
   const uid = useId().replace(/:/g, '')
   const sheet = useRef<HTMLDialogElement>(null)
   const common = { today, maxAdults, maxChildren, buttonLabel }
+  // Panoul de pe telefon se montează la prima deschidere (mai puțin DOM și mai puțin JS la încărcare).
+  const [sheetMounted, setSheetMounted] = useState(false)
+  useEffect(() => {
+    if (sheetMounted && !sheet.current?.open) sheet.current?.showModal()
+  }, [sheetMounted])
+  const openSheet = () => (sheetMounted ? sheet.current?.showModal() : setSheetMounted(true))
 
   return (
     <div className="stay-request" id={id}>
@@ -476,7 +501,7 @@ export function StayRequest({ id, title, note, buttonLabel, maxAdults, maxChildr
         type="button"
         aria-haspopup="dialog"
         aria-controls={`${uid}-sheet`}
-        onClick={() => sheet.current?.showModal()}
+        onClick={openSheet}
       >
         <span>
           <span className="stay-mobile-title">{title}</span>
@@ -485,17 +510,26 @@ export function StayRequest({ id, title, note, buttonLabel, maxAdults, maxChildr
         <I name="chevron-right" />
       </button>
       <dialog className="stay-sheet" id={`${uid}-sheet`} ref={sheet} aria-labelledby={`${uid}-st`}>
-        <div className="stay-sheet-head">
-          <h2 className="stay-title" id={`${uid}-st`}>
-            {title}
-          </h2>
-          <button className="nav-close" type="button" aria-label={UI.stay.close} onClick={() => sheet.current?.close()}>
-            <I name="x" />
-          </button>
-        </div>
-        <p className="stay-note">{note}</p>
-        {tag}
-        <StayWidget uid={`${uid}m`} variant="sheet" {...common} />
+        {sheetMounted && (
+          <>
+            <div className="stay-sheet-head">
+              <h2 className="stay-title" id={`${uid}-st`}>
+                {title}
+              </h2>
+              <button
+                className="nav-close"
+                type="button"
+                aria-label={UI.stay.close}
+                onClick={() => sheet.current?.close()}
+              >
+                <I name="x" />
+              </button>
+            </div>
+            <p className="stay-note">{note}</p>
+            {tag}
+            <StayWidget uid={`${uid}m`} variant="sheet" {...common} />
+          </>
+        )}
       </dialog>
     </div>
   )

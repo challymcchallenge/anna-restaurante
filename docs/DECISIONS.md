@@ -2,7 +2,7 @@
 
 Sursa de adevăr pentru proiect. Dacă un fișier din `design/` sau `docs/` contrazice această listă, câștigă lista. O decizie se schimbă doar de către Alin.
 
-Ultima actualizare: 24.11.2026 (GATE 2)
+Ultima actualizare: 24.11.2026 (F3, după pașii 1–3)
 
 | ID | Subiect | Decizie |
 |---|---|---|
@@ -49,6 +49,8 @@ Ultima actualizare: 24.11.2026 (GATE 2)
 | D-41 | Direcția de design (GATE 2, 24.11.2026) | **B · Carta**: copertă închisă `#1C1416` cu folio auriu `#D6AE66`, pagini de hârtie `#F5EDE0`. **Butoanele bordo devin verzi**: verde smarald `#14613F` (din familia verdelui din steagul logo-ului), butonul principal auriu cu luciu de folio. Detalii: `docs/design-system.md`. |
 | D-42 | Fonturi (GATE 2, 24.11.2026) | **Gratuite (OFL)**, găzduite pe site. Setul aprobat G3 are **4 fonturi**: Belleza și Tenor Sans (titluri), Hanken Grotesk și Host Grotesk (text); Trattoria: Belleza + Hanken Grotesk. Originalele de pe vineyard.co.za (Optima Nova + PP Mori, ≥ 178 USD în primul an) nu se cumpără. Alin a cerut și variante: `design/f2/fonturi.html` (8 perechi). |
 | D-43 | Pictograma de filă (GATE 2, 24.11.2026) | **Desenată de Claude Code**: disc în culoarea copertei, inel de folio, „V” din script-ul Alex Brush (OFL), cel mai apropiat de logo. Fișiere în `design/brand/favicon/`; în Setări → Pictogramă de filă. |
+| D-44 | Răspunsurile la oprirea F3 după pașii 1–3 (24.11.2026) | **GO pentru pașii 4–6.** G3-1: **slider de categorii** în Bucătăria, în locul rândurilor de meniu (răspunsul lui Alin: „G3-1 - slider de categorii”). G3-2: antetul compact pe desktop rămâne. G3-3: linkurile spre paginile încă neconstruite rămân vizibile. G3-4: fotografiile provizorii rămân până vin cele reale. |
+| D-45 | Widgetul de cazare (24.11.2026) | **Arată ca referința dată de Alin** (`design/f3/referinte/2026_11_24_Trattoria_Referinta_Cazare_{1,2,3}.png`): bară-pastilă cu Sosire · Plecare · Camere și oaspeți și butonul de cerere; calendar deasupra câmpului; camere cu adulți și copii (−/+), „Adaugă cameră”, „Șterge camera”. În culorile B · Carta (D-41). Rămâne cerere de ofertă (D-15) |
 
 ## Linkuri-cheie
 

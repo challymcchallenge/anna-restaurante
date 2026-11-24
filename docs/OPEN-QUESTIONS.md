@@ -53,7 +53,15 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| G3-1 | Categoriile din Bucătăria: rânduri de meniu cu fotografie alături (macheta B aprobată la GATE 2, `docs/design-system.md`) sau slider de carduri cu fotografie (cuvântul din PLAN F3 și wireframe-ul S-01)? Am construit rândurile; contradicția e semnalată | F3 pasul 4 | Alin |
-| G3-2 | Antetul compact care rămâne sus pe desktop după primul ecran (nou față de machetă, ca „Rezervă o masă” să fie mereu la un clic) — îl păstrăm? | F3 pasul 4 | Alin |
-| G3-3 | Linkurile spre pagini încă neconstruite (`/contact` din cererea de cazare, `/catalog-vinuri`, paginile legale, `/formular-de-reclamatie`) dau 404 până la pașii 9–10. Le las vizibile (implicit) sau le ascund până atunci? | F3 pasul 4 | Alin |
-| G3-4 | Fotografiile provizorii din F2 (Wikimedia, cu credit) sunt acum în Biblioteca media pe producție. Rămân până vin cele reale (implicit) sau le scot? | F3 | Alin |
+| ~~G3-1~~ | ~~Categoriile din Bucătăria: rânduri de meniu cu fotografie alături (macheta B aprobată la GATE 2, `docs/design-system.md`) sau slider de carduri cu fotografie (cuvântul din PLAN F3 și wireframe-ul S-01)? Am construit rândurile; contradicția e semnalată~~ — **rezolvat: D-44**, slider de categorii | — | — |
+| ~~G3-2~~ | ~~Antetul compact care rămâne sus pe desktop după primul ecran (nou față de machetă, ca „Rezervă o masă” să fie mereu la un clic) — îl păstrăm?~~ — **rezolvat: D-44**, rămâne | — | — |
+| ~~G3-3~~ | ~~Linkurile spre pagini încă neconstruite (`/contact` din cererea de cazare, `/catalog-vinuri`, paginile legale, `/formular-de-reclamatie`) dau 404 până la pașii 9–10. Le las vizibile (implicit) sau le ascund până atunci?~~ — **rezolvat: D-44**, rămân vizibile | — | — |
+| ~~G3-4~~ | ~~Fotografiile provizorii din F2 (Wikimedia, cu credit) sunt acum în Biblioteca media pe producție. Rămân până vin cele reale (implicit) sau le scot?~~ — **rezolvat: D-44**, rămân | — | — |
+
+## Întrebări noi după F3, pașii 4–6 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_F3_Pasii4-6.md`, secțiunea 7
+
+| # | Întrebare | Până la | Cine răspunde |
+|---|---|---|---|
+| G4-1 | „Rezervă masă” pe cardul unei seri: să deschidă fereastra ialoc cu data serii preselectată? Câmpul „Rezervare cu data serii” există; nu l-am legat încă, pentru că ar cere o a doua inițializare ialoc, neprobată (F0 a probat doar una). Acum deschide fereastra obișnuită | F3 pasul 9 | Alin |
+| G4-2 | PLAN F3 pasul 4 pomenește „agenda lunii” la Evenimente private; wireframe-ul S-02 nu o are. Agenda serilor e pe `/petreceri`. Vrei și pe pagina saloanelor o listă a serilor din luna curentă? | F3 pasul 9 | Alin |
+| G4-3 | Câte camere poate avea o cerere de cazare? Am pus cel mult 4 [PRESUPUNERE]; maximele de adulți (6) și copii (4) se aplică pe cameră | F3 pasul 9 | Alin |

@@ -83,7 +83,7 @@ Ordinea de construcție; după fiecare pas, build + capturi pe telefon și deskt
 
 **GATE 3:** fiecare secțiune arătată pe telefon și desktop. Toate formularele probate cap-coadă, cu emailul primit. Lighthouse măsurat fără efecte.
 
-**Stare (24.11.2026):** pașii 1–3 gata, în așteptarea „GO” pentru pașii 4–6. Raport: `docs/2026_11_24_Trattoria_F3_Pasii1-3.md`. Pe producție: antet, navigare, footer, bara de jos, hero cu cererea de cazare, Bucătăria, Vinuri, Ce spun oaspeții.
+**Stare (24.11.2026):** pașii 1–6 gata (GO pentru 4–6 primit, D-44; widgetul de cazare după referință, D-45). Oprire înainte de pasul 7. Rapoarte: `docs/2026_11_24_Trattoria_F3_Pasii1-3.md`, `docs/2026_11_24_Trattoria_F3_Pasii4-6.md`. Pașii 1–3: Raport: `docs/2026_11_24_Trattoria_F3_Pasii1-3.md`. Pe producție: antet, navigare, footer, bara de jos, hero cu cererea de cazare, Bucătăria, Vinuri, Ce spun oaspeții.
 
 ## Faza 4 — Efecte, sunet, traduceri
 
