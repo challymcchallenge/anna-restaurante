@@ -147,6 +147,7 @@ F3 pașii 4–6: Evenimente private (saloanele, galerie, „Rezervă salonul”,
 - Configurare: `next.config.ts` (Critical-CH doar pe /admin), `eslint.config.mjs`, `vitest.config.mts`
 - Teste și măsurători: `tests/int/f3-site.int.spec.ts`, `docs/f3/contrast-*.json`, `scripts/f3/capture.mjs`, `scripts/local-tenant.ts` (doar local)
 - Capturi: `design/f3/capturi/`
+- Pagina HTML a raportului (privată, cu capturile și graficul Lighthouse): https://claude.ai/artifact/5svuGdrQyy6xT9JDeT5SEj
 
 ---
 
