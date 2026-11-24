@@ -2,14 +2,9 @@
 
 Data: 24.11.2026. Valorile secrete nu trec prin conversație și nu intră în repo. Numele variabilelor sunt cele din `.env.example`.
 
-## 1. Vercel: protecția adresei de producție (D-22)
+## 1. Vercel: protecția adresei de producție (D-22) — **FĂCUT 24.11.2026 de Claude Code**
 
-Acum adresa https://anna-restaurante-alinlabau-9308s-projects.vercel.app cere login Vercel (setarea `all_except_custom_domains`). Conectorul Vercel din sesiune are doar drept de citire, deci schimbarea o faci tu.
-
-1. Deschide https://vercel.com/alinlabau-9308s-projects/anna-restaurante/settings/deployment-protection
-2. La **Vercel Authentication** alege **Standard Protection**, apoi Save.
-
-Efect: producția devine publică, fără parolă; previzualizările rămân protejate. Neindexarea o face aplicația (ADR-012, deja activă).
+Setată pe **Standard Protection** prin conectorul Vercel, după ce Alin a dat drept de scriere. Verificat: https://anna-restaurante-alinlabau-9308s-projects.vercel.app/robots.txt răspunde 200, cu `Disallow: /` și `X-Robots-Tag: noindex, nofollow`. Previzualizările rămân protejate.
 
 ## 2. Supabase: de unde iei valorile
 
@@ -31,13 +26,15 @@ Mediu: **Production** și **Preview**. Variabilele secrete le marchezi **Sensiti
 |---|---|---|
 | `DATABASE_URI` | Șirul *Transaction pooler* de la pasul 2, cu parola completată | da |
 | `PAYLOAD_SECRET` | Un șir aleator de 64 de caractere, generat de tine (vezi mai jos) | da |
-| `S3_ENDPOINT` | `https://fmkqpdwqvpwspsxmmkxh.storage.supabase.co/storage/v1/s3` | nu |
-| `S3_REGION` | `eu-west-1` | nu |
-| `S3_BUCKET` | `media` | nu |
+| `S3_ENDPOINT` | `https://fmkqpdwqvpwspsxmmkxh.storage.supabase.co/storage/v1/s3` — **pus de Claude Code** | nu |
+| `S3_REGION` | `eu-west-1` — **pus de Claude Code** | nu |
+| `S3_BUCKET` | `media` — **pus de Claude Code** | nu |
 | `S3_ACCESS_KEY_ID` | *Access key ID* de la pasul 2 | da |
 | `S3_SECRET_ACCESS_KEY` | *Secret access key* de la pasul 2 | da |
-| `NEXT_PUBLIC_SITE_URL` | `https://anna-restaurante-alinlabau-9308s-projects.vercel.app` | nu |
-| `ALLOW_INDEXING` | `false` | nu |
+| `NEXT_PUBLIC_SITE_URL` | `https://anna-restaurante-alinlabau-9308s-projects.vercel.app` — **pus de Claude Code** | nu |
+| `ALLOW_INDEXING` | `false` — **pus de Claude Code** | nu |
+
+**Rămân pentru Alin cele 4 secrete:** `DATABASE_URI`, `PAYLOAD_SECRET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` (Production + Preview, tip Sensitive).
 
 Nu se pun acum:
 - `RESEND_API_KEY` și `EMAIL_FROM`: la final, odată cu domeniul de trimitere (decizia ta din 24.11.2026).

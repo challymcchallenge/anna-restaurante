@@ -50,7 +50,9 @@ Ultima verificare: **24.11.2026**. Sursa versiunilor: registrul npm (`npm view`)
 | Bucket Supabase | `media`, public. Creat de Claude Code pe 24.11.2026 |
 | Proiect Vercel | `anna-restaurante` (`prj_fUZFnSKhbgQ253uFVnheAfPFswnR`), echipa `alinlabau-9308s-projects`, legat de GitHub `challymcchallenge/anna-restaurante`, ramura `main` |
 | Adresa temporară de producție | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
-| Protecția Vercel | `all_except_custom_domains`: și adresa de producție cere login Vercel. **Contrazice D-22.** De schimbat de Alin în „Standard Protection” |
+| Protecția Vercel | **Standard Protection** (`prod_deployment_urls_and_all_previews`), setată pe 24.11.2026. Înainte era `all_except_custom_domains`, care contrazicea D-22 |
+| Regiunea funcțiilor Vercel | **dub1** (Dublin), prin `vercel.json`. Înainte: iad1 (SUA) |
+| Variabile Vercel puse | `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `NEXT_PUBLIC_SITE_URL`, `ALLOW_INDEXING` (Production + Preview). Lipsesc cele 4 secrete |
 
 ---
 

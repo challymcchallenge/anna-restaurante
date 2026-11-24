@@ -20,7 +20,7 @@ Data: 24.11.2026 · Stare: **aștept „GO” de la Alin**. Detaliile fiecărui 
 | ADR-002 Multi-tenant | **Confirmat: 21/21 verificări**. Editorul Trattoria vede 2 seri, cel Citybar 1; GET pe seara celuilalt restaurant dă 404; nu își poate da singur rol sau alt restaurant. Capturi din panou în `docs/spikes/img/` |
 | ADR-006 Găzduire | Prețuri verificate. **Funcțiile Vercel mutate în dub1 (Dublin)**, lângă Supabase eu-west-1 (erau în iad1, SUA) |
 | ADR-009 Email | **Amânat la decizia ta** (domeniul vine la final). Limite verificate: 100 de emailuri pe zi, iar CC contează separat, deci 50 de cereri cu copie pe zi |
-| ADR-012 Neindexare | **Confirmat**: meta `noindex`, `X-Robots-Tag`, `robots.txt` `Disallow: /`. Pe `*.vercel.app` rămâne neindexat și după lansare. **Protecția Vercel actuală contrazice D-22** (cere login și pe producție) |
+| ADR-012 Neindexare | **Confirmat pe producție**: adresa e publică (Standard Protection), cu meta `noindex`, `X-Robots-Tag` și `robots.txt` `Disallow: /`. Pe `*.vercel.app` rămâne neindexat și după lansare |
 | T6 Meniu digital | Linkuri pe categorie: **da**, prin `#id-categorie` |
 
 ## 3. Contradicții găsite (nerezolvate; `docs/DECISIONS.md` câștigă)
@@ -37,8 +37,8 @@ Data: 24.11.2026 · Stare: **aștept „GO” de la Alin**. Detaliile fiecărui 
 
 | # | Ce | Unde | Timp |
 |---|---|---|---|
-| 1 | Vercel → Deployment Protection → **Standard Protection** | https://vercel.com/alinlabau-9308s-projects/anna-restaurante/settings/deployment-protection | 1 min |
-| 2 | Cele 9 variabile în Vercel | `docs/2026_11_24_Trattoria_Variabile_Mediu.md` · https://vercel.com/alinlabau-9308s-projects/anna-restaurante/settings/environment-variables | 10 min |
+| 1 | ~~Vercel → Standard Protection~~ **făcut de Claude Code**, după acordarea dreptului de scriere | — | — |
+| 2 | Cele **4 secrete** în Vercel (celelalte 5 le-a pus Claude Code) | `docs/2026_11_24_Trattoria_Variabile_Mediu.md` · https://vercel.com/alinlabau-9308s-projects/anna-restaurante/settings/environment-variables | 10 min |
 | 3 | Proba pe telefon și laptop: un clip și 2–3 fotografii, apoi „Copiază rezultatele” | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/spike/f0-media.html (după pasul 1) | 5 min |
 | 4 | Decizii: C1 (efecte înainte sau după lansare), motorul de traducere, AV1 da sau nu | răspuns în conversație | — |
 | 5 | Opțional: cheie API Anthropic pentru testul cu Claude Haiku 5.5 (prin formular securizat) | — | 2 min |
