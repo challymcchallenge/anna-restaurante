@@ -62,6 +62,26 @@ Apoi rulează Faza N din docs/PLAN.md, pas cu pas, cu aceleași reguli ca până
 
 ---
 
+## PROMPTUL F2 (copy-paste, sesiunea pentru Faza 2 · după GATE 1, 24.11.2026)
+
+```
+Continuăm proiectul Trattoria da Vittoria. Citește CLAUDE.md, docs/DECISIONS.md, docs/ADR.md, docs/PLAN.md, docs/OPEN-QUESTIONS.md și tot ce s-a adăugat în docs/ de la ultima fază (docs/2026_11_24_Trattoria_GATE1.md, docs/materiale-necesare.md, docs/versions.md, docs/img/). Spune-mi în 5 rânduri unde am rămas, pe baza fișierelor și a istoricului git.
+
+Apoi rulează Faza 2 din docs/PLAN.md (Direcție de design), pas cu pas, cu aceleași reguli ca până acum: o singură fază, te oprești la GATE 2, raportezi cifre reale și aștepți „GO”. Lucrezi autonom pe main; mă oprești doar unde e nevoie de mine.
+
+Pentru F2:
+- Pornești de la wireframe-urile din design/ și de la design/content-model.md. Referința vineyard.co.za e nivel de calitate, nu model de copiat.
+- Înainte să folosești un skill de design (Taste, Impeccable, UI UX Pro și celelalte instalate), citește-i documentația și folosește doar comenzile și componentele pe care le returnează efectiv.
+- Materialele de brand (logo-uri, culori, fonturi, clipul și posterele pentru hero) le găsești în panou, în Biblioteca media a restaurantului Trattoria. Ce lipsește, lucrezi pe conținut provizoriu marcat „Exemplu · de înlocuit” și îmi spui exact ce lipsește, cu calea din docs/materiale-necesare.md.
+- Fonturile alese acoperă diacriticele românești (ș, ț, ă, â, î). Setul aprobat devine câmpul de fonturi din Setări restaurant (amânat din F1).
+- Contrast text/fundal minimum 4,5:1, verificat și raportat cu cifre. Efectele sezoniere, sunetul, 3D și comutatorul de temă rămân în R2 (D-33).
+- Livrabile: două direcții, fiecare cu Acasă pe telefon și pe desktop (hero, bara de cazare, insigna premiului), apoi docs/design-system.md și variabilele de temă pe restaurant pentru direcția aleasă.
+
+GATE 2: îmi arăți cele două direcții, cu contrastele măsurate, și aștepți să aleg una.
+```
+
+---
+
 ## Note de utilizare
 
 - **Faza 0 are un punct de oprire la pasul b):** Claude Code îți spune ce variabile lipsesc, tu le completezi în `.env.local` și în Vercel, apoi confirmi. Cheile nu trec prin conversație.
