@@ -1,14 +1,17 @@
 import type { CollectionConfig } from 'payload'
+import { APIError } from 'payload'
 
-import { adminOnly, adminOnlyField, adminOrSelf, ROLES } from '../access/roles'
+import { adminOnly, adminOnlyField, adminOrSelf, hiddenForEditors, ROLES } from '../access/roles'
 
 /** Utilizatori (content-model G2, D-16). */
 export const Users: CollectionConfig = {
   slug: 'users',
   labels: { singular: 'Utilizator', plural: 'Utilizatori' },
   admin: {
+    group: 'Administrare',
     useAsTitle: 'email',
-    defaultColumns: ['name', 'email', 'role'],
+    defaultColumns: ['name', 'email', 'role', 'active'],
+    hidden: hiddenForEditors,
   },
   auth: true,
   access: {
@@ -18,6 +21,15 @@ export const Users: CollectionConfig = {
     delete: adminOnly,
   },
   hooks: {
+    beforeLogin: [
+      // Un cont oprit („Activ” debifat) nu mai poate intra în panou (content-model G2).
+      ({ user }) => {
+        if (user?.active === false) {
+          throw new APIError('Contul este oprit. Cere Administratorului să îl reactiveze.', 403, undefined, true)
+        }
+        return user
+      },
+    ],
     beforeChange: [
       // Primul cont creat în panou devine Administrator; altfel nimeni nu ar putea administra.
       async ({ data, operation, req }) => {
@@ -35,6 +47,8 @@ export const Users: CollectionConfig = {
       label: 'Nume',
       type: 'text',
       maxLength: 60,
+      // Obligatoriu în panou; coloana rămâne opțională în baza de date (conturi create în F0).
+      validate: ((value: unknown) => (value ? true : 'Câmpul este obligatoriu.')) as any,
     },
     {
       name: 'role',

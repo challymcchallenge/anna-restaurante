@@ -1,0 +1,231 @@
+{
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente.",
+  "tenantSlug": "trattoria-da-vittoria",
+  "settings": {
+    "tagline": "The Best Restaurant in Town",
+    "address": {
+      "street": "Strada Victoriei nr. 8",
+      "city": "Târgu Jiu",
+      "county": "Gorj",
+      "country": "România"
+    },
+    "phoneReservations": "+40 356 630 238",
+    "phoneEvents": "0764 816 462",
+    "hours": [
+      { "day": "mon", "opens": "08:00", "closes": "24:00" },
+      { "day": "tue", "opens": "08:00", "closes": "24:00" },
+      { "day": "wed", "opens": "08:00", "closes": "24:00" },
+      { "day": "thu", "opens": "08:00", "closes": "24:00" },
+      { "day": "fri", "opens": "08:00", "closes": "24:00" },
+      { "day": "sat", "opens": "08:00", "closes": "24:00" },
+      { "day": "sun", "opens": "08:00", "closes": "24:00" }
+    ],
+    "social": {
+      "instagram": "https://www.instagram.com/trattoriadavittoria/",
+      "youtube": "https://www.youtube.com/@AnnaEvents",
+      "tiktok": "https://www.tiktok.com/@anna.events"
+    },
+    "googleReviewUrl": "https://g.page/r/CcvVjOcZMWuYEBM/review",
+    "ialocId": "4385",
+    "digitalMenuUrl": "https://www.meniudigital.ro/trattoriadavittoria",
+    "activeLocales": ["ro"],
+    "requests": {
+      "privateEvent": { "active": false },
+      "pizzaCourse": { "active": false },
+      "accommodation": { "active": true, "recipients": ["rezervari@hotelanna.ro"] },
+      "question": { "active": false },
+      "complaint": { "active": false }
+    }
+  },
+  "homePage": {
+    "hero": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 1,
+      "menuLabel": "Acasă",
+      "mediaMode": "video",
+      "subtitle": "Vă așteptăm cu drag și vă servim cu plăcere!",
+      "bookLabel": "Rezervă o masă",
+      "menuButtonLabel": "Meniu"
+    },
+    "stay": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 2,
+      "menuLabel": "Cazare",
+      "title": "Cazare la Hotel ANNA",
+      "note": "Este o cerere de ofertă; recepția hotelului confirmă disponibilitatea.",
+      "buttonLabel": "Cere ofertă de cazare",
+      "maxAdults": 6,
+      "maxChildren": 4
+    },
+    "kitchen": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 3,
+      "menuLabel": "Bucătăria",
+      "title": "Bucătăria. Descoperă meniul, fel cu fel.",
+      "buttonLabel": "Vezi meniul complet"
+    },
+    "wines": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 4,
+      "menuLabel": "Vinuri",
+      "title": "Pentru fiecare fel, un vin pe măsură.",
+      "buttonLabel": "Vezi lista de vinuri"
+    },
+    "reviews": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 5,
+      "menuLabel": "Recenzii",
+      "title": "Nu ne crede pe cuvânt.",
+      "buttonLabel": "Lasă o recenzie"
+    },
+    "parties": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 6,
+      "menuLabel": "Petreceri",
+      "title": "Weekendul începe la Trattoria.",
+      "intro": "Seri cu DJ, artiști și formații. Rezervă-ți masa din timp.",
+      "emptyMessage": "Pregătim următoarea seară"
+    },
+    "privateEvents": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 7,
+      "menuLabel": "Evenimente private",
+      "title": "Un salon doar al vostru.",
+      "intro": "Onomastici, botezuri, tăieri de moț, prezentări, teambuilding.",
+      "eventTypes": [
+        { "label": "Onomastici" },
+        { "label": "Botezuri" },
+        { "label": "Tăieri de moț" },
+        { "label": "Prezentări" },
+        { "label": "Teambuilding" }
+      ],
+      "buttonLabel": "Rezervă salonul"
+    },
+    "pizza": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 8,
+      "menuLabel": "Cursuri de pizza",
+      "title": "Azi gătesc cei mici.",
+      "shortText": "Pentru o zi, copiii devin mici maeștri pizzaioli! Vor descoperi secretele preparării pizzei, vor întinde aluatul, vor alege ingredientele preferate și își vor pregăti propria pizza.",
+      "buttonLabel": "Înscrie copilul",
+      "fullText": { "$richText": "Pentru o zi, copiii devin mici maeștri pizzaioli! Vor descoperi secretele preparării pizzei, vor întinde aluatul, vor alege ingredientele preferate și își vor pregăti propria pizza.\n\nDetaliile (vârsta, durata, prețul, numărul de locuri) se completează după confirmarea localului (Q-11)." }
+    },
+    "hotel": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 9,
+      "menuLabel": "Hotel ANNA",
+      "title": "După cină, rămâi peste noapte.",
+      "intro": "Cazare la Hotel ANNA, pe Bd. Ecaterina Teodoroiu 17, în Târgu Jiu. Trimite o cerere; recepția hotelului îți confirmă disponibilitatea.",
+      "hotelName": "Hotel ANNA",
+      "hotelAddress": "Bd. Ecaterina Teodoroiu 17, Târgu Jiu",
+      "hotelUrl": "https://www.hotelanna.ro"
+    },
+    "gallery": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 10,
+      "menuLabel": "Galerie",
+      "title": "Trattoria, în imagini.",
+      "buttonLabel": "Vezi galeria"
+    },
+    "contact": {
+      "enabled": true,
+      "placeholder": true,
+      "order": 11,
+      "menuLabel": "Contact",
+      "title": "Spune-ne ce plănuiești.",
+      "intro": "Cu ce te putem ajuta?"
+    },
+    "footer": {
+      "copyright": "© Trattoria da Vittoria. Toate drepturile rezervate.",
+      "placeholder": false
+    }
+  },
+  "collections": {
+    "gallery-categories": [
+      { "name": "Restaurant" },
+      { "name": "Preparate" },
+      { "name": "Vinuri" },
+      { "name": "Petreceri" },
+      { "name": "Hotel" },
+      { "name": "Evenimente" }
+    ],
+    "dish-categories": [
+      { "name": "Recomandări din partea casei", "shortText": "Alese de bucătar", "placeholder": true },
+      { "name": "Antipasti", "shortText": "Începutul unei mese italiene", "placeholder": true },
+      { "name": "Pasta e Risotto", "shortText": "Inima trattoriei", "placeholder": true },
+      { "name": "Pizza", "shortText": "Clasice și rețete ale casei", "placeholder": true },
+      { "name": "Preparate Marine", "shortText": "Pește și fructe de mare", "placeholder": true },
+      { "name": "Preparate Vită", "shortText": "Pentru seri de ocazie", "placeholder": true },
+      { "name": "Deserturi", "shortText": "Finalul dulce al mesei", "placeholder": true },
+      { "name": "Buona Mattina", "shortText": "Mic dejun", "placeholder": true }
+    ],
+    "wines": [
+      { "name": "Prosecco DOC Brut", "type": "sparkling", "country": "Italia", "region": "Veneto", "priceBottle": 135, "volume": "0.75", "featured": true, "placeholder": true },
+      { "name": "Pinot Grigio delle Venezie DOC", "type": "white", "country": "Italia", "vintage": 2023, "priceBottle": 120, "volume": "0.75", "featured": true, "placeholder": true },
+      { "name": "Sauvignon Blanc", "type": "white", "country": "România", "region": "Drăgășani", "vintage": 2023, "priceBottle": 110, "volume": "0.75", "featured": true, "placeholder": true },
+      { "name": "Chianti Classico DOCG", "type": "red", "country": "Italia", "region": "Toscana", "vintage": 2021, "priceBottle": 165, "volume": "0.75", "featured": true, "placeholder": true },
+      { "name": "Fetească Neagră", "type": "red", "country": "România", "region": "Dealu Mare", "vintage": 2020, "priceBottle": 145, "volume": "0.75", "featured": true, "placeholder": true }
+    ],
+    "reviews": [
+      { "author": "Maria P.", "group": "restaurant", "source": "google", "date": "2026-10-01T12:00:00.000Z", "text": "Paste excelente și servire atentă. Revenim cu drag.", "placeholder": true },
+      { "author": "Andrei D.", "group": "restaurant", "source": "google", "date": "2026-09-01T12:00:00.000Z", "text": "Am sărbătorit aici botezul fetiței. Totul a ieșit cum ne-am dorit.", "placeholder": true },
+      { "author": "Ioana M.", "group": "restaurant", "source": "tripadvisor", "date": "2026-08-01T12:00:00.000Z", "text": "Cea mai bună pizza din oraș și o listă de vinuri pe măsură.", "placeholder": true },
+      { "author": "Cristina V.", "group": "hotel", "source": "google", "date": "2026-07-01T12:00:00.000Z", "text": "Camere curate, personal amabil, mic dejun foarte bun.", "placeholder": true }
+    ],
+    "events": [
+      { "name": "Italian Nights", "type": "dj", "guest": "Numele DJ-ului", "startsAt": { "$inDays": 18, "time": "20:00" }, "entry": "Intrare liberă", "placeholder": true },
+      { "name": "Seară de blues", "type": "band", "guest": "Numele formației", "startsAt": { "$inDays": 24, "time": "20:30" }, "placeholder": true },
+      { "name": "House Night", "type": "dj", "guest": "Numele DJ-ului", "startsAt": { "$inDays": 25, "time": "21:00" }, "placeholder": true }
+    ],
+    "salons": [
+      { "name": "Salon Trattoria", "location": "la etaj", "capacity": 25, "description": "Descriere de înlocuit: atmosfera, dotările și tipurile de evenimente potrivite pentru salon.", "placeholder": true },
+      { "name": "Salon Vittoria", "location": "la mansardă", "capacity": 40, "description": "Descriere de înlocuit: atmosfera, dotările și tipurile de evenimente potrivite pentru salon.", "placeholder": true }
+    ],
+    "room-types": [
+      { "name": "Camere Premium", "description": "Descriere scurtă, de înlocuit.", "placeholder": true },
+      { "name": "Apartamente VIP Riviera", "description": "Descriere scurtă, de înlocuit.", "placeholder": true }
+    ],
+    "faqs": [
+      { "question": "Aveți parcare?", "answer": { "$richText": "Răspuns de confirmat de local." }, "group": "home", "placeholder": true },
+      { "question": "Pot veni cu copiii?", "answer": { "$richText": "Răspuns de confirmat de local." }, "group": "home", "placeholder": true },
+      { "question": "Aveți preparate vegetariene?", "answer": { "$richText": "Răspuns de confirmat de local." }, "group": "home", "placeholder": true },
+      { "question": "Cum rezerv un salon pentru un eveniment?", "answer": { "$richText": "Din pagina Evenimente private sau la telefon 0764 816 462." }, "group": "home", "placeholder": true },
+      { "question": "Putem aduce tortul nostru?", "answer": { "$richText": "Răspuns de confirmat de local." }, "group": "private-events", "placeholder": true },
+      { "question": "Se plătește un avans?", "answer": { "$richText": "Răspuns de confirmat de local." }, "group": "private-events", "placeholder": true },
+      { "question": "Până la ce oră poate dura evenimentul?", "answer": { "$richText": "Răspuns de confirmat de local." }, "group": "private-events", "placeholder": true }
+    ],
+    "group-links": [
+      { "name": "Anna Delivery", "placeholder": true },
+      { "name": "Cofetăria Anna", "placeholder": true },
+      { "name": "CityBar & Josper Grill", "url": "https://citybar.ro/" },
+      { "name": "SuperBistro", "url": "https://www.superbistro.ro/" },
+      { "name": "Terasa Anna", "url": "https://terasa-anna.ro/" },
+      { "name": "Piscina Anna Summer Events", "placeholder": true },
+      { "name": "Anna Events", "placeholder": true },
+      { "name": "Riviera Events", "placeholder": true },
+      { "name": "Hotel Anna", "url": "https://www.hotelanna.ro" },
+      { "name": "Hotel Anna Junior", "placeholder": true }
+    ],
+    "legal-pages": [
+      { "title": "Termeni și condiții", "slug": "termeni", "content": { "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25)." }, "placeholder": true },
+      { "title": "Politica de confidențialitate", "slug": "confidentialitate", "content": { "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25). Trebuie să menționeze serviciile terțe ale ferestrei de rezervare ialoc: Google Analytics și PostHog (F0, ialoc.md)." }, "placeholder": true },
+      { "title": "Politica de cookies", "slug": "cookies", "content": { "$richText": "Text de înlocuit cu varianta juristului grupului (Q-25)." }, "placeholder": true }
+    ],
+    "awards": [
+      { "name": "Wine Spectator Restaurant Award", "organization": "Wine Spectator", "placements": ["hero", "wines-section", "wines-page", "footer"], "placeholder": true }
+    ],
+    "redirects": [
+      { "from": "/valori-nutritionale", "to": "https://www.meniudigital.ro/trattoriadavittoria", "permanent": true }
+    ]
+  }
+}

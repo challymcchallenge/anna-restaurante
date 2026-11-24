@@ -1,17 +1,22 @@
 import type { CollectionConfig } from 'payload'
 
-import { adminOnly, authenticated } from '../access/roles'
+import { adminOnly, authenticated, hiddenForEditors } from '../access/roles'
 
 /**
  * Restaurante (content-model G1, ADR-002). Fiecare restaurant este un tenant.
- * Câmpurile de identitate, contact și integrări (R1–R3) se adaugă în F1.
+ * Identitatea, contactul și integrările (R1–R4) stau în colecția „Setări restaurant”.
  */
 export const Tenants: CollectionConfig = {
   slug: 'tenants',
   labels: { singular: 'Restaurant', plural: 'Restaurante' },
+  // Ordinea din comutatorul de restaurant: se schimbă prin tragere în listă.
+  // Implicit, ordinea creării (primul restaurant = cel ales după autentificare, nu primul alfabetic).
+  orderable: true,
   admin: {
+    group: 'Administrare',
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', 'domain', 'active'],
+    hidden: hiddenForEditors,
   },
   access: {
     // Pluginul multi-tenant restrânge citirea la restaurantele atribuite (Editor).

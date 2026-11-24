@@ -3,17 +3,35 @@ import { resendAdapter } from '@payloadcms/email-resend'
 import { multiTenantPlugin } from '@payloadcms/plugin-multi-tenant'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { ro } from '@payloadcms/translations/languages/ro'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { adminOnlyField, isAdmin } from './access/roles'
+import { Awards, Redirects, Submissions } from './collections/AdminAreas'
+import {
+  ComplaintReasons,
+  DishCategories,
+  Faqs,
+  Gallery,
+  GalleryCategories,
+  GroupLinks,
+  LegalPages,
+} from './collections/Catalog'
 import { Events } from './collections/Events'
+import { HomePage } from './collections/HomePage'
 import { Media } from './collections/Media'
+import { Reviews } from './collections/Reviews'
+import { Settings } from './collections/Settings'
 import { Tenants } from './collections/Tenants'
 import { Users } from './collections/Users'
+import { RoomTypes, Salons } from './collections/Venues'
+import { Wines } from './collections/Wines'
 import { parseFromAddress } from './lib/email'
+import { DEFAULT_LOCALE, LOCALES } from './lib/locales'
+import { publicFileUrl, supabasePublicBase } from './lib/media/publicUrl'
 import type { Config } from './payload-types'
 
 const filename = fileURLToPath(import.meta.url)
@@ -28,26 +46,73 @@ const s3Ready = Boolean(
     process.env.S3_SECRET_ACCESS_KEY,
 )
 
+const mediaPublicBase = supabasePublicBase(process.env.S3_ENDPOINT, process.env.S3_BUCKET)
+
 const from = parseFromAddress(process.env.EMAIL_FROM)
 
 export default buildConfig({
   admin: {
     user: Users.slug,
+    meta: { titleSuffix: ' · Panou ANNA' },
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      // Tabloul de bord (S-12): conținut provizoriu rămas și serile apropiate.
+      beforeDashboard: ['/components/admin/Dashboard#Dashboard'],
+    },
   },
-  collections: [Tenants, Users, Media, Events],
+  // Panoul în română (F1). Limba interfeței; conținutul are limbile lui (localization).
+  i18n: {
+    supportedLanguages: { ro },
+    fallbackLanguage: 'ro',
+    // Corecturi la traducerea oficială Payload („Localitate” înseamnă oraș, nu limbă).
+    translations: {
+      ro: { general: { locale: 'Limba conținutului', locales: 'Limbi' } } as any,
+    },
+  },
+  // Texte pe limbi (D-28, ADR-007). Româna e implicită; unde lipsește traducerea, se afișează româna.
+  localization: {
+    locales: LOCALES.map((l) => ({ code: l.code, label: l.label })),
+    defaultLocale: DEFAULT_LOCALE,
+    fallback: true,
+  },
+  collections: [
+    HomePage,
+    Events,
+    DishCategories,
+    Wines,
+    Reviews,
+    Salons,
+    RoomTypes,
+    Gallery,
+    GalleryCategories,
+    Faqs,
+    ComplaintReasons,
+    GroupLinks,
+    LegalPages,
+    Media,
+    Submissions,
+    Settings,
+    Awards,
+    Redirects,
+    Tenants,
+    Users,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  // Clipurile convertite ajung la ~12 MB (F0); 50 MB acoperă un clip de 30 s cu marjă.
+  upload: { limits: { fileSize: 50_000_000 } },
   db: postgresAdapter({
-    // Supabase: șirul de conectare prin pooler (ADR-003).
+    // Supabase: șirul de conectare prin Shared pooler (ADR-003).
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    // Schema se schimbă doar prin migrații (src/migrations), la fel local și în producție.
+    push: false,
   }),
   // Fără RESEND_API_KEY, Payload doar afișează emailurile în consolă (dezvoltare locală).
   email: process.env.RESEND_API_KEY
@@ -63,8 +128,24 @@ export default buildConfig({
     multiTenantPlugin<Config>({
       tenantsSlug: 'tenants',
       collections: {
-        media: {},
+        'home-page': { isGlobal: true },
+        settings: { isGlobal: true },
         events: {},
+        'dish-categories': {},
+        wines: {},
+        reviews: {},
+        salons: {},
+        'room-types': {},
+        gallery: {},
+        'gallery-categories': {},
+        faqs: {},
+        'complaint-reasons': {},
+        'group-links': {},
+        'legal-pages': {},
+        media: {},
+        submissions: {},
+        awards: {},
+        redirects: {},
       },
       // Administratorul vede toate restaurantele.
       userHasAccessToAllTenants: (user) => isAdmin(user),
@@ -76,18 +157,30 @@ export default buildConfig({
       },
       i18n: {
         translations: {
-          en: { 'nav-tenantSelector-label': 'Restaurant' },
+          ro: {
+            'nav-tenantSelector-label': 'Restaurant',
+            'assign-tenant-button-label': 'Mută la alt restaurant',
+            'assign-tenant-modal-title': 'Mută „{{title}}”',
+            'field-assignedTenant-label': 'Restaurant',
+          },
         },
       },
     }),
     // Supabase Storage prin API-ul compatibil S3, încărcare directă din browser (ADR-003).
-    // Fără variabilele S3 (dezvoltare locală), fișierele rămân pe disc.
+    // Fișierele se servesc direct din URL-ul public Supabase (F1). Fără variabilele S3
+    // (dezvoltare locală), fișierele rămân pe disc.
     s3Storage({
       enabled: s3Ready,
       alwaysInsertFields: true,
       clientUploads: true,
       collections: {
-        media: true,
+        media: mediaPublicBase
+          ? {
+              disablePayloadAccessControl: true,
+              generateFileURL: ({ filename: file, prefix }) =>
+                publicFileUrl(mediaPublicBase, file, prefix),
+            }
+          : true,
       },
       bucket: process.env.S3_BUCKET || '',
       config: {

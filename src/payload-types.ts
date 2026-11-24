@@ -67,10 +67,26 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    'home-page': HomePage;
+    events: Event;
+    'dish-categories': DishCategory;
+    wines: Wine;
+    reviews: Review;
+    salons: Salon;
+    'room-types': RoomType;
+    gallery: Gallery;
+    'gallery-categories': GalleryCategory;
+    faqs: Faq;
+    'complaint-reasons': ComplaintReason;
+    'group-links': GroupLink;
+    'legal-pages': LegalPage;
+    media: Media;
+    submissions: Submission;
+    settings: Setting;
+    awards: Award;
+    redirects: Redirect;
     tenants: Tenant;
     users: User;
-    media: Media;
-    events: Event;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,10 +94,26 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    'dish-categories': DishCategoriesSelect<false> | DishCategoriesSelect<true>;
+    wines: WinesSelect<false> | WinesSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    salons: SalonsSelect<false> | SalonsSelect<true>;
+    'room-types': RoomTypesSelect<false> | RoomTypesSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    'gallery-categories': GalleryCategoriesSelect<false> | GalleryCategoriesSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
+    'complaint-reasons': ComplaintReasonsSelect<false> | ComplaintReasonsSelect<true>;
+    'group-links': GroupLinksSelect<false> | GroupLinksSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    submissions: SubmissionsSelect<false> | SubmissionsSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+    awards: AwardsSelect<false> | AwardsSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     tenants: TenantsSelect<false> | TenantsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    events: EventsSelect<false> | EventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -90,10 +122,15 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale:
+    | ('false' | 'none' | 'null')
+    | false
+    | null
+    | ('ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv')
+    | ('ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv')[];
   globals: {};
   globalsSelect: {};
-  locale: null;
+  locale: 'ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -122,11 +159,290 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Secțiunile paginii Acasă, cu ordinea lor. Oprirea unei secțiuni o scoate și din meniu.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  hero: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    mediaMode: 'video' | 'slideshow';
+    /**
+     * 16:9, fără sunet, cel mult 30 s.
+     */
+    videoDesktop?: (number | null) | Media;
+    /**
+     * 9:16, fără sunet, cel mult 30 s (D-02, D-24).
+     */
+    videoMobile?: (number | null) | Media;
+    /**
+     * HERO-L · 16:9 · minimum 2400 × 1350 px · Apare înaintea clipului.
+     */
+    posterDesktop?: (number | null) | Media;
+    /**
+     * HERO-P · 9:16 · minimum 1080 × 1920 px
+     */
+    posterMobile?: (number | null) | Media;
+    slides?:
+      | {
+          /**
+           * HERO-L · 16:9 · minimum 2400 × 1350 px
+           */
+          desktop: number | Media;
+          /**
+           * HERO-P · 9:16 · minimum 1080 × 1920 px
+           */
+          mobile: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+    subtitle?: string | null;
+    /**
+     * Deschide fereastra ialoc.
+     */
+    bookLabel: string;
+    /**
+     * Deschide meniul digital în filă nouă.
+     */
+    menuButtonLabel: string;
+  };
+  stay: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    /**
+     * Spune că este o cerere, confirmată de hotel.
+     */
+    note: string;
+    buttonLabel: string;
+    maxAdults: number;
+    maxChildren: number;
+  };
+  kitchen: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    intro?: string | null;
+    buttonLabel: string;
+  };
+  wines: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    intro?: string | null;
+    /**
+     * Duce la /catalog-vinuri.
+     */
+    buttonLabel: string;
+  };
+  reviews: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    /**
+     * Folosește legătura de recenzie Google din Setări.
+     */
+    buttonLabel: string;
+  };
+  parties: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    intro?: string | null;
+    emptyMessage: string;
+  };
+  privateEvents: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    intro?: string | null;
+    eventTypes?:
+      | {
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+    buttonLabel: string;
+  };
+  pizza: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    shortText: string;
+    /**
+     * CARD-L · 3:2 · minimum 1800 × 1200 px
+     */
+    photo?: (number | null) | Media;
+    buttonLabel: string;
+    /**
+     * Obligatoriu. Cel mult 1200 caractere.
+     */
+    fullText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * GAL · format liber · minimum 1600 px pe latura lungă
+     */
+    gallery?: (number | Media)[] | null;
+    age?: string | null;
+    duration?: string | null;
+    price?: string | null;
+    seats?: string | null;
+  };
+  hotel: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    intro: string;
+    /**
+     * Nu se traduce: aceeași valoare în toate limbile.
+     */
+    hotelName: string;
+    /**
+     * Nu se traduce: aceeași valoare în toate limbile.
+     */
+    hotelAddress: string;
+    hotelUrl?: string | null;
+    /**
+     * Apare doar dacă este completat și confirmat.
+     */
+    priceFrom?: number | null;
+    priceNote?: string | null;
+    /**
+     * CARD-L · 3:2 · minimum 1800 × 1200 px
+     */
+    photos?: (number | Media)[] | null;
+  };
+  gallery: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    buttonLabel: string;
+  };
+  contact: {
+    /**
+     * Oprită = secțiunea dispare de pe Acasă și din meniu.
+     */
+    enabled?: boolean | null;
+    /**
+     * Pornit = textele sunt exemple, de înlocuit (D-08).
+     */
+    placeholder?: boolean | null;
+    order?: number | null;
+    menuLabel?: string | null;
+    title: string;
+    intro?: string | null;
+  };
+  footer: {
+    copyright: string;
+    placeholder?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tenants".
  */
 export interface Tenant {
   id: number;
+  _order?: string | null;
   name: string;
   /**
    * Litere mici și cratime; nu se schimbă după creare.
@@ -149,6 +465,920 @@ export interface Tenant {
    * Oprită până la legarea domeniului (ADR-012).
    */
   allowIndexing?: boolean | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Păstrează originalul la tine; pe site rămâne doar varianta optimizată (D-27). Folosește butonul „Alege și convertește”.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Se completează la încărcare. Logo: PNG sau SVG, fără conversie în JPEG. BADGE: fișierul oficial, neatins.
+   */
+  kind: 'photo' | 'clip' | 'logo' | 'badge' | 'video-variant' | 'video-poster';
+  /**
+   * Ce se vede în imagine, pentru cititoarele de ecran și Google. Obligatoriu la fotografii și clipuri.
+   */
+  alt?: string | null;
+  /**
+   * Doar pentru căutare în panou. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  title?: string | null;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  credit?: string | null;
+  hasChildren?: boolean | null;
+  parentalConsent?: boolean | null;
+  /**
+   * Rămâne la tine; nu a urcat pe server.
+   */
+  originalName?: string | null;
+  originalBytes?: number | null;
+  durationSeconds?: number | null;
+  efficientVariant?: (number | null) | Media;
+  poster?: (number | null) | Media;
+  codec?: string | null;
+  variantOf?: (number | null) | Media;
+  prefix?: string | null;
+  _objectKey?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    avif640?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    webp640?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    avif960?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    webp960?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    avif1280?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    webp1280?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    avif1920?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    webp1920?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    avif2560?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    webp2560?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * Serile cu DJ, artiști sau formații. O seară trecută iese singură din agendă și intră în arhiva foto.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  /**
+   * Ora României.
+   */
+  startsAt: string;
+  endsAt?: string | null;
+  type: 'dj' | 'artist' | 'band' | 'other';
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  guest?: string | null;
+  /**
+   * CARD-P · 4:5 · minimum 1080 × 1350 px · Este și imaginea de distribuire pe rețele.
+   */
+  poster?: (number | null) | Media;
+  description?: string | null;
+  /**
+   * De exemplu „Intrare liberă”. Se completează la fiecare seară, dacă este cazul.
+   */
+  entry?: string | null;
+  /**
+   * Butonul deschide fereastra ialoc cu data serii preselectată (probat în F0).
+   */
+  bookWithDate?: boolean | null;
+  /**
+   * GAL · format liber · minimum 1600 px pe latura lungă · Apar în arhiva foto și în Galerie, la categoria Petreceri.
+   */
+  photosAfter?: (number | Media)[] | null;
+  /**
+   * Calculată: viitoare sau trecută.
+   */
+  status?: string | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Cardurile din sliderul „Bucătăria”. Fără legătură = adresa meniului digital din Setări.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dish-categories".
+ */
+export interface DishCategory {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * De exemplu „Pasta e Risotto”. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  shortText?: string | null;
+  /**
+   * CARD-P · 4:5 · minimum 1080 × 1350 px
+   */
+  photo?: (number | null) | Media;
+  /**
+   * Opțional. Poate duce direct la categoria din meniul digital (…/trattoriadavittoria#id-categorie, probat în F0).
+   */
+  link?: string | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Catalogul de la /catalog-vinuri. Cele bifate „Recomandat” apar în sliderul de pe Acasă (cel mult 10).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wines".
+ */
+export interface Wine {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  producer?: string | null;
+  type: 'sparkling' | 'white' | 'rose' | 'red' | 'dessert';
+  country?: string | null;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  region?: string | null;
+  /**
+   * Patru cifre; gol = fără an.
+   */
+  vintage?: number | null;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  grapes?: string | null;
+  priceBottle: number;
+  volume: '0.375' | '0.75' | '1.5';
+  /**
+   * Gol = nu se servește la pahar.
+   */
+  priceGlass?: number | null;
+  description?: string | null;
+  /**
+   * CARD-P · 4:5 · minimum 1080 × 1350 px
+   */
+  photo?: (number | null) | Media;
+  /**
+   * Apare în sliderul de pe Acasă; cel mult 10.
+   */
+  featured?: boolean | null;
+  /**
+   * Oprit = rămâne în panou, dispare din listă.
+   */
+  available?: boolean | null;
+  /**
+   * Pentru legarea ulterioară cu portalul de vinuri (D-14). Nu se traduce: aceeași valoare în toate limbile.
+   */
+  externalCode?: string | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Recenzii pentru restaurant și pentru hotel. Pe Acasă apar primele 3 active din grupul Restaurant.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Prenume și inițială. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  author: string;
+  group: 'restaurant' | 'hotel';
+  /**
+   * În celelalte limbi apare cu mențiunea „tradus din română”.
+   */
+  text: string;
+  source: 'google' | 'tripadvisor' | 'facebook' | 'other';
+  date: string;
+  rating?: number | null;
+  sourceUrl?: string | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Formularul sugerează salonul după numărul de invitați; peste cea mai mare capacitate îndrumă către Riviera Events sau ANNA Events (D-32).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "salons".
+ */
+export interface Salon {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  /**
+   * De exemplu „la etaj”.
+   */
+  location?: string | null;
+  capacity: number;
+  description: string;
+  /**
+   * CARD-L · 3:2 · minimum 1800 × 1200 px · Între 3 și 10.
+   */
+  photos?: (number | Media)[] | null;
+  amenities?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "room-types".
+ */
+export interface RoomType {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  description?: string | null;
+  /**
+   * CARD-L · 3:2 · minimum 1800 × 1200 px
+   */
+  photo?: (number | null) | Media;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Fotografii și clipuri pe categorii. Cele bifate „Pe Acasă” (cel mult 8) apar în secțiunea Galerie.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * GAL · format liber · minimum 1600 px pe latura lungă
+   */
+  file: number | Media;
+  category: number | GalleryCategory;
+  caption?: string | null;
+  onHome?: boolean | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-categories".
+ */
+export interface GalleryCategory {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  name: string;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Pe Acasă apar cel mult 5 din grupul Acasă.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  question: string;
+  /**
+   * Obligatoriu. Cel mult 600 caractere.
+   */
+  answer?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  group: 'home' | 'private-events' | 'pizza' | 'stay' | 'restaurant';
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "complaint-reasons".
+ */
+export interface ComplaintReason {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  reason: string;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "group-links".
+ */
+export interface GroupLink {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  /**
+   * Obligatorie; poate lipsi doar cât timp elementul este „Provizoriu”.
+   */
+  url?: string | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  title: string;
+  /**
+   * Litere mici și cratime, de exemplu „confidentialitate”. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  slug: string;
+  /**
+   * Obligatoriu.
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  inFooter?: boolean | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Create de formularele site-ului. Fiecare cerere rămâne aici chiar dacă emailul nu a plecat.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "submissions".
+ */
+export interface Submission {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  subject: 'privateEvent' | 'pizzaCourse' | 'accommodation' | 'question' | 'complaint';
+  status: 'new' | 'in-progress' | 'resolved';
+  name?: string | null;
+  phone: string;
+  email: string;
+  message?: string | null;
+  details?: {
+    eventType?: string | null;
+    eventDate?: string | null;
+    guests?: number | null;
+    salon?: (number | null) | Salon;
+    children?: number | null;
+    ages?: string | null;
+    preferredDate?: string | null;
+    checkIn?: string | null;
+    checkOut?: string | null;
+    adults?: number | null;
+    kids?: number | null;
+    roomType?: (number | null) | RoomType;
+    visitDate?: string | null;
+    reason?: (number | null) | ComplaintReason;
+    waiter?: string | null;
+  };
+  consent: boolean;
+  consentAt?: string | null;
+  emailSent?: boolean | null;
+  emailError?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Identitate, contact, program, integrări și destinatarii emailurilor. Un document pe restaurant.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  tagline: string;
+  /**
+   * LOGO · SVG; dacă nu există, PNG transparent de minimum 600 px lățime · Obligatoriu înainte de lansare.
+   */
+  logo?: (number | null) | Media;
+  /**
+   * LOGO · SVG; dacă nu există, PNG transparent de minimum 600 px lățime · Dacă lipsește, se folosește cel principal.
+   */
+  logoDark?: (number | null) | Media;
+  /**
+   * LOGO · SVG; dacă nu există, PNG transparent de minimum 600 px lățime · În footer.
+   */
+  logoGroup?: (number | null) | Media;
+  /**
+   * SVG sau PNG pătrat, minimum 512 px. Obligatoriu înainte de lansare.
+   */
+  favicon?: (number | null) | Media;
+  /**
+   * Panoul verifică contrastul textului pe fundal: minimum 4,5:1; sub prag nu se poate salva. Paleta finală vine din direcția de design (F2).
+   */
+  colors?: {
+    /**
+     * Format #RRGGBB.
+     */
+    background?: string | null;
+    /**
+     * Format #RRGGBB.
+     */
+    text?: string | null;
+    /**
+     * Format #RRGGBB.
+     */
+    accent?: string | null;
+    /**
+     * Format #RRGGBB.
+     */
+    accent2?: string | null;
+  };
+  /**
+   * O singură temă la lansare; comutatorul pentru vizitatori vine în R2 (D-33). Alegerea: Q-17.
+   */
+  defaultTheme?: ('dark' | 'light') | null;
+  /**
+   * SHARE · 1,91:1 · minimum 1200 × 630 px
+   */
+  shareImage?: (number | null) | Media;
+  address: {
+    /**
+     * Nu se traduce: aceeași valoare în toate limbile.
+     */
+    street: string;
+    /**
+     * Nu se traduce: aceeași valoare în toate limbile.
+     */
+    city: string;
+    /**
+     * Nu se traduce: aceeași valoare în toate limbile.
+     */
+    county?: string | null;
+    /**
+     * Nu se traduce: aceeași valoare în toate limbile.
+     */
+    country: string;
+    /**
+     * Pentru hartă. Obligatoriu înainte de F3.
+     */
+    lat?: number | null;
+    lng?: number | null;
+  };
+  /**
+   * În antet, în Contact și ca rezervă a ferestrei ialoc (D-17).
+   */
+  phoneReservations: string;
+  /**
+   * În Evenimente private și la „Rezervă salonul” (D-17).
+   */
+  phoneEvents?: string | null;
+  /**
+   * Câte un rând pe zi.
+   */
+  hours?:
+    | {
+        day: 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+        opens?: string | null;
+        closes?: string | null;
+        closed?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  hoursNote?: string | null;
+  /**
+   * Apar în footer și în Contact, doar dacă sunt completate (D-18, D-30).
+   */
+  social?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    youtube?: string | null;
+    tiktok?: string | null;
+    tripadvisor?: string | null;
+  };
+  /**
+   * Folosită de butonul „Lasă o recenzie”.
+   */
+  googleReviewUrl?: string | null;
+  otherNetworks?:
+    | {
+        /**
+         * Nu se traduce: aceeași valoare în toate limbile.
+         */
+        name: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * ID-ul localului în ialoc.ro (D-03). Nu se traduce: aceeași valoare în toate limbile.
+   */
+  ialocId: string;
+  /**
+   * Se păstrează contul existent (D-32). Nu se traduce: aceeași valoare în toate limbile.
+   */
+  analyticsId?: string | null;
+  digitalMenuUrl: string;
+  /**
+   * Româna este implicită. Celelalte limbi se pornesc după traduceri (F4, D-28). Fereastra ialoc are doar ro și en.
+   */
+  activeLocales: ('ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv')[];
+  requests?: {
+    privateEvent?: {
+      /**
+       * Oprit = butonul dispare din formular.
+       */
+      active?: boolean | null;
+      /**
+       * Cel mult 5. Obligatoriu când subiectul e activ.
+       */
+      recipients?: string[] | null;
+      /**
+       * Configurată de Administrator; nu apare nicăieri pe site și nu se scrie în cod (D-15).
+       */
+      cc?: string[] | null;
+      /**
+       * Apare în confirmare. Gol până la Q-34.
+       */
+      responseTime?: string | null;
+    };
+    pizzaCourse?: {
+      /**
+       * Oprit = butonul dispare din formular.
+       */
+      active?: boolean | null;
+      /**
+       * Cel mult 5. Obligatoriu când subiectul e activ.
+       */
+      recipients?: string[] | null;
+      /**
+       * Configurată de Administrator; nu apare nicăieri pe site și nu se scrie în cod (D-15).
+       */
+      cc?: string[] | null;
+      /**
+       * Apare în confirmare. Gol până la Q-34.
+       */
+      responseTime?: string | null;
+    };
+    accommodation?: {
+      /**
+       * Oprit = butonul dispare din formular.
+       */
+      active?: boolean | null;
+      /**
+       * Cel mult 5. Obligatoriu când subiectul e activ.
+       */
+      recipients?: string[] | null;
+      /**
+       * Configurată de Administrator; nu apare nicăieri pe site și nu se scrie în cod (D-15).
+       */
+      cc?: string[] | null;
+      /**
+       * Apare în confirmare. Gol până la Q-34.
+       */
+      responseTime?: string | null;
+    };
+    question?: {
+      /**
+       * Oprit = butonul dispare din formular.
+       */
+      active?: boolean | null;
+      /**
+       * Cel mult 5. Obligatoriu când subiectul e activ.
+       */
+      recipients?: string[] | null;
+      /**
+       * Configurată de Administrator; nu apare nicăieri pe site și nu se scrie în cod (D-15).
+       */
+      cc?: string[] | null;
+      /**
+       * Apare în confirmare. Gol până la Q-34.
+       */
+      responseTime?: string | null;
+    };
+    complaint?: {
+      /**
+       * Oprit = butonul dispare din formular.
+       */
+      active?: boolean | null;
+      /**
+       * Cel mult 5. Obligatoriu când subiectul e activ.
+       */
+      recipients?: string[] | null;
+      /**
+       * Configurată de Administrator; nu apare nicăieri pe site și nu se scrie în cod (D-15).
+       */
+      cc?: string[] | null;
+      /**
+       * Apare în confirmare. Gol până la Q-34.
+       */
+      responseTime?: string | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Logo-ul oficial se folosește complet, fără recolorare sau decupare (D-10).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awards".
+ */
+export interface Award {
+  id: number;
+  _order?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  name: string;
+  /**
+   * Nu se traduce: aceeași valoare în toate limbile.
+   */
+  organization: string;
+  /**
+   * Gol până la acordare. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  level?: string | null;
+  /**
+   * Gol până la acordare.
+   */
+  year?: number | null;
+  /**
+   * BADGE · fișierul oficial, nemodificat · Gol până la acordare. Se afișează exact cum a fost încărcat.
+   */
+  badge?: (number | null) | Media;
+  /**
+   * Lângă insignă, în antetul secțiunii Vinuri.
+   */
+  line?: string | null;
+  sourceUrl?: string | null;
+  placements: ('hero' | 'wines-section' | 'wines-page' | 'footer')[];
+  /**
+   * Are efect doar când nivelul și anul sunt completate.
+   */
+  structuredData?: boolean | null;
+  /**
+   * Oprit = nu apare pe site, dar rămâne în panou.
+   */
+  active?: boolean | null;
+  /**
+   * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
+   */
+  placeholder?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Adresa veche, relativă. Exemplu: /valori-nutritionale Nu se traduce: aceeași valoare în toate limbile.
+   */
+  from: string;
+  /**
+   * Adresă nouă (relativă, cu „/”) sau externă (https://…).
+   */
+  to: string;
+  permanent?: boolean | null;
   active?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -190,46 +1420,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  alt: string;
-  prefix?: string | null;
-  _objectKey?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  name: string;
-  startsAt: string;
-  type: 'dj' | 'artist' | 'band' | 'other';
-  active?: boolean | null;
-  /**
-   * Pornit = pe site apare eticheta „Exemplu · de înlocuit” (D-08).
-   */
-  placeholder?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -253,20 +1443,84 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'tenants';
-        value: number | Tenant;
+        relationTo: 'home-page';
+        value: number | HomePage;
       } | null)
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'dish-categories';
+        value: number | DishCategory;
+      } | null)
+    | ({
+        relationTo: 'wines';
+        value: number | Wine;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: number | Review;
+      } | null)
+    | ({
+        relationTo: 'salons';
+        value: number | Salon;
+      } | null)
+    | ({
+        relationTo: 'room-types';
+        value: number | RoomType;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'gallery-categories';
+        value: number | GalleryCategory;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
+      } | null)
+    | ({
+        relationTo: 'complaint-reasons';
+        value: number | ComplaintReason;
+      } | null)
+    | ({
+        relationTo: 'group-links';
+        value: number | GroupLink;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: number | LegalPage;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'events';
-        value: number | Event;
+        relationTo: 'submissions';
+        value: number | Submission;
+      } | null)
+    | ({
+        relationTo: 'settings';
+        value: number | Setting;
+      } | null)
+    | ({
+        relationTo: 'awards';
+        value: number | Award;
+      } | null)
+    | ({
+        relationTo: 'redirects';
+        value: number | Redirect;
+      } | null)
+    | ({
+        relationTo: 'tenants';
+        value: number | Tenant;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -312,9 +1566,704 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  tenant?: T;
+  hero?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        mediaMode?: T;
+        videoDesktop?: T;
+        videoMobile?: T;
+        posterDesktop?: T;
+        posterMobile?: T;
+        slides?:
+          | T
+          | {
+              desktop?: T;
+              mobile?: T;
+              id?: T;
+            };
+        subtitle?: T;
+        bookLabel?: T;
+        menuButtonLabel?: T;
+      };
+  stay?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        note?: T;
+        buttonLabel?: T;
+        maxAdults?: T;
+        maxChildren?: T;
+      };
+  kitchen?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        intro?: T;
+        buttonLabel?: T;
+      };
+  wines?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        intro?: T;
+        buttonLabel?: T;
+      };
+  reviews?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        buttonLabel?: T;
+      };
+  parties?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        intro?: T;
+        emptyMessage?: T;
+      };
+  privateEvents?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        intro?: T;
+        eventTypes?:
+          | T
+          | {
+              label?: T;
+              id?: T;
+            };
+        buttonLabel?: T;
+      };
+  pizza?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        shortText?: T;
+        photo?: T;
+        buttonLabel?: T;
+        fullText?: T;
+        gallery?: T;
+        age?: T;
+        duration?: T;
+        price?: T;
+        seats?: T;
+      };
+  hotel?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        intro?: T;
+        hotelName?: T;
+        hotelAddress?: T;
+        hotelUrl?: T;
+        priceFrom?: T;
+        priceNote?: T;
+        photos?: T;
+      };
+  gallery?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        buttonLabel?: T;
+      };
+  contact?:
+    | T
+    | {
+        enabled?: T;
+        placeholder?: T;
+        order?: T;
+        menuLabel?: T;
+        title?: T;
+        intro?: T;
+      };
+  footer?:
+    | T
+    | {
+        copyright?: T;
+        placeholder?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  tenant?: T;
+  name?: T;
+  startsAt?: T;
+  endsAt?: T;
+  type?: T;
+  guest?: T;
+  poster?: T;
+  description?: T;
+  entry?: T;
+  bookWithDate?: T;
+  photosAfter?: T;
+  status?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dish-categories_select".
+ */
+export interface DishCategoriesSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  shortText?: T;
+  photo?: T;
+  link?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wines_select".
+ */
+export interface WinesSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  producer?: T;
+  type?: T;
+  country?: T;
+  region?: T;
+  vintage?: T;
+  grapes?: T;
+  priceBottle?: T;
+  volume?: T;
+  priceGlass?: T;
+  description?: T;
+  photo?: T;
+  featured?: T;
+  available?: T;
+  externalCode?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  author?: T;
+  group?: T;
+  text?: T;
+  source?: T;
+  date?: T;
+  rating?: T;
+  sourceUrl?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "salons_select".
+ */
+export interface SalonsSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  location?: T;
+  capacity?: T;
+  description?: T;
+  photos?: T;
+  amenities?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "room-types_select".
+ */
+export interface RoomTypesSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  description?: T;
+  photo?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  file?: T;
+  category?: T;
+  caption?: T;
+  onHome?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-categories_select".
+ */
+export interface GalleryCategoriesSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  question?: T;
+  answer?: T;
+  group?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "complaint-reasons_select".
+ */
+export interface ComplaintReasonsSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  reason?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "group-links_select".
+ */
+export interface GroupLinksSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  url?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  title?: T;
+  slug?: T;
+  content?: T;
+  inFooter?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  tenant?: T;
+  kind?: T;
+  alt?: T;
+  title?: T;
+  credit?: T;
+  hasChildren?: T;
+  parentalConsent?: T;
+  originalName?: T;
+  originalBytes?: T;
+  durationSeconds?: T;
+  efficientVariant?: T;
+  poster?: T;
+  codec?: T;
+  variantOf?: T;
+  prefix?: T;
+  _objectKey?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        avif640?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        webp640?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        avif960?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        webp960?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        avif1280?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        webp1280?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        avif1920?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        webp1920?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        avif2560?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        webp2560?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "submissions_select".
+ */
+export interface SubmissionsSelect<T extends boolean = true> {
+  tenant?: T;
+  subject?: T;
+  status?: T;
+  name?: T;
+  phone?: T;
+  email?: T;
+  message?: T;
+  details?:
+    | T
+    | {
+        eventType?: T;
+        eventDate?: T;
+        guests?: T;
+        salon?: T;
+        children?: T;
+        ages?: T;
+        preferredDate?: T;
+        checkIn?: T;
+        checkOut?: T;
+        adults?: T;
+        kids?: T;
+        roomType?: T;
+        visitDate?: T;
+        reason?: T;
+        waiter?: T;
+      };
+  consent?: T;
+  consentAt?: T;
+  emailSent?: T;
+  emailError?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  tenant?: T;
+  tagline?: T;
+  logo?: T;
+  logoDark?: T;
+  logoGroup?: T;
+  favicon?: T;
+  colors?:
+    | T
+    | {
+        background?: T;
+        text?: T;
+        accent?: T;
+        accent2?: T;
+      };
+  defaultTheme?: T;
+  shareImage?: T;
+  address?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        county?: T;
+        country?: T;
+        lat?: T;
+        lng?: T;
+      };
+  phoneReservations?: T;
+  phoneEvents?: T;
+  hours?:
+    | T
+    | {
+        day?: T;
+        opens?: T;
+        closes?: T;
+        closed?: T;
+        id?: T;
+      };
+  hoursNote?: T;
+  social?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        youtube?: T;
+        tiktok?: T;
+        tripadvisor?: T;
+      };
+  googleReviewUrl?: T;
+  otherNetworks?:
+    | T
+    | {
+        name?: T;
+        url?: T;
+        id?: T;
+      };
+  ialocId?: T;
+  analyticsId?: T;
+  digitalMenuUrl?: T;
+  activeLocales?: T;
+  requests?:
+    | T
+    | {
+        privateEvent?:
+          | T
+          | {
+              active?: T;
+              recipients?: T;
+              cc?: T;
+              responseTime?: T;
+            };
+        pizzaCourse?:
+          | T
+          | {
+              active?: T;
+              recipients?: T;
+              cc?: T;
+              responseTime?: T;
+            };
+        accommodation?:
+          | T
+          | {
+              active?: T;
+              recipients?: T;
+              cc?: T;
+              responseTime?: T;
+            };
+        question?:
+          | T
+          | {
+              active?: T;
+              recipients?: T;
+              cc?: T;
+              responseTime?: T;
+            };
+        complaint?:
+          | T
+          | {
+              active?: T;
+              recipients?: T;
+              cc?: T;
+              responseTime?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awards_select".
+ */
+export interface AwardsSelect<T extends boolean = true> {
+  _order?: T;
+  tenant?: T;
+  name?: T;
+  organization?: T;
+  level?: T;
+  year?: T;
+  badge?: T;
+  line?: T;
+  sourceUrl?: T;
+  placements?: T;
+  structuredData?: T;
+  active?: T;
+  placeholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects_select".
+ */
+export interface RedirectsSelect<T extends boolean = true> {
+  tenant?: T;
+  from?: T;
+  to?: T;
+  permanent?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tenants_select".
  */
 export interface TenantsSelect<T extends boolean = true> {
+  _order?: T;
   name?: T;
   slug?: T;
   domain?: T;
@@ -360,41 +2309,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  tenant?: T;
-  alt?: T;
-  prefix?: T;
-  _objectKey?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events_select".
- */
-export interface EventsSelect<T extends boolean = true> {
-  tenant?: T;
-  name?: T;
-  startsAt?: T;
-  type?: T;
-  active?: T;
-  placeholder?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

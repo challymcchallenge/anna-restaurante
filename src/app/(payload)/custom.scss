@@ -1,0 +1,133 @@
+// Stiluri proprii pentru panou (F1). Folosesc variabilele temei Payload, deci merg și pe fundal închis.
+
+// Contor de caractere (content-model 1).
+.counted-field {
+  margin-bottom: var(--base);
+
+  .field-type {
+    margin-bottom: 0;
+  }
+}
+
+.char-counter {
+  margin-top: calc(var(--base) / 4);
+  font-size: 0.8125rem;
+  color: var(--theme-elevation-500);
+
+  &--over {
+    color: var(--theme-error-500);
+    font-weight: 600;
+  }
+}
+
+// „Alege și convertește” în zona de încărcare (S-14 … S-14e).
+// Butonul implicit „Selectează fișier” se ascunde: totul trece prin conversia din browser.
+.file-field__dropzoneButtons > .btn:not(.media-convert__btn),
+.file-field__orText {
+  display: none;
+}
+
+.media-convert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--base) / 2);
+  width: 100%;
+
+  &__kind {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.8125rem;
+
+    select {
+      min-height: 36px;
+      padding: 4px 8px;
+      border: 1px solid var(--theme-elevation-150);
+      border-radius: var(--style-radius-s);
+      background: var(--theme-input-bg);
+      color: var(--theme-text);
+    }
+  }
+
+  &__btn {
+    margin: 0;
+    align-self: flex-end;
+  }
+
+  &__note {
+    flex-basis: 100%;
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--theme-elevation-600);
+  }
+
+  &__status {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    progress {
+      width: 100%;
+      height: 12px;
+    }
+
+    small {
+      color: var(--theme-elevation-500);
+    }
+  }
+
+  &__error {
+    flex-basis: 100%;
+    padding: calc(var(--base) / 2);
+    border-left: 4px solid var(--theme-error-500);
+    background: var(--theme-error-50);
+    color: var(--theme-text);
+  }
+
+  &__actions {
+    display: flex;
+    gap: calc(var(--base) / 2);
+    margin-top: calc(var(--base) / 2);
+
+    .btn {
+      margin: 0;
+    }
+  }
+}
+
+// Tabloul de bord (S-12).
+.anna-dashboard {
+  display: grid;
+  gap: var(--base);
+  margin-bottom: calc(var(--base) * 2);
+
+  &__title {
+    margin: 0;
+  }
+
+  &__card {
+    padding: var(--base);
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: var(--style-radius-m);
+    background: var(--theme-elevation-50);
+
+    h3 {
+      margin: 0 0 calc(var(--base) / 2);
+    }
+
+    ul {
+      margin: calc(var(--base) / 2) 0 0;
+      padding-left: 1.2em;
+    }
+
+    &--warn {
+      border-left: 4px solid var(--theme-warning-500);
+    }
+
+    &--ok {
+      border-left: 4px solid var(--theme-success-500);
+    }
+  }
+}

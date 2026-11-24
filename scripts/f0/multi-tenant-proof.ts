@@ -109,7 +109,7 @@ for (const [i, t] of fixtures.tenants.entries()) {
     .toBuffer()
   const media = await payload.create({
     collection: 'media',
-    data: { alt: `Exemplu · de înlocuit — ${t.slug}`, tenant: tenantIds[t.slug] },
+    data: { kind: 'photo', alt: `Exemplu · de înlocuit — ${t.slug}`, tenant: tenantIds[t.slug] },
     file: { data: png, mimetype: 'image/png', name: `f0-${t.slug}.png`, size: png.length },
   })
   mediaIds[t.slug] = media.id as number
