@@ -182,7 +182,7 @@ export async function seedStarterContent({
           depth: 0,
           req,
         })
-        const current = settingsDocs[0] as Record<string, unknown> | undefined
+        const current = settingsDocs[0] as unknown as Record<string, unknown> | undefined
         if (current) {
           const patch: Record<string, unknown> = {}
           for (const [field, key] of Object.entries(seed.settingsMedia)) {

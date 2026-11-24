@@ -6,7 +6,7 @@
  * (minim) și percentila 5. Așa se măsoară și textul așezat peste fotografie/video, nu doar culorile
  * declarate în CSS.
  *
- * Utilizare: node scripts/f2/contrast-measure.mjs <pagina.html> <eticheta> <ieșire.json>
+ * Utilizare: node scripts/f2/contrast-measure.mjs <pagina.html> <eticheta> <ieșire.json> [light|dark]
  * Rulează pe 390 × 844 (telefon) și 1440 × 900 (desktop), cu animațiile încheiate.
  */
 import { createRequire } from 'module'
@@ -16,7 +16,7 @@ import path from 'path'
 const require = createRequire(import.meta.url)
 const { chromium } = require('playwright')
 
-const [file, label, out] = process.argv.slice(2)
+const [file, label, out, scheme = 'light'] = process.argv.slice(2)
 if (!file || !out) {
   console.error('Utilizare: node scripts/f2/contrast-measure.mjs <pagina.html> <eticheta> <ieșire.json>')
   process.exit(2)
@@ -55,7 +55,7 @@ for (const [device, viewport] of [
   ['telefon', { width: 390, height: 844 }],
   ['desktop', { width: 1440, height: 900 }],
 ]) {
-  const ctx = await browser.newContext({ viewport, deviceScaleFactor: 1, reducedMotion: 'no-preference' })
+  const ctx = await browser.newContext({ viewport, deviceScaleFactor: 1, reducedMotion: 'no-preference', colorScheme: scheme })
   const page = await ctx.newPage()
   await page.goto('file://' + path.resolve(file))
   await page.evaluate(() => document.fonts.ready)

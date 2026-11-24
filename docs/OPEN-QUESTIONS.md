@@ -4,8 +4,8 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| 1 | Materialele de brand: logo-uri (Trattoria, ANNA), culori, fonturi | F2 | Alin |
-| 2 | Clipul video pentru hero și setul de fotografii pe categorii | F2 | Alin |
+| 1 | Materialele de brand: ~~logo-uri (Trattoria, ANNA)~~ **primite în F2**; culorile și fonturile propuse în F2 (G2-1, G2-2) | GATE 2 | Alin |
+| 2 | Clipul video pentru hero și setul de fotografii pe categorii (amânat la cererea lui Alin; machetele folosesc fotografii provizorii) | F3 | Alin |
 | 3 | Ce anume se animă în 3D pe desktop | F4 | Alin |
 | 4 | Lista de recenzii (restaurant și hotel) | F3 | Alin |
 | 5 | Lista reală de vinuri și câmpurile fiecărui vin. Colecția există, cu 5 exemple provizorii; câmpurile se pot ajusta după lista reală | **F3** (mutat din F1: nu blochează panoul) | Alin |
@@ -38,3 +38,12 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | ~~16~~ | ~~Cele 9 motive de sesizare~~ — **rezolvat: D-39**, preluate de pe davittoria.ro | — | — |
 | ~~17~~ | ~~Adresele site-urilor grupului~~ — **rezolvat: D-40**, 11 linkuri, inclusiv Fabrica Mezeluri GorjANNA | — | — |
 | 18 | Poziția pe hartă a restaurantului (latitudine, longitudine) | F3 | Alin |
+
+## Întrebări noi după F2 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_GATE2.md`, secțiunea 10
+
+| # | Întrebare | Până la | Cine răspunde |
+|---|---|---|---|
+| G2-1 | Direcția de design: A · Cotto sau B · Carta (propunerea mea: B) | GATE 2 | Alin |
+| G2-2 | Fonturi OFL gratuite sau originalele plătite de pe vineyard.co.za (Optima + PP Mori; preț neverificat) | GATE 2 | Alin |
+| G2-3 | Setul aprobat G3: toate cele 4 fonturi verificate, din care alege fiecare restaurant | GATE 2 | Alin |
+| G2-4 | Pictograma de filă: un „V” din script-ul logo-ului, desenat de Claude Code | F3 | Alin |

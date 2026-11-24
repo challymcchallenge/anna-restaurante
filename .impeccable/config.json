@@ -21,6 +21,15 @@
         ],
         "createdAt": "2026-11-24T13:56:16.435Z",
         "reason": "Claude: crem derivat din fondul de marmură al logo-ului Trattoria (#F8EAD8 măsurat), angajament de brand în PRODUCT.md"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "design/2026_11_24_Trattoria_Directii_F2.html"
+        ],
+        "createdAt": "2026-11-24T14:06:30.521Z",
+        "reason": "Claude: fals pozitiv; detectorul amestecă culorile temei închise cu fundal alb. Măsurat pe randare (scripts/f2/contrast-measure.mjs): minim 6,86:1 temă deschisă, 8,43:1 temă închisă, 383 de rânduri"
       }
     ]
   }

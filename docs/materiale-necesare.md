@@ -1,6 +1,6 @@
 # Materiale necesare — Trattoria da Vittoria
 
-Data: 24.11.2026 · Faza 1 · Lista se actualizează la fiecare fază. Coloana „Până la” arată faza înaintea căreia e nevoie de material.
+Data: 24.11.2026 · Actualizat în F2 · Lista se actualizează la fiecare fază. Coloana „Până la” arată faza înaintea căreia e nevoie de material.
 
 Unde se pun: totul se încarcă sau se scrie din panou, cu Trattoria aleasă în comutatorul „Restaurant”.
 Panoul: https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin
@@ -11,11 +11,11 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 
 | # | Material | Format | Unde în panou | Până la | Sursa cerinței |
 |---|---|---|---|---|---|
-| 1 | Logo Trattoria, varianta principală | SVG; altfel PNG transparent, minimum 600 px lățime | Setări restaurant → Identitate → Logo principal | F2 | OQ #1, content-model R1 |
-| 2 | Logo Trattoria pe fundal închis | idem | … → Logo pe fundal închis | F2 | R1 (opțional) |
-| 3 | Logo Grupul ANNA, pentru footer | idem | … → Logo grup | F2 | R1 |
-| 4 | Pictograma de filă (favicon) | SVG sau PNG pătrat, minimum 512 px | … → Pictogramă de filă | F2 | R1 |
-| 5 | Culorile și fonturile brandului, dacă există un ghid | PDF sau listă de coduri #RRGGBB | trimise mie; paleta finală se stabilește în F2 | F2 | OQ #1, Q-17 |
+| ~~1~~ | ~~Logo Trattoria, varianta principală~~ — **primit (F2)**: PNG transparent 1024 × 1024, intră în Biblioteca media și în Logo principal la următorul build (`seed/media/trattoria-da-vittoria/`). Un SVG ar fi și mai clar la dimensiuni mici, dacă există | — | Setări restaurant → Identitate → Logo principal | — | OQ #1 |
+| ~~2~~ | ~~Logo Trattoria pe fundal închis~~ — **nu mai e necesar (F2)**: medalionul se vede bine și pe fundal închis | — | … → Logo pe fundal închis | — | R1 (opțional) |
+| ~~3~~ | ~~Logo Grupul ANNA~~ — **primit (F2)**: PNG transparent, intră în Logo grup la următorul build | — | … → Logo grup | — | R1 |
+| 4 | Pictograma de filă (favicon). Medalionul nu se citește la 32 px; propunere F2: un „V” din script-ul logo-ului, pe fond crem (îl pot desena eu, G2-4) | SVG sau PNG pătrat, minimum 512 px | … → Pictogramă de filă | F3 | R1 |
+| 5 | Culorile și fonturile: **propuse în F2** (două direcții, `docs/2026_11_24_Trattoria_GATE2.md`); se închid la alegerea ta (G2-1). Dacă există totuși un ghid de brand, trimite-l | PDF sau listă de coduri #RRGGBB | — | GATE 2 | OQ #1, Q-17 |
 | 6 | Imaginea de distribuire pe rețele | 1200 × 630 px | … → Imagine de distribuire implicită | F3 | R1, SHARE |
 
 ## 2. Fotografii și clipuri
@@ -24,9 +24,9 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 
 | # | Material | Format recomandat | Câte | Până la |
 |---|---|---|---|---|
-| 7 | Clip hero pentru desktop | 16:9, fără sunet, ≤ 30 s | 1 | F2 |
-| 8 | Clip hero pentru telefon | 9:16, fără sunet, ≤ 30 s | 1 | F2 |
-| 9 | Poster hero desktop / telefon (imaginea care apare înaintea clipului) | 16:9, min. 2400 × 1350 · 9:16, min. 1080 × 1920 | 2 | F2 |
+| 7 | Clip hero pentru desktop (în machete: fotografie provizorie) | 16:9, fără sunet, ≤ 30 s | 1 | F3 (amânat la cererea ta) |
+| 8 | Clip hero pentru telefon (în machete: fotografie provizorie) | 9:16, fără sunet, ≤ 30 s | 1 | F3 (amânat la cererea ta) |
+| 9 | Poster hero desktop / telefon (imaginea care apare înaintea clipului) | 16:9, min. 2400 × 1350 · 9:16, min. 1080 × 1920 | 2 | F3 (amânat la cererea ta) |
 | 10 | Câte o fotografie pentru fiecare din cele 8 categorii de preparate | 4:5, min. 1080 × 1350 | 8 | F3 |
 | 11 | Saloanele Trattoria și Vittoria | 3:2, min. 1800 × 1200 | 3–10 pe salon | F3 |
 | 12 | Hotel ANNA și cele 2 tipuri de camere | 3:2 | 3 + 2 | F3 |
@@ -34,6 +34,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | 14 | Galerie pe categorii (Restaurant, Preparate, Vinuri, Petreceri, Hotel, Evenimente) | min. 1600 px pe latura lungă | 6–8 pe Acasă, restul în galerie | F3 |
 | 15 | Afișele serilor tematice | 4:5 | câte unul pe seară | la fiecare seară |
 | 16 | Acordul părinților pentru fotografiile cu copii | confirmare scrisă | — | F3 (Q-25, OQ #8) |
+| 31 | Fotografiile pentru direcția aleasă în F2, în locul celor 5 fotografii provizorii din machete (Wikimedia Commons, `design/f2/assets/foto/credits.json`). A · Cotto: lumină de zi, făină, mâini, paste, aluat. B · Carta: seară, cuptorul, pahare, oameni la masă (fără fețe recognoscibile fără acord) | ca la 9 și 10 | 5–8 | F3 |
 
 ## 3. Texte și liste
 

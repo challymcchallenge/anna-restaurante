@@ -2,7 +2,7 @@
  * F2 · Capturi pentru raportul GATE 2.
  * Prim ecran: 390 × 844 (telefon) și 1440 × 900 (desktop), la densitate 2, cu animațiile încheiate.
  * Pagina întreagă: densitate 1, fără animații (reducedMotion), ca să nu se reia momentul de intrare.
- * Utilizare: node scripts/f2/capture.mjs <pagina.html> <prefix-ieșire>
+ * Utilizare: node scripts/f2/capture.mjs <pagina.html> design/f2/capturi/<prefix>
  */
 import { createRequire } from 'module'
 import path from 'path'
