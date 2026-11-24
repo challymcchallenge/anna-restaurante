@@ -93,6 +93,8 @@ Am găsit și reparat două greșeli:
 - **Pasul 12:** textele finale în română, cu cârlige de marketing și un singur îndemn clar pe secțiune.
 - **GATE 3** încheie faza: fiecare secțiune arătată pe telefon și desktop, plus Lighthouse.
 
+Pagina HTML a raportului (privată): https://claude.ai/artifact/XnmA8Xk1JDqFD3jVvYXNRK
+
 ---
 
 100% AI Solutions & Agentic Work-Flows for SMEs
