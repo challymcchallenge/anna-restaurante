@@ -84,3 +84,20 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | ~~G6-3~~ | ~~Fotografia bonului la sesizări (content-model 7, opțional): nu am făcut-o, pentru că încărcarea de fișiere de către vizitatori cere verificări de siguranță. Propun s-o fac în F5, ca atașament la emailul către manager, fără să rămână pe server. De acord?~~ — **rezolvat: D-51** | — | — |
 | ~~G6-4~~ | ~~Pe confirmarea unei cereri de cazare, „Dacă este urgent” arată acum telefonul de rezervări al restaurantului. Vrei telefonul recepției Hotel ANNA? Dacă da, îmi dai numărul și adaug câmpul în Setări~~ — **rezolvat: D-51** | — | — |
 
+
+## Întrebări noi după F3 pasul 10 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_F3_Pasul10.md`, secțiunea 4
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G7-1 | Cine e juristul grupului și cum lucrează: corectează ciornele legale direct în panou sau trimite textul? (Q-25) | F5 | Alin |
+| G7-2 | Fac lista adreselor de pe davittoria.ro înainte de mutarea domeniului (D-36), ca să nu dea 404? Cere o cerere de rețea spre davittoria.ro, cu acordul tău | F5 | Alin |
+| G7-3 | Cât timp păstrăm cererile și sesizările în panou? Termenul intră în Politica de confidențialitate | F5 | Alin + jurist |
+
+## Întrebări noi la GATE 3 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_GATE3.md`, secțiunea 7
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G8-1 | Subtitlul din hero e gol pe producție (golit din panou). Îl lași gol, revii la „Vă așteptăm cu drag și vă servim cu plăcere!” sau pui „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.”? | F4 (se traduce) | Alin |
+| G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele)? | F4 | Alin |
+| G8-3 | Descrierile saloanelor și camerelor și răspunsurile la întrebările frecvente: le scrii tu sau le iau de pe davittoria.ro și hotelanna.ro (cerere de rețea, cu acordul tău)? | F4 | Alin |
+| G8-4 | Recenziile reale: iau 3–4 recenzii publice din profilul Google, cu numele scurtat și sursa? | F4 | Alin |
