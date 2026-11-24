@@ -136,6 +136,13 @@ export const UI = {
   /** Paginile legale (F3 pasul 10) */
   legalUpdated: (date: string) => `Actualizat la ${date}`,
   legalToc: 'Cuprins',
+  /** Descrierea paginii legale pentru motoarele de căutare: titlul, restaurantul și secțiunile, cel mult 160 de caractere. */
+  legalMeta: (title: string, restaurant: string, sections: string[]) => {
+    // Doar prima literă devine mică, și doar la un cuvânt obișnuit („Hotel ANNA” → „hotel ANNA”, „ANPC” rămâne).
+    const lower = (t: string) => (/^\p{Lu}\p{Ll}/u.test(t) ? t[0].toLocaleLowerCase('ro-RO') + t.slice(1) : t)
+    const full = `${title} · ${restaurant}${sections.length ? `: ${sections.map(lower).join(', ')}` : ''}.`
+    return full.length <= 160 ? full : `${full.slice(0, 157).replace(/[\s,:;·]+\S*$/, '')}…`
+  },
   /** Galeria (F3 pasul 8) */
   galleryFilter: 'Categoria',
   galleryMeta: (restaurant: string, count: number, categories: string[]) =>

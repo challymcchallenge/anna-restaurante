@@ -24,7 +24,10 @@ async function resolve(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const r = await resolve((await params).slug)
   if (!r?.page) return {}
-  return { title: `${r.page.title} · ${r.site.tenant.name}` }
+  return {
+    title: `${r.page.title} · ${r.site.tenant.name}`,
+    description: UI.legalMeta(r.page.title, r.site.tenant.name, legalHeadings(r.page.content).map((h) => h.text)),
+  }
 }
 
 export default async function LegalPage({ params }: Props) {

@@ -6,6 +6,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest'
 import config from '@/payload.config'
 import { legalHeadings } from '@/components/site/LegalContent'
 import { getSlugPage } from '@/lib/site/data'
+import { UI } from '@/lib/site/strings'
 import { lexicalText, seedStarterContent, toLexical } from '@/seed/starter'
 
 /**
@@ -44,6 +45,15 @@ describe('F3 pasul 10 · paginile legale și redirecționările', () => {
       { id: 'cine-raspunde-de-date', text: 'Cine răspunde de date' },
       { id: 'drepturile-tale', text: 'Drepturile tale' },
     ])
+  })
+
+  it('Descrierea pentru căutare: titlul, restaurantul, secțiunile, cel mult 160 de caractere', () => {
+    expect(UI.legalMeta('Politica de cookies', 'Restaurant X', ['Ce cookies folosește site-ul', 'Hotel ANNA', 'ANPC'])).toBe(
+      'Politica de cookies · Restaurant X: ce cookies folosește site-ul, hotel ANNA, ANPC.',
+    )
+    const long = UI.legalMeta('Termeni și condiții', 'Restaurant X', Array.from({ length: 12 }, (_, i) => `Secțiunea numărul ${i + 1}`))
+    expect(long.length).toBeLessThanOrEqual(160)
+    expect(long.endsWith('…')).toBe(true)
   })
 
   it('Seed: cele 3 pagini legale au ciorna cu titluri, etichetată „Exemplu”', async () => {
