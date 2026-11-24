@@ -1,0 +1,27 @@
+flowchart LR
+  %% Săgeată = "este necesar pentru". Graf la nivel de modul: 62 de funcționalități ar fi ilizibile într-un singur desen.
+  %% Toate modulele au funcționalități în MVP (albastru). Dependențele de sisteme externe sunt în tabelul de sub graf.
+  CON[Contact și cereri]
+  ADM[Panou de administrare]
+  HOT[Cazare Hotel ANNA]
+  HOM[Acasă și navigare]
+  EVE[Evenimente și petreceri]
+  PIZ[Cursuri de pizza pentru copii]
+  RES[Restaurant]
+  GAL[Galerie]
+  EXP[Experiența pe site]
+  CON --> ADM
+  CON --> HOT
+  CON --> EVE
+  CON --> PIZ
+  ADM --> HOT
+  ADM --> HOM
+  ADM --> EVE
+  ADM --> PIZ
+  ADM --> RES
+  ADM --> GAL
+  ADM --> EXP
+  HOT --> HOM
+  HOM --> EVE
+  classDef mvp fill:#1a56db,stroke:#1a56db,color:#ffffff
+  class CON,ADM,HOT,HOM,EVE,PIZ,RES,GAL,EXP mvp

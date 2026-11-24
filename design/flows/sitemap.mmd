@@ -1,0 +1,25 @@
+flowchart LR
+  %% Linie continuă = accesibil oricui din meniu sau din pagină. Linie punctată = doar în anumite situații sau legătură către un sistem extern.
+  ent>Intrare: Google, Maps, cod QR, reclame, rețele sociale] -.-> S01[S-01 Acasă]
+  S01 --> S02[S-02 Evenimente private - Saloane]
+  S01 --> S03[S-03 Petreceri și agenda]
+  S03 -.-> S10[S-10 Detaliu eveniment · propunere DESI]
+  S01 --> S04[S-04 Cursuri de pizza pentru copii]
+  S01 --> S05[S-05 Galerie]
+  S01 --> S06[S-06 Contact]
+  S06 --> S07[S-07 Sesizări]
+  S01 --> S23[S-23 Catalog de vinuri]
+  S01 --> S08[S-08 Pagini legale]
+  S01 -.-> S09[S-09 Pagină negăsită]
+  subgraph ext [În afara acestui site]
+    xREZ[/Fereastra de rezervări ialoc/]
+    xMEN[/Meniu digital - meniudigital.ro/]
+    xHOT[/hotelanna.ro/]
+    xGOO[/Recenzie Google/]
+    xGRP[/Site-urile Grupului ANNA/]
+  end
+  S01 -.-> xREZ
+  S01 -.-> xMEN
+  S01 -.-> xHOT
+  S01 -.-> xGOO
+  S01 -.-> xGRP

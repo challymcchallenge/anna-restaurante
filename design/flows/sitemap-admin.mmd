@@ -1,0 +1,14 @@
+flowchart LR
+  %% Panoul de administrare - produs separat de site-ul public. Linie punctată = doar anumite roluri sau versiuni.
+  S11[S-11 Autentificare] --> S12[S-12 Tablou de bord]
+  S12 --> S13[S-13 Conținut și secțiuni]
+  S12 --> S14[S-14 Bibliotecă media]
+  S12 --> S15[S-15 Evenimente]
+  S12 --> S16[S-16 Recenzii]
+  S12 -.-> S17[S-17 Cereri · R2]
+  S12 --> S18[S-18 Setări site]
+  S12 --> S22[S-22 Premii și distincții]
+  S12 --> S24[S-24 Vinuri]
+  S12 -.-> S19[S-19 Efecte și sunet · R2]
+  S12 --> S20[S-20 Traduceri]
+  S12 -.-> S21[S-21 Restaurante · R3 · doar Administrator]

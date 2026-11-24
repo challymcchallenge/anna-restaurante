@@ -1,0 +1,14 @@
+flowchart TD
+  %% Actor: Editor, de pe telefon, din local. Decis: D-09 (serile sunt o colecție), D-16 (publicare directă - presupunere).
+  start([Start: vrea să anunțe o seară]) --> list[S-15 Evenimente]
+  list -- apasă Seară nouă --> form[S-15b Evenimente - seară nouă]
+  form -- completează, apasă Adaugă afișul --> med{{Flux: Încărcare media}}
+  med -- afiș salvat sau renunță --> ready[S-15b Evenimente - seară nouă, gata de publicat]
+  ready -- apasă Publică --> valid{Nume, dată viitoare și afiș completate?}
+  valid -- nu --> err[S-15d Evenimente - câmpuri de corectat]
+  err -- corectează --> ready
+  valid -- da --> pub[[Publică seara în agendă și pe Acasă]]
+  pub --> done[S-15c Evenimente - seară publicată]
+  done --> wait[[Wait: trece data serii]]
+  wait --> arch[[Scoate seara din agendă și o trece în arhivă]]
+  arch --> endA([Sfârșit: seara este în arhivă, cu fotografiile adăugate ulterior])

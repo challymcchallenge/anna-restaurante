@@ -1,0 +1,13 @@
+flowchart TD
+  %% Actor: oaspete. Decis: D-03 (ialoc, mod popup), D-17 (rezerva: robotul telefonic).
+  start([Start: apasă Rezervă o masă, de oriunde din site]) --> load[[Încarcă scriptul ialoc la prima apăsare]]
+  load --> ok{Scriptul a răspuns la timp?}
+  ok -- da --> pop[S-01c Acasă - fereastra ialoc deschisă]
+  pop --> ialoc[/ialoc.ro - formularul de rezervare/]
+  ialoc -- finalizează rezervarea --> endA([Sfârșit: masă rezervată, confirmare de la ialoc])
+  ialoc -- închide fereastra --> back[S-01 Acasă]
+  back --> endB([Sfârșit: nu a rezervat, rămâne pe pagină])
+  ok -- nu --> fb[S-01d Acasă - rezervare indisponibilă]
+  fb -- apasă Sună pentru rezervare --> ivr[/Robot telefonic +40 356 630 238/]
+  ivr --> endC([Sfârșit: rezervă prin telefon])
+  fb -- încearcă din nou --> load

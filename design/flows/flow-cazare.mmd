@@ -1,0 +1,17 @@
+flowchart TD
+  %% Actor: oaspete care vrea cazare la Hotel ANNA. Decis: D-15 (destinatar), D-20 (bara din hero după modelul Vineyard).
+  start([Start: vrea cazare la Hotel ANNA]) --> dev{Pe ce dispozitiv este?}
+  dev -- desktop --> bar[S-01 Acasă - bara de cazare din hero]
+  dev -- telefon --> sheet[S-01b Acasă - panoul de cazare]
+  bar -- alege datele, apasă Cere ofertă --> form[S-06 Contact - subiect Cazare, date completate]
+  sheet -- alege datele, apasă Continuă --> form
+  form -- completează, apasă Trimite --> valid{Date complete și corecte?}
+  valid -- nu --> err[S-06b Contact - câmpuri de corectat]
+  err -- corectează --> form
+  valid -- da --> send[[Salvează cererea, trimite emailul către hotel cu copie și confirmarea către oaspete]]
+  send --> ok{Trimitere reușită?}
+  ok -- da --> done[S-06c Contact - cerere trimisă]
+  done --> endA([Sfârșit: hotelul îl contactează])
+  ok -- nu --> fail[S-06d Contact - eroare la trimitere]
+  fail -- încearcă din nou --> send
+  fail -- sună la hotel --> endB([Sfârșit: rezolvă telefonic])

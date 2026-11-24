@@ -1,0 +1,16 @@
+flowchart TD
+  %% Actor: Editor sau Administrator, de obicei de pe telefon. Decis: D-07 (conversie automată), D-24 (în browser, clipuri de cel mult 30 s), D-27 (pe server doar variantele optimizate).
+  start([Start: apasă Încarcă în Biblioteca media]) --> pick[S-14 Bibliotecă media]
+  pick -- alege un fișier --> chk{Format acceptat și clip de cel mult 30 s?}
+  chk -- nu --> rej[S-14e Bibliotecă media - fișier respins]
+  rej -- alege alt fișier --> pick
+  chk -- da --> up[S-14b Bibliotecă media - se convertește și se încarcă]
+  up --> conv[[Convertește pe dispozitiv și încarcă doar variantele pentru site]]
+  conv --> ok{Conversie și încărcare reușite?}
+  ok -- nu --> fail[S-14c Bibliotecă media - conversie eșuată]
+  fail -- încearcă din nou --> conv
+  fail -- renunță --> endB([Sfârșit: fișierul nu este adăugat])
+  ok -- da --> rev[S-14d Bibliotecă media - verifică și completează]
+  rev -- pune punctul focal, apasă Salvează --> alt{Text alternativ completat?}
+  alt -- nu --> rev
+  alt -- da --> endA([Sfârșit: varianta optimizată este în bibliotecă])

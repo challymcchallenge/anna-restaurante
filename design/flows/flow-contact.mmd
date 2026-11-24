@@ -1,0 +1,18 @@
+flowchart TD
+  start([Start: apasă Contact sau un buton de cerere]) --> pick[S-06 Contact - alege subiectul]
+  pick --> what{Ce dorește?}
+  what -- masă la restaurant --> ialoc[/Fereastra de rezervări ialoc/]
+  ialoc --> endA([Sfârșit: masă rezervată în ialoc])
+  what -- salon, curs, cazare sau întrebare --> form[S-06 Contact - formular pe subiect]
+  what -- are o nemulțumire --> ses{{Flux: Sesizare - S-07}}
+  ses -- sesizare trimisă --> endS([Sfârșit: sesizare înregistrată])
+  form -- apasă Trimite --> valid{Date complete și corecte?}
+  valid -- nu --> err[S-06b Contact - câmpuri de corectat]
+  err -- corectează --> form
+  valid -- da --> send[[Salvează cererea și trimite emailurile]]
+  send --> ok{Trimitere reușită?}
+  ok -- da --> done[S-06c Contact - cerere trimisă]
+  done --> endB([Sfârșit: primește email de confirmare])
+  ok -- nu --> fail[S-06d Contact - eroare la trimitere]
+  fail -- încearcă din nou --> send
+  fail -- sună la restaurant --> endC([Sfârșit: rezolvă telefonic])
