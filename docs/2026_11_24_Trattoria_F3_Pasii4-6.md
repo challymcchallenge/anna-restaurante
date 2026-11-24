@@ -1,6 +1,6 @@
 # F3 · pașii 4–6 · Trattoria da Vittoria — raport (oprire înainte de pasul 7)
 
-Data: 24.11.2026 · Stare: **gata, în așteptarea „GO”** · Decizii: D-44 (răspunsurile G3), D-45 (widgetul de cazare) · Commit-uri pe `main`: `3e591a3` (cazare), `28e6e5a` (slider), `8d6a630` (pașii 4–6), `291c2b9` (teste, contrast), `de342ce` (performanță, documente)
+Data: 24.11.2026 · Stare: **gata, în așteptarea „GO”** · Decizii: D-44 (răspunsurile G3), D-45 (widgetul de cazare) · Commit-uri pe `main`: `3e591a3` (cazare), `28e6e5a` (slider), `8d6a630` (pașii 4–6), `291c2b9` (teste, contrast), `de342ce` (performanță, documente), `b571226` (nota cazării, raportul)
 
 ## 1. Concluzie
 
@@ -12,7 +12,7 @@ Am făcut cele trei lucruri cerute la GO. Toate sunt live pe adresa temporară: 
 
 | Țintă | Rezultat măsurat |
 |---|---|
-| Lighthouse mobil, performanță ≥ 85 | **Acasă (producție, înainte de ultima reparație): 85 / 87 / 91.** După ce panoul de cazare de pe telefon se montează la deschidere, Acasă local: 90 / 90 / 90 (rezultatul de producție e în secțiunea 3). Paginile noi, pe producție: Evenimente private 94 / 94, Petreceri 98 / 99, Cursuri de pizza 98 / 97 |
+| Lighthouse mobil, performanță ≥ 85 | **Acasă, pe producție, versiunea finală: 91 / 87 / 91 (mediană 91).** Paginile noi, pe producție: Evenimente private 94 / 94, Petreceri 98 / 99, Cursuri de pizza 98 / 97 |
 | Lighthouse mobil, accesibilitate ≥ 95 | **100** la toate rulările |
 | Contrast ≥ 4,5:1, pe pagina afișată | **648 de rânduri pe 4 pagini, 0 sub prag**, minimum 5,38:1 |
 | Teste de integrare | **30/30** (5 noi) |
@@ -44,7 +44,7 @@ Am făcut cele trei lucruri cerute la GO. Toate sunt live pe adresa temporară: 
 | Pagina | Rulări | Performanță | Accesibilitate | LCP | TBT | CLS |
 |---|---|---|---|---|---|---|
 | Acasă (deploy `dpl_8oCNCK…`) | 3 | 85 / 87 / 91 | 100 | 3,1–3,3 s | 110–350 ms | 0 |
-| Acasă (după montarea la cerere, deploy `de342ce`) | 3 | vezi 3.2 | 100 | | | |
+| **Acasă, versiunea finală** (`b571226`) | 3 | **91 / 87 / 91** | 100 | 3,2–3,3 s | 130–280 ms | 0 |
 | Evenimente private | 2 | 94 / 94 | 100 | 0,8 s | 290–300 ms | 0 |
 | Petreceri | 2 | 98 / 99 | 100 | 0,8 s | 140–180 ms | 0,001 |
 | Cursuri de pizza | 2 | 98 / 97 | 100 | 0,8 s | 160–190 ms | 0,017 |
@@ -53,7 +53,7 @@ SEO 66 peste tot: `noindex` intenționat pe adresa temporară (ADR-012).
 
 ### 3.2 Acasă după reparație
 
-Local, build de producție: 90 / 90 / 90, TBT 80–100 ms. Cauza scăderii: Acasă avea 817 noduri în DOM (față de 623 după pașii 1–3), iar widgetul de cazare era randat de două ori: în bară și, ascuns, în panoul de pe telefon. Acum panoul se montează la prima deschidere.
+Pe producție: de la 85 / 87 / 91 la 91 / 87 / 91. Local, build de producție: 90 / 90 / 90, TBT 80–100 ms. Cauza scăderii: Acasă avea 817 noduri în DOM (față de 623 după pașii 1–3), iar widgetul de cazare era randat de două ori: în bară și, ascuns, în panoul de pe telefon. Acum panoul se montează la prima deschidere.
 
 ### 3.3 Contrast pe randare
 
@@ -125,6 +125,9 @@ F3 pașii 7–9:
 - **9:** Contact, cu formularul care primește parametrii de la cazare și de la butoanele de cerere, plus pagina de sesizări.
 
 Emailurile Resend (pasul 11) și testul cu domeniul verificat rămân pentru F5 (D-36).
+
+
+Pagina HTML a raportului (privată): https://claude.ai/artifact/RTSGCASrpHDmQqHSc7X6qr
 
 ---
 
