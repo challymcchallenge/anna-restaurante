@@ -2,7 +2,7 @@
 
 Sursa de adevăr pentru proiect. Dacă un fișier din `design/` sau `docs/` contrazice această listă, câștigă lista. O decizie se schimbă doar de către Alin.
 
-Ultima actualizare: 24.11.2026
+Ultima actualizare: 24.11.2026 (GATE 1)
 
 | ID | Subiect | Decizie |
 |---|---|---|
@@ -42,6 +42,9 @@ Ultima actualizare: 24.11.2026
 | D-34 | Motorul de traducere (GATE 0, 24.11.2026) | **Claude Haiku 5.5 prin API**, cu protecția termenilor prin marcaje `{n}`. Cheia (`TRANSLATE_API_KEY`) o pune Alin în Vercel înainte de F4. |
 | D-35 | Video, varianta eficientă (GATE 0, 24.11.2026) | **Se păstrează AV1** (HEVC pe dispozitivele Apple), alături de H.264. Pe clipul real: −43% față de H.264. |
 | D-36 | Email (24.11.2026) | Domeniul de trimitere și testul Resend se fac **la final**, odată cu mutarea DNS a domeniului de pe vechiul hosting. Site-ul vechi rămâne activ până atunci. |
+| D-37 | Cereri primite (GATE 1, 24.11.2026) | **Editorul (Social Media Managerul) vede cererile pentru cursurile de pizza pentru copii (înscrieri) și întrebările (mesaje)** și le schimbă starea. Cazarea, evenimentele private și sesizările rămân la Administrator și la destinatarii de email. Datele trimise de vizitator nu se modifică din panou. |
+| D-38 | Presupunerile din GATE 1 (24.11.2026) | **Acceptate**: doar limba română activă până la F4; clipurile fără sunet; 50 MB maximum după conversie; „Provizoriu” oprit implicit la elementele noi; subiectele fără destinatar rămân oprite; paginile legale la `/termeni`, `/confidentialitate`, `/cookies`. |
+| D-39 | Motive de sesizare (GATE 1, 24.11.2026) | **Preluate de pe https://davittoria.ro/formular-de-reclamatie/** (cele 9, cu explicația lor). Cu acordul lui Alin. Fiecare motiv are „Motiv” + „Explicație”. |
 
 ## Linkuri-cheie
 

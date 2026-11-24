@@ -1,6 +1,6 @@
 # GATE 1 · Trattoria da Vittoria — raport faza 1 (panou și model de conținut)
 
-Data: 24.11.2026 · Stare: **aștept „GO” de la Alin** · Commit-uri: `8ec6208`, `5813e37`, `31d15d9`, `8ff6f54` pe `main` · Deploy de producție: READY (`dpl_7LMPWGNXnPa6s1H5zWgqfQ51s4Yd`, 80 s cu migrații și conținut de pornire)
+Data: 24.11.2026 · Stare: **GO primit de la Alin (24.11.2026). Deciziile: D-37 (Editorul vede cererile de curs de pizza și întrebările), D-38 (restul presupunerilor acceptate), D-39 (motivele de sesizare preluate de pe site-ul actual).** F1 închis · Commit-uri: `8ec6208`, `5813e37`, `31d15d9`, `8ff6f54` pe `main` · Deploy de producție: READY (`dpl_7LMPWGNXnPa6s1H5zWgqfQ51s4Yd`, 80 s cu migrații și conținut de pornire)
 
 Panoul: https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin
 
@@ -96,6 +96,15 @@ F1 era estimat la 3–4 sesiuni; s-a făcut într-una. Total: **13–17 sesiuni*
 ## 10. Capturi (în `docs/img/`)
 
 `f1-admin-dashboard.png` (contorul: 52), `f1-admin-settings-cereri.png`, `f1-admin-home.png`, `f1-admin-media-converted.png`, `f1-admin-clip-rejected.png`, `f1-editor-dashboard.png` (contorul Editorului: 51, fără Premii), `f1-editor-phone-event.png`, `f1-editor-phone-awards.png` („Nimic găsit”).
+
+## 11. După GO (24.11.2026)
+
+| Ce | Rezultat |
+|---|---|
+| D-37 | Editorul vede în meniu „Cereri primite”, doar cu subiectele Curs de pizza și Întrebare; schimbă doar „Stare”. Tabloul de bord arată „Cereri noi”. Probat: 4 cereri de test, Editorul vede 2, nu poate modifica Cazare și nu poate șterge |
+| D-39 | Cele 9 motive de sesizare, cu explicația lor, în colecția „Motive de sesizare”. **Abatere de la content-model 5.9**: am adăugat câmpul „Explicație” (120 de caractere, pe limbi), ca textul de pe site-ul actual să rămână întreg. Cel mai lung text are ~95 de caractere, peste limita de 80 a unui singur câmp |
+| Conținutul de pornire | Jurnal pe colecție: o colecție nouă din `seed/*.json` se aplică la următorul build; una golită intenționat din panou nu se mai completează. Probat pe copia producției: recenziile șterse au rămas șterse, motivele s-au adăugat |
+| Propunere | Pe pagina descărcată de pe davittoria.ro apar linkul de Facebook și adresele celor 10 site-uri ale grupului. **Nu le-am aplicat**; aștept confirmarea ta (vezi `docs/OPEN-QUESTIONS.md`, #13 și #17) |
 
 ---
 

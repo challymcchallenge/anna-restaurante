@@ -27,14 +27,14 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | T4 | Motorul de traducere automată, pornind de la cele gratuite | ADR-007 |
 | T5 | Costul real al proiectului Supabase suplimentar în organizația Pro | ADR-006 |
 | T6 | Dacă meniul digital permite legături directe pe categorie | — |
-| 13 | Linkul paginii de Facebook a Trattoriei (apare în footer și Contact în design; lipsește din D-18/D-30) | F3 | Alin |
+| 13 | Linkul paginii de Facebook a Trattoriei (apare în footer și Contact în design; lipsește din D-18/D-30). **Găsit pe davittoria.ro, de confirmat:** facebook.com/p/Trattoria-da-Vittoria-100083393292155/ | F3 | Alin |
 
 ## Întrebări noi după F1 (24.11.2026) — detalii în `docs/2026_11_24_Trattoria_GATE1.md`, secțiunea 5
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| 14 | Cererile primite: le vede doar Administratorul (propunerea mea) sau și Editorul? | F3 | Alin |
+| ~~14~~ | ~~Cererile primite: cine le vede~~ — **rezolvat: D-37** | — | — |
 | 15 | Destinatarii de email pentru Eveniment privat, Curs de pizza, Întrebare, Sesizare și adresa de copie (se pun în panou) | F3 | Alin |
-| 16 | Cele 9 motive de sesizare de pe site-ul actual (le pot prelua eu de pe davittoria.ro, dacă îmi dai voie să accesez site-ul) | F3 | Alin |
-| 17 | Adresele site-urilor grupului fără link (6 din 10) | F3 | Alin |
+| ~~16~~ | ~~Cele 9 motive de sesizare~~ — **rezolvat: D-39**, preluate de pe davittoria.ro | — | — |
+| 17 | Adresele site-urilor grupului fără link (6 din 10). **Găsite pe davittoria.ro, de confirmat:** Anna Delivery → anna-delivery.ro; Cofetăria Anna → dolcessa.ro; Piscina Anna Summer Events → annasummerevents.ro; Anna Events → annaevents.ro; Riviera Events → rivieraevents.ro; Hotel Anna Junior → hotelannajunior.ro | F3 | Alin |
 | 18 | Poziția pe hartă a restaurantului (latitudine, longitudine) | F3 | Alin |
