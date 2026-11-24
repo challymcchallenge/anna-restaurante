@@ -802,8 +802,15 @@ export interface Review {
    */
   text: string;
   source: 'google' | 'tripadvisor' | 'facebook' | 'other';
-  date: string;
+  /**
+   * Dacă lipsește, pe site apare doar sursa.
+   */
+  date?: string | null;
   rating?: number | null;
+  /**
+   * Limba în care a scris-o oaspetele. Citatul rămâne în limba lui și e marcat corect pentru cititoarele de ecran (D-55).
+   */
+  language: 'ro' | 'en' | 'it' | 'fr' | 'de' | 'sv' | 'zh';
   sourceUrl?: string | null;
   /**
    * Oprit = nu apare pe site, dar rămâne în panou.
@@ -1863,6 +1870,7 @@ export interface ReviewsSelect<T extends boolean = true> {
   source?: T;
   date?: T;
   rating?: T;
+  language?: T;
   sourceUrl?: T;
   active?: T;
   placeholder?: T;

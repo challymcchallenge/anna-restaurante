@@ -1,5 +1,5 @@
 {
-  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54).",
+  "$comment": "Conținut de pornire pentru restaurantul cu slug-ul de mai jos (date, nu cod; ADR-002). Faptele vin din docs/DECISIONS.md; restul sunt texte de lucru DESI din wireframe-uri, marcate „Provizoriu” (Exemplu · de înlocuit, D-08). Se aplică o singură dată, doar unde restaurantul nu are încă elemente. Motivele de sesizare: preluate de pe https://davittoria.ro/formular-de-reclamatie/ pe 24.11.2026 (D-39). Facebook și linkurile grupului: confirmate de Alin pe 24.11.2026 (D-40). F3: fotografiile provizorii din machetele F2 (Wikimedia Commons, licențe în media/trattoria-da-vittoria/provizorii/credits.json) intră în Biblioteca media cu titlul „Exemplu · de înlocuit” și creditul lor, și se pun doar în câmpurile goale (mediaFill). F3 (D-46): lista de vinuri vine din docs/f3/2026_11_19_Trattoria_Lista_Vinuri_Corectata.pdf (155 de rânduri; cele 2 „la pahar” sunt prețul la pahar al aceluiași vin): înlocuiește o singură dată exemplele de vinuri (lists); tipul, regiunea și soiurile marcate în D-46 sunt deduse [PRESUPUNERE]. Logo-ul orizontal al Grupului ANNA (negru și alb) primit de la Alin pe 24.11.2026. F3 pasul 8: galeria pornește cu 5 elemente din aceleași fotografii provizorii, marcate „Exemplu · de înlocuit” (D-49). D-51: destinatarii și copiile pe subiect (requestsFill), date de Alin pe 24.11.2026; intră în repo la cererea lui explicită (excepție de la regula din CLAUDE.md). D-52: telefoanele în format internațional; telefonul pentru înscrierile la cursul de pizza. F3 pasul 10: paginile legale primesc ciorne factuale pentru jurist (D-53), tot marcate „Provizoriu”. F3 pasul 12: textele finale ale secțiunilor (titluri, texte introductive, cursul de pizza) și eticheta „Exemplu” scoasă de pe secțiunile fără fotografii demo; se schimbă o singură dată, doar unde textul e încă cel vechi (D-54). D-55: recenziile reale de pe Google (7 pentru restaurant, 7 pentru hotel), date de Alin pe 24.11.2026, înlocuiesc exemplele (lists).",
   "tenantSlug": "trattoria-da-vittoria",
   "settings": {
     "tagline": "The Best Restaurant in Town",
@@ -2657,6 +2657,129 @@
           "priceBottle": 150,
           "volume": "0.75",
           "externalCode": "inventar-58"
+        }
+      ]
+    },
+    {
+      "$comment": "Recenziile reale de pe profilurile Google ale restaurantului și Hotel ANNA, extrase de Alin pe 24.11.2026 (D-55). Înlocuiesc o singură dată recenziile-exemplu („Provizoriu”). Numele scurtate la prenume și inițială; fără dată (nu era în extras); emoticoanele scoase din citate.",
+      "collection": "reviews",
+      "version": "2026-11-24-google",
+      "matchOn": [
+        "author",
+        "group"
+      ],
+      "items": [
+        {
+          "author": "Dodo D.",
+          "group": "restaurant",
+          "text": "Best restaurant in town by far. Reasonable prices, good atmosphere and great food.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Mihai M.",
+          "group": "restaurant",
+          "text": "Probably the best and unique restaurant in Targu Jiu… The interior design is breathtaking, lighting is warming, there's also a piano… attention to details is amazing.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Vlad D.",
+          "group": "restaurant",
+          "text": "Best food in town. Pizza, mozzarella focaccia, ribs are excellent. Big thanks to the cubana Chica for her service.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Alin T.",
+          "group": "restaurant",
+          "text": "One of the best pizzas I've eaten (Sicilian pizza)… Bresaola was the same quality… New York cheesecake and lava cake were very good.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Alexandra-Ioana M.",
+          "group": "restaurant",
+          "text": "Chic place for a relaxed evening out in the city center! Lively atmosphere, tasty food and lovely garnished beverages and dishes! Nice!",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Danijel D.",
+          "group": "restaurant",
+          "text": "Place is best on whole city, it is fancy, service is good, food is perfect! Estera was really helpful and made us feel like we are at home!",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Enna S.",
+          "group": "restaurant",
+          "text": "Amazing experience ! Fast service , amazing food, GREAT atmosphere",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Mihaela, România",
+          "group": "hotel",
+          "text": "The breakfast far exceeded expectations, being superior to many offers from multi-star hotels… the number of stars is inferior to the quality.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Christopher, Australia",
+          "group": "hotel",
+          "text": "Very kind and helpful lady at reception who was able to find us secure undercover parking… The hotel is luxurious, quiet, very comfortable.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Adina, România",
+          "group": "hotel",
+          "text": "The rooms are spacious and the bathrooms are the most unique… won't find this anywhere else in Europe - japanese toilettes and techy shower. Flawless.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Ramona, România",
+          "group": "hotel",
+          "text": "Top-notch bathroom facilities, smart Japanese-style toilet. Extremely clean throughout. Pet-friendly. Nice, large bed, Netflix, complimentary water and coffee.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Zompara, Serbia",
+          "group": "hotel",
+          "text": "Everything was more than perfect. The best room we had in our 4 days stay in Romania.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Ana, Olanda",
+          "group": "hotel",
+          "text": "The apartment is huge, and all the facilities are new and modern. The location is very central.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
+        },
+        {
+          "author": "Christian, România",
+          "group": "hotel",
+          "text": "Very modern and comfortable, really high-tech furnishings, futuristic and luxurious feeling.",
+          "source": "google",
+          "rating": 5,
+          "language": "en"
         }
       ]
     }

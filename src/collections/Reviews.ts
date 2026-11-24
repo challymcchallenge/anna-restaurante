@@ -3,7 +3,18 @@ import type { CollectionConfig } from 'payload'
 import { contentAccess } from '../access/roles'
 import { contentFlags, select, text, textarea, url } from '../fields'
 
-/** Recenzii (content-model 5.3, D-06). Lista reală vine de la Alin; până atunci, exemplele sunt „Provizoriu”. */
+/** Limbile site-ului (ADR-007): limba în care e scrisă o recenzie. */
+export const REVIEW_LANGUAGES = [
+  { value: 'ro', label: 'Română' },
+  { value: 'en', label: 'Engleză' },
+  { value: 'it', label: 'Italiană' },
+  { value: 'fr', label: 'Franceză' },
+  { value: 'de', label: 'Germană' },
+  { value: 'sv', label: 'Suedeză' },
+  { value: 'zh', label: 'Chineză' },
+]
+
+/** Recenzii (content-model 5.3, D-06, D-55). Recenziile reale de pe Google au venit de la Alin pe 24.11.2026. */
 export const Reviews: CollectionConfig = {
   slug: 'reviews',
   labels: { singular: 'Recenzie', plural: 'Recenzii' },
@@ -59,8 +70,11 @@ export const Reviews: CollectionConfig = {
           name: 'date',
           label: 'Luna și anul',
           type: 'date',
-          required: true,
-          admin: { date: { pickerAppearance: 'monthOnly', displayFormat: 'MMMM yyyy' } },
+          // Opțională (D-55): recenziile preluate fără dată apar doar cu sursa.
+          admin: {
+            date: { pickerAppearance: 'monthOnly', displayFormat: 'MMMM yyyy' },
+            description: 'Dacă lipsește, pe site apare doar sursa.',
+          },
         },
         {
           name: 'rating',
@@ -72,6 +86,14 @@ export const Reviews: CollectionConfig = {
         },
       ],
     },
+    select({
+      name: 'language',
+      label: 'Limba recenziei',
+      required: true,
+      defaultValue: 'ro',
+      options: REVIEW_LANGUAGES,
+      description: 'Limba în care a scris-o oaspetele. Citatul rămâne în limba lui și e marcat corect pentru cititoarele de ecran (D-55).',
+    }),
     url({ name: 'sourceUrl', label: 'Legătură către sursă' }),
     ...contentFlags(),
   ],

@@ -2,7 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
-import { monthYear } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
 import { UI } from '@/lib/site/strings'
@@ -11,6 +10,7 @@ import { byTypeGroups, typesIn } from '@/lib/site/wines'
 import { AwardBadge, awardsFor, ExampleTag, ExternalLink } from './Bits'
 import { Icon } from './Icons'
 import { Picture } from './Picture'
+import { ReviewCard } from './ReviewCard'
 import { SliderArrows } from './SliderArrows'
 import { GroupLogo, WineFilter, WineItem } from './WineList'
 
@@ -167,36 +167,9 @@ export function Reviews({ site, id }: { site: SiteData; id: string }) {
         </div>
         {reviews.length > 0 && (
           <ul className="review-list">
-            {reviews.map((v, n) => {
-              const source = UI.sources[v.source] ?? ''
-              const when = monthYear(v.date)
-              return (
-                <li key={v.id} className={`review${n === 0 ? ' review--lead' : ''}`}>
-                  <figure>
-                    <blockquote>
-                      <p>„{v.text}”</p>
-                    </blockquote>
-                    <figcaption>
-                      {v.rating ? (
-                        <span className="review-stars" role="img" aria-label={UI.ratingLabel(v.rating)}>
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <Icon key={i} name="star" className={i < (v.rating ?? 0) ? 'is-on' : ''} />
-                          ))}
-                        </span>
-                      ) : null}
-                      <span className="review-author">{v.author}</span>
-                      <span className="review-source">
-                        {source &&
-                          (v.sourceUrl ? <ExternalLink href={v.sourceUrl}>{source}</ExternalLink> : source)}
-                        {source && when ? ' · ' : ''}
-                        {when}
-                      </span>
-                      {v.placeholder && <ExampleTag className="row-tag" />}
-                    </figcaption>
-                  </figure>
-                </li>
-              )
-            })}
+            {reviews.map((v, n) => (
+              <ReviewCard key={v.id} review={v} lead={n === 0} />
+            ))}
           </ul>
         )}
         {reviewUrl && r?.buttonLabel && (

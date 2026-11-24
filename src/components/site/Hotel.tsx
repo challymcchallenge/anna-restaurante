@@ -1,7 +1,7 @@
 import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
-import { monthYear, price, telHref } from '@/lib/site/format'
+import { price, telHref } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
@@ -12,6 +12,7 @@ import { ExampleTag, ExternalLink } from './Bits'
 import { Chapter, RequestButton } from './Events'
 import { Icon } from './Icons'
 import { Picture } from './Picture'
+import { ReviewCard } from './ReviewCard'
 
 /**
  * Acasă · Cazare la Hotel ANNA (PLAN F3 pasul 7, content-model 4.9, wireframe S-01 secțiunea 9).
@@ -120,35 +121,9 @@ export function Hotel({ site, id }: { site: SiteData; id: string }) {
         <div className="wrap">
           <h3 className="mini-title hotel-mini">{UI.hotelReviewsTitle}</h3>
           <ul className="review-list hotel-reviews">
-            {reviews.map((v) => {
-              const source = UI.sources[v.source] ?? ''
-              const when = monthYear(v.date)
-              return (
-                <li key={v.id} className="review">
-                  <figure>
-                    <blockquote>
-                      <p>„{v.text}”</p>
-                    </blockquote>
-                    <figcaption>
-                      {v.rating ? (
-                        <span className="review-stars" role="img" aria-label={UI.ratingLabel(v.rating)}>
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <Icon key={i} name="star" className={i < (v.rating ?? 0) ? 'is-on' : ''} />
-                          ))}
-                        </span>
-                      ) : null}
-                      <span className="review-author">{v.author}</span>
-                      <span className="review-source">
-                        {source && (v.sourceUrl ? <ExternalLink href={v.sourceUrl}>{source}</ExternalLink> : source)}
-                        {source && when ? ' · ' : ''}
-                        {when}
-                      </span>
-                      {v.placeholder && <ExampleTag className="row-tag" />}
-                    </figcaption>
-                  </figure>
-                </li>
-              )
-            })}
+            {reviews.map((v) => (
+              <ReviewCard key={v.id} review={v} />
+            ))}
           </ul>
         </div>
       )}

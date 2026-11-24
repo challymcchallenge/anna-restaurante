@@ -41,7 +41,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | # | Material | Unde în panou | Până la | Sursa |
 |---|---|---|---|---|
 | ~~17~~ | ~~Lista reală de vinuri~~ — **primită (PDF din 19.11.2026), importată: D-46.** Rămân verificările din G5-2 … G5-4 | Vinuri | F3 | D-46 |
-| 18 | Recenziile reale, pentru restaurant și pentru hotel. **F3: Acasă arată primele 3 din grupul Restaurant, fiecare cu „Exemplu · de înlocuit”**; legătura „Lasă o recenzie” merge deja la recenzia Google | Recenzii (4 exemple acum) | F3 | D-06, OQ #4 |
+| 18 | Recenziile reale, pentru restaurant și pentru hotel. **Primite pe 24.11.2026 (D-55): 7 + 7 de pe Google, pe site.** Lipsesc doar lunile în care au fost scrise (opțional, se completează în panou) | Recenzii | F3 | D-06, D-55 |
 | 32 (nou, F3) | Textul introductiv pentru **Bucătăria** și pentru **Vinuri** (câmpul e gol, secțiunile arată doar titlul). Un rând, cel mult 160 de caractere fiecare | Pagina Acasă → Bucătăria / Vinuri → Text introductiv | F3 | content-model 4.3, 4.4 |
 | 33 (nou, F3) | Rândul de lângă insigna premiului în secțiunea Vinuri (gol acum) | Premii și distincții → Wine Spectator → Rând de text | F3 | content-model 5.10 |
 | ~~34~~ | ~~Fotografii ale sticlelor de vin~~ — **nu mai e nevoie**: lista de vinuri nu arată fotografii (D-46); câmpul rămâne pentru portalul de vinuri (D-14) | Vinuri → Fotografie | — | D-46 |

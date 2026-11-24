@@ -72,7 +72,7 @@ describe('F3 · pasul 7 · Hotel ANNA', () => {
     expect(pageMediaCredits(site(false))).toEqual([])
   })
 
-  it('Conținutul de pornire: 2 tipuri de camere și o recenzie de hotel, marcate „Exemplu”', async () => {
+  it('Conținutul de pornire: 2 tipuri de camere „Exemplu”; recenziile de hotel sunt cele reale (D-55)', async () => {
     const rooms = await payload.find({ collection: 'room-types', where: { tenant: { equals: tenantId } }, sort: '_order', depth: 0 })
     expect(rooms.docs.map((r) => r.name)).toEqual(expect.arrayContaining(['Camere Premium', 'Apartamente VIP Riviera']))
     expect(rooms.docs.every((r) => r.placeholder)).toBe(true)
@@ -81,7 +81,7 @@ describe('F3 · pasul 7 · Hotel ANNA', () => {
       where: { and: [{ tenant: { equals: tenantId } }, { group: { equals: 'hotel' } }] },
       depth: 0,
     })
-    expect(reviews.totalDocs).toBeGreaterThanOrEqual(1)
-    expect(reviews.docs.every((r) => r.placeholder)).toBe(true)
+    expect(reviews.totalDocs).toBeGreaterThanOrEqual(7)
+    expect(reviews.docs.some((r) => r.placeholder)).toBe(false)
   })
 })

@@ -100,4 +100,4 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | G8-1 | Subtitlul din hero e gol pe producție (golit din panou). Îl lași gol, revii la „Vă așteptăm cu drag și vă servim cu plăcere!” sau pui „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.”? | F4 (se traduce) | Alin |
 | G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele)? | F4 | Alin |
 | G8-3 | Descrierile saloanelor și camerelor și răspunsurile la întrebările frecvente: le scrii tu sau le iau de pe davittoria.ro și hotelanna.ro (cerere de rețea, cu acordul tău)? | F4 | Alin |
-| G8-4 | Recenziile reale: iau 3–4 recenzii publice din profilul Google, cu numele scurtat și sursa? | F4 | Alin |
+| ~~G8-4~~ | ~~Recenziile reale: iau 3–4 recenzii publice din profilul Google, cu numele scurtat și sursa?~~ — **rezolvat: D-55** | — | — |

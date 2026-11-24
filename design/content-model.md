@@ -340,11 +340,12 @@ Ordine: pe tip, apoi manuală.
 | Text | text lung | Da | 280 | | se traduce |
 | Sursă | alegere | Da | - | Google, TripAdvisor, Facebook, Altă sursă | - |
 | Legătură către sursă | url | Nu | - | | - |
-| Luna și anul | dată | Da | - | Se afișează „octombrie 2026" | - |
+| Luna și anul | dată | Nu (D-55) | - | Se afișează „octombrie 2026"; fără dată apare doar sursa | - |
+| Limba recenziei | alegere | Da | - | Limba în care a scris oaspetele (ro, en, it, fr, de, sv, zh); citatul primește `lang` (D-55) | - |
 | Notă | număr | Nu | - | 1-5 | - |
 | Grup | alegere | Da | - | Restaurant sau Hotel | - |
 
-Recenziile-exemplu au „Provizoriu" pornit până sosesc cele reale (D-06, D-08).
+Recenziile-exemplu au „Provizoriu" pornit până sosesc cele reale (D-06, D-08). Cele reale de pe Google au venit pe 24.11.2026 (D-55).
 
 ### 5.4 Seri tematice (D-09)
 

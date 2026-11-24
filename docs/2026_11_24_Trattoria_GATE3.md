@@ -60,7 +60,7 @@ Fiecare text se schimbă o singură dată și doar dacă e încă cel vechi. Un 
 - recenziile reale;
 - detaliile cursului de pizza.
 
-Sunt întrebările G8-2 … G8-4.
+Sunt întrebările G8-2 și G8-3. Recenziile reale au venit după GATE 3 (D-55, secțiunea 9).
 
 **Pe producție, subtitlul din hero e gol.** A fost golit din panou; pe baza locală e încă „Vă așteptăm cu drag și vă servim cu plăcere!”. Nu l-am repus (G8-1). Acasă primește acum descrierea pentru căutare din nume, adresă și program: „Trattoria da Vittoria, Strada Victoriei nr. 8, Târgu Jiu. Program: Zilnic 8:00–24:00.”
 
@@ -122,7 +122,7 @@ Pe baza locală, cu toate subiectele pornite ca pe producție (D-51), am trimis 
 |---|---|---|
 | Hero: fotografia (clipul lipsește) | clipurile desktop și telefon, posterele | #7, #8, #9 |
 | Bucătăria: 3 fotografii provizorii, 5 coperți cu nume | o fotografie pe categorie | #10 |
-| Ce spun oaspeții: 3 recenzii exemplu; hotel: 1 | recenziile reale | #18 |
+| ~~Ce spun oaspeții: 3 recenzii exemplu; hotel: 1~~ | **rezolvat după GATE 3: 7 + 7 recenzii reale de pe Google (D-55)** | #18 |
 | Petreceri: 3 seri exemplu | serile reale (le pune Editorul) și afișele | #15 |
 | Saloane: descrieri și fotografii | descrieri, fotografii, confirmarea capacităților | #11, #24 |
 | Cursul de pizza: fotografia; vârsta, durata, prețul, locurile | detaliile (Q-11) și fotografiile, cu acordul părinților | #13, #16, #25 |
@@ -139,7 +139,7 @@ Pe baza locală, cu toate subiectele pornite ca pe producție (D-51), am trimis 
 | G8-1 | Subtitlul din hero e gol pe producție. Îl lași gol, îl pui pe cel vechi sau pui unul nou? | Unul nou, cu ce și unde: „Bucătărie italiană și peste 150 de vinuri, pe Strada Victoriei 8, în Târgu Jiu.” (85 de caractere). Îl pun eu sau îl scrii tu în Pagina Acasă → Hero |
 | G8-2 | Ce are bucătăria pe care alt restaurant italian din Târgu Jiu nu poate spune? (cuptorul, bucătarul, o rețetă a casei, de unde vin ingredientele) | Îmi dai 2–3 fapte și rescriu titlul Bucătăriei și subtitlul |
 | G8-3 | Descrierile saloanelor și camerelor și răspunsurile la întrebări: le scrii tu sau le iau de pe davittoria.ro și hotelanna.ro? | Le iau eu de pe site-urile voastre (cerere de rețea, cu acordul tău) și le marchez „de verificat” |
-| G8-4 | Recenziile reale: iau 3–4 din profilul Google al restaurantului, cu numele scurtat și legătura spre sursă? | Da, doar recenzii publice, cu sursa vizibilă |
+| ~~G8-4~~ | ~~Recenziile reale~~ | **Rezolvat: D-55**, 7 + 7 de pe Google, pe site |
 | G7-1 … G7-3 | Juristul, adresele vechi, termenul de păstrare a cererilor (din pasul 10) | Rămân deschise |
 
 ## 8. Faza următoare, după GO: F4
@@ -150,6 +150,27 @@ Efectele, sunetul, 3D și comutatorul de temă sunt mutate după lansare (D-33).
 - întrebările frecvente unde sunt relevante.
 
 **Înainte de F4, de la tine:** cheia `TRANSLATE_API_KEY` în Vercel (D-34), pe care o pui tu. Numele variabilei e în `docs/2026_11_24_Trattoria_Variabile_Mediu.md`.
+
+## 9. După GATE 3: recenziile reale (D-55)
+
+Ai extras 14 recenzii de pe profilurile Google: 7 pentru restaurant și 7 pentru Hotel ANNA, toate de 5 stele. Ele înlocuiesc cele 4 exemple, iar eticheta „Exemplu” a dispărut de pe recenzii.
+
+| Unde | Primele 3 (apar pe Acasă) | În panou, active, pentru rotație |
+|---|---|---|
+| Ce spun oaspeții | Dodo D. („Best restaurant in town by far…”), Mihai M. (atmosfera, pianul), Vlad D. (pizza, focaccia, servirea) | Alin T., Alexandra-Ioana M., Danijel D., Enna S. |
+| Hotel ANNA | Mihaela, România (micul dejun); Christopher, Australia (recepția, parcarea); Adina, România (camerele) | Ramona, Zompara, Ana, Christian |
+
+Cum le-am preluat:
+- **Numele:** scurtate la prenume și inițială. La hotel apar prenumele și țara, cum erau în extras.
+- **Citatele:** în engleză, cum erau în extras, cu „…” unde fuseseră scurtate; am scos doar emoticoanele.
+- **Data:** extrasul nu are luna, deci sub citat apare doar „Google”. Câmpul „Luna și anul” a devenit opțional; îl poți completa din panou.
+- **Limba:** câmp nou, „Limba recenziei”. Citatul englezesc e marcat `lang="en"`, ca cititoarele de ecran să-l pronunțe corect (WCAG 3.1.2), iar în F4 știm din ce limbă se traduce.
+
+**[PRESUPUNERE] De verificat de tine:** câteva citate ale oaspeților din România par traduse automat de Google (de exemplu Mihaela și Christian). Dacă originalul e în română, pune-l pe acela din panou și alege „Română” la limbă: pe site-ul în română e mai credibil.
+
+Teste: 66/66 (3 noi). Migrația: `20261124_221615_f3_recenzii_limba`.
+
+**După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
 Pagina HTML a raportului (privată): https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP
 
