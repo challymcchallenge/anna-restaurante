@@ -48,11 +48,11 @@ describe('F3 · site public', () => {
       kitchen: { enabled: true, order: 4, menuLabel: 'Bucătăria' },
       wines: { enabled: false, order: 3, menuLabel: 'Vinuri' },
       reviews: { enabled: true, order: 3, menuLabel: 'Recenzii' },
-      hotel: { enabled: true, order: 0, menuLabel: 'Hotel ANNA' },
+      gallery: { enabled: true, order: 0, menuLabel: 'Galerie' },
     })
     expect(orderedSections(h).map((s) => s.key)).toEqual(['hero', 'stay', 'reviews', 'kitchen'])
     const items = navItems(h)
-    // Acasă nu apare (logo-ul duce acolo); Vinuri e oprită; Hotel ANNA nu e încă construit (pasul 7).
+    // Acasă nu apare (logo-ul duce acolo); Vinuri e oprită; Galeria nu e încă construită (pasul 8).
     expect(items.map((i) => i.label)).toEqual(['Cazare', 'Recenzii', 'Bucătăria'])
     expect(items.map((i) => i.href)).toEqual(['/#cazare', '/#recenzii', '/#bucataria'])
     expect(items.every((i) => i.tier === 1)).toBe(true)

@@ -17,7 +17,7 @@ export const SECTIONS = [
   { key: 'parties', id: 'petreceri', built: true },
   { key: 'privateEvents', id: 'evenimente-private', built: true },
   { key: 'pizza', id: 'cursuri-pizza', built: true },
-  { key: 'hotel', id: 'hotel', built: false },
+  { key: 'hotel', id: 'hotel', built: true },
   { key: 'gallery', id: 'galerie', built: false },
   { key: 'contact', id: 'contact', built: false },
 ] as const

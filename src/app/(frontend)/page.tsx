@@ -3,6 +3,7 @@ import React from 'react'
 
 import { Parties, Pizza, PrivateEvents } from '@/components/site/Events'
 import { Hero } from '@/components/site/Hero'
+import { Hotel } from '@/components/site/Hotel'
 import { Kitchen, Reviews, Wines } from '@/components/site/Restaurant'
 import { getSite } from '@/lib/site/data'
 import { orderedSections } from '@/lib/site/sections'
@@ -33,6 +34,8 @@ export default async function HomePage() {
             return <PrivateEvents key={s.key} site={site} id={s.id} />
           case 'pizza':
             return <Pizza key={s.key} site={site} id={s.id} />
+          case 'hotel':
+            return <Hotel key={s.key} site={site} id={s.id} />
           // „stay” (cererea de cazare) stă în hero, la baza copertei.
           default:
             return null

@@ -13,6 +13,7 @@ import type {
   HomePage,
   LegalPage,
   Review,
+  RoomType,
   Salon,
   Setting,
   Tenant,
@@ -48,6 +49,9 @@ export type SiteData = {
   /** Serile trecute, cele mai noi întâi (arhiva foto). */
   eventsPast: Event[]
   faqs: Faq[]
+  /** F3 pasul 7: tipurile de camere și recenziile hotelului (content-model 4.9, 5.6). */
+  roomTypes: RoomType[]
+  hotelReviews: Review[]
 }
 
 /** Începutul zilei de azi în ora României, ca o seară de azi să rămână în agendă toată ziua. */
@@ -100,8 +104,22 @@ async function load(hostname: string): Promise<SiteData | null> {
   const own: Where = { tenant: { equals: tenant.id } }
 
   const today = startOfTodayBucharest()
-  const [settings, home, awards, groupLinks, legalPages, dishCategories, wines, reviews, salons, upcoming, past, faqs] =
-    await Promise.all([
+  const [
+    settings,
+    home,
+    awards,
+    groupLinks,
+    legalPages,
+    dishCategories,
+    wines,
+    reviews,
+    salons,
+    upcoming,
+    past,
+    faqs,
+    roomTypes,
+    hotelReviews,
+  ] = await Promise.all([
       payload.find({ collection: 'settings', where: own, limit: 1, depth: 1 }),
       // depth 2: clipurile din hero aduc și varianta eficientă și imaginea de început.
       payload.find({ collection: 'home-page', where: own, limit: 1, depth: 2 }),
@@ -147,6 +165,14 @@ async function load(hostname: string): Promise<SiteData | null> {
         depth: 1,
       }),
       payload.find({ collection: 'faqs', where: of(), sort: '_order', limit: 50, depth: 0 }),
+      payload.find({ collection: 'room-types', where: of(), sort: '_order', limit: 6, depth: 1 }),
+      payload.find({
+        collection: 'reviews',
+        where: of([{ group: { equals: 'hotel' } }]),
+        sort: '_order',
+        limit: 3,
+        depth: 0,
+      }),
     ])
 
 
@@ -164,6 +190,8 @@ async function load(hostname: string): Promise<SiteData | null> {
     eventsUpcoming: upcoming.docs,
     eventsPast: past.docs,
     faqs: faqs.docs,
+    roomTypes: roomTypes.docs,
+    hotelReviews: hotelReviews.docs,
   }
 }
 

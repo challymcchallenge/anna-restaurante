@@ -70,7 +70,7 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
-| G5-1 | Confirmi cele 20 de vinuri recomandate pe Acasă (5 din fiecare tip)? Le schimbi din panou: Vinuri → bifa „Recomandat” | F3 GATE | Alin |
-| G5-2 | Soiurile: PDF-ul nu le are. Le-am pus doar la 19 vinuri (din poza 7 sau impuse de denumire). Le completez și la celelalte, după fișele producătorilor, sau rămân doar denumirea de origine? | F3 GATE | Alin |
-| G5-3 | Culoarea a 4 vinuri e dedusă [PRESUPUNERE]: Familia Vlădoi Brizza și Recaș Muse Day = alb; Domaine de Belle Mare Le Rivage = rosé (nota din PDF); Domeniul Coroanei Segarcea Demidulce = desert. Corect? | F3 GATE | Alin |
-| G5-4 | Rândurile „De verificat pe etichetă” (33) și „Decizie de stoc / preț” (11) din PDF sunt pe site, cu excepția Pinot Grigio Friuli „2026” (ascuns). Le verifici în panou (Vinuri, coloana „Cod extern” = rândul din inventar) și oprești „Disponibil” la ce nu mai vinzi? | înainte de lansare | Alin |
+| ~~G5-1~~ | ~~Confirmi cele 20 de vinuri recomandate pe Acasă (5 din fiecare tip)? Le schimbi din panou: Vinuri → bifa „Recomandat”~~ — **rezolvat: D-48** | — | — |
+| ~~G5-2~~ | ~~Soiurile: PDF-ul nu le are. Le-am pus doar la 19 vinuri (din poza 7 sau impuse de denumire). Le completez și la celelalte, după fișele producătorilor, sau rămân doar denumirea de origine?~~ — **rezolvat: D-48** | — | — |
+| ~~G5-3~~ | ~~Culoarea a 4 vinuri e dedusă [PRESUPUNERE]: Familia Vlădoi Brizza și Recaș Muse Day = alb; Domaine de Belle Mare Le Rivage = rosé (nota din PDF); Domeniul Coroanei Segarcea Demidulce = desert. Corect?~~ — **rezolvat: D-48** | — | — |
+| ~~G5-4~~ | ~~Rândurile „De verificat pe etichetă” (33) și „Decizie de stoc / preț” (11) din PDF sunt pe site, cu excepția Pinot Grigio Friuli „2026” (ascuns). Le verifici în panou (Vinuri, coloana „Cod extern” = rândul din inventar) și oprești „Disponibil” la ce nu mai vinzi?~~ — **rezolvat: D-48** | — | — |

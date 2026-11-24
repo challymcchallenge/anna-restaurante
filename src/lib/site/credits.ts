@@ -27,6 +27,11 @@ export function pageMediaCredits(site: SiteData): string[] {
     refs.push(pizza?.photo, ...((pizza?.gallery ?? []) as MediaRef[]))
   }
 
+  // F3 pasul 7: fotografiile hotelului și ale camerelor.
+  if (isOn(home, 'hotel')) {
+    refs.push(...((section(home, 'hotel')?.photos ?? []) as MediaRef[]), ...site.roomTypes.map((r) => r.photo))
+  }
+
   const credits = refs
     .map(asMedia)
     .filter((m): m is Media => Boolean(m?.credit))

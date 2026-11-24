@@ -58,6 +58,17 @@ export const UI = {
   bottle: 'sticla',
   glass: 'paharul',
   currency: 'lei',
+  /** Cazare · Hotel ANNA (F3 pasul 7) */
+  roomsTitle: 'Camerele',
+  hotelReviewsTitle: 'Ce spun oaspeții hotelului',
+  priceFrom: 'de la',
+  visitSite: (url: string) => {
+    try {
+      return `Vezi ${new URL(url).hostname.replace(/^www\./, '')}`
+    } catch {
+      return 'Vezi site-ul hotelului'
+    }
+  },
   /** Lista de vinuri (D-46) */
   wineListTitle: 'Lista de vinuri',
   nonVintage: 'NV',
