@@ -65,6 +65,8 @@ const SIZES: Record<Shape | HomeTile, string> = {
   w4: '(min-width: 1280px) 1240px, 100vw',
 }
 
+export const tileSizes = (shape: Shape | HomeTile) => SIZES[shape]
+
 export function GalleryTile({
   item,
   href,

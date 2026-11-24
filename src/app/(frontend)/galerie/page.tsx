@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import React from 'react'
+import { preload } from 'react-dom'
 
 import { PageCover } from '@/components/site/Events'
 import { ChipFilter } from '@/components/site/ChipFilter'
-import { categoryOf, galleryVisual, GalleryTile } from '@/components/site/Gallery'
+import { galleryVisual, GalleryTile, shapeOf, tileSizes } from '@/components/site/Gallery'
 import { GalleryLightbox } from '@/components/site/GalleryLightbox'
 import { pageMediaCredits } from '@/lib/site/credits'
+import { pictureSources } from '@/lib/site/media'
 import { getGallery, getSite } from '@/lib/site/data'
 import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
@@ -32,6 +34,19 @@ export default async function GalleryPage() {
   const site = await sitePage('gallery')
   const s = section(site.home, 'gallery')
   const { items, categories } = await getGallery(site.tenant.id)
+
+  // Prima fotografie e elementul LCP: se preîncarcă din <head>, în formatul ales de browser (AVIF).
+  const first = items.map((i) => galleryVisual(i).image).find(Boolean)
+  if (first) {
+    const src = pictureSources(first, 960)
+    preload(src.src, {
+      as: 'image',
+      fetchPriority: 'high',
+      imageSrcSet: src.avif ?? src.webp ?? undefined,
+      imageSizes: tileSizes(shapeOf(first)),
+      type: src.avif ? 'image/avif' : undefined,
+    })
+  }
 
   // Filtrul pe categorie: o regulă CSS pe categorie (id numeric), fără JavaScript.
   const rules = categories
