@@ -1,0 +1,27 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "design/f2/directia-b-carta.html"
+        ],
+        "createdAt": "2026-11-24T13:56:16.426Z",
+        "reason": "Claude: fals pozitiv; detectorul static compară textul crem al hero-ului cu fundalul paginii (#F5EDE0), nu cu coperta. Măsurat pe randare reală (scripts/f2/contrast-measure.mjs, docs/f2/contrast-b-carta.json): minim 5,67:1 desktop, 6,82:1 telefon"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "design/f2/directia-a-cotto.html",
+          "design/f2/directia-b-carta.html"
+        ],
+        "createdAt": "2026-11-24T13:56:16.435Z",
+        "reason": "Claude: crem derivat din fondul de marmură al logo-ului Trattoria (#F8EAD8 măsurat), angajament de brand în PRODUCT.md"
+      }
+    ]
+  }
+}

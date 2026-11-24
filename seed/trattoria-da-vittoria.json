@@ -598,5 +598,32 @@
         "explanation": "Vă rugăm să ne relatați incidentul mai jos."
       }
     ]
+  },
+  "media": [
+    {
+      "key": "logoTrattoria",
+      "file": "media/trattoria-da-vittoria/logo-trattoria-da-vittoria.png",
+      "kind": "logo",
+      "title": "Logo Trattoria da Vittoria",
+      "alt": "Trattoria da Vittoria"
+    },
+    {
+      "key": "logoAnna",
+      "file": "media/trattoria-da-vittoria/logo-grup-anna.png",
+      "kind": "logo",
+      "title": "Logo Grupul ANNA",
+      "alt": "Grupul ANNA"
+    },
+    {
+      "key": "logoBiztech",
+      "file": "media/trattoria-da-vittoria/logo-biztech-consulting.png",
+      "kind": "logo",
+      "title": "Logo BizTech Consulting (realizator)",
+      "alt": "BizTech Consulting"
+    }
+  ],
+  "settingsMedia": {
+    "logo": "logoTrattoria",
+    "logoGroup": "logoAnna"
   }
 }

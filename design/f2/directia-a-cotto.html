@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Direcția A · Cotto — Trattoria da Vittoria</title>
+<link rel="preload" href="assets/fonts/tenor-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/host-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/f2-base.css">
+<style>
+/* Direcția A · „Cotto”: bucătăria de familie italiană la lumina zilei.
+   Teracota (cotto) ține câmpuri întregi; calcea (var) e fundalul; alama din inelul logo-ului e doar linie și etichetă.
+   Câmpurile de culoare se ating cu muchie dreaptă, fără degradeuri între ele. Rostul de 3 px dintre plăci e semnătura. */
+:root {
+  --c-bg: #F2E8DC;          /* calce */
+  --c-bg-2: #E8DACA;        /* calce umbrită */
+  --c-text: #2B1D17;        /* cerneală */
+  --c-text-2: #5C463B;      /* text secundar */
+  --c-accent: #9A4428;      /* cotto */
+  --c-accent-deep: #7C3420; /* cotto ars */
+  --c-on-accent: #FAF3EA;   /* cremă pe cotto */
+  --c-brass: #E4BF7E;       /* alamă, doar pe cotto ars */
+  --c-grout: #F2E8DC;       /* rost */
+  --c-selection: #9A4428; --c-selection-text: #FAF3EA;
+  --c-focus: #2B1D17; --c-focus-halo: rgba(250, 243, 234, 0.9);
+  --c-shadow: rgba(124, 52, 32, 0.55);
+  --c-btn-bg: #9A4428; --c-btn-text: #FAF3EA;
+  --c-ghost-text: #2B1D17; --c-ghost-border: rgba(43, 29, 23, 0.45);
+  --c-award-border: rgba(250, 243, 234, 0.75); --c-award-text: #FAF3EA;
+  --c-bar-bg: #F2E8DC; --c-bar-line: rgba(43, 29, 23, 0.14);
+  --font-display: 'Tenor Sans', 'Optima', 'Candara', sans-serif;
+  --font-text: 'Host Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --radius-btn: 2px;
+  --grout: 3px;
+}
+
+/* Antet */
+.site-header { position: relative; z-index: 20; background: var(--c-bg); border-bottom: 1px solid rgba(43, 29, 23, 0.12); }
+.header-in { height: var(--header-h); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--s4); }
+.brand { justify-self: center; display: block; width: 48px; height: 48px; }
+.brand img { width: 100%; height: 100%; }
+.nav-toggle { justify-self: start; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-left: -12px; border: 0; background: none; color: var(--c-text); cursor: pointer; }
+.nav-toggle .icon { width: 24px; height: 24px; }
+.nav-main { display: none; }
+.header-right { justify-self: end; display: flex; align-items: center; gap: var(--s4); }
+.lang { font: 600 14px/1 var(--font-text); letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 2px; min-height: 48px; padding: 0 4px; color: var(--c-text); text-decoration: none; }
+.lang .icon { width: 14px; height: 14px; }
+.header-phone, .header-cta { display: none; }
+@media (min-width: 1024px) {
+  .nav-toggle { display: none; }
+  .brand { width: 64px; height: 64px; }
+  .nav-main { display: flex; justify-self: start; gap: var(--s5); }
+  .nav-main a { font: 500 15px/1 var(--font-text); letter-spacing: 0.01em; text-decoration: none; padding: var(--s3) 0; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms var(--ease-out); }
+  .nav-main a:hover { border-bottom-color: currentColor; }
+  .nav-main .icon { width: 14px; height: 14px; }
+  .header-phone { display: inline-flex; align-items: center; gap: var(--s2); font: 500 15px/1 var(--font-text); text-decoration: none; font-variant-numeric: tabular-nums; }
+  .header-phone .icon { width: 16px; height: 16px; color: var(--c-accent); }
+  .header-cta { display: inline-flex; }
+}
+
+/* Hero: video/poster pe toată lățimea; textul stă pe o placă de cotto, nu pe fotografie. */
+.hero { position: relative; isolation: isolate; background: var(--c-accent-deep); }
+.hero-media { position: relative; display: block; height: clamp(220px, 32svh, 420px); overflow: hidden; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.hero .example-tag { top: var(--s4); right: var(--edge); }
+.hero-in { position: relative; }
+.hero-panel {
+  position: relative; margin: -32px calc(-1 * var(--edge)) 0; padding: var(--s5) var(--edge) var(--s5);
+  background: var(--c-accent); color: var(--c-on-accent);
+}
+.hero h1 { font-size: clamp(34px, 10vw, 40px); line-height: 1.04; letter-spacing: -0.01em; max-width: 12ch; }
+.hero-award { margin-top: var(--s4); }
+.hero-sub { margin: var(--s4) 0 0; font-size: 18px; line-height: 1.45; max-width: 34ch; }
+.hero-actions { display: none; }
+.hero-actions .btn-primary { background: var(--c-on-accent); color: var(--c-accent); }
+.hero-actions .btn-ghost { color: var(--c-on-accent); border-color: rgba(250, 243, 234, 0.7); }
+
+/* Cererea de cazare (D-15): pe telefon un buton-placă; pe desktop rândul de plăci. */
+.stay { margin: 0 calc(-1 * var(--edge)); background: var(--c-grout); padding-top: var(--grout); }
+.stay-mobile {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s4); width: 100%;
+  min-height: 72px; padding: var(--s4) var(--edge); border: 0; cursor: pointer; text-align: left;
+  background: var(--c-accent-deep); color: var(--c-on-accent);
+}
+.stay-mobile-title { display: block; font: 400 21px/1.2 var(--font-display); }
+.stay-mobile-note { display: block; margin-top: 2px; font: 400 14px/1.35 var(--font-text); color: var(--c-brass); }
+.stay-mobile .icon { width: 24px; height: 24px; color: var(--c-brass); }
+.stay-row { display: none; }
+
+@media (min-width: 1024px) {
+  .hero-media { height: calc(100svh - var(--header-h)); min-height: 720px; max-height: 960px; }
+  .hero-media img { object-position: 50% 50%; }
+  .hero .example-tag { top: var(--s5); }
+  .hero-in { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; }
+  .hero-in > * { pointer-events: auto; }
+  .hero-panel { margin: 0; width: 600px; padding: var(--s7) var(--s7) var(--s6); }
+  .hero h1 { font-size: 64px; line-height: 1.02; max-width: 11ch; }
+  .hero-award { margin-top: var(--s5); }
+  .hero-sub { font-size: 20px; }
+  .hero-actions { display: flex; gap: var(--s3); margin-top: var(--s6); }
+  .stay { margin: 0 0 var(--s7); padding: var(--grout) 0 0; background: var(--c-grout); }
+  .stay-mobile { display: none; }
+  .stay-row { display: grid; grid-template-columns: 1.25fr 1fr 1fr 1.15fr auto; gap: var(--grout); }
+  .tile { background: var(--c-accent-deep); color: var(--c-on-accent); padding: var(--s4) var(--s5); min-height: 88px; display: flex; flex-direction: column; justify-content: center; }
+  .tile-title { font: 400 22px/1.15 var(--font-display); }
+  .tile-note { margin-top: 4px; font: 400 13px/1.35 var(--font-text); color: var(--c-brass); }
+  .field { border: 0; text-align: left; cursor: pointer; font: inherit; transition: background-color 160ms var(--ease-out); }
+  .field:hover { background: #6E2D1B; }
+  .field-label { display: flex; align-items: center; gap: var(--s2); font: 600 12px/1 var(--font-text); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-brass); }
+  .field-label .icon { width: 16px; height: 16px; }
+  .field-value { margin-top: var(--s2); font: 400 18px/1.2 var(--font-text); }
+  .tile-cta { padding: var(--s4); }
+  .tile-cta .btn { height: 100%; min-height: 56px; background: var(--c-on-accent); color: var(--c-accent-deep); }
+}
+
+/* Secțiunea următoare: Bucătăria (se vede ritmul tipografic și plăcile). */
+.kitchen { padding: var(--s8) 0 var(--s8); }
+.kitchen h2 { font-size: clamp(30px, 8vw, 40px); line-height: 1.1; letter-spacing: -0.01em; max-width: 16ch; }
+.kitchen-intro { margin: var(--s4) 0 0; color: var(--c-text-2); max-width: 46ch; }
+.cards { display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: var(--grout); margin: var(--s6) calc(-1 * var(--edge)) 0; padding: 0 var(--edge); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--c-accent) var(--c-bg-2); }
+.card { scroll-snap-align: start; background: var(--c-accent); color: var(--c-on-accent); text-decoration: none; display: block; transition: transform 200ms var(--ease-out); }
+.card:hover { transform: translateY(-2px); }
+.card-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms var(--ease-out); }
+.card:hover .card-media img { transform: scale(1.03); }
+.card .example-tag { left: var(--s3); bottom: var(--s3); }
+.card-body { padding: var(--s4) var(--s4) var(--s5); }
+.card-name { font: 400 22px/1.15 var(--font-display); }
+.card-text { margin-top: 4px; font-size: 15px; color: var(--c-on-accent); }
+.kitchen-more { margin-top: var(--s6); }
+@media (min-width: 1024px) {
+  .kitchen { padding: var(--s9) 0; }
+  .kitchen-head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: end; }
+  .kitchen h2 { font-size: 52px; }
+  .kitchen-intro { margin: 0; justify-self: end; }
+  .cards { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); margin: var(--s7) 0 0; padding: 0; overflow: visible; }
+}
+
+/* Bara de jos pe telefon */
+.phone-bar .btn-primary { background: var(--c-accent); color: var(--c-on-accent); }
+.phone-bar .btn-ghost { color: var(--c-text); border-color: rgba(43, 29, 23, 0.35); }
+
+/* Momentul de mișcare: plăcile „se așază” una după alta, o singură dată. */
+@media (prefers-reduced-motion: no-preference) {
+  .lay { animation: lay 620ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + 120ms); }
+  @keyframes lay { from { clip-path: inset(100% 0 0 0); transform: translateY(8px); } to { clip-path: inset(0 0 0 0); transform: none; } }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap header-in">
+    <button class="nav-toggle" type="button" aria-label="Deschide navigarea" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <nav class="nav-main" aria-label="Navigare principală">
+      <a href="#bucataria">Restaurant</a>
+      <a href="#vinuri">Vinuri</a>
+      <a href="#evenimente">Evenimente <svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg></a>
+      <a href="#cazare">Cazare</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="brand" href="#"><img src="assets/logo/logo-trattoria-256.webp" width="256" height="256" alt="Trattoria da Vittoria, pagina de start"></a>
+    <div class="header-right">
+      <a class="header-phone" href="tel:+40356630238"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>+40 356 630 238</a>
+      <a class="lang" href="#" aria-label="Limba: română. Schimbă limba">RO <svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg></a>
+      <button class="btn btn-primary header-cta" type="button" data-ialoc="4385" aria-haspopup="dialog">Rezervă o masă</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <picture class="hero-media">
+      <source media="(max-width: 1023px)" srcset="assets/foto/photo-f50109961-780x975.webp" width="780" height="975">
+      <img src="assets/foto/photo-f50109961-1920.webp" width="1920" height="1440" alt="Cuiburi de paste proaspete, tagliatelle și papardelle, pe masa de lucru" fetchpriority="high" decoding="async">
+    </picture>
+    <span class="example-tag"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Exemplu · de înlocuit</span>
+    <div class="wrap hero-in">
+      <div class="hero-panel lay" style="--i:0">
+        <h1 id="hero-title"><span lang="en">The Best Restaurant in Town</span></h1>
+        <div class="award hero-award" role="img" aria-label="Spațiu rezervat pentru insigna Wine Spectator Restaurant Award; nivelul și anul se completează la confirmare">
+          <span class="award-seal"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span>
+          <span class="award-text"><strong>Wine Spectator Restaurant Award</strong>nivel și an la confirmare</span>
+        </div>
+        <p class="hero-sub">Vă așteptăm cu drag și vă servim cu plăcere!</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" type="button" data-ialoc="4385" aria-haspopup="dialog">Rezervă o masă</button>
+          <a class="btn btn-ghost" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener">Meniu <span class="sr-only">(se deschide în filă nouă)</span></a>
+        </div>
+      </div>
+      <form class="stay lay" style="--i:1" id="cazare" aria-label="Cerere de cazare la Hotel ANNA" onsubmit="return false">
+        <button class="stay-mobile" type="button">
+          <span><span class="stay-mobile-title">Cazare la Hotel ANNA</span><span class="stay-mobile-note">Cerere de ofertă, confirmată de hotel</span></span>
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        </button>
+        <div class="stay-row">
+          <div class="tile"><span class="tile-title">Cazare la Hotel ANNA</span><span class="tile-note">Este o cerere de ofertă; recepția hotelului confirmă disponibilitatea.</span></div>
+          <button class="tile field" type="button"><span class="field-label"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Sosire</span><span class="field-value">Alege data</span></button>
+          <button class="tile field" type="button"><span class="field-label"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Plecare</span><span class="field-value">Alege data</span></button>
+          <button class="tile field" type="button"><span class="field-label"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Oaspeți</span><span class="field-value">2 adulți · 1 cameră</span></button>
+          <div class="tile tile-cta"><button class="btn" type="submit">Cere ofertă de cazare</button></div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="kitchen" id="bucataria" aria-labelledby="kitchen-title">
+    <div class="wrap">
+      <div class="kitchen-head">
+        <h2 id="kitchen-title">Bucătăria. Descoperă meniul, fel cu fel.</h2>
+        <p class="kitchen-intro">Opt capitole din meniu, de la antipasti la deserturi. Alege unul și îl deschizi direct în meniul digital.</p>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener">
+          <div class="card-media"><img src="assets/foto/photo-f79977114-card.webp" width="800" height="1000" alt="Farfurie cu paste scurte și legume" loading="lazy" decoding="async"><span class="example-tag"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Exemplu · de înlocuit</span></div>
+          <div class="card-body"><div class="card-name">Pasta e Risotto</div><div class="card-text">Inima trattoriei</div></div>
+        </a>
+        <a class="card" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener">
+          <div class="card-media"><img src="assets/foto/photo-f23064597-card.webp" width="800" height="1000" alt="Pizza scoasă cu lopata din cuptorul cu lemne" loading="lazy" decoding="async"><span class="example-tag"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Exemplu · de înlocuit</span></div>
+          <div class="card-body"><div class="card-name">Pizza</div><div class="card-text">Clasice și rețete ale casei</div></div>
+        </a>
+        <a class="card" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener">
+          <div class="card-media"><img src="assets/foto/photo-f154799608-card.webp" width="800" height="1000" alt="Pizza margherita cu busuioc proaspăt" loading="lazy" decoding="async"><span class="example-tag"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Exemplu · de înlocuit</span></div>
+          <div class="card-body"><div class="card-name">Recomandări din partea casei</div><div class="card-text">Alese de bucătar</div></div>
+        </a>
+      </div>
+      <a class="btn btn-ghost kitchen-more" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Vezi meniul complet</a>
+    </div>
+  </section>
+</main>
+
+<div class="wrap credits">
+  Machetă F2, direcția A · Fotografii provizorii, Wikimedia Commons: David Adam Kess (CC BY-SA 4.0), Jared Tarbell (CC BY 2.0) și alți autori; lista completă în <code>assets/foto/credits.json</code>.
+</div>
+
+<nav class="phone-bar" aria-label="Acțiuni rapide">
+  <button class="btn btn-primary" type="button" data-ialoc="4385" aria-haspopup="dialog">Rezervă o masă</button>
+  <a class="btn btn-ghost" href="https://www.meniudigital.ro/trattoriadavittoria" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Meniu</a>
+  <a class="btn btn-ghost" href="tel:+40356630238"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Sună</a>
+</nav>
+<dialog class="ialoc-demo" id="ialoc-demo" aria-labelledby="ialoc-demo-title">
+  <p id="ialoc-demo-title"><strong>Aici se deschide fereastra de rezervare ialoc</strong></p>
+  <p>În site: <code>ialocEmbedWidget.show()</code>, restaurantul 4385 (D-03). Dacă fereastra nu răspunde, butonul devine „Sună pentru rezervare”, +40 356 630 238.</p>
+  <form method="dialog"><button class="btn btn-primary" type="submit">Închide</button></form>
+</dialog>
+<script>
+  document.querySelectorAll('[data-ialoc]').forEach(function (b) { b.addEventListener('click', function () { document.getElementById('ialoc-demo').showModal(); }); });
+</script>
+</body>
+</html>

@@ -14,11 +14,29 @@ import type { CollectionSlug, Payload, PayloadRequest } from 'payload'
  * Restaurantele fără fișier nu primesc nimic.
  */
 
+/**
+ * Fișiere de brand pentru Biblioteca media (F2): logo-urile primite de la Alin.
+ * `file` e relativ la folderul `seed/`. Fișierul se încarcă o singură dată pe restaurant: dacă există
+ * deja un element media cu același „Titlu intern”, se refolosește; dacă a fost încărcat și apoi
+ * șters intenționat din panou (jurnalul `media:<key>`), nu se mai pune la loc.
+ */
+type SeedMedia = {
+  key: string
+  file: string
+  kind: 'logo' | 'photo' | 'badge'
+  title: string
+  alt?: string
+  credit?: string
+}
+
 type SeedFile = {
   tenantSlug: string
   settings?: Record<string, unknown>
   homePage?: Record<string, unknown>
   collections?: Partial<Record<CollectionSlug, Record<string, unknown>[]>>
+  media?: SeedMedia[]
+  /** Câmp din Setări restaurant → `key` din `media`. Se completează doar câmpurile goale. */
+  settingsMedia?: Record<string, string>
 }
 
 /** Text simplu → document Lexical (paragrafe separate prin rând gol). */
@@ -128,6 +146,55 @@ export async function seedStarterContent({
     if (seed.homePage) await applyOnce('home-page', [seed.homePage])
     for (const [collection, items] of Object.entries(seed.collections ?? {}) as [CollectionSlug, Record<string, unknown>[]][]) {
       await applyOnce(collection, items)
+    }
+
+    if (seed.media?.length) {
+      const ids: Record<string, number | string> = {}
+      for (const item of seed.media) {
+        const { docs: found } = await payload.find({
+          collection: 'media',
+          where: { and: [{ tenant: { equals: tenant.id } }, { title: { equals: item.title } }] },
+          limit: 1,
+          depth: 0,
+          req,
+        })
+        if (found[0]) {
+          ids[item.key] = found[0].id
+          continue
+        }
+        if (log[`media:${item.key}`]) continue
+        const doc = await payload.create({
+          collection: 'media',
+          data: { kind: item.kind, title: item.title, alt: item.alt, credit: item.credit, ...base } as any,
+          filePath: path.join(dir, item.file),
+          req,
+          context: ctx,
+        })
+        ids[item.key] = doc.id
+        created.media = (created.media ?? 0) + 1
+        log[`media:${item.key}`] = now
+      }
+      if (seed.settingsMedia) {
+        const { docs: settingsDocs } = await payload.find({
+          collection: 'settings',
+          where: { tenant: { equals: tenant.id } },
+          limit: 1,
+          depth: 0,
+          req,
+        })
+        const current = settingsDocs[0] as Record<string, unknown> | undefined
+        if (current) {
+          const patch: Record<string, unknown> = {}
+          for (const [field, key] of Object.entries(seed.settingsMedia)) {
+            if (!current[field] && ids[key] !== undefined) patch[field] = ids[key]
+          }
+          if (Object.keys(patch).length) {
+            await payload.update({ collection: 'settings', id: current.id as number, data: patch as any, req, context: ctx })
+            created.settingsMedia = Object.keys(patch).length
+            log[`settingsMedia:${Object.keys(patch).sort().join(',')}`] = now
+          }
+        }
+      }
     }
 
     if (Object.keys(log).length === alreadyLogged) {
