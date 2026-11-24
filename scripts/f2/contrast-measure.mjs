@@ -60,6 +60,9 @@ for (const [device, viewport] of [
   const page = await ctx.newPage()
   await page.goto(/^https?:\/\//.test(file) ? file : 'file://' + path.resolve(file))
   await page.evaluate(() => document.fonts.ready)
+  // F3: secțiunile cu content-visibility: auto își schimbă înălțimea când apar; pentru o măsurare
+  // stabilă (rândul și fundalul lui în același loc) le desenăm pe toate de la început.
+  await page.addStyleTag({ content: '*{content-visibility:visible!important}' })
   await page.waitForTimeout(1800)
 
   const docH = await page.evaluate(() => document.documentElement.scrollHeight)
@@ -78,6 +81,8 @@ for (const [device, viewport] of [
         if (!t) continue
         const el = n.parentElement
         if (!el || el.closest('svg, script, style, .sr-only, [aria-hidden="true"]')) continue
+        // textul dintr-un <details> închis nu se vede (în afară de <summary>)
+        if (el.closest('details:not([open])') && !el.closest('summary')) continue
         const cs = getComputedStyle(el)
         if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) === 0) continue
         const r = document.createRange()
@@ -92,8 +97,12 @@ for (const [device, viewport] of [
         for (const q of rects) {
           if (q.top < 0 || q.bottom > innerHeight || q.left < 0 || q.right > innerWidth) continue
           // textul acoperit de alt element (de exemplu bara fixă de jos) nu se vede: nu se măsoară
-          const hit = document.elementFromPoint(q.left + q.width / 2, q.top + q.height / 2)
-          if (!hit || !(hit === el || el.contains(hit) || hit.contains(el))) continue
+          // F3: verificat sus, la mijloc și jos (zona eșantionată), ca un rând pe jumătate sub bara fixă de jos să nu se măsoare
+          const own = (y) => {
+            const hit = document.elementFromPoint(q.left + q.width / 2, y)
+            return Boolean(hit && (hit === el || el.contains(hit) || hit.contains(el)))
+          }
+          if (!own(q.top + q.height * 0.18) || !own(q.top + q.height / 2) || !own(q.top + q.height * 0.82)) continue
           out.push({
             key: path.join('>') + '|' + t.slice(0, 40) + '|' + idx,
             text: t.slice(0, 60),
