@@ -1,20 +1,10 @@
-import { test, expect, Page } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
-test.describe('Frontend', () => {
-  let page: Page
-
-  test.beforeAll(async ({ browser }, testInfo) => {
-    const context = await browser.newContext()
-    page = await context.newPage()
-  })
-
-  test('can go on homepage', async ({ page }) => {
-    await page.goto('http://localhost:3000')
-
-    await expect(page).toHaveTitle(/Payload Blank Template/)
-
-    const heading = page.locator('h1').first()
-
-    await expect(heading).toHaveText('Welcome to your new project.')
+test.describe('Site public (în construcție)', () => {
+  test('pagina principală răspunde și nu se indexează (ADR-012)', async ({ page }) => {
+    const response = await page.goto('http://localhost:3000')
+    expect(response?.status()).toBe(200)
+    expect(response?.headers()['x-robots-tag']).toContain('noindex')
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/)
   })
 })

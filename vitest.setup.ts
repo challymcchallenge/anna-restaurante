@@ -1,4 +1,2 @@
-// Any setup scripts you might need go here
-
-// Load .env files
-import 'dotenv/config'
+// Testele rulează doar pe o bază locală (vezi tests/helpers/env.ts).
+import './tests/helpers/env'
