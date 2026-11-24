@@ -29,11 +29,14 @@ export function BookButton({
   ialocId,
   tel,
   className = 'btn btn-primary',
+  date,
 }: {
   label: string
   ialocId: string | null | undefined
   tel: string | null
   className?: string
+  /** AAAA-LL-ZZ: fereastra ialoc se deschide cu data preselectată (G4-1, D-47). */
+  date?: string | null
 }) {
   const call = (cls: string) =>
     tel ? (
@@ -46,7 +49,7 @@ export function BookButton({
   const fallback = call(`${className} ialoc-fallback`)
   return (
     <>
-      <button className={className} type="button" data-ialoc="" aria-haspopup="dialog">
+      <button className={className} type="button" data-ialoc="" data-ialoc-date={date || undefined} aria-haspopup="dialog">
         {label}
       </button>
       {fallback}

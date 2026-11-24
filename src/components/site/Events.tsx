@@ -170,6 +170,7 @@ export function EventCard({ event, site, sizes }: { event: Event; site: SiteData
           ialocId={site.settings?.ialocId}
           tel={telHref(site.settings?.phoneReservations)}
           className="btn btn-ghost"
+          date={event.bookWithDate !== false ? p.ymd : null}
         />
       </div>
     </article>

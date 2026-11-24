@@ -59,6 +59,11 @@ export function amount(value: number | null | undefined, locale = 'ro-RO'): stri
   return price(value, locale)?.replace(` ${UI.currency}`, '') ?? null
 }
 
+/** Momentul randării paginii (ms), pentru timpul minim de completare al formularelor (anti-spam). */
+export function renderedAt(): number {
+  return new Date().getTime()
+}
+
 /** Data de azi (AAAA-LL-ZZ) în ora României, pentru câmpurile de dată. */
 export function todayIso(): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Bucharest' }).format(new Date())

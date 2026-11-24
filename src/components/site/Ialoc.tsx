@@ -87,8 +87,24 @@ export function IalocLoader({ venueId, locale }: { venueId: string; locale: stri
         },
       )
     }
+    // G4-1 (D-47): ialoc citește data din adresa paginii (`?defaultDate=`) chiar în momentul clicului
+    // și o păstrează pentru clicurile următoare. Înaintea lui (faza de captură), punem data butonului
+    // (sau nimic, pentru „Rezervă o masă”) și refacem adresa imediat după.
+    const onCapture = (event: MouseEvent) => {
+      const target = (event.target as Element | null)?.closest<HTMLElement>(SELECTOR)
+      if (!target) return
+      const original = window.location.href
+      const url = new URL(original)
+      url.searchParams.set('defaultDate', target.dataset.ialocDate ?? '')
+      window.history.replaceState(window.history.state, '', url)
+      window.setTimeout(() => window.history.replaceState(window.history.state, '', original), 0)
+    }
+    document.addEventListener('click', onCapture, true)
     document.addEventListener('click', onClick)
-    return () => document.removeEventListener('click', onClick)
+    return () => {
+      document.removeEventListener('click', onCapture, true)
+      document.removeEventListener('click', onClick)
+    }
   }, [venueId, locale])
   return null
 }

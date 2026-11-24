@@ -50,12 +50,13 @@ describe('F3 · site public', () => {
       reviews: { enabled: true, order: 3, menuLabel: 'Recenzii' },
       contact: { enabled: true, order: 0, menuLabel: 'Contact' },
     })
-    expect(orderedSections(h).map((s) => s.key)).toEqual(['hero', 'stay', 'reviews', 'kitchen'])
+    expect(orderedSections(h).map((s) => s.key)).toEqual(['contact', 'hero', 'stay', 'reviews', 'kitchen'])
     const items = navItems(h)
-    // Acasă nu apare (logo-ul duce acolo); Vinuri e oprită; Contact nu e încă construit (pasul 9).
-    expect(items.map((i) => i.label)).toEqual(['Cazare', 'Recenzii', 'Bucătăria'])
-    expect(items.map((i) => i.href)).toEqual(['/#cazare', '/#recenzii', '/#bucataria'])
-    expect(items.every((i) => i.tier === 1)).toBe(true)
+    // Acasă nu apare (logo-ul duce acolo); Vinuri e oprită; ordinea vine din panou (Contact are 0).
+    expect(items.map((i) => i.label)).toEqual(['Contact', 'Cazare', 'Recenzii', 'Bucătăria'])
+    expect(items.map((i) => i.href)).toEqual(['/#contact', '/#cazare', '/#recenzii', '/#bucataria'])
+    // 4 etichete nu încap la 1024 px (cu „Mai mult”), deci ultimele două apar de la 1280 px.
+    expect(items.map((i) => i.tier)).toEqual([1, 1, 2, 2])
   })
 
   it('Navigarea: ce nu încape în antet trece în „Mai mult”, în ordine', () => {

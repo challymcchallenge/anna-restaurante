@@ -49,7 +49,7 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 | ~~19~~ | ~~Cele 9 motive de sesizare~~ — **gata** (D-39) | Motive de sesizare | — | D-39 |
 | ~~20~~ | ~~Adresele site-urilor grupului~~ — **gata** (D-40, 11 linkuri) | Linkuri grup | — | D-40 |
 | ~~21~~ | ~~Linkul paginii de Facebook~~ — **gata** (D-40) | Setări → Rețele sociale | — | D-40 |
-| 22 | Poziția restaurantului pe hartă (latitudine, longitudine) | Setări → Contact și program → Adresă | F3 | content-model R2 |
+| 22 | Poziția restaurantului pe hartă (latitudine, longitudine). **F3 pasul 9: fără ea, „Vezi pe hartă” caută după adresă în Google Maps; cu ea, duce exact la punct** | Setări → Contact și program → Adresă | F3 | content-model R2 |
 | 23 | Răspunsurile la cele 7 întrebări frecvente (sau altele). **F3: cele 3 din grupul Evenimente private apar pe `/evenimente-private`, cu „Exemplu · de înlocuit”** | Întrebări frecvente | F3 | Q-24 |
 | 24 | Descrierile saloanelor și a camerelor; confirmarea capacităților 25 / 40 și a amplasării (etaj / mansardă) | Saloane, Tipuri de camere | F3 | A-08 |
 | 25 | Cursurile de pizza: vârstă, durată, preț, locuri, cum se confirmă înscrierea. **F3: rândurile apar pe Acasă și pe pagina cursului imediat ce completezi câmpurile** | Pagina Acasă → Cursuri de pizza | F3 | Q-11, OQ #6 |

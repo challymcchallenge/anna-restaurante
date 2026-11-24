@@ -20,6 +20,8 @@
 
   /* Derivate din temă (aceleași reguli pentru orice restaurant). */
   --line-paper: color-mix(in srgb, var(--c-text) 22%, transparent);
+  /* Culoare semantică pentru erorile din formulare (nu ține de restaurant); peste 6:1 pe hârtie. */
+  --c-error: #9b2c1f;
   --line-paper-strong: color-mix(in srgb, var(--c-text) 45%, transparent);
   --line-cover: color-mix(in srgb, var(--c-accent) 35%, transparent);
   --line-cover-strong: color-mix(in srgb, var(--c-accent) 60%, transparent);
@@ -975,3 +977,86 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .lightbox[open] .lightbox-media > * { animation: lightbox-in 280ms var(--ease-out); }
   @keyframes lightbox-in { from { opacity: 0; transform: scale(0.985); } }
 }
+
+/* ---------- Contact și sesizări (F3 pasul 9, S-06, S-06b, S-06c, S-07) ---------- */
+.contact-page { padding-top: var(--s6); }
+.contact-grid { display: grid; gap: var(--s8); }
+.contact-main { min-width: 0; }
+.contact-page h2.contact-aside-title { font-size: 28px; max-width: none; }
+.contact-list { list-style: none; margin: var(--s4) 0 0; padding: 0; display: grid; gap: var(--s4); }
+.contact-list li { display: flex; align-items: flex-start; gap: var(--s3); font-size: 16px; line-height: 1.5; }
+.contact-list .icon { flex: none; width: 18px; height: 18px; margin-top: 3px; color: var(--c-accent-ink); }
+.contact-list a[href^="tel:"] { font-weight: 600; text-decoration: none; font-variant-numeric: tabular-nums; }
+.contact-list a[href^="tel:"]:hover { text-decoration: underline; }
+.contact-note { display: block; font: 600 12px/1.3 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent-ink); }
+.contact-complaint { margin-top: var(--s6); color: var(--c-text-2); }
+.contact-home-grid { display: grid; gap: var(--s7); }
+.contact-subjects { list-style: none; margin: var(--s6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s3); }
+.btn-ghost-paper { background: transparent; color: var(--c-text); border-color: var(--line-paper-strong); }
+.btn-ghost-paper:hover { border-color: var(--c-accent-2); color: var(--c-accent-2); }
+@media (min-width: 1024px) {
+  .contact-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: start; }
+  .contact-aside { position: sticky; top: 104px; }
+  .contact-home-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s8); align-items: start; }
+}
+
+/* Formularul */
+.cf { display: grid; gap: var(--s5); max-width: 680px; }
+.cf-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.cf-subjects { min-width: 0; margin: 0; padding: 0; border: 0; }
+.cf-subjects legend { margin-bottom: var(--s3); padding: 0; font: 400 26px/1.2 var(--font-display); }
+.cf-subjects .chip-filter { justify-content: flex-start; margin: 0; }
+.chip--action :is(button, a) {
+  display: inline-flex; align-items: center; gap: var(--s1); min-height: 44px; padding: 0 var(--s4);
+  border: 1px solid var(--line-paper-strong); border-radius: var(--radius-btn); background: transparent;
+  font: 600 15px/1 var(--font-text); color: var(--c-text); text-decoration: none; cursor: pointer;
+}
+.chip--action :is(button, a):hover { border-color: var(--c-text); }
+.chip--action .icon { width: 16px; height: 16px; }
+.cf-group { display: none; gap: var(--s4); }
+.cf-group--always,
+.cf:has(input[name="subiect"][value="eveniment-privat"]:checked) .cf-group[data-subject="eveniment-privat"],
+.cf:has(input[name="subiect"][value="curs-pizza"]:checked) .cf-group[data-subject="curs-pizza"],
+.cf:has(input[name="subiect"][value="cazare"]:checked) .cf-group[data-subject="cazare"],
+.cf:has(input[name="subiect"][value="intrebare"]:checked) .cf-group[data-subject="intrebare"] { display: grid; }
+.cf-row { display: grid; gap: var(--s4); }
+@media (min-width: 640px) { .cf-row { grid-template-columns: 1fr 1fr; } }
+.cf-person { display: grid; gap: var(--s4); padding-top: var(--s5); border-top: 1px solid var(--line-paper); }
+.cf-field { display: grid; gap: var(--s1); min-width: 0; }
+.cf-field > label, .cf-reasons legend { font-size: 15px; font-weight: 600; }
+.cf :is(input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="date"], select, textarea) {
+  width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line-paper-strong); border-radius: var(--radius-box);
+  background: color-mix(in srgb, var(--c-bg), #ffffff 55%); color: var(--c-text); font: 400 16px/1.4 var(--font-text);
+}
+.cf textarea { min-height: 120px; resize: vertical; }
+.cf :is(input, select, textarea):focus-visible { outline: 2px solid var(--c-accent-2); outline-offset: 2px; border-color: var(--c-accent-2); }
+.cf-hint { font-size: 14px; color: var(--c-text-2); }
+.cf-note { font-size: 15px; line-height: 1.5; color: var(--c-text-2); }
+.cf-field--error :is(input, select, textarea) { border: 2px solid var(--c-error); }
+.cf-error { display: flex; align-items: flex-start; gap: var(--s2); font-size: 14px; font-weight: 600; color: var(--c-error); }
+.cf-error-mark {
+  display: inline-grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--c-error); color: var(--c-bg); font: 700 13px/1 var(--font-text);
+}
+.cf-summary { display: flex; align-items: center; gap: var(--s3); padding: var(--s4); border: 2px solid var(--c-error); border-radius: var(--radius-box); font-weight: 600; color: var(--c-error); }
+.cf-summary:focus-visible { outline: 2px solid var(--c-error); outline-offset: 3px; }
+.cf-consent { display: grid; grid-template-columns: auto 1fr; gap: var(--s2) var(--s3); align-items: start; }
+.cf-consent input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--c-accent-2); }
+.cf-consent .cf-error { grid-column: 1 / -1; }
+.cf-reasons { display: grid; gap: var(--s2); min-width: 0; margin: 0; padding: 0; border: 0; }
+.cf-reasons legend { margin-bottom: var(--s2); padding: 0; }
+.cf-reason {
+  display: grid; grid-template-columns: auto 1fr; gap: var(--s3); align-items: start; padding: var(--s3) var(--s4);
+  border: 1px solid var(--line-paper); border-radius: var(--radius-box); cursor: pointer;
+}
+.cf-reason:has(input:checked) { border-color: var(--c-accent-2); background: color-mix(in srgb, var(--c-accent-2) 6%, transparent); }
+.cf-reason input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--c-accent-2); }
+.cf-reason b { display: block; font-weight: 600; }
+.cf-reason small { display: block; margin-top: 2px; font-size: 14px; color: var(--c-text-2); }
+.cf-submit { justify-self: start; }
+.cf-done { display: grid; justify-items: start; gap: var(--s3); padding: var(--s6); border: 1px solid var(--line-paper-strong); border-radius: var(--radius-box); }
+.cf-done:focus-visible { outline: 2px solid var(--c-accent-2); outline-offset: 3px; }
+.cf-done-title { display: flex; align-items: center; gap: var(--s3); font: 400 32px/1.15 var(--font-display); }
+.cf-done-title .icon { width: 28px; height: 28px; color: var(--c-accent-2); }
+.cf-done-summary { font-weight: 600; }
+.cf-done .btn { margin-top: var(--s3); }

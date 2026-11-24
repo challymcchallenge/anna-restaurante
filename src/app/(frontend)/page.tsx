@@ -2,6 +2,7 @@ import { headers } from 'next/headers'
 import React from 'react'
 
 import { Parties, Pizza, PrivateEvents } from '@/components/site/Events'
+import { ContactSection } from '@/components/site/ContactSection'
 import { GallerySection } from '@/components/site/Gallery'
 import { Hero } from '@/components/site/Hero'
 import { Hotel } from '@/components/site/Hotel'
@@ -39,6 +40,8 @@ export default async function HomePage() {
             return <Hotel key={s.key} site={site} id={s.id} />
           case 'gallery':
             return <GallerySection key={s.key} site={site} id={s.id} />
+          case 'contact':
+            return <ContactSection key={s.key} site={site} id={s.id} />
           // „stay” (cererea de cazare) stă în hero, la baza copertei.
           default:
             return null

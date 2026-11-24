@@ -19,7 +19,7 @@ export const SECTIONS = [
   { key: 'pizza', id: 'cursuri-pizza', built: true },
   { key: 'hotel', id: 'hotel', built: true },
   { key: 'gallery', id: 'galerie', built: true },
-  { key: 'contact', id: 'contact', built: false },
+  { key: 'contact', id: 'contact', built: true },
 ] as const
 
 export type SectionKey = (typeof SECTIONS)[number]['key']
