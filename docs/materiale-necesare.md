@@ -11,9 +11,9 @@ Contorul din Tabloul de bord arată câte elemente provizorii au rămas. La lans
 
 | # | Material | Format | Unde în panou | Până la | Sursa cerinței |
 |---|---|---|---|---|---|
-| ~~1~~ | ~~Logo Trattoria, varianta principală~~ — **primit (F2)**: PNG transparent 1024 × 1024, intră în Biblioteca media și în Logo principal la următorul build (`seed/media/trattoria-da-vittoria/`). Un SVG ar fi și mai clar la dimensiuni mici, dacă există | — | Setări restaurant → Identitate → Logo principal | — | OQ #1 |
+| ~~1~~ | ~~Logo Trattoria, varianta principală~~ — **primit (F2)**: PNG transparent 1024 × 1024, în Biblioteca media și în Logo principal din 24.11.2026 (deploy `dpl_9YX6qkL7k2aDqxo1MzorMUpiiJKB`) (`seed/media/trattoria-da-vittoria/`). Un SVG ar fi și mai clar la dimensiuni mici, dacă există | — | Setări restaurant → Identitate → Logo principal | — | OQ #1 |
 | ~~2~~ | ~~Logo Trattoria pe fundal închis~~ — **nu mai e necesar (F2)**: medalionul se vede bine și pe fundal închis | — | … → Logo pe fundal închis | — | R1 (opțional) |
-| ~~3~~ | ~~Logo Grupul ANNA~~ — **primit (F2)**: PNG transparent, intră în Logo grup la următorul build | — | … → Logo grup | — | R1 |
+| ~~3~~ | ~~Logo Grupul ANNA~~ — **primit (F2)**: PNG transparent, în Logo grup din 24.11.2026 | — | … → Logo grup | — | R1 |
 | 4 | Pictograma de filă (favicon). Medalionul nu se citește la 32 px; propunere F2: un „V” din script-ul logo-ului, pe fond crem (îl pot desena eu, G2-4) | SVG sau PNG pătrat, minimum 512 px | … → Pictogramă de filă | F3 | R1 |
 | 5 | Culorile și fonturile: **propuse în F2** (două direcții, `docs/2026_11_24_Trattoria_GATE2.md`); se închid la alegerea ta (G2-1). Dacă există totuși un ghid de brand, trimite-l | PDF sau listă de coduri #RRGGBB | — | GATE 2 | OQ #1, Q-17 |
 | 6 | Imaginea de distribuire pe rețele | 1200 × 630 px | … → Imagine de distribuire implicită | F3 | R1, SHARE |

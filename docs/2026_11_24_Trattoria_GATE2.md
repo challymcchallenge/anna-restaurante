@@ -125,7 +125,7 @@ Conflicte, rezolvate după `CLAUDE.md`:
 | `.../logo-grup-anna.png` (1009 × 1008) | „Logo Grupul ANNA” | Logo grup (footer) |
 | `.../logo-biztech-consulting.png` (1024 × 1024) | „Logo BizTech Consulting (realizator)” | — (pe site, creditul rămâne text, ADR-013) |
 
-Se încarcă la următorul build de producție, prin conținutul de pornire. Un logo șters intenționat din panou nu mai e pus la loc. Setările se completează doar dacă sunt goale. Probat pe o bază locală: 16/16 teste de integrare, dintre care 2 noi.
+**Aplicat pe producție (24.11.2026, 14:08 UTC):** deploy `dpl_9YX6qkL7k2aDqxo1MzorMUpiiJKB` READY în 41 s. Conținutul de pornire a raportat `{"media":3,"settingsMedia":2}`: 3 logo-uri create (id 3, 4, 5, restaurantul 1), fiecare cu 10 variante AVIF/WebP, iar Logo principal și Logo grup au fost completate. URL-urile publice Supabase răspund 200 (1.005.590, 600.777 și 687.204 octeți). Un logo șters intenționat din panou nu mai e pus la loc. Setările se completează doar dacă sunt goale. Probat pe o bază locală: 16/16 teste de integrare, dintre care 2 noi.
 
 ## 8. Excepții ale detectorului Impeccable (în `.impeccable/config.json`)
 
