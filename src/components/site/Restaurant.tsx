@@ -10,74 +10,78 @@ import { UI } from '@/lib/site/strings'
 import { AwardBadge, awardsFor, ExampleTag, ExternalLink } from './Bits'
 import { Icon } from './Icons'
 import { Picture } from './Picture'
+import { SliderArrows } from './SliderArrows'
 
 /**
  * Secțiunea Restaurant (PLAN F3 pasul 3, content-model 4.3–4.5): Bucătăria, Vinuri, Ce spun oaspeții.
  * Tot conținutul vine din panou; conținutul provizoriu poartă eticheta „Exemplu · de înlocuit”.
  */
 
-/* ---------- Bucătăria: o pagină de meniu ---------- */
+/* ---------- Bucătăria: sliderul de categorii (G3-1, D-44) ---------- */
 
 export function Kitchen({ site, id }: { site: SiteData; id: string }) {
   const k = section(site.home, 'kitchen')
   const menuUrl = site.settings?.digitalMenuUrl
   const cats = site.dishCategories
-  const withPhoto = cats
-    .map((c, i) => ({ c, i, photo: asMedia(c.photo) }))
-    .filter((x) => x.photo)
   const anyPlaceholder = Boolean(k?.placeholder) || cats.some((c) => c.placeholder)
   const titleId = `${id}-titlu`
+  const trackId = `${id}-categorii`
 
   return (
     <section className="kitchen paper-section" id={id} aria-labelledby={titleId}>
-      <div className={`wrap kitchen-grid${withPhoto.length ? '' : ' kitchen-grid--text'}`}>
-        <div className="kitchen-head">
+      <div className="wrap cat-head">
+        <div className="cat-head-text">
           <h2 id={titleId}>{k?.title}</h2>
           {k?.intro && <p className="section-intro">{k.intro}</p>}
-          {anyPlaceholder && !withPhoto.length && <ExampleTag className="section-tag" />}
+          {anyPlaceholder && <ExampleTag className="section-tag" />}
         </div>
-
-        {withPhoto.length > 0 && (
-          // Fotografia categoriei: pe desktop se schimbă după rândul peste care treci (CSS :has).
-          <div className="kitchen-photos">
-            {withPhoto.map(({ i, photo }, n) => (
-              <div key={i} className={`kitchen-photo${n === 0 ? ' is-default' : ''}`} data-photo={i}>
-                {/* Doar prima are text alternativ; celelalte apar la trecerea peste rândul lor. */}
-                <Picture media={photo!} sizes="(min-width: 1024px) 38vw, 100vw" alt={n === 0 ? undefined : ''} />
-              </div>
-            ))}
-            {anyPlaceholder && <ExampleTag floating className="photo-tag" />}
-          </div>
-        )}
-
-        <div className="kitchen-menu">
-          {cats.length > 0 && (
-            <ul className="menu-list">
-              {cats.map((c, i) => {
-                const href = c.link || menuUrl
-                const row = (
-                  <>
-                    <span className="menu-name">{c.name}</span>
-                    <span className="menu-dots" aria-hidden="true" />
-                    {c.shortText && <span className="menu-note">{c.shortText}</span>}
-                  </>
-                )
-                return (
-                  <li key={c.id} className="menu-row" data-photo={asMedia(c.photo) ? i : undefined}>
-                    {href ? <ExternalLink href={href}>{row}</ExternalLink> : <span className="menu-row-static">{row}</span>}
-                  </li>
-                )
-              })}
-            </ul>
-          )}
-          {menuUrl && k?.buttonLabel && (
-            <ExternalLink href={menuUrl} className="btn btn-secondary section-cta">
-              <Icon name="book" />
-              {k.buttonLabel}
-            </ExternalLink>
-          )}
-        </div>
+        {cats.length > 1 && <SliderArrows trackId={trackId} />}
       </div>
+
+      {cats.length > 0 && (
+        <ul className="cat-track" id={trackId} aria-labelledby={titleId}>
+          {cats.map((c) => {
+            const href = c.link || menuUrl
+            const photo = asMedia(c.photo)
+            const card = (
+              <>
+                <span className="cat-visual">
+                  {photo ? (
+                    <Picture media={photo} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 30vw, 72vw" />
+                  ) : (
+                    // Fără fotografie: pagina de titlu a capitolului, pe copertă, cu chenar de folio.
+                    <span className="cat-chapter" aria-hidden="true">
+                      <span>{c.name}</span>
+                    </span>
+                  )}
+                </span>
+                <span className="cat-name">{c.name}</span>
+                {c.shortText && <span className="cat-note">{c.shortText}</span>}
+              </>
+            )
+            return (
+              <li key={c.id} className="cat">
+                {href ? (
+                  <ExternalLink href={href} className="cat-card">
+                    {card}
+                  </ExternalLink>
+                ) : (
+                  <span className="cat-card">{card}</span>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      )}
+
+      {menuUrl && k?.buttonLabel && (
+        <div className="wrap">
+          <ExternalLink href={menuUrl} className="btn btn-secondary section-cta">
+            <Icon name="book" />
+            {k.buttonLabel}
+          </ExternalLink>
+        </div>
+      )}
     </section>
   )
 }

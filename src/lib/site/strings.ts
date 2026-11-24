@@ -63,6 +63,8 @@ export const UI = {
     string,
     string
   >,
+  prev: 'Înapoi',
+  next: 'Înainte',
   pause: 'Oprește derularea imaginilor',
   play: 'Pornește derularea imaginilor',
 } as const

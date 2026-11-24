@@ -520,62 +520,52 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .paper-section h2, .cover-section h2 { font-size: 52px; }
 }
 
-/* Bucătăria: rânduri de meniu cu linie de puncte; fotografia categoriei alături */
-.kitchen-grid { display: grid; gap: var(--s6); }
-.kitchen-photos {
-  position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-box);
-  background: color-mix(in srgb, var(--c-text) 8%, var(--c-bg));
+/* Bucătăria: sliderul de categorii (G3-1, D-44). Cardurile 4:5 trec de marginea din dreapta,
+   ca să se vadă că lista continuă; fără rotire automată. */
+.cat-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s5); }
+.cat-head-text { min-width: 0; }
+.slider-arrows { display: none; gap: var(--s2); flex: none; }
+.slider-arrow {
+  display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0;
+  border: 1px solid var(--c-text); border-radius: 50%; background: none; color: var(--c-text); cursor: pointer;
+  transition: background-color 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
-.kitchen-photo { position: absolute; inset: 0; }
-.kitchen-photo picture { height: 100%; }
-.kitchen-photo img { width: 100%; height: 100%; object-fit: cover; }
-.kitchen-photo:not(.is-default) { display: none; }
-.menu-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-paper); }
-.menu-row { border-bottom: 1px solid var(--line-paper); }
-.menu-row a, .menu-row-static {
-  /* Telefon: numele și linia de puncte pe un rând, nota dedesubt; desktop: nota la capătul liniei. */
-  display: grid; grid-template-columns: minmax(0, max-content) minmax(16px, 1fr); grid-template-areas: 'name dots' 'note note';
-  align-items: baseline; column-gap: var(--s3); row-gap: 2px;
-  min-height: 56px; padding: var(--s4) 0; text-decoration: none;
-  transition: color 160ms var(--ease-out);
+.slider-arrow:hover:not(:disabled) { background: var(--c-text); color: var(--c-bg); }
+.slider-arrow:active:not(:disabled) { transform: scale(0.96); }
+.slider-arrow:disabled { border-color: var(--line-paper-strong); color: color-mix(in srgb, var(--c-text) 38%, var(--c-bg)); cursor: default; }
+.slider-arrow .icon { width: 20px; height: 20px; }
+.cat-track {
+  --gutter: max(var(--edge), calc((100vw - var(--container)) / 2));
+  list-style: none; margin: var(--s6) 0 0; padding: 0 var(--gutter) var(--s4);
+  display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: var(--s4);
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin; scrollbar-color: var(--line-paper-strong) transparent;
 }
-.menu-name { grid-area: name; }
-.menu-dots { grid-area: dots; }
-.menu-note { grid-area: note; }
-.menu-row a:hover, .menu-row a:focus-visible { color: var(--c-accent-2); }
-.menu-name { font: 400 24px/1.15 var(--font-display); }
-.menu-dots { border-bottom: 1px dotted var(--line-paper-strong); transform: translateY(-5px); }
-.menu-note { font-size: 15px; color: var(--c-text-2); }
+.cat { scroll-snap-align: start; min-width: 0; }
+.cat-card { display: block; text-decoration: none; border-radius: var(--radius-box); }
+.cat-visual { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.cat-visual picture, .cat-visual img { width: 100%; height: 100%; }
+.cat-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
+.cat-card:hover .cat-visual img { transform: scale(1.03); }
+/* Fără fotografie: pagina de titlu a capitolului, pe copertă */
+.cat-chapter {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: var(--s6); text-align: center;
+  color: var(--c-on-dark); font: 400 28px/1.15 var(--font-display);
+}
+.cat-chapter::before {
+  content: ""; position: absolute; inset: var(--s3);
+  border: 1px solid var(--line-cover-strong); box-shadow: inset 0 0 0 5px var(--c-dark), inset 0 0 0 6px var(--line-cover);
+}
+.cat-chapter span { position: relative; max-width: 10ch; text-wrap: balance; }
+.cat-name { display: block; margin-top: var(--s4); font: 400 24px/1.15 var(--font-display); transition: color 160ms var(--ease-out); }
+.cat-note { display: block; margin-top: var(--s1); font-size: 15px; color: var(--c-text-2); }
+.cat-card:hover .cat-name { color: var(--c-accent-2); }
+.kitchen .section-cta { margin-top: var(--s5); }
+@media (min-width: 768px) { .cat-track { grid-auto-columns: calc((100% - 2 * var(--s4)) / 3); } }
 @media (min-width: 1024px) {
-  .kitchen-grid {
-    grid-template-columns: 5fr 7fr; column-gap: var(--s8); row-gap: var(--s6); align-items: start;
-    grid-template-areas: 'head menu' 'photos menu';
-  }
-  .kitchen-grid--text { grid-template-areas: 'head menu'; }
-  .kitchen-head { grid-area: head; }
-  .kitchen-photos { grid-area: photos; }
-  .kitchen-menu { grid-area: menu; }
-  .kitchen-photo:not(.is-default) { display: block; }
-  .kitchen-photo { opacity: 0; transition: opacity 420ms var(--ease-out); }
-  .kitchen-photo.is-default { opacity: 1; }
-  .kitchen-photo img { transition: transform 900ms var(--ease-out); }
-  .kitchen-grid:has(.menu-row[data-photo]:is(:hover, :focus-within)) .kitchen-photo { opacity: 0; }
-  .kitchen-grid:has(.menu-row:is(:hover, :focus-within)) .kitchen-photo img { transform: scale(1.03); }
-  .menu-row a, .menu-row-static { grid-template-columns: minmax(0, max-content) minmax(16px, 1fr) auto; grid-template-areas: 'name dots note'; }
-  .menu-name { font-size: 28px; }
-  .menu-note { font-size: 16px; text-align: right; }
-}
-@media (min-width: 1024px) {
-.kitchen-grid:has(.menu-row[data-photo='0']:is(:hover, :focus-within)) .kitchen-photo[data-photo='0'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='1']:is(:hover, :focus-within)) .kitchen-photo[data-photo='1'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='2']:is(:hover, :focus-within)) .kitchen-photo[data-photo='2'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='3']:is(:hover, :focus-within)) .kitchen-photo[data-photo='3'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='4']:is(:hover, :focus-within)) .kitchen-photo[data-photo='4'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='5']:is(:hover, :focus-within)) .kitchen-photo[data-photo='5'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='6']:is(:hover, :focus-within)) .kitchen-photo[data-photo='6'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='7']:is(:hover, :focus-within)) .kitchen-photo[data-photo='7'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='8']:is(:hover, :focus-within)) .kitchen-photo[data-photo='8'] { opacity: 1; }
-.kitchen-grid:has(.menu-row[data-photo='9']:is(:hover, :focus-within)) .kitchen-photo[data-photo='9'] { opacity: 1; }
+  .slider-arrows { display: flex; }
+  .cat-track { gap: var(--s5); grid-auto-columns: calc((100% - 3 * var(--s5)) / 4); margin-top: var(--s7); }
+  .cat-name { font-size: 26px; }
 }
 
 /* Vinuri: lista de vinuri, pe copertă; insigna premiului în antet (D-20) */
