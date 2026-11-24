@@ -49,4 +49,21 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withPayload(nextConfig, { devBundleServerPackages: false })
+const withPayloadConfig = withPayload(nextConfig, { devBundleServerPackages: false })
+
+/**
+ * F3 (Lighthouse): Payload adaugă pe TOATE adresele `Accept-CH` / `Critical-CH:
+ * Sec-CH-Prefers-Color-Scheme`, pentru tema panoului. Pe site, `Critical-CH` face browserul să
+ * reîncarce documentul o dată (≈ 610 ms în simularea Lighthouse pe mobil). Regula rămâne doar pe /admin.
+ */
+const payloadHeaders = withPayloadConfig.headers
+withPayloadConfig.headers = async () => {
+  const rules = payloadHeaders ? await payloadHeaders() : []
+  return rules.map((rule) =>
+    rule.source === '/:path*' && rule.headers.some((h) => h.key === 'Critical-CH')
+      ? { ...rule, source: '/admin/:path*' }
+      : rule,
+  )
+}
+
+export default withPayloadConfig

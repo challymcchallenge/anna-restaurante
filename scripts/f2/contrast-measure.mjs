@@ -83,7 +83,10 @@ for (const [device, viewport] of [
         const r = document.createRange()
         r.selectNodeContents(n)
         const rects = [...r.getClientRects()].filter((q) => q.width > 2 && q.height > 2)
-        const m = cs.color.match(/[\d.]+/g).map(Number)
+        // rgb(r, g, b[, a]) are valori 0–255; color(srgb r g b [/ a]) (de exemplu din color-mix) are 0–1.
+        const isSrgb = cs.color.startsWith('color(srgb')
+        const nums = cs.color.replace('color(srgb', '').match(/[\d.]+/g).map(Number)
+        const m = isSrgb ? [...nums.slice(0, 3).map((v) => v * 255), nums[3] ?? 1] : nums
         let path = []
         for (let e = el; e && e !== document.body; e = e.parentElement) path.unshift(e.tagName.toLowerCase() + (e.className && typeof e.className === 'string' ? '.' + e.className.trim().split(/\s+/)[0] : ''))
         for (const q of rects) {

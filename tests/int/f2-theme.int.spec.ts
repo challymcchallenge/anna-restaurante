@@ -105,6 +105,8 @@ describe('F2 · tema pe restaurant', () => {
     await seedStarterContent({ payload })
     const again: any = await payload.findByID({ collection: 'settings', id: s.id, depth: 0 })
     expect(again.fontText).toBe('host-grotesk')
+    // F3: înapoi la fontul direcției, ca testul să se poată rula din nou pe aceeași bază.
+    await payload.update({ collection: 'settings', id: s.id, data: { fontText: 'hanken-grotesk' } as any })
 
     // Verde deschis pe butonul secundar: textul (fundalul) nu se mai citește.
     await expect(

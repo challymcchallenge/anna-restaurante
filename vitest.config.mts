@@ -8,5 +8,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     include: ['tests/int/**/*.int.spec.ts'],
+    // Toate fișierele folosesc aceeași bază locală și același restaurant: rulează pe rând (F3).
+    fileParallelism: false,
+    testTimeout: 30_000,
   },
 })

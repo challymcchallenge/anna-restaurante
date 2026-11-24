@@ -82,10 +82,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   }
 
   const settings = site.settings
-  // Fonturile primului ecran (subsetul latin, greutatea 400), încărcate devreme.
+  // Fonturile primului ecran (greutatea 400), încărcate devreme: latin și latin-ext, unde stau ă, ș, ț.
   for (const font of themeFonts(settings)) {
-    const file = fontFiles(font).find((f) => f.subset === 'latin' && f.weight === 400)
-    if (file) preload(file.url, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' })
+    for (const file of fontFiles(font).filter((f) => f.weight === 400)) {
+      preload(file.url, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' })
+    }
   }
   const locale = (settings?.activeLocales?.[0] as string) || 'ro'
 
