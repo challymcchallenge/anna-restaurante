@@ -12,6 +12,9 @@ import { BookButton } from './Bits'
 import { Icon } from './Icons'
 import { HeaderController } from './HeaderController'
 
+/** Lățimea afișată a logo-ului la deschidere (D-60): 96 px pe telefon, 144 px de la 1024 px. */
+const BRAND_SIZES = '(min-width: 1024px) 144px, 96px'
+
 /** Logo-ul principal, pe copertă (medalionul se vede bine pe fundal închis, GATE 2). */
 function Brand({ site, className }: { site: SiteData; className: string }) {
   const logo = asMedia(site.settings?.logoDark) ?? asMedia(site.settings?.logo)
@@ -27,9 +30,9 @@ function Brand({ site, className }: { site: SiteData; className: string }) {
   return (
     <Link className={className} href="/" aria-label={UI.homeLink(name)}>
       <picture>
-        {s.avif && <source type="image/avif" srcSet={s.avif} sizes="72px" />}
-        {s.webp && <source type="image/webp" srcSet={s.webp} sizes="72px" />}
-        <img src={s.src} width={s.width || 72} height={s.height || 72} alt="" fetchPriority="high" />
+        {s.avif && <source type="image/avif" srcSet={s.avif} sizes={BRAND_SIZES} />}
+        {s.webp && <source type="image/webp" srcSet={s.webp} sizes={BRAND_SIZES} />}
+        <img src={s.src} width={s.width || 144} height={s.height || 144} alt="" fetchPriority="high" />
       </picture>
     </Link>
   )
