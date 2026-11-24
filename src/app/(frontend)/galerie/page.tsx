@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import React from 'react'
 
 import { PageCover } from '@/components/site/Events'
@@ -5,8 +7,8 @@ import { ChipFilter } from '@/components/site/ChipFilter'
 import { categoryOf, galleryVisual, GalleryTile } from '@/components/site/Gallery'
 import { GalleryLightbox } from '@/components/site/GalleryLightbox'
 import { pageMediaCredits } from '@/lib/site/credits'
-import { getGallery } from '@/lib/site/data'
-import { sitePage, sitePageMeta } from '@/lib/site/page'
+import { getGallery, getSite } from '@/lib/site/data'
+import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
 import { UI } from '@/lib/site/strings'
 
@@ -14,7 +16,17 @@ import { UI } from '@/lib/site/strings'
  * S-05 · Galerie (F-30, F-31): toate fotografiile și clipurile active, în mozaic, cu filtre pe
  * categorie (doar categoriile care au elemente). La click, fotografia mare sau clipul, peste pagină.
  */
-export const generateMetadata = () => sitePageMeta('gallery', 'Galerie')
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSite((await headers()).get('host'))
+  if (!site) return {}
+  const s = section(site.home, 'gallery')
+  const { items, categories } = await getGallery(site.tenant.id)
+  return {
+    title: `${s?.menuLabel || s?.title || 'Galerie'} · ${site.tenant.name}`,
+    // Secțiunea nu are text introductiv: descrierea se compune din galerie.
+    description: UI.galleryMeta(site.tenant.name, items.length, categories.map((c) => c.name)),
+  }
+}
 
 export default async function GalleryPage() {
   const site = await sitePage('gallery')
@@ -50,8 +62,8 @@ export default async function GalleryPage() {
           )}
           <div className="gal-frame">
             <ul className="gal-mosaic">
-              {items.map((item) => (
-                <GalleryTile key={item.id} item={item} id={`g-${item.id}`} />
+              {items.map((item, i) => (
+                <GalleryTile key={item.id} item={item} id={`g-${item.id}`} priority={i < 2} />
               ))}
             </ul>
           </div>

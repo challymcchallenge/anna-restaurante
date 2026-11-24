@@ -71,6 +71,8 @@ export const UI = {
   },
   /** Galeria (F3 pasul 8) */
   galleryFilter: 'Categoria',
+  galleryMeta: (restaurant: string, count: number, categories: string[]) =>
+    `Galeria ${restaurant}: ${count === 1 ? '1 fotografie' : count < 20 ? `${count} fotografii` : `${count} de fotografii`}${categories.length ? ` (${categories.join(', ')})` : ''}.`,
   allPhotos: 'Toate',
   enlarge: (label: string) => (label ? `Mărește: ${label}` : 'Mărește fotografia'),
   galleryDialog: 'Galerie: fotografia mărită',

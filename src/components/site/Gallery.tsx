@@ -70,12 +70,15 @@ export function GalleryTile({
   href,
   id,
   tile,
+  priority = false,
 }: {
   item: Gallery
   href?: string
   id?: string
   /** Pe Acasă: placa din așezarea fixă; altfel forma vine din proporțiile fișierului. */
   tile?: HomeTile
+  /** Primele plăci din /galerie, vizibile la deschidere: se încarcă imediat (LCP). */
+  priority?: boolean
 }) {
   const { image, clip } = galleryVisual(item)
   if (!image) return null
@@ -99,7 +102,7 @@ export function GalleryTile({
         data-category={category?.name ?? ''}
         data-video={clip ? JSON.stringify(videoSources(clip)) : undefined}
       >
-        <Picture media={image} sizes={SIZES[shape]} />
+        <Picture media={image} sizes={SIZES[shape]} priority={priority} />
         {clip && (
           <span className="gal-play" aria-hidden="true">
             <Icon name="play" />

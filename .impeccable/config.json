@@ -50,7 +50,10 @@
           "http://localhost:3000/petreceri",
           "http://localhost:3000/cursuri-pizza-copii",
           "http://localhost:3000/catalog-vinuri",
-          "https://anna-restaurante-alinlabau-9308s-projects.vercel.app/catalog-vinuri"
+          "https://anna-restaurante-alinlabau-9308s-projects.vercel.app/catalog-vinuri",
+          "http://localhost:3000/galerie",
+          "https://anna-restaurante-alinlabau-9308s-projects.vercel.app/galerie",
+          "https://anna-restaurante-alinlabau-9308s-projects.vercel.app/"
         ],
         "createdAt": "2026-11-24T16:20:00.000Z",
         "reason": "user confirmed: GO B la GATE 2 (D-41); hârtia vine din Setări restaurant (colors.background, #F5EDE0 pentru Trattoria), derivată din marmura logo-ului; site-ul F3 folosește tema aprobată"
