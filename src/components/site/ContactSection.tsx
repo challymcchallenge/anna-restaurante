@@ -5,7 +5,7 @@ import { formContext } from '@/lib/site/contact-context'
 import type { SiteData } from '@/lib/site/data'
 import { hoursSummary, telHref } from '@/lib/site/format'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, renderLocale, UI } from '@/lib/site/i18n/server'
 
 import { BookButton, ExampleTag, ExternalLink } from './Bits'
 import { FaqList } from './Events'
@@ -32,7 +32,7 @@ export function mapQuery(site: SiteData): string | null {
 export function ContactMap({ site }: { site: SiteData }) {
   const query = mapQuery(site)
   if (!query) return null
-  return <MapSketch query={query} name={site.tenant.name} street={site.settings?.address?.street} />
+  return <MapSketch locale={renderLocale()} query={query} name={site.tenant.name} street={site.settings?.address?.street} />
 }
 
 /** Datele de contact din Setări (R2): telefoanele, adresa cu harta, programul. */
@@ -131,7 +131,7 @@ export function ContactSection({ site, id }: { site: SiteData; id: string }) {
               </li>
               {subjects.map((x) => (
                 <li key={x.key}>
-                  <Link className="btn btn-ghost-paper" href={`/contact?subiect=${x.slug}`}>
+                  <Link className="btn btn-ghost-paper" href={lp(`/contact?subiect=${x.slug}`)}>
                     {x.key === 'question' ? UI.form.question : x.label}
                   </Link>
                 </li>
@@ -140,7 +140,7 @@ export function ContactSection({ site, id }: { site: SiteData; id: string }) {
             {complaintOn && (
               <p className="contact-complaint">
                 {UI.form.complaintLink}{' '}
-                <Link className="text-link" href="/formular-de-reclamatie">
+                <Link className="text-link" href={lp('/formular-de-reclamatie')}>
                   {UI.form.complaintCta}
                   <Icon name="arrow-up-right" />
                 </Link>

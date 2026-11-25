@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-import { UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
 
 import { Icon } from './Icons'
 
@@ -18,7 +18,8 @@ const norm = (v: string) =>
  * apoi regiunile și tipurile rămase goale. Lista e randată pe server; fără JavaScript se vede toată.
  * Rezultatul se anunță cititoarelor de ecran; fără rezultat apare o singură ieșire: „Vezi toate vinurile”.
  */
-export function WineSearch({ boardId }: { boardId: string }) {
+export function WineSearch({ boardId, locale }: { boardId: string; locale: string }) {
+  const UI = clientUI(locale)
   const [query, setQuery] = useState('')
   const [found, setFound] = useState<number | null>(null)
 

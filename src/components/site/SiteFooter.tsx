@@ -6,7 +6,7 @@ import { hoursSummary, telHref } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { pageMediaCredits } from '@/lib/site/credits'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, UI } from '@/lib/site/i18n/server'
 
 import { AwardBadge, awardsFor, BookButton, ExampleTag, ExternalLink } from './Bits'
 import { Icon, type IconName } from './Icons'
@@ -147,11 +147,11 @@ export function SiteFooter({ site }: { site: SiteData }) {
               <ul className="footer-links">
                 {site.legalPages.map((p) => (
                   <li key={p.id}>
-                    <Link href={`/${p.slug}`}>{p.title}</Link>
+                    <Link href={lp(`/${p.slug}`)}>{p.title}</Link>
                   </li>
                 ))}
                 <li>
-                  <Link href="/formular-de-reclamatie">{UI.complaints}</Link>
+                  <Link href={lp('/formular-de-reclamatie')}>{UI.complaints}</Link>
                 </li>
               </ul>
               <p className="footer-lang">

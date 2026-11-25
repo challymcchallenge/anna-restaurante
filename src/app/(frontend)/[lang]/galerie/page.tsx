@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
 import React from 'react'
 import { preload } from 'react-dom'
 
@@ -9,31 +8,33 @@ import { galleryVisual, GalleryTile, shapeOf, tileSizes } from '@/components/sit
 import { GalleryLightbox } from '@/components/site/GalleryLightbox'
 import { pageMediaCredits } from '@/lib/site/credits'
 import { pictureSources } from '@/lib/site/media'
-import { getGallery, getSite } from '@/lib/site/data'
+import { getGallery } from '@/lib/site/data'
+import { getActiveSite, localeAlternates } from '@/lib/site/locale'
 import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { renderLocale, UI } from '@/lib/site/i18n/server'
 
 /**
  * S-05 · Galerie (F-30, F-31): toate fotografiile și clipurile active, în mozaic, cu filtre pe
  * categorie (doar categoriile care au elemente). La click, fotografia mare sau clipul, peste pagină.
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSite((await headers()).get('host'))
+  const site = await getActiveSite()
   if (!site) return {}
   const s = section(site.home, 'gallery')
-  const { items, categories } = await getGallery(site.tenant.id)
+  const { items, categories } = await getGallery(site.tenant.id, site.locale)
   return {
-    title: `${s?.menuLabel || s?.title || 'Galerie'} · ${site.tenant.name}`,
+    title: `${s?.menuLabel || s?.title || UI.pageLabels.pageGallery} · ${site.tenant.name}`,
     // Secțiunea nu are text introductiv: descrierea se compune din galerie.
     description: UI.galleryMeta(site.tenant.name, items.length, categories.map((c) => c.name)),
+    alternates: localeAlternates(site, '/galerie'),
   }
 }
 
 export default async function GalleryPage() {
   const site = await sitePage('gallery')
   const s = section(site.home, 'gallery')
-  const { items, categories } = await getGallery(site.tenant.id)
+  const { items, categories } = await getGallery(site.tenant.id, site.locale)
 
   // Prima fotografie e elementul LCP: se preîncarcă din <head>, în formatul ales de browser (AVIF).
   const first = items.map((i) => galleryVisual(i).image).find(Boolean)
@@ -89,7 +90,7 @@ export default async function GalleryPage() {
           )}
         </div>
       </section>
-      <GalleryLightbox boardId="galerie" />
+      <GalleryLightbox locale={renderLocale()} boardId="galerie" />
     </>
   )
 }

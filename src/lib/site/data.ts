@@ -3,6 +3,7 @@ import { getPayload, type Where } from 'payload'
 import { cache } from 'react'
 
 import { WINE_TYPES } from '@/collections/Wines'
+import { DEFAULT_LOCALE, isLocale, type LocaleCode } from '@/lib/locales'
 import config from '@/payload.config'
 import type {
   Award,
@@ -34,6 +35,8 @@ import { getTenantByHost } from '../tenant'
 export const SITE_TAG = 'site'
 
 export type SiteData = {
+  /** Limba paginii (F4): textele vin în această limbă, cu româna unde lipsește traducerea. */
+  locale: LocaleCode
   tenant: Tenant
   settings: Setting | null
   home: HomePage | null
@@ -97,10 +100,11 @@ function byType<T extends { type: Wine['type'] }>(wines: T[]): T[] {
     .map(({ w }) => w)
 }
 
-async function load(hostname: string): Promise<SiteData | null> {
+async function load(hostname: string, locale: LocaleCode): Promise<SiteData | null> {
   const payload = await getPayload({ config: await config })
   const tenant = await getTenantByHost(payload, hostname)
   if (!tenant) return null
+  // Limba cererii; unde un text nu e tradus, Payload întoarce româna (localization.fallback).
 
   const of = (extra: Where[] = []): Where => ({
     and: [{ tenant: { equals: tenant.id } }, active, ...extra],
@@ -125,21 +129,23 @@ async function load(hostname: string): Promise<SiteData | null> {
     hotelReviews,
     galleryHome,
   ] = await Promise.all([
-      payload.find({ collection: 'settings', where: own, limit: 1, depth: 1 }),
+      payload.find({ locale, collection: 'settings', where: own, limit: 1, depth: 1 }),
       // depth 2: clipurile din hero aduc și varianta eficientă și imaginea de început.
-      payload.find({ collection: 'home-page', where: own, limit: 1, depth: 2 }),
-      payload.find({ collection: 'awards', where: of(), sort: '_order', limit: 10, depth: 1 }),
-      payload.find({ collection: 'group-links', where: of(), sort: '_order', limit: 30, depth: 0 }),
+      payload.find({ locale, collection: 'home-page', where: own, limit: 1, depth: 2 }),
+      payload.find({ locale, collection: 'awards', where: of(), sort: '_order', limit: 10, depth: 1 }),
+      payload.find({ locale, collection: 'group-links', where: of(), sort: '_order', limit: 30, depth: 0 }),
       payload.find({
+        locale,
         collection: 'legal-pages',
         where: of([{ inFooter: { equals: true } }]),
         sort: '_order',
         limit: 10,
         depth: 0,
       }),
-      payload.find({ collection: 'dish-categories', where: of(), sort: '_order', limit: 10, depth: 1 }),
+      payload.find({ locale, collection: 'dish-categories', where: of(), sort: '_order', limit: 10, depth: 1 }),
       // Recomandatele de pe Acasă: cel mult 5 din fiecare tip (D-46), fără fotografii.
       payload.find({
+        locale,
         collection: 'wines',
         where: of([{ featured: { equals: true } }, { available: { equals: true } }]),
         sort: '_order',
@@ -148,14 +154,16 @@ async function load(hostname: string): Promise<SiteData | null> {
         select: WINE_FIELDS,
       }),
       payload.find({
+        locale,
         collection: 'reviews',
         where: of([{ group: { equals: 'restaurant' } }]),
         sort: '_order',
         limit: 3,
         depth: 0,
       }),
-      payload.find({ collection: 'salons', where: of(), sort: '_order', limit: 10, depth: 1 }),
+      payload.find({ locale, collection: 'salons', where: of(), sort: '_order', limit: 10, depth: 1 }),
       payload.find({
+        locale,
         collection: 'events',
         where: of([{ startsAt: { greater_than_equal: today } }]),
         sort: 'startsAt',
@@ -163,15 +171,17 @@ async function load(hostname: string): Promise<SiteData | null> {
         depth: 1,
       }),
       payload.find({
+        locale,
         collection: 'events',
         where: of([{ startsAt: { less_than: today } }]),
         sort: '-startsAt',
         limit: 12,
         depth: 1,
       }),
-      payload.find({ collection: 'faqs', where: of(), sort: '_order', limit: 50, depth: 0 }),
-      payload.find({ collection: 'room-types', where: of(), sort: '_order', limit: 6, depth: 1 }),
+      payload.find({ locale, collection: 'faqs', where: of(), sort: '_order', limit: 50, depth: 0 }),
+      payload.find({ locale, collection: 'room-types', where: of(), sort: '_order', limit: 6, depth: 1 }),
       payload.find({
+        locale,
         collection: 'reviews',
         where: of([{ group: { equals: 'hotel' } }]),
         sort: '_order',
@@ -179,11 +189,12 @@ async function load(hostname: string): Promise<SiteData | null> {
         depth: 0,
       }),
       // depth 2: clipurile aduc și posterul, cu variantele lui.
-      payload.find({ collection: 'gallery', where: of([{ onHome: { equals: true } }]), sort: '_order', limit: 8, depth: 2 }),
+      payload.find({ locale, collection: 'gallery', where: of([{ onHome: { equals: true } }]), sort: '_order', limit: 8, depth: 2 }),
     ])
 
 
   return {
+    locale,
     tenant,
     settings: settings.docs[0] ?? null,
     home: home.docs[0] ?? null,
@@ -212,19 +223,22 @@ const BUILD = process.env.VERCEL_DEPLOYMENT_ID ?? process.env.VERCEL_GIT_COMMIT_
 const loadCached = unstable_cache(load, ['site-data', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
 /** O singură încărcare pe cerere (antetul, pagina și footerul folosesc aceleași date). */
-export const getSite = cache(async (host: string | null | undefined): Promise<SiteData | null> => {
-  if (!host) return null
-  const hostname = host.split(':')[0].toLowerCase()
-  return loadCached(hostname)
-})
+export const getSite = cache(
+  async (host: string | null | undefined, locale: string = DEFAULT_LOCALE): Promise<SiteData | null> => {
+    if (!host) return null
+    const hostname = host.split(':')[0].toLowerCase()
+    return loadCached(hostname, isLocale(locale) ? locale : DEFAULT_LOCALE)
+  },
+)
 
 /**
  * Lista completă de la /catalog-vinuri (S-23, D-46): vinurile active și disponibile, pe tip, apoi în
  * ordinea din panou. Separat de `getSite`, ca Acasă să nu încarce toată lista.
  */
-async function loadWineList(tenantId: number): Promise<WineRow[]> {
+async function loadWineList(tenantId: number, locale: LocaleCode): Promise<WineRow[]> {
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({
+    locale,
     collection: 'wines',
     where: { and: [{ tenant: { equals: tenantId } }, active, { available: { equals: true } }] },
     sort: '_order',
@@ -238,18 +252,21 @@ async function loadWineList(tenantId: number): Promise<WineRow[]> {
 
 const wineListCached = unstable_cache(loadWineList, ['wine-list', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
-export const getWineList = cache((tenantId: number) => wineListCached(tenantId))
+export const getWineList = cache((tenantId: number, locale: LocaleCode) => wineListCached(tenantId, locale))
 
 /**
  * Galeria completă de la /galerie (S-05, F-30): elementele active, în ordinea din panou, și
  * categoriile care au cel puțin un element. Separat de `getSite`, ca Acasă să nu încarce tot.
  */
-async function loadGallery(tenantId: number): Promise<{ items: Gallery[]; categories: GalleryCategory[] }> {
+async function loadGallery(
+  tenantId: number,
+  locale: LocaleCode,
+): Promise<{ items: Gallery[]; categories: GalleryCategory[] }> {
   const payload = await getPayload({ config: await config })
   const of: Where = { and: [{ tenant: { equals: tenantId } }, active] }
   const [items, categories] = await Promise.all([
-    payload.find({ collection: 'gallery', where: of, sort: '_order', limit: 500, pagination: false, depth: 2 }),
-    payload.find({ collection: 'gallery-categories', where: of, sort: '_order', limit: 30, depth: 0 }),
+    payload.find({ locale, collection: 'gallery', where: of, sort: '_order', limit: 500, pagination: false, depth: 2 }),
+    payload.find({ locale, collection: 'gallery-categories', where: of, sort: '_order', limit: 30, depth: 0 }),
   ])
   const used = new Set(items.docs.map((i) => (typeof i.category === 'object' ? i.category?.id : i.category)))
   return { items: items.docs, categories: categories.docs.filter((c) => used.has(c.id)) }
@@ -257,7 +274,7 @@ async function loadGallery(tenantId: number): Promise<{ items: Gallery[]; catego
 
 const galleryCached = unstable_cache(loadGallery, ['gallery', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
-export const getGallery = cache((tenantId: number) => galleryCached(tenantId))
+export const getGallery = cache((tenantId: number, locale: LocaleCode) => galleryCached(tenantId, locale))
 
 /**
  * O pagină proprie după adresa scurtă (F3 pasul 10): pagina legală activă cu acest `slug` sau,
@@ -266,9 +283,11 @@ export const getGallery = cache((tenantId: number) => galleryCached(tenantId))
 async function loadSlug(
   tenantId: number,
   slug: string,
+  locale: LocaleCode,
 ): Promise<{ page: LegalPage | null; redirect: { to: string; permanent: boolean } | null }> {
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({
+    locale,
     collection: 'legal-pages',
     where: { and: [{ tenant: { equals: tenantId } }, active, { slug: { equals: slug } }] },
     limit: 1,
@@ -276,6 +295,7 @@ async function loadSlug(
   })
   if (docs[0]) return { page: docs[0], redirect: null }
   const { docs: redirects } = await payload.find({
+    locale,
     collection: 'redirects',
     where: { and: [{ tenant: { equals: tenantId } }, active, { from: { in: [`/${slug}`, `/${slug}/`] } }] },
     limit: 1,
@@ -287,4 +307,6 @@ async function loadSlug(
 
 const slugCached = unstable_cache(loadSlug, ['slug-page', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 
-export const getSlugPage = cache((tenantId: number, slug: string) => slugCached(tenantId, slug))
+export const getSlugPage = cache((tenantId: number, slug: string, locale: LocaleCode) =>
+  slugCached(tenantId, slug, locale),
+)

@@ -6,7 +6,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest'
 import config from '@/payload.config'
 import { legalHeadings } from '@/components/site/LegalContent'
 import { getSlugPage } from '@/lib/site/data'
-import { UI } from '@/lib/site/strings'
+import { ro as UI } from '@/lib/site/i18n/ro'
 import { lexicalText, seedStarterContent, toLexical } from '@/seed/starter'
 
 /**
@@ -110,15 +110,15 @@ describe('F3 pasul 10 · paginile legale și redirecționările', () => {
   })
 
   it('Adresa scurtă: pagină legală, redirecționare din panou sau nimic', async () => {
-    const legal = await getSlugPage(tenantId, 'confidentialitate')
+    const legal = await getSlugPage(tenantId, 'confidentialitate', 'ro')
     expect(legal.page?.slug).toBe('confidentialitate')
     expect(legal.redirect).toBeNull()
 
-    const nutrition = await getSlugPage(tenantId, 'valori-nutritionale')
+    const nutrition = await getSlugPage(tenantId, 'valori-nutritionale', 'ro')
     expect(nutrition.page).toBeNull()
     expect(nutrition.redirect).toEqual({ to: 'https://www.meniudigital.ro/trattoriadavittoria', permanent: true })
 
-    const none = await getSlugPage(tenantId, 'nu-exista')
+    const none = await getSlugPage(tenantId, 'nu-exista', 'ro')
     expect(none).toEqual({ page: null, redirect: null })
   })
 })

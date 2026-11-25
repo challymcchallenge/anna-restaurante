@@ -9,10 +9,11 @@ import { PhoneBar, SiteFooter } from '@/components/site/SiteFooter'
 import { SiteHeader } from '@/components/site/SiteHeader'
 import { isIndexingAllowed } from '@/lib/indexing'
 import { getSite } from '@/lib/site/data'
+import { ui } from '@/lib/site/i18n'
+import { getPageSite, localeAlternates } from '@/lib/site/locale'
 import { hoursSummary } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
 import { fontFiles } from '@/theme/fonts'
 import { resolveColors, themeFonts, themeStyleSheet } from '@/theme/theme'
 import './styles.css'
@@ -20,14 +21,16 @@ import './styles.css'
 /**
  * Site-ul public (F3). Restaurantul se găsește după adresă (ADR-002); tema (culori, fonturi),
  * logo-ul, pictograma de filă și textele vin din „Setări restaurant” și din „Pagina Acasă”.
+ * F4 (D-64): limba vine din adresă (`/en/…`; româna fără prefix, rescrisă în `next.config.ts`).
  */
 
 export async function generateMetadata(): Promise<Metadata> {
   const host = (await headers()).get('host')
   // Meta robots (ADR-012): noindex cât timp indexarea nu este permisă.
   const robots = isIndexingAllowed(host) ? undefined : { index: false, follow: false }
-  const site = await getSite(host)
+  const site = await getPageSite()
   if (!site) return { robots, title: 'Site în construcție' }
+  const UI = ui(site.locale)
 
   const s = site.settings
   const title = [site.tenant.name, s?.tagline].filter(Boolean).join(' · ')
@@ -37,9 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const favicon = asMedia(s?.favicon)
   const share = asMedia(s?.shareImage)
   return {
+    metadataBase: host ? new URL(`https://${host}`) : undefined,
     title,
     description,
     robots,
+    // Acasă; paginile proprii își pun propria adresă (`localeAlternates`).
+    alternates: localeAlternates(site, '/'),
     icons: favicon
       ? {
           icon: [{ url: favicon.url as string, type: favicon.mimeType ?? undefined }],
@@ -50,7 +56,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: site.tenant.name,
-      locale: 'ro_RO',
+      locale: UI.ogLocale,
       type: 'website',
       images: share?.url ? [{ url: share.url, width: share.width ?? undefined, height: share.height ?? undefined }] : undefined,
     },
@@ -58,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export async function generateViewport(): Promise<Viewport> {
-  const site = await getSite((await headers()).get('host'))
+  const site = await getPageSite()
   return {
     width: 'device-width',
     initialScale: 1,
@@ -69,7 +75,7 @@ export async function generateViewport(): Promise<Viewport> {
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
-  const site = await getSite((await headers()).get('host'))
+  const site = await getPageSite()
 
   if (!site) {
     return (
@@ -91,7 +97,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       preload(file.url, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' })
     }
   }
-  const locale = (settings?.activeLocales?.[0] as string) || 'ro'
+  const locale = site.locale
+  const UI = ui(locale)
 
   return (
     <html lang={locale}>

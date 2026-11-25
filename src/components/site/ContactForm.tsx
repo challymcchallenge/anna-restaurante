@@ -3,9 +3,10 @@
 import Link from 'next/link'
 import React, { useActionState, useEffect, useRef, useState } from 'react'
 
-import { submitRequest, type FormState } from '@/app/(frontend)/contact/actions'
+import { submitRequest, type FormState } from '@/app/(frontend)/[lang]/contact/actions'
 import type { Subject } from '@/lib/site/requests'
-import { UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
+import { localePath } from '@/lib/locales'
 
 import { Icon } from './Icons'
 
@@ -30,6 +31,8 @@ export type ContactFormProps = {
   urgent: Partial<Record<Subject, { phone: string; tel: string; email?: string }>>
   responseTimes: Partial<Record<Subject, string>>
   book?: { label: string; tel: string | null; ialoc: boolean }
+  /** Limba paginii (F4): textele, mesajele de validare și linkurile. */
+  locale: string
 }
 
 const initialState: FormState = { status: 'idle', attempt: 0 }
@@ -40,12 +43,14 @@ function Field({
   error,
   hint,
   children,
+  errorMark,
 }: {
   name: string
   label: string
   error?: string
   hint?: string
   children: React.ReactElement<Record<string, unknown>>
+  errorMark: string
 }) {
   const describedBy = [hint ? `${name}-hint` : null, error ? `${name}-err` : null].filter(Boolean).join(' ') || undefined
   return (
@@ -67,7 +72,7 @@ function Field({
           <span className="cf-error-mark" aria-hidden="true">
             !
           </span>
-          <span className="sr-only">{UI.form.errorMark} </span>
+          <span className="sr-only">{errorMark} </span>
           {error}
         </p>
       )}
@@ -76,7 +81,8 @@ function Field({
 }
 
 export function ContactForm(props: ContactFormProps) {
-  const { mode, subjects, initial, today, salons, roomTypes, reasons } = props
+  const { mode, subjects, initial, today, salons, roomTypes, reasons, locale } = props
+  const UI = clientUI(locale)
   const [state, action, pending] = useActionState(submitRequest, initialState)
   const values = { ...initial, ...(state.values ?? {}) }
   const errors = state.errors ?? {}
@@ -125,7 +131,7 @@ export function ContactForm(props: ContactFormProps) {
             )}
           </p>
         )}
-        <Link className="btn btn-secondary" href="/">
+        <Link className="btn btn-secondary" href={localePath(locale, '/')}>
           {UI.form.backHome}
         </Link>
       </div>
@@ -140,6 +146,7 @@ export function ContactForm(props: ContactFormProps) {
 
   return (
     <form ref={formRef} key={state.attempt} action={action} noValidate className={`cf cf--${mode}`}>
+      <input type="hidden" name="limba" value={locale} />
       {(missing > 0 || errors.form) && (
         <div className="cf-summary" role="alert" tabIndex={-1}>
           <span className="cf-error-mark" aria-hidden="true">
@@ -204,14 +211,14 @@ export function ContactForm(props: ContactFormProps) {
 
       {subjects.some((s) => s.key === 'privateEvent') && (
         <div className="cf-group" data-subject="eveniment-privat">
-          <Field name="tipEveniment" label={UI.form.eventType} hint={UI.form.eventTypeHint} error={errors.tipEveniment}>
+          <Field errorMark={UI.form.errorMark} name="tipEveniment" label={UI.form.eventType} hint={UI.form.eventTypeHint} error={errors.tipEveniment}>
             <input type="text" maxLength={60} defaultValue={v('tipEveniment')} />
           </Field>
           <div className="cf-row">
-            <Field name="dataEveniment" label={UI.form.eventDate} error={errors.dataEveniment}>
+            <Field errorMark={UI.form.errorMark} name="dataEveniment" label={UI.form.eventDate} error={errors.dataEveniment}>
               <input type="date" min={today} defaultValue={v('dataEveniment')} />
             </Field>
-            <Field name="invitati" label={UI.form.guests} error={errors.invitati}>
+            <Field errorMark={UI.form.errorMark} name="invitati" label={UI.form.guests} error={errors.invitati}>
               <input
                 type="number"
                 inputMode="numeric"
@@ -227,7 +234,7 @@ export function ContactForm(props: ContactFormProps) {
             </p>
           )}
           {salons.length > 1 && (
-            <Field name="salon" label={UI.form.salon}>
+            <Field errorMark={UI.form.errorMark} name="salon" label={UI.form.salon}>
               <select defaultValue={v('salon') || (fit ? String(fit.id) : '')} key={fit?.id ?? 'none'}>
                 <option value="">{UI.form.salonAny}</option>
                 {salons.map((s) => (
@@ -244,14 +251,14 @@ export function ContactForm(props: ContactFormProps) {
       {subjects.some((s) => s.key === 'pizzaCourse') && (
         <div className="cf-group" data-subject="curs-pizza">
           <div className="cf-row">
-            <Field name="copiiCurs" label={UI.form.children} error={errors.copiiCurs}>
+            <Field errorMark={UI.form.errorMark} name="copiiCurs" label={UI.form.children} error={errors.copiiCurs}>
               <input type="number" inputMode="numeric" min={1} defaultValue={v('copiiCurs')} />
             </Field>
-            <Field name="varste" label={UI.form.ages} hint={UI.form.agesHint} error={errors.varste}>
+            <Field errorMark={UI.form.errorMark} name="varste" label={UI.form.ages} hint={UI.form.agesHint} error={errors.varste}>
               <input type="text" maxLength={60} defaultValue={v('varste')} />
             </Field>
           </div>
-          <Field name="dataDorita" label={UI.form.preferredDate} error={errors.dataDorita}>
+          <Field errorMark={UI.form.errorMark} name="dataDorita" label={UI.form.preferredDate} error={errors.dataDorita}>
             <input type="date" min={today} defaultValue={v('dataDorita')} />
           </Field>
           <p className="cf-note">{UI.form.allergies}</p>
@@ -261,18 +268,18 @@ export function ContactForm(props: ContactFormProps) {
       {subjects.some((s) => s.key === 'accommodation') && (
         <div className="cf-group" data-subject="cazare">
           <div className="cf-row">
-            <Field name="sosire" label={UI.form.checkIn} error={errors.sosire}>
+            <Field errorMark={UI.form.errorMark} name="sosire" label={UI.form.checkIn} error={errors.sosire}>
               <input type="date" min={today} defaultValue={v('sosire')} />
             </Field>
-            <Field name="plecare" label={UI.form.checkOut} error={errors.plecare}>
+            <Field errorMark={UI.form.errorMark} name="plecare" label={UI.form.checkOut} error={errors.plecare}>
               <input type="date" min={today} defaultValue={v('plecare')} />
             </Field>
           </div>
           <div className="cf-row">
-            <Field name="adultiTotal" label={UI.form.adults} error={errors.adultiTotal}>
+            <Field errorMark={UI.form.errorMark} name="adultiTotal" label={UI.form.adults} error={errors.adultiTotal}>
               <input type="number" inputMode="numeric" min={1} defaultValue={v('adultiTotal') || '2'} />
             </Field>
-            <Field name="copiiTotal" label={UI.form.kids} error={errors.copiiTotal}>
+            <Field errorMark={UI.form.errorMark} name="copiiTotal" label={UI.form.kids} error={errors.copiiTotal}>
               <input type="number" inputMode="numeric" min={0} defaultValue={v('copiiTotal') || '0'} />
             </Field>
           </div>
@@ -283,7 +290,7 @@ export function ContactForm(props: ContactFormProps) {
             </>
           )}
           {roomTypes.length > 0 && (
-            <Field name="tipCamera" label={UI.form.roomType}>
+            <Field errorMark={UI.form.errorMark} name="tipCamera" label={UI.form.roomType}>
               <select defaultValue={v('tipCamera')}>
                 <option value="">{UI.form.roomAny}</option>
                 {roomTypes.map((r) => (
@@ -306,7 +313,7 @@ export function ContactForm(props: ContactFormProps) {
 
       {mode === 'complaint' && (
         <div className="cf-group cf-group--always">
-          <Field name="dataVizitei" label={UI.form.visitDate} error={errors.dataVizitei}>
+          <Field errorMark={UI.form.errorMark} name="dataVizitei" label={UI.form.visitDate} error={errors.dataVizitei}>
             <input type="date" max={today} defaultValue={v('dataVizitei')} />
           </Field>
           <fieldset className={`cf-reasons${errors.motiv ? ' cf-field--error' : ''}`} aria-describedby={errors.motiv ? 'motiv-err' : undefined}>
@@ -336,25 +343,25 @@ export function ContactForm(props: ContactFormProps) {
               </p>
             )}
           </fieldset>
-          <Field name="ospatar" label={UI.form.waiter} hint={UI.form.waiterHint} error={errors.ospatar}>
+          <Field errorMark={UI.form.errorMark} name="ospatar" label={UI.form.waiter} hint={UI.form.waiterHint} error={errors.ospatar}>
             <input type="text" maxLength={60} defaultValue={v('ospatar')} />
           </Field>
         </div>
       )}
 
       <div className="cf-person">
-        <Field name="nume" label={UI.form.name} error={errors.nume}>
+        <Field errorMark={UI.form.errorMark} name="nume" label={UI.form.name} error={errors.nume}>
           <input type="text" autoComplete="name" maxLength={80} defaultValue={v('nume')} />
         </Field>
         <div className="cf-row">
-          <Field name="telefon" label={UI.form.phone} error={errors.telefon}>
+          <Field errorMark={UI.form.errorMark} name="telefon" label={UI.form.phone} error={errors.telefon}>
             <input type="tel" autoComplete="tel" inputMode="tel" maxLength={30} defaultValue={v('telefon')} />
           </Field>
-          <Field name="email" label={UI.form.email} error={errors.email}>
+          <Field errorMark={UI.form.errorMark} name="email" label={UI.form.email} error={errors.email}>
             <input type="email" autoComplete="email" inputMode="email" maxLength={120} defaultValue={v('email')} />
           </Field>
         </div>
-        <Field
+        <Field errorMark={UI.form.errorMark}
           name="mesaj"
           label={mode === 'complaint' ? UI.form.description : current === 'intrebare' ? UI.form.questionLabel : UI.form.details}
           hint={mode === 'complaint' || current === 'intrebare' ? undefined : UI.form.detailsHint}

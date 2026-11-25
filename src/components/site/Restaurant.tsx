@@ -4,7 +4,7 @@ import React from 'react'
 import type { SiteData } from '@/lib/site/data'
 import { asMedia } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, renderLocale, UI } from '@/lib/site/i18n/server'
 import { byTypeGroups, typesIn } from '@/lib/site/wines'
 
 import { AwardBadge, awardsFor, ExampleTag, ExternalLink } from './Bits'
@@ -37,7 +37,7 @@ export function Kitchen({ site, id }: { site: SiteData; id: string }) {
           {k?.intro && <p className="section-intro">{k.intro}</p>}
           {anyPlaceholder && <ExampleTag className="section-tag" />}
         </div>
-        {cats.length > 1 && <SliderArrows trackId={trackId} />}
+        {cats.length > 1 && <SliderArrows locale={renderLocale()} trackId={trackId} />}
       </div>
 
       {cats.length > 0 && (
@@ -139,7 +139,7 @@ export function Wines({ site, id }: { site: SiteData; id: string }) {
 
         {w?.buttonLabel && (
           <div className="wines-cta">
-            <Link className="btn btn-ghost" href="/catalog-vinuri">
+            <Link className="btn btn-ghost" href={lp('/catalog-vinuri')}>
               <Icon name="wine" />
               {w.buttonLabel}
             </Link>

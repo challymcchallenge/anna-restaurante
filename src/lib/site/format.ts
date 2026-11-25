@@ -1,6 +1,6 @@
 import type { Setting } from '@/payload-types'
 
-import { DAY_LABELS, UI } from './strings'
+import { UI } from './i18n/server'
 
 /** `tel:` din numărul afișat: păstrează doar + și cifrele. */
 export function telHref(phone: string | null | undefined): string | null {
@@ -25,8 +25,8 @@ export function hoursSummary(hours: Setting['hours']): string[] {
   let start = 0
   for (let i = 1; i <= hours.length; i++) {
     if (i === hours.length || labels[i] !== labels[start]) {
-      const from = DAY_LABELS[hours[start].day] ?? hours[start].day
-      const to = DAY_LABELS[hours[i - 1].day] ?? hours[i - 1].day
+      const from = UI.days[hours[start].day] ?? hours[start].day
+      const to = UI.days[hours[i - 1].day] ?? hours[i - 1].day
       out.push(`${start === i - 1 ? from : `${from}–${to}`}: ${labels[start]}`)
       start = i
     }
@@ -35,7 +35,7 @@ export function hoursSummary(hours: Setting['hours']): string[] {
 }
 
 /** „octombrie 2026”, în ora României. */
-export function monthYear(iso: string | null | undefined, locale = 'ro-RO'): string {
+export function monthYear(iso: string | null | undefined, locale: string = UI.intl): string {
   if (!iso) return ''
   return new Intl.DateTimeFormat(locale, {
     month: 'long',
@@ -45,7 +45,7 @@ export function monthYear(iso: string | null | undefined, locale = 'ro-RO'): str
 }
 
 /** Preț în lei, fără zecimale inutile: „135 lei”, „37,50 lei”. */
-export function price(value: number | null | undefined, locale = 'ro-RO'): string | null {
+export function price(value: number | null | undefined, locale: string = UI.intl): string | null {
   if (value == null) return null
   const n = new Intl.NumberFormat(locale, {
     minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
@@ -55,7 +55,7 @@ export function price(value: number | null | undefined, locale = 'ro-RO'): strin
 }
 
 /** Doar suma, fără monedă (lista de vinuri are moneda în legendă: „0,75 l · lei”). */
-export function amount(value: number | null | undefined, locale = 'ro-RO'): string | null {
+export function amount(value: number | null | undefined, locale: string = UI.intl): string | null {
   return price(value, locale)?.replace(` ${UI.currency}`, '') ?? null
 }
 
@@ -72,7 +72,7 @@ export function todayIso(): string {
 const BUC = 'Europe/Bucharest'
 
 /** Părțile datei unei seri, în ora României: „sâmbătă”, „12”, „decembrie”, „dec.”, „20:00”. */
-export function eventParts(iso: string, locale = 'ro-RO') {
+export function eventParts(iso: string, locale: string = UI.intl) {
   const d = new Date(iso)
   const part = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(locale, { ...o, timeZone: BUC }).format(d)
   return {
@@ -86,7 +86,7 @@ export function eventParts(iso: string, locale = 'ro-RO') {
 }
 
 /** „sâmbătă, 12 decembrie · 20:00” */
-export function eventWhen(iso: string, locale = 'ro-RO'): string {
+export function eventWhen(iso: string, locale: string = UI.intl): string {
   const p = eventParts(iso, locale)
   return `${p.weekday}, ${p.day} ${p.month} · ${p.time}`
 }

@@ -8,7 +8,7 @@ import { eventParts, eventWhen, slugify, telHref } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, UI } from '@/lib/site/i18n/server'
 
 import { BookButton, ExampleTag } from './Bits'
 import { Icon } from './Icons'
@@ -40,7 +40,7 @@ export function PageCover({
     <section className="page-cover" data-hero="" aria-labelledby="page-title">
       <div className="cover-frame" aria-hidden="true" />
       <div className="wrap page-cover-in">
-        <Link className="back-link" href="/">
+        <Link className="back-link" href={lp('/')}>
           <Icon name="chevron-left" />
           {UI.home}
         </Link>
@@ -226,7 +226,7 @@ export function Parties({ site, id }: { site: SiteData; id: string }) {
           {s?.intro && <p className="section-intro">{s.intro}</p>}
           {s?.placeholder && <ExampleTag className="section-tag" />}
         </div>
-        <Link className="text-link text-link--dark" href="/petreceri">
+        <Link className="text-link text-link--dark" href={lp('/petreceri')}>
           {UI.seeAllEvents}
           <Icon name="arrow-up-right" />
         </Link>
@@ -318,7 +318,7 @@ export function PrivateEvents({ site, id }: { site: SiteData; id: string }) {
               </a>
             )}
           </div>
-          <Link className="text-link" href="/evenimente-private">
+          <Link className="text-link" href={lp('/evenimente-private')}>
             {UI.seeSalons}
             <Icon name="arrow-up-right" />
           </Link>
@@ -330,7 +330,7 @@ export function PrivateEvents({ site, id }: { site: SiteData; id: string }) {
                 key={salon.id}
                 salon={salon}
                 sizes="(min-width: 1024px) 30vw, 100vw"
-                href={`/evenimente-private#${slugify(salon.name)}`}
+                href={lp(`/evenimente-private#${slugify(salon.name)}`)}
               />
             ))}
           </div>
@@ -383,7 +383,7 @@ export function Pizza({ site, id }: { site: SiteData; id: string }) {
               label={s?.buttonLabel || ''}
               phone={site.settings?.phonePizza || site.settings?.phoneReservations}
             />
-            <Link className="text-link" href="/cursuri-pizza-copii">
+            <Link className="text-link" href={lp('/cursuri-pizza-copii')}>
               {UI.aboutCourse}
               <Icon name="arrow-up-right" />
             </Link>

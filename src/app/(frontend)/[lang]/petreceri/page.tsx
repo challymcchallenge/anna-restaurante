@@ -8,10 +8,10 @@ import { asMedia } from '@/lib/site/media'
 import { eventParts } from '@/lib/site/format'
 import { sitePage, sitePageMeta } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 
 /** S-03 · Petreceri și agenda: toate serile viitoare și arhiva foto („Cum a fost”). */
-export const generateMetadata = () => sitePageMeta('parties', 'Petreceri')
+export const generateMetadata = () => sitePageMeta('parties', 'pageParties')
 
 export default async function PartiesPage() {
   const site = await sitePage('parties')

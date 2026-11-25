@@ -16,6 +16,29 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // F4 (D-64): româna stă la rădăcină, fără prefix. Intern, `/galerie` devine `/ro/galerie`, ca toate
+  // paginile să stea sub `app/(frontend)/[lang]`. Celelalte limbi au prefixul lor (`/en/galerie`).
+  // `afterFiles`: fișierele din `public/`, `/_next`, panoul și API-ul au întâietate.
+  async rewrites() {
+    return {
+      beforeFiles: [],
+      afterFiles: [
+        { source: '/', destination: '/ro' },
+        {
+          source: '/:path((?!(?:ro|en|it|fr|de|zh|sv|admin|api)(?:/|$))(?!_)(?!.*\\.[a-z0-9]+$).*)',
+          destination: '/ro/:path',
+        },
+      ],
+      fallback: [],
+    }
+  },
+  // `/ro/…` scris de mână duce la adresa fără prefix (o singură adresă pe pagină, pentru căutare).
+  async redirects() {
+    return [
+      { source: '/ro', destination: '/', permanent: true },
+      { source: '/ro/:path*', destination: '/:path*', permanent: true },
+    ]
+  },
   // Antetul X-Robots-Tag (ADR-012). Aceeași regulă ca în src/lib/indexing.ts.
   async headers() {
     const rules = [

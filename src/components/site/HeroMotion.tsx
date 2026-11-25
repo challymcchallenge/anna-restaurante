@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
-import { UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
 
 type Source = { src: string; type: string }
 
@@ -33,10 +33,13 @@ function useMotionAllowed() {
 export function HeroMotion({
   video,
   frames,
+  locale,
 }: {
   video: { desktop: Source[]; mobile: Source[] } | null
   frames: number
+  locale: string
 }) {
+  const UI = clientUI(locale)
   const ref = useRef<HTMLVideoElement>(null)
   const [sources, setSources] = useState<Source[] | null>(null)
   const [playing, setPlaying] = useState(false)

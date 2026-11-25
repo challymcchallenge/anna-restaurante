@@ -4,7 +4,7 @@ import { getPayload } from 'payload'
 import { beforeAll, describe, expect, it } from 'vitest'
 
 import config from '@/payload.config'
-import { UI } from '@/lib/site/strings'
+import { ro as UI } from '@/lib/site/i18n/ro'
 import { lexicalText, seedStarterContent } from '@/seed/starter'
 import seed from '../../seed/trattoria-da-vittoria.json'
 

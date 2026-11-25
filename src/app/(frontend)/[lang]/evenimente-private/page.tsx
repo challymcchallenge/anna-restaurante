@@ -9,10 +9,10 @@ import { asMedia } from '@/lib/site/media'
 import { sitePage, sitePageMeta } from '@/lib/site/page'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 
 /** S-02 · Evenimente private: saloanele, cu fotografiile lor, cererea și întrebările frecvente. */
-export const generateMetadata = () => sitePageMeta('privateEvents', 'Evenimente private')
+export const generateMetadata = () => sitePageMeta('privateEvents', 'pagePrivateEvents')
 
 export default async function PrivateEventsPage() {
   const site = await sitePage('privateEvents')
@@ -48,7 +48,7 @@ export default async function PrivateEventsPage() {
             <div className="wrap salon-page-grid">
               <div className="salon-gallery">
                 {photos.length > 0 ? (
-                  <ul className="photo-track" aria-label={`${salon.name}: ${UI.gallery.toLowerCase()}`}>
+                  <ul className="photo-track" aria-label={`${salon.name}: ${UI.gallery}`}>
                     {photos.map((m) => (
                       <li key={m.id}>
                         <Picture media={m} sizes="(min-width: 1024px) 55vw, 88vw" />

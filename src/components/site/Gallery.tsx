@@ -4,7 +4,7 @@ import React from 'react'
 import type { SiteData } from '@/lib/site/data'
 import { asMedia, pictureSources, videoSources } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, UI } from '@/lib/site/i18n/server'
 import type { Gallery, Media } from '@/payload-types'
 
 import { ExampleTag } from './Bits'
@@ -134,13 +134,13 @@ export function GallerySection({ site, id }: { site: SiteData; id: string }) {
           <div className="gal-frame">
             <ul className="gal-mosaic gal-mosaic--home">
               {items.map((item, i) => (
-                <GalleryTile key={item.id} item={item} href={`/galerie#g-${item.id}`} tile={layout[i]} />
+                <GalleryTile key={item.id} item={item} href={lp(`/galerie#g-${item.id}`)} tile={layout[i]} />
               ))}
             </ul>
           </div>
         )}
         {s?.buttonLabel && (
-          <Link className="btn btn-secondary section-cta" href="/galerie">
+          <Link className="btn btn-secondary section-cta" href={lp('/galerie')}>
             <Icon name="image" />
             {s.buttonLabel}
           </Link>

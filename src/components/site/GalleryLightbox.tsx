@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
 
 import { Icon } from './Icons'
 
@@ -42,7 +42,8 @@ const read = (a: HTMLAnchorElement): Slide => {
  * Adresa primește `#g-<id>`, așa că o fotografie de pe Acasă se deschide direct aici.
  * Fără JavaScript, plăcile rămân linkuri spre fișierul mare.
  */
-export function GalleryLightbox({ boardId }: { boardId: string }) {
+export function GalleryLightbox({ boardId, locale }: { boardId: string; locale: string }) {
+  const UI = clientUI(locale)
   const dialog = useRef<HTMLDialogElement>(null)
   const opener = useRef<HTMLAnchorElement | null>(null)
   const links = useRef<HTMLAnchorElement[]>([])

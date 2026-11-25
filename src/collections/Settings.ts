@@ -482,6 +482,17 @@ export const Settings: CollectionConfig = {
               description:
                 'Româna este implicită. Celelalte limbi se pornesc după traduceri (F4, D-28). Fereastra ialoc are doar ro și en.',
             }),
+            {
+              name: 'doNotTranslate',
+              label: 'Termeni care nu se traduc',
+              type: 'text',
+              hasMany: true,
+              maxRows: 60,
+              admin: {
+                description:
+                  'Rămân la fel în toate limbile (content-model 9). Numele restaurantului, tagline-ul, saloanele, camerele, categoriile, serile și linkurile grupului se adaugă singure; aici pui restul (de exemplu Hotel ANNA, Wine Spectator).',
+              },
+            },
           ],
         },
         {

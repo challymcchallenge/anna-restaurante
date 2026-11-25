@@ -3,7 +3,7 @@ import React from 'react'
 import type { SiteData, WineRow } from '@/lib/site/data'
 import { amount, price } from '@/lib/site/format'
 import { asMedia, pictureSources } from '@/lib/site/media'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 import {
   byOrigin,
   searchText,

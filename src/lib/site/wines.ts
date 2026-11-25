@@ -1,7 +1,7 @@
 import { WINE_TYPES } from '@/collections/Wines'
 
 import type { WineRow } from './data'
-import { UI } from './strings'
+import { UI } from './i18n/server'
 
 /**
  * Lista de vinuri (D-46): gruparea pe tip, apoi pe țară și regiune (ordinea din panou), și
@@ -40,7 +40,7 @@ export const vintageLabel = (w: WineRow) => (w.vintage ? String(w.vintage) : UI.
 /** Volumul în ml, ca pe etichetă: 375 ml, 750 ml, 1.500 ml. */
 export function volumeMl(v: string | null | undefined): string {
   const ml = Math.round(Number(v || '0.75') * 1000)
-  return `${new Intl.NumberFormat('ro-RO').format(ml)} ml`
+  return `${new Intl.NumberFormat(UI.intl).format(ml)} ml`
 }
 
 /** Volumul în litri, doar când nu e sticla obișnuită de 0,75 l („1,5 l”). */

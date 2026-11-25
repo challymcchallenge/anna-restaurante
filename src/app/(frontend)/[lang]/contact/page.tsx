@@ -10,14 +10,14 @@ import { formContext, roomsFromQuery } from '@/lib/site/contact-context'
 import { renderedAt, telHref, todayIso } from '@/lib/site/format'
 import { sitePage, sitePageMeta } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, renderLocale, UI } from '@/lib/site/i18n/server'
 
 /**
  * S-06 · Contact: formularul unic cu subiect (F-32), datele de contact și sesizările.
  * Butoanele din site și bara de cazare deschid pagina cu subiectul și datele deja completate
  * (`/contact?subiect=cazare&sosire=…`). Apar doar subiectele pornite în Setări → Cereri și emailuri.
  */
-export const generateMetadata = (): Promise<Metadata> => sitePageMeta('contact', 'Contact')
+export const generateMetadata = (): Promise<Metadata> => sitePageMeta('contact', 'pageContact')
 
 type Search = Record<string, string | string[] | undefined>
 const list = (v: string | string[] | undefined) => (Array.isArray(v) ? v : v ? [v] : [])
@@ -50,7 +50,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         <div className="wrap contact-grid">
           <div className="contact-main">
             {subjects.length > 0 ? (
-              <ContactForm
+              <ContactForm locale={renderLocale()}
                 mode="contact"
                 subjects={subjects}
                 initial={initial}
@@ -72,7 +72,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             {complaintOn && (
               <p className="contact-complaint">
                 {UI.form.complaintLink}{' '}
-                <Link className="text-link" href="/formular-de-reclamatie">
+                <Link className="text-link" href={lp('/formular-de-reclamatie')}>
                   {UI.form.complaintCta}
                   <Icon name="arrow-up-right" />
                 </Link>

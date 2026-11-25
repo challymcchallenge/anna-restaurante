@@ -5,7 +5,7 @@ import { price, telHref } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 import type { Media } from '@/payload-types'
 
 import { ExampleTag, ExternalLink } from './Bits'

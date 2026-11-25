@@ -9,10 +9,10 @@ import { asMedia, videoSources } from '@/lib/site/media'
 import { sitePage, sitePageMeta } from '@/lib/site/page'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 
 /** S-04 · Cursuri de pizza pentru copii: textul complet, detaliile, galeria și înscrierea. */
-export const generateMetadata = () => sitePageMeta('pizza', 'Cursuri de pizza')
+export const generateMetadata = () => sitePageMeta('pizza', 'pagePizza')
 
 export default async function PizzaPage() {
   const site = await sitePage('pizza')

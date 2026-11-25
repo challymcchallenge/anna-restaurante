@@ -5,6 +5,8 @@ import React from 'react'
 
 import { isAdmin } from '@/access/roles'
 
+import { TranslationsBox } from './TranslationsBox'
+
 /**
  * Tabloul de bord (S-12): câte elemente provizorii au rămas (D-08, ADR-013), serile apropiate
  * și ce mai lipsește din Setări. Contorul trebuie să arate 0 înainte de lansare (PLAN, F5).
@@ -179,6 +181,9 @@ export async function Dashboard({ payload, user }: Props) {
           </ul>
         )}
       </section>
+
+      {/* Traducerile (F4, D-64): cifrele pe limbă și „Tradu tot site-ul”. */}
+      {tenantId != null && <TranslationsBox tenantId={tenantId} admin={admin} />}
 
       {admin && missing.length > 0 && (
         <section className="anna-dashboard__card">

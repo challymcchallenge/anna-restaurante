@@ -2,15 +2,17 @@ import Link from 'next/link'
 import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
+import { activeLocales } from '@/lib/site/locale'
 import { telHref } from '@/lib/site/format'
 import { asMedia, pictureSources } from '@/lib/site/media'
 import { navItems, section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { lp, UI } from '@/lib/site/i18n/server'
 import { LOCALES } from '@/lib/locales'
 
 import { BookButton } from './Bits'
 import { Icon } from './Icons'
 import { HeaderController } from './HeaderController'
+import { LanguageMenu } from './LanguageMenu'
 
 /** Lățimea afișată a logo-ului la deschidere (D-60): 96 px pe telefon, 144 px de la 1024 px. */
 const BRAND_SIZES = '(min-width: 1024px) 144px, 96px'
@@ -21,14 +23,14 @@ function Brand({ site, className }: { site: SiteData; className: string }) {
   const name = site.tenant.name
   if (!logo) {
     return (
-      <Link className={`${className} brand--text`} href="/">
+      <Link className={`${className} brand--text`} href={lp('/')}>
         {name}
       </Link>
     )
   }
   const s = pictureSources(logo, 640)
   return (
-    <Link className={className} href="/" aria-label={UI.homeLink(name)}>
+    <Link className={className} href={lp('/')} aria-label={UI.homeLink(name)}>
       <picture>
         {s.avif && <source type="image/avif" srcSet={s.avif} sizes={BRAND_SIZES} />}
         {s.webp && <source type="image/webp" srcSet={s.webp} sizes={BRAND_SIZES} />}
@@ -39,20 +41,27 @@ function Brand({ site, className }: { site: SiteData; className: string }) {
   )
 }
 
-/** Limba: deocamdată doar româna este activă (D-28, D-38); selectorul complet vine în F4. */
+/** Selectorul de limbă (F4, D-64): limbile pornite în Setări → Limbi active, în ordinea din `LOCALES`. */
 export function Language({ site, className = 'lang' }: { site: SiteData; className?: string }) {
-  const code = (site.settings?.activeLocales?.[0] ?? 'ro') as string
-  const label = LOCALES.find((l) => l.code === code)?.label ?? code
+  const current = LOCALES.find((l) => l.code === site.locale) ?? LOCALES[0]
+  const locales = activeLocales(site).map((code) => ({ code, label: LOCALES.find((l) => l.code === code)?.label ?? code }))
   return (
-    <span className={className}>
-      <span aria-hidden="true">{code.toUpperCase()}</span>
-      <span className="sr-only">{UI.languageCurrent(label)}</span>
-    </span>
+    <LanguageMenu
+      current={current.code}
+      locales={locales}
+      label={UI.chooseLanguage}
+      currentLabel={UI.languageCurrent(current.label)}
+      className={className}
+    />
   )
 }
 
 export function SiteHeader({ site }: { site: SiteData }) {
-  const items = navItems(site.home, site.settings?.navigation)
+  const items = navItems(site.home, site.settings?.navigation, {
+    sectionLabels: UI.sectionLabels,
+    pageLabels: UI.pageLabels,
+    wideGlyphs: site.locale === 'zh',
+  }).map((i) => ({ ...i, href: lp(i.href) }))
   const hasMoreLg = items.some((i) => i.tier > 1)
   const hasMoreXl = items.some((i) => i.tier > 2)
   const phone = site.settings?.phoneReservations ?? null

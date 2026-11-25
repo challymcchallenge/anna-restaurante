@@ -120,6 +120,14 @@ const BUDGET = { lg: 380, xl: 508 } as const
 
 type Candidate = { id: string; href: string; label: string; moreOnly: boolean }
 
+/** Limba meniului (F4): etichetele de rezervă din dicționar și lățimea literelor. */
+export type NavI18n = {
+  sectionLabels?: Record<string, string>
+  pageLabels?: Record<string, string>
+  /** Chineza: semnele sunt mai late decât literele latine în majuscule. */
+  wideGlyphs?: boolean
+}
+
 /** Meniul automat: secțiunile pornite, cu etichetă în meniu, în ordinea de pe Acasă. */
 function autoItems(home: HomePage | null): Candidate[] {
   return orderedSections(home)
@@ -131,7 +139,7 @@ function autoItems(home: HomePage | null): Candidate[] {
  * Meniul din „Setări → Meniu de navigare” (D-60): ordinea rândurilor, eticheta (gol = cea din
  * Pagina Acasă sau numele paginii), afișarea. O secțiune oprită nu apare, ca să nu ducă nicăieri.
  */
-function settingsItems(home: HomePage | null, nav: NavEntry[]): Candidate[] {
+function settingsItems(home: HomePage | null, nav: NavEntry[], i18n: NavI18n): Candidate[] {
   const out: Candidate[] = []
   for (const entry of nav) {
     if (!entry?.target || entry.display === 'hidden') continue
@@ -139,23 +147,23 @@ function settingsItems(home: HomePage | null, nav: NavEntry[]): Candidate[] {
     const custom = entry.label?.trim()
     if (entry.target in NAV_PAGES) {
       const page = NAV_PAGES[entry.target as NavPage]
-      out.push({ id: entry.target, href: page.href, label: custom || page.label, moreOnly })
+      out.push({ id: entry.target, href: page.href, label: custom || i18n.pageLabels?.[entry.target] || page.label, moreOnly })
       continue
     }
     const meta = SECTIONS.find((s) => s.key === entry.target)
     if (!meta || meta.key === 'hero' || !meta.built || !isOn(home, meta.key)) continue
-    const label = custom || section(home, meta.key)?.menuLabel || SECTION_LABELS[meta.key]
+    const label = custom || section(home, meta.key)?.menuLabel || i18n.sectionLabels?.[meta.key] || SECTION_LABELS[meta.key]
     out.push({ id: meta.id, href: `/#${meta.id}`, label, moreOnly })
   }
   return out
 }
 
-export function navItems(home: HomePage | null, nav?: NavEntry[] | null): NavItem[] {
-  const all = nav?.length ? settingsItems(home, nav) : autoItems(home)
+export function navItems(home: HomePage | null, nav?: NavEntry[] | null, i18n: NavI18n = {}): NavItem[] {
+  const all = nav?.length ? settingsItems(home, nav, i18n) : autoItems(home)
   // Lățimile se socotesc doar pe cele care pot sta în antet; cele „Doar în «Mai mult»” stau în panou.
   const items = all.filter((i) => !i.moreOnly)
 
-  const width = (label: string) => label.length * CHAR_PX + GAP_PX
+  const width = (label: string) => label.length * CHAR_PX * (i18n.wideGlyphs ? 1.6 : 1) + GAP_PX
   const fits = (budget: number) => {
     const total = items.reduce((sum, i) => sum + width(i.label), 0)
     // Dacă încap toate, nu e nevoie de „Mai mult”.

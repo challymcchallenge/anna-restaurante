@@ -12,7 +12,7 @@ import { Settings } from '@/collections/Settings'
  */
 
 const root = process.cwd()
-const css = readFileSync(join(root, 'src/app/(frontend)/styles.css'), 'utf8')
+const css = readFileSync(join(root, 'src/app/(frontend)/[lang]/styles.css'), 'utf8')
 
 type Node = { name?: string; type?: string; fields?: Field[]; tabs?: { fields: Field[] }[]; [k: string]: unknown }
 

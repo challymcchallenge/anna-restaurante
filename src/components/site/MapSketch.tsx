@@ -2,14 +2,25 @@
 
 import React, { useState } from 'react'
 
-import { UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
 
 /**
  * Harta de pe Contact (G6-2, D-51): întâi o schiță desenată (fără cereri către terți, fără cookies),
  * cu pinul restaurantului și strada din Setări. Harta Google se încarcă doar la „Arată harta”.
  * Fără JavaScript rămâne schița, iar „Vezi pe hartă” de lângă ea deschide Google Maps.
  */
-export function MapSketch({ query, name, street }: { query: string; name: string; street?: string | null }) {
+export function MapSketch({
+  query,
+  name,
+  street,
+  locale,
+}: {
+  query: string
+  name: string
+  street?: string | null
+  locale: string
+}) {
+  const UI = clientUI(locale)
   const [live, setLive] = useState(false)
   const src = `https://www.google.com/maps?q=${encodeURIComponent(query)}&hl=ro&z=16&output=embed`
 

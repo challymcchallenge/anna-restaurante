@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react'
 
-import { UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
 
 /**
  * Săgețile unui slider (G3-1): derulează lista cu câte un card, fără rotire automată. Lista rămâne
  * derulabilă cu degetul, cu mouse-ul și cu tastatura (linkurile din carduri). O săgeată se
  * dezactivează la capătul ei.
  */
-export function SliderArrows({ trackId }: { trackId: string }) {
+export function SliderArrows({ trackId, locale }: { trackId: string; locale: string }) {
+  const UI = clientUI(locale)
   const [edge, setEdge] = useState({ start: true, end: false })
 
   useEffect(() => {

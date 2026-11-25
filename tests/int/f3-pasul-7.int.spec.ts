@@ -8,7 +8,7 @@ import { pageMediaCredits } from '@/lib/site/credits'
 import type { SiteData } from '@/lib/site/data'
 import { requestHref } from '@/lib/site/requests'
 import { navItems, orderedSections } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { ro as UI } from '@/lib/site/i18n/ro'
 import { seedStarterContent } from '@/seed/starter'
 
 /**

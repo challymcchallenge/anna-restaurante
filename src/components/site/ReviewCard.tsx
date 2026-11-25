@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { monthYear } from '@/lib/site/format'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 import type { Review } from '@/payload-types'
 
 import { ExampleTag, ExternalLink } from './Bits'

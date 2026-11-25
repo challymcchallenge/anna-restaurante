@@ -148,5 +148,10 @@ export function themeStyleSheet(settings: ThemeSettings | null | undefined): str
   const vars = Object.entries(themeCssVars(settings))
     .map(([k, v]) => `${k}:${v}`)
     .join(';')
-  return `${fontFaceCss(themeFonts(settings))}\n:root{${vars}}`
+  // Chineza (F4-5, D-64): fonturile temei n-au semne chinezești; după ele vine fontul sistemului, fără
+  // font web în plus. Literele latine (nume, prețuri) rămân în fonturile temei.
+  const [heading, text] = themeFonts(settings)
+  const cjk = `'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC'`
+  const zh = `html:lang(zh){--font-display:'${heading.family}', ${cjk}, ${heading.fallback};--font-text:'${text.family}', ${cjk}, ${text.fallback}}`
+  return `${fontFaceCss(themeFonts(settings))}\n:root{${vars}}\n${zh}`
 }

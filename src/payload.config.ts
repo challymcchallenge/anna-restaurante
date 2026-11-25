@@ -33,6 +33,8 @@ import { parseFromAddress } from './lib/email'
 import { DEFAULT_LOCALE, LOCALES } from './lib/locales'
 import { publicFileUrl, supabasePublicBase } from './lib/media/publicUrl'
 import { withSiteRevalidation } from './lib/site/revalidate'
+import { withTranslation } from './lib/translate/collection'
+import { translateEndpoint } from './lib/translate/endpoint'
 import type { Config } from './payload-types'
 
 const filename = fileURLToPath(import.meta.url)
@@ -79,6 +81,7 @@ export default buildConfig({
     fallback: true,
   },
   // Tot ce apare pe site golește cache-ul site-ului public la salvare (F3, src/lib/site/revalidate.ts).
+  // Colecțiile cu texte „se traduce” primesc starea traducerii și retraducerea automată (F4).
   collections: [
     ...[
       HomePage,
@@ -95,12 +98,16 @@ export default buildConfig({
       GroupLinks,
       LegalPages,
       Media,
-    ].map(withSiteRevalidation),
+    ]
+      .map(withTranslation)
+      .map(withSiteRevalidation),
     Submissions,
-    ...[Settings, Awards, Redirects, Tenants].map(withSiteRevalidation),
+    ...[Settings, Awards, Redirects, Tenants].map(withTranslation).map(withSiteRevalidation),
     Users,
   ],
   editor: lexicalEditor(),
+  // Traducerile din panou (F4, D-64): /api/translate.
+  endpoints: [translateEndpoint],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

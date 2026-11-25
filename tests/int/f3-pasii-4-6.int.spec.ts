@@ -5,7 +5,7 @@ import { eventParts, eventWhen, slugify } from '@/lib/site/format'
 import { requestHref } from '@/lib/site/requests'
 import { navItems, orderedSections } from '@/lib/site/sections'
 import type { SiteData } from '@/lib/site/data'
-import { plural, UI } from '@/lib/site/strings'
+import { plural, ro as UI } from '@/lib/site/i18n/ro'
 
 /**
  * F3 pașii 4–6 și widgetul de cazare (D-45), fără browser:

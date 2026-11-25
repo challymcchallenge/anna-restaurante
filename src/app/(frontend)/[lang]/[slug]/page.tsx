@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
 import { notFound, permanentRedirect, redirect } from 'next/navigation'
 import React from 'react'
 
 import { PageCover } from '@/components/site/Events'
 import { LegalContent, legalHeadings } from '@/components/site/LegalContent'
-import { getSite, getSlugPage } from '@/lib/site/data'
-import { UI } from '@/lib/site/strings'
+import { getSlugPage } from '@/lib/site/data'
+import { getActiveSite, localeAlternates } from '@/lib/site/locale'
+import { lp, UI } from '@/lib/site/i18n/server'
 
 /**
  * Paginile legale (PLAN F3 pasul 10, content-model 5.12): termeni, confidențialitate, cookies, la
@@ -16,9 +16,9 @@ import { UI } from '@/lib/site/strings'
 type Props = { params: Promise<{ slug: string }> }
 
 async function resolve(slug: string) {
-  const site = await getSite((await headers()).get('host'))
+  const site = await getActiveSite()
   if (!site) return null
-  return { site, ...(await getSlugPage(site.tenant.id, decodeURIComponent(slug).toLowerCase())) }
+  return { site, ...(await getSlugPage(site.tenant.id, decodeURIComponent(slug).toLowerCase(), site.locale)) }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${r.page.title} · ${r.site.tenant.name}`,
     description: UI.legalMeta(r.page.title, r.site.tenant.name, legalHeadings(r.page.content).map((h) => h.text)),
+    alternates: localeAlternates(r.site, `/${r.page.slug}`),
   }
 }
 
@@ -34,7 +35,7 @@ export default async function LegalPage({ params }: Props) {
   const { slug } = await params
   // O singură adresă pe pagină: /TERMENI → /termeni (308).
   const decoded = decodeURIComponent(slug)
-  if (decoded !== decoded.toLowerCase()) permanentRedirect(`/${encodeURIComponent(decoded.toLowerCase())}`)
+  if (decoded !== decoded.toLowerCase()) permanentRedirect(lp(`/${encodeURIComponent(decoded.toLowerCase())}`))
   const r = await resolve(slug)
   if (!r) notFound()
   if (!r.page) {
@@ -43,7 +44,7 @@ export default async function LegalPage({ params }: Props) {
   }
   const page = r.page
   const toc = legalHeadings(page.content)
-  const updated = new Intl.DateTimeFormat('ro-RO', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Bucharest' }).format(
+  const updated = new Intl.DateTimeFormat(UI.intl, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Bucharest' }).format(
     new Date(page.updatedAt),
   )
 
@@ -65,6 +66,8 @@ export default async function LegalPage({ params }: Props) {
             </nav>
           )}
           <article className="legal-body">
+            {/* F4-4 (D-64): în altă limbă decât româna, nota că textul e o traducere automată. */}
+            {UI.legalTranslationNote && <p className="legal-note">{UI.legalTranslationNote}</p>}
             <LegalContent data={page.content} />
           </article>
         </div>

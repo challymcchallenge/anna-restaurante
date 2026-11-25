@@ -2,7 +2,7 @@ import React from 'react'
 
 import type { Award } from '@/payload-types'
 import { asMedia, pictureSources } from '@/lib/site/media'
-import { UI } from '@/lib/site/strings'
+import { UI } from '@/lib/site/i18n/server'
 
 import { Icon } from './Icons'
 

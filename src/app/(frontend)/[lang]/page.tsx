@@ -1,5 +1,6 @@
-import { headers } from 'next/headers'
 import React from 'react'
+
+import { getActiveSite } from '@/lib/site/locale'
 
 import { Parties, Pizza, PrivateEvents } from '@/components/site/Events'
 import { ContactSection } from '@/components/site/ContactSection'
@@ -7,7 +8,6 @@ import { GallerySection } from '@/components/site/Gallery'
 import { Hero } from '@/components/site/Hero'
 import { Hotel } from '@/components/site/Hotel'
 import { Kitchen, Reviews, Wines } from '@/components/site/Restaurant'
-import { getSite } from '@/lib/site/data'
 import { orderedSections } from '@/lib/site/sections'
 
 /**
@@ -15,7 +15,7 @@ import { orderedSections } from '@/lib/site/sections'
  * Tagline-ul vine din Setări; secțiunile încă neconstruite în F3 nu apar (PLAN F3, pașii 4–9).
  */
 export default async function HomePage() {
-  const site = await getSite((await headers()).get('host'))
+  const site = await getActiveSite()
   if (!site) return null
 
   return (

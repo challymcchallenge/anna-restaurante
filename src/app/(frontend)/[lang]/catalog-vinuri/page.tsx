@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
 import React from 'react'
 
 import { AwardBadge, awardsFor } from '@/components/site/Bits'
 import { PageCover } from '@/components/site/Events'
 import { GroupLogo, WineFilter, WineSheetGroup } from '@/components/site/WineList'
 import { WineSearch } from '@/components/site/WineSearch'
-import { getSite, getWineList } from '@/lib/site/data'
+import { getWineList } from '@/lib/site/data'
+import { getActiveSite, localeAlternates } from '@/lib/site/locale'
 import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
-import { UI } from '@/lib/site/strings'
+import { renderLocale, UI } from '@/lib/site/i18n/server'
 import { byTypeGroups, typesIn } from '@/lib/site/wines'
 
 /**
@@ -19,15 +19,16 @@ import { byTypeGroups, typesIn } from '@/lib/site/wines'
  * stă în antetul paginii (D-20, locul 3).
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSite((await headers()).get('host'))
+  const site = await getActiveSite()
   if (!site) return {}
   const w = section(site.home, 'wines')
   // Fără text introductiv în panou: descrierea se compune din listă (numărul de vinuri, țările).
-  const wines = w?.intro ? [] : await getWineList(site.tenant.id)
+  const wines = w?.intro ? [] : await getWineList(site.tenant.id, site.locale)
   const countries = [...new Set(wines.map((x) => x.country).filter((c): c is string => Boolean(c)))]
   return {
     title: `${w?.title || UI.wineListTitle} · ${site.tenant.name}`,
     description: w?.intro || UI.wineMetaDescription(site.tenant.name, UI.wineCount(wines.length), countries),
+    alternates: localeAlternates(site, '/catalog-vinuri'),
   }
 }
 
@@ -35,7 +36,7 @@ export default async function WineListPage() {
   const site = await sitePage('wines')
   const w = section(site.home, 'wines')
   const award = awardsFor(site.awards, 'wines-page')[0]
-  const wines = await getWineList(site.tenant.id)
+  const wines = await getWineList(site.tenant.id, site.locale)
   const glass = wines.filter((x) => x.priceGlass != null)
 
   return (
@@ -59,7 +60,7 @@ export default async function WineListPage() {
           <div className="wine-sheet wine-board" id="lista">
             <div className="wine-tools">
               <WineFilter name="tip" types={typesIn(wines)} />
-              <WineSearch boardId="lista" />
+              <WineSearch locale={renderLocale()} boardId="lista" />
             </div>
             {glass.length > 0 && <WineSheetGroup type="glass" wines={glass} glass />}
             {byTypeGroups(wines).map((g) => (

@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 import React from 'react'
+
+import { getActiveSite, localeAlternates } from '@/lib/site/locale'
 
 import { ContactForm } from '@/components/site/ContactForm'
 import { ContactDetails, ContactMap } from '@/components/site/ContactSection'
 import { PageCover } from '@/components/site/Events'
 import config from '@/payload.config'
 import { formContext } from '@/lib/site/contact-context'
-import { getSite } from '@/lib/site/data'
 import { renderedAt, telHref, todayIso } from '@/lib/site/format'
 import { sitePage } from '@/lib/site/page'
-import { UI } from '@/lib/site/strings'
+import { renderLocale, UI } from '@/lib/site/i18n/server'
 
 /**
  * S-07 · Sesizări, la adresa păstrată de pe site-ul vechi (D-19, D-32): data vizitei, motivul
@@ -19,8 +19,14 @@ import { UI } from '@/lib/site/strings'
  * dacă subiectul e oprit în Setări, pagina dă telefonul.
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSite((await headers()).get('host'))
-  return site ? { title: `${UI.form.complaintTitle} · ${site.tenant.name}`, description: UI.form.complaintIntro } : {}
+  const site = await getActiveSite()
+  return site
+    ? {
+        title: `${UI.form.complaintTitle} · ${site.tenant.name}`,
+        description: UI.form.complaintIntro,
+        alternates: localeAlternates(site, '/formular-de-reclamatie'),
+      }
+    : {}
 }
 
 export default async function ComplaintPage() {
@@ -48,7 +54,7 @@ export default async function ComplaintPage() {
         <div className="wrap contact-grid">
           <div className="contact-main">
             {complaint ? (
-              <ContactForm
+              <ContactForm locale={renderLocale()}
                 mode="complaint"
                 subjects={[complaint]}
                 initial={{ subiect: complaint.slug }}

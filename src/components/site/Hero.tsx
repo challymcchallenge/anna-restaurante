@@ -9,6 +9,7 @@ import { isOn, section } from '@/lib/site/sections'
 import { AwardBadge, awardsFor, BookButton, ExampleTag, ExternalLink } from './Bits'
 import { HeroMotion } from './HeroMotion'
 import { StayRequest } from './StayRequest'
+import { renderLocale } from '@/lib/site/i18n/server'
 
 const DESKTOP = '(min-width: 1024px)'
 
@@ -105,7 +106,7 @@ export function Hero({ site, id }: { site: SiteData; id: string }) {
             className={`hero-frame${i === 0 ? ' is-active' : ''}`}
           />
         ))}
-        {(video || frames.length > 1) && <HeroMotion video={video} frames={frames.length} />}
+        {(video || frames.length > 1) && <HeroMotion locale={renderLocale()} video={video} frames={frames.length} />}
       </div>
       <div className="cover-frame" aria-hidden="true" />
       {hero?.placeholder && <ExampleTag floating className="hero-tag" />}
@@ -138,7 +139,7 @@ export function Hero({ site, id }: { site: SiteData; id: string }) {
 
         {stay && (
           <div className="stay rise" style={{ '--i': 4 } as React.CSSProperties}>
-            <StayRequest
+            <StayRequest locale={renderLocale()}
               id="cazare"
               title={stay.title}
               note={stay.note}

@@ -1,8 +1,14 @@
 'use client'
 
-import React, { useEffect, useId, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useId, useRef, useState } from 'react'
 
-import { plural, UI } from '@/lib/site/strings'
+import { clientUI } from '@/lib/site/i18n/client'
+import type { ClientDict } from '@/lib/site/i18n/ro'
+import { localePath } from '@/lib/locales'
+
+/** Textele și limba (F4): date de `StayRequest` tuturor componentelor din fișier. */
+const UICtx = createContext<{ UI: ClientDict; locale: string }>({ UI: clientUI('ro'), locale: 'ro' })
+const useUI = () => useContext(UICtx).UI
 
 /**
  * Cererea de cazare (content-model 4.2, D-15, D-45): o bară-pastilă cu Sosire · Plecare · Camere și
@@ -45,13 +51,13 @@ const addMonths = (y: number, m: number, n: number) => {
   return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1 }
 }
 const ym = (iso: string) => ({ y: Number(iso.slice(0, 4)), m: Number(iso.slice(5, 7)) })
-const fmt = (iso: string, o: Intl.DateTimeFormatOptions) =>
-  new Intl.DateTimeFormat('ro-RO', { ...o, timeZone: 'UTC' }).format(toUtc(iso))
-const short = (iso: string) => fmt(iso, { day: 'numeric', month: 'short', year: 'numeric' })
-const long = (iso: string) =>
-  fmt(iso, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
-const title = (y: number, m: number) => {
-  const t = fmt(`${y}-${String(m).padStart(2, '0')}-01`, { month: 'long', year: 'numeric' })
+const fmt = (iso: string, o: Intl.DateTimeFormatOptions, intl: string) =>
+  new Intl.DateTimeFormat(intl, { ...o, timeZone: 'UTC' }).format(toUtc(iso))
+const short = (iso: string, intl: string) => fmt(iso, { day: 'numeric', month: 'short', year: 'numeric' }, intl)
+const long = (iso: string, intl: string) =>
+  fmt(iso, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }, intl)
+const title = (y: number, m: number, intl: string) => {
+  const t = fmt(`${y}-${String(m).padStart(2, '0')}-01`, { month: 'long', year: 'numeric' }, intl)
   return t.charAt(0).toUpperCase() + t.slice(1)
 }
 /** Cele 42 de zile afișate pentru o lună, începând cu lunea (convenția din România). */
@@ -79,6 +85,7 @@ function Calendar({
   range: [string, string]
   onPick: (iso: string) => void
 }) {
+  const UI = useUI()
   const [view, setView] = useState(() => ym(value))
   const [focus, setFocus] = useState(value)
   const grid = useRef<HTMLTableElement>(null)
@@ -128,7 +135,7 @@ function Calendar({
           <I name="chevron-left" />
         </button>
         <p className="cal-title" aria-live="polite">
-          {title(view.y, view.m)}
+          {title(view.y, view.m, UI.intl)}
         </p>
         <button
           className="cal-nav"
@@ -175,7 +182,7 @@ function Calendar({
                       disabled={past}
                       aria-pressed={selected}
                       aria-current={iso === today ? 'date' : undefined}
-                      aria-label={`${long(iso)}${iso === today ? `, ${UI.stay.today}` : ''}`}
+                      aria-label={`${long(iso, UI.intl)}${iso === today ? `, ${UI.stay.today}` : ''}`}
                       onClick={() => onPick(iso)}
                     >
                       {Number(iso.slice(8, 10))}
@@ -208,6 +215,7 @@ function Stepper({
   max: number
   onChange: (n: number) => void
 }) {
+  const UI = useUI()
   return (
     <div className="stepper" role="group" aria-labelledby={id}>
       <span className="stepper-label" id={id}>
@@ -238,15 +246,12 @@ function Stepper({
   )
 }
 
-const roomSummary = (r: Room) =>
-  [plural(r.adults, 'adult', 'adulți'), r.children ? plural(r.children, 'copil', 'copii') : null]
-    .filter(Boolean)
-    .join(', ')
+const roomSummary = (UI: ClientDict, r: Room) => UI.stay.roomSummary(r.adults, r.children)
 
-function guestsSummary(rooms: Room[]) {
+function guestsSummary(UI: ClientDict, rooms: Room[]) {
   const a = rooms.reduce((s, r) => s + r.adults, 0)
   const c = rooms.reduce((s, r) => s + r.children, 0)
-  return `${plural(rooms.length, 'cameră', 'camere')} · ${plural(a, 'adult', 'adulți')}, ${plural(c, 'copil', 'copii')}`
+  return UI.stay.guestsSummary(rooms.length, a, c)
 }
 
 /* ---------- Bara (desktop) și panoul (telefon), cu aceeași logică ---------- */
@@ -261,6 +266,7 @@ type WidgetProps = {
 }
 
 function StayWidget({ uid, variant, today, maxAdults, maxChildren, buttonLabel }: WidgetProps) {
+  const { UI, locale } = useContext(UICtx)
   const [arrive, setArrive] = useState(today)
   const [depart, setDepart] = useState(addDays(today, 1))
   const [rooms, setRooms] = useState<Room[]>([{ adults: 2, children: 0 }])
@@ -347,7 +353,7 @@ function StayWidget({ uid, variant, today, maxAdults, maxChildren, buttonLabel }
   const ornament = variant === 'bar' ? <I name="ornament" className="sbar-orn" /> : null
 
   return (
-    <form className={`sbar sbar--${variant}`} ref={root} action="/contact" method="get">
+    <form className={`sbar sbar--${variant}`} ref={root} action={localePath(locale, '/contact')} method="get">
       <input type="hidden" name="subiect" value="cazare" />
       <input type="hidden" name="sosire" value={arrive} />
       <input type="hidden" name="plecare" value={depart} />
@@ -363,7 +369,7 @@ function StayWidget({ uid, variant, today, maxAdults, maxChildren, buttonLabel }
         'arrive',
         'calendar',
         UI.stay.arrive,
-        short(arrive),
+        short(arrive, UI.intl),
         <Calendar
           label={UI.stay.chooseArrive}
           value={arrive}
@@ -378,7 +384,7 @@ function StayWidget({ uid, variant, today, maxAdults, maxChildren, buttonLabel }
         'depart',
         'calendar',
         UI.stay.depart,
-        short(depart),
+        short(depart, UI.intl),
         <Calendar
           key={arrive}
           label={UI.stay.chooseDepart}
@@ -394,12 +400,12 @@ function StayWidget({ uid, variant, today, maxAdults, maxChildren, buttonLabel }
         'guests',
         'door',
         UI.stay.roomsGuests,
-        guestsSummary(rooms),
+        guestsSummary(UI, rooms),
         <div className="rooms" role="dialog" aria-label={UI.stay.roomsGuests}>
           {rooms.map((r, i) => (
             <div className="room" key={i}>
               <p className="room-title">
-                {UI.stay.room(i + 1)}: {roomSummary(r)}
+                {UI.stay.room(i + 1)}: {roomSummary(UI, r)}
               </p>
               <Stepper
                 id={`${uid}-r${i}-a`}
@@ -457,6 +463,7 @@ type Props = {
   today: string
   /** Eticheta „Exemplu · de înlocuit”, randată pe server, dacă textele sunt provizorii. */
   tag?: React.ReactNode
+  locale: string
 }
 
 export function StayRequest({
@@ -468,7 +475,9 @@ export function StayRequest({
   maxChildren,
   today,
   tag,
+  locale,
 }: Props) {
+  const UI = clientUI(locale)
   const uid = useId().replace(/:/g, '')
   const sheet = useRef<HTMLDialogElement>(null)
   const common = { today, maxAdults, maxChildren, buttonLabel }
@@ -480,6 +489,7 @@ export function StayRequest({
   const openSheet = () => (sheetMounted ? sheet.current?.showModal() : setSheetMounted(true))
 
   return (
+    <UICtx.Provider value={{ UI, locale }}>
     <div className="stay-request" id={id}>
       {/* Desktop: titlul și nota deasupra barei-pastilă, pe copertă */}
       <div className="stay-desktop">
@@ -532,5 +542,6 @@ export function StayRequest({
         )}
       </dialog>
     </div>
+    </UICtx.Provider>
   )
 }

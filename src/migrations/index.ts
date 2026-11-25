@@ -10,6 +10,7 @@ import * as migration_20261124_211206_f3_telefon_pizza from './20261124_211206_f
 import * as migration_20261124_221615_f3_recenzii_limba from './20261124_221615_f3_recenzii_limba';
 import * as migration_20261124_231318_f3_meniu_navigare from './20261124_231318_f3_meniu_navigare';
 import * as migration_20261125_002159_f3_decor from './20261125_002159_f3_decor';
+import * as migration_20261125_044503_f4_traduceri from './20261125_044503_f4_traduceri';
 
 export const migrations = [
   {
@@ -70,6 +71,11 @@ export const migrations = [
   {
     up: migration_20261125_002159_f3_decor.up,
     down: migration_20261125_002159_f3_decor.down,
-    name: '20261125_002159_f3_decor'
+    name: '20261125_002159_f3_decor',
+  },
+  {
+    up: migration_20261125_044503_f4_traduceri.up,
+    down: migration_20261125_044503_f4_traduceri.down,
+    name: '20261125_044503_f4_traduceri'
   },
 ];

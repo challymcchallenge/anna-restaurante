@@ -441,6 +441,8 @@ export interface HomePage {
     copyright: string;
     placeholder?: boolean | null;
   };
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -527,6 +529,8 @@ export interface Media {
   poster?: (number | null) | Media;
   codec?: string | null;
   variantOf?: (number | null) | Media;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   prefix?: string | null;
   _objectKey?: string | null;
   updatedAt: string;
@@ -675,6 +679,8 @@ export interface Event {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -709,6 +715,8 @@ export interface DishCategory {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -779,6 +787,8 @@ export interface Wine {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -820,6 +830,8 @@ export interface Review {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -861,6 +873,8 @@ export interface Salon {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -889,6 +903,8 @@ export interface RoomType {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -917,6 +933,8 @@ export interface Gallery {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -937,6 +955,8 @@ export interface GalleryCategory {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -978,6 +998,8 @@ export interface Faq {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1002,6 +1024,8 @@ export interface ComplaintReason {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1072,6 +1096,8 @@ export interface LegalPage {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1316,6 +1342,10 @@ export interface Setting {
    * Româna este implicită. Celelalte limbi se pornesc după traduceri (F4, D-28). Fereastra ialoc are doar ro și en.
    */
   activeLocales: ('ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv')[];
+  /**
+   * Rămân la fel în toate limbile (content-model 9). Numele restaurantului, tagline-ul, saloanele, camerele, categoriile, serile și linkurile grupului se adaugă singure; aici pui restul (de exemplu Hotel ANNA, Wine Spectator).
+   */
+  doNotTranslate?: string[] | null;
   requests?: {
     privateEvent?: {
       /**
@@ -1408,6 +1438,8 @@ export interface Setting {
       responseTime?: string | null;
     };
   };
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1459,6 +1491,8 @@ export interface Award {
    * Pornit = pe site apare eticheta „Exemplu · de înlocuit”; intră în contorul din Tabloul de bord (D-08).
    */
   placeholder?: boolean | null;
+  i18nStatus?: ('auto' | 'verified') | null;
+  i18nSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1827,6 +1861,8 @@ export interface HomePageSelect<T extends boolean = true> {
         copyright?: T;
         placeholder?: T;
       };
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1849,6 +1885,8 @@ export interface EventsSelect<T extends boolean = true> {
   status?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1865,6 +1903,8 @@ export interface DishCategoriesSelect<T extends boolean = true> {
   link?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1893,6 +1933,8 @@ export interface WinesSelect<T extends boolean = true> {
   externalCode?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1913,6 +1955,8 @@ export interface ReviewsSelect<T extends boolean = true> {
   sourceUrl?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1936,6 +1980,8 @@ export interface SalonsSelect<T extends boolean = true> {
       };
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1951,6 +1997,8 @@ export interface RoomTypesSelect<T extends boolean = true> {
   photo?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1967,6 +2015,8 @@ export interface GallerySelect<T extends boolean = true> {
   onHome?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1980,6 +2030,8 @@ export interface GalleryCategoriesSelect<T extends boolean = true> {
   name?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1995,6 +2047,8 @@ export interface FaqsSelect<T extends boolean = true> {
   group?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2009,6 +2063,8 @@ export interface ComplaintReasonsSelect<T extends boolean = true> {
   explanation?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2039,6 +2095,8 @@ export interface LegalPagesSelect<T extends boolean = true> {
   inFooter?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2061,6 +2119,8 @@ export interface MediaSelect<T extends boolean = true> {
   poster?: T;
   codec?: T;
   variantOf?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   prefix?: T;
   _objectKey?: T;
   updatedAt?: T;
@@ -2298,6 +2358,7 @@ export interface SettingsSelect<T extends boolean = true> {
   analyticsId?: T;
   digitalMenuUrl?: T;
   activeLocales?: T;
+  doNotTranslate?: T;
   requests?:
     | T
     | {
@@ -2342,6 +2403,8 @@ export interface SettingsSelect<T extends boolean = true> {
               responseTime?: T;
             };
       };
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2363,6 +2426,8 @@ export interface AwardsSelect<T extends boolean = true> {
   structuredData?: T;
   active?: T;
   placeholder?: T;
+  i18nStatus?: T;
+  i18nSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }

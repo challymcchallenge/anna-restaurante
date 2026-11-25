@@ -11,7 +11,7 @@ import { describe, expect, it } from 'vitest'
 
 const root = process.cwd()
 const footer = readFileSync(join(root, 'src/components/site/SiteFooter.tsx'), 'utf8')
-const css = readFileSync(join(root, 'src/app/(frontend)/styles.css'), 'utf8')
+const css = readFileSync(join(root, 'src/app/(frontend)/[lang]/styles.css'), 'utf8')
 
 describe('D-63 · creditul BizTech în footer', () => {
   it('Cele 3 rânduri, cu linkurile de telefon și site', () => {

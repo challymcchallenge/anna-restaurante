@@ -1,4 +1,5 @@
 import { SUBJECT_SLUGS, type Subject } from './requests'
+import { ro } from './i18n/ro'
 
 /**
  * Formularul unic de Contact și cel de sesizări (F3 pasul 9, S-06, S-06b, S-07, content-model 7).
@@ -9,25 +10,9 @@ import { SUBJECT_SLUGS, type Subject } from './requests'
 export const subjectFromSlug = (slug: string | null | undefined): Subject | null =>
   (Object.entries(SUBJECT_SLUGS).find(([, s]) => s === slug)?.[0] as Subject | undefined) ?? null
 
-export const FORM_MESSAGES = {
-  phone: 'Scrie un număr de telefon, ca să te putem suna.',
-  email: 'Scrie adresa de email, de exemplu nume@exemplu.ro.',
-  consent: 'Bifează acordul, ca să-ți putem răspunde.',
-  subject: 'Alege despre ce ne scrii.',
-  eventDate: 'Alege data evenimentului, de azi încolo.',
-  guests: 'Scrie câți invitați vor fi.',
-  children: 'Scrie câți copii vin la curs.',
-  preferredDate: 'Alege o dată de azi încolo.',
-  checkIn: 'Alege data sosirii, de azi încolo.',
-  checkOut: 'Plecarea trebuie să fie după sosire.',
-  adults: 'Scrie câți adulți vin (cel puțin unul).',
-  kids: 'Scrie câți copii vin (0 dacă nu vin copii).',
-  question: 'Scrie întrebarea ta.',
-  visitDate: 'Alege data vizitei, cel târziu azi.',
-  reason: 'Alege motivul sesizării.',
-  description: 'Spune-ne pe scurt ce s-a întâmplat.',
-  tooLong: (max: number) => `Cel mult ${max} de caractere.`,
-} as const
+/** Mesajele de validare în română; formularul primește mesajele limbii paginii (F4). */
+export const FORM_MESSAGES = ro.formErrors
+export type FormMessages = typeof ro.formErrors
 
 export type FormValues = Record<string, string | string[]>
 export type FieldErrors = Record<string, string>
@@ -56,7 +41,11 @@ const isDate = (v: string) => /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Dat
 export const dateAtNoon = (v: string) => `${v}T12:00:00.000Z`
 const int = (v: string) => (/^\d{1,4}$/.test(v) ? Number(v) : null)
 
-export function validRequest(values: FormValues, lookups: Lookups): { errors: FieldErrors; data: RequestData | null } {
+export function validRequest(
+  values: FormValues,
+  lookups: Lookups,
+  FORM_MESSAGES: FormMessages = ro.formErrors,
+): { errors: FieldErrors; data: RequestData | null } {
   const errors: FieldErrors = {}
   const subject = subjectFromSlug(one(values.subiect))
   if (!subject || !lookups.activeSubjects.includes(subject)) errors.subiect = FORM_MESSAGES.subject
