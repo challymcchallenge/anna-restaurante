@@ -124,3 +124,10 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | ~~G11-2~~ | ~~numele categoriilor traductibile~~ — **rezolvat: D-67** | — | — |
 | ~~G11-3~~ | ~~abaterea /zh acceptată~~ — **rezolvat: D-67** | — | — |
 
+
+## Întrebări deschise după D-72 (25.11.2026)
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G12-1 | **Slideshow-ul pe telefoanele cu „Reducere mișcare” / „Eliminare animații” / economie de date.** Acum (D-60) rămâne pe prima fotografie, intenționat. Propunere: cadrele se schimbă și acolo, **fără estompare** (trecere instantanee), cu butonul de pauză. Schimbă D-60, deci cere „DA”. Alin n-a spus încă ce telefon și ce setări are; nu am reprodus problema pe telefoane emulate | înainte de lansare | Alin |
+| G12-2 | **Coperta Acasă:** din panou (25.11.2026, 11:14) e pe **Video**, cu `Evenimente_Trattoria_1.mp4` (9:16, 10 s) doar la „Clip telefon”. Pe desktop se folosește tot clipul vertical, mărit și neclar. Variante: un clip 16:9 de cel mult 30 s la „Clip desktop”, sau înapoi la „Slideshow” (cele 5 fotografii sunt salvate) | înainte de lansare | Alin |

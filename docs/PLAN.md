@@ -101,6 +101,8 @@ Efectele sezoniere, animațiile 3D, sunetul de fundal și comutatorul de temă s
 
 **Stare (25.11.2026):** **GATE 4 prezentat** (raport `docs/2026_11_25_Trattoria_GATE4.md`, pagina HTML https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM). 7 limbi live, conținutul tradus integral (rămân identice doar numele proprii); FAQ la cursuri și cazare (D-65); fotografiile demo scoase (D-66). Lighthouse mobil pe producție, mediane: `/` 86, `/en` 89, `/zh` 82 (sub țintă, cauza măsurată, G11-3); accesibilitate 100. Teste 105/105. GO pentru F5 și răspunsurile G11 primite (D-67); cererile de după GATE 4 rezolvate (D-67). F5 pornește în sesiunea următoare.
 
+**După GATE 4 (25.11.2026):** cererile și reparațiile D-66 … D-72, toate pe producție (insigna Wine Spectator, PDF-ul listei de vinuri, coperta pe telefon, bara de jos, slideshow la 3 s, clipul cursului pe Acasă; D-72 a reparat linkurile interne care afișau Acasă pe Vercel). Teste 126/126. Deschise: G12-1, G12-2. Predarea: `docs/2026_11_25_Trattoria_Stare_Proiect.md`.
+
 ## Faza 5 — Verificare și lansare
 
 **GO primit (D-67, 25.11.2026).** Ordinea: întâi tot ce ține de site și panou; **emailurile prin Resend și domeniul se conectează la final**, când totul e gata (D-36, D-67). Se re-măsoară Lighthouse pe `/zh` pe domeniul final (G11-3).
