@@ -129,8 +129,8 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G12-1 | **Slideshow-ul pe telefoanele cu „Reducere mișcare” / „Eliminare animații” / economie de date.** Acum (D-60) rămâne pe prima fotografie, intenționat. Propunere: cadrele se schimbă și acolo, **fără estompare** (trecere instantanee), cu butonul de pauză. Schimbă D-60, deci cere „DA”. Alin n-a spus încă ce telefon și ce setări are; nu am reprodus problema pe telefoane emulate | înainte de lansare | Alin |
-| G12-2 | **Coperta Acasă:** din panou (25.11.2026, 11:14) e pe **Video**, cu `Evenimente_Trattoria_1.mp4` (9:16, 10 s) doar la „Clip telefon”. Pe desktop se folosește tot clipul vertical, mărit și neclar. Variante: un clip 16:9 de cel mult 30 s la „Clip desktop”, sau înapoi la „Slideshow” (cele 5 fotografii sunt salvate) | înainte de lansare | Alin |
+| ~~G12-1~~ | ~~Slideshow-ul cu „Reducere mișcare”~~ — **rezolvat: D-76** (cadrele se schimbă instant, cu pauză) | — | — |
+| ~~G12-2~~ | ~~Coperta pe video fără clip de desktop~~ — **rezolvat: D-76** (Alin a revenit la slideshow) | — | — |
 
 ## Importul în masă al fotografiilor (cerut de Alin, 25.11.2026) — propunerea în `docs/2026_11_25_Trattoria_Stare_Proiect.md`, „Sesiunea următoare”
 

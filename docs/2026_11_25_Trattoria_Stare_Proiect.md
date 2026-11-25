@@ -5,10 +5,10 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 ## Concluzia
 
 - **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
-- **După GATE 4 au venit 10 cereri și reparații (D-66 … D-75)**, toate publicate și verificate pe producție (tabelul de mai jos).
+- **După GATE 4 au venit 11 cereri și reparații (D-66 … D-76)**, toate publicate și verificate pe producție (tabelul de mai jos).
 - **D-72 a reparat un bug serios:** din F4 până la D-72, pe Vercel, linkurile interne către paginile în română schimbau adresa, dar afișau Acasă până la reîncărcare. Acum merg.
-- **Cifre (producție, Lighthouse mobil):** Acasă mediana 86 (5 rulări după D-71), `/catalog-vinuri` 91, `/en` 89, `/zh` 82 (acceptat, G11-3, se re-măsoară în F5); accesibilitate 100, CLS 0. **Teste: 131/131** (27 de fișiere). tsc și lint: 0 erori.
-- **Deschise:** G12-1 (slideshow pe telefoane cu „Reducere mișcare”) și G12-2 (coperta pe video, fără clip de desktop), în `docs/OPEN-QUESTIONS.md`.
+- **Cifre (producție, Lighthouse mobil):** Acasă mediana 86 (5 rulări după D-71), `/catalog-vinuri` 91, `/en` 89, `/zh` 82 (acceptat, G11-3, se re-măsoară în F5); accesibilitate 100, CLS 0. **Teste: 136/136** (29 de fișiere). tsc și lint: 0 erori.
+- **G12 rezolvate (D-76):** coperta e din nou pe slideshow; cadrele se derulează și cu „Reducere mișcare” (instant, cu pauză).
 
 ## Unde e totul
 
@@ -17,7 +17,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/stoic-johnson-oxvj0z` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-75) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-76) |
 | Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G12-1, G12-2) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_083644_d71_slideshow_clip_acasa` |
@@ -75,7 +75,7 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 ## Note tehnice pentru sesiunea nouă
 
 - **Local:** Postgres 16 în container. Dacă serverul nu pornește cu `ECONNREFUSED 5432`: `pg_ctlcluster 16 main start`. Apoi `pnpm dev` (port 3000). Valorile din `.env.local` nu se citesc și nu se afișează; pentru date se folosesc scripturi temporare `pnpm payload run scripts/tmp-x.ts`, șterse după. Local, fișierele media stau pe disc (`media/`), nu în Supabase.
-- **Verificări:** `pnpm exec tsc --noEmit`, `pnpm lint` (0 erori; avertismentele sunt vechi), `pnpm vitest run --config ./vitest.config.mts` (131/131), `pnpm build`.
+- **Verificări:** `pnpm exec tsc --noEmit`, `pnpm lint` (0 erori; avertismentele sunt vechi), `pnpm vitest run --config ./vitest.config.mts` (136/136), `pnpm build`.
 - **Build de producție local:** `pnpm build && npx next start -p 3100`. Atenție: **rutarea Vercel diferă de `next start`** (sufixele `.rsc` / `.segments`, D-72). Ordinea exactă a rutelor primită de Vercel se vede cu un adaptor de diagnostic: un modul cu `onBuildComplete(ctx)` care scrie `ctx.routing` într-un fișier, rulat cu `NEXT_ADAPTER_PATH=<modul> pnpm build`.
 - **Next 16 în dev:** dacă paginile arată date vechi, oprește serverul și șterge `.next/dev/cache/fetch-cache`. Scripturile `payload run` nu pot goli cache-ul Next (`revalidateTag` merge doar într-o cerere Next).
 - **Contrast:** `node scripts/f2/contrast-measure.mjs <url> <etichetă> <out.json>`; medalionul din antet dă rezultate false la derulare, se repetă cu `.site-header` ascuns (D-62). Pentru textul de pe copertă (D-70): fundalul fotografiat cu textul ascuns, pe fiecare cadru, percentila 95 a luminozității din spatele textului.
@@ -94,7 +94,7 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-75), `docs/OPEN-QUESTIONS.md` (G12, G13), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Importul fotografiilor: răspunsurile G13 / Pornește F5 / răspunsuri G12 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-76), `docs/OPEN-QUESTIONS.md`, `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Importul fotografiilor: răspunsurile G13 / Pornește F5 / răspunsuri G12 / altă cerere]
 
 ---
 

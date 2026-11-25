@@ -26,7 +26,9 @@ export function useMotionAllowed() {
  * slideshow, cadrele care se schimbă la intervalul din panou (D-71: implicit 3 s; înainte 6 s). Posterul rămâne imaginea principală a primului ecran:
  * clipul pornește doar după încărcarea paginii, ca să nu întârzie afișarea.
  *
- * - `prefers-reduced-motion` sau economia de date: rămâne posterul, fără clip și fără derulare.
+ * - `prefers-reduced-motion` sau economia de date: clipul nu pornește (rămâne posterul). Slideshow-ul se
+ *   derulează și atunci (D-76, cerut de Alin): cu `prefers-reduced-motion`, cadrele se schimbă instant, fără
+ *   estompare (regula globală din styles.css oprește tranzițiile), iar butonul de pauză rămâne.
  * - Butonul de pauză oprește mișcarea (WCAG 2.2.2: orice se mișcă peste 5 s se poate opri).
  * - Clipul de telefon (9:16) sub 1024 px, cel de desktop (16:9) de la 1024 px.
  */
@@ -64,9 +66,9 @@ export function HeroMotion({
   }, [video, allowed])
 
   // Slideshow: cadrele 2…n primesc adresele abia după încărcarea paginii, ca fotografia principală
-  // (LCP) să nu împartă rețeaua cu ele (D-60). Fără mișcare permisă, nu se descarcă deloc.
+  // (LCP) să nu împartă rețeaua cu ele (D-60). D-76: se încarcă și se derulează pentru toți vizitatorii.
   useEffect(() => {
-    if (video || frames < 2 || !allowed) return
+    if (video || frames < 2) return
     const arm = () =>
       document.querySelectorAll<HTMLElement>('.hero-frame [data-srcset], .hero-frame [data-src]').forEach((el) => {
         // Întâi <source>, apoi <img> (ordinea din document): browserul alege sursa corectă.
@@ -81,11 +83,11 @@ export function HeroMotion({
     }
     window.addEventListener('load', arm, { once: true })
     return () => window.removeEventListener('load', arm)
-  }, [video, frames, allowed])
+  }, [video, frames])
 
   // Slideshow: cadrul activ se schimbă la `interval` (clasa `is-active`, tranziția e în CSS).
   useEffect(() => {
-    if (video || frames < 2 || !allowed || paused) return
+    if (video || frames < 2 || paused) return
     const els = Array.from(document.querySelectorAll<HTMLElement>('.hero-frame'))
     let i = Math.max(0, els.findIndex((e) => e.classList.contains('is-active')))
     const t = window.setInterval(() => {
@@ -94,7 +96,7 @@ export function HeroMotion({
       els[i]?.classList.add('is-active')
     }, interval)
     return () => window.clearInterval(t)
-  }, [video, frames, allowed, paused, interval])
+  }, [video, frames, paused, interval])
 
   useEffect(() => {
     const v = ref.current
@@ -103,7 +105,8 @@ export function HeroMotion({
     else v.play().catch(() => setPlaying(false))
   }, [paused, sources])
 
-  const moving = allowed && (Boolean(sources) || (!video && frames > 1))
+  // Butonul de pauză: cât rulează clipul (doar cu mișcare permisă) sau cât se derulează slideshow-ul (D-76: mereu).
+  const moving = (allowed && Boolean(sources)) || (!video && frames > 1)
 
   return (
     <>
