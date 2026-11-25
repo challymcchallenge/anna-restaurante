@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- script CommonJS rulat cu Playwright-ul global (NODE_PATH), vezi README */
 // Conversia ca în panou: convertImage(file, 'photo') din convert.ts, rulat în Chromium (HEIC prin heic-to).
 const { chromium } = require('playwright')
 const fs = require('fs'), path = require('path')

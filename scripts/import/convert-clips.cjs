@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- script CommonJS rulat cu Playwright-ul global (NODE_PATH), vezi README */
 const { chromium } = require('playwright')
 const fs = require('fs'), path = require('path')
 ;(async () => {
