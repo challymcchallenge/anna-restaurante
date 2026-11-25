@@ -131,3 +131,8 @@
     }
   }
 }
+
+/* F4: panoul „Traduceri” din bara laterală: butoanele unul sub altul, fără marginile mari implicite. */
+.translation-panel .btn {
+  margin: 0;
+}

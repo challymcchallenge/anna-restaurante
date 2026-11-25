@@ -152,7 +152,7 @@ describe('F4 · ce se traduce dintr-un document', () => {
     const back = fromMarkup(p, 'Book the <1>Salon Vittoria</1> now.')!
     expect(back.map((n) => n.text)).toEqual(['Book the ', 'Salon Vittoria', ' now.'])
     expect(back[1].format).toBe(1)
-    const li = DOC.body.root.children[1].children[0].children as never
+    const li = (DOC.body.root.children[1] as { children: { children: unknown[] }[] }).children[0].children as never
     const liBack = fromMarkup(li, 'Free <1>parking</1>')!
     expect(liBack[1].type).toBe('link')
     expect((liBack[1].fields as { url: string }).url).toBe('https://x.ro')

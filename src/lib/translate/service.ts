@@ -92,9 +92,134 @@ export type TranslateOutcome = { locale: LocaleCode; ok: boolean; error?: string
 
 export type TranslateReport = { outcomes: TranslateOutcome[]; inputTokens: number; outputTokens: number; costUsd: number }
 
+type Prepared = {
+  collection: CollectionSlug
+  id: number | string
+  ro: Record<string, unknown>
+  hash: string
+  parts: { seg: Segment; key: string; text: string; used: string[] }[]
+}
+
+/** Segmentele unui document, cu termenii protejați; cheile sunt unice între documente (`d3:s7`). */
+function prepare(payload: Payload, collection: CollectionSlug, ro: Record<string, unknown>, terms: string[], n: number): Prepared {
+  const segments = segmentsOf(payload, collection, ro)
+  return {
+    collection,
+    id: ro.id as number | string,
+    ro,
+    hash: sourceHash(segments),
+    parts: segments.map((seg, i) => {
+      const p = protectTerms(seg.source, terms)
+      return { seg, key: `d${n}:s${i}`, text: p.text, used: p.used }
+    }),
+  }
+}
+
+type Translator = typeof translateBatch
+
+/** Rulează sarcinile câte `limit` deodată. */
+async function pool<T>(tasks: (() => Promise<T>)[], limit: number): Promise<T[]> {
+  const out: T[] = []
+  let next = 0
+  await Promise.all(
+    Array.from({ length: Math.min(limit, tasks.length) }, async () => {
+      while (next < tasks.length) {
+        const i = next++
+        out[i] = await tasks[i]()
+      }
+    }),
+  )
+  return out
+}
+
+/**
+ * Traduce bucățile mai multor documente într-o limbă, grupate în cereri comune (~40 de bucăți) și
+ * câte 4 cereri în paralel. A doua încercare pentru bucățile care n-au ieșit bine. Întoarce textul
+ * bun pe cheie; ce lipsește rămâne în română.
+ */
+async function translateParts(
+  docs: Prepared[],
+  locale: LocaleCode,
+  restaurant: string,
+  translate: Translator,
+  usage: { input: number; output: number },
+): Promise<Map<string, string>> {
+  const all = docs.flatMap((d) => d.parts)
+  const raw = new Map<string, string>()
+  const ask = async (items: Item[]) => {
+    const results = await pool(
+      chunk(items).map((part) => () => translate(part, locale, restaurant)),
+      4,
+    )
+    for (const r of results) {
+      usage.input += r.inputTokens
+      usage.output += r.outputTokens
+      r.texts.forEach((v, k) => raw.set(k, v))
+    }
+  }
+  const good = (p: Prepared['parts'][number]) => {
+    const t = raw.get(p.key)
+    if (!t) return null
+    const restored = restoreTerms(t, p.used)
+    if (!restored.ok || (p.seg.max && restored.text.length > p.seg.max)) return null
+    return restored.text
+  }
+  await ask(all.map((p) => ({ id: p.key, text: p.text, max: p.seg.max })))
+  const retry = all.filter((p) => good(p) === null)
+  if (retry.length) await ask(retry.map((p) => ({ id: p.key, text: p.text, max: p.seg.max ? Math.floor(p.seg.max * 0.9) : undefined })))
+  const out = new Map<string, string>()
+  for (const p of all) {
+    const t = good(p)
+    if (t !== null) out.set(p.key, t)
+  }
+  return out
+}
+
+/** Salvează limba unui document: câmpurile de sus cu text, copiate din română, cu textele traduse. */
+async function writeDoc(payload: Payload, doc: Prepared, locale: LocaleCode, texts: Map<string, string>, req?: PayloadRequest): Promise<number> {
+  const data: Record<string, unknown> = {}
+  for (const p of doc.parts) {
+    const top = p.seg.path[0] as string
+    if (!(top in data)) data[top] = structuredClone(doc.ro[top])
+  }
+  let skipped = 0
+  for (const p of doc.parts) {
+    const text = texts.get(p.key)
+    if (text === undefined) {
+      // Rămâne textul românesc (același pe care site-ul l-ar arăta oricum): câmpurile obligatorii nu
+      // pot rămâne goale, iar un text greșit e mai rău decât unul netradus.
+      skipped += 1
+      continue
+    }
+    if (p.seg.kind === 'text') {
+      setAt(data, p.seg.path, text)
+    } else {
+      const block = getAt(data, p.seg.path) as { children?: unknown[] } | undefined
+      if (!block?.children) continue
+      const children = fromMarkup(block.children as never, text) ?? [
+        { type: 'text', format: 0, detail: 0, mode: 'normal', style: '', version: 1, text: stripMarkup(text) },
+      ]
+      setAt(data, [...p.seg.path, 'children'], children)
+    }
+  }
+  data.i18nStatus = 'auto'
+  data.i18nSource = doc.hash
+  await payload.update({
+    collection: doc.collection,
+    id: doc.id,
+    locale,
+    data: data as never,
+    depth: 0,
+    overrideAccess: true,
+    context: { i18nAuto: true },
+    req,
+  })
+  return skipped
+}
+
 /**
  * Traduce un document în limbile date și salvează fiecare limbă cu starea „tradus automat”.
- * Bucățile care nu ies bine (marcaje pierdute, prea lungi) rămân netraduse: pe site apare româna.
+ * Bucățile care nu ies bine (marcaje pierdute, prea lungi) rămân în română.
  */
 export async function translateDocument(
   payload: Payload,
@@ -105,81 +230,27 @@ export async function translateDocument(
     terms?: string[]
     req?: PayloadRequest
     /** Doar pentru probe locale fără cheie: un traducător înlocuitor. */
-    translate?: typeof translateBatch
+    translate?: Translator
   },
 ): Promise<TranslateReport> {
   const { collection, id, locales } = args
   const ro = (await payload.findByID({ collection, id, depth: 0, locale: DEFAULT_LOCALE, overrideAccess: true })) as unknown as Record<string, unknown>
-  const segments = segmentsOf(payload, collection, ro)
-  const hash = sourceHash(segments)
   const tenantId = (ro.tenant && typeof ro.tenant === 'object' ? (ro.tenant as { id: number }).id : ro.tenant) as number | undefined
   const terms = args.terms ?? (tenantId ? await glossary(payload, tenantId) : [])
-  const restaurant = terms[0] ?? 'the restaurant'
-  const report: TranslateReport = { outcomes: [], inputTokens: 0, outputTokens: 0, costUsd: 0 }
-
-  // Aceleași bucăți pentru toate limbile: protejate o singură dată.
-  const prepared = segments.map((s, i) => {
-    const p = protectTerms(s.source, terms)
-    return { seg: s, id: `s${i}`, text: p.text, used: p.used }
-  })
-
-  for (const locale of locales) {
-    try {
-      const translated = new Map<string, string>()
-      const pending: Item[] = prepared.map((p) => ({ id: p.id, text: p.text, max: p.seg.max }))
-      for (const part of chunk(pending)) {
-        const r = await (args.translate ?? translateBatch)(part, locale, restaurant)
-        report.inputTokens += r.inputTokens
-        report.outputTokens += r.outputTokens
-        r.texts.forEach((v, k) => translated.set(k, v))
+  const doc = prepare(payload, collection, ro, terms, 0)
+  const usage = { input: 0, output: 0 }
+  const outcomes = await Promise.all(
+    locales.map(async (locale): Promise<TranslateOutcome> => {
+      try {
+        const texts = await translateParts([doc], locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage)
+        const skipped = await writeDoc(payload, doc, locale, texts, args.req)
+        return { locale, ok: true, skipped }
+      } catch (e) {
+        return { locale, ok: false, error: e instanceof Error ? e.message : String(e) }
       }
-
-      // Documentul de salvat: doar câmpurile de sus care au text de tradus, copiate din română.
-      const data: Record<string, unknown> = {}
-      for (const p of prepared) {
-        const top = p.seg.path[0] as string
-        if (!(top in data)) data[top] = structuredClone(ro[top])
-      }
-      let skipped = 0
-      for (const p of prepared) {
-        const raw = translated.get(p.id)
-        const restored = raw ? restoreTerms(raw, p.used) : { text: '', ok: false }
-        if (!raw || !restored.ok || (p.seg.max && restored.text.length > p.seg.max)) {
-          skipped += 1
-          // Rămâne gol în limba țintă: pe site se vede româna (fallback), nu un text greșit.
-          if (p.seg.kind === 'text') setAt(data, p.seg.path, null)
-          continue
-        }
-        if (p.seg.kind === 'text') {
-          setAt(data, p.seg.path, restored.text)
-        } else {
-          const block = getAt(data, p.seg.path) as { children?: unknown[] } | undefined
-          if (!block?.children) continue
-          const children = fromMarkup(block.children as never, restored.text) ?? [
-            { type: 'text', format: 0, detail: 0, mode: 'normal', style: '', version: 1, text: stripMarkup(restored.text) },
-          ]
-          setAt(data, [...p.seg.path, 'children'], children)
-        }
-      }
-      data.i18nStatus = 'auto'
-      data.i18nSource = hash
-      await payload.update({
-        collection,
-        id,
-        locale,
-        data: data as never,
-        depth: 0,
-        overrideAccess: true,
-        context: { i18nAuto: true },
-        req: args.req,
-      })
-      report.outcomes.push({ locale, ok: true, skipped })
-    } catch (e) {
-      report.outcomes.push({ locale, ok: false, error: e instanceof Error ? e.message : String(e) })
-    }
-  }
-  report.costUsd = costUsd(report.inputTokens, report.outputTokens)
-  return report
+    }),
+  )
+  return { outcomes, inputTokens: usage.input, outputTokens: usage.output, costUsd: costUsd(usage.input, usage.output) }
 }
 
 export type Overview = Record<LocaleCode, Record<TranslationState, number>> & { documents: number }
@@ -187,8 +258,12 @@ export type Overview = Record<LocaleCode, Record<TranslationState, number>> & { 
 type WorkItem = { collection: CollectionSlug; id: number | string; locale: LocaleCode; state: TranslationState }
 
 /** Toate documentele restaurantului și starea lor pe limbă (Tabloul de bord, „Tradu tot site-ul”). */
-export async function siteStates(payload: Payload, tenantId: number | string): Promise<{ items: WorkItem[]; documents: number }> {
+export async function siteStates(
+  payload: Payload,
+  tenantId: number | string,
+): Promise<{ items: WorkItem[]; documents: number; docs: Map<string, unknown> }> {
   const items: WorkItem[] = []
+  const docs = new Map<string, unknown>()
   let documents = 0
   for (const collection of translatableCollections(payload)) {
     const base = { where: { tenant: { equals: tenantId } }, depth: 0, limit: 2000, pagination: false as const, overrideAccess: true }
@@ -196,7 +271,10 @@ export async function siteStates(payload: Payload, tenantId: number | string): P
     const hashes = new Map<string | number, string>()
     for (const d of ro.docs as unknown as { id: string | number }[]) {
       const segs = segmentsOf(payload, collection, d)
-      if (segs.length) hashes.set(d.id, sourceHash(segs))
+      if (segs.length) {
+        hashes.set(d.id, sourceHash(segs))
+        docs.set(`${collection}:${d.id}`, d)
+      }
     }
     documents += hashes.size
     if (!hashes.size) continue
@@ -215,7 +293,7 @@ export async function siteStates(payload: Payload, tenantId: number | string): P
       }
     }
   }
-  return { items, documents }
+  return { items, documents, docs }
 }
 
 export async function overview(payload: Payload, tenantId: number | string): Promise<Overview> {
@@ -230,41 +308,53 @@ export async function overview(payload: Payload, tenantId: number | string): Pro
 export type BatchMode = 'missing' | 'stale' | 'all'
 
 /**
- * „Tradu tot site-ul” pe bucăți: traduce documentele care au nevoie (netraduse și cele „de retradus”;
- * cu `all`, și pe cele traduse automat), până la `budgetMs`, apoi spune câte au rămas. Panoul repetă
- * cererea până la 0. Un text „verificat de om” nu se suprascrie niciodată aici (D-64, F4-2).
+ * „Tradu tot site-ul” pe ture: o tură ia cel mult `maxDocs` documente care au nevoie de traducere
+ * într-o singură limbă (netraduse și „de retradus”; cu `all`, și cele traduse automat), le traduce
+ * în cereri comune și le salvează până la `budgetMs`. Panoul repetă tura până nu mai rămâne nimic.
+ * Un text „verificat de om” nu se suprascrie niciodată aici (D-64, F4-2).
  */
 export async function translateBatchRun(
   payload: Payload,
-  args: { tenantId: number | string; locales: LocaleCode[]; mode: BatchMode; budgetMs: number; req?: PayloadRequest },
-): Promise<{ done: number; failed: { collection: string; id: string | number; locale: string; error: string }[]; remaining: number; costUsd: number }> {
-  if (!translationAvailable()) throw new Error('Lipsește TRANSLATE_API_KEY.')
+  args: {
+    tenantId: number | string
+    locales: LocaleCode[]
+    mode: BatchMode
+    budgetMs: number
+    maxDocs?: number
+    req?: PayloadRequest
+    translate?: Translator
+  },
+): Promise<{ done: number; failed: { collection: string; id: string | number; locale: string; error: string }[]; remaining: number; costUsd: number; locale?: string }> {
+  if (!args.translate && !translationAvailable()) throw new Error('Lipsește TRANSLATE_API_KEY.')
   const started = Date.now()
-  const { items } = await siteStates(payload, args.tenantId)
-  const wanted = (s: TranslationState) =>
-    s === 'none' || s === 'stale-auto' || (args.mode === 'all' && s === 'auto')
+  const { items, docs } = await siteStates(payload, args.tenantId)
+  const wanted = (st: TranslationState) => st === 'none' || st === 'stale-auto' || (args.mode === 'all' && st === 'auto')
   const todo = items.filter((i) => args.locales.includes(i.locale) && wanted(i.state))
-  // Grupate pe document: o singură încărcare și același glosar pentru toate limbile lui.
-  const byDoc = new Map<string, WorkItem[]>()
-  for (const i of todo) {
-    const k = `${i.collection}:${i.id}`
-    byDoc.set(k, [...(byDoc.get(k) ?? []), i])
-  }
+  if (!todo.length) return { done: 0, failed: [], remaining: 0, costUsd: 0 }
+  const locale = todo[0].locale
+  const slice = todo.filter((i) => i.locale === locale).slice(0, args.maxDocs ?? 80)
   const terms = await glossary(payload, args.tenantId)
-  let done = 0
-  let cost = 0
+  const prepared = slice.map((w, n) => prepare(payload, w.collection, docs.get(`${w.collection}:${w.id}`) as Record<string, unknown>, terms, n))
+  const usage = { input: 0, output: 0 }
   const failed: { collection: string; id: string | number; locale: string; error: string }[] = []
-  let handled = 0
-  for (const group of byDoc.values()) {
-    if (Date.now() - started > args.budgetMs) break
-    const { collection, id } = group[0]
-    const r = await translateDocument(payload, { collection, id, locales: group.map((g) => g.locale), terms, req: args.req })
-    cost += r.costUsd
-    for (const o of r.outcomes) {
-      if (o.ok) done += 1
-      else failed.push({ collection, id, locale: o.locale, error: o.error ?? '' })
-    }
-    handled += group.length
+  let done = 0
+  let texts = new Map<string, string>()
+  try {
+    texts = await translateParts(prepared, locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage)
+  } catch (e) {
+    const error = e instanceof Error ? e.message : String(e)
+    return { done: 0, failed: slice.map((w) => ({ collection: w.collection, id: w.id, locale, error })), remaining: todo.length, costUsd: costUsd(usage.input, usage.output), locale }
   }
-  return { done, failed, remaining: todo.length - handled, costUsd: cost }
+  let written = 0
+  for (const doc of prepared) {
+    if (Date.now() - started > args.budgetMs) break
+    written += 1
+    try {
+      await writeDoc(payload, doc, locale, texts, args.req)
+      done += 1
+    } catch (e) {
+      failed.push({ collection: doc.collection, id: doc.id, locale, error: e instanceof Error ? e.message : String(e) })
+    }
+  }
+  return { done, failed, remaining: todo.length - written, costUsd: costUsd(usage.input, usage.output), locale }
 }

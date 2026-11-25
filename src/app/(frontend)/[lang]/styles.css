@@ -1212,9 +1212,12 @@ main > section:is(:nth-of-type(8n + 5), :nth-of-type(8n + 6), :nth-of-type(8n + 
 .lang-menu a[aria-current='true'] { color: var(--c-accent); }
 .lang-menu .lang-code { font-weight: 600; font-size: 12px; letter-spacing: 0.08em; min-width: 22px; color: color-mix(in srgb, var(--c-on-dark) 70%, var(--c-dark)); }
 .lang-menu a[aria-current='true'] .lang-code { color: var(--c-accent); }
-/* În panoul de pe telefon și în footer, lista se deschide sub cod, în flux. */
-.lang--panel.lang-menu ul, .lang--footer.lang-menu ul { position: static; margin-top: 4px; box-shadow: none; }
-.lang--footer.lang-menu ul { bottom: auto; }
+/* În panoul de pe telefon, lista se deschide sub cod, în flux. */
+.lang--panel.lang-menu ul { position: static; margin-top: 4px; box-shadow: none; }
+/* În footer, lista se deschide în sus (sub ea e doar creditul). */
+.lang--footer.lang-menu ul { top: auto; bottom: calc(100% + 6px); left: 0; right: auto; }
 .footer-lang .lang-menu > summary { min-height: 24px; }
 @media (prefers-reduced-motion: reduce) { .lang-menu > summary::after { transition: none; } }
 .legal-note { margin: 0 0 24px; padding: 12px 16px; border-left: 3px solid var(--c-accent-ink); background: color-mix(in srgb, var(--c-accent) 10%, var(--c-bg)); font-size: 15px; }
+.review-translated { margin: 8px 0 0; font-size: 13px; color: var(--c-text-2); }
+.hotel .review-translated { color: var(--c-on-dark-2); }

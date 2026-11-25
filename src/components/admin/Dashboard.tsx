@@ -183,7 +183,14 @@ export async function Dashboard({ payload, user }: Props) {
       </section>
 
       {/* Traducerile (F4, D-64): cifrele pe limbă și „Tradu tot site-ul”. */}
-      {tenantId != null && <TranslationsBox tenantId={tenantId} admin={admin} />}
+      {tenantId != null ? (
+        <TranslationsBox tenantId={tenantId} admin={admin} />
+      ) : (
+        <section className="anna-dashboard__card">
+          <h3>Traduceri</h3>
+          <p>Alege un restaurant din comutatorul „Restaurant” din meniu, ca să vezi traducerile lui.</p>
+        </section>
+      )}
 
       {admin && missing.length > 0 && (
         <section className="anna-dashboard__card">

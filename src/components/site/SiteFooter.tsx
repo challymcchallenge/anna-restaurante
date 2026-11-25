@@ -154,9 +154,9 @@ export function SiteFooter({ site }: { site: SiteData }) {
                   <Link href={lp('/formular-de-reclamatie')}>{UI.complaints}</Link>
                 </li>
               </ul>
-              <p className="footer-lang">
+              <div className="footer-lang">
                 {UI.languageLabel}: <Language site={site} className="lang lang--footer" />
-              </p>
+              </div>
             </section>
           </div>
         </div>
