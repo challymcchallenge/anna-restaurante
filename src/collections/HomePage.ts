@@ -197,7 +197,8 @@ export const HomePage: CollectionConfig = {
           textarea({ name: 'shortText', label: 'Text scurt (pe Acasă)', max: 300, required: true, localized: true }),
           media({ name: 'photo', label: 'Fotografie', format: 'CARD-L', requiredUnlessPlaceholder: true }),
           button('Înscrie copilul'),
-          richText({ name: 'fullText', label: 'Text complet (pagina cursului)', max: 1200, required: true, localized: true }),
+          // D-74: textul cursului are subtitluri („Cum îl înscrii”, D-54); fără titluri în editor, panoul nu-l putea deschide.
+          richText({ name: 'fullText', label: 'Text complet (pagina cursului)', max: 1200, required: true, localized: true, headings: true }),
           media({ name: 'gallery', label: 'Galerie foto-video', kinds: ['photo', 'clip'], format: 'GAL', hasMany: true, maxRows: 12 }),
           media({
             name: 'video',

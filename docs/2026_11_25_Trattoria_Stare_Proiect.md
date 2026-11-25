@@ -5,9 +5,9 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 ## Concluzia
 
 - **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
-- **După GATE 4 au venit 8 cereri și reparații (D-66 … D-73)**, toate publicate și verificate pe producție (tabelul de mai jos).
+- **După GATE 4 au venit 9 cereri și reparații (D-66 … D-74)**, toate publicate și verificate pe producție (tabelul de mai jos).
 - **D-72 a reparat un bug serios:** din F4 până la D-72, pe Vercel, linkurile interne către paginile în română schimbau adresa, dar afișau Acasă până la reîncărcare. Acum merg.
-- **Cifre (producție, Lighthouse mobil):** Acasă mediana 86 (5 rulări după D-71), `/catalog-vinuri` 91, `/en` 89, `/zh` 82 (acceptat, G11-3, se re-măsoară în F5); accesibilitate 100, CLS 0. **Teste: 129/129** (26 de fișiere). tsc și lint: 0 erori.
+- **Cifre (producție, Lighthouse mobil):** Acasă mediana 86 (5 rulări după D-71), `/catalog-vinuri` 91, `/en` 89, `/zh` 82 (acceptat, G11-3, se re-măsoară în F5); accesibilitate 100, CLS 0. **Teste: 131/131** (27 de fișiere). tsc și lint: 0 erori.
 - **Deschise:** G12-1 (slideshow pe telefoane cu „Reducere mișcare”) și G12-2 (coperta pe video, fără clip de desktop), în `docs/OPEN-QUESTIONS.md`.
 
 ## Unde e totul
@@ -17,7 +17,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/stoic-johnson-oxvj0z` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-73) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-74) |
 | Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G12-1, G12-2) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_083644_d71_slideshow_clip_acasa` |
@@ -39,6 +39,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 | D-71 | Slideshow-ul la 3 s, editabil (Pagina Acasă → Hero → „Durata unui cadru”); clipul cursului de pizza și pe Acasă, în colaj lângă fotografie: nu se descarcă până la ecran, pornește fără sunet, butoane de pauză și sunet; comutator „Arată clipul și pe Acasă” |
 | D-72 | **Bug reparat:** pe Vercel, cererile routerului au sufix (`/galerie.rsc`, `/galerie.segments/_tree.segment.rsc`, Acasă `/index.rsc`); rescrierea românei le rata și cădeau pe `/[lang]` cu „lang = galerie”. Regula din `next.config.ts` le trimite acum la `/ro/…`. Test `f4-d72` |
 | D-73 | **Clipul fără sunet:** conversia copiază acum sunetul ca atare, verifică pistele aruncate și spune în panou („Codec și sunet”) dacă clipul are sunet. Clipul de pe site n-are pistă audio deloc; trebuie reîncărcat, cu fila panoului redeschisă |
+| D-74 | **Eroare în panou** la „Text complet (pagina cursului)” (Lexical #17): textul din seed (D-54) avea un subtitlu, editorul n-avea titluri. Câmpul are acum H2 și H3; test care oprește repetarea |
 
 ## Ce așteaptă de la Alin
 
@@ -58,7 +59,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 ## Note tehnice pentru sesiunea nouă
 
 - **Local:** Postgres 16 în container. Dacă serverul nu pornește cu `ECONNREFUSED 5432`: `pg_ctlcluster 16 main start`. Apoi `pnpm dev` (port 3000). Valorile din `.env.local` nu se citesc și nu se afișează; pentru date se folosesc scripturi temporare `pnpm payload run scripts/tmp-x.ts`, șterse după. Local, fișierele media stau pe disc (`media/`), nu în Supabase.
-- **Verificări:** `pnpm exec tsc --noEmit`, `pnpm lint` (0 erori; avertismentele sunt vechi), `pnpm vitest run --config ./vitest.config.mts` (129/129), `pnpm build`.
+- **Verificări:** `pnpm exec tsc --noEmit`, `pnpm lint` (0 erori; avertismentele sunt vechi), `pnpm vitest run --config ./vitest.config.mts` (131/131), `pnpm build`.
 - **Build de producție local:** `pnpm build && npx next start -p 3100`. Atenție: **rutarea Vercel diferă de `next start`** (sufixele `.rsc` / `.segments`, D-72). Ordinea exactă a rutelor primită de Vercel se vede cu un adaptor de diagnostic: un modul cu `onBuildComplete(ctx)` care scrie `ctx.routing` într-un fișier, rulat cu `NEXT_ADAPTER_PATH=<modul> pnpm build`.
 - **Next 16 în dev:** dacă paginile arată date vechi, oprește serverul și șterge `.next/dev/cache/fetch-cache`. Scripturile `payload run` nu pot goli cache-ul Next (`revalidateTag` merge doar într-o cerere Next).
 - **Contrast:** `node scripts/f2/contrast-measure.mjs <url> <etichetă> <out.json>`; medalionul din antet dă rezultate false la derulare, se repetă cu `.site-header` ascuns (D-62). Pentru textul de pe copertă (D-70): fundalul fotografiat cu textul ascuns, pe fiecare cadru, percentila 95 a luminozității din spatele textului.
@@ -77,7 +78,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-73), `docs/OPEN-QUESTIONS.md` (G12), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Pornește F5 / răspunsuri G12 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-74), `docs/OPEN-QUESTIONS.md` (G12), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Pornește F5 / răspunsuri G12 / altă cerere]
 
 ---
 
