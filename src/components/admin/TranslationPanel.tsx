@@ -58,20 +58,23 @@ export function TranslationPanel() {
   const [busy, setBusy] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
 
-  const load = useCallback(async () => {
-    if (!id || !collectionSlug) return
-    try {
-      const data = await call({ action: 'states', collection: collectionSlug, id })
-      setStates(data.states)
-      setAvailable(Boolean(data.available))
-    } catch (e) {
-      setMessage(e instanceof Error ? e.message : String(e))
-    }
-  }, [id, collectionSlug])
-
+  // Starea se (re)încarcă la deschidere și după fiecare acțiune (`reload`).
+  const [tick, setTick] = useState(0)
+  const load = useCallback(async () => setTick((t) => t + 1), [])
   useEffect(() => {
-    void load()
-  }, [load])
+    if (!id || !collectionSlug) return
+    let alive = true
+    call({ action: 'states', collection: collectionSlug, id })
+      .then((data) => {
+        if (!alive) return
+        setStates(data.states)
+        setAvailable(Boolean(data.available))
+      })
+      .catch((e) => alive && setMessage(e instanceof Error ? e.message : String(e)))
+    return () => {
+      alive = false
+    }
+  }, [id, collectionSlug, tick])
 
   if (!id) {
     return (

@@ -17,3 +17,8 @@ export const DELETE = REST_DELETE(config)
 export const PATCH = REST_PATCH(config)
 export const PUT = REST_PUT(config)
 export const OPTIONS = REST_OPTIONS(config)
+
+// Adăugat manual (F4, D-64): o tură din „Tradu tot site-ul” durează până la ~45 s, plus citirea
+// stărilor; retraducerea după salvare rulează în `after()` tot în această funcție. Dacă Payload
+// regenerează fișierul, linia trebuie pusă la loc (testul f4-traduceri o verifică).
+export const maxDuration = 120

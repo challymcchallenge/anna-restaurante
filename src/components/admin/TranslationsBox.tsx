@@ -32,17 +32,17 @@ export function TranslationsBox({ tenantId, admin }: { tenantId: number | string
   const [log, setLog] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
 
-  const load = useCallback(async () => {
-    try {
-      setData(await call({ action: 'overview', tenantId }))
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e))
-    }
-  }, [tenantId])
-
+  const [tick, setTick] = useState(0)
+  const load = useCallback(() => setTick((t) => t + 1), [])
   useEffect(() => {
-    void load()
-  }, [load])
+    let alive = true
+    call({ action: 'overview', tenantId })
+      .then((d) => alive && setData(d))
+      .catch((e) => alive && setError(e instanceof Error ? e.message : String(e)))
+    return () => {
+      alive = false
+    }
+  }, [tenantId, tick])
 
   const runAll = async () => {
     setRunning(true)
@@ -67,7 +67,7 @@ export function TranslationsBox({ tenantId, admin }: { tenantId: number | string
       setError(e instanceof Error ? e.message : String(e))
     } finally {
       setRunning(false)
-      void load()
+      load()
     }
   }
 

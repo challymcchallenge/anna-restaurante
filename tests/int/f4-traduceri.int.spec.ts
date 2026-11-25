@@ -191,3 +191,10 @@ describe('F4 · ce se traduce dintr-un document', () => {
     expect(chunk(big).map((c) => c.length)).toEqual([2, 2, 1])
   })
 })
+
+describe('F4 · durata funcției API', () => {
+  it('ruta /api are maxDuration 120 s (traducerile pe ture)', () => {
+    const route = readFileSync(join(process.cwd(), 'src/app/(payload)/api/[...slug]/route.ts'), 'utf8')
+    expect(route).toMatch(/export const maxDuration = 120/)
+  })
+})
