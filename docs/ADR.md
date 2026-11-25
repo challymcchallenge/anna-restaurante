@@ -126,3 +126,7 @@ Detaliile și cifrele sunt în `docs/spikes/` și `docs/2026_11_24_Trattoria_GAT
 - **ADR-009:** testul de email se mută în F5 (D-36). Limită: 50 de cereri cu copie pe zi pe planul gratuit Resend.
 - **ADR-010:** efectele, sunetul, 3D și tema trec în **R2, după lansare** (D-33).
 - **ADR-012:** confirmat pe producție: meta `noindex`, `X-Robots-Tag`, `robots.txt`; `*.vercel.app` nu se indexează niciodată.
+
+## Actualizare după GATE 3 (cerută de Alin, 25.11.2026)
+
+- **ADR-013, footer:** creditul de 2 rânduri se înlocuiește cu logo-ul rotund BizTech și 3 rânduri, centrate (D-63): „100% AI Solutions & Agentic WorkFlows | SW Development” / „Made with ❤️ by BizTech Consulting SRL” / „Alin Labau - AI Project Manager | +40 772 295 031 | www.biztech.ro”, cu linkurile `tel:+40772295031` și https://www.biztech.ro/. Rămâne fix, același pe toate restaurantele, needitabil din panou.

@@ -269,6 +269,16 @@ Contrastul pe Acasă, peste noile forme: cu antetul ascuns, 0 rânduri sub 4,5:1
 
 Capturi: `design/f3/capturi/2026_11_25_Trattoria_D62_*.webp`. Teste: 83/83 (4 noi, `f3-d62`).
 
+## 15. După GATE 3: creditul BizTech din footer (D-63)
+
+Jos în footer, centrat: logo-ul rotund BizTech (56–72 px, fără deformare pe orice ecran), apoi 3 rânduri:
+
+- 100% AI Solutions & Agentic WorkFlows | SW Development
+- Made with ❤️ by BizTech Consulting SRL
+- Alin Labau - AI Project Manager | +40 772 295 031 | www.biztech.ro
+
+Telefonul și site-ul sunt linkuri. Pe telefon, rândurile cu „|” se așază pe segmente, unul sub altul. Înlocuiește creditul de 2 rânduri din ADR-013.
+
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
 Pagina HTML a raportului (privată): https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP

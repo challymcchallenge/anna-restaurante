@@ -302,9 +302,18 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .footer-lang { margin-top: var(--s4); font-size: 15px; color: var(--c-on-dark-2); display: flex; align-items: center; gap: var(--s2); }
 .footer-lang .lang { min-height: 0; color: var(--c-on-dark); }
 .footer-base { margin-top: var(--s8); padding-top: var(--s5); border-top: 1px solid var(--line-cover); display: grid; gap: var(--s3); text-align: center; font-size: 13px; line-height: 1.5; color: var(--c-on-dark-2); }
-.footer-maker { margin-top: var(--s3); }
-.footer-maker a { text-decoration: none; }
+/* Creditul BizTech (D-63): logo-ul rotund și 3 rânduri, centrate. Logo-ul își păstrează proporția (1:1)
+   pe orice ecran; sub 560 px, rândurile cu „|” se așază pe segmente, unul sub altul. */
+.footer-maker { margin-top: var(--s4); display: grid; justify-items: center; gap: 2px; }
+.footer-maker-logo { display: block; width: clamp(56px, 16vw, 72px); height: auto; aspect-ratio: 1; margin-bottom: var(--s3); filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.45)); }
+.footer-maker-line { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: var(--s2); }
+.footer-maker-line > span { white-space: nowrap; }
+.footer-maker a { text-decoration: none; text-underline-offset: 3px; }
 .footer-maker a:hover { color: var(--c-on-dark); text-decoration: underline; }
+@media (max-width: 559px) {
+  .footer-maker-line { flex-direction: column; align-items: center; }
+  .footer-maker-sep { display: none; }
+}
 @media (min-width: 768px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-group { grid-column: span 1; }

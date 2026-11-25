@@ -168,15 +168,45 @@ export function SiteFooter({ site }: { site: SiteData }) {
               {UI.photoCredits}: {credits.join(' · ')}
             </p>
           )}
-          {/* Creditul realizatorului (ADR-013): fix, 2 rânduri, discret; nu se editează din panou. */}
-          <p className="footer-maker">
-            Made with ❤️ by BizTech Consulting SRL
-            <br />
-            <a href="https://www.biztech.ro" target="_blank" rel="noopener">
-              www.biztech.ro
-            </a>{' '}
-            / <a href="tel:+40772295031">+40772295031</a>
-          </p>
+          {/* Creditul realizatorului (D-63, înlocuiește cele 2 rânduri din ADR-013): logo-ul și 3 rânduri,
+              centrate. E același pe toate restaurantele și nu se editează din panou. */}
+          <div className="footer-maker">
+            <img
+              className="footer-maker-logo"
+              src="/brand/biztech-80.webp"
+              srcSet="/brand/biztech-80.webp 1x, /brand/biztech-160.webp 2x, /brand/biztech-240.webp 3x"
+              width={80}
+              height={80}
+              alt="BizTech Consulting SRL"
+              loading="lazy"
+              decoding="async"
+            />
+            <p className="footer-maker-line">
+              <span>100% AI Solutions &amp; Agentic WorkFlows</span>
+              <span className="footer-maker-sep" aria-hidden="true">
+                |
+              </span>
+              <span>SW Development</span>
+            </p>
+            <p className="footer-maker-line">Made with ❤️ by BizTech Consulting SRL</p>
+            <p className="footer-maker-line">
+              <span>Alin Labau - AI Project Manager</span>
+              <span className="footer-maker-sep" aria-hidden="true">
+                |
+              </span>
+              <span>
+                <a href="tel:+40772295031">+40 772 295 031</a>
+              </span>
+              <span className="footer-maker-sep" aria-hidden="true">
+                |
+              </span>
+              <span>
+                <a href="https://www.biztech.ro/" target="_blank" rel="noopener">
+                  www.biztech.ro
+                </a>
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
