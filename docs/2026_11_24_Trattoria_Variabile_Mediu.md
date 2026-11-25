@@ -38,7 +38,7 @@ Mediu: **Production** și **Preview**. Variabilele secrete le marchezi **Sensiti
 
 Nu se pun acum:
 - `RESEND_API_KEY` și `EMAIL_FROM`: la final, odată cu domeniul de trimitere (decizia ta din 24.11.2026).
-- `TRANSLATE_API_KEY`: după ce alegi motorul de traducere la GATE 0.
+- `TRANSLATE_API_KEY`: cheia Anthropic pentru traduceri (D-34). **Pusă de Alin pe 25.11.2026**, Production și Preview, Sensitive (verificat după nume, D-64).
 
 Generarea `PAYLOAD_SECRET` în PowerShell, pe calculatorul tău:
 

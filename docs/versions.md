@@ -107,6 +107,10 @@ Fonturile de pe vineyard.co.za (citit pe 24.11.2026; nu se cumpără, D-42):
 | Securitate Supabase (advisors) | F0: 0 probleme. **F1: RLS pornit pe toate tabelele din `public`** (fără politici; Payload este proprietarul tabelelor și nu e afectat) |
 | Migrații pe producție (F1) | `20261124_120825_f1_content_model`, `20261124_121504_f1_tenants_order`, `20261124_122707_f1_starter_flag` (batch 2, 24.11.2026, 581 + 421 + 137 ms pe build-ul Vercel) |
 | Conținut de pornire (F1) | `seed/trattoria-da-vittoria.json`, aplicat o singură dată de `scripts/seed-starter.ts` după migrații |
+| `@anthropic-ai/sdk` (F4) | **1.14.0**, publicat pe 24.11.2026 (npm, verificat 25.11.2026); fixat exact în `package.json` |
+| Model de traducere (F4, D-34) | `claude-haiku-5-5`; 0,10 USD intrare / 0,50 USD ieșire per milion de tokeni, pentru cereri sub 100K tokeni (documentația oficială, prețuri din 03.11.2026) |
+| Durata funcției `/api` (F4) | `maxDuration = 120` s, setat în `src/app/(payload)/api/[...slug]/route.ts`; valoarea implicită Vercel pentru planul Pro **neverificată** |
+| Migrație F4 | `20261125_044503_f4_traduceri`: `i18n_status` și `i18n_source` pe tabelele `*_locales` ale celor 15 colecții cu texte de tradus |
 
 ---
 
