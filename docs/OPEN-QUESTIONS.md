@@ -113,5 +113,5 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G10-1 | FAQ și la Cursurile de pizza și la Hotel (3–4 întrebări fiecare, din răspunsurile lui Alin)? | GATE 4 | Alin |
-| G10-2 | Termeni care nu se traduc, în plus față de cei automați: Hotel ANNA, Grupul ANNA, Wine Spectator, Riviera Events, VIP Riviera? | GATE 4 | Alin |
+| ~~G10-1~~ | ~~FAQ la cursuri și la hotel~~ — **rezolvat: D-65** (3 + 4 întrebări, doar fapte confirmate) | — | — |
+| ~~G10-2~~ | ~~Termeni care nu se traduc~~ — **rezolvat: D-65** | — | — |

@@ -50,11 +50,14 @@ describe('D-58 · saloane, camere, hotel, întrebări', () => {
     expect(vip).not.toMatch(/742/)
   })
 
-  it('Întrebări (D-59): 7, fără dubluri, toate cu răspuns; 5 pe Acasă', async () => {
-    const faqs = await all('faqs')
+  it('Întrebări (D-59): 7 pe Acasă și la evenimente, fără dubluri, toate cu răspuns; 5 pe Acasă', async () => {
+    // D-65 (G10) a adăugat 3 întrebări la cursuri și 4 la cazare: testate în f4-traduceri.
+    const all14 = await all('faqs')
+    expect(all14).toHaveLength(14)
+    expect(new Set(all14.map((f) => `${f.group}|${f.question}`)).size).toBe(14)
+    const faqs = all14.filter((f) => f.group === 'home' || f.group === 'private-events')
     expect(faqs).toHaveLength(7)
-    expect(new Set(faqs.map((f) => `${f.group}|${f.question}`)).size).toBe(7)
-    expect(faqs.filter((f) => f.placeholder)).toHaveLength(0)
+    expect(all14.filter((f) => f.placeholder)).toHaveLength(0)
     expect(faqs.filter((f) => f.group === 'home')).toHaveLength(5)
     for (const f of faqs) expect(lexicalText(f.answer), String(f.question)).not.toMatch(/de confirmat/)
     const parking = faqs.find((f) => f.question === 'Aveți parcare?')

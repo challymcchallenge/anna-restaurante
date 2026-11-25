@@ -2966,6 +2966,73 @@
           "placeholder": false
         }
       ]
+    },
+    {
+      "$comment": "G10-1 (D-65): întrebări la Cursurile de pizza (din textul aprobat al cursului și telefonul de înscrieri, D-52) și la Cazare (faptele de pe hotelanna.ro, 24.11.2026, docs/f3/2026_11_24_Trattoria_Surse_G8-3.md). Vârsta, durata, prețul și locurile la curs nu sunt confirmate (OQ #6), deci nu apar. Se adaugă o singură dată; ce e scris din panou rămâne.",
+      "collection": "faqs",
+      "version": "2026-11-25-g10",
+      "matchOn": [
+        "question",
+        "group"
+      ],
+      "items": [
+        {
+          "question": "Ce face copilul la curs?",
+          "group": "pizza",
+          "answer": {
+            "$richText": "Primește aluatul lui, îl întinde cu mâinile lui, își alege ingredientele preferate și își pregătește propria pizza, exact cum îi place."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Cum îl înscriu?",
+          "group": "pizza",
+          "answer": {
+            "$richText": "Apeși „Înscrie copilul” și ne scrii câți copii vin, vârstele lor și data dorită. Te sunăm noi să confirmăm data și locurile. Dacă preferi telefonul, ne găsești la +40 727 417 498."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Ce facem dacă cel mic are alergii?",
+          "group": "pizza",
+          "answer": {
+            "$richText": "Ni le spui la telefon, când confirmăm înscrierea. În formular nu îți cerem date despre sănătate."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Micul dejun e inclus?",
+          "group": "stay",
+          "answer": {
+            "$richText": "Da, e inclus în preț: bufet suedez, cu preparate din mezelăria proprie. Îl servim între 7:00 și 10:00, iar în weekend între 8:00 și 11:00."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Copiii plătesc cazarea?",
+          "group": "stay",
+          "answer": {
+            "$richText": "Copiii până la 5 ani stau gratuit, iar micul dejun îl primesc din partea casei."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Unde parchez?",
+          "group": "stay",
+          "answer": {
+            "$richText": "Parcarea e gratuită, chiar în fața hotelului, și e supravegheată video."
+          },
+          "placeholder": false
+        },
+        {
+          "question": "Cum rezerv o cameră?",
+          "group": "stay",
+          "answer": {
+            "$richText": "Alegi datele și camerele în bara de cazare și trimiți cererea. Recepția Hotel ANNA îți confirmă oferta prin telefon sau email. Poți suna și direct, la +40 253 206 333."
+          },
+          "placeholder": false
+        }
+      ]
     }
   ],
   "swaps": [
@@ -3641,6 +3708,18 @@
           "target": "contact",
           "display": "header"
         }
+      ]
+    },
+    {
+      "collection": "settings",
+      "field": "doNotTranslate",
+      "from": null,
+      "to": [
+        "Hotel ANNA",
+        "Grupul ANNA",
+        "Wine Spectator",
+        "Riviera Events",
+        "VIP Riviera"
       ]
     }
   ],

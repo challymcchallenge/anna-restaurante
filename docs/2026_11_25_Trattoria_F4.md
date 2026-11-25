@@ -56,12 +56,12 @@ Cheia stă doar în Vercel; nu o am local, cum e corect. Am probat motorul pe ba
 - Recenziile verificate de om primesc tot mențiunea „Tradus automat din …”.
 - Fereastra ialoc rămâne în ro și en; în celelalte limbi se deschide în engleză (ADR-007).
 
-## Întrebări noi
+## Întrebări G10: rezolvate (D-65)
 
-| # | Întrebare | Propunerea mea |
-|---|---|---|
-| G10-1 | PLAN F4 pasul 5, „FAQ unde sunt relevante”: întrebări frecvente există pe Acasă (5) și la Evenimente private (2). Vrei și la Cursurile de pizza și la Hotel? | Da, câte 3–4, din răspunsurile tale (vârstă, durată, ce aduce copilul; check-in, animale, parcare). Fără răspunsuri inventate |
-| G10-2 | Lista „Termeni care nu se traduc” din Setări e goală (cei automați sunt deja protejați) | Adaug: Hotel ANNA, Grupul ANNA, Wine Spectator, Riviera Events, VIP Riviera |
+- **G10-1 (DA):** 3 întrebări la Cursurile de pizza (ce face copilul, înscrierea, alergiile) și 4 la Cazare (micul dejun, copiii, parcarea, rezervarea), doar din fapte confirmate. Cele de cazare apar pe Acasă sub Hotel, la „Întrebări despre cazare”. Vârsta, durata, prețul și locurile la curs lipsesc până le confirmi (OQ #6).
+- **G10-2 (DA):** Hotel ANNA, Grupul ANNA, Wine Spectator, Riviera Events și VIP Riviera sunt în Setări → Integrări → „Termeni care nu se traduc”.
+
+Intră pe producție la publicare, înainte de prima traducere: „Tradu tot site-ul” le traduce odată cu restul.
 
 ---
 

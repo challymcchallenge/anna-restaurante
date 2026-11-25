@@ -9,6 +9,8 @@ const pl = (n: number, one: string, many: string) => (n === 1 ? `1 ${one}` : `${
 export const de: Dict = {
   ...deClient,
   /** Ghilimelele citatelor (recenzii), după limbă. */
+  /** Titlul întrebărilor despre cazare, sub secțiunea Hotel (G10-1). */
+  faqStayTitle: 'Fragen zu Ihrem Aufenthalt',
   quotes: ['„', '“'] as [string, string],
   ogLocale: 'de_DE',
   languageNames: {

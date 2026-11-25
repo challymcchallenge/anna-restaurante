@@ -198,3 +198,21 @@ describe('F4 · durata funcției API', () => {
     expect(route).toMatch(/export const maxDuration = 120/)
   })
 })
+
+describe('G10 (D-65) · întrebări la cursuri și la cazare, termeni care nu se traduc', () => {
+  const seed = JSON.parse(readFileSync(join(process.cwd(), 'seed/trattoria-da-vittoria.json'), 'utf8'))
+  it('3 întrebări la cursuri, 4 la cazare, toate cu răspuns (fără „Provizoriu”)', () => {
+    const list = seed.lists.find((l: { version: string }) => l.version === '2026-11-25-g10')
+    const by = (g: string) => list.items.filter((i: { group: string }) => i.group === g)
+    expect(by('pizza')).toHaveLength(3)
+    expect(by('stay')).toHaveLength(4)
+    expect(list.items.every((i: { placeholder: boolean; answer: { $richText: string } }) => !i.placeholder && i.answer.$richText.length > 20)).toBe(true)
+  })
+  it('termenii din Setări și secțiunea de sub Hotel', () => {
+    const swap = seed.swaps.find((s: { field: string }) => s.field === 'doNotTranslate')
+    expect(swap.to).toEqual(['Hotel ANNA', 'Grupul ANNA', 'Wine Spectator', 'Riviera Events', 'VIP Riviera'])
+    const home = readFileSync(join(process.cwd(), 'src/app/(frontend)/[lang]/page.tsx'), 'utf8')
+    expect(home).toContain('<FaqList faqs={site.faqs} group="stay" title={UI.faqStayTitle} />')
+    for (const d of Object.values(DICTS)) expect(d.faqStayTitle.length).toBeGreaterThan(3)
+  })
+})

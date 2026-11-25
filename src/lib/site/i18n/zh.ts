@@ -6,6 +6,8 @@ import { zhClient } from './zh.client'
 export const zh: Dict = {
   ...zhClient,
   /** Ghilimelele citatelor (recenzii), după limbă. */
+  /** Titlul întrebărilor despre cazare, sub secțiunea Hotel (G10-1). */
+  faqStayTitle: '住宿常见问题',
   quotes: ['“', '”'] as [string, string],
   ogLocale: 'zh_CN',
   languageNames: {
