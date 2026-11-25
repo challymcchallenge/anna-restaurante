@@ -99,9 +99,11 @@ Efectele sezoniere, animațiile 3D, sunetul de fundal și comutatorul de temă s
 
 **GATE 4:** Lighthouse mobil pe `/`, `/en` și `/zh`: performanță ≥ 85, accesibilitate ≥ 95, cifre reale. `prefers-reduced-motion` probat.
 
-**Stare (25.11.2026):** **GATE 4 prezentat** (raport `docs/2026_11_25_Trattoria_GATE4.md`, pagina HTML https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM). 7 limbi live, conținutul tradus integral (rămân identice doar numele proprii); FAQ la cursuri și cazare (D-65); fotografiile demo scoase (D-66). Lighthouse mobil pe producție, mediane: `/` 86, `/en` 89, `/zh` 82 (sub țintă, cauza măsurată, G11-3); accesibilitate 100. Teste 105/105. Aștept GO pentru F5 și răspunsurile G11.
+**Stare (25.11.2026):** **GATE 4 prezentat** (raport `docs/2026_11_25_Trattoria_GATE4.md`, pagina HTML https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM). 7 limbi live, conținutul tradus integral (rămân identice doar numele proprii); FAQ la cursuri și cazare (D-65); fotografiile demo scoase (D-66). Lighthouse mobil pe producție, mediane: `/` 86, `/en` 89, `/zh` 82 (sub țintă, cauza măsurată, G11-3); accesibilitate 100. Teste 105/105. GO pentru F5 și răspunsurile G11 primite (D-67); cererile de după GATE 4 rezolvate (D-67). F5 pornește în sesiunea următoare.
 
 ## Faza 5 — Verificare și lansare
+
+**GO primit (D-67, 25.11.2026).** Ordinea: întâi tot ce ține de site și panou; **emailurile prin Resend și domeniul se conectează la final**, când totul e gata (D-36, D-67). Se re-măsoară Lighthouse pe `/zh` pe domeniul final (G11-3).
 
 **Se face**
 1. Audit de finisare (Impeccable); se aplică doar modificările listate și explicate.

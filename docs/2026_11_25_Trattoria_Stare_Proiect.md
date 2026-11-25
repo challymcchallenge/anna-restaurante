@@ -4,9 +4,9 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după F4) · scris la cererea lu
 
 ## Concluzia
 
-- **F0–F4 sunt gata, pe producție. GATE 4 e prezentat** (`docs/2026_11_25_Trattoria_GATE4.md`, pagina HTML https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM). Aștept „GO” pentru F5 și răspunsurile G11-1 … G11-3.
-- **7 limbi live**, conținut tradus integral (Haiku 5.5); FAQ la cursuri și cazare (D-65); fotografiile demo și nota din footer scoase (D-66).
-- **Cifrele de acum (producție, Lighthouse mobil, mediane):** `/` 86, `/en` 89, `/zh` 82 (sub țintă, G11-3); accesibilitate 100, CLS 0. Teste: 105/105.
+- **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
+- **După GATE 4 (D-66, D-67):** fotografiile demo și nota din footer scoase; pagina de cookies rescrisă pentru Trattoria („Provizoriu”); numele categoriilor se traduc; insigna premiului acceptă orice imagine; clipurile își păstrează sunetul, iar clipul cursului stă în locul fotografiei (9:16); pictograma de filă = logo-ul original; sliderul Bucătăriei arată până la 20 de categorii.
+- **Cifre (producție, Lighthouse mobil, mediane):** `/` 86, `/en` 89, `/zh` 82 (acceptat, G11-3, re-măsurat în F5); accesibilitate 100. Teste: 108/108.
 
 ## Unde e totul
 
@@ -16,9 +16,9 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după F4) · scris la cererea lu
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08) |
 | Raportul GATE 3 (pagină HTML, privată) | https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-66) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-67) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, `docs/OPEN-QUESTIONS.md` |
-| Ultima migrație | `20261125_044503_f4_traduceri` |
+| Ultima migrație | `20261125_065151_d67_categorii_clip` |
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
 | Raportul GATE 4 (pagină HTML, privată) | https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM |
 
@@ -38,15 +38,14 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 ## Ce așteaptă de la Alin
 
-1. **GO pentru F5** și răspunsurile **G11-1** (pagina de cookies cu textul Riviera Events), **G11-2** (numele categoriilor traductibile), **G11-3** (abaterea `/zh`).
-2. **Verificarea englezei** (F4-7) în panou.
-3. **Fotografiile reale** (galeria apare singură când există cel puțin un element; categoriile, saloanele și camerele au plăci „fără fotografie”).
-4. **Un clip real de 1–2 minute** și **câmpurile „[de completat]” din paginile legale** (D-59).
+1. **Clipul cursului de pizza, reîncărcat** din fișierul original (cel de pe site a fost convertit fără sunet, iar originalul nu se păstrează pe server, D-27). După încărcare: Pagina Acasă → Cursuri de pizza → „Clip principal”.
+2. **Verificarea englezei** (F4-7) și, când e gata, **textul juristului** pentru paginile legale (cookies e acum „Provizoriu”).
+3. **Fotografiile reale** pentru galerie, categorii, saloane și camere.
 
 ## Ce urmează, pe faze
 
 - **F4**: gata, GATE 4 prezentat. Efectele, sunetul, 3D și tema sunt mutate după lansare (D-33).
-- **F5** (2 sesiuni): emailurile prin Resend cu domeniul verificat (D-36), audit de finisare, date structurate, sitemap, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare.
+- **F5** (2 sesiuni, GO primit): audit de finisare, date structurate, sitemap pe limbi, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare, re-măsurarea `/zh`; **la final** emailurile prin Resend și domeniul (D-36, D-67).
 - **La final:** playbook-ul proiectului în vault-ul Obsidian, după standardul de denumire.
 
 ## Note tehnice pentru sesiunea nouă
@@ -70,7 +69,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-66), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. Suntem la GATE 4. [GO F5 + răspunsuri G11 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-67), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Pornește F5 / altă cerere]
 
 ---
 
