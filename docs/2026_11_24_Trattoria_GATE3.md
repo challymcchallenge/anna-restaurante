@@ -253,11 +253,11 @@ Capturi: `design/f3/capturi/2026_11_25_Trattoria_D61_*.webp`. Teste: 79/79 (4 no
 | Cerere | Cum e acum |
 |---|---|
 | Footer: linkuri cu triunghiuri, rânduri mai apropiate | Triunghi mic de folio în fața fiecărui link (grupul ANNA, Informații). Rânduri de 30 px în loc de 44 px, peste ținta minimă de 24 px |
-| Forme abstracte, discrete, potrivite fiecărei secțiuni | Un desen fin pe fundal: măslin și spic, ciorchine, lauri cu stele, serpentine, pahare, felie de pizza și bonetă, semilună, rame, acul de hartă, bule de dialog. În spate, o pată organică; în colțul opus, linii de contur. Culoarea vine din temă |
+| Forme abstracte, discrete, potrivite fiecărei secțiuni | Un desen fin pe fundal: măslin și spic, ciorchine, lauri cu stele, serpentine, pahare, felie de pizza și bonetă, semilună, rame, acul de hartă, bule de dialog. În spate, o pată organică (liniile de contur din colț au fost scoase la cererea ta). Culoarea vine din temă |
 | Tranziții șerpuite între secțiuni | Unde se schimbă fundalul, marginea e un val cu un ecou subțire. 4 forme care se schimbă pe rând; se potrivesc singure dacă schimbi ordinea secțiunilor |
 | Din panou | Setări → Identitate: „Forme decorative pe secțiuni”, „Margini ondulate între secțiuni”, „Cât de vizibile sunt formele” (Discret / Mediu / Vizibil) |
 
-Desenele sunt 15 fișiere SVG, 33 KB în total, încărcate doar când secțiunea ajunge pe ecran. Nu se mișcă și dispar la tipărire și în modul de contrast forțat. Migrația: `20261125_002159_f3_decor`.
+Desenele sunt 14 fișiere SVG, 32 KB în total, încărcate doar când secțiunea ajunge pe ecran. Nu se mișcă și dispar la tipărire și în modul de contrast forțat. Migrația: `20261125_002159_f3_decor`.
 
 | Pagina (Lighthouse mobil, producție) | Performanță | Accesibilitate | CLS |
 |---|---|---|---|

@@ -1142,7 +1142,7 @@ body[data-decor-level="medium"] { --decor-k: 1.6; }
 body[data-decor-level="visible"] { --decor-k: 2.3; }
 .paper-section, .cover-section, .site-footer { position: relative; isolation: isolate; }
 
-/* Formele: motivul secțiunii sus în dreapta, liniile de contur jos în stânga; mereu sub conținut. */
+/* Formele: motivul secțiunii sus în dreapta, mereu sub conținut (liniile de contur, scoase la cererea lui Alin). */
 .kitchen { --decor: url(/decor/kitchen.svg); }
 .wines, .wine-page { --decor: url(/decor/wines.svg); }
 .reviews { --decor: url(/decor/reviews.svg); }
@@ -1158,14 +1158,12 @@ body[data-decor-level="visible"] { --decor-k: 2.3; }
 body:not([data-decor="off"]) :is(.kitchen, .wines, .wine-page, .reviews, .parties, .agenda, .archive, .private, .salon-page, .cta-band, .pizza, .course, .course-gallery, .hotel, .gallery, .gallery-page, .contact-home, .contact-page, .faq)::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: var(--decor-c); opacity: calc(var(--decor-o) * var(--decor-k));
-  --decor-place: var(--decor) right -56px top calc(var(--wave-h) + var(--s4)) / 220px auto no-repeat,
-    url(/decor/contour.svg) left -88px bottom -64px / 260px auto no-repeat;
+  --decor-place: var(--decor) right -56px top calc(var(--wave-h) + var(--s4)) / 220px auto no-repeat;
   -webkit-mask: var(--decor-place); mask: var(--decor-place);
 }
 @media (min-width: 1024px) {
   body:not([data-decor="off"]) :is(.kitchen, .wines, .wine-page, .reviews, .parties, .agenda, .archive, .private, .salon-page, .cta-band, .pizza, .course, .course-gallery, .hotel, .gallery, .gallery-page, .contact-home, .contact-page, .faq)::after {
-    --decor-place: var(--decor) right max(-40px, calc(50vw - 760px)) top calc(var(--wave-h) + var(--s5)) / clamp(320px, 27vw, 420px) auto no-repeat,
-      url(/decor/contour.svg) left max(-120px, calc(50vw - 840px)) bottom -96px / 400px auto no-repeat;
+    --decor-place: var(--decor) right max(-40px, calc(50vw - 760px)) top calc(var(--wave-h) + var(--s5)) / clamp(320px, 27vw, 420px) auto no-repeat;
   }
 }
 

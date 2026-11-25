@@ -32,7 +32,7 @@ function findField(fields: Field[], name: string): Node | null {
 describe('D-62 · forme decorative și valuri', () => {
   it('Fiecare fișier din CSS există în public/decor și e o mască (doar negru)', () => {
     const urls = [...new Set([...css.matchAll(/url\(\/decor\/([a-z-]+\.svg)\)/g)].map((m) => m[1]))]
-    expect(urls.length).toBeGreaterThanOrEqual(15)
+    expect(urls.length).toBeGreaterThanOrEqual(14)
     for (const file of urls) {
       const path = join(root, 'public/decor', file)
       expect(existsSync(path), file).toBe(true)
@@ -54,6 +54,11 @@ describe('D-62 · forme decorative și valuri', () => {
     const level = findField(Settings.fields, 'decorLevel') as { defaultValue: string; options: { value: string }[] }
     expect(level.defaultValue).toBe('subtle')
     expect(level.options.map((o) => o.value)).toEqual(['subtle', 'medium', 'visible'])
+  })
+
+  it('Fără liniile de contur (scoase la cererea lui Alin)', () => {
+    expect(css).not.toContain('contour.svg')
+    expect(existsSync(join(root, 'public/decor/contour.svg'))).toBe(false)
   })
 
   it('Fără decor în modul de contrast forțat și la tipărire', () => {

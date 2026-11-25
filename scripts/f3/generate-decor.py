@@ -5,7 +5,7 @@ D-62: generează motivele decorative (public/decor/*.svg) și valurile dintre se
 Fișierele sunt măști (doar negru + transparență): culoarea vine din temă, în CSS
 (`background: var(--c-accent)` + `mask-image`), deci nimic din tenant nu e scris aici.
 Motivele sunt line-art cu un singur grosime de linie, ca ilustrațiile dintr-o carte de vinuri,
-plus o pată organică abstractă, mai slabă, în spate.
+plus o pată organică abstractă, mai slabă, în spate. (Liniile de contur din colțul opus au fost scoase la cererea lui Alin, 25.11.2026.)
 
 Rulare: python3 scripts/f3/generate-decor.py
 """
@@ -367,14 +367,6 @@ def faq():
     return svg(''.join(out))
 
 
-# ---------- Linii de contur: forma abstractă din colțul opus, comună ----------
-def contour():
-    out = []
-    for i, s in enumerate([1.0, 0.8, 0.6, 0.4]):
-        out.append(f'<path d="{blob(200, 200, 170, 101, n=8, wobble=0.16, scale=s)}"{" stroke-dasharray=\"1 8\"" if i == 0 else ""}/>')
-    return svg(''.join(out))
-
-
 # ---------- Valurile dintre secțiuni (mască pe lățime, cu un ecou subțire) ----------
 WAVES = {
     'a': 'M0 30C240 4 480 54 720 30S1200 62 1440 30',
@@ -399,7 +391,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     motifs = {
         'kitchen': kitchen, 'wines': wines, 'reviews': reviews, 'parties': parties, 'private': private,
-        'pizza': pizza, 'hotel': hotel, 'gallery': gallery, 'contact': contact, 'faq': faq, 'contour': contour,
+        'pizza': pizza, 'hotel': hotel, 'gallery': gallery, 'contact': contact, 'faq': faq,
     }
     for name, fn in motifs.items():
         with open(os.path.join(OUT, f'{name}.svg'), 'w') as fh:
