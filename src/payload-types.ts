@@ -1189,6 +1189,18 @@ export interface Setting {
    */
   defaultTheme?: ('dark' | 'light') | null;
   /**
+   * Desene fine pe fundal, potrivite fiecărei secțiuni (D-62). Culoarea vine din temă.
+   */
+  decorShapes?: boolean | null;
+  /**
+   * Unde se schimbă culoarea fundalului, trecerea e o linie șerpuită, nu una dreaptă.
+   */
+  decorWaves?: boolean | null;
+  /**
+   * Gol = Discret.
+   */
+  decorLevel?: ('subtle' | 'medium' | 'visible') | null;
+  /**
    * SHARE · 1,91:1 · minimum 1200 × 630 px
    */
   shareImage?: (number | null) | Media;
@@ -2230,6 +2242,9 @@ export interface SettingsSelect<T extends boolean = true> {
   fontHeading?: T;
   fontText?: T;
   defaultTheme?: T;
+  decorShapes?: T;
+  decorWaves?: T;
+  decorLevel?: T;
   shareImage?: T;
   address?:
     | T

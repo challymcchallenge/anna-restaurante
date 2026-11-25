@@ -98,7 +98,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <head>
         <style id="tema" dangerouslySetInnerHTML={{ __html: themeStyleSheet(settings) }} />
       </head>
-      <body>
+      {/* Decorul (D-62): formele de pe fundal și valurile dintre secțiuni, din Setări → Identitate. */}
+      <body
+        data-decor={settings?.decorShapes === false ? 'off' : 'on'}
+        data-decor-level={settings?.decorLevel || 'subtle'}
+        data-waves={settings?.decorWaves === false ? 'off' : 'on'}
+      >
         <a className="skip-link" href="#continut">
           {UI.skipToContent}
         </a>

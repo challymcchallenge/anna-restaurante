@@ -9,6 +9,7 @@ import * as migration_20261124_210257_f3_hotel_receptie from './20261124_210257_
 import * as migration_20261124_211206_f3_telefon_pizza from './20261124_211206_f3_telefon_pizza';
 import * as migration_20261124_221615_f3_recenzii_limba from './20261124_221615_f3_recenzii_limba';
 import * as migration_20261124_231318_f3_meniu_navigare from './20261124_231318_f3_meniu_navigare';
+import * as migration_20261125_002159_f3_decor from './20261125_002159_f3_decor';
 
 export const migrations = [
   {
@@ -64,6 +65,11 @@ export const migrations = [
   {
     up: migration_20261124_231318_f3_meniu_navigare.up,
     down: migration_20261124_231318_f3_meniu_navigare.down,
-    name: '20261124_231318_f3_meniu_navigare'
+    name: '20261124_231318_f3_meniu_navigare',
+  },
+  {
+    up: migration_20261125_002159_f3_decor.up,
+    down: migration_20261125_002159_f3_decor.down,
+    name: '20261125_002159_f3_decor'
   },
 ];

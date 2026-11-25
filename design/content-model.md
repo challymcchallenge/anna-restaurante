@@ -115,6 +115,9 @@ Setul îl stabilește echipa de design în runda 3 și este livrat odată cu sit
 | Font titluri, font text | referință G3 | Da | - | | - |
 | Temă implicită | alegere | Da | - | Închisă sau deschisă; o singură temă la lansare, comutatorul pentru vizitatori vine în R2 (D-32). Care temă: Q-17 | - |
 | Imagine de distribuire implicită | imagine | Da | - | SHARE | - |
+| Forme decorative pe secțiuni | da/nu | Nu | - | Pornit implicit. Desene fine pe fundal, câte unul potrivit fiecărei secțiuni; culoarea vine din temă (D-62) | - |
+| Margini ondulate între secțiuni | da/nu | Nu | - | Pornit implicit. Unde se schimbă culoarea fundalului, marginea e șerpuită (D-62) | - |
+| Cât de vizibile sunt formele | alegere | Nu | - | Discret (implicit), Mediu, Vizibil (D-62) | - |
 
 ### R2. Contact și program
 

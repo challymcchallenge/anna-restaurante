@@ -248,6 +248,17 @@ Pe producție: raza de 16 px e măsurată pe fiecare fotografie din Bucătărie 
 
 Capturi: `design/f3/capturi/2026_11_25_Trattoria_D61_*.webp`. Teste: 79/79 (4 noi, `f3-d61`). Fără migrație.
 
+## 14. După GATE 3: footer compact, forme decorative, margini ondulate (D-62)
+
+| Cerere | Cum e acum |
+|---|---|
+| Footer: linkuri cu triunghiuri, rânduri mai apropiate | Triunghi mic de folio în fața fiecărui link (grupul ANNA, Informații). Rânduri de 30 px în loc de 44 px, peste ținta minimă de 24 px |
+| Forme abstracte, discrete, potrivite fiecărei secțiuni | Un desen fin pe fundal: măslin și spic, ciorchine, lauri cu stele, serpentine, pahare, felie de pizza și bonetă, semilună, rame, acul de hartă, bule de dialog. În spate, o pată organică; în colțul opus, linii de contur. Culoarea vine din temă |
+| Tranziții șerpuite între secțiuni | Unde se schimbă fundalul, marginea e un val cu un ecou subțire. 4 forme care se schimbă pe rând; se potrivesc singure dacă schimbi ordinea secțiunilor |
+| Din panou | Setări → Identitate: „Forme decorative pe secțiuni”, „Margini ondulate între secțiuni”, „Cât de vizibile sunt formele” (Discret / Mediu / Vizibil) |
+
+Desenele sunt 15 fișiere SVG, 33 KB în total, încărcate doar când secțiunea ajunge pe ecran. Nu se mișcă și dispar la tipărire și în modul de contrast forțat. Migrația: `20261125_002159_f3_decor`.
+
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
 Pagina HTML a raportului (privată): https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP

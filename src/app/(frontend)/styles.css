@@ -267,11 +267,11 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 
 /* ---------- Footer: coperta din spate a cartei ---------- */
 /* Pe telefon, sub bara fixă de jos rămâne tot coperta (fără fâșie de hârtie). */
-.site-footer { background: var(--c-dark); color: var(--c-on-dark); padding: var(--s8) 0 calc(var(--s6) + var(--bar-h) + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-cover); }
+.site-footer { background: var(--c-dark); color: var(--c-on-dark); padding: calc(var(--s8) + var(--wave-pad, 0px)) 0 calc(var(--s6) + var(--bar-h) + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-cover); }
 .footer-grid { display: grid; gap: var(--s7); }
 .footer-title { font: 400 24px/1.15 var(--font-display); margin-bottom: var(--s4); }
 .footer-logo img { display: block; height: 30px; width: auto; }
-.footer-line { display: flex; align-items: flex-start; gap: var(--s3); margin-top: var(--s3); font-size: 16px; }
+.footer-line { display: flex; align-items: flex-start; gap: var(--s3); margin-top: var(--s2); font-size: 16px; }
 .footer-line .icon { width: 18px; height: 18px; margin-top: 3px; color: var(--c-accent); }
 .footer-line a { text-decoration: none; font-variant-numeric: tabular-nums; }
 .footer-line a:hover { text-decoration: underline; }
@@ -281,10 +281,20 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .footer-social a:hover { color: var(--c-accent); border-color: var(--c-accent); transform: translateY(-1px); }
 .footer-social .icon { width: 18px; height: 18px; }
 .footer-social .footer-social-text { border-radius: var(--radius-btn); font-size: 14px; }
+/* Listele de linkuri (D-62): compacte, fiecare rând marcat cu un triunghi mic de folio. Rândul are 30 px,
+   peste ținta minimă de 24 px (WCAG 2.5.8). */
 .footer-links { list-style: none; margin: 0; padding: 0; }
-.footer-links li { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
-.footer-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 calc(100% - 10px); transition: background-size 220ms var(--ease-out), color 160ms var(--ease-out); }
+.footer-links li { position: relative; display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; padding-left: var(--s4); }
+.footer-links li::before {
+  content: ""; position: absolute; left: 0; top: 11px; width: 6px; height: 8px;
+  background: var(--c-accent); clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.footer-links a { display: inline-flex; align-items: center; min-height: 30px; font-size: 15px; line-height: 1.3; text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 calc(100% - 4px); transition: background-size 220ms var(--ease-out), color 160ms var(--ease-out); }
 .footer-links a:hover { background-size: 100% 1px; color: var(--c-accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .footer-links li::before { transition: transform 160ms var(--ease-out); }
+  .footer-links li:hover::before { transform: translateX(2px); }
+}
 .footer-links--cols { columns: 2; column-gap: var(--s5); }
 .footer-links--cols li { break-inside: avoid; }
 .footer-side { display: grid; gap: var(--s7); align-content: start; }
@@ -300,7 +310,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   .footer-group { grid-column: span 1; }
 }
 @media (min-width: 1024px) {
-  .site-footer { padding: var(--s9) 0 var(--s6); }
+  .site-footer { padding: calc(var(--s9) + var(--wave-pad, 0px)) 0 var(--s6); }
   .footer-grid { grid-template-columns: 4fr 5fr 3fr; gap: var(--s8); }
   .footer-links--cols { columns: 2; }
 }
@@ -518,8 +528,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 /* ---------- Secțiunile: pagini de hârtie și pagini de copertă ---------- */
 /* Sub primul ecran: browserul nu așază și nu desenează secțiunile până se apropie de ecran (Lighthouse TBT). */
 .paper-section, .cover-section, .site-footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
-.paper-section { padding: var(--s8) 0; background: var(--c-bg); color: var(--c-text); }
-.cover-section { padding: var(--s8) 0; background: var(--c-dark); color: var(--c-on-dark); }
+.paper-section { padding: calc(var(--s8) + var(--wave-pad, 0px)) 0 var(--s8); background: var(--c-bg); color: var(--c-text); }
+.cover-section { padding: calc(var(--s8) + var(--wave-pad, 0px)) 0 var(--s8); background: var(--c-dark); color: var(--c-on-dark); }
 .paper-section h2, .cover-section h2 { font-size: clamp(32px, 9vw, 40px); line-height: 1.08; letter-spacing: -0.01em; max-width: 16ch; }
 .section-intro { margin-top: var(--s4); color: var(--c-text-2); max-width: 44ch; }
 .cover-section .section-intro { color: var(--c-on-dark-2); }
@@ -528,7 +538,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .photo-tag { left: var(--s3); bottom: var(--s3); }
 .row-tag { margin-left: var(--s2); }
 @media (min-width: 1024px) {
-  .paper-section, .cover-section { padding: var(--s9) 0; }
+  .paper-section, .cover-section { padding: calc(var(--s9) + var(--wave-pad, 0px)) 0 var(--s9); }
   .paper-section h2, .cover-section h2 { font-size: 52px; }
 }
 
@@ -683,7 +693,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .mini-title { margin-top: var(--s6); font: 600 12px/1.3 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent-ink); }
 .mini-title + .types { margin-top: var(--s3); }
 .private-cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s6); }
-.paper-section--warm { background: color-mix(in srgb, var(--c-text) 4%, var(--c-bg)); }
+.paper-section--warm { background: var(--c-warm); }
 
 /* Coperta paginilor proprii */
 .page-cover {
@@ -1119,4 +1129,64 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .legal-grid { grid-template-columns: minmax(220px, 3fr) minmax(0, 8fr); gap: var(--s8); }
   .legal-grid--single { grid-template-columns: minmax(0, 1fr); }
   .legal-toc { position: sticky; top: 112px; }
+}
+
+/* ---------- D-62: forme decorative pe fundal și valuri între secțiuni ----------
+   Motivele sunt măști SVG (public/decor, generate de scripts/f3/generate-decor.py), deci culoarea vine
+   din temă. Se pornesc și se reglează din Setări → Identitate → Decor: data-decor, data-decor-level și
+   data-waves pe <body>. Nimic nu se mișcă, deci nu e nevoie de o variantă pentru prefers-reduced-motion. */
+:root { --c-warm: color-mix(in srgb, var(--c-text) 4%, var(--c-bg)); --wave-h: 28px; --decor-k: 1; }
+@media (min-width: 640px) { :root { --wave-h: 40px; } }
+@media (min-width: 1024px) { :root { --wave-h: 56px; } }
+body[data-decor-level="medium"] { --decor-k: 1.6; }
+body[data-decor-level="visible"] { --decor-k: 2.3; }
+.paper-section, .cover-section, .site-footer { position: relative; isolation: isolate; }
+
+/* Formele: motivul secțiunii sus în dreapta, liniile de contur jos în stânga; mereu sub conținut. */
+.kitchen { --decor: url(/decor/kitchen.svg); }
+.wines, .wine-page { --decor: url(/decor/wines.svg); }
+.reviews { --decor: url(/decor/reviews.svg); }
+.parties, .agenda, .archive { --decor: url(/decor/parties.svg); }
+.private, .salon-page, .cta-band { --decor: url(/decor/private.svg); }
+.pizza, .course, .course-gallery { --decor: url(/decor/pizza.svg); }
+.hotel { --decor: url(/decor/hotel.svg); }
+.gallery, .gallery-page { --decor: url(/decor/gallery.svg); }
+.contact-home, .contact-page { --decor: url(/decor/contact.svg); }
+.faq { --decor: url(/decor/faq.svg); }
+.paper-section { --decor-c: color-mix(in srgb, var(--c-accent) 55%, var(--c-text)); --decor-o: 0.13; }
+.cover-section { --decor-c: var(--c-accent); --decor-o: 0.12; }
+body:not([data-decor="off"]) :is(.kitchen, .wines, .wine-page, .reviews, .parties, .agenda, .archive, .private, .salon-page, .cta-band, .pizza, .course, .course-gallery, .hotel, .gallery, .gallery-page, .contact-home, .contact-page, .faq)::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--decor-c); opacity: calc(var(--decor-o) * var(--decor-k));
+  --decor-place: var(--decor) right -56px top calc(var(--wave-h) + var(--s4)) / 220px auto no-repeat,
+    url(/decor/contour.svg) left -88px bottom -64px / 260px auto no-repeat;
+  -webkit-mask: var(--decor-place); mask: var(--decor-place);
+}
+@media (min-width: 1024px) {
+  body:not([data-decor="off"]) :is(.kitchen, .wines, .wine-page, .reviews, .parties, .agenda, .archive, .private, .salon-page, .cta-band, .pizza, .course, .course-gallery, .hotel, .gallery, .gallery-page, .contact-home, .contact-page, .faq)::after {
+    --decor-place: var(--decor) right max(-40px, calc(50vw - 760px)) top calc(var(--wave-h) + var(--s5)) / clamp(320px, 27vw, 420px) auto no-repeat,
+      url(/decor/contour.svg) left max(-120px, calc(50vw - 840px)) bottom -96px / 400px auto no-repeat;
+  }
+}
+
+/* Valurile: o secțiune care urmează după un fundal diferit începe cu marginea șerpuită a celei de
+   deasupra, în culoarea ei, cu un ecou subțire ca linia dublă de folio. Formele se schimbă pe rând. */
+body:not([data-waves="off"]) :is(.hero, .cover-section, .page-cover) + .paper-section { --wave-c: var(--c-dark); --wave-content: ""; --wave-pad: calc(var(--wave-h) * 0.5); }
+body:not([data-waves="off"]) .paper-section:not(.paper-section--warm) + :is(.cover-section, .paper-section--warm) { --wave-c: var(--c-bg); --wave-content: ""; --wave-pad: calc(var(--wave-h) * 0.5); }
+body:not([data-waves="off"]) .paper-section--warm + :is(.cover-section, .paper-section:not(.paper-section--warm)) { --wave-c: var(--c-warm); --wave-content: ""; --wave-pad: calc(var(--wave-h) * 0.5); }
+body:not([data-waves="off"]) main:has(> .paper-section:not(.paper-section--warm):last-child) + .site-footer { --wave-c: var(--c-bg); --wave-content: ""; --wave-pad: calc(var(--wave-h) * 0.5); border-top-color: var(--wave-c); }
+body:not([data-waves="off"]) main:has(> .paper-section--warm:last-child) + .site-footer { --wave-c: var(--c-warm); --wave-content: ""; --wave-pad: calc(var(--wave-h) * 0.5); border-top-color: var(--wave-c); }
+:is(.paper-section, .cover-section, .site-footer)::before {
+  content: var(--wave-content, none); position: absolute; inset: 0 0 auto; height: var(--wave-h); z-index: 0; pointer-events: none;
+  background: var(--wave-c);
+  -webkit-mask: var(--wave, url(/decor/wave-a.svg)) 0 0 / 100% 100% no-repeat; mask: var(--wave, url(/decor/wave-a.svg)) 0 0 / 100% 100% no-repeat;
+}
+main > section:nth-of-type(4n + 2) { --wave: url(/decor/wave-b.svg); }
+main > section:nth-of-type(4n + 3) { --wave: url(/decor/wave-c.svg); }
+main > section:nth-of-type(4n) { --wave: url(/decor/wave-d.svg); }
+main > section:is(:nth-of-type(8n + 5), :nth-of-type(8n + 6), :nth-of-type(8n + 7), :nth-of-type(8n))::before { transform: scaleX(-1); }
+.site-footer { --wave: url(/decor/wave-b.svg); }
+
+@media (forced-colors: active), print {
+  :is(.paper-section, .cover-section, .site-footer)::before, :is(.paper-section, .cover-section)::after { display: none; }
 }

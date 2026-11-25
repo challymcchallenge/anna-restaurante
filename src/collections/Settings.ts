@@ -228,6 +228,43 @@ export const Settings: CollectionConfig = {
               description:
                 'O singură temă la lansare; comutatorul pentru vizitatori vine în R2 (D-33). Alegerea: Q-17.',
             }),
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'decorShapes',
+                  label: 'Forme decorative pe secțiuni',
+                  type: 'checkbox',
+                  defaultValue: true,
+                  admin: {
+                    width: '33%',
+                    description: 'Desene fine pe fundal, potrivite fiecărei secțiuni (D-62). Culoarea vine din temă.',
+                  },
+                },
+                {
+                  name: 'decorWaves',
+                  label: 'Margini ondulate între secțiuni',
+                  type: 'checkbox',
+                  defaultValue: true,
+                  admin: {
+                    width: '33%',
+                    description: 'Unde se schimbă culoarea fundalului, trecerea e o linie șerpuită, nu una dreaptă.',
+                  },
+                },
+                select({
+                  name: 'decorLevel',
+                  label: 'Cât de vizibile sunt formele',
+                  options: [
+                    { value: 'subtle', label: 'Discret' },
+                    { value: 'medium', label: 'Mediu' },
+                    { value: 'visible', label: 'Vizibil' },
+                  ],
+                  defaultValue: 'subtle',
+                  width: '33%',
+                  description: 'Gol = Discret.',
+                }),
+              ],
+            },
             media({
               name: 'shareImage',
               label: 'Imagine de distribuire implicită',

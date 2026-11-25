@@ -11,9 +11,11 @@ import { media } from '@/fields'
  * 30 s (ca pagina principală să se încarce repede). Fără bază de date: câmpul se verifică direct.
  */
 
+type Node = { name?: string; type?: string; fields?: Field[]; tabs?: { fields: Field[] }[] }
+
 function findFields(fields: Field[], name: string, out: UploadField[] = []): UploadField[] {
-  for (const f of fields as any[]) {
-    if (f.name === name && f.type === 'upload') out.push(f)
+  for (const f of fields as unknown as Node[]) {
+    if (f.name === name && f.type === 'upload') out.push(f as unknown as UploadField)
     if (Array.isArray(f.fields)) findFields(f.fields, name, out)
     if (Array.isArray(f.tabs)) for (const t of f.tabs) findFields(t.fields, name, out)
   }
