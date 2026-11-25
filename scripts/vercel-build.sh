@@ -12,6 +12,9 @@ if [ "$VERCEL_ENV" = "production" ] && [ -n "$DATABASE_URI" ] && [ -d src/migrat
   # Conținutul de pornire (seed/*.json), o singură dată pe restaurant, după toate migrațiile (F1).
   echo "[vercel-build] conținut de pornire"
   pnpm payload run scripts/seed-starter.ts
+  # F4 (F4, completarea traducerilor): traducerile automate cu bucăți rămase în română se completează o singură dată.
+  echo "[vercel-build] traduceri: completare"
+  pnpm payload run scripts/translate-repair.ts || echo "[vercel-build] traduceri: completarea nu a rulat, build-ul continuă"
 else
   echo "[vercel-build] VERCEL_ENV=${VERCEL_ENV:-nesetat}: fără migrații și fără conținut de pornire (doar la producție)"
 fi

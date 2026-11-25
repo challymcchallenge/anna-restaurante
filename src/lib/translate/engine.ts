@@ -91,6 +91,38 @@ const SCHEMA = {
   additionalProperties: false,
 } as const
 
+function shortenPrompt(target: LocaleCode): string {
+  return [
+    `Each item is a ${LANGUAGE[target]} text from a restaurant website that is too long for its field.`,
+    'Rewrite each one in the same language with at most "max" characters (count every character, including spaces), keeping the meaning and the warm, premium tone. Drop filler words before facts.',
+    'Keep every placeholder like {0} and every tag like <1>…</1> or <br/> exactly once, unchanged.',
+    'Reply with JSON only: {"items":[{"id":"…","text":"…"}]} with the same ids, in the same order.',
+  ].join('\n')
+}
+
+/** A treia încercare pentru textele prea lungi: modelul primește propria traducere și limita exactă. */
+export async function shortenBatch(items: Item[], target: LocaleCode): Promise<BatchResult> {
+  if (!items.length) return { texts: new Map(), inputTokens: 0, outputTokens: 0 }
+  const response = await anthropic().messages.create({
+    model: TRANSLATE_MODEL,
+    max_tokens: 8000,
+    thinking: { type: 'disabled' },
+    output_config: { effort: 'low', format: { type: 'json_schema', schema: SCHEMA as unknown as Record<string, unknown> } },
+    system: shortenPrompt(target),
+    messages: [{ role: 'user', content: JSON.stringify({ items: items.map((i) => ({ id: i.id, text: i.text, max: i.max })) }) }],
+  })
+  const usage = { inputTokens: response.usage.input_tokens, outputTokens: response.usage.output_tokens }
+  if (response.stop_reason !== 'end_turn') return { texts: new Map(), ...usage }
+  const text = response.content.flatMap((b) => (b.type === 'text' ? [b.text] : [])).join('')
+  const texts = new Map<string, string>()
+  try {
+    for (const it of (JSON.parse(text).items ?? []) as { id: string; text: string }[]) texts.set(it.id, it.text)
+  } catch {
+    // Răspuns nevalid: bucățile rămân în română.
+  }
+  return { texts, ...usage }
+}
+
 /** O cerere: până la ~40 de bucăți sau ~6.000 de caractere (le împarte apelantul, `chunk`). */
 export async function translateBatch(items: Item[], target: LocaleCode, restaurant: string): Promise<BatchResult> {
   if (!items.length) return { texts: new Map(), inputTokens: 0, outputTokens: 0 }

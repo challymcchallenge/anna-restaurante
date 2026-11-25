@@ -2,7 +2,7 @@ import type { CollectionSlug, Payload, PayloadRequest } from 'payload'
 
 import { DEFAULT_LOCALE, LOCALE_CODES, type LocaleCode } from '@/lib/locales'
 
-import { chunk, costUsd, translateBatch, translationAvailable, type Item } from './engine'
+import { chunk, costUsd, shortenBatch, translateBatch, translationAvailable, type Item } from './engine'
 import {
   collectSegments,
   fromMarkup,
@@ -143,12 +143,13 @@ async function translateParts(
   restaurant: string,
   translate: Translator,
   usage: { input: number; output: number },
+  shorten: Translator | null = null,
 ): Promise<Map<string, string>> {
   const all = docs.flatMap((d) => d.parts)
   const raw = new Map<string, string>()
-  const ask = async (items: Item[]) => {
+  const ask = async (items: Item[], maxItems: number, fn: (part: Item[]) => ReturnType<Translator>) => {
     const results = await pool(
-      chunk(items).map((part) => () => translate(part, locale, restaurant)),
+      chunk(items, maxItems).map((part) => () => fn(part)),
       4,
     )
     for (const r of results) {
@@ -157,20 +158,41 @@ async function translateParts(
       r.texts.forEach((v, k) => raw.set(k, v))
     }
   }
-  const good = (p: Prepared['parts'][number]) => {
+  type Part = Prepared['parts'][number]
+  /** De ce nu e bună o bucată: lipsește, termeni sau marcaje pierdute, prea lungă; null = bună. */
+  const problem = (p: Part): 'missing' | 'terms' | 'long' | null => {
     const t = raw.get(p.key)
-    if (!t) return null
+    if (!t) return 'missing'
     const restored = restoreTerms(t, p.used)
-    if (!restored.ok || (p.seg.max && restored.text.length > p.seg.max)) return null
-    return restored.text
+    if (!restored.ok) return 'terms'
+    if (p.seg.max && restored.text.length > p.seg.max) return 'long'
+    return null
   }
-  await ask(all.map((p) => ({ id: p.key, text: p.text, max: p.seg.max })))
-  const retry = all.filter((p) => good(p) === null)
-  if (retry.length) await ask(retry.map((p) => ({ id: p.key, text: p.text, max: p.seg.max ? Math.floor(p.seg.max * 0.9) : undefined })))
+  const tr = (part: Item[]) => translate(part, locale, restaurant)
+  await ask(all.map((p) => ({ id: p.key, text: p.text, max: p.seg.max })), 40, tr)
+  // A doua încercare, pe bucăți mici: ce lipsește sau a ieșit cu termeni pierduți se traduce din nou.
+  const again = all.filter((p) => problem(p) === 'missing' || problem(p) === 'terms')
+  if (again.length) await ask(again.map((p) => ({ id: p.key, text: p.text, max: p.seg.max })), 8, tr)
+  // A treia, pentru textele prea lungi: modelul își scurtează propria traducere la limita exactă.
+  const long = all.filter((p) => problem(p) === 'long')
+  if (long.length) {
+    const sh = shorten ? (part: Item[]) => shorten(part, locale, restaurant) : (part: Item[]) => shortenBatch(part, locale)
+    await ask(
+      long.map((p) => ({ id: p.key, text: raw.get(p.key) as string, max: p.seg.max })),
+      20,
+      sh,
+    )
+  }
   const out = new Map<string, string>()
+  const left: string[] = []
   for (const p of all) {
-    const t = good(p)
-    if (t !== null) out.set(p.key, t)
+    const why = problem(p)
+    if (why === null) out.set(p.key, restoreTerms(raw.get(p.key) as string, p.used).text)
+    else left.push(`${p.seg.path.join('.')} (${why})`)
+  }
+  if (left.length) {
+    // În jurnalele Vercel: ce a rămas în română și de ce.
+    console.warn(`[traduceri] ${locale}: ${left.length} bucăți rămase în română: ${left.slice(0, 20).join('; ')}`)
   }
   return out
 }
@@ -242,7 +264,7 @@ export async function translateDocument(
   const outcomes = await Promise.all(
     locales.map(async (locale): Promise<TranslateOutcome> => {
       try {
-        const texts = await translateParts([doc], locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage)
+        const texts = await translateParts([doc], locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage, args.translate ?? null)
         const skipped = await writeDoc(payload, doc, locale, texts, args.req)
         return { locale, ok: true, skipped }
       } catch (e) {
@@ -340,7 +362,7 @@ export async function translateBatchRun(
   let done = 0
   let texts = new Map<string, string>()
   try {
-    texts = await translateParts(prepared, locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage)
+    texts = await translateParts(prepared, locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage, args.translate ?? null)
   } catch (e) {
     const error = e instanceof Error ? e.message : String(e)
     return { done: 0, failed: slice.map((w) => ({ collection: w.collection, id: w.id, locale, error })), remaining: todo.length, costUsd: costUsd(usage.input, usage.output), locale }
@@ -358,3 +380,41 @@ export async function translateBatchRun(
   }
   return { done, failed, remaining: todo.length - written, costUsd: costUsd(usage.input, usage.output), locale }
 }
+
+/**
+ * Documentele „traduse automat” în care au rămas bucăți în română (de exemplu un text prea lung
+ * pentru limita câmpului la prima rulare, înainte de trecerea de scurtare). Se compară, pe fiecare
+ * bucată cu cel puțin două cuvinte, textul limbii cu cel românesc.
+ */
+export async function incompleteTranslations(
+  payload: Payload,
+  tenantId: number | string,
+  locales: LocaleCode[],
+): Promise<{ collection: CollectionSlug; id: number | string; locales: LocaleCode[]; paths: string[] }[]> {
+  const out = new Map<string, { collection: CollectionSlug; id: number | string; locales: Set<LocaleCode>; paths: Set<string> }>()
+  for (const collection of translatableCollections(payload)) {
+    const base = { where: { tenant: { equals: tenantId } }, depth: 0, limit: 2000, pagination: false as const, overrideAccess: true }
+    const ro = (await payload.find({ collection, ...base, locale: DEFAULT_LOCALE })).docs as unknown as Record<string, unknown>[]
+    const segsById = new Map(ro.map((d) => [d.id as string | number, segmentsOf(payload, collection, d)]))
+    for (const locale of locales) {
+      const docs = (await payload.find({ collection, ...base, locale, fallbackLocale: false })).docs as unknown as Record<string, unknown>[]
+      for (const d of docs) {
+        if (d.i18nStatus !== 'auto') continue
+        const roSegs = segsById.get(d.id as string | number) ?? []
+        const target = new Map(segmentsOf(payload, collection, d).map((x) => [x.path.join('.'), x.source]))
+        for (const seg of roSegs) {
+          if (!/\S+\s+\S+/.test(stripMarkup(seg.source)) || stripMarkup(seg.source).length < 12) continue
+          const t = target.get(seg.path.join('.'))
+          if (t !== undefined && t !== seg.source) continue
+          const key = `${collection}:${d.id}`
+          const entry = out.get(key) ?? { collection, id: d.id as string | number, locales: new Set<LocaleCode>(), paths: new Set<string>() }
+          entry.locales.add(locale)
+          entry.paths.add(`${locale}:${seg.path.join('.')}`)
+          out.set(key, entry)
+        }
+      }
+    }
+  }
+  return [...out.values()].map((e) => ({ collection: e.collection, id: e.id, locales: [...e.locales], paths: [...e.paths] }))
+}
+
