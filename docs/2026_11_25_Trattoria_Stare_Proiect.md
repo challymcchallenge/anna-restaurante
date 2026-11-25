@@ -5,7 +5,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după F4) · scris la cererea lu
 ## Concluzia
 
 - **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
-- **După GATE 4 (D-66 … D-71):** fotografiile demo și nota din footer scoase; pagina de cookies rescrisă pentru Trattoria („Provizoriu”); numele categoriilor se traduc; insigna premiului acceptă orice imagine; clipurile își păstrează sunetul, iar clipul cursului stă în locul fotografiei (9:16); pictograma de filă = logo-ul original; sliderul Bucătăriei arată până la 20 de categorii. **D-68:** insigna Wine Spectator Grand Award 2027 pusă prin seed, cu transparență; unealta de încărcare păstrează ca PNG fotografiile cu pixeli transparenți. **D-69:** insigna de 2 ori mai mare; PDF-ul listei de vinuri se alege în Pagina Acasă → Vinuri, iar pe `/catalog-vinuri` apare „Descarcă PDF”. **D-70:** pe telefon, coperta are umbra de jos mai ușoară; bara de jos are doar „Rezervă o masă” și „Meniu”. **D-71:** slideshow-ul la 3 s (editabil în panou); clipul cursului pe Acasă, lângă fotografie.
+- **După GATE 4 (D-66 … D-72):** fotografiile demo și nota din footer scoase; pagina de cookies rescrisă pentru Trattoria („Provizoriu”); numele categoriilor se traduc; insigna premiului acceptă orice imagine; clipurile își păstrează sunetul, iar clipul cursului stă în locul fotografiei (9:16); pictograma de filă = logo-ul original; sliderul Bucătăriei arată până la 20 de categorii. **D-68:** insigna Wine Spectator Grand Award 2027 pusă prin seed, cu transparență; unealta de încărcare păstrează ca PNG fotografiile cu pixeli transparenți. **D-69:** insigna de 2 ori mai mare; PDF-ul listei de vinuri se alege în Pagina Acasă → Vinuri, iar pe `/catalog-vinuri` apare „Descarcă PDF”. **D-70:** pe telefon, coperta are umbra de jos mai ușoară; bara de jos are doar „Rezervă o masă” și „Meniu”. **D-71:** slideshow-ul la 3 s (editabil în panou); clipul cursului pe Acasă, lângă fotografie. **D-72:** reparat: linkurile interne afișau Acasă până la reîncărcare (rescrierea românei pe Vercel).
 - **Cifre (producție, Lighthouse mobil, mediane):** `/` 86, `/en` 89, `/zh` 82 (acceptat, G11-3, re-măsurat în F5); accesibilitate 100. Teste: 108/108.
 
 ## Unde e totul
@@ -16,7 +16,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după F4) · scris la cererea lu
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08) |
 | Raportul GATE 3 (pagină HTML, privată) | https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-71) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-72) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, `docs/OPEN-QUESTIONS.md` |
 | Ultima migrație | `20261125_065151_d67_categorii_clip` |
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
@@ -69,7 +69,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-71), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Pornește F5 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-72), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Pornește F5 / altă cerere]
 
 ---
 

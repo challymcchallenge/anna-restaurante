@@ -19,13 +19,20 @@ const nextConfig: NextConfig = {
   // F4 (D-64): româna stă la rădăcină, fără prefix. Intern, `/galerie` devine `/ro/galerie`, ca toate
   // paginile să stea sub `app/(frontend)/[lang]`. Celelalte limbi au prefixul lor (`/en/galerie`).
   // `afterFiles`: fișierele din `public/`, `/_next`, panoul și API-ul au întâietate.
+  //
+  // D-72: pe Vercel, cererile routerului (navigarea între pagini) ajung aici cu sufix: `/galerie.rsc`,
+  // `/galerie.segments/_tree.segment.rsc`, iar Acasă ca `/index.rsc`, `/index.segments/…`. Regula lasă
+  // să treacă aceste sufixe (fișierele cu altă extensie rămân neatinse); altfel cererea cădea pe
+  // `/[lang]` cu „lang = galerie” și linkurile afișau Acasă până la reîncărcare.
   async rewrites() {
     return {
       beforeFiles: [],
       afterFiles: [
         { source: '/', destination: '/ro' },
+        { source: '/index.rsc', destination: '/ro.rsc' },
+        { source: '/index.segments/:rest*', destination: '/ro.segments/:rest*' },
         {
-          source: '/:path((?!(?:ro|en|it|fr|de|zh|sv|admin|api)(?:/|$))(?!_)(?!.*\\.[a-z0-9]+$).*)',
+          source: '/:path((?!(?:ro|en|it|fr|de|zh|sv|admin|api)(?:/|$|\\.))(?!_)(?!index\\.)(?!.*\\.(?!rsc$)[a-z0-9]+$).*)',
           destination: '/ro/:path',
         },
       ],
