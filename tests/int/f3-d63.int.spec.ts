@@ -23,8 +23,8 @@ describe('D-63 · creditul BizTech în footer', () => {
     expect(footer).toContain('href="https://www.biztech.ro/"')
   })
 
-  it('Logo-ul: 80, 160 și 240 px, pătrat, cu colțuri transparente', async () => {
-    for (const size of [80, 160, 240]) {
+  it('Logo-ul: 96…432 px, pătrat, cu colțuri transparente', async () => {
+    for (const size of [96, 144, 192, 288, 432]) {
       const file = join(root, `public/brand/biztech-${size}.webp`)
       const meta = await sharp(file).metadata()
       expect([meta.width, meta.height]).toEqual([size, size])
@@ -32,11 +32,12 @@ describe('D-63 · creditul BizTech în footer', () => {
       const { data } = await sharp(file).ensureAlpha().extract({ left: 0, top: 0, width: 1, height: 1 }).raw().toBuffer({ resolveWithObject: true })
       expect(data[3]).toBe(0)
     }
-    expect(footer).toContain('/brand/biztech-160.webp 2x')
+    expect(footer).toContain('sizes="(min-width: 1024px) 144px, 96px"')
   })
 
   it('Proporția se păstrează pe orice ecran, iar pe telefon rândurile se așază pe segmente', () => {
-    expect(css).toMatch(/\.footer-maker-logo \{[^}]*height: auto; aspect-ratio: 1;/)
+    expect(css).toMatch(/\.footer-maker-logo \{[^}]*width: 96px; height: auto; aspect-ratio: 1;/)
+    expect(css).toMatch(/@media \(min-width: 1024px\) \{ \.footer-maker-logo \{ width: 144px; \} \}/)
     expect(css).toMatch(/@media \(max-width: 559px\) \{\s*\.footer-maker-line \{ flex-direction: column;/)
     expect(css).toMatch(/\.footer-maker a \{[^}]*min-height: 24px;/)
   })

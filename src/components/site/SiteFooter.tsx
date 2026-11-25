@@ -168,15 +168,17 @@ export function SiteFooter({ site }: { site: SiteData }) {
               {UI.photoCredits}: {credits.join(' · ')}
             </p>
           )}
-          {/* Creditul realizatorului (D-63, înlocuiește cele 2 rânduri din ADR-013): logo-ul și 3 rânduri,
-              centrate. E același pe toate restaurantele și nu se editează din panou. */}
+          {/* Creditul realizatorului (D-63, înlocuiește cele 2 rânduri din ADR-013): logo-ul, cât logo-ul
+              restaurantului din antet (96 / 144 px), și 3 rânduri, centrate. E același pe toate restaurantele
+              și nu se editează din panou. */}
           <div className="footer-maker">
             <img
               className="footer-maker-logo"
-              src="/brand/biztech-80.webp"
-              srcSet="/brand/biztech-80.webp 1x, /brand/biztech-160.webp 2x, /brand/biztech-240.webp 3x"
-              width={80}
-              height={80}
+              src="/brand/biztech-144.webp"
+              srcSet="/brand/biztech-96.webp 96w, /brand/biztech-144.webp 144w, /brand/biztech-192.webp 192w, /brand/biztech-288.webp 288w, /brand/biztech-432.webp 432w"
+              sizes="(min-width: 1024px) 144px, 96px"
+              width={144}
+              height={144}
               alt="BizTech Consulting SRL"
               loading="lazy"
               decoding="async"

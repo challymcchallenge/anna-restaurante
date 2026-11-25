@@ -129,4 +129,4 @@ Detaliile și cifrele sunt în `docs/spikes/` și `docs/2026_11_24_Trattoria_GAT
 
 ## Actualizare după GATE 3 (cerută de Alin, 25.11.2026)
 
-- **ADR-013, footer:** creditul de 2 rânduri se înlocuiește cu logo-ul rotund BizTech și 3 rânduri, centrate (D-63): „100% AI Solutions & Agentic WorkFlows | SW Development” / „Made with ❤️ by BizTech Consulting SRL” / „Alin Labau - AI Project Manager | +40 772 295 031 | www.biztech.ro”, cu linkurile `tel:+40772295031` și https://www.biztech.ro/. Rămâne fix, același pe toate restaurantele, needitabil din panou.
+- **ADR-013, footer:** creditul de 2 rânduri se înlocuiește cu logo-ul rotund BizTech, cât logo-ul restaurantului din antet (96 / 144 px), și 3 rânduri, centrate (D-63): „100% AI Solutions & Agentic WorkFlows | SW Development” / „Made with ❤️ by BizTech Consulting SRL” / „Alin Labau - AI Project Manager | +40 772 295 031 | www.biztech.ro”, cu linkurile `tel:+40772295031` și https://www.biztech.ro/. Rămâne fix, același pe toate restaurantele, needitabil din panou.

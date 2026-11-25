@@ -271,7 +271,7 @@ Capturi: `design/f3/capturi/2026_11_25_Trattoria_D62_*.webp`. Teste: 83/83 (4 no
 
 ## 15. După GATE 3: creditul BizTech din footer (D-63)
 
-Jos în footer, centrat: logo-ul rotund BizTech (56–72 px, fără deformare pe orice ecran), apoi 3 rânduri:
+Jos în footer, centrat: logo-ul rotund BizTech, cât logo-ul Trattoria din antet (96 px pe telefon, 144 px pe desktop), fără deformare pe orice ecran, apoi 3 rânduri:
 
 - 100% AI Solutions & Agentic WorkFlows | SW Development
 - Made with ❤️ by BizTech Consulting SRL
