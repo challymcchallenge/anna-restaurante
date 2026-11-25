@@ -17,6 +17,8 @@ export const ro = {
   /** Ghilimelele citatelor (recenzii), după limbă. */
   /** Titlul întrebărilor despre cazare, sub secțiunea Hotel (G10-1). */
   faqStayTitle: 'Întrebări despre cazare',
+  /** Tipurile de vin (filtrele listei de vinuri). */
+  wineTypes: { sparkling: 'Spumant', white: 'Alb', rose: 'Rosé', red: 'Roșu', dessert: 'Desert' } as Record<string, string>,
   quotes: ['„', '”'] as [string, string],
   /** Open Graph (`og:locale`). */
   ogLocale: 'ro_RO',

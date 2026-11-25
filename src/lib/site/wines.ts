@@ -10,7 +10,8 @@ import { UI } from './i18n/server'
 
 export type WineType = WineRow['type']
 
-export const typeLabel = (t: string) => WINE_TYPES.find((w) => w.value === t)?.label ?? t
+/** Numele tipului în limba paginii (F4); româna din panou ca rezervă. */
+export const typeLabel = (t: string) => UI.wineTypes[t] ?? WINE_TYPES.find((w) => w.value === t)?.label ?? t
 
 /** Tipurile prezente în listă, în ordinea fixă (spumant, alb, rosé, roșu, desert). */
 export function typesIn(wines: WineRow[]): WineType[] {

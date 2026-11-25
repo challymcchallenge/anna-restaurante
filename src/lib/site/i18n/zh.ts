@@ -8,6 +8,8 @@ export const zh: Dict = {
   /** Ghilimelele citatelor (recenzii), după limbă. */
   /** Titlul întrebărilor despre cazare, sub secțiunea Hotel (G10-1). */
   faqStayTitle: '住宿常见问题',
+  /** Tipurile de vin (filtrele listei de vinuri). */
+  wineTypes: { sparkling: '起泡酒', white: '白葡萄酒', rose: '桃红葡萄酒', red: '红葡萄酒', dessert: '甜酒' } as Record<string, string>,
   quotes: ['“', '”'] as [string, string],
   ogLocale: 'zh_CN',
   languageNames: {

@@ -11,6 +11,8 @@ export const fr: Dict = {
   /** Ghilimelele citatelor (recenzii), după limbă. */
   /** Titlul întrebărilor despre cazare, sub secțiunea Hotel (G10-1). */
   faqStayTitle: 'Questions sur votre séjour',
+  /** Tipurile de vin (filtrele listei de vinuri). */
+  wineTypes: { sparkling: 'Effervescent', white: 'Blanc', rose: 'Rosé', red: 'Rouge', dessert: 'Dessert' } as Record<string, string>,
   quotes: ['«\u00A0', '\u00A0»'] as [string, string],
   ogLocale: 'fr_FR',
   languageNames: {
