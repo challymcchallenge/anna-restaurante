@@ -171,6 +171,7 @@ export const it: Dict = {
   wineLegendGlass: 'calice · lei',
   wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
     `Carta dei vini di ${restaurant}: ${count}${countries.length ? ` (${countries.length > 1 ? `${countries.slice(0, -1).join(', ')} e ${countries[countries.length - 1]}` : countries[0]})` : ''}, con il prezzo alla bottiglia e al calice.`,
+  wineDownloadPdf: 'Scarica il PDF',
   winePageNote:
     'I prezzi sono in lei, per la bottiglia da 0,75 l, salvo diversa indicazione. I vini non disponibili non compaiono nella lista.',
   ratingLabel: (n: number) => `Voto ${n} su 5`,

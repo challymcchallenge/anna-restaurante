@@ -160,6 +160,7 @@ export const zh: Dict = {
   wineLegendGlass: '杯 · lei',
   wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
     `${restaurant} 酒单：${count}${countries.length ? `，产自${countries.length > 1 ? `${countries.slice(0, -1).join('、')}和${countries[countries.length - 1]}` : countries[0]}` : ''}，按瓶和按杯标价。`,
+  wineDownloadPdf: '下载 PDF',
   winePageNote: '如无特别说明，价格以列伊（lei）为单位，按 0.75 升整瓶计。缺货的葡萄酒不会出现在酒单中。',
   ratingLabel: (n: number) => `评分：${n}（满分 5）`,
   sources: { google: 'Google', tripadvisor: 'TripAdvisor', facebook: 'Facebook', other: '' },

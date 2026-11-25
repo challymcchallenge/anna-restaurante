@@ -167,6 +167,7 @@ export const sv: Dict = {
   wineLegendGlass: 'glas · lei',
   wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
     `Vinlista för ${restaurant}: ${count}${countries.length ? ` från ${countries.length > 1 ? `${countries.slice(0, -1).join(', ')} och ${countries[countries.length - 1]}` : countries[0]}` : ''}, med pris per flaska och per glas.`,
+  wineDownloadPdf: 'Ladda ner PDF',
   winePageNote:
     'Priserna anges i lei för en flaska på 0,75 l, om inget annat anges. Viner som inte finns i lager visas inte i listan.',
   ratingLabel: (n: number) => `Betyg ${n} av 5`,

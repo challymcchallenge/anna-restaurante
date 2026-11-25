@@ -13,6 +13,17 @@ export function asMedia(ref: MediaRef): Media | null {
   return ref && typeof ref === 'object' && ref.url ? ref : null
 }
 
+/**
+ * Adresa de descărcare a unui fișier (D-69, lista de vinuri în PDF). Pe un URL public Supabase,
+ * `?download=<nume>` cere browserului să salveze fișierul în loc să-l deschidă (documentația
+ * Supabase „Serving assets from Storage”, verificat pe 25.11.2026). Altfel rămâne adresa simplă.
+ */
+export function downloadUrl(media: Media): string {
+  const url = media.url as string
+  if (!/\/storage\/v1\/object\/public\//.test(url) || url.includes('?')) return url
+  return `${url}?download=${encodeURIComponent(media.filename || 'document.pdf')}`
+}
+
 type Size = { url?: string | null; width?: number | null; height?: number | null }
 
 function variants(media: Media, format: 'avif' | 'webp'): { url: string; width: number }[] {

@@ -12,7 +12,7 @@
  *   (D-61). Peste 30 s, latura lungă e de cel mult 1280 px, ca fișierele să rămână sub 50 MB.
  */
 
-export type UploadKind = 'photo' | 'clip' | 'logo' | 'badge'
+export type UploadKind = 'photo' | 'clip' | 'logo' | 'badge' | 'document'
 
 export const MASTER_MAX_SIDE = 2560
 export const JPEG_QUALITY = 0.9
@@ -41,9 +41,11 @@ export const isVideoFile = (file: File) => file.type.startsWith('video/') || VID
 export const isHeicFile = (file: File) => /hei[cf]$/i.test(file.type) || HEIC_EXT.test(file.name)
 export const isSvgFile = (file: File) => file.type === 'image/svg+xml' || /\.svg$/i.test(file.name)
 export const isImageFile = (file: File) => file.type.startsWith('image/') || IMAGE_EXT.test(file.name)
+export const isPdfFile = (file: File) => file.type === 'application/pdf' || /\.pdf$/i.test(file.name)
 
 export function detectKind(file: File): UploadKind {
   if (isVideoFile(file)) return 'clip'
+  if (isPdfFile(file)) return 'document'
   if (isSvgFile(file)) return 'logo'
   return 'photo'
 }
@@ -115,7 +117,30 @@ function hasTransparency(canvas: HTMLCanvasElement): boolean {
   return false
 }
 
-export async function convertImage(file: File, kind: Exclude<UploadKind, 'clip'>): Promise<PhotoResult> {
+/**
+ * Document PDF (D-69): urcă exact cum e, fără conversie. Se verifică aceleași lucruri ca serverul
+ * (Payload 3.94, `validatePDF`): semnătura „%PDF-” la început și „xref” și „%%EOF” în ultimii 1.024 de
+ * octeți, plus limita de încărcare. Așa, un fișier stricat e oprit aici, cu mesaj în română.
+ */
+export async function prepareDocument(file: File): Promise<File> {
+  const latin1 = new TextDecoder('latin1')
+  const head = latin1.decode(await file.slice(0, 5).arrayBuffer())
+  if (head !== '%PDF-') {
+    throw new RejectedFileError('Fișierul nu este un PDF. Salvează documentul ca PDF și încearcă din nou.')
+  }
+  const tail = latin1.decode(await file.slice(Math.max(0, file.size - 1024)).arrayBuffer())
+  if (!tail.includes('%%EOF') || !tail.includes('xref')) {
+    throw new RejectedFileError('PDF-ul pare incomplet sau stricat. Salvează-l din nou ca PDF (Fișier → Export ca PDF) și încearcă iar.')
+  }
+  if (file.size > UPLOAD_MAX_BYTES) {
+    throw new RejectedFileError(
+      `PDF-ul are ${formatBytes(file.size)}; limita este ${formatBytes(UPLOAD_MAX_BYTES)}. Micșorează-l (de exemplu „Reduce File Size” la export) și încearcă din nou.`,
+    )
+  }
+  return file.type === 'application/pdf' ? file : new File([file], file.name, { type: 'application/pdf' })
+}
+
+export async function convertImage(file: File, kind: Exclude<UploadKind, 'clip' | 'document'>): Promise<PhotoResult> {
   const t0 = performance.now()
 
   if (kind === 'badge') {

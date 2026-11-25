@@ -17,6 +17,8 @@ import {
   convertClip,
   convertImage,
   detectKind,
+  isPdfFile,
+  prepareDocument,
   formatBytes,
   formatSeconds,
   isVideoFile,
@@ -31,14 +33,15 @@ import {
  */
 
 const KIND_OPTIONS: { value: UploadKind | 'auto'; label: string }[] = [
-  { value: 'auto', label: 'Detectez singur (fotografie sau clip)' },
+  { value: 'auto', label: 'Detectez singur (fotografie, clip sau PDF)' },
   { value: 'photo', label: 'Fotografie' },
   { value: 'clip', label: 'Clip video (cel mult 120 s)' },
   { value: 'logo', label: 'Logo (PNG sau SVG)' },
   { value: 'badge', label: 'Logo oficial de premiu (neatins)' },
+  { value: 'document', label: 'Document PDF (de exemplu lista de vinuri)' },
 ]
 
-const ACCEPT = 'image/*,video/*,.heic,.heif,.mov,.mp4,.m4v,.svg'
+const ACCEPT = 'image/*,video/*,.heic,.heif,.mov,.mp4,.m4v,.svg,.pdf,application/pdf'
 
 type State =
   | { status: 'idle' }
@@ -118,6 +121,10 @@ export const MediaUploadControl: React.FC = () => {
         setState({ status: 'rejected', message: 'Ai ales „Clip video”, dar fișierul nu este un clip (MP4 sau MOV).' })
         return
       }
+      if (kind !== 'document' && isPdfFile(file)) {
+        setState({ status: 'rejected', message: 'Fișierul este un PDF: alege „Document PDF” la „Ce încarci?”.' })
+        return
+      }
 
       try {
         if (kind === 'clip') {
@@ -149,6 +156,18 @@ export const MediaUploadControl: React.FC = () => {
             `Clip convertit în ${formatSeconds(result.ms)}: ${formatBytes(file.size)} → ${formatBytes(total)} (H.264${result.efficientCodec ? ` + ${result.efficientCodec.toUpperCase()}` : ''} + imagine de început). Completează textul alternativ și apasă Salvează.`,
             { duration: 12000 },
           )
+          setState({ status: 'idle' })
+          return
+        }
+
+        if (kind === 'document') {
+          const pdf = await prepareDocument(file)
+          setField('kind', 'document')
+          setField('originalName', file.name)
+          setField('originalBytes', file.size)
+          setModified(true)
+          setUploadControlFile(pdf)
+          toast.success(`PDF pregătit, neschimbat (${formatBytes(file.size)}). Apasă Salvează.`, { duration: 10000 })
           setState({ status: 'idle' })
           return
         }
@@ -244,7 +263,7 @@ export const MediaUploadControl: React.FC = () => {
       />
       <p className="media-convert__note">
         Fotografii JPG, PNG, HEIC · clipuri MP4, MOV de cel mult {CLIP_MAX_SECONDS} s · logo-uri SVG sau
-        PNG. Păstrează originalul la tine; pe site rămâne doar varianta optimizată. Clipurile de peste{' '}
+        PNG · documente PDF (de exemplu lista de vinuri), neschimbate. Păstrează originalul la tine; pe site rămâne doar varianta optimizată. Clipurile de peste{' '}
         {SHORT_CLIP_SECONDS} s se fac la 720p, se convertesc în câteva minute și merg pe paginile proprii; în
         hero-ul de pe Acasă intră doar clipuri de cel mult {SHORT_CLIP_SECONDS} s.
       </p>

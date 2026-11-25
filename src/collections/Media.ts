@@ -10,7 +10,7 @@ import { text } from '../fields'
  * Fluxul (design/flows/flow-incarcare-media.mmd):
  * 1. În panou, butonul „Alege și convertește” (MediaUploadControl) convertește fișierul în browser:
  *    fotografie → master JPEG de cel mult 2560 px (HEIC prin heic-to); logo → PNG/SVG, fără JPEG;
- *    BADGE → neatins; clip → MP4 H.264 + variantă eficientă (AV1/HEVC) + poster, maximum 120 s (D-61).
+ *    BADGE și Document PDF → neatinse; clip → MP4 H.264 + variantă eficientă (AV1/HEVC) + poster, maximum 120 s (D-61).
  * 2. Fișierul convertit urcă direct în Supabase Storage (clientUploads, ADR-003).
  * 3. Serverul generează variantele AVIF q55 e2 + WebP q78 e4, pe 5 lățimi (actualizarea ADR-004).
  * Originalul nu urcă niciodată pe server (D-27).
@@ -21,6 +21,7 @@ export const MEDIA_KINDS = [
   { value: 'clip', label: 'Clip video' },
   { value: 'logo', label: 'Logo' },
   { value: 'badge', label: 'Logo oficial de premiu (BADGE)' },
+  { value: 'document', label: 'Document PDF' },
   { value: 'video-variant', label: 'Variantă video (automată)' },
   { value: 'video-poster', label: 'Imagine de început a unui clip (automată)' },
 ] as const
@@ -67,6 +68,8 @@ const ALLOWED: Record<MediaKind, string[]> = {
   logo: ['image/png', 'image/svg+xml', 'image/webp'],
   badge: ['image/png', 'image/svg+xml', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'],
   clip: ['video/mp4', 'video/webm'],
+  // D-69: de exemplu lista de vinuri în PDF; urcă neschimbat, fără variante.
+  document: ['application/pdf'],
   'video-variant': ['video/mp4', 'video/webm'],
   'video-poster': ['image/jpeg', 'image/webp'],
 }
@@ -95,6 +98,8 @@ export const Media: CollectionConfig = {
     mimeTypes: [...new Set(Object.values(ALLOWED).flat())],
     imageSizes,
     adminThumbnail: ({ doc }) => {
+      // Un PDF n-are miniatură: panoul arată iconița de fișier.
+      if ((doc as any)?.mimeType === 'application/pdf') return null
       const sizes = (doc as any)?.sizes
       return sizes?.webp640?.url || (doc as any)?.url || null
     },
@@ -188,7 +193,7 @@ export const Media: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description:
-          'Se completează la încărcare. Logo: PNG sau SVG, fără conversie în JPEG. BADGE: fișierul oficial, neatins.',
+          'Se completează la încărcare. Logo: PNG sau SVG, fără conversie în JPEG. BADGE: fișierul oficial, neatins. Document PDF: neschimbat (de exemplu lista de vinuri).',
       },
     },
     {

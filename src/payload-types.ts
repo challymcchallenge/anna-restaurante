@@ -270,6 +270,10 @@ export interface HomePage {
      * Duce la /catalog-vinuri.
      */
     buttonLabel: string;
+    /**
+     * Opțional. Cu un fișier ales aici, pe pagina Lista de vinuri apare butonul „Descarcă PDF” (D-69). Încarcă PDF-ul în Biblioteca media, cu „Ce încarci?” → „Document PDF”.
+     */
+    pdf?: (number | null) | Media;
   };
   reviews: {
     /**
@@ -506,9 +510,9 @@ export interface Media {
   id: number;
   tenant?: (number | null) | Tenant;
   /**
-   * Se completează la încărcare. Logo: PNG sau SVG, fără conversie în JPEG. BADGE: fișierul oficial, neatins.
+   * Se completează la încărcare. Logo: PNG sau SVG, fără conversie în JPEG. BADGE: fișierul oficial, neatins. Document PDF: neschimbat (de exemplu lista de vinuri).
    */
-  kind: 'photo' | 'clip' | 'logo' | 'badge' | 'video-variant' | 'video-poster';
+  kind: 'photo' | 'clip' | 'logo' | 'badge' | 'document' | 'video-variant' | 'video-poster';
   /**
    * Ce se vede în imagine, pentru cititoarele de ecran și Google. Obligatoriu la fotografii și clipuri.
    */
@@ -1764,6 +1768,7 @@ export interface HomePageSelect<T extends boolean = true> {
         title?: T;
         intro?: T;
         buttonLabel?: T;
+        pdf?: T;
       };
   reviews?:
     | T

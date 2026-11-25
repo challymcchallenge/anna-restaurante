@@ -94,7 +94,7 @@ export function AwardBadge({
   className,
 }: {
   award: Award
-  /** Înălțimea locului: hero 72/96, Vinuri 120, footer 56 (wireframe S-01). */
+  /** Înălțimea locului: hero 72/96, Vinuri 120, footer 56 (wireframe S-01); logo-ul oficial, dublu (D-69). */
   size: 'hero' | 'section' | 'footer'
   tone?: 'dark' | 'light'
   className?: string

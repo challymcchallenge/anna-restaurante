@@ -152,6 +152,10 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .award--footer { padding-block: 6px; }
 .award--footer .award-text { font-size: 12px; }
 .award--official img { height: 100%; width: auto; }
+/* D-69: logo-ul oficial e de 2 ori mai mare decât locul rezervat: hero 144/192, Vinuri 240, footer 112. */
+.award--official.award--hero { height: calc(var(--badge-h) * 2); }
+.award--official.award--section { height: 240px; }
+.award--official.award--footer { height: 112px; }
 .award-link { display: inline-block; border-radius: 6px; }
 @media (min-width: 1024px) { .award-text { font-size: 14px; } }
 
@@ -726,6 +730,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 /* ---------- Lista de vinuri, /catalog-vinuri (S-23, D-46, poza 7): foaia de hârtie ---------- */
 .cover-logo { display: block; margin-top: var(--s5); }
 .page-award { display: grid; justify-items: start; gap: var(--s3); margin-top: var(--s5); }
+.page-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
 .wine-page { padding-top: var(--s6); }
 /* Pe foaia mai deschisă (desktop), textul secundar e puțin mai închis, ca să rămână peste 5:1. */
 .wine-sheet { max-width: 760px; margin-inline: auto; --c-text-2: color-mix(in srgb, var(--c-text) 78%, var(--c-bg)); }

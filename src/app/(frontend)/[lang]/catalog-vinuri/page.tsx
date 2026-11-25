@@ -2,10 +2,12 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 import { AwardBadge, awardsFor } from '@/components/site/Bits'
+import { Icon } from '@/components/site/Icons'
 import { PageCover } from '@/components/site/Events'
 import { GroupLogo, WineFilter, WineSheetGroup } from '@/components/site/WineList'
 import { WineSearch } from '@/components/site/WineSearch'
 import { getWineList } from '@/lib/site/data'
+import { asMedia, downloadUrl } from '@/lib/site/media'
 import { getActiveSite, localeAlternates } from '@/lib/site/locale'
 import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
@@ -16,7 +18,8 @@ import { byTypeGroups, typesIn } from '@/lib/site/wines'
  * S-23 · Lista de vinuri (D-14, D-19, D-46): toate vinurile disponibile, în formatul deschis
  * (poza 7 a lui Alin): pe tip, apoi țara · regiunea; producătorul îngroșat, anul, prețul; dedesubt
  * denumirea de origine și soiurile. Filtrul pe tip și căutarea, ca în wireframe. Insigna premiului
- * stă în antetul paginii (D-20, locul 3).
+ * stă în antetul paginii (D-20, locul 3). Dacă în panou e ales PDF-ul listei (Pagina Acasă → Vinuri),
+ * sub ea apare „Descarcă PDF” (D-69).
  */
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getActiveSite()
@@ -38,6 +41,7 @@ export default async function WineListPage() {
   const award = awardsFor(site.awards, 'wines-page')[0]
   const wines = await getWineList(site.tenant.id, site.locale)
   const glass = wines.filter((x) => x.priceGlass != null)
+  const pdf = asMedia(w?.pdf)
 
   return (
     <>
@@ -52,6 +56,14 @@ export default async function WineListPage() {
             <AwardBadge award={award} size="section" />
             {award.line && <p className="wines-line">{award.line}</p>}
           </div>
+        )}
+        {pdf && (
+          <p className="page-actions">
+            <a className="btn btn-ghost" href={downloadUrl(pdf)} download={pdf.filename || true} type="application/pdf">
+              <Icon name="download" />
+              {UI.wineDownloadPdf}
+            </a>
+          </p>
         )}
       </PageCover>
 

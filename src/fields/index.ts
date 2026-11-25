@@ -183,7 +183,7 @@ export const PHOTO_FORMATS = {
 
 export type PhotoFormat = keyof typeof PHOTO_FORMATS
 
-type MediaKind = 'photo' | 'clip' | 'logo' | 'badge'
+type MediaKind = 'photo' | 'clip' | 'logo' | 'badge' | 'document'
 
 /** Referință către Biblioteca media, filtrată pe tipul de fișier. */
 export const media = (

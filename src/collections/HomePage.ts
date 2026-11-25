@@ -132,7 +132,18 @@ export const HomePage: CollectionConfig = {
         section(
           'wines',
           'Vinuri',
-          [title(), intro(), button('Vezi lista de vinuri', 'Duce la /catalog-vinuri.')],
+          [
+            title(),
+            intro(),
+            button('Vezi lista de vinuri', 'Duce la /catalog-vinuri.'),
+            media({
+              name: 'pdf',
+              label: 'Lista de vinuri în PDF',
+              kinds: ['document'],
+              description:
+                'Opțional. Cu un fișier ales aici, pe pagina Lista de vinuri apare butonul „Descarcă PDF” (D-69). Încarcă PDF-ul în Biblioteca media, cu „Ce încarci?” → „Document PDF”.',
+            }),
+          ],
           'Lista arată vinurile bifate „Recomandat” (cel mult 5 din fiecare tip), pe tipuri, cu filtre. Deasupra titlului: logo-ul grupului pe fundal închis (Setări).',
         ),
         section(

@@ -169,6 +169,7 @@ export const fr: Dict = {
   wineLegendGlass: 'verre · lei',
   wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
     `Carte des vins de ${restaurant} : ${count}${countries.length ? ` (${countries.length > 1 ? `${countries.slice(0, -1).join(', ')} et ${countries[countries.length - 1]}` : countries[0]})` : ''}, avec le prix à la bouteille et au verre.`,
+  wineDownloadPdf: 'Télécharger le PDF',
   winePageNote:
     'Les prix sont en lei, pour une bouteille de 0,75 l, sauf indication contraire. Les vins en rupture de stock n’apparaissent pas dans la liste.',
   ratingLabel: (n: number) => `Note : ${n} sur 5`,

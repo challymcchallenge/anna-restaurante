@@ -187,6 +187,7 @@ export const ro = {
   wineLegendGlass: 'pahar · lei',
   wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
     `Lista de vinuri ${restaurant}: ${count}${countries.length ? ` din ${countries.length > 1 ? `${countries.slice(0, -1).join(', ')} și ${countries[countries.length - 1]}` : countries[0]}` : ''}, cu prețul la sticlă și la pahar.`,
+  wineDownloadPdf: 'Descarcă PDF',
   winePageNote: 'Prețurile sunt în lei, pentru sticla de 0,75 l, dacă nu e scris altfel. Vinurile care nu sunt în stoc nu apar în listă.',
   ratingLabel: (n: number) => `Notă ${n} din 5`,
   sources: { google: 'Google', tripadvisor: 'TripAdvisor', facebook: 'Facebook', other: '' } as Record<

@@ -165,6 +165,7 @@ export const en: Dict = {
   wineLegendGlass: 'glass · lei',
   wineMetaDescription: (restaurant: string, count: string, countries: string[]) =>
     `${restaurant} wine list: ${count}${countries.length ? ` from ${countries.length > 1 ? `${countries.slice(0, -1).join(', ')} and ${countries[countries.length - 1]}` : countries[0]}` : ''}, with prices by the bottle and by the glass.`,
+  wineDownloadPdf: 'Download PDF',
   winePageNote:
     'Prices are in lei, for a 0.75 l bottle, unless stated otherwise. Wines that are out of stock do not appear on the list.',
   ratingLabel: (n: number) => `Rated ${n} out of 5`,
