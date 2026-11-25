@@ -553,6 +553,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 /* ---------- Secțiunile: pagini de hârtie și pagini de copertă ---------- */
 /* Sub primul ecran: browserul nu așază și nu desenează secțiunile până se apropie de ecran (Lighthouse TBT). */
 .paper-section, .cover-section, .site-footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+/* F5: o clipă, la saltul spre o secțiune, toate se așază cu înălțimea reală (HeaderController). */
+.cv-all .paper-section, .cv-all .cover-section, .cv-all .site-footer { content-visibility: visible; }
 .paper-section { padding: calc(var(--s8) + var(--wave-pad, 0px)) 0 var(--s8); background: var(--c-bg); color: var(--c-text); }
 .cover-section { padding: calc(var(--s8) + var(--wave-pad, 0px)) 0 var(--s8); background: var(--c-dark); color: var(--c-on-dark); }
 .paper-section h2, .cover-section h2 { font-size: clamp(32px, 9vw, 40px); line-height: 1.08; letter-spacing: -0.01em; max-width: 16ch; }
