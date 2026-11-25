@@ -236,6 +236,16 @@ Contrastul textelor din antet peste fotografie: telefon 6,85:1, „Mai mult” 1
 
 Capturi: `design/f3/capturi/2026_11_24_Trattoria_D60_*.webp`. Teste: 75/75 (3 noi). Migrația: `20261124_231318_f3_meniu_navigare`.
 
+## 13. După GATE 3: fotografii rotunjite și clipuri de 120 s (D-61)
+
+| Cerere | Cum e acum |
+|---|---|
+| Toate pozele cu margini rotunjite | O singură rază, 16 px, pe toate fotografiile: Bucătăria, serile, arhiva, saloanele, hotelul și camerele, cursul de pizza, galeria și fereastra mare. Plăcile fără fotografie au și rama aurie rotunjită. Coperta rămâne dreaptă, fiindcă ocupă tot ecranul |
+| Clipuri de până la 120 s | Butonul „Alege și convertește” primește clipuri de până la 120 s. Peste 30 s se convertesc la 720p, ca să încapă în 50 MB (estimat ~25 MB la 120 s, neverificat pe un clip real). Conversia durează câteva minute |
+| Nu pe Acasă | Coperta de pe Acasă primește doar clipuri de cel mult 30 s: lista arată doar clipurile scurte, iar unul lung e respins la salvare. Clipurile lungi merg în `/galerie` și în galeria cursului de pizza, unde se încarcă doar la apăsare |
+
+Teste: 79/79 (4 noi, `f3-d61`). Fără migrație.
+
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
 Pagina HTML a raportului (privată): https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP

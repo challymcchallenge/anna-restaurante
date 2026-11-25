@@ -12,6 +12,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import {
   CLIP_MAX_SECONDS,
+  SHORT_CLIP_SECONDS,
   RejectedFileError,
   convertClip,
   convertImage,
@@ -32,7 +33,7 @@ import {
 const KIND_OPTIONS: { value: UploadKind | 'auto'; label: string }[] = [
   { value: 'auto', label: 'Detectez singur (fotografie sau clip)' },
   { value: 'photo', label: 'Fotografie' },
-  { value: 'clip', label: 'Clip video (cel mult 30 s)' },
+  { value: 'clip', label: 'Clip video (cel mult 120 s)' },
   { value: 'logo', label: 'Logo (PNG sau SVG)' },
   { value: 'badge', label: 'Logo oficial de premiu (neatins)' },
 ]
@@ -243,7 +244,9 @@ export const MediaUploadControl: React.FC = () => {
       />
       <p className="media-convert__note">
         Fotografii JPG, PNG, HEIC · clipuri MP4, MOV de cel mult {CLIP_MAX_SECONDS} s · logo-uri SVG sau
-        PNG. Păstrează originalul la tine; pe site rămâne doar varianta optimizată.
+        PNG. Păstrează originalul la tine; pe site rămâne doar varianta optimizată. Clipurile de peste{' '}
+        {SHORT_CLIP_SECONDS} s se fac la 720p, se convertesc în câteva minute și merg pe paginile proprii; în
+        hero-ul de pe Acasă intră doar clipuri de cel mult {SHORT_CLIP_SECONDS} s.
       </p>
 
       {state.status === 'working' && (

@@ -180,11 +180,11 @@ export interface HomePage {
     menuLabel?: string | null;
     mediaMode: 'video' | 'slideshow';
     /**
-     * 16:9, fără sunet, cel mult 30 s.
+     * 16:9, fără sunet, cel mult 30 s (clipurile lungi merg pe paginile proprii, D-61).
      */
     videoDesktop?: (number | null) | Media;
     /**
-     * 9:16, fără sunet, cel mult 30 s (D-02, D-24).
+     * 9:16, fără sunet, cel mult 30 s (D-02, D-24, D-61).
      */
     videoMobile?: (number | null) | Media;
     /**

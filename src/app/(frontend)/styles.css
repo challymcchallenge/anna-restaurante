@@ -17,6 +17,8 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --radius-btn: 999px;
   --radius-box: 4px;
+  /* Fotografiile și clipurile de pe site au colțuri rotunjite (D-61); coperta (hero) rămâne pe toată lățimea. */
+  --radius-photo: 16px;
 
   /* Derivate din temă (aceleași reguli pentru orice restaurant). */
   --line-paper: color-mix(in srgb, var(--c-text) 22%, transparent);
@@ -554,8 +556,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   contain: paint;
 }
 .cat { scroll-snap-align: start; min-width: 0; }
-.cat-card { display: block; text-decoration: none; border-radius: var(--radius-box); }
-.cat-visual { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.cat-card { display: block; text-decoration: none; border-radius: var(--radius-photo); }
+.cat-visual { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-photo); background: var(--c-dark); }
 .cat-visual picture, .cat-visual img { width: 100%; height: 100%; }
 .cat-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
 .cat-card:hover .cat-visual img { transform: scale(1.03); }
@@ -565,7 +567,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   color: var(--c-on-dark); font: 400 28px/1.15 var(--font-display);
 }
 .chapter::before {
-  content: ""; position: absolute; inset: var(--s3);
+  content: ""; position: absolute; inset: var(--s3); border-radius: calc(var(--radius-photo) - var(--s3) / 2);
   border: 1px solid var(--line-cover-strong); box-shadow: inset 0 0 0 5px var(--c-dark), inset 0 0 0 6px var(--line-cover);
 }
 .chapter > span { position: relative; max-width: 12ch; text-wrap: balance; }
@@ -760,7 +762,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 }
 .event-track > li { scroll-snap-align: start; min-width: 0; }
 .event { display: flex; flex-direction: column; height: 100%; }
-.event-visual { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.event-visual { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-photo); background: var(--c-dark); }
 .event-visual picture, .event-visual img { width: 100%; height: 100%; }
 .event-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
 .event:hover .event-visual img { transform: scale(1.03); }
@@ -784,7 +786,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .cover-section .no-events-follow { color: var(--c-on-dark-2); }
 .agenda-grid { list-style: none; margin: var(--s6) 0 0; padding: 0; display: grid; gap: var(--s7) var(--s5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
 .archive-grid { list-style: none; margin: var(--s6) 0 0; padding: 0; display: grid; gap: var(--s4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.archive-item picture, .archive-item img, .archive-item video { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-box); display: block; background: var(--c-dark); }
+.archive-item picture, .archive-item img, .archive-item video { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-photo); display: block; background: var(--c-dark); }
 .archive-name { margin-top: var(--s2); font-size: 15px; color: var(--c-text-2); }
 @media (min-width: 1024px) {
   .event-track { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; gap: var(--s6); margin-top: var(--s7); }
@@ -795,8 +797,8 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 /* ---------- Evenimente private (S-02) ---------- */
 .private-grid { display: grid; gap: var(--s7); }
 .salons { display: grid; gap: var(--s6); }
-.salon-link { display: block; border-radius: var(--radius-box); }
-.salon-visual { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.salon-link { display: block; border-radius: var(--radius-photo); }
+.salon-visual { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-photo); background: var(--c-dark); }
 .salon-visual picture, .salon-visual img { width: 100%; height: 100%; }
 .salon-visual img { object-fit: cover; transition: transform 700ms var(--ease-out); }
 .salon-link:hover img { transform: scale(1.03); }
@@ -816,7 +818,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   contain: paint;
 }
 .photo-track li { scroll-snap-align: start; }
-.photo-track img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-box); }
+.photo-track img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-photo); }
 @media (min-width: 1024px) {
   .salon-page-grid { grid-template-columns: 7fr 5fr; gap: var(--s8); align-items: center; }
   .salon-page--flip .salon-gallery { order: 2; }
@@ -845,7 +847,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 
 /* ---------- Cursuri de pizza (S-04) ---------- */
 .pizza-grid { display: grid; gap: var(--s6); }
-.pizza-visual { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.pizza-visual { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-photo); background: var(--c-dark); }
 .pizza-visual picture, .pizza-visual img { width: 100%; height: 100%; }
 .pizza-visual img { object-fit: cover; }
 .pizza-text .section-intro { max-width: 52ch; }
@@ -865,7 +867,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .prose h2 + *, .prose h3 + * { margin-top: var(--s3); }
 .prose li + li { margin-top: var(--s2); }
 .course-side { display: grid; gap: var(--s5); align-content: start; justify-items: start; }
-.course-photo { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.course-photo { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-photo); background: var(--c-dark); }
 .course-photo picture, .course-photo img { width: 100%; height: 100%; object-fit: cover; }
 .course-side .details { width: 100%; margin: 0; }
 @media (min-width: 1024px) { .course-grid { grid-template-columns: 7fr 5fr; gap: var(--s8); align-items: start; } }
@@ -892,7 +894,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .hotel-photos { display: grid; gap: var(--s3); }
 .hotel-photos--more { grid-template-columns: 1fr 1fr; }
 .hotel-photos--more .hotel-photo--lead { grid-column: 1 / -1; }
-.hotel-photo, .hotel-room-visual { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-box); }
+.hotel-photo, .hotel-room-visual { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-photo); }
 .hotel-photo picture, .hotel-photo img, .hotel-room-visual picture, .hotel-room-visual img { width: 100%; height: 100%; }
 .hotel-photo img, .hotel-room-visual img { object-fit: cover; }
 .hotel .mini-title { margin-top: var(--s8); color: var(--c-accent); }
@@ -927,7 +929,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .gal-item { position: relative; min-width: 0; grid-row: span 2; }
 .gal-item--tall { grid-row: span 3; }
 .gal-item--wide { grid-column: span 2; grid-row: span 3; }
-.gal-link { display: block; width: 100%; height: 100%; overflow: hidden; border-radius: var(--radius-box); background: var(--c-dark); }
+.gal-link { display: block; width: 100%; height: 100%; overflow: hidden; border-radius: var(--radius-photo); background: var(--c-dark); }
 .gal-link picture, .gal-link img { width: 100%; height: 100%; }
 .gal-link img { object-fit: cover; transition: transform 700ms var(--ease-out); }
 .gal-link:hover img { transform: scale(1.03); }
@@ -965,7 +967,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .lightbox-media { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 0; overflow: hidden; }
 .lightbox-media picture { display: contents; }
 .lightbox-media img, .lightbox-media video {
-  display: block; width: auto; height: auto; max-width: 100%; max-height: min(100%, calc(100dvh - 220px)); object-fit: contain; border-radius: var(--radius-box);
+  display: block; width: auto; height: auto; max-width: 100%; max-height: min(100%, calc(100dvh - 220px)); object-fit: contain; border-radius: var(--radius-photo);
 }
 .lightbox-caption { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1) var(--s4); max-width: 70ch; font-size: 15px; line-height: 1.45; text-align: center; }
 .lightbox-count { color: var(--c-on-dark-2); font-variant-numeric: tabular-nums; }

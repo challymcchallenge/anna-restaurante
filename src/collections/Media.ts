@@ -10,7 +10,7 @@ import { text } from '../fields'
  * Fluxul (design/flows/flow-incarcare-media.mmd):
  * 1. În panou, butonul „Alege și convertește” (MediaUploadControl) convertește fișierul în browser:
  *    fotografie → master JPEG de cel mult 2560 px (HEIC prin heic-to); logo → PNG/SVG, fără JPEG;
- *    BADGE → neatins; clip → MP4 H.264 + variantă eficientă (AV1/HEVC) + poster, maximum 30 s.
+ *    BADGE → neatins; clip → MP4 H.264 + variantă eficientă (AV1/HEVC) + poster, maximum 120 s (D-61).
  * 2. Fișierul convertit urcă direct în Supabase Storage (clientUploads, ADR-003).
  * 3. Serverul generează variantele AVIF q55 e2 + WebP q78 e4, pe 5 lățimi (actualizarea ADR-004).
  * Originalul nu urcă niciodată pe server (D-27).
@@ -33,8 +33,11 @@ export const VARIANT_WIDTHS = [640, 960, 1280, 1920, 2560] as const
 /** Latura maximă a masterului (ADR-004). */
 export const MASTER_MAX_SIDE = 2560
 
-/** Durata maximă a unui clip, în secunde (D-24). */
-export const CLIP_MAX_SECONDS = 30
+/** Durata maximă a unui clip, în secunde (D-24, mărită la 120 s prin D-61). */
+export const CLIP_MAX_SECONDS = 120
+
+/** Clipurile din hero-ul de pe Acasă: cel mult atât, ca prima pagină să se încarce repede (D-61). */
+export const HERO_CLIP_MAX_SECONDS = 30
 
 const hideSize: ImageSize['admin'] = {
   disableGroupBy: true,

@@ -2,6 +2,7 @@ import type { CollectionConfig, Field, Tab } from 'payload'
 
 import { adminOnly, authenticated } from '../access/roles'
 import { media, richText, sectionFlags, select, text, textarea, url, validatePhone } from '../fields'
+import { HERO_CLIP_MAX_SECONDS } from './Media'
 
 /**
  * Pagina Acasă: secțiunile din content-model 4 (structura hibridă, D-11).
@@ -61,14 +62,16 @@ export const HomePage: CollectionConfig = {
                   name: 'videoDesktop',
                   label: 'Video desktop',
                   kinds: ['clip'],
-                  description: '16:9, fără sunet, cel mult 30 s.',
+                  maxClipSeconds: HERO_CLIP_MAX_SECONDS,
+                  description: `16:9, fără sunet, cel mult ${HERO_CLIP_MAX_SECONDS} s (clipurile lungi merg pe paginile proprii, D-61).`,
                   condition: (_, s) => s?.mediaMode !== 'slideshow',
                 }),
                 media({
                   name: 'videoMobile',
                   label: 'Video telefon',
                   kinds: ['clip'],
-                  description: '9:16, fără sunet, cel mult 30 s (D-02, D-24).',
+                  maxClipSeconds: HERO_CLIP_MAX_SECONDS,
+                  description: `9:16, fără sunet, cel mult ${HERO_CLIP_MAX_SECONDS} s (D-02, D-24, D-61).`,
                   condition: (_, s) => s?.mediaMode !== 'slideshow',
                 }),
               ],

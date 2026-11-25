@@ -2,9 +2,9 @@
 
 Din acest document se construiesc colecțiile din panou, în Payload CMS 3 (stack aprobat, D-23). Descrie **ce** conținut există și ce reguli are; **cum** se stochează este decizia arhitectului.
 
-- Decis de Alin: structura hibridă (D-11), un panou cu restaurante complet separate (D-12, D-25), traduceri native pe limbi (D-28, care înlocuiește D-13), catalog de vinuri de sine stătător (D-14), destinatari de email pe subiect (D-15), rolurile Administrator și Editor (D-16), telefoanele (D-17), conversia media în browser, fără fișiere inițiale pe server, clipuri de cel mult 30 de secunde (D-07, D-24, D-27), conținutul provizoriu marcat (D-08), serile ca și colecție (D-09), premiile în 4 locuri (D-10, D-20), sunetul (D-21), rețelele din footer (D-30).
+- Decis de Alin: structura hibridă (D-11), un panou cu restaurante complet separate (D-12, D-25), traduceri native pe limbi (D-28, care înlocuiește D-13), catalog de vinuri de sine stătător (D-14), destinatari de email pe subiect (D-15), rolurile Administrator și Editor (D-16), telefoanele (D-17), conversia media în browser, fără fișiere inițiale pe server, clipuri de cel mult 120 de secunde, iar pe coperta de pe Acasă de cel mult 30 (D-07, D-24, D-27, D-61), conținutul provizoriu marcat (D-08), serile ca și colecție (D-09), premiile în 4 locuri (D-10, D-20), sunetul (D-21), rețelele din footer (D-30).
 - Acceptat de Alin (D-32): cele 8 categorii din slider, sesizările simplificate, tema unică la lansare, efectele și sunetul în R2.
-- **Propunere DESI, de validat la implementare:** toate limitele de lungime, rapoartele de aspect și dimensiunile minime de mai jos, plus câmpurile unui vin (Q-35). Limitele de mărime la încărcare și formatul audio nu sunt încă stabilite; durata maximă a unui clip este 30 de secunde (D-24).
+- **Propunere DESI, de validat la implementare:** toate limitele de lungime, rapoartele de aspect și dimensiunile minime de mai jos, plus câmpurile unui vin (Q-35). Limitele de mărime la încărcare și formatul audio nu sunt încă stabilite; durata maximă a unui clip este 120 de secunde; pe coperta de pe Acasă, 30 de secunde (D-24, D-61).
 
 ## 1. Convenții
 
@@ -170,8 +170,8 @@ Fiecare secțiune are în plus: **Pornită** (bifă), **Ordine** (număr), **Eti
 | Câmp | Tip | Oblig. | Limită | Reguli | Traducere |
 |---|---|---|---|---|---|
 | Mod media | alegere | Da | - | Video (implicit, D-29) sau Slideshow (rezervă) | - |
-| Video desktop | video | Da dacă mod = Video | - | 16:9, fără sunet, cel mult 30 s | - |
-| Video telefon | video | Da dacă mod = Video | - | 9:16, fără sunet, cel mult 30 s (D-02, D-24) | - |
+| Video desktop | video | Da dacă mod = Video | - | 16:9, fără sunet, cel mult 30 s (D-61: doar clipurile scurte) | - |
+| Video telefon | video | Da dacă mod = Video | - | 9:16, fără sunet, cel mult 30 s (D-02, D-24, D-61) | - |
 | Poster desktop | imagine | Da | - | HERO-L; apare înaintea clipului | - |
 | Poster telefon | imagine | Da | - | HERO-P | - |
 | Cadre de slideshow | listă: imagine desktop + imagine telefon | Da dacă mod = Slideshow | 5 cadre | HERO-L + HERO-P | - |
@@ -473,7 +473,7 @@ Un fișier se încarcă o singură dată și poate fi folosit în mai multe locu
 | Regulă la încărcare | Valoare | Sursă |
 |---|---|---|
 | Formate acceptate | JPG, PNG, HEIC; MP4, MOV; SVG pentru logo-uri | D-07 |
-| Durata maximă a unui clip | 30 de secunde; un clip mai lung este respins cu un mesaj care spune durata lui și limita | D-24 |
+| Durata maximă a unui clip | 120 de secunde; un clip mai lung este respins cu un mesaj care spune durata lui și limita. Peste 30 s, clipul se convertește la 720p. Coperta de pe Acasă primește doar clipuri de cel mult 30 s | D-24, D-61 |
 | Mărimea maximă a fișierului | de stabilit după proba din faza 0 | - |
 | Schimbarea punctului focal după încărcare | Lucrează pe cea mai mare variantă păstrată; pentru o decupare nouă la calitate maximă, panoul cere reîncărcarea fișierului | A-23, de probat |
 

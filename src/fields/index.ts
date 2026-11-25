@@ -17,6 +17,7 @@ import type {
   TextareaField,
   UploadField,
   Validate,
+  Where,
 } from 'payload'
 import { upload as defaultUploadValidate } from 'payload/shared'
 
@@ -194,17 +195,27 @@ export const media = (
     maxRows?: number
     /** obligatoriu, cu excepția elementelor provizorii */
     requiredUnlessPlaceholder?: boolean
+    /** Clipurile mai lungi nu se pot alege aici (de exemplu hero-ul de pe Acasă, D-61). */
+    maxClipSeconds?: number
   },
 ): UploadField => {
   const kinds = o.kinds ?? ['photo']
   const softRequired = o.requiredUnlessPlaceholder ? requiredUnlessPlaceholder() : undefined
+  const filterOptions: Where = o.maxClipSeconds
+    ? {
+        and: [
+          { kind: { in: kinds } },
+          { or: [{ kind: { not_equals: 'clip' } }, { durationSeconds: { less_than_equal: o.maxClipSeconds + 0.5 } }] },
+        ],
+      }
+    : { kind: { in: kinds } }
   const base = {
     name: o.name,
     label: o.label,
     type: 'upload' as const,
     relationTo: 'media' as const,
     required: o.required,
-    filterOptions: { kind: { in: kinds } },
+    filterOptions,
     admin: {
       description:
         [o.format ? PHOTO_FORMATS[o.format] : undefined, o.description].filter(Boolean).join(' · ') ||
@@ -217,6 +228,15 @@ export const media = (
       if (softRequired) {
         const soft = softRequired(value, args)
         if (soft !== true) return soft
+      }
+      if (o.maxClipSeconds && value) {
+        const ids = (Array.isArray(value) ? value : [value]).map((v) => (typeof v === 'object' && v ? (v as { id: number }).id : v))
+        for (const id of ids) {
+          const doc = await args.req.payload.findByID({ collection: 'media', id, depth: 0, req: args.req }).catch(() => null)
+          if (doc?.kind === 'clip' && Number(doc.durationSeconds) > o.maxClipSeconds + 0.5) {
+            return `Aici intră doar clipuri de cel mult ${o.maxClipSeconds} s (acesta are ${Number(doc.durationSeconds).toFixed(0)} s). Clipurile lungi se folosesc pe paginile proprii (D-61).`
+          }
+        }
       }
       if (o.validate) return (o.validate as any)(value, args)
       return true

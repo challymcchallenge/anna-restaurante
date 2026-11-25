@@ -8,15 +8,21 @@
  * - HEIC: decodat cu heic-to (serverul nu poate);
  * - logo: PNG sau SVG, niciodată JPEG (se pierde transparența);
  * - BADGE: fișierul oficial, neatins;
- * - clip: MP4 H.264 + AV1 (sau HEVC pe Apple, VP9 ca ultimă variantă) + poster JPEG; fără sunet; cel mult 30 s.
+ * - clip: MP4 H.264 + AV1 (sau HEVC pe Apple, VP9 ca ultimă variantă) + poster JPEG; fără sunet; cel mult 120 s
+ *   (D-61). Peste 30 s, latura lungă e de cel mult 1280 px, ca fișierele să rămână sub 50 MB.
  */
 
 export type UploadKind = 'photo' | 'clip' | 'logo' | 'badge'
 
 export const MASTER_MAX_SIDE = 2560
 export const JPEG_QUALITY = 0.9
-export const CLIP_MAX_SECONDS = 30
+export const CLIP_MAX_SECONDS = 120
+/** Până aici clipul rămâne la 1080p; peste, se codează la 720p (D-61). Clipurile din hero: cel mult atât. */
+export const SHORT_CLIP_SECONDS = 30
 export const VIDEO_MAX_SIDE = 1920
+export const LONG_VIDEO_MAX_SIDE = 1280
+/** Limita unui fișier încărcat (payload.config, upload.limits; Supabase Storage). */
+export const UPLOAD_MAX_BYTES = 50_000_000
 export const POSTER_QUALITY = 0.85
 
 export class RejectedFileError extends Error {
@@ -182,7 +188,7 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
   const duration = await input.computeDuration()
   if (duration > CLIP_MAX_SECONDS + 0.5) {
     throw new RejectedFileError(
-      `Clipul are ${duration.toFixed(1).replace('.', ',')} s; limita este ${CLIP_MAX_SECONDS} s (D-24). Scurtează-l pe telefon și încearcă din nou.`,
+      `Clipul are ${duration.toFixed(1).replace('.', ',')} s; limita este ${CLIP_MAX_SECONDS} s (D-61). Scurtează-l pe telefon și încearcă din nou.`,
     )
   }
   const track = await input.getPrimaryVideoTrack()
@@ -192,9 +198,11 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
   }
 
   const portrait = track.displayHeight > track.displayWidth
+  // Clipurile lungi (pentru paginile proprii) se codează la 720p: ~25 MB la 120 s în loc de ~50 MB (D-61).
+  const maxSide = duration > SHORT_CLIP_SECONDS + 0.5 ? LONG_VIDEO_MAX_SIDE : VIDEO_MAX_SIDE
   const size = portrait
-    ? { height: Math.min(VIDEO_MAX_SIDE, track.displayHeight) }
-    : { width: Math.min(VIDEO_MAX_SIDE, track.displayWidth) }
+    ? { height: Math.min(maxSide, track.displayHeight) }
+    : { width: Math.min(maxSide, track.displayWidth) }
 
   // Imaginea de început.
   onProgress({ stage: 'Imaginea de început…', progress: 0.02 })
@@ -248,6 +256,11 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
     await conversion.execute()
     const buffer = (output.target as InstanceType<typeof MB.BufferTarget>).buffer
     if (!buffer) throw new Error(`${job.label}: rezultat gol.`)
+    if (buffer.byteLength > UPLOAD_MAX_BYTES) {
+      throw new RejectedFileError(
+        `${job.label}: fișierul convertit are ${formatBytes(buffer.byteLength)}; limita este ${formatBytes(UPLOAD_MAX_BYTES)}. Scurtează clipul și încearcă din nou.`,
+      )
+    }
     const ext = job.webm ? 'webm' : 'mp4'
     const suffix = job.codec === 'avc' ? '' : `-${job.codec}`
     outputs.push(
