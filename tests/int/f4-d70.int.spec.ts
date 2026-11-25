@@ -16,7 +16,8 @@ const css = read('src/app/(frontend)/[lang]/styles.css')
 describe('D-70 · coperta pe telefon', () => {
   it('gradientul de jos pornește de la 72% (nu 96%) și se termină la 78% din înălțime', () => {
     expect(css).toContain(
-      'linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 72%, transparent) 0%, color-mix(in srgb, var(--c-dark) 58%, transparent) 30%, color-mix(in srgb, var(--c-dark) 20%, transparent) 60%, transparent 78%);',
+      // F5: aceleași trepte, cu minimul în pixeli de la 390 × 844 (ecranele scurte cădeau sub 3:1).
+      'linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 72%, transparent) 0%, color-mix(in srgb, var(--c-dark) 58%, transparent) max(30%, 232px), color-mix(in srgb, var(--c-dark) 20%, transparent) max(60%, 463px), transparent max(78%, 602px));',
     )
     expect(css).not.toContain('var(--c-dark) 96%, transparent) 0%, color-mix(in srgb, var(--c-dark) 90%, transparent) 42%')
   })

@@ -350,8 +350,11 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 62%, transparent) 0, transparent 140px),
     /* D-70: pe telefon, umbra de jos e mai ușoară (era 96% / 90% până la 42% din înălțime), ca fotografia
-       să se vadă. Contrast măsurat pe cele 5 cadre: titlu ≥ 3,25:1, subtitlu ≥ 5,06:1 (pragurile WCAG: 3 și 4,5). */
-    linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 72%, transparent) 0%, color-mix(in srgb, var(--c-dark) 58%, transparent) 30%, color-mix(in srgb, var(--c-dark) 20%, transparent) 60%, transparent 78%);
+       să se vadă. Contrast măsurat pe cele 5 cadre: titlu ≥ 3,25:1, subtitlu ≥ 5,06:1 (pragurile WCAG: 3 și 4,5).
+       F5: titlul stă la ~330 px de marginea de jos pe orice telefon, deci treptele au și un minim în pixeli
+       (cele de la 390 × 844). Pe ecranele scurte (360 × 780, 375 × 667), cu cadrele din D-77, titlul cădea
+       la 2,23–2,74:1; acum ≥ 3,08:1. De la 390 px în sus, aspectul e același. */
+    linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 72%, transparent) 0%, color-mix(in srgb, var(--c-dark) 58%, transparent) max(30%, 232px), color-mix(in srgb, var(--c-dark) 20%, transparent) max(60%, 463px), transparent max(78%, 602px));
 }
 @media (max-width: 1023px) {
   /* Umbră fină sub litere, pentru porțiunile luminoase ale fotografiei. */
@@ -1147,7 +1150,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .map-show { position: absolute; left: 50%; bottom: var(--s4); transform: translateX(-50%); }
 .map-show:hover { transform: translateX(-50%) translateY(-1px); }
 .map-frame { border: 0; }
-.map-note { margin-top: var(--s2); font-size: 13px; line-height: 1.45; color: var(--c-text-2); }
+.map-note { margin-top: var(--s2); font-size: 13px; line-height: 1.45; color: var(--c-text-2); text-wrap: pretty; }
 .contact-home-side { min-width: 0; }
 
 /* ---------- Paginile legale (F3 pasul 10, content-model 5.12) ---------- */
@@ -1156,6 +1159,8 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .legal-body { min-width: 0; max-width: 70ch; }
 .legal-body .section-tag { margin-bottom: var(--s5); }
 .legal-text { font-size: 17px; line-height: 1.65; }
+/* F5 (audit): ~75 de caractere pe rând în textul lung (măsurat înainte: ~93 la 1280 px). Titlurile rămân pe toată lățimea. */
+.legal-text > p, .legal-text > ul, .legal-text > ol { max-width: 31em; }
 .legal-text > * + * { margin-top: var(--s4); }
 .paper-section .legal-text h2 { margin-top: var(--s7); font-size: clamp(26px, 6vw, 32px); line-height: 1.15; max-width: none; scroll-margin-top: 112px; }
 .paper-section .legal-text h3 { margin-top: var(--s6); font: 400 22px/1.25 var(--font-display); scroll-margin-top: 112px; }
