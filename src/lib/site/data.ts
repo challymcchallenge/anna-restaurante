@@ -145,7 +145,8 @@ async function load(hostname: string, locale: LocaleCode): Promise<SiteData | nu
         limit: 10,
         depth: 0,
       }),
-      payload.find({ locale, collection: 'dish-categories', where: of(), sort: '_order', limit: 10, depth: 1 }),
+      // D-67: până la 20 de categorii în slider.
+      payload.find({ locale, collection: 'dish-categories', where: of(), sort: '_order', limit: 20, depth: 1 }),
       // Recomandatele de pe Acasă: cel mult 5 din fiecare tip (D-46), fără fotografii.
       payload.find({
         locale,

@@ -364,6 +364,10 @@ export interface HomePage {
      * GAL · format liber · minimum 1600 px pe latura lungă
      */
     gallery?: (number | Media)[] | null;
+    /**
+     * D-67: apare pe pagina cursului în locul fotografiei, în formatul lui (de exemplu 9:16), cu sunet la apăsare. Gol = primul clip din galerie.
+     */
+    video?: (number | null) | Media;
     age?: string | null;
     duration?: string | null;
     price?: string | null;
@@ -685,7 +689,7 @@ export interface Event {
   createdAt: string;
 }
 /**
- * Cardurile din sliderul „Bucătăria”. Fără legătură = adresa meniului digital din Setări.
+ * Cardurile din sliderul „Bucătăria” (cel mult 20). Fără legătură = adresa meniului digital din Setări.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dish-categories".
@@ -695,7 +699,7 @@ export interface DishCategory {
   _order?: string | null;
   tenant?: (number | null) | Tenant;
   /**
-   * De exemplu „Pasta e Risotto”. Nu se traduce: aceeași valoare în toate limbile.
+   * De exemplu „Pasta e Risotto”. Numele italienești rămân la fel în toate limbile.
    */
   name: string;
   shortText?: string | null;
@@ -1343,7 +1347,7 @@ export interface Setting {
    */
   activeLocales: ('ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv')[];
   /**
-   * Rămân la fel în toate limbile (content-model 9). Numele restaurantului, tagline-ul, saloanele, camerele, categoriile, serile și linkurile grupului se adaugă singure; aici pui restul (de exemplu Hotel ANNA, Wine Spectator).
+   * Rămân la fel în toate limbile (content-model 9). Numele restaurantului, tagline-ul, saloanele, camerele, serile și linkurile grupului se adaugă singure; aici pui restul (de exemplu Hotel ANNA, Wine Spectator).
    */
   doNotTranslate?: string[] | null;
   requests?: {
@@ -1470,7 +1474,7 @@ export interface Award {
    */
   year?: number | null;
   /**
-   * BADGE · fișierul oficial, nemodificat · Gol până la acordare. Se afișează exact cum a fost încărcat.
+   * BADGE · fișierul oficial, nemodificat · Gol până la acordare. Orice imagine: fișierul oficial, un logo sau o fotografie.
    */
   badge?: (number | null) | Media;
   /**
@@ -1812,6 +1816,7 @@ export interface HomePageSelect<T extends boolean = true> {
         buttonLabel?: T;
         fullText?: T;
         gallery?: T;
+        video?: T;
         age?: T;
         duration?: T;
         price?: T;

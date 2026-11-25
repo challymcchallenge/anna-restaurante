@@ -44,17 +44,17 @@ export function segmentsOf(payload: Payload, slug: string, doc: unknown): Segmen
 
 /**
  * Termenii care nu se traduc (content-model 9): numele restaurantului, tagline-ul, saloanele,
- * camerele, categoriile, serile, linkurile grupului și lista din Setări → Integrări.
+ * camerele, serile, linkurile grupului și lista din Setări → Integrări. Categoriile de preparate se
+ * traduc din D-67 (numele italienești le păstrează modelul, după instrucțiuni).
  */
 export async function glossary(payload: Payload, tenantId: number | string): Promise<string[]> {
   const where = { tenant: { equals: tenantId } }
   const common = { where, depth: 0, limit: 500, pagination: false as const, overrideAccess: true, locale: DEFAULT_LOCALE }
-  const [tenant, settings, salons, rooms, cats, events, links] = await Promise.all([
+  const [tenant, settings, salons, rooms, events, links] = await Promise.all([
     payload.findByID({ collection: 'tenants', id: tenantId, depth: 0, overrideAccess: true }).catch(() => null),
     payload.find({ collection: 'settings', ...common, limit: 1 }),
     payload.find({ collection: 'salons', ...common }),
     payload.find({ collection: 'room-types', ...common }),
-    payload.find({ collection: 'dish-categories', ...common }),
     payload.find({ collection: 'events', ...common }),
     payload.find({ collection: 'group-links', ...common }),
   ])
@@ -66,7 +66,6 @@ export async function glossary(payload: Payload, tenantId: number | string): Pro
     ...((s?.doNotTranslate as string[] | undefined) ?? []),
     ...names(salons.docs),
     ...names(rooms.docs),
-    ...names(cats.docs),
     ...names(events.docs),
     ...names(links.docs),
   ].filter((t): t is string => typeof t === 'string' && t.trim().length > 1)

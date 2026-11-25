@@ -246,7 +246,9 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
       input: inp,
       output,
       video: { ...size, codec: job.codec, quality: MB.QUALITY_MEDIUM, forceTranscode: true },
-      audio: { discard: true },
+      // D-67: sunetul se păstrează (copiat ca atare când containerul îl acceptă, altfel recodat).
+      // Pe Acasă clipurile rulează tot fără sunet (muted); pe paginile proprii se aude la apăsare.
+      audio: { quality: MB.QUALITY_MEDIUM },
       showWarnings: false,
     })
     if (!conversion.isValid) {

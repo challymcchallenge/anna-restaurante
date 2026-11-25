@@ -1221,3 +1221,7 @@ main > section:is(:nth-of-type(8n + 5), :nth-of-type(8n + 6), :nth-of-type(8n + 
 .legal-note { margin: 0 0 24px; padding: 12px 16px; border-left: 3px solid var(--c-accent-ink); background: color-mix(in srgb, var(--c-accent) 10%, var(--c-bg)); font-size: 15px; }
 .review-translated { margin: 8px 0 0; font-size: 13px; color: var(--c-text-2); }
 .hotel .review-translated { color: var(--c-on-dark-2); }
+/* D-67: clipul principal al cursului, în proporția lui (de exemplu 9:16), fără decupare. */
+.course-photo.course-photo--video { aspect-ratio: auto; display: flex; justify-content: center; }
+.course-photo--video video { display: block; width: 100%; height: auto; max-height: min(82vh, 760px); object-fit: contain; background: var(--c-dark); }
+@media (min-width: 1024px) { .course-photo--video video { width: auto; max-width: 100%; } }

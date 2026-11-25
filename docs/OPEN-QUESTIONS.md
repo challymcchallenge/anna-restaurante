@@ -120,7 +120,7 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G11-1 | Pagina de cookies de pe producție are textul Riviera Events (rivieraevents.ro, chei „riviera-…”). O rescriu pentru Trattoria din ciorna D-53? | F5 | Alin |
-| G11-2 | Numele categoriilor din Bucătărie devin traductibile (categoriile noi au nume românești)? | F5 | Alin |
-| G11-3 | Accept abaterea `/zh` (mediana 82, ținta 85) și re-măsor în F5 pe domeniul final? | GATE 4 | Alin |
+| ~~G11-1~~ | ~~pagina de cookies~~ — **rezolvat: D-67** | — | — |
+| ~~G11-2~~ | ~~numele categoriilor traductibile~~ — **rezolvat: D-67** | — | — |
+| ~~G11-3~~ | ~~abaterea /zh acceptată~~ — **rezolvat: D-67** | — | — |
 

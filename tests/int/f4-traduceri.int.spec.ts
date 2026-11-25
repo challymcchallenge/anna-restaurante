@@ -216,3 +216,27 @@ describe('G10 (D-65) · întrebări la cursuri și la cazare, termeni care nu se
     for (const d of Object.values(DICTS)) expect(d.faqStayTitle.length).toBeGreaterThan(3)
   })
 })
+
+describe('D-67 · cererile de după GATE 4', () => {
+  const read = (f: string) => readFileSync(join(process.cwd(), f), 'utf8')
+  it('insigna premiului acceptă orice imagine; sliderul are până la 20 de categorii', () => {
+    expect(read('src/collections/AdminAreas.ts')).toContain("kinds: ['badge', 'logo', 'photo']")
+    expect(read('src/lib/site/data.ts')).toMatch(/collection: 'dish-categories', where: of\(\), sort: '_order', limit: 20/)
+  })
+  it('clipurile își păstrează sunetul; clipul cursului stă în locul fotografiei, fără muted', () => {
+    const convert = read('src/components/admin/media/convert.ts')
+    expect(convert).not.toContain('discard: true')
+    expect(convert).toContain('audio: { quality: MB.QUALITY_MEDIUM }')
+    const page = read('src/app/(frontend)/[lang]/cursuri-pizza-copii/page.tsx')
+    expect(page).toContain("allGallery.find((m) => m.kind === 'clip')")
+    expect(page).not.toMatch(/<video[^>]*\bmuted\b/)
+  })
+  it('numele categoriei se traduce; pagina de cookies cu textul altui site se înlocuiește o singură dată', () => {
+    expect(read('src/collections/Catalog.ts')).toMatch(/name: 'name', label: 'Nume', max: 32, required: true, localized: true/)
+    const seed = JSON.parse(read('seed/trattoria-da-vittoria.json'))
+    const swap = seed.swaps.find((s: { match?: { slug?: string }; whenContains?: string }) => s.match?.slug === 'cookies' && s.whenContains)
+    expect(swap.whenContains).toBe('rivieraevents.ro')
+    expect(swap.alsoSet).toEqual({ placeholder: true })
+    expect(swap.to.$richText).toContain('Limba aleasă stă în adresa paginii')
+  })
+})

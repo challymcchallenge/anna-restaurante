@@ -55,9 +55,10 @@ export const Awards: CollectionConfig = {
     media({
       name: 'badge',
       label: 'Logo oficial',
-      kinds: ['badge'],
+      // D-67: orice imagine (logo oficial, fotografie, PNG, JPEG, WebP, AVIF, SVG; HEIC se convertește).
+      kinds: ['badge', 'logo', 'photo'],
       format: 'BADGE',
-      description: 'Gol până la acordare. Se afișează exact cum a fost încărcat.',
+      description: 'Gol până la acordare. Orice imagine: fișierul oficial, un logo sau o fotografie.',
     }),
     text({ name: 'line', label: 'Rând de text', max: 90, localized: true, description: 'Lângă insignă, în antetul secțiunii Vinuri.' }),
     url({ name: 'sourceUrl', label: 'Legătură către sursă' }),

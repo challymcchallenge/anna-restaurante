@@ -95,6 +95,13 @@ type SeedFile = {
     toMedia?: string
     /** A doua schimbare a aceluiași câmp (de exemplu un text final rescris): cheie nouă în jurnal. */
     version?: string
+    /**
+     * În loc de `from`: se schimbă doar dacă textul de acum conține acest fragment (de exemplu un text
+     * lipit din alt site, G11-1). Ce a scris altfel Administratorul nu se atinge.
+     */
+    whenContains?: string
+    /** Alte câmpuri setate odată cu schimbarea (de exemplu „Provizoriu”). */
+    alsoSet?: Record<string, unknown>
   }[]
 }
 
@@ -499,14 +506,19 @@ export async function seedStarterContent({
       const current = container[leaf]
       // Text formatat: se compară textul simplu, iar valoarea nouă devine document Lexical.
       const rich = isPlainObject(from) && typeof from.$richText === 'string'
-      const same = rich
-        ? lexicalText(current) === (from as { $richText: string }).$richText
-        : isEmpty(from)
-          ? isEmpty(current)
-          : current === from
+      const same = swap.whenContains
+        ? (typeof current === 'string' ? current : (lexicalText(current) ?? '')).includes(swap.whenContains)
+        : rich
+          ? lexicalText(current) === (from as { $richText: string }).$richText
+          : isEmpty(from)
+            ? isEmpty(current)
+            : current === from
       if (same) {
         const value = resolveValues(to)
-        const data = group ? { [group]: { ...container, [leaf]: value } } : { [leaf]: value }
+        const data = {
+          ...(group ? { [group]: { ...container, [leaf]: value } } : { [leaf]: value }),
+          ...(swap.alsoSet ?? {}),
+        }
         await payload.update({
           collection: swap.collection,
           id: target.id as number,

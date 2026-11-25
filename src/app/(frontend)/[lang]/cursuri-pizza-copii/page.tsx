@@ -18,7 +18,15 @@ export default async function PizzaPage() {
   const site = await sitePage('pizza')
   const s = section(site.home, 'pizza')
   const photo = asMedia(s?.photo)
-  const gallery = ((s?.gallery ?? []) as (number | Media)[]).map(asMedia).filter(Boolean) as Media[]
+  const allGallery = ((s?.gallery ?? []) as (number | Media)[]).map(asMedia).filter(Boolean) as Media[]
+  // D-67: clipul principal stă în locul fotografiei (câmpul „Clip principal” sau primul clip din galerie)
+  // și nu se mai repetă în galeria de dedesubt.
+  const video = asMedia(s?.video) ?? allGallery.find((m) => m.kind === 'clip') ?? null
+  const gallery = allGallery.filter((m) => m.id !== video?.id)
+  const poster = video ? asMedia(video.poster) : null
+  // Proporția originală a clipului (de exemplu 9:16), din clip sau din imaginea de început.
+  const vw = Number(video?.width || poster?.width) || 9
+  const vh = Number(video?.height || poster?.height) || 16
 
   return (
     <>
@@ -31,8 +39,24 @@ export default async function PizzaPage() {
             {s?.fullText && <RichText data={s.fullText as never} className="prose" />}
           </div>
           <aside className="course-side">
-            <div className="course-photo">
-              {photo ? (
+            <div className={`course-photo${video ? ' course-photo--video' : ''}`}>
+              {video ? (
+                // Fără `muted`: sunetul pornește odată cu clipul, la apăsare (nu se redă singur).
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={poster?.url ?? undefined}
+                  width={vw}
+                  height={vh}
+                  style={{ aspectRatio: `${vw} / ${vh}` }}
+                  aria-label={s?.menuLabel || s?.title || undefined}
+                >
+                  {videoSources(video).map((v) => (
+                    <source key={v.src} src={v.src} type={v.type} />
+                  ))}
+                </video>
+              ) : photo ? (
                 <Picture media={photo} sizes="(min-width: 1024px) 35vw, 100vw" />
               ) : (
                 <Chapter>{s?.menuLabel || s?.title}</Chapter>
@@ -56,7 +80,7 @@ export default async function PizzaPage() {
               {gallery.map((m) => (
                 <li key={m.id} className="archive-item">
                   {m.kind === 'clip' ? (
-                    <video controls preload="none" playsInline muted poster={asMedia(m.poster)?.url ?? undefined}>
+                    <video controls preload="none" playsInline poster={asMedia(m.poster)?.url ?? undefined}>
                       {videoSources(m).map((v) => (
                         <source key={v.src} src={v.src} type={v.type} />
                       ))}

@@ -795,6 +795,13 @@
       "title": "Exemplu · de înlocuit: sticlă și pahar de vin roșu",
       "alt": "Sticlă și pahar de vin roșu",
       "credit": "congerdesign, CC0, Wikimedia Commons"
+    },
+    {
+      "key": "faviconLogo",
+      "file": "media/trattoria-da-vittoria/pictograma-trattoria-logo-256.png",
+      "kind": "logo",
+      "title": "Pictogramă de filă Trattoria (logo original)",
+      "alt": "Trattoria da Vittoria"
     }
   ],
   "settingsMedia": {
@@ -3721,6 +3728,28 @@
         "Riviera Events",
         "VIP Riviera"
       ]
+    },
+    {
+      "collection": "settings",
+      "field": "favicon",
+      "fromMedia": "favicon",
+      "toMedia": "faviconLogo"
+    },
+    {
+      "$comment": "G11-1 (D-67): pagina de cookies de pe producție avea textul site-ului Riviera Events. Se înlocuiește o singură dată, doar dacă textul de acum îl conține, cu ciorna D-53 actualizată pentru Trattoria, și devine „Provizoriu” până o aprobă juristul.",
+      "collection": "legal-pages",
+      "match": {
+        "slug": "cookies"
+      },
+      "field": "content",
+      "whenContains": "rivieraevents.ro",
+      "to": {
+        "$richText": "Ciornă pentru juristul grupului (Q-25): descrie ce face site-ul Trattoria da Vittoria la 25.11.2026. Textul final îl dă juristul; ce e între paranteze drepte se completează.\n\n## Ce cookies folosește site-ul\nSite-ul public nu scrie cookies și nu păstrează nimic în browserul tău. Limba aleasă stă în adresa paginii (de exemplu /en), nu într-un cookie. Panoul de administrare folosește un cookie de sesiune, doar pentru personalul restaurantului.\n\n## Servicii terțe\n- Fereastra de rezervare ialoc se încarcă doar când apeși „Rezervă o masă” și nu setează cookies în configurația actuală (verificat pe 24.11.2026).\n- Harta Google se încarcă doar după ce apeși „Arată harta” și poate seta cookies Google.\n- Meniul digital și rețelele sociale se deschid pe site-urile lor, cu regulile lor.\n\n## Notă pentru jurist\nDacă în contul ialoc se pornesc pixelii de marketing (Google Ads, Meta, TikTok), e nevoie de un banner de consimțământ.\n\n## Cum controlezi cookies\n[de completat de jurist]"
+      },
+      "alsoSet": {
+        "placeholder": true
+      },
+      "version": "2026-11-25-g11"
     }
   ],
   "requestsFill": {

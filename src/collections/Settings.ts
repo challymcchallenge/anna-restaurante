@@ -490,7 +490,7 @@ export const Settings: CollectionConfig = {
               maxRows: 60,
               admin: {
                 description:
-                  'Rămân la fel în toate limbile (content-model 9). Numele restaurantului, tagline-ul, saloanele, camerele, categoriile, serile și linkurile grupului se adaugă singure; aici pui restul (de exemplu Hotel ANNA, Wine Spectator).',
+                  'Rămân la fel în toate limbile (content-model 9). Numele restaurantului, tagline-ul, saloanele, camerele, serile și linkurile grupului se adaugă singure; aici pui restul (de exemplu Hotel ANNA, Wine Spectator).',
               },
             },
           ],

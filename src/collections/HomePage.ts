@@ -176,6 +176,13 @@ export const HomePage: CollectionConfig = {
           button('Înscrie copilul'),
           richText({ name: 'fullText', label: 'Text complet (pagina cursului)', max: 1200, required: true, localized: true }),
           media({ name: 'gallery', label: 'Galerie foto-video', kinds: ['photo', 'clip'], format: 'GAL', hasMany: true, maxRows: 12 }),
+          media({
+            name: 'video',
+            label: 'Clip principal (pagina cursului)',
+            kinds: ['clip'],
+            description:
+              'D-67: apare pe pagina cursului în locul fotografiei, în formatul lui (de exemplu 9:16), cu sunet la apăsare. Gol = primul clip din galerie.',
+          }),
           {
             type: 'row',
             fields: [

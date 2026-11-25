@@ -65,7 +65,7 @@ const imageSizes: ImageSize[] = VARIANT_WIDTHS.flatMap((width) => [
 const ALLOWED: Record<MediaKind, string[]> = {
   photo: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
   logo: ['image/png', 'image/svg+xml', 'image/webp'],
-  badge: ['image/png', 'image/svg+xml', 'image/jpeg', 'image/webp'],
+  badge: ['image/png', 'image/svg+xml', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'],
   clip: ['video/mp4', 'video/webm'],
   'video-variant': ['video/mp4', 'video/webm'],
   'video-poster': ['image/jpeg', 'image/webp'],

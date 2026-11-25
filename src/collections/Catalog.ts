@@ -3,7 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { contentAccess } from '../access/roles'
 import { contentFlags, media, richText, select, text, url } from '../fields'
 
-/** Categorii de preparate (content-model 5.1). Cel mult 10 active; ordine manuală. */
+/** Categorii de preparate (content-model 5.1). Cel mult 20 active (D-67); ordine manuală. */
 export const DishCategories: CollectionConfig = {
   slug: 'dish-categories',
   labels: { singular: 'Categorie de preparate', plural: 'Categorii de preparate' },
@@ -12,11 +12,12 @@ export const DishCategories: CollectionConfig = {
     group: 'Conținut',
     useAsTitle: 'name',
     defaultColumns: ['name', 'shortText', 'active', 'placeholder'],
-    description: 'Cardurile din sliderul „Bucătăria”. Fără legătură = adresa meniului digital din Setări.',
+    description: 'Cardurile din sliderul „Bucătăria” (cel mult 20). Fără legătură = adresa meniului digital din Setări.',
   },
   access: contentAccess,
   fields: [
-    text({ name: 'name', label: 'Nume', max: 32, required: true, nt: true, description: 'De exemplu „Pasta e Risotto”.' }),
+    // G11-2 (D-67): numele se traduce (categoriile noi au nume românești); cele italienești rămân la fel.
+    text({ name: 'name', label: 'Nume', max: 32, required: true, localized: true, description: 'De exemplu „Pasta e Risotto”. Numele italienești rămân la fel în toate limbile.' }),
     text({ name: 'shortText', label: 'Text scurt', max: 70, localized: true }),
     media({ name: 'photo', label: 'Fotografie', format: 'CARD-P', requiredUnlessPlaceholder: true }),
     url({

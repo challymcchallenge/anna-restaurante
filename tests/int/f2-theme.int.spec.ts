@@ -94,7 +94,8 @@ describe('F2 · tema pe restaurant', () => {
     expect(s.colors).toMatchObject({ surfaceDark: '#1C1416', accent2: '#14613F' })
     expect(s.fontHeading).toBe('belleza')
     expect(s.fontText).toBe('hanken-grotesk')
-    expect(s.favicon?.title).toBe('Pictogramă de filă Trattoria')
+    // D-67: pictograma de filă e logo-ul original (înlocuiește pictograma desenată din D-43).
+    expect(s.favicon?.title).toBe('Pictogramă de filă Trattoria (logo original)')
 
     // O valoare pusă de Administrator nu se suprascrie la următoarea rulare.
     await payload.update({
