@@ -97,9 +97,24 @@ function sizeWarnings(width: number, height: number): string[] {
 }
 
 /**
- * Fotografie → master JPEG; logo → PNG (micșorat doar dacă depășește 2560 px) sau SVG neschimbat;
+ * Fotografie → master JPEG (PNG dacă are transparență, D-68); logo → PNG (micșorat doar dacă depășește 2560 px) sau SVG neschimbat;
  * BADGE → neatins.
  */
+/** Are imaginea pixeli (semi)transparenți? Se verifică un pixel din 16 pe fiecare latură (rapid). */
+function hasTransparency(canvas: HTMLCanvasElement): boolean {
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return false
+  const { width, height } = canvas
+  const data = ctx.getImageData(0, 0, width, height).data
+  const step = 16
+  for (let y = 0; y < height; y += step) {
+    for (let x = 0; x < width; x += step) {
+      if (data[(y * width + x) * 4 + 3] < 250) return true
+    }
+  }
+  return false
+}
+
 export async function convertImage(file: File, kind: Exclude<UploadKind, 'clip'>): Promise<PhotoResult> {
   const t0 = performance.now()
 
@@ -149,7 +164,9 @@ export async function convertImage(file: File, kind: Exclude<UploadKind, 'clip'>
   bitmap.close()
   resized.close()
 
-  const asPng = kind === 'logo'
+  // D-68: o imagine cu transparență (PNG, WebP, AVIF, GIF) rămâne PNG, ca transparența să nu se piardă
+  // (JPEG n-are canal alfa). Fotografiile obișnuite merg mai departe ca JPEG.
+  const asPng = kind === 'logo' || (/^image\/(png|webp|avif|gif)$/.test(file.type) && hasTransparency(canvas))
   const blob = await canvasToBlob(canvas, asPng ? 'image/png' : 'image/jpeg', asPng ? undefined : JPEG_QUALITY)
   const out = new File([blob], `${baseName(file.name)}.${asPng ? 'png' : 'jpg'}`, {
     type: blob.type,

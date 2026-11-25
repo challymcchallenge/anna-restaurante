@@ -53,7 +53,14 @@ type SeedFile = {
    * documentul după câmpuri simple (de exemplu numele). Fiecare rând se aplică o singură dată
    * (jurnalul `mediaFill:…`): un câmp golit intenționat din panou nu se mai completează.
    */
-  mediaFill?: { collection: CollectionSlug; match?: Record<string, string>; field: string; media: string }[]
+  mediaFill?: {
+    collection: CollectionSlug
+    match?: Record<string, string>
+    field: string
+    media: string
+    /** D-68: pune fișierul chiar dacă în câmp e altul (o singură dată), când Alin a cerut înlocuirea. */
+    replace?: boolean
+  }[]
   /**
    * F3 (D-46): o listă reală care înlocuiește exemplele unei colecții (de exemplu lista de vinuri).
    * Se aplică o singură dată pe versiune (jurnalul `list:<colecție>:<versiune>`): șterge doar
@@ -445,7 +452,7 @@ export async function seedStarterContent({
     }
 
     for (const fill of seed.mediaFill ?? []) {
-      const key = `mediaFill:${fill.collection}:${JSON.stringify(fill.match ?? {})}:${fill.field}`
+      const key = `mediaFill:${fill.collection}:${JSON.stringify(fill.match ?? {})}:${fill.field}${fill.replace ? `:${fill.media}` : ''}`
       if (log[key] || ids[fill.media] === undefined) continue
       const { docs: targets } = await payload.find({
         collection: fill.collection,
@@ -463,7 +470,7 @@ export async function seedStarterContent({
       if (!target) continue
       const [group, leaf] = fill.field.includes('.') ? fill.field.split('.', 2) : [null, fill.field]
       const container = (group ? (target[group] as Record<string, unknown> | undefined) : target) ?? {}
-      if (isEmpty(container[leaf])) {
+      if (fill.replace || isEmpty(container[leaf])) {
         // Grupul se trimite întreg, cu valorile existente, ca nimic din el să nu se piardă.
         const data = group ? { [group]: { ...container, [leaf]: ids[fill.media] } } : { [leaf]: ids[fill.media] }
         await payload.update({

@@ -802,6 +802,13 @@
       "kind": "logo",
       "title": "Pictogramă de filă Trattoria (logo original)",
       "alt": "Trattoria da Vittoria"
+    },
+    {
+      "key": "awardWineSpectator",
+      "file": "media/trattoria-da-vittoria/wine-spectator-grand-award.webp",
+      "kind": "badge",
+      "title": "Wine Spectator Grand Award 2027 (insigna)",
+      "alt": "Wine Spectator Grand Award 2027"
     }
   ],
   "settingsMedia": {
@@ -857,6 +864,15 @@
       },
       "field": "photo",
       "media": "fotoPizza"
+    },
+    {
+      "collection": "awards",
+      "match": {
+        "name": "Wine Spectator Restaurant Award"
+      },
+      "field": "badge",
+      "media": "awardWineSpectator",
+      "replace": true
     }
   ],
   "lists": [
