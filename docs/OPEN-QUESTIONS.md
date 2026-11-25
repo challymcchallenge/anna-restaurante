@@ -108,3 +108,10 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 |---|---|---|---|
 | ~~G9-1~~ | ~~Răspunsurile pe care nu le-am găsit pe site-uri~~ — **rezolvat: D-59** | — | — |
 | ~~G9-2~~ | ~~Apartamentele VIP Riviera în formularul de cazare~~ — **rezolvat: D-59** | — | — |
+
+## Întrebări noi în F4 (25.11.2026) — detalii în `docs/2026_11_25_Trattoria_F4.md`
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G10-1 | FAQ și la Cursurile de pizza și la Hotel (3–4 întrebări fiecare, din răspunsurile lui Alin)? | GATE 4 | Alin |
+| G10-2 | Termeni care nu se traduc, în plus față de cei automați: Hotel ANNA, Grupul ANNA, Wine Spectator, Riviera Events, VIP Riviera? | GATE 4 | Alin |
