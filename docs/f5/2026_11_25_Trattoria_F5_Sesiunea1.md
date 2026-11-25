@@ -9,7 +9,8 @@ Trattoria da Vittoria · 25.11.2026 · Decizia: D-78 · Planul: `docs/2026_11_25
 - **Auditul de finisare: 16 → 18/20.** O problemă de accesibilitate reală, reparată: titlul copertei pe telefoanele scurte (iPhone SE: 2,23 → 3,26:1).
 - **Lighthouse mobil pe producție (mediane):** Acasă 89, `/en` 89, `/zh` 80 (abaterea acceptată în G11-3); accesibilitate 100, CLS 0.
 - **Teste: 155/155** (33 de fișiere). `tsc` și lint: 0 erori.
-- **De la Alin:** G14-1 … G14-5 și `CRON_SECRET` în Vercel.
+- **G14 rezolvate (D-79):** 12 luni pentru cereri; **Google Analytics cu banner de cookies** (`GT-NCLXCCBJ`, doar după „Accept”, doar pe domeniu). Acasă cu bannerul: mediana 86 (ținta 85 atinsă). **Deschis: G15-1** (textele legale Riviera Events pe Trattoria).
+- **De la Alin:** G15-1 și `CRON_SECRET` în Vercel.
 
 ## Ce s-a făcut
 
@@ -39,7 +40,7 @@ Trattoria da Vittoria · 25.11.2026 · Decizia: D-78 · Planul: `docs/2026_11_25
 - **PLAN F5.5–F5.6** numește fișierele `docs/ghid-editor.md` și `docs/launch-checklist.md`; `CLAUDE.md` cere `YYYY_MM_DD_Trattoria_Titlu`. Am urmat regula din `CLAUDE.md` și am actualizat PLAN.
 - **Coperta pe telefon (D-70):** cu cadrele din D-77, titlul cădea sub 3:1 pe ecranele scurte. Am păstrat aspectul cerut de Alin de la 390 px în sus și am întărit umbra doar unde contrastul cădea sub prag.
 
-## Întrebări (G14)
+## Întrebări (G14, rezolvate prin D-79)
 
 | # | Întrebare | Propunerea mea |
 |---|---|---|

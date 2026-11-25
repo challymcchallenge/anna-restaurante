@@ -73,7 +73,7 @@ footer.credit b { color: var(--ink); font-weight: 600; }
     <p class="eyebrow">Trattoria da Vittoria · F5 · 25.11.2026 · D-78</p>
     <h1>Sesiunea 1 din F5: site-ul e pregătit de lansare, minus emailurile și domeniul</h1>
     <p class="lede">Tot ce nu depinde de domeniu și de Resend e gata și publicat pe producție, în ordinea cerută în D-67. Urmează sesiunea 2: emailurile, domeniul și GATE 5.</p>
-    <span class="stamp">Sesiunea 1 gata · aștept răspunsurile G14</span>
+    <span class="stamp">Sesiunea 1 gata · G14 rezolvate (D-79) · aștept G15-1</span>
   </div>
 </header>
 
@@ -84,6 +84,7 @@ footer.credit b { color: var(--ink); font-weight: 600; }
     <li><a href="#navigare">Navigarea</a></li>
     <li><a href="#audit">Auditul</a></li>
     <li><a href="#lighthouse">Lighthouse</a></li>
+    <li><a href="#analytics">Google Analytics</a></li>
     <li><a href="#intrebari">Întrebări</a></li>
     <li><a href="#tu">Ce faci tu</a></li>
     <li><a href="#drum">Drumul până la lansare</a></li>
@@ -181,9 +182,28 @@ footer.credit b { color: var(--ink); font-weight: 600; }
   </div>
 </section>
 
+<section class="ch band" id="analytics">
+  <div class="inner">
+    <h2><span class="no">06</span>Google Analytics cu banner de cookies (D-79)</h2>
+    <p>Eticheta Google a site-ului vechi, <code>GT-NCLXCCBJ</code>, pusă în panou (Setări → Integrări → „ID statistici”). Modelul e cel din politica grupului, aprobată de jurist pentru Riviera Events. Statisticile se încarcă doar pe domeniul propriu; pe adresa temporară bannerul apare, dar nu pleacă nimic spre Google.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Verificare</th><th>Rezultat</th></tr></thead>
+      <tbody>
+        <tr><td>Înainte de „Accept”</td><td class="ok">0 cereri către Google, 0 cookies</td></tr>
+        <tr><td>„Accept” (domeniu simulat, local)</td><td>se încarcă <code>GT-NCLXCCBJ</code>, cu reclamele refuzate și cookie-urile la 13 luni</td></tr>
+        <tr><td>„Refuz” și retragerea acordului</td><td>nimic de la Google; cookie-ul <code>_ga</code> se șterge</td></tr>
+        <tr><td>„Setări cookie-uri” din footer</td><td>bannerul revine, cu focusul în el</td></tr>
+        <tr><td>Producție, adresa temporară, telefon și desktop</td><td class="ok">bannerul apare; 0 cereri către Google și după „Accept”; 0 erori</td></tr>
+        <tr><td>Lighthouse mobil pe Acasă, cu bannerul</td><td>87 · 86 · 87 · 82 · 83, mediana <b>86</b> (fără banner: 89); accesibilitate 100, CLS 0</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
 <section class="ch band" id="intrebari">
   <div class="inner">
-    <h2><span class="no">06</span>Întrebări pentru tine (G14)</h2>
+    <h2><span class="no">07</span>Întrebări: G14 rezolvate, G15-1 deschisă</h2>
+    <p><b>G15-1.</b> Paginile Cookies și Confidențialitate de pe producție au textele site-ului Riviera Events, lipite din panou azi (06:05 și 14:20 UTC), după înlocuirea din D-67. Vorbesc despre rivieraevents.ro, WhatsApp, Web3Forms și Google Translate. Nu le-am suprascris. Propunerea adaptată pentru Trattoria e în <code>docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md</code>: descrie exact bannerul de acum și termenul de 12 luni. Le înlocuiesc?</p>
     <div class="tbl"><table>
       <thead><tr><th>#</th><th>Întrebare</th><th>Propunerea mea</th></tr></thead>
       <tbody>
@@ -199,11 +219,11 @@ footer.credit b { color: var(--ink); font-weight: 600; }
 
 <section class="ch band" id="tu">
   <div class="inner">
-    <h2><span class="no">07</span>Ce faci tu</h2>
+    <h2><span class="no">08</span>Ce faci tu</h2>
     <ol class="todo">
-      <li>Răspunde la G14-1 … G14-5.</li>
+      <li>Răspunde la G15-1 (textele legale Cookies și Confidențialitate).</li>
       <li>Pune <code>CRON_SECRET</code> în Vercel (Production, Sensitive, cel puțin 16 caractere): <a href="https://vercel.com/alinlabau-9308s-projects/anna-restaurante/settings/environment-variables">Environment Variables</a>.</li>
-      <li>Termenul de păstrare: panou → Setări → Cereri și emailuri → „Păstrează cererile (luni)”: <a href="https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin">panoul</a>.</li>
+      <li>Termenul de păstrare e pus (12 luni). Bannerul îl poți vedea pe site acum: <a href="https://anna-restaurante-alinlabau-9308s-projects.vercel.app/">site-ul</a>.</li>
       <li>Trimite ghidul editorului Social Media Managerului (<code>docs/2026_11_25_Trattoria_Ghid_Editor.md</code>).</li>
       <li>Continuă checklist-ul de lansare, secțiunea A (conținut): <code>docs/2026_11_25_Trattoria_Checklist_Lansare.md</code>.</li>
     </ol>
@@ -212,11 +232,11 @@ footer.credit b { color: var(--ink); font-weight: 600; }
 
 <section class="ch band" id="drum">
   <div class="inner">
-    <h2><span class="no">08</span>Drumul până la lansare</h2>
+    <h2><span class="no">09</span>Drumul până la lansare</h2>
     <div class="mermaid-wrap">
 <pre class="mermaid">
 flowchart LR
-  A["F5 · sesiunea 1<br/>gata"] --> B["Răspunsurile G14<br/>CRON_SECRET"]
+  A["F5 · sesiunea 1<br/>gata, G14 rezolvate"] --> B["G15-1 textele legale<br/>CRON_SECRET"]
   B --> C["Conținutul final<br/>checklist A"]
   C --> D["F5 · sesiunea 2<br/>Resend + domeniul"]
   D --> E["Probe pe domeniu<br/>Lighthouse, ialoc, emailuri"]
