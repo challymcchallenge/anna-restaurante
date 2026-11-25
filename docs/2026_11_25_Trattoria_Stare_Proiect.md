@@ -17,7 +17,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/stoic-johnson-oxvj0z` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-74) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-75) |
 | Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G12-1, G12-2) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_083644_d71_slideshow_clip_acasa` |
@@ -56,7 +56,11 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 - **F5** (2 sesiuni, GO primit): audit de finisare, date structurate, sitemap pe limbi, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare, re-măsurarea `/zh`; **la final** emailurile prin Resend și domeniul (D-36, D-67). În auditul F5 intră și o probă de **navigare prin linkuri pe producție** (nu doar încărcări directe), pe toate paginile și limbile.
 - **La final:** playbook-ul proiectului în vault-ul Obsidian, după standardul de denumire.
 
-## Sesiunea următoare: importul în masă al fotografiilor (cerut de Alin, 25.11.2026)
+## Importul în masă al fotografiilor (D-75, în lucru)
+
+**Stare:** fotografiile sunt descărcate, convertite și analizate. Raportul pentru „GO” e aici: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6. Se așteaptă răspunsul lui Alin la propuneri și la G13-5 (cum se încarcă). Fișierele convertite erau doar în containerul sesiunii; se refac după `scripts/import/README.md`.
+
+### Propunerea inițială
 
 Alin are multe fotografii într-un dosar local și încărcarea una câte una durează prea mult. Propunerea (de aprobat, întrebările G13 din `docs/OPEN-QUESTIONS.md`):
 
@@ -90,7 +94,7 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-74), `docs/OPEN-QUESTIONS.md` (G12, G13), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Importul fotografiilor: răspunsurile G13 / Pornește F5 / răspunsuri G12 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-75), `docs/OPEN-QUESTIONS.md` (G12, G13), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Importul fotografiilor: răspunsurile G13 / Pornește F5 / răspunsuri G12 / altă cerere]
 
 ---
 
