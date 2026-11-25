@@ -1,12 +1,12 @@
 import { DEFAULT_LOCALE, type LocaleCode } from '@/lib/locales'
 
-import { deClient } from './de'
-import { enClient } from './en'
-import { frClient } from './fr'
-import { itClient } from './it'
-import { roClient, type ClientDict } from './ro'
-import { svClient } from './sv'
-import { zhClient } from './zh'
+import { deClient } from './de.client'
+import { enClient } from './en.client'
+import { frClient } from './fr.client'
+import { itClient } from './it.client'
+import { roClient, type ClientDict } from './ro.client'
+import { svClient } from './sv.client'
+import { zhClient } from './zh.client'
 
 /**
  * Textele componentelor care rulează în browser (formulare, calendar, galerie, căutarea de vinuri).

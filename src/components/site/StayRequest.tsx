@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useId, useRef, useState } from 'react'
 
 import { clientUI } from '@/lib/site/i18n/client'
-import type { ClientDict } from '@/lib/site/i18n/ro'
+import type { ClientDict } from '@/lib/site/i18n/ro.client'
 import { localePath } from '@/lib/locales'
 
 /** Textele și limba (F4): date de `StayRequest` tuturor componentelor din fișier. */

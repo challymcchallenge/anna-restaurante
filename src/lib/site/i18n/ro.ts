@@ -7,121 +7,10 @@
  * căutarea de vinuri). Le ținem separat ca în browser să ajungă doar ele, nu tot dicționarul.
  */
 
-/** Plural românesc: 1 adult, 2 adulți, 20 de adulți. */
-export function plural(n: number, one: string, many: string): string {
-  if (n === 1) return `1 ${one}`
-  const rest = n % 100
-  return n >= 20 && (rest === 0 || rest >= 20) ? `${n} de ${many}` : `${n} ${many}`
-}
+import { plural, roClient, type ClientDict } from './ro.client'
 
-export const roClient = {
-  /** Formatul datelor și al numerelor (Intl). */
-  intl: 'ro-RO',
-  stay: {
-    arrive: 'Sosire',
-    depart: 'Plecare',
-    guests: 'Oaspeți',
-    roomsGuests: 'Camere și oaspeți',
-    adults: 'Adulți',
-    children: 'Copii',
-    continue: 'Continuă',
-    close: 'Închide',
-    departAfterArrive: 'Plecarea trebuie să fie după sosire.',
-    mobileNote: 'Cerere de ofertă, confirmată de hotel',
-    chooseArrive: 'Alege data sosirii',
-    chooseDepart: 'Alege data plecării',
-    prevMonth: 'Luna anterioară',
-    nextMonth: 'Luna următoare',
-    weekdays: ['L', 'Ma', 'Mi', 'J', 'V', 'S', 'D'],
-    weekdaysLong: ['luni', 'marți', 'miercuri', 'joi', 'vineri', 'sâmbătă', 'duminică'],
-    room: (n: number) => `Camera ${n}`,
-    addRoom: 'Adaugă cameră',
-    removeRoom: 'Șterge camera',
-    fewer: (what: string) => `Mai puțini: ${what.toLowerCase()}`,
-    more: (what: string) => `Mai mulți: ${what.toLowerCase()}`,
-    today: 'azi',
-    roomSummary: (adults: number, children: number) =>
-      [plural(adults, 'adult', 'adulți'), children ? plural(children, 'copil', 'copii') : null].filter(Boolean).join(', '),
-    guestsSummary: (rooms: number, adults: number, children: number) =>
-      `${plural(rooms, 'cameră', 'camere')} · ${plural(adults, 'adult', 'adulți')}, ${plural(children, 'copil', 'copii')}`,
-  },
-  /** Contact și sesizări (F3 pasul 9, S-06, S-07) */
-  form: {
-    subjectLegend: 'Cu ce te putem ajuta?',
-    bookTable: 'Rezerv o masă',
-    question: 'Am o întrebare',
-    eventType: 'Tipul evenimentului',
-    eventTypeHint: 'De exemplu: botez, aniversare, cină de firmă',
-    eventDate: 'Data dorită',
-    guests: 'Număr de invitați',
-    salon: 'Salon preferat',
-    salonAny: 'Oricare',
-    salonFits: (name: string, n: number) => `Potrivit: ${name} (până la ${n} de invitați)`,
-    salonTooMany: (n: number) =>
-      `Pentru mai mult de ${n} de invitați, saloanele noastre sunt prea mici. Trimite cererea oricum: îți recomandăm o sală potrivită din Grupul ANNA.`,
-    children: 'Număr de copii',
-    ages: 'Vârstele copiilor',
-    agesHint: 'De exemplu: 6 și 9 ani',
-    preferredDate: 'Data dorită',
-    allergies: 'Dacă există alergii, le discutăm la confirmare, nu aici.',
-    checkIn: 'Sosire',
-    checkOut: 'Plecare',
-    adults: 'Adulți',
-    kids: 'Copii',
-    roomType: 'Tip de cameră (opțional)',
-    roomAny: 'Oricare',
-    hotelNote: (hotel: string) => `Cererea merge la ${hotel}. Hotelul confirmă prin telefon sau email.`,
-    questionNote: 'Scrie-ne întrebarea mai jos.',
-    name: 'Numele tău',
-    phone: 'Telefon',
-    email: 'Email',
-    details: 'Detalii (opțional)',
-    detailsHint: 'Meniu pentru copii, tort adus de noi.',
-    questionLabel: 'Întrebarea ta',
-    consent: 'Sunt de acord cu prelucrarea datelor pentru a primi un răspuns.',
-    submit: 'Trimite cererea',
-    sending: 'Se trimite…',
-    missing: (n: number) =>
-      n === 1 ? 'Mai e un câmp de completat. L-am marcat mai jos.' : `Mai sunt ${n} câmpuri de completat. Le-am marcat mai jos.`,
-    errorMark: 'Eroare:',
-    doneTitle: 'Am primit cererea ta',
-    weCall: 'Te sunăm noi.',
-    urgent: 'Dacă este urgent:',
-    backHome: 'Înapoi la Acasă',
-    faster: 'Mai repede prin telefon',
-    complaintLink: 'Ai avut o problemă la noi?',
-    complaintCta: 'Trimite o sesizare',
-    seeMap: 'Vezi pe hartă',
-    showMap: 'Arată harta',
-    mapTitle: (name: string) => `Harta: ${name}`,
-    mapNote: 'Schiță. Harta reală se încarcă de la Google Maps doar când apeși „Arată harta”.',
-    mapLoaded: 'Harta: Google Maps.',
-    visitDate: 'Data vizitei',
-    reason: 'Motivul',
-    description: 'Ce s-a întâmplat',
-    waiter: 'Ospătarul (opțional)',
-    waiterHint: 'Numele de pe bon, dacă îl știi',
-    complaintTitle: 'Sesizări',
-    complaintIntro:
-      'Ne pare rău că ceva nu a fost cum trebuia. Spune-ne ce s-a întâmplat: răspunde managerul restaurantului.',
-    complaintSubmit: 'Trimite sesizarea',
-    complaintOff: 'Momentan primim sesizările la telefon:',
-    noSubjects: 'Momentan primim cererile la telefon.',
-  },
-  galleryDialog: 'Galerie: fotografia mărită',
-  galleryCount: (i: number, n: number) => `${i} din ${n}`,
-  close: 'Închide',
-  prev: 'Înapoi',
-  next: 'Înainte',
-  pause: 'Oprește derularea imaginilor',
-  play: 'Pornește derularea imaginilor',
-  wineSearch: 'Caută un vin, un producător sau o regiune',
-  wineSearchShort: 'Vin, producător sau regiune',
-  wineNoResults: (q: string) => `Niciun vin nu se potrivește cu „${q}”.`,
-  wineNoResultsHint: 'Încearcă alt cuvânt sau vezi toate vinurile.',
-  wineClear: 'Vezi toate vinurile',
-  wineCount: (n: number) => (n === 1 ? '1 vin' : n < 20 ? `${n} vinuri` : `${n} de vinuri`),
-}
+export { plural, roClient }
+export type { ClientDict }
 
 export const ro = {
   ...roClient,
@@ -320,5 +209,4 @@ export const ro = {
 }
 
 /** Forma comună a dicționarelor; celelalte limbi o respectă exact. */
-export type ClientDict = typeof roClient
 export type Dict = typeof ro
