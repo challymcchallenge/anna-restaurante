@@ -5,11 +5,13 @@ import { getActiveSite } from '@/lib/site/locale'
 import { FaqList, Parties, Pizza, PrivateEvents } from '@/components/site/Events'
 import { ContactSection } from '@/components/site/ContactSection'
 import { GallerySection } from '@/components/site/Gallery'
+import { JsonLd } from '@/components/site/JsonLd'
 import { Hero } from '@/components/site/Hero'
 import { Hotel } from '@/components/site/Hotel'
 import { Kitchen, Reviews, Wines } from '@/components/site/Restaurant'
 import { UI } from '@/lib/site/i18n/server'
 import { orderedSections } from '@/lib/site/sections'
+import { restaurantLd, websiteLd } from '@/lib/site/seo'
 
 /**
  * Acasă (S-01): secțiunile pornite din panou, în ordinea din panou (content-model 4).
@@ -21,6 +23,8 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* F5 (PLAN F5.3): restaurantul (cu premiul activ, D-20) și numele site-ului pentru Google. */}
+      <JsonLd build={(origin) => [restaurantLd(site, origin), websiteLd(site, origin)]} />
       {orderedSections(site.home).map((s) => {
         switch (s.key) {
           case 'hero':

@@ -8,9 +8,10 @@ import { ChipFilter } from '@/components/site/ChipFilter'
 import { galleryVisual, GalleryTile, shapeOf, tileSizes } from '@/components/site/Gallery'
 import { GalleryLightbox } from '@/components/site/GalleryLightbox'
 import { pageMediaCredits } from '@/lib/site/credits'
-import { pictureSources } from '@/lib/site/media'
+import { asMedia, pictureSources } from '@/lib/site/media'
 import { getGallery } from '@/lib/site/data'
-import { getActiveSite, localeAlternates } from '@/lib/site/locale'
+import { getActiveSite } from '@/lib/site/locale'
+import { pageMetadata } from '@/lib/site/seo'
 import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
 import { renderLocale, UI } from '@/lib/site/i18n/server'
@@ -24,12 +25,15 @@ export async function generateMetadata(): Promise<Metadata> {
   if (!site) return {}
   const s = section(site.home, 'gallery')
   const { items, categories } = await getGallery(site.tenant.id, site.locale)
-  return {
+  // F5: imaginea de distribuire = prima fotografie din galerie (cea de pe Acasă, dacă există).
+  const first = [...site.galleryHome, ...items].map((i) => asMedia(i.file)).find((m) => m?.mimeType?.startsWith('image/'))
+  return pageMetadata(site, {
     title: `${s?.menuLabel || s?.title || UI.pageLabels.pageGallery} · ${site.tenant.name}`,
     // Secțiunea nu are text introductiv: descrierea se compune din galerie.
     description: UI.galleryMeta(site.tenant.name, items.length, categories.map((c) => c.name)),
-    alternates: localeAlternates(site, '/galerie'),
-  }
+    path: '/galerie',
+    image: first,
+  })
 }
 
 export default async function GalleryPage() {

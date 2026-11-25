@@ -3061,6 +3061,12 @@
   "swaps": [
     {
       "collection": "settings",
+      "field": "servesCuisine",
+      "from": null,
+      "to": "Italian"
+    },
+    {
+      "collection": "settings",
       "field": "logoGroup",
       "fromMedia": "logoAnna",
       "toMedia": "logoAnnaNegru"

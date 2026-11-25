@@ -472,6 +472,26 @@ export const Settings: CollectionConfig = {
               ],
             },
             url({ name: 'digitalMenuUrl', label: 'Adresa meniului digital', required: true }),
+            // F5 (PLAN F5.3): date structurate pentru Google (schema.org Restaurant), pe restaurant.
+            {
+              type: 'row',
+              fields: [
+                text({
+                  name: 'servesCuisine',
+                  label: 'Bucătăria (pentru Google)',
+                  max: 60,
+                  nt: true,
+                  description: 'Apare în datele pentru Google, nu pe pagină. Exemplu: Italian.',
+                }),
+                text({
+                  name: 'priceRange',
+                  label: 'Nivel de preț (pentru Google)',
+                  max: 30,
+                  nt: true,
+                  description: 'Exemplu: 50–150 lei sau $$. Gol = nu se trimite.',
+                }),
+              ],
+            },
             select({
               name: 'activeLocales',
               label: 'Limbi active',

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { ExampleTag } from '@/components/site/Bits'
+import { JsonLd } from '@/components/site/JsonLd'
 import { EventCard, NoEvents, PageCover } from '@/components/site/Events'
 import { Picture } from '@/components/site/Picture'
 import type { Media } from '@/payload-types'
@@ -8,6 +9,7 @@ import { asMedia } from '@/lib/site/media'
 import { eventParts } from '@/lib/site/format'
 import { sitePage, sitePageMeta } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
+import { eventsLd } from '@/lib/site/seo'
 import { UI } from '@/lib/site/i18n/server'
 
 /** S-03 · Petreceri și agenda: toate serile viitoare și arhiva foto („Cum a fost”). */
@@ -23,6 +25,8 @@ export default async function PartiesPage() {
 
   return (
     <>
+      {/* F5: serile viitoare ca date structurate (schema.org Event); cele-exemplu nu intră. */}
+      <JsonLd build={(origin) => eventsLd(site, origin)} />
       <PageCover title={s?.menuLabel || s?.title || ''} intro={s?.intro} placeholder={Boolean(s?.placeholder)} />
 
       <section className="agenda paper-section" aria-labelledby="agenda-t">

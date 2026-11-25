@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import React from 'react'
 
-import { getActiveSite, localeAlternates } from '@/lib/site/locale'
+import { getActiveSite } from '@/lib/site/locale'
+import { pageMetadata } from '@/lib/site/seo'
 
 import { ContactForm } from '@/components/site/ContactForm'
 import { ContactDetails, ContactMap } from '@/components/site/ContactSection'
@@ -21,11 +22,11 @@ import { renderLocale, UI } from '@/lib/site/i18n/server'
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getActiveSite()
   return site
-    ? {
+    ? pageMetadata(site, {
         title: `${UI.form.complaintTitle} · ${site.tenant.name}`,
         description: UI.form.complaintIntro,
-        alternates: localeAlternates(site, '/formular-de-reclamatie'),
-      }
+        path: '/formular-de-reclamatie',
+      })
     : {}
 }
 

@@ -5,7 +5,8 @@ import React from 'react'
 import { PageCover } from '@/components/site/Events'
 import { LegalContent, legalHeadings } from '@/components/site/LegalContent'
 import { getSlugPage } from '@/lib/site/data'
-import { getActiveSite, localeAlternates } from '@/lib/site/locale'
+import { getActiveSite } from '@/lib/site/locale'
+import { pageMetadata } from '@/lib/site/seo'
 import { lp, UI } from '@/lib/site/i18n/server'
 
 /**
@@ -24,11 +25,11 @@ async function resolve(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const r = await resolve((await params).slug)
   if (!r?.page) return {}
-  return {
+  return pageMetadata(r.site, {
     title: `${r.page.title} · ${r.site.tenant.name}`,
     description: UI.legalMeta(r.page.title, r.site.tenant.name, legalHeadings(r.page.content).map((h) => h.text)),
-    alternates: localeAlternates(r.site, `/${r.page.slug}`),
-  }
+    path: `/${r.page.slug}`,
+  })
 }
 
 export default async function LegalPage({ params }: Props) {

@@ -1355,6 +1355,14 @@ export interface Setting {
   analyticsId?: string | null;
   digitalMenuUrl: string;
   /**
+   * Apare în datele pentru Google, nu pe pagină. Exemplu: Italian. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  servesCuisine?: string | null;
+  /**
+   * Exemplu: 50–150 lei sau $$. Gol = nu se trimite. Nu se traduce: aceeași valoare în toate limbile.
+   */
+  priceRange?: string | null;
+  /**
    * Româna este implicită. Celelalte limbi se pornesc după traduceri (F4, D-28). Fereastra ialoc are doar ro și en.
    */
   activeLocales: ('ro' | 'en' | 'it' | 'fr' | 'de' | 'zh' | 'sv')[];
@@ -2377,6 +2385,8 @@ export interface SettingsSelect<T extends boolean = true> {
   ialocId?: T;
   analyticsId?: T;
   digitalMenuUrl?: T;
+  servesCuisine?: T;
+  priceRange?: T;
   activeLocales?: T;
   doNotTranslate?: T;
   requests?:

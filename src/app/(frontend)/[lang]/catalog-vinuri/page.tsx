@@ -8,7 +8,8 @@ import { GroupLogo, WineFilter, WineSheetGroup } from '@/components/site/WineLis
 import { WineSearch } from '@/components/site/WineSearch'
 import { getWineList } from '@/lib/site/data'
 import { asMedia, downloadUrl } from '@/lib/site/media'
-import { getActiveSite, localeAlternates } from '@/lib/site/locale'
+import { getActiveSite } from '@/lib/site/locale'
+import { pageMetadata } from '@/lib/site/seo'
 import { sitePage } from '@/lib/site/page'
 import { section } from '@/lib/site/sections'
 import { renderLocale, UI } from '@/lib/site/i18n/server'
@@ -28,11 +29,11 @@ export async function generateMetadata(): Promise<Metadata> {
   // Fără text introductiv în panou: descrierea se compune din listă (numărul de vinuri, țările).
   const wines = w?.intro ? [] : await getWineList(site.tenant.id, site.locale)
   const countries = [...new Set(wines.map((x) => x.country).filter((c): c is string => Boolean(c)))]
-  return {
+  return pageMetadata(site, {
     title: `${w?.title || UI.wineListTitle} · ${site.tenant.name}`,
     description: w?.intro || UI.wineMetaDescription(site.tenant.name, UI.wineCount(wines.length), countries),
-    alternates: localeAlternates(site, '/catalog-vinuri'),
-  }
+    path: '/catalog-vinuri',
+  })
 }
 
 export default async function WineListPage() {

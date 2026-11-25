@@ -14,6 +14,7 @@ import * as migration_20261125_044503_f4_traduceri from './20261125_044503_f4_tr
 import * as migration_20261125_065151_d67_categorii_clip from './20261125_065151_d67_categorii_clip';
 import * as migration_20261125_075251_d69_pdf_vinuri from './20261125_075251_d69_pdf_vinuri';
 import * as migration_20261125_083644_d71_slideshow_clip_acasa from './20261125_083644_d71_slideshow_clip_acasa';
+import * as migration_20261125_133048_f5_seo_settings from './20261125_133048_f5_seo_settings';
 
 export const migrations = [
   {
@@ -94,6 +95,11 @@ export const migrations = [
   {
     up: migration_20261125_083644_d71_slideshow_clip_acasa.up,
     down: migration_20261125_083644_d71_slideshow_clip_acasa.down,
-    name: '20261125_083644_d71_slideshow_clip_acasa'
+    name: '20261125_083644_d71_slideshow_clip_acasa',
+  },
+  {
+    up: migration_20261125_133048_f5_seo_settings.up,
+    down: migration_20261125_133048_f5_seo_settings.down,
+    name: '20261125_133048_f5_seo_settings'
   },
 ];

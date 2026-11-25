@@ -10,7 +10,8 @@ import { SiteHeader } from '@/components/site/SiteHeader'
 import { isIndexingAllowed } from '@/lib/indexing'
 import { getSite } from '@/lib/site/data'
 import { ui } from '@/lib/site/i18n'
-import { getPageSite, localeAlternates } from '@/lib/site/locale'
+import { getPageSite } from '@/lib/site/locale'
+import { pageMetadata, siteOrigin } from '@/lib/site/seo'
 import { hoursSummary } from '@/lib/site/format'
 import { asMedia } from '@/lib/site/media'
 import { section } from '@/lib/site/sections'
@@ -38,28 +39,17 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     section(site.home, 'hero')?.subtitle || UI.homeMeta(site.tenant.name, address, hoursSummary(s?.hours))
   const favicon = asMedia(s?.favicon)
-  const share = asMedia(s?.shareImage)
   return {
-    metadataBase: host ? new URL(`https://${host}`) : undefined,
-    title,
-    description,
+    metadataBase: siteOrigin(host) ? new URL(siteOrigin(host) as string) : undefined,
     robots,
-    // Acasă; paginile proprii își pun propria adresă (`localeAlternates`).
-    alternates: localeAlternates(site, '/'),
+    // Acasă; paginile proprii își pun titlul, adresa și Open Graph-ul lor (`pageMetadata`, F5).
+    ...pageMetadata(site, { title, description, path: '/' }),
     icons: favicon
       ? {
           icon: [{ url: favicon.url as string, type: favicon.mimeType ?? undefined }],
           apple: [{ url: favicon.url as string }],
         }
       : undefined,
-    openGraph: {
-      title,
-      description,
-      siteName: site.tenant.name,
-      locale: UI.ogLocale,
-      type: 'website',
-      images: share?.url ? [{ url: share.url, width: share.width ?? undefined, height: share.height ?? undefined }] : undefined,
-    },
   }
 }
 
