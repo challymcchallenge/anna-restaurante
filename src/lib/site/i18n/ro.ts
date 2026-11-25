@@ -113,7 +113,6 @@ export const ro = {
   navLabel: 'Navigare principală',
   moreNav: 'Mai mult',
   quickActions: 'Acțiuni rapide',
-  call: 'Sună',
   callForBooking: 'Sună pentru rezervare',
   newTab: '(se deschide în filă nouă)',
   languageLabel: 'Limba',

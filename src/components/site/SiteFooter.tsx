@@ -215,7 +215,7 @@ export function SiteFooter({ site }: { site: SiteData }) {
   )
 }
 
-/** Bara fixă de jos, doar pe telefon (wireframe S-01): Rezervă o masă · Meniu · Sună. */
+/** Bara fixă de jos, doar pe telefon (wireframe S-01): Rezervă o masă · Meniu. „Sună” scos la cererea lui Alin (D-70). */
 export function PhoneBar({ site }: { site: SiteData }) {
   const s = site.settings
   const hero = section(site.home, 'hero')
@@ -228,12 +228,6 @@ export function PhoneBar({ site }: { site: SiteData }) {
           <Icon name="book" />
           {hero?.menuButtonLabel || 'Meniu'}
         </ExternalLink>
-      )}
-      {tel && (
-        <a className="btn btn-ghost" href={tel}>
-          <Icon name="phone" />
-          {UI.call}
-        </a>
       )}
     </nav>
   )

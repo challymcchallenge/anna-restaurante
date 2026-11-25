@@ -97,7 +97,6 @@ export const en: Dict = {
   navLabel: 'Main navigation',
   moreNav: 'More',
   quickActions: 'Quick actions',
-  call: 'Call',
   callForBooking: 'Call to book',
   newTab: '(opens in a new tab)',
   languageLabel: 'Language',

@@ -261,12 +261,13 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 /* ---------- Bara fixă de jos pe telefon (S-01): Rezervă o masă · Meniu · Sună ---------- */
 .phone-bar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-  display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: var(--s2);
+  /* D-70: doar „Rezervă o masă” și „Meniu”, în coloane egale (fără „Sună”). */
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--s2);
   padding: var(--s2) var(--edge) calc(var(--s2) + env(safe-area-inset-bottom));
   background: var(--c-dark); border-top: 1px solid var(--line-cover);
 }
 .phone-bar .btn { min-height: 52px; padding: 0 var(--s3); font-size: 15px; }
-@media (max-width: 359px) { .phone-bar { grid-template-columns: 1.4fr 1fr 1fr; gap: 6px; } .phone-bar .btn { padding: 0 var(--s2); font-size: 14px; } }
+@media (max-width: 359px) { .phone-bar { gap: 6px; } .phone-bar .btn { padding: 0 var(--s2); font-size: 14px; } }
 @media (min-width: 1024px) { .phone-bar { display: none; } }
 
 /* ---------- Footer: coperta din spate a cartei ---------- */
@@ -348,7 +349,13 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--c-dark) 62%, transparent) 0, transparent 140px),
-    linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 96%, transparent) 0%, color-mix(in srgb, var(--c-dark) 90%, transparent) 42%, color-mix(in srgb, var(--c-dark) 25%, transparent) 70%, transparent 85%);
+    /* D-70: pe telefon, umbra de jos e mai ușoară (era 96% / 90% până la 42% din înălțime), ca fotografia
+       să se vadă. Contrast măsurat pe cele 5 cadre: titlu ≥ 3,25:1, subtitlu ≥ 5,06:1 (pragurile WCAG: 3 și 4,5). */
+    linear-gradient(0deg, color-mix(in srgb, var(--c-dark) 72%, transparent) 0%, color-mix(in srgb, var(--c-dark) 58%, transparent) 30%, color-mix(in srgb, var(--c-dark) 20%, transparent) 60%, transparent 78%);
+}
+@media (max-width: 1023px) {
+  /* Umbră fină sub litere, pentru porțiunile luminoase ale fotografiei. */
+  .hero h1, .hero-sub { text-shadow: 0 1px 2px rgb(0 0 0 / 0.55), 0 2px 18px rgb(0 0 0 / 0.45); }
 }
 .hero-tag { top: calc(8px + 96px + var(--s2)); right: var(--edge); }
 .cover-frame { display: none; }

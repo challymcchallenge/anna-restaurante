@@ -101,7 +101,6 @@ export const de: Dict = {
   navLabel: 'Hauptnavigation',
   moreNav: 'Mehr',
   quickActions: 'Schnellaktionen',
-  call: 'Anrufen',
   callForBooking: 'Zum Reservieren anrufen',
   newTab: '(öffnet in neuem Tab)',
   languageLabel: 'Sprache',

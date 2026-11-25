@@ -93,7 +93,6 @@ export const zh: Dict = {
   navLabel: '主导航',
   moreNav: '更多',
   quickActions: '快捷操作',
-  call: '致电',
   callForBooking: '致电预订',
   newTab: '（在新标签页中打开）',
   languageLabel: '语言',

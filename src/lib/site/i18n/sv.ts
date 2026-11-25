@@ -97,7 +97,6 @@ export const sv: Dict = {
   navLabel: 'Huvudnavigering',
   moreNav: 'Mer',
   quickActions: 'Snabbval',
-  call: 'Ring',
   callForBooking: 'Ring för bokning',
   newTab: '(öppnas i en ny flik)',
   languageLabel: 'Språk',
