@@ -37,6 +37,8 @@ export default async function ComplaintPage() {
   const reasons = complaint
     ? (
         await payload.find({
+          // F4: motivele în limba paginii (traduse din panou), cu româna unde lipsește traducerea.
+          locale: site.locale,
           collection: 'complaint-reasons',
           where: { and: [{ tenant: { equals: site.tenant.id } }, { active: { equals: true } }] },
           sort: '_order',

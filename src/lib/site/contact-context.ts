@@ -3,6 +3,7 @@ import type { ContactFormProps } from '@/components/site/ContactForm'
 
 import type { SiteData } from './data'
 import { telHref } from './format'
+import { UI } from './i18n/server'
 import { SUBJECT_SLUGS, type Subject } from './requests'
 
 export { roomsFromQuery } from './contact'
@@ -14,7 +15,8 @@ export function formContext(site: SiteData) {
   const active = REQUEST_SUBJECTS.filter((x) => requests[x.value]?.active).map((x) => ({
     key: x.value as Subject,
     slug: SUBJECT_SLUGS[x.value as Subject],
-    label: x.label,
+    // F4: numele subiectului în limba paginii.
+    label: UI.subjects[x.value] ?? x.label,
   }))
   const phone = (p: string | null | undefined) => (p && telHref(p) ? { phone: p, tel: telHref(p) as string } : undefined)
   const urgent: ContactFormProps['urgent'] = {
