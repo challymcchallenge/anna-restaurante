@@ -308,7 +308,7 @@ html[data-ialoc='failed'] .ialoc-fallback { display: inline-flex !important; }
 .footer-maker-logo { display: block; width: clamp(56px, 16vw, 72px); height: auto; aspect-ratio: 1; margin-bottom: var(--s3); filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.45)); }
 .footer-maker-line { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: var(--s2); }
 .footer-maker-line > span { white-space: nowrap; }
-.footer-maker a { text-decoration: none; text-underline-offset: 3px; }
+.footer-maker a { display: inline-flex; align-items: center; min-height: 24px; text-decoration: none; text-underline-offset: 3px; } /* ținta minimă de 24 px (WCAG 2.5.8) */
 .footer-maker a:hover { color: var(--c-on-dark); text-decoration: underline; }
 @media (max-width: 559px) {
   .footer-maker-line { flex-direction: column; align-items: center; }

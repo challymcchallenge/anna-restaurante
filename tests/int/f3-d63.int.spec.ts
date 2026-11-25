@@ -38,5 +38,6 @@ describe('D-63 · creditul BizTech în footer', () => {
   it('Proporția se păstrează pe orice ecran, iar pe telefon rândurile se așază pe segmente', () => {
     expect(css).toMatch(/\.footer-maker-logo \{[^}]*height: auto; aspect-ratio: 1;/)
     expect(css).toMatch(/@media \(max-width: 559px\) \{\s*\.footer-maker-line \{ flex-direction: column;/)
+    expect(css).toMatch(/\.footer-maker a \{[^}]*min-height: 24px;/)
   })
 })
