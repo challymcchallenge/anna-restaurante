@@ -259,6 +259,16 @@ Capturi: `design/f3/capturi/2026_11_25_Trattoria_D61_*.webp`. Teste: 79/79 (4 no
 
 Desenele sunt 15 fișiere SVG, 33 KB în total, încărcate doar când secțiunea ajunge pe ecran. Nu se mișcă și dispar la tipărire și în modul de contrast forțat. Migrația: `20261125_002159_f3_decor`.
 
+| Pagina (Lighthouse mobil, producție) | Performanță | Accesibilitate | CLS |
+|---|---|---|---|
+| Acasă | 87 / 89 | 100 | 0 |
+| `/galerie` | 82 / 87 / 89 (prima rulare cu TBT 370 ms) | 100 | 0 |
+| `/evenimente-private` | 99 | 100 | 0 |
+
+Contrastul pe Acasă, peste noile forme: cu antetul ascuns, 0 rânduri sub 4,5:1 pe telefon și pe desktop; cel mai slab rând are 5:1. Cu antetul vizibil, două rânduri au ieșit sub prag doar pentru că medalionul trecea peste ele la derulare, ca la D-60. Fișiere: `docs/f3/contrast-d62-acasa.json`, `docs/f3/contrast-d62-acasa-fara-antet.json`.
+
+Capturi: `design/f3/capturi/2026_11_25_Trattoria_D62_*.webp`. Teste: 83/83 (4 noi, `f3-d62`).
+
 **După GATE 3 (24.11.2026):** au intrat recenziile reale de pe Google, 7 pentru restaurant și 7 pentru hotel (D-55). Detalii în secțiunea 9.
 
 Pagina HTML a raportului (privată): https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP
