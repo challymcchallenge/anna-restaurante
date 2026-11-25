@@ -144,5 +144,5 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | (vechi) G13-3 | **Ce pot înlocui:** doar golurile (galerie, categorii, saloane, camere, seri) sau și ce e acum pe site (cadrele copertei, fotografia cursului) | înainte de import | Alin |
 | ~~G13-4~~ | ~~Copii în fotografii~~ — **rezolvat: D-75** („avem acordul de la toți”) | — | — |
 | (vechi) G13-4 | **Copii în fotografii:** panoul cere „Acordul părinților confirmat” (Q-25). Confirmi acordul pentru fotografiile cu copii (cursul de pizza) sau le lăsăm deoparte? | înainte de import | Alin |
-| G13-5 | **Încărcarea pe producție** (Alin a întrebat de ce e nevoie): A · adresă de import temporară cu token ales de el, sau B · fișierele convertite (~85 MB) în repo, încărcate de seed la publicare. Raportul: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6 | înainte de import | Alin |
+| ~~G13-5~~ | ~~Încărcarea pe producție~~ — **rezolvat: D-75** (varianta A; 122 de elemente în galerie) | — | — |
 | (vechi) G13-5 | **Încărcarea pe producție:** un punct de import temporar (`/api/media-import`), protejat cu un token pe care îl pui tu în Vercel (`MEDIA_IMPORT_TOKEN`) și în formularul securizat de credențiale; îl ștergem după import. Fără parole în conversație. DA / altă variantă? | înainte de import | Alin |

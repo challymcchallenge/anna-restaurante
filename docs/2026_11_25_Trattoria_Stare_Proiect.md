@@ -5,7 +5,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 ## Concluzia
 
 - **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
-- **După GATE 4 au venit 9 cereri și reparații (D-66 … D-74)**, toate publicate și verificate pe producție (tabelul de mai jos).
+- **După GATE 4 au venit 10 cereri și reparații (D-66 … D-75)**, toate publicate și verificate pe producție (tabelul de mai jos).
 - **D-72 a reparat un bug serios:** din F4 până la D-72, pe Vercel, linkurile interne către paginile în română schimbau adresa, dar afișau Acasă până la reîncărcare. Acum merg.
 - **Cifre (producție, Lighthouse mobil):** Acasă mediana 86 (5 rulări după D-71), `/catalog-vinuri` 91, `/en` 89, `/zh` 82 (acceptat, G11-3, se re-măsoară în F5); accesibilitate 100, CLS 0. **Teste: 131/131** (27 de fișiere). tsc și lint: 0 erori.
 - **Deschise:** G12-1 (slideshow pe telefoane cu „Reducere mișcare”) și G12-2 (coperta pe video, fără clip de desktop), în `docs/OPEN-QUESTIONS.md`.
@@ -56,9 +56,9 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 - **F5** (2 sesiuni, GO primit): audit de finisare, date structurate, sitemap pe limbi, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare, re-măsurarea `/zh`; **la final** emailurile prin Resend și domeniul (D-36, D-67). În auditul F5 intră și o probă de **navigare prin linkuri pe producție** (nu doar încărcări directe), pe toate paginile și limbile.
 - **La final:** playbook-ul proiectului în vault-ul Obsidian, după standardul de denumire.
 
-## Importul în masă al fotografiilor (D-75, în lucru)
+## Importul în masă al fotografiilor (D-75, gata)
 
-**Stare (25.11.2026):** Alin a dat GO (H11 Il Ritmo, H11 Kinder și B10 intră; din grupul sanitar rămân C4 și C10; varianta A). Adresa `/api/media-import` e publicată; `MEDIA_IMPORT_TOKEN` e pus de Alin în Vercel (Production, Sensitive), iar același cod e salvat ca secret de rețea al mediului ANNA-Restaurante (antet `x-import-token`). Urmează: republicarea, încărcarea cu `scripts/import/upload.mjs` (111 fișiere, 122 de elemente de galerie) și curățenia (variabila din Vercel, secretul din mediu, folderul Drive pe „Restricted”). Înainte de GO: fotografiile erau descărcate, convertite și analizate. Raportul pentru „GO” e aici: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6. Se așteaptă răspunsul lui Alin la propuneri și la G13-5 (cum se încarcă). Fișierele convertite erau doar în containerul sesiunii; se refac după `scripts/import/README.md`.
+**Gata (25.11.2026):** 122 de elemente în galerie pe producție (106 fotografii noi, 5 clipuri cu sunet, 11 refolosite), 8 pe Acasă; Lighthouse Acasă mediana 90. Rămâne curățenia lui Alin: `MEDIA_IMPORT_TOKEN` din Vercel, secretul din mediu, folderul Drive pe „Restricted”. Istoric: Alin a dat GO (H11 Il Ritmo, H11 Kinder și B10 intră; din grupul sanitar rămân C4 și C10; varianta A). Adresa `/api/media-import` e publicată; `MEDIA_IMPORT_TOKEN` e pus de Alin în Vercel (Production, Sensitive), iar același cod e salvat ca secret de rețea al mediului ANNA-Restaurante (antet `x-import-token`). Urmează: republicarea, încărcarea cu `scripts/import/upload.mjs` (111 fișiere, 122 de elemente de galerie) și curățenia (variabila din Vercel, secretul din mediu, folderul Drive pe „Restricted”). Înainte de GO: fotografiile erau descărcate, convertite și analizate. Raportul pentru „GO” e aici: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6. Se așteaptă răspunsul lui Alin la propuneri și la G13-5 (cum se încarcă). Fișierele convertite erau doar în containerul sesiunii; se refac după `scripts/import/README.md`.
 
 ### Propunerea inițială
 
