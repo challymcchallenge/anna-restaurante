@@ -4,10 +4,13 @@ import React from 'react'
 import { preload } from 'react-dom'
 
 import { IconSprite } from '@/components/site/Icons'
+import { CookieConsent } from '@/components/site/CookieConsent'
 import { IalocLoader } from '@/components/site/Ialoc'
 import { PhoneBar, SiteFooter } from '@/components/site/SiteFooter'
 import { SiteHeader } from '@/components/site/SiteHeader'
 import { isIndexingAllowed } from '@/lib/indexing'
+import { localePath } from '@/lib/locales'
+import { analyticsHostAllowed, analyticsTagId } from '@/lib/site/consent'
 import { getSite } from '@/lib/site/data'
 import { ui } from '@/lib/site/i18n'
 import { getPageSite } from '@/lib/site/locale'
@@ -89,6 +92,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   }
   const locale = site.locale
   const UI = ui(locale)
+  const host = (await headers()).get('host')
+  const tagId = analyticsTagId(settings?.analyticsId)
+  const cookiesPage = site.legalPages.find((p) => p.slug?.includes('cookie'))
 
   return (
     <html lang={locale}>
@@ -112,6 +118,15 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <SiteFooter site={site} />
         <PhoneBar site={site} />
         {settings?.ialocId && <IalocLoader venueId={settings.ialocId} locale={locale} />}
+        {/* F5 (G14-3, D-79): statisticile, doar cu acordul vizitatorului și doar pe domeniul propriu. */}
+        {tagId && (
+          <CookieConsent
+            tagId={tagId}
+            load={analyticsHostAllowed(host)}
+            locale={locale}
+            policyHref={cookiesPage ? localePath(locale, `/${cookiesPage.slug}`) : null}
+          />
+        )}
       </body>
     </html>
   )

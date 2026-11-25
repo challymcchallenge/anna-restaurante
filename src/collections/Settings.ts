@@ -467,7 +467,12 @@ export const Settings: CollectionConfig = {
                   name: 'analyticsId',
                   label: 'ID statistici',
                   nt: true,
-                  description: 'Se păstrează contul existent (D-32).',
+                  description:
+                    'Eticheta Google (G-… sau GT-…), de pe site-ul de acum (D-32, D-79). Gol = fără statistici și fără banner de cookies. Google Analytics se încarcă doar după „Accept” și doar pe domeniul propriu.',
+                  validate: ((value: unknown) =>
+                    !value || /^(G|GT)-[A-Z0-9]{4,20}$/i.test(String(value).trim())
+                      ? true
+                      : 'Scrie ID-ul ca în contul Google, de exemplu GT-NCLXCCBJ sau G-ABC123XYZ.') as any,
                 }),
               ],
             },

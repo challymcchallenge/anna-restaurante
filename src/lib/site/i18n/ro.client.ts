@@ -118,6 +118,14 @@ export const roClient = {
   wineNoResultsHint: 'Încearcă alt cuvânt sau vezi toate vinurile.',
   wineClear: 'Vezi toate vinurile',
   wineCount: (n: number) => (n === 1 ? '1 vin' : n < 20 ? `${n} vinuri` : `${n} de vinuri`),
+  /** F5 (G14-3, D-79): bannerul de cookies pentru statistici (Google Analytics). */
+  cookies: {
+    title: 'Statistici, doar cu acordul tău',
+    text: 'Folosim Google Analytics ca să vedem ce pagini sunt citite. Până nu apeși „Accept”, nu se încarcă nimic de la Google.',
+    policy: 'Politica de cookies',
+    accept: 'Accept',
+    reject: 'Refuz',
+  },
 }
 
 export type ClientDict = typeof roClient

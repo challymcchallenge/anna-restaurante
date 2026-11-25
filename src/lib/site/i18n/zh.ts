@@ -110,6 +110,8 @@ export const zh: Dict = {
   contactTitle: '联系我们',
   legalTitle: '信息',
   complaints: '投诉',
+  /** F5 (D-79): linkul din footer care redeschide bannerul de cookies. */
+  cookieSettings: 'Cookie 设置',
   socialTitle: '关注我们',
   photoCredits: '临时照片',
   bottle: '每瓶',

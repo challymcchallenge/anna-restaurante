@@ -151,8 +151,14 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G14-1 | **Cât timp păstrăm cererile primite?** Termenul se pune în Setări → Cereri și emailuri → „Păstrează cererile (luni)” și se scrie în Confidențialitate. Propunerea mea, de verificat cu juristul: 12 luni [PRESUPUNERE]. Pentru ștergerea automată, pune în Vercel variabila `CRON_SECRET` (Production, Sensitive, cel puțin 16 caractere) | înainte de lansare | Alin (cu juristul) |
-| G14-2 | **Paginile vechi fără echivalent** (`/la-multi-ani`, protejată cu parolă; `/1hm`; `/test`; `/3d-flip-book/test`) duc acum la Acasă. Rămân așa sau le lăsăm să dea 404? | înainte de mutarea domeniului | Alin |
-| G14-3 | **Statistici după lansare:** site-ul vechi are eticheta Google `GT-NCLXCCBJ`; site-ul nou nu pune cookies. (a) fără statistici; (b) Vercel Web Analytics (de verificat dacă pune cookies și cât costă, neverificat); (c) Google Analytics, cu banner de consimțământ | la lansare | Alin |
-| G14-4 | **Nivel de preț pentru Google** (Setări → Integrări): de exemplu „50–150 lei”. Gol = nu se trimite | oricând | Alin |
-| G14-5 | **Sesiunea 2:** domeniul de trimitere pentru emailuri (propunere: `davittoria.ro`, adresa `rezervari@davittoria.ro` sau `site@davittoria.ro`, OQ #10) și ziua mutării DNS | înainte de sesiunea 2 | Alin |
+| ~~G14-1~~ | ~~Cât timp păstrăm cererile primite~~ — **rezolvat: D-79** (12 luni) | — | — |
+| ~~G14-2~~ | ~~Paginile vechi fără echivalent~~ — **rezolvat: D-79** (rămân redirecționate la Acasă) | — | — |
+| ~~G14-3~~ | ~~Statistici după lansare~~ — **rezolvat: D-79** (Google Analytics cu banner, eticheta GT-NCLXCCBJ) | — | — |
+| ~~G14-4~~ | ~~Nivel de preț pentru Google~~ — **rezolvat: D-79** (opțional, din panou) | — | — |
+| ~~G14-5~~ | ~~Domeniul de trimitere pentru emailuri și ziua mutării DNS~~ — **rezolvat: D-79** (davittoria.ro, în sesiunea 2) | — | — |
+
+## Întrebări noi după D-79 (25.11.2026)
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G15-1 | **Paginile Cookies și Confidențialitate** de pe producție au textele site-ului Riviera Events (rivieraevents.ro, WhatsApp, Web3Forms, Google Translate, `_ga_XTPH4ERPM0`). Le înlocuiesc cu propunerea adaptată pentru Trattoria (`docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md`), care descrie exact bannerul de acum și termenul de 12 luni? Prin seed, o singură dată, doar dacă textul e încă cel Riviera; „Provizoriu” până completează juristul | înainte de lansare | Alin (cu juristul) |

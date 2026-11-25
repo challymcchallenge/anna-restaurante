@@ -108,4 +108,12 @@ export const zhClient: ClientDict = {
   wineNoResultsHint: '请尝试其他关键词，或查看全部葡萄酒。',
   wineClear: '查看全部葡萄酒',
   wineCount: (n: number) => `${n} 款葡萄酒`,
+  /** F5 (G14-3, D-79): bannerul de cookies pentru statistici (Google Analytics). */
+  cookies: {
+    title: '仅在您同意后进行统计',
+    text: '我们使用 Google Analytics 了解哪些页面被阅读。在您点击“接受”之前，不会从 Google 加载任何内容。',
+    policy: 'Cookie 政策',
+    accept: '接受',
+    reject: '拒绝',
+  },
 }

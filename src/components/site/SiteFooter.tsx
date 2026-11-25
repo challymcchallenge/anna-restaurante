@@ -3,6 +3,7 @@ import React from 'react'
 
 import type { SiteData } from '@/lib/site/data'
 import { hoursSummary, telHref } from '@/lib/site/format'
+import { analyticsTagId } from '@/lib/site/consent'
 import { asMedia } from '@/lib/site/media'
 import { pageMediaCredits } from '@/lib/site/credits'
 import { section } from '@/lib/site/sections'
@@ -153,6 +154,14 @@ export function SiteFooter({ site }: { site: SiteData }) {
                 <li>
                   <Link href={lp('/formular-de-reclamatie')}>{UI.complaints}</Link>
                 </li>
+                {/* F5 (D-79): redeschide bannerul de cookies (CookieConsent), doar cu statistici pornite. */}
+                {analyticsTagId(s?.analyticsId) && (
+                  <li>
+                    <button type="button" data-cookie-settings="">
+                      {UI.cookieSettings}
+                    </button>
+                  </li>
+                )}
               </ul>
               <div className="footer-lang">
                 {UI.languageLabel}: <Language site={site} className="lang lang--footer" />

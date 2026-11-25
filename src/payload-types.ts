@@ -1350,7 +1350,7 @@ export interface Setting {
    */
   ialocId: string;
   /**
-   * Se păstrează contul existent (D-32). Nu se traduce: aceeași valoare în toate limbile.
+   * Eticheta Google (G-… sau GT-…), de pe site-ul de acum (D-32, D-79). Gol = fără statistici și fără banner de cookies. Google Analytics se încarcă doar după „Accept” și doar pe domeniul propriu. Nu se traduce: aceeași valoare în toate limbile.
    */
   analyticsId?: string | null;
   digitalMenuUrl: string;

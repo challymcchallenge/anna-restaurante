@@ -112,4 +112,12 @@ export const svClient: ClientDict = {
   wineNoResultsHint: 'Prova ett annat ord eller visa alla viner.',
   wineClear: 'Visa alla viner',
   wineCount: (n: number) => pl(n, 'vin', 'viner'),
+  /** F5 (G14-3, D-79): bannerul de cookies pentru statistici (Google Analytics). */
+  cookies: {
+    title: 'Statistik bara med ditt samtycke',
+    text: 'Vi använder Google Analytics för att se vilka sidor som läses. Inget laddas från Google förrän du trycker på ”Godkänn”.',
+    policy: 'Cookiepolicy',
+    accept: 'Godkänn',
+    reject: 'Avböj',
+  },
 }

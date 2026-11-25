@@ -12,7 +12,7 @@ import { zhClient } from './zh.client'
  * Textele componentelor care rulează în browser (formulare, calendar, galerie, căutarea de vinuri).
  * Se importă doar partea „client” a fiecărei limbi, ca dicționarele complete să rămână pe server.
  */
-const CLIENT: Record<LocaleCode, ClientDict> = {
+export const CLIENT_DICTS: Record<LocaleCode, ClientDict> = {
   ro: roClient,
   en: enClient,
   it: itClient,
@@ -23,5 +23,5 @@ const CLIENT: Record<LocaleCode, ClientDict> = {
 }
 
 export function clientUI(locale: string | null | undefined): ClientDict {
-  return CLIENT[(locale ?? DEFAULT_LOCALE) as LocaleCode] ?? roClient
+  return CLIENT_DICTS[(locale ?? DEFAULT_LOCALE) as LocaleCode] ?? roClient
 }

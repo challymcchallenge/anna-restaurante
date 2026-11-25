@@ -8,7 +8,7 @@ Trattoria da Vittoria · 25.11.2026 · Site-ul public de pe producție, telefon 
 - **1 problemă de accesibilitate reală (P1), reparată:** pe telefoanele scurte (360 × 780, 375 × 667), titlul copertei avea 2,23–2,74:1 pe cadrele noi din D-77 (prag 3:1). Acum ≥ 3,08:1; de la 390 px în sus nu se schimbă nimic.
 - **Navigarea prin linkuri pe producție: 2.288 de clicuri în 7 limbi, 0 greșeli**, 0 erori în consolă.
 - **1 problemă de navigare pe telefon (P2), reparată:** din meniul lateral, salturile spre Cursuri, Galerie, Hotel și Contact lăsau secțiunea cu 600–2.000 px sub ecran (17 din 32). Acum 30/30 pe producție.
-- **0 cookies** pe site-ul public: la încărcare, după fereastra ialoc și după „Arată harta”. Nu e nevoie de banner [PRESUPUNERE juridică, Q-25].
+- **0 cookies** pe site-ul public: la încărcare, după fereastra ialoc și după „Arată harta”. **Actualizare D-79:** Alin a ales Google Analytics; cookie-urile `_ga` apar doar după „Accept” în bannerul de cookies.
 
 ## Scorul
 

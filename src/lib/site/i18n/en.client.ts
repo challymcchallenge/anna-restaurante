@@ -113,4 +113,12 @@ export const enClient: ClientDict = {
   wineNoResultsHint: 'Try another word or see all wines.',
   wineClear: 'See all wines',
   wineCount: (n: number) => pl(n, 'wine', 'wines'),
+  /** F5 (G14-3, D-79): bannerul de cookies pentru statistici (Google Analytics). */
+  cookies: {
+    title: 'Statistics, only with your consent',
+    text: 'We use Google Analytics to see which pages are read. Nothing loads from Google until you press “Accept”.',
+    policy: 'Cookie policy',
+    accept: 'Accept',
+    reject: 'Decline',
+  },
 }

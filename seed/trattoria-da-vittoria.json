@@ -3130,6 +3130,20 @@
   ],
   "swaps": [
     {
+      "$comment": "G14-3 (D-79): eticheta Google de pe davittoria.ro (codul site-ului vechi, citit pe 25.11.2026), o singură dată, doar dacă câmpul e gol.",
+      "collection": "settings",
+      "field": "analyticsId",
+      "from": null,
+      "to": "GT-NCLXCCBJ"
+    },
+    {
+      "$comment": "G14-1 (D-79): cererile se păstrează 12 luni; ștergerea rulează doar cu CRON_SECRET în Vercel.",
+      "collection": "settings",
+      "field": "requestsRetentionMonths",
+      "from": null,
+      "to": 12
+    },
+    {
       "collection": "awards",
       "match": { "name": "Wine Spectator Restaurant Award" },
       "field": "structuredData",

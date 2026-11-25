@@ -115,6 +115,8 @@ export const sv: Dict = {
   contactTitle: 'Kontakt',
   legalTitle: 'Information',
   complaints: 'Klagomål',
+  /** F5 (D-79): linkul din footer care redeschide bannerul de cookies. */
+  cookieSettings: 'Cookieinställningar',
   socialTitle: 'Följ oss',
   photoCredits: 'Tillfälliga foton',
   bottle: 'per flaska',

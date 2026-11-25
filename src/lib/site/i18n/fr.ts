@@ -117,6 +117,8 @@ export const fr: Dict = {
   contactTitle: 'Contact',
   legalTitle: 'Informations',
   complaints: 'Réclamations',
+  /** F5 (D-79): linkul din footer care redeschide bannerul de cookies. */
+  cookieSettings: 'Paramètres des cookies',
   socialTitle: 'Suivez-nous',
   photoCredits: 'Photos provisoires',
   bottle: 'la bouteille',

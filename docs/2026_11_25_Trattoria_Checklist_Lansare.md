@@ -8,8 +8,8 @@
 |---|---|---|---|
 | A1 | **0 elemente provizorii** (contorul din panou). Rămase: categoriile din Bucătărie (fără fotografii), saloanele, camerele, serile-exemplu, paginile legale | Alin | deschis |
 | A2 | **Insigna Wine Spectator:** fișierul oficial, cu nivelul și anul corecte (D-20, D-68). Bifa „În datele pentru Google” e pusă (F5) | Alin | deschis (insigna actuală: Grand Award 2027, de confirmat) |
-| A3 | **Textul juristului** pentru Termeni, Confidențialitate, Cookies: firma, CUI, operatorul de date, termenul de păstrare (D-59) | Alin | deschis |
-| A4 | **Termenul de păstrare a cererilor:** Setări → Cereri și emailuri → „Păstrează cererile (luni)” și același termen în Confidențialitate (G7-3) | Alin | deschis |
+| A3 | **Textul juristului** pentru Termeni, Confidențialitate, Cookies: firma, CUI, operatorul de date, termenul de păstrare (D-59). **Acum Cookies și Confidențialitate au textele Riviera Events** (G15-1, propunerea în `docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md`) | Alin | deschis |
+| A4 | **Termenul de păstrare a cererilor:** 12 luni (G14-1, pus prin seed, D-79); același termen în Confidențialitate (G15-1) | Alin | termen pus; textul, deschis |
 | A5 | **Verificarea englezei** (F4-7) | Alin | deschis |
 | A6 | **Fotografiile reale** pentru categoriile din Bucătărie, saloane, camere | Alin | deschis |
 | A7 | **Clipul cursului de pizza cu sunet** (D-73) și **PDF-ul listei de vinuri** (D-69) | Alin | deschis |
@@ -36,7 +36,7 @@
 | C6 | **Lighthouse mobil pe domeniu:** `/`, `/en`, `/zh` (G11-3); ținte ≥ 85 / ≥ 95 | Claude |
 | C7 | Toate formularele probate cap-coadă, cu emailul primit | Claude + Alin |
 | C8 | **Google:** Rich Results Test pe `/` (Restaurant) și `/petreceri` (Event); Search Console cu domeniul și sitemap-ul `https://davittoria.ro/sitemap.xml`; Google Business Profile cu adresa site-ului | Alin + Claude |
-| C9 | **Statistici:** site-ul vechi are eticheta Google `GT-NCLXCCBJ`. Site-ul nou nu pune cookies. Statisticile cu cookies cer banner de consimțământ (PLAN F5.4). De decis | Alin |
+| C9 | **Statistici (D-79):** Google Analytics cu banner, eticheta `GT-NCLXCCBJ` a site-ului vechi; pornește singur pe domeniu. De verificat pe domeniu: 0 cereri către Google înainte de „Accept”, apoi pagina vizualizată în Google Analytics (Rapoarte → În timp real) și numele cookie-ului `_ga_<ID>` trecut în politica de cookies | Claude + Alin |
 | C10 | Vechiul hosting oprit abia după ce DNS-ul s-a propagat și redirecționările merg | Alin |
 
 ## D. După lansare

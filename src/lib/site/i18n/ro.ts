@@ -131,6 +131,8 @@ export const ro = {
   contactTitle: 'Contact',
   legalTitle: 'Informații',
   complaints: 'Sesizări',
+  /** F5 (D-79): linkul din footer care redeschide bannerul de cookies. */
+  cookieSettings: 'Setări cookie-uri',
   socialTitle: 'Urmărește-ne',
   photoCredits: 'Fotografii provizorii',
   bottle: 'sticla',
