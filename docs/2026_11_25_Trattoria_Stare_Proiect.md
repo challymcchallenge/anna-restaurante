@@ -4,9 +4,9 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după F4) · scris la cererea lu
 
 ## Concluzia
 
-- **F0–F3 sunt gata, pe producție. F4 (traducerile) e construit și publicat** (GO: D-64, raport `docs/2026_11_25_Trattoria_F4.md`). Limbile sunt încă oprite pe producție.
-- **Pasul următor ține de Alin:** în panou, Tablou de bord → Traduceri → „Tradu tot site-ul”, apoi Setări → Integrări → Limbi active = toate 7. Apoi: Lighthouse pe `/en` și `/zh`, capturi, **GATE 4**.
-- **Cifrele de acum (producție, Lighthouse mobil):** Acasă în română, 5 rulări după F4: 79 / 87 / 88 / 86 / 84 (mediana 86), accesibilitate 100, CLS 0. Teste: 100/100. Contrast: neschimbat de la D-62.
+- **F0–F4 sunt gata, pe producție. GATE 4 e prezentat** (`docs/2026_11_25_Trattoria_GATE4.md`, pagina HTML https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM). Aștept „GO” pentru F5 și răspunsurile G11-1 … G11-3.
+- **7 limbi live**, conținut tradus integral (Haiku 5.5); FAQ la cursuri și cazare (D-65); fotografiile demo și nota din footer scoase (D-66).
+- **Cifrele de acum (producție, Lighthouse mobil, mediane):** `/` 86, `/en` 89, `/zh` 82 (sub țintă, G11-3); accesibilitate 100, CLS 0. Teste: 105/105.
 
 ## Unde e totul
 
@@ -16,10 +16,11 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după F4) · scris la cererea lu
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08) |
 | Raportul GATE 3 (pagină HTML, privată) | https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-64) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-66) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, `docs/OPEN-QUESTIONS.md` |
 | Ultima migrație | `20261125_044503_f4_traduceri` |
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
+| Raportul GATE 4 (pagină HTML, privată) | https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM |
 
 Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZxQFCMMH1ZZnX`, regiunea dub1. La fiecare publicare, build-ul rulează `payload migrate` și seed-ul (`scripts/seed-starter.ts`).
 
@@ -37,15 +38,14 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 ## Ce așteaptă de la Alin
 
-1. **Prima rulare a traducerilor** (pașii 1–6 din `docs/2026_11_25_Trattoria_F4.md`) și pornirea limbilor în Setări. Cheia `TRANSLATE_API_KEY` e pusă (verificat 25.11.2026).
-2. **Verificarea englezei** (F4-7) și răspunsurile la G10-1 (FAQ la cursuri și hotel) și G10-2 (termeni care nu se traduc).
-3. **Un clip real de 1–2 minute** încărcat din panou (estimarea ~25 MB la 120 s e încă neverificată).
-4. **Fotografiile** care înlocuiesc plăcile „Exemplu · de înlocuit” (`docs/materiale-necesare.md`).
-5. **Paginile legale:** câmpurile „[de completat]” (D-59).
+1. **GO pentru F5** și răspunsurile **G11-1** (pagina de cookies cu textul Riviera Events), **G11-2** (numele categoriilor traductibile), **G11-3** (abaterea `/zh`).
+2. **Verificarea englezei** (F4-7) în panou.
+3. **Fotografiile reale** (galeria apare singură când există cel puțin un element; categoriile, saloanele și camerele au plăci „fără fotografie”).
+4. **Un clip real de 1–2 minute** și **câmpurile „[de completat]” din paginile legale** (D-59).
 
 ## Ce urmează, pe faze
 
-- **F4** (în curs): construit și publicat. Rămân prima rulare (Alin), Lighthouse pe `/en` și `/zh`, G10-1, apoi GATE 4. Efectele, sunetul, 3D și tema sunt mutate după lansare (D-33).
+- **F4**: gata, GATE 4 prezentat. Efectele, sunetul, 3D și tema sunt mutate după lansare (D-33).
 - **F5** (2 sesiuni): emailurile prin Resend cu domeniul verificat (D-36), audit de finisare, date structurate, sitemap, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare.
 - **La final:** playbook-ul proiectului în vault-ul Obsidian, după standardul de denumire.
 
@@ -63,13 +63,14 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 - **Rute:** paginile stau sub `src/app/(frontend)/[lang]/`. `next.config.ts` rescrie `/x` în `/ro/x` (afterFiles) și redirecționează `/ro/x` → `/x`. Limba vine din `next/root-params` (`pageLocale()`); componentele de pe server folosesc `UI` din `src/lib/site/i18n/server.ts` (limba cererii, prin `React.cache`), iar linkurile `lp('/…')`. Componentele din browser primesc `locale` și folosesc `clientUI(locale)` (doar fișierele `*.client.ts`).
 - **Traduceri:** `src/lib/translate/` (segmente, motor, serviciu, câmpuri și reguli pe colecție, `/api/translate`). Probă locală fără cheie: `translateDocument(..., { translate: fake })`.
+- **Completarea traducerilor** rulează la build (`scripts/translate-repair.ts`, o dată pe versiune, jurnal `translateRepair:<versiune>` pe restaurant); ce rămâne în română apare în jurnalul build-ului cu motivul (`long`, `terms`, `same`, `missing`).
 - **Local:** containerul nou nu avea `.env.local`; am creat unul doar local (baza `trattoria` pe Postgres 16, secret generat), plus restaurantul de probă cu `pnpm payload run scripts/local-tenant.ts`. Valorile nu sunt în repo.
 
 ## Cum pornești sesiunea nouă
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-64), `docs/PLAN.md` (Faza 4) și `docs/2026_11_25_Trattoria_F4.md`. F4 e publicat; [am rulat „Tradu tot site-ul” și am pornit limbile / altă cerere].
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-66), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. Suntem la GATE 4. [GO F5 + răspunsuri G11 / altă cerere]
 
 ---
 

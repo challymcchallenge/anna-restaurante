@@ -115,3 +115,12 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 |---|---|---|---|
 | ~~G10-1~~ | ~~FAQ la cursuri și la hotel~~ — **rezolvat: D-65** (3 + 4 întrebări, doar fapte confirmate) | — | — |
 | ~~G10-2~~ | ~~Termeni care nu se traduc~~ — **rezolvat: D-65** | — | — |
+
+## Întrebări noi la GATE 4 (25.11.2026) — detalii în `docs/2026_11_25_Trattoria_GATE4.md`
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G11-1 | Pagina de cookies de pe producție are textul Riviera Events (rivieraevents.ro, chei „riviera-…”). O rescriu pentru Trattoria din ciorna D-53? | F5 | Alin |
+| G11-2 | Numele categoriilor din Bucătărie devin traductibile (categoriile noi au nume românești)? | F5 | Alin |
+| G11-3 | Accept abaterea `/zh` (mediana 82, ținta 85) și re-măsor în F5 pe domeniul final? | GATE 4 | Alin |
+

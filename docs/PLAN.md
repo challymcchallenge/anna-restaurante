@@ -99,7 +99,7 @@ Efectele sezoniere, animațiile 3D, sunetul de fundal și comutatorul de temă s
 
 **GATE 4:** Lighthouse mobil pe `/`, `/en` și `/zh`: performanță ≥ 85, accesibilitate ≥ 95, cifre reale. `prefers-reduced-motion` probat.
 
-**Stare (25.11.2026):** **GO primit (D-64).** Pașii 1–4 construiți și publicați pe producție (`main`, migrația `20261125_044503_f4_traduceri`); teste 100/100; Acasă în română: Lighthouse mobil mediana 86 (5 rulări), accesibilitate 100. **Aștept pasul 6:** Alin pornește „Tradu tot site-ul” din Tabloul de bord și limbile din Setări; apoi Lighthouse pe `/en` și `/zh` și GATE 4. Pasul 5 (FAQ): întrebarea G10-1. Raport: `docs/2026_11_25_Trattoria_F4.md`.
+**Stare (25.11.2026):** **GATE 4 prezentat** (raport `docs/2026_11_25_Trattoria_GATE4.md`, pagina HTML https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM). 7 limbi live, conținutul tradus integral (rămân identice doar numele proprii); FAQ la cursuri și cazare (D-65); fotografiile demo scoase (D-66). Lighthouse mobil pe producție, mediane: `/` 86, `/en` 89, `/zh` 82 (sub țintă, cauza măsurată, G11-3); accesibilitate 100. Teste 105/105. Aștept GO pentru F5 și răspunsurile G11.
 
 ## Faza 5 — Verificare și lansare
 
