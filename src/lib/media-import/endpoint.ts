@@ -7,8 +7,9 @@ import type { Endpoint, PayloadRequest } from 'payload'
  * - Merge doar cât există `MEDIA_IMPORT_TOKEN` în Vercel (cel puțin 32 de caractere); altfel răspunde 404.
  * - Cererea trebuie să aibă antetul `x-import-token` egal cu el (comparat în timp constant). Valoarea
  *   o pune Alin și în formularul securizat al sesiunii; nu apare în cod, în repo sau în conversație.
- * - Poate doar să creeze: fișiere media (fotografii, clipuri și variantele lor) și elemente de galerie,
- *   pentru un restaurant. Nu șterge și nu modifică nimic.
+ * - Poate crea fișiere media (fotografii, clipuri și variantele lor) și elemente de galerie, pentru un
+ *   restaurant. D-77: poate și schimba trei lucruri, cerute de Alin: bifele „Pe Acasă” din galerie, ordinea
+ *   unor elemente din galerie (doar între ele, cu cheile lor de ordine) și cadrele copertei. Nu șterge nimic.
  * - E sigură la reluare: un fișier cu același titlu intern sau un element de galerie cu același fișier
  *   nu se creează a doua oară; se întoarce cel existent.
  *
@@ -126,6 +127,61 @@ async function createGallery(req: PayloadRequest, body: { tenantSlug?: string; i
   return json({ items: out })
 }
 
+/** Lista de id-uri: întregi, fără dubluri, între `min` și `max` elemente. */
+export function idList(v: unknown, min: number, max: number): number[] | null {
+  if (!Array.isArray(v) || v.length < min || v.length > max) return null
+  if (!v.every((x) => Number.isInteger(x) && x > 0)) return null
+  return new Set(v).size === v.length ? (v as number[]) : null
+}
+
+/** Cadrele copertei: 1–5, fiecare cu imagine de desktop și de telefon. */
+export function slideList(v: unknown): { desktop: number; mobile: number }[] | null {
+  if (!Array.isArray(v) || v.length < 1 || v.length > 5) return null
+  const ok = v.every((s) => s && Number.isInteger(s.desktop) && Number.isInteger(s.mobile))
+  return ok ? v.map((s) => ({ desktop: s.desktop, mobile: s.mobile })) : null
+}
+
+type ManageBody = { action?: string; tenantSlug?: string; fileIds?: unknown; slides?: unknown }
+
+/** D-77: „Pe Acasă” exact pentru aceste fișiere (cel mult 8); restul elementelor pierd bifa. */
+async function homeGallery(req: PayloadRequest, tenant: number, body: ManageBody): Promise<Response> {
+  const ids = idList(body.fileIds, 1, 8)
+  if (!ids) return json({ error: 'fileIds: între 1 și 8 id-uri de fișiere, fără dubluri.' }, 400)
+  const own = { tenant: { equals: tenant } }
+  const wanted = await req.payload.find({ collection: 'gallery', where: { and: [own, { file: { in: ids } }] }, limit: 20, depth: 0, overrideAccess: true })
+  if (wanted.docs.length !== ids.length) return json({ error: 'Unele fișiere nu sunt în galerie.', found: wanted.docs.length }, 400)
+  const off = await req.payload.find({ collection: 'gallery', where: { and: [own, { onHome: { equals: true } }, { file: { not_in: ids } }] }, limit: 50, depth: 0, overrideAccess: true })
+  for (const d of off.docs) await req.payload.update({ collection: 'gallery', id: d.id, data: { onHome: false } as never, overrideAccess: true })
+  for (const d of wanted.docs) if (!d.onHome) await req.payload.update({ collection: 'gallery', id: d.id, data: { onHome: true } as never, overrideAccess: true })
+  return json({ onHome: ids, cleared: off.docs.length })
+}
+
+/** D-77: aceleași chei de ordine, redistribuite între elementele date, în ordinea dată. */
+async function reorderGallery(req: PayloadRequest, tenant: number, body: ManageBody): Promise<Response> {
+  const ids = idList(body.fileIds, 2, 60)
+  if (!ids) return json({ error: 'fileIds: între 2 și 60 de id-uri de fișiere, fără dubluri.' }, 400)
+  const found = await req.payload.find({ collection: 'gallery', where: { and: [{ tenant: { equals: tenant } }, { file: { in: ids } }] }, limit: 100, depth: 0, overrideAccess: true })
+  if (found.docs.length !== ids.length) return json({ error: 'Unele fișiere nu sunt în galerie.', found: found.docs.length }, 400)
+  const byFile = new Map(found.docs.map((d) => [typeof d.file === 'object' ? (d.file as { id: number }).id : (d.file as number), d]))
+  const keys = found.docs.map((d) => String((d as { _order?: string })._order ?? '')).sort()
+  if (keys.some((k) => !k)) return json({ error: 'Element fără cheie de ordine.' }, 400)
+  for (const [i, fileId] of ids.entries()) {
+    const doc = byFile.get(fileId)!
+    if ((doc as { _order?: string })._order !== keys[i]) await req.payload.update({ collection: 'gallery', id: doc.id, data: { _order: keys[i] } as never, overrideAccess: true })
+  }
+  return json({ order: ids })
+}
+
+/** D-77: cadrele copertei (Pagina Acasă → Hero → Cadre de slideshow); restul copertei rămâne neatins. */
+async function heroSlides(req: PayloadRequest, tenant: number, body: ManageBody): Promise<Response> {
+  const slides = slideList(body.slides)
+  if (!slides) return json({ error: 'slides: 1–5 cadre, fiecare cu desktop și mobile (id-uri de fișiere).' }, 400)
+  const home = await req.payload.find({ collection: 'home-page', where: { tenant: { equals: tenant } }, limit: 1, depth: 0, overrideAccess: true })
+  if (!home.docs[0]) return json({ error: 'Pagina Acasă lipsește.' }, 400)
+  await req.payload.update({ collection: 'home-page', id: home.docs[0].id, data: { hero: { slides } } as never, overrideAccess: true, locale: 'ro' })
+  return json({ slides: slides.length })
+}
+
 export const mediaImportEndpoint: Endpoint = {
   path: '/media-import',
   method: 'post',
@@ -134,8 +190,15 @@ export const mediaImportEndpoint: Endpoint = {
     if (!importTokenOk(req.headers.get('x-import-token'))) return json({ error: 'Cod de import greșit.' }, 401)
     const type = req.headers.get('content-type') ?? ''
     if (type.includes('multipart/form-data')) return createMedia(req)
-    const body = (await req.json?.().catch(() => ({}))) as { action?: string; tenantSlug?: string; items?: GalleryItem[] }
+    const body = (await req.json?.().catch(() => ({}))) as ManageBody & { items?: GalleryItem[] }
     if (body?.action === 'gallery') return createGallery(req, body)
+    if (['homeGallery', 'reorderGallery', 'heroSlides'].includes(String(body?.action))) {
+      const tenant = await tenantId(req, body.tenantSlug)
+      if (!tenant) return json({ error: 'Restaurant necunoscut.' }, 400)
+      if (body.action === 'homeGallery') return homeGallery(req, tenant, body)
+      if (body.action === 'reorderGallery') return reorderGallery(req, tenant, body)
+      return heroSlides(req, tenant, body)
+    }
     return json({ error: 'Acțiune necunoscută.' }, 400)
   },
 }
