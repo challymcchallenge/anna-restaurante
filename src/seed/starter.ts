@@ -213,6 +213,20 @@ export function lexicalText(doc: unknown): string | null {
     .join('\n\n')
 }
 
+/**
+ * F5 (G15-1): tot textul unui document Lexical, inclusiv din liste, linkuri și alte noduri imbricate.
+ * Folosit la `whenContains`: un fragment dintr-o listă (de exemplu „Web3Forms”) trebuie găsit și el.
+ */
+export function lexicalDeepText(doc: unknown): string {
+  const walk = (node: unknown): string => {
+    if (!isPlainObject(node)) return ''
+    const own = typeof node.text === 'string' ? node.text : ''
+    const kids = Array.isArray(node.children) ? (node.children as unknown[]).map(walk).join(' ') : ''
+    return `${own} ${kids}`
+  }
+  return isPlainObject(doc) ? walk(doc.root).replace(/\s+/g, ' ').trim() : ''
+}
+
 /** Data relativă: `{ "$inDays": 18, "time": "20:00" }` → ISO, ora României. */
 function relativeDate(spec: { $inDays: number; time?: string }) {
   const [h, m] = (spec.time ?? '20:00').split(':').map(Number)
@@ -523,7 +537,7 @@ export async function seedStarterContent({
       // Text formatat: se compară textul simplu, iar valoarea nouă devine document Lexical.
       const rich = isPlainObject(from) && typeof from.$richText === 'string'
       const same = swap.whenContains
-        ? (typeof current === 'string' ? current : (lexicalText(current) ?? '')).includes(swap.whenContains)
+        ? (typeof current === 'string' ? current : lexicalDeepText(current)).includes(swap.whenContains)
         : rich
           ? lexicalText(current) === (from as { $richText: string }).$richText
           : isEmpty(from)

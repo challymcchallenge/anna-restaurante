@@ -161,4 +161,4 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 
 | # | Întrebare | Când trebuie | Cine răspunde |
 |---|---|---|---|
-| G15-1 | **Paginile Cookies și Confidențialitate** de pe producție au textele site-ului Riviera Events (rivieraevents.ro, WhatsApp, Web3Forms, Google Translate, `_ga_XTPH4ERPM0`). Le înlocuiesc cu propunerea adaptată pentru Trattoria (`docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md`), care descrie exact bannerul de acum și termenul de 12 luni? Prin seed, o singură dată, doar dacă textul e încă cel Riviera; „Provizoriu” până completează juristul | înainte de lansare | Alin (cu juristul) |
+| ~~G15-1~~ | ~~Paginile Cookies și Confidențialitate cu textele Riviera Events~~ — **rezolvat: D-80** (înlocuite cu varianta pentru Trattoria, „Provizoriu” până completează juristul) | — | — |

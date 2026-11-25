@@ -3145,7 +3145,9 @@
     },
     {
       "collection": "awards",
-      "match": { "name": "Wine Spectator Restaurant Award" },
+      "match": {
+        "name": "Wine Spectator Restaurant Award"
+      },
       "field": "structuredData",
       "from": false,
       "to": true
@@ -3863,6 +3865,38 @@
         "placeholder": true
       },
       "version": "2026-11-25-g11"
+    },
+    {
+      "$comment": "G15-1 (D-80): pagina de cookies avea textul site-ului Riviera Events, pus din panou după G11-1. Se înlocuiește o singură dată, doar dacă textul de acum conține „rivieraevents.ro”, cu varianta adaptată pentru Trattoria (docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md), aprobată de Alin. „Provizoriu” până completează juristul.",
+      "collection": "legal-pages",
+      "match": {
+        "slug": "cookies"
+      },
+      "field": "content",
+      "whenContains": "rivieraevents.ro",
+      "to": {
+        "$richText": "Ciornă pentru juristul grupului (Q-25, G15-1): textul aprobat pentru Riviera Events, adaptat pentru Trattoria da Vittoria la 25.11.2026. Ce e între paranteze drepte completează juristul.\n\n## Ce sunt cookie-urile\nCookie-urile sunt fișiere mici pe care un site le salvează în browserul dumneavoastră. Unele sunt necesare ca site-ul să funcționeze, altele urmăresc vizitatorii pentru statistici sau reclame. Pentru acestea din urmă, legea cere acordul dumneavoastră.\n\n## Ce folosește site-ul Trattoria da Vittoria\nCookie-uri de publicitate: nu folosim.\n\nGoogle Analytics, doar cu acordul dumneavoastră: la prima vizită vă întrebăm printr-un banner. Până nu apăsați „Accept”, nu se încarcă nimic de la Google. Dacă acceptați, Google Analytics 4 (Google Ireland Limited) ne arată ce pagini sunt vizitate, de pe ce tip de dispozitiv și din ce oraș, aproximativ, ca să îmbunătățim site-ul. Semnalele pentru reclame sunt oprite. Nu folosim datele pentru reclame.\n\nCookie-urile Google Analytics:\n\n- _ga (Google Analytics): deosebește vizitatorii între ei, fără nume sau email; 13 luni.\n- _ga_[ID] (Google Analytics): ține minte vizita curentă; 13 luni. [de completat după lansare: numele exact, cu ID-ul proprietății Google Analytics a Trattoriei]\n\nDacă apăsați „Refuz” (sau vă retrageți acordul mai târziu), Google Analytics nu pornește, iar cookie-urile _ga existente se șterg. Vă puteți schimba oricând alegerea din linkul „Setări cookie-uri”, din subsolul fiecărei pagini. Detalii despre cum folosește Google datele: policies.google.com/technologies/partner-sites.\n\nPreferințe salvate în browser (nu cookie-uri):\n\n- Alegerea din bannerul de cookie-uri: localStorage, cheia cookies-consent, ca să nu vă întrebăm la fiecare pagină; 12 luni, apoi vă întrebăm din nou.\n- Limba aleasă stă în adresa paginii (de exemplu /en), nu într-un cookie.\n\n## Conținut de pe alte site-uri, încărcat doar la click\n- Rezervarea unei mese: fereastra ialoc se încarcă doar când apăsați „Rezervă o masă”. În configurația actuală nu setează cookie-uri (verificat pe 25.11.2026).\n- Harta: pe site e o schiță; harta Google se încarcă doar după ce apăsați „Arată harta” și poate pune propriile cookie-uri.\n- Meniul digital și rețelele sociale se deschid pe site-urile lor, cu regulile lor.\n\n## Cum ștergeți datele salvate\nDin setările browserului puteți șterge oricând datele site-urilor, inclusiv preferințele și cookie-urile de pe acest site. Acordul pentru Google Analytics îl schimbați din „Setări cookie-uri”, în subsol.\n\n## Întrebări\n[de completat de jurist: adresa pentru datele personale; pe Riviera Events este gdpr@annagrup.ro]. Detalii despre datele personale găsiți în Politica de confidențialitate."
+      },
+      "alsoSet": {
+        "placeholder": true
+      },
+      "version": "2026-11-25-g15"
+    },
+    {
+      "$comment": "G15-1 (D-80): pagina de confidențialitate avea textul site-ului Riviera Events (WhatsApp, Web3Forms). Se înlocuiește o singură dată, doar dacă textul de acum conține „Web3Forms”.",
+      "collection": "legal-pages",
+      "match": {
+        "slug": "confidentialitate"
+      },
+      "field": "content",
+      "whenContains": "Web3Forms",
+      "to": {
+        "$richText": "Ciornă pentru juristul grupului (Q-25, G15-1): textul aprobat pentru Riviera Events, adaptat pentru Trattoria da Vittoria la 25.11.2026. Ce e între paranteze drepte completează juristul.\n\n## Cine suntem\n[de confirmat de jurist: operatorul datelor pentru Trattoria da Vittoria. Pe Riviera Events este ANNA COMPLEX 1991 SRL, CUI 37378065, J18/330/12.04.2017, Calea Severinului nr. 24, biroul 6, Târgu Jiu.] Ne puteți scrie oricând despre datele dumneavoastră la [adresa pentru datele personale; pe Riviera Events este gdpr@annagrup.ro].\n\n## Ce date colectăm și de ce\nCând ne trimiteți o cerere prin formular (eveniment privat, curs de pizza pentru copii, cazare la Hotel ANNA, întrebare) sau o sesizare: numele, telefonul, emailul, mesajul și detaliile cererii (de exemplu datele sejurului, numărul de invitați, salonul dorit sau motivul sesizării), împreună cu acordul dumneavoastră și momentul în care l-ați dat.\n\nLe folosim ca să vă răspundem. Cererile de cazare ajung la Hotel ANNA, celelalte la echipa restaurantului. Temeiul legal este încheierea unui contract la cererea dumneavoastră (art. 6 alin. 1 lit. b din GDPR). [de confirmat de jurist: temeiul pentru sesizări]\n\nNu vă cerem date medicale. Dacă aveți alergii, le discutăm direct.\n\nRezervările de masă se fac în fereastra ialoc, după regulile ialoc.\n\nCând vizitați site-ul: serverul înregistrează automat date tehnice, precum adresa IP, tipul de browser și pagina cerută, pentru funcționarea și securitatea site-ului (interes legitim, art. 6 alin. 1 lit. f). Statisticile Google Analytics pornesc doar cu acordul dumneavoastră (vezi Politica de cookies).\n\nNu folosim datele pentru publicitate, nu le vindem și nu facem profiluri.\n\n## Cine ne ajută să procesăm datele\n- Vercel găzduiește site-ul (servere în Uniunea Europeană, Dublin).\n- Supabase păstrează baza de date (Uniunea Europeană, Irlanda).\n- Resend trimite pe email cererile din formular către echipa noastră. [de confirmat la lansare]\n- Google Analytics (Google Ireland Limited), doar dacă apăsați „Accept” în bannerul de cookie-uri. [de completat: cât păstrează contul Google Analytics al Trattoriei datele, de exemplu 14 luni]\n- ialoc, pentru rezervările de masă.\n\n## Cât timp păstrăm datele\nCererile și sesizările trimise prin formular le păstrăm 12 luni; apoi se șterg automat. Dacă organizăm un eveniment împreună, păstrăm datele cât durează contractul și apoi cât cere legea pentru documentele contabile.\n\n## Drepturile dumneavoastră\nAveți dreptul să cereți accesul la datele dumneavoastră, corectarea sau ștergerea lor, restricționarea prelucrării, portabilitatea lor și să vă opuneți prelucrării bazate pe interes legitim.\n\nDacă considerați că nu am respectat legea, puteți depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP), www.dataprotection.ro.\n\n## Fotografii\nFotografiile cu oaspeți și copii le publicăm doar cu acordul celor care apar în ele (pentru copii, al părinților). Dacă vă recunoașteți într-o fotografie și doriți să o scoatem, scrieți-ne și o eliminăm."
+      },
+      "alsoSet": {
+        "placeholder": true
+      },
+      "version": "2026-11-25-g15"
     }
   ],
   "requestsFill": {

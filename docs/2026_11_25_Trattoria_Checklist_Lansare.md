@@ -8,7 +8,7 @@
 |---|---|---|---|
 | A1 | **0 elemente provizorii** (contorul din panou). Rămase: categoriile din Bucătărie (fără fotografii), saloanele, camerele, serile-exemplu, paginile legale | Alin | deschis |
 | A2 | **Insigna Wine Spectator:** fișierul oficial, cu nivelul și anul corecte (D-20, D-68). Bifa „În datele pentru Google” e pusă (F5) | Alin | deschis (insigna actuală: Grand Award 2027, de confirmat) |
-| A3 | **Textul juristului** pentru Termeni, Confidențialitate, Cookies: firma, CUI, operatorul de date, termenul de păstrare (D-59). **Acum Cookies și Confidențialitate au textele Riviera Events** (G15-1, propunerea în `docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md`) | Alin | deschis |
+| A3 | **Textul juristului** pentru Termeni, Confidențialitate, Cookies: firma, CUI, operatorul de date, termenul de păstrare (D-59). Cookies și Confidențialitate au varianta pentru Trattoria (D-80), cu parantezele drepte de completat | Alin | deschis |
 | A4 | **Termenul de păstrare a cererilor:** 12 luni (G14-1, pus prin seed, D-79); același termen în Confidențialitate (G15-1) | Alin | termen pus; textul, deschis |
 | A5 | **Verificarea englezei** (F4-7) | Alin | deschis |
 | A6 | **Fotografiile reale** pentru categoriile din Bucătărie, saloane, camere | Alin | deschis |

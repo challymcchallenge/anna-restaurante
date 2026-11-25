@@ -8,7 +8,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D
 - Sesiunea 1: date structurate (Restaurant cu premiul, WebSite, serile ca Event), sitemap pe limbi (77 de adrese), Open Graph propriu pe fiecare pagină, redirecționările de pe davittoria.ro (16 adrese citite), ștergerea automată a cererilor (așteaptă termenul și `CRON_SECRET`), auditul de finisare 16 → 18/20, ghidul editorului, checklist-ul de lansare. **Proba de navigare prin linkuri pe producție: 2.288 de clicuri în 7 limbi, 0 greșite.**
 - **Lighthouse mobil după F5 (producție, 5 rulări, mașina liberă):** Acasă 89, `/en` 89, `/zh` 80 (G11-3, se re-măsoară pe domeniu); accesibilitate 100, CLS 0. **Teste: 155/155** (33 de fișiere).
 - **G14 rezolvate (D-79):** cererile se păstrează 12 luni; **Google Analytics cu banner de cookies**, cu eticheta `GT-NCLXCCBJ` a site-ului vechi, doar după „Accept” și doar pe domeniul propriu (pe adresa temporară bannerul apare, statisticile nu se încarcă).
-- **Deschis: G15-1** — paginile Cookies și Confidențialitate de pe producție au textele Riviera Events; propunerea pentru Trattoria: `docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md`.
+- **G15-1 rezolvat (D-80):** paginile Cookies și Confidențialitate au varianta pentru Trattoria, „Provizoriu” până completează juristul ce e între paranteze drepte.
 - **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
 - **După GATE 4 au venit 12 cereri și reparații (D-66 … D-77)**, toate publicate și verificate pe producție (tabelul de mai jos).
 - **D-72 a reparat un bug serios:** din F4 până la D-72, pe Vercel, linkurile interne către paginile în română schimbau adresa, dar afișau Acasă până la reîncărcare. Acum merg.
@@ -22,8 +22,8 @@ Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/dazzling-rubin-m26pdx` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-79) |
-| Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G15-1 deschisă) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-80) |
+| Întrebări deschise | `docs/OPEN-QUESTIONS.md` (niciuna nouă; rămân cele vechi, pentru Alin) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_134155_f5_requests_retention` |
 | F5 | Planul `docs/2026_11_25_Trattoria_F5_Plan.md`, raportul sesiunii 1 `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md`, auditul `docs/f5/2026_11_25_Trattoria_Audit_F5.md`, adresele vechi `docs/f5/2026_11_25_Trattoria_Adrese_vechi.md` |
@@ -52,7 +52,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 ## Ce așteaptă de la Alin
 
-0. **Din F5 (noi):** răspunsul la **G15-1** (textele legale); **`CRON_SECRET`** în Vercel (Production, Sensitive, ≥ 16 caractere; termenul de 12 luni e pus); opțional „Nivel de preț (pentru Google)” în Setări → Integrări. Lista completă, în ordine: `docs/2026_11_25_Trattoria_Checklist_Lansare.md`.
+0. **Din F5 (noi):** parantezele drepte din Cookies și Confidențialitate, la jurist (D-80); **`CRON_SECRET`** în Vercel (Production, Sensitive, ≥ 16 caractere; termenul de 12 luni e pus); opțional „Nivel de preț (pentru Google)” în Setări → Integrări. Lista completă, în ordine: `docs/2026_11_25_Trattoria_Checklist_Lansare.md`.
 1. **PDF-ul listei de vinuri:** Biblioteca media → Creează → „Ce încarci?” → „Document PDF” → „Alege și convertește” → Salvează; apoi Pagina Acasă → Vinuri → „Lista de vinuri în PDF” → Salvează (D-69).
 2. **Clipul cursului de pizza (D-73):** cel de pe site n-are pistă audio. Închide și redeschide fila panoului (codul nou), reîncarcă originalul din Biblioteca media, verifică „Codec și sunet” = „cu sunet”, apoi alege clipul la Pagina Acasă → Cursuri de pizza → „Clip principal” (sau scoate-l pe cel vechi din galerie). Spune din ce browser încarci.
 3. **Verificarea englezei** (F4-7), **textul juristului** pentru paginile legale (cookies e „Provizoriu”) și **fotografiile reale** pentru categoriile din Bucătărie, saloane și camere (galeria e gata, D-75; le poți alege din Biblioteca media).

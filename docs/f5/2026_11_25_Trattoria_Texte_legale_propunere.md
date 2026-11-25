@@ -1,6 +1,6 @@
 # Paginile Cookies și Confidențialitate: propunere pentru Trattoria (G15-1)
 
-Trattoria da Vittoria · 25.11.2026 · Pentru Alin și juristul grupului · **Nimic nu s-a schimbat pe site.**
+Trattoria da Vittoria · 25.11.2026 · Pentru Alin și juristul grupului · **Aprobat de Alin („DA, înlocuiește-le”), pus pe site prin D-80.** Ce e între paranteze drepte completează juristul.
 
 ## De ce
 
