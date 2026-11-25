@@ -58,7 +58,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 ## Importul în masă al fotografiilor (D-75, în lucru)
 
-**Stare:** fotografiile sunt descărcate, convertite și analizate. Raportul pentru „GO” e aici: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6. Se așteaptă răspunsul lui Alin la propuneri și la G13-5 (cum se încarcă). Fișierele convertite erau doar în containerul sesiunii; se refac după `scripts/import/README.md`.
+**Stare (25.11.2026):** Alin a dat GO (H11 Il Ritmo, H11 Kinder și B10 intră; din grupul sanitar rămân C4 și C10; varianta A). Adresa `/api/media-import` e publicată; `MEDIA_IMPORT_TOKEN` e pus de Alin în Vercel (Production, Sensitive), iar același cod e salvat ca secret de rețea al mediului ANNA-Restaurante (antet `x-import-token`). Urmează: republicarea, încărcarea cu `scripts/import/upload.mjs` (111 fișiere, 122 de elemente de galerie) și curățenia (variabila din Vercel, secretul din mediu, folderul Drive pe „Restricted”). Înainte de GO: fotografiile erau descărcate, convertite și analizate. Raportul pentru „GO” e aici: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6. Se așteaptă răspunsul lui Alin la propuneri și la G13-5 (cum se încarcă). Fișierele convertite erau doar în containerul sesiunii; se refac după `scripts/import/README.md`.
 
 ### Propunerea inițială
 
