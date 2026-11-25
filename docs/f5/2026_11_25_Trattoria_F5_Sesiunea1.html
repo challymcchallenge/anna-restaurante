@@ -1,0 +1,236 @@
+<title>Trattoria F5 Sesiunea 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Belleza&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: o „carte de meniu” — antet pe copertă închisă cu folio, apoi capitole pe hârtie, cu un cuprins lipit sus. */
+:root {
+  --paper: #F5EDE0; --paper-2: #EFE4D2; --ink: #241A17; --ink-2: #5A4A43;
+  --cover: #1C1416; --on-cover: #F3E9DA; --foil: #9A7430; --foil-bright: #D6AE66;
+  --green: #14613F; --line: #D9CBB4; --bad: #A3352B; --good: #14613F;
+  --display: "Belleza", "Optima", "Candara", Georgia, serif;
+  --text: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #1C1416; --paper-2: #261C1E; --ink: #F3E9DA; --ink-2: #C9B9A6; --cover: #120D0E; --on-cover: #F3E9DA;
+  --foil: #D6AE66; --foil-bright: #E2BF7E; --green: #4FB585; --line: #3A2C2C; --bad: #E58B7F; --good: #6FCB9C; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #1C1416; --paper-2: #261C1E; --ink: #F3E9DA; --ink-2: #C9B9A6; --cover: #120D0E; --on-cover: #F3E9DA;
+  --foil: #D6AE66; --foil-bright: #E2BF7E; --green: #4FB585; --line: #3A2C2C; --bad: #E58B7F; --good: #6FCB9C; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--text); }
+.band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 980px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--green); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--foil); outline-offset: 2px; border-radius: 4px; }
+code { font: 500 0.88em/1 ui-monospace, "SFMono-Regular", Menlo, monospace; background: var(--paper-2); padding: 2px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+
+.cover { background: var(--cover); color: var(--on-cover); margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: calc(env(safe-area-inset-top, 0px) + 40px); padding-bottom: 40px; }
+.cover .frame { border: 1px solid var(--foil-bright); outline: 1px solid color-mix(in srgb, var(--foil-bright) 45%, transparent); outline-offset: 5px; padding: 28px 24px; }
+.eyebrow { font: 600 12px/1.3 var(--text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--foil-bright); }
+.cover h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; margin-top: 10px; }
+.cover p.lede { margin-top: 14px; max-width: 60ch; color: color-mix(in srgb, var(--on-cover) 86%, transparent); }
+.stamp { display: inline-block; margin-top: 18px; border: 1px solid var(--foil-bright); color: var(--foil-bright); padding: 4px 12px; border-radius: 999px; font: 600 13px/1.4 var(--text); }
+
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+nav.toc ul { list-style: none; margin: 0 auto; max-width: 980px; padding: 10px 0; display: flex; gap: 6px 18px; flex-wrap: wrap; }
+nav.toc a { color: var(--ink-2); text-decoration: none; font: 500 14px/1.4 var(--text); padding: 4px 0; display: inline-block; }
+nav.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+section.ch { padding-block: 40px; border-bottom: 1px solid var(--line); scroll-margin-top: 56px; }
+section.ch h2 { font-size: clamp(26px, 4vw, 34px); line-height: 1.15; display: flex; align-items: baseline; gap: 12px; }
+section.ch h2 .no { font: 600 13px/1 var(--text); color: var(--foil); letter-spacing: 0.08em; }
+section.ch > .inner > p { margin-top: 12px; max-width: 68ch; color: var(--ink-2); }
+
+.figures { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.fig { border-top: 2px solid var(--foil); padding-top: 10px; }
+.fig b { display: block; font: 400 34px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.fig span { color: var(--ink-2); font-size: 14px; }
+
+.tbl { margin-top: 18px; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 12px/1.3 var(--text); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; padding: 1px 9px; border-radius: 999px; font: 600 12px/1.6 var(--text); border: 1px solid currentColor; white-space: nowrap; }
+.ok { color: var(--good); } .no-ok { color: var(--bad); } .wait { color: var(--foil); }
+
+ol.todo { margin: 18px 0 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+.mermaid-wrap { margin-top: 20px; overflow-x: auto; background: var(--paper-2); border-radius: 12px; padding: 16px; }
+
+footer.credit { padding-block: 32px 40px; text-align: center; color: var(--ink-2); font-size: 14px; line-height: 1.7; }
+footer.credit b { color: var(--ink); font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (max-width: 560px) { .cover .frame { padding: 20px 16px; } th, td { padding: 8px 6px; } }
+</style>
+
+<header class="cover band">
+  <div class="inner frame">
+    <p class="eyebrow">Trattoria da Vittoria · F5 · 25.11.2026 · D-78</p>
+    <h1>Sesiunea 1 din F5: site-ul e pregătit de lansare, minus emailurile și domeniul</h1>
+    <p class="lede">Tot ce nu depinde de domeniu și de Resend e gata și publicat pe producție, în ordinea cerută în D-67. Urmează sesiunea 2: emailurile, domeniul și GATE 5.</p>
+    <span class="stamp">Sesiunea 1 gata · aștept răspunsurile G14</span>
+  </div>
+</header>
+
+<nav class="toc band" aria-label="Cuprins">
+  <ul>
+    <li><a href="#concluzie">Concluzia</a></li>
+    <li><a href="#facut">Ce s-a făcut</a></li>
+    <li><a href="#navigare">Navigarea</a></li>
+    <li><a href="#audit">Auditul</a></li>
+    <li><a href="#lighthouse">Lighthouse</a></li>
+    <li><a href="#intrebari">Întrebări</a></li>
+    <li><a href="#tu">Ce faci tu</a></li>
+    <li><a href="#drum">Drumul până la lansare</a></li>
+  </ul>
+</nav>
+
+<main>
+<section class="ch band" id="concluzie">
+  <div class="inner">
+    <h2><span class="no">01</span>Concluzia</h2>
+    <p>Navigarea prin linkuri e curată în toate limbile, Google primește acum datele restaurantului și ale serilor, iar adresele de pe davittoria.ro au unde să ducă după mutarea domeniului. Auditul a găsit două probleme reale pe telefon; amândouă sunt reparate și verificate pe producție.</p>
+    <div class="figures">
+      <div class="fig"><b>2.288</b><span>clicuri pe producție, 7 limbi, 0 greșite</span></div>
+      <div class="fig"><b>18/20</b><span>scorul auditului Impeccable (era 16)</span></div>
+      <div class="fig"><b>77</b><span>adrese în sitemap (11 pagini × 7 limbi)</span></div>
+      <div class="fig"><b>155/155</b><span>teste trecute (33 de fișiere)</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch band" id="facut">
+  <div class="inner">
+    <h2><span class="no">02</span>Ce s-a făcut</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Ce</th><th>Rezultat pe producție</th><th>Stare</th></tr></thead>
+      <tbody>
+        <tr><td>Date structurate pentru Google</td><td>Acasă: restaurantul (adresă, program, meniu, rezervări, 4 rețele, premiul Wine Spectator GRAND AWARD 2027). <code>/petreceri</code>: 4 seri reale ca evenimente</td><td><span class="pill ok">publicat</span></td></tr>
+        <tr><td>Previzualizarea la distribuire (Open Graph)</td><td>Înainte, toate paginile arătau titlul de pe Acasă și nicio imagine. Acum fiecare pagină are titlul și fotografia ei</td><td><span class="pill ok">publicat</span></td></tr>
+        <tr><td>Sitemap pe limbi</td><td><code>/sitemap.xml</code>, 77 de adrese cu legăturile între limbi; robots.txt îl anunță abia la lansare</td><td><span class="pill ok">publicat</span></td></tr>
+        <tr><td>Adresele vechi de pe davittoria.ro (G7-2)</td><td>16 adrese citite: 3 rămân pagini, 13 se redirecționează. Toate probate</td><td><span class="pill ok">publicat</span></td></tr>
+        <tr><td>Ștergerea cererilor vechi (G7-3)</td><td>Termenul se pune în panou; rulează zilnic, noaptea</td><td><span class="pill wait">așteaptă termenul și CRON_SECRET</span></td></tr>
+        <tr><td>Ghidul editorului</td><td>Pentru Social Media Manager: fotografii, seri, galerie, traduceri, cereri</td><td><span class="pill ok">în repo</span></td></tr>
+        <tr><td>Checklist-ul de lansare</td><td>Conținut, tehnic, ziua lansării, cu cine face fiecare pas</td><td><span class="pill ok">în repo</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="ch band" id="navigare">
+  <div class="inner">
+    <h2><span class="no">03</span>Proba de navigare pe producție</h2>
+    <p>Clic pe fiecare link intern, din fiecare pagină, în fiecare limbă. După fiecare clic, adresa, titlul și titlul paginii se compară cu deschiderea directă a aceleiași adrese. Așa s-ar fi prins bugul din D-72.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Probă</th><th>Clicuri</th><th>Greșite</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop, română</td><td class="num">296</td><td class="num ok">0</td></tr>
+        <tr><td>Desktop, en · it · fr · de · zh · sv</td><td class="num">6 × 332</td><td class="num ok">0</td></tr>
+        <tr><td>Telefon, meniul lateral, salturi la secțiunile de pe Acasă, înainte</td><td class="num">32</td><td class="num no-ok">17</td></tr>
+        <tr><td>Telefon, același test, după reparație</td><td class="num">30</td><td class="num ok">0</td></tr>
+      </tbody>
+    </table></div>
+    <p>Cele 17 salturi greșite lăsau secțiunea (Cursuri, Galerie, Hotel, Contact) cu 600–2.000 px sub ecran. Cauza era o optimizare de viteză din F3: browserul estima înălțimea secțiunilor încă nedesenate. Acum, la salt, secțiunile se așază o clipă cu înălțimea reală.</p>
+  </div>
+</section>
+
+<section class="ch band" id="audit">
+  <div class="inner">
+    <h2><span class="no">04</span>Auditul de finisare</h2>
+    <p>Titlul copertei pe telefon, cadru cu cadru, cu slideshow-ul oprit. Pragul pentru text mare e 3:1. Cadrele noi din D-77 coborau sub prag pe ecranele scurte; de la 390 px în sus, aspectul cerut în D-70 rămâne exact același.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Ecran</th><th>Cel mai slab cadru, înainte</th><th>După</th></tr></thead>
+      <tbody>
+        <tr><td>375 × 667 (iPhone SE)</td><td class="num no-ok">2,23:1</td><td class="num ok">3,26:1</td></tr>
+        <tr><td>360 × 780</td><td class="num no-ok">2,73:1</td><td class="num ok">3,08:1</td></tr>
+        <tr><td>390 × 844</td><td class="num ok">3,29:1</td><td class="num ok">3,29:1</td></tr>
+        <tr><td>Desktop 1280 și 1920</td><td class="num ok">9,94:1</td><td class="num ok">neschimbat</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Verificare</th><th>Rezultat</th></tr></thead>
+      <tbody>
+        <tr><td>Lățimi 360, 390, 768, 1280, 1920 px, 11 pagini</td><td>0 depășiri, 0 imagini fără text alternativ, titluri în ordine</td></tr>
+        <tr><td>Tastatura pe Acasă</td><td>„Sari la conținut” primul, focus vizibil peste tot</td></tr>
+        <tr><td>Cookies</td><td>0 la încărcare, după fereastra ialoc și după hartă: nu e nevoie de banner [PRESUPUNERE juridică]</td></tr>
+        <tr><td>Paginile legale</td><td>rânduri de ~75 de caractere (erau ~93)</td></tr>
+      </tbody>
+    </table></div>
+    <p>Neaplicat, cu motiv: meniul din antet face încărcare completă a paginii (corect, dar ~1 s mai lent). Schimbarea atinge rutarea reparată în D-72, deci o las pentru după lansare.</p>
+  </div>
+</section>
+
+<section class="ch band" id="lighthouse">
+  <div class="inner">
+    <h2><span class="no">05</span>Lighthouse mobil</h2>
+    <p>Producție, 5 rulări pe pagină, mediana. Ținte: performanță ≥ 85, accesibilitate ≥ 95 (D-26). SEO nu se măsoară acum: adresa temporară e neindexată intenționat.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Pagina</th><th>Rulări</th><th>Mediana</th><th>Accesibilitate</th><th>CLS</th></tr></thead>
+      <tbody>
+        <tr><td><code>/</code> (română)</td><td class="num">89 · 87 · 93 · 89 · 92</td><td class="num ok"><b>89</b></td><td class="num">100</td><td class="num">0</td></tr>
+        <tr><td><code>/en</code></td><td class="num">93 · 89 · 89 · 90 · 88</td><td class="num ok"><b>89</b></td><td class="num">100</td><td class="num">0</td></tr>
+        <tr><td><code>/zh</code></td><td class="num">81 · 81 · 80 · 80 · 77</td><td class="num wait"><b>80</b></td><td class="num">100</td><td class="num">0</td></tr>
+      </tbody>
+    </table></div>
+    <p><code>/zh</code> rămâne sub 85, cum era la GATE 4 (82): abaterea acceptată în G11-3, din așezarea textului chinezesc. Se re-măsoară pe domeniul final, în sesiunea 2. O primă serie a rulat în paralel cu testele (procesor ocupat, TBT până la 950 ms); am aruncat-o și am repetat cu mașina liberă.</p>
+  </div>
+</section>
+
+<section class="ch band" id="intrebari">
+  <div class="inner">
+    <h2><span class="no">06</span>Întrebări pentru tine (G14)</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>#</th><th>Întrebare</th><th>Propunerea mea</th></tr></thead>
+      <tbody>
+        <tr><td>G14-1</td><td>Cât timp păstrăm cererile primite?</td><td>12 luni [PRESUPUNERE], de confirmat cu juristul</td></tr>
+        <tr><td>G14-2</td><td>Paginile vechi fără echivalent (<code>/la-multi-ani</code>, <code>/1hm</code>, <code>/test</code>) duc la Acasă. Rămân așa?</td><td>Da</td></tr>
+        <tr><td>G14-3</td><td>Statistici după lansare: fără, Vercel Web Analytics sau Google Analytics cu banner?</td><td>Decizie la lansare; site-ul vechi avea Google</td></tr>
+        <tr><td>G14-4</td><td>Nivelul de preț pentru Google (de exemplu „50–150 lei”)</td><td>Opțional, din panou</td></tr>
+        <tr><td>G14-5</td><td>Domeniul de trimitere pentru emailuri și ziua mutării DNS</td><td><code>davittoria.ro</code>, adresă de tipul <code>rezervari@davittoria.ro</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="ch band" id="tu">
+  <div class="inner">
+    <h2><span class="no">07</span>Ce faci tu</h2>
+    <ol class="todo">
+      <li>Răspunde la G14-1 … G14-5.</li>
+      <li>Pune <code>CRON_SECRET</code> în Vercel (Production, Sensitive, cel puțin 16 caractere): <a href="https://vercel.com/alinlabau-9308s-projects/anna-restaurante/settings/environment-variables">Environment Variables</a>.</li>
+      <li>Termenul de păstrare: panou → Setări → Cereri și emailuri → „Păstrează cererile (luni)”: <a href="https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin">panoul</a>.</li>
+      <li>Trimite ghidul editorului Social Media Managerului (<code>docs/2026_11_25_Trattoria_Ghid_Editor.md</code>).</li>
+      <li>Continuă checklist-ul de lansare, secțiunea A (conținut): <code>docs/2026_11_25_Trattoria_Checklist_Lansare.md</code>.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="ch band" id="drum">
+  <div class="inner">
+    <h2><span class="no">08</span>Drumul până la lansare</h2>
+    <div class="mermaid-wrap">
+<pre class="mermaid">
+flowchart LR
+  A["F5 · sesiunea 1<br/>gata"] --> B["Răspunsurile G14<br/>CRON_SECRET"]
+  B --> C["Conținutul final<br/>checklist A"]
+  C --> D["F5 · sesiunea 2<br/>Resend + domeniul"]
+  D --> E["Probe pe domeniu<br/>Lighthouse, ialoc, emailuri"]
+  E --> F["GATE 5<br/>lansarea"]
+</pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="credit band">
+  <div class="inner">
+    <p><b>100% AI Solutions &amp; Agentic Work-Flows for SMEs</b></p>
+    <p>Made with ❤️ by BizTech Consulting SRL</p>
+    <p>Alin Labau - AI Project Manager | +40 772 295 031 | <a href="https://www.biztech.ro">www.biztech.ro</a></p>
+  </div>
+</footer>

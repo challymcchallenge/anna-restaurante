@@ -6,7 +6,8 @@ Trattoria da Vittoria · 25.11.2026 · Site-ul public de pe producție, telefon 
 
 - **Scor Impeccable: 16/20 înainte, 18/20 după corecții** (bandă „Good” → „Excellent”).
 - **1 problemă de accesibilitate reală (P1), reparată:** pe telefoanele scurte (360 × 780, 375 × 667), titlul copertei avea 2,23–2,74:1 pe cadrele noi din D-77 (prag 3:1). Acum ≥ 3,08:1; de la 390 px în sus nu se schimbă nimic.
-- **Navigarea prin linkuri pe producție: 0 greșeli** în cele 7 limbi (vezi „Proba de navigare”).
+- **Navigarea prin linkuri pe producție: 2.288 de clicuri în 7 limbi, 0 greșeli**, 0 erori în consolă.
+- **1 problemă de navigare pe telefon (P2), reparată:** din meniul lateral, salturile spre Cursuri, Galerie, Hotel și Contact lăsau secțiunea cu 600–2.000 px sub ecran (17 din 32). Acum 30/30 pe producție.
 - **0 cookies** pe site-ul public: la încărcare, după fereastra ialoc și după „Arată harta”. Nu e nevoie de banner [PRESUPUNERE juridică, Q-25].
 
 ## Scorul
@@ -49,6 +50,7 @@ Cauza: titlul stă la ~330 px de marginea de jos pe orice telefon, dar umbra era
 | P | Problema | Unde | Ce am făcut |
 |---|---|---|---|
 | P1 | Titlul copertei sub 3:1 pe telefoanele scurte, cu cadrele din D-77 (WCAG 1.4.3) | `styles.css`, `.hero::before` | **Reparat** (tabelul de mai sus) |
+| P2 | Pe telefon, saltul din meniu spre o secțiune de jos a paginii Acasă (Cursuri, Galerie, Hotel, Contact) lăsa secțiunea la 600–2.000 px sub ecran. Cauza: secțiunile au `content-visibility: auto` cu înălțimea estimată de 900 px | `HeaderController.tsx`, `.cv-all` | **Reparat:** la salt, secțiunile se așază o clipă cu înălțimea reală. Local, build de producție: 18/18 (cu corecția neutralizată: 3 greșite); producție: 30/30 |
 | P2 | Rânduri de ~93 de caractere în paginile legale (citire obositoare) | `.legal-text` | **Reparat:** paragrafele la 31em, ~75 de caractere |
 | P2 | Paginile proprii moșteneau titlul Open Graph al paginii Acasă; nicio imagine de distribuire | toate paginile | **Reparat** în pasul de date structurate (F5, `pageMetadata`) |
 | P3 | Un cuvânt singur pe ultimul rând al notei hărții | `.map-note` | **Reparat:** `text-wrap: pretty` |
@@ -62,7 +64,15 @@ Cauza: titlul stă la ~330 px de marginea de jos pe orice telefon, dar umbra era
 
 ## Proba de navigare prin linkuri (producție)
 
-Clic pe fiecare link intern, din fiecare pagină, în fiecare limbă (desktop, Chromium); după clic, adresa, titlul și h1 se compară cu încărcarea directă a aceleiași adrese. Rezultatul final e în raportul sesiunii.
+Clic pe fiecare link intern, din fiecare pagină, în fiecare limbă (desktop 1280 px, Chromium); după clic, adresa, titlul și h1 se compară cu încărcarea directă a aceleiași adrese.
+
+| Limba | Clicuri | Greșite | Cu încărcare completă (corect, dar mai lent) |
+|---|---|---|---|
+| ro | 296 | 0 | 140 |
+| en, it, fr, de, zh, sv | 332 fiecare | 0 | 161 fiecare |
+| **Total** | **2.288** | **0** | |
+
+Încărcările complete vin din selectorul de limbă (normal: se schimbă limba paginii) și din linkurile simple `<a>` ale meniului (P3 de mai sus). **Pe telefon** (iPhone 13, atingeri reale, meniul lateral, ro și en, de pe Acasă și de pe `/galerie`): 30/30 după corecție.
 
 ## Ce rămâne pentru sesiunea 2
 

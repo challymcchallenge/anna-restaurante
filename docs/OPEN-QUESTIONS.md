@@ -146,3 +146,13 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | (vechi) G13-4 | **Copii în fotografii:** panoul cere „Acordul părinților confirmat” (Q-25). Confirmi acordul pentru fotografiile cu copii (cursul de pizza) sau le lăsăm deoparte? | înainte de import | Alin |
 | ~~G13-5~~ | ~~Încărcarea pe producție~~ — **rezolvat: D-75** (varianta A; 122 de elemente în galerie) | — | — |
 | (vechi) G13-5 | **Încărcarea pe producție:** un punct de import temporar (`/api/media-import`), protejat cu un token pe care îl pui tu în Vercel (`MEDIA_IMPORT_TOKEN`) și în formularul securizat de credențiale; îl ștergem după import. Fără parole în conversație. DA / altă variantă? | înainte de import | Alin |
+
+## Întrebări noi în F5, sesiunea 1 (25.11.2026) — detalii în `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md`
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G14-1 | **Cât timp păstrăm cererile primite?** Termenul se pune în Setări → Cereri și emailuri → „Păstrează cererile (luni)” și se scrie în Confidențialitate. Propunerea mea, de verificat cu juristul: 12 luni [PRESUPUNERE]. Pentru ștergerea automată, pune în Vercel variabila `CRON_SECRET` (Production, Sensitive, cel puțin 16 caractere) | înainte de lansare | Alin (cu juristul) |
+| G14-2 | **Paginile vechi fără echivalent** (`/la-multi-ani`, protejată cu parolă; `/1hm`; `/test`; `/3d-flip-book/test`) duc acum la Acasă. Rămân așa sau le lăsăm să dea 404? | înainte de mutarea domeniului | Alin |
+| G14-3 | **Statistici după lansare:** site-ul vechi are eticheta Google `GT-NCLXCCBJ`; site-ul nou nu pune cookies. (a) fără statistici; (b) Vercel Web Analytics (de verificat dacă pune cookies și cât costă, neverificat); (c) Google Analytics, cu banner de consimțământ | la lansare | Alin |
+| G14-4 | **Nivel de preț pentru Google** (Setări → Integrări): de exemplu „50–150 lei”. Gol = nu se trimite | oricând | Alin |
+| G14-5 | **Sesiunea 2:** domeniul de trimitere pentru emailuri (propunere: `davittoria.ro`, adresa `rezervari@davittoria.ro` sau `site@davittoria.ro`, OQ #10) și ziua mutării DNS | înainte de sesiunea 2 | Alin |

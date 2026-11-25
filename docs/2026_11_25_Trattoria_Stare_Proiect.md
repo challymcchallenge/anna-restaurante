@@ -1,9 +1,13 @@
 # Starea proiectului și predarea către sesiunea următoare
 
-Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiunii F4) · scris la cererea lui Alin, ca sesiunea nouă să pornească din fișiere, nu din memoria conversației.
+Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D-78) · scris la cererea lui Alin, ca sesiunea nouă să pornească din fișiere, nu din memoria conversației.
 
 ## Concluzia
 
+- **F5, sesiunea 1 e gata și pe producție (D-78).** Rămâne **sesiunea 2**: emailurile prin Resend, domeniul, lansarea (GATE 5). Raportul: `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md`.
+- Sesiunea 1: date structurate (Restaurant cu premiul, WebSite, serile ca Event), sitemap pe limbi (77 de adrese), Open Graph propriu pe fiecare pagină, redirecționările de pe davittoria.ro (16 adrese citite), ștergerea automată a cererilor (așteaptă termenul și `CRON_SECRET`), auditul de finisare 16 → 18/20, ghidul editorului, checklist-ul de lansare. **Proba de navigare prin linkuri pe producție: 2.288 de clicuri în 7 limbi, 0 greșite.**
+- **Lighthouse mobil după F5 (producție, 5 rulări, mașina liberă):** Acasă 89, `/en` 89, `/zh` 80 (G11-3, se re-măsoară pe domeniu); accesibilitate 100, CLS 0. **Teste: 155/155** (33 de fișiere).
+- **Întrebări deschise: G14-1 … G14-5** (`docs/OPEN-QUESTIONS.md`).
 - **F0–F4 sunt gata, pe producție. GO pentru F5 primit (D-67)**, cu o schimbare de ordine: **Resend și domeniul se conectează la final**, după tot restul.
 - **După GATE 4 au venit 12 cereri și reparații (D-66 … D-77)**, toate publicate și verificate pe producție (tabelul de mai jos).
 - **D-72 a reparat un bug serios:** din F4 până la D-72, pe Vercel, linkurile interne către paginile în română schimbau adresa, dar afișau Acasă până la reîncărcare. Acum merg.
@@ -16,12 +20,16 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 |---|---|
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
-| Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/stoic-johnson-oxvj0z` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-77) |
-| Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G12 și G13 rezolvate) |
+| Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/dazzling-rubin-m26pdx` |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-78) |
+| Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G14-1 … G14-5 deschise) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
-| Ultima migrație | `20261125_083644_d71_slideshow_clip_acasa` |
+| Ultima migrație | `20261125_134155_f5_requests_retention` |
+| F5 | Planul `docs/2026_11_25_Trattoria_F5_Plan.md`, raportul sesiunii 1 `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md`, auditul `docs/f5/2026_11_25_Trattoria_Audit_F5.md`, adresele vechi `docs/f5/2026_11_25_Trattoria_Adrese_vechi.md` |
+| Ghidul editorului, checklist-ul | `docs/2026_11_25_Trattoria_Ghid_Editor.md`, `docs/2026_11_25_Trattoria_Checklist_Lansare.md` |
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
+| Raportul F5, sesiunea 1 (HTML, privat) | https://claude.ai/artifact/WPqR2GLALuLnmtKHexFkhZ |
+| Ghidul editorului (HTML, privat) | https://claude.ai/artifact/45BL6VdJMtaUea1bxX3Ujp |
 | Raportul GATE 4 | `docs/2026_11_25_Trattoria_GATE4.md` și pagina HTML privată https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM |
 | Raportul GATE 3 (pagină HTML, privată) | https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP |
 
@@ -43,6 +51,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 ## Ce așteaptă de la Alin
 
+0. **Din F5 (noi):** răspunsurile G14-1 … G14-5; **`CRON_SECRET`** în Vercel (Production, Sensitive, ≥ 16 caractere) și termenul în Setări → Cereri și emailuri → „Păstrează cererile (luni)”; opțional „Nivel de preț (pentru Google)” în Setări → Integrări. Lista completă, în ordine: `docs/2026_11_25_Trattoria_Checklist_Lansare.md`.
 1. **PDF-ul listei de vinuri:** Biblioteca media → Creează → „Ce încarci?” → „Document PDF” → „Alege și convertește” → Salvează; apoi Pagina Acasă → Vinuri → „Lista de vinuri în PDF” → Salvează (D-69).
 2. **Clipul cursului de pizza (D-73):** cel de pe site n-are pistă audio. Închide și redeschide fila panoului (codul nou), reîncarcă originalul din Biblioteca media, verifică „Codec și sunet” = „cu sunet”, apoi alege clipul la Pagina Acasă → Cursuri de pizza → „Clip principal” (sau scoate-l pe cel vechi din galerie). Spune din ce browser încarci.
 3. **Verificarea englezei** (F4-7), **textul juristului** pentru paginile legale (cookies e „Provizoriu”) și **fotografiile reale** pentru categoriile din Bucătărie, saloane și camere (galeria e gata, D-75; le poți alege din Biblioteca media).
@@ -53,7 +62,8 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 ## Ce urmează, pe faze
 
 - **F4:** gata, cu cererile D-66 … D-72. Efectele, sunetul, 3D și tema sunt mutate după lansare (D-33).
-- **F5** (2 sesiuni, GO primit): audit de finisare, date structurate, sitemap pe limbi, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare, re-măsurarea `/zh`; **la final** emailurile prin Resend și domeniul (D-36, D-67). În auditul F5 intră și o probă de **navigare prin linkuri pe producție** (nu doar încărcări directe), pe toate paginile și limbile.
+- **F5, sesiunea 1:** gata (D-78).
+- **F5, sesiunea 2:** emailurile prin Resend pentru toate formularele (ADR-009) și fotografia bonului la sesizări (G6-3); domeniul `davittoria.ro`, `ALLOW_INDEXING=true`, redirecționările probate pe domeniu, ialoc și Lighthouse (inclusiv `/zh`, G11-3) pe domeniu; curățenia importului (D-75); GATE 5. Pașii: checklist-ul de lansare, secțiunile B și C.
 - **La final:** playbook-ul proiectului în vault-ul Obsidian, după standardul de denumire.
 
 ## Importul în masă al fotografiilor (D-75, gata)
@@ -84,6 +94,15 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 - **Seed-ul** nu e tranzacțional: la o eroare rămâne aplicat pe jumătate și se reia la rularea următoare. Schimbările de conținut pe producție merg prin „swaps” cu versiune; `mediaFill` acceptă `replace` (D-68); codul: `src/seed/starter.ts`.
 - **Desenele decorative** se regenerează cu `python3 scripts/f3/generate-decor.py` (ieșire în `public/decor`).
 
+## Note tehnice F5
+
+- **SEO:** `src/lib/site/seo.ts` (`pageMetadata`, `restaurantLd`, `websiteLd`, `eventsLd`, `sitemapEntries`), `src/components/site/JsonLd.tsx`, `src/app/sitemap.ts`. Funcțiile pure de limbă stau în `src/lib/site/alternates.ts` (fără `next/root-params`, ca să poată fi testate); `locale.ts` le re-exportă.
+- **Redirecționări:** `src/app/(frontend)/[lang]/[slug]/[...rest]/page.tsx` (adrese cu mai multe segmente), `getRedirect()` în `data.ts`, `normalizeOldPath()` în `src/lib/redirect-path.ts`. Seed: `lists` acceptă `keepPlaceholders` (colecții fără „Provizoriu”).
+- **Cereri vechi:** `src/lib/requests/cleanup.ts`, `GET /api/cleanup-requests`, `vercel.json` → `crons` (02:23 UTC). Fără `CRON_SECRET`: 404.
+- **Salturile la secțiuni:** `HeaderController.tsx` → `goToSection()` + `.cv-all` în `styles.css` (secțiunile au `content-visibility: auto`).
+- **Probele de pe producție** (scripturi în scratchpad, de refăcut la nevoie): navigarea prin linkuri (clic JS pe fiecare `a[href]` intern, compară titlul și h1 cu încărcarea directă), salturile din meniul de pe telefon (iPhone 13, atingeri), contrastul copertei cadru cu cadru (slideshow oprit din butonul de pauză, text ascuns, percentila 95), lățimile 360–1920 cu depășiri, ținte, `alt`, focus și cookies.
+- **Mediul local nou:** containerul nu avea `.env.local` și nici bază: rol și bază Postgres `anna` create local, `.env.local` cu valori locale (fără nimic de pe producție), apoi `pnpm payload migrate` și `pnpm payload run scripts/local-tenant.ts`.
+
 ## Note tehnice F4
 
 - **Rute:** paginile stau sub `src/app/(frontend)/[lang]/`. `next.config.ts` rescrie `/x` în `/ro/x` (afterFiles; plus sufixele `.rsc` / `.segments` și `/index.rsc` → `/ro.rsc`, D-72) și redirecționează `/ro/x` → `/x`. Limba vine din `next/root-params` (`pageLocale()`); componentele de pe server folosesc `UI` din `src/lib/site/i18n/server.ts`, iar linkurile `lp('/…')`. Componentele din browser primesc `locale` și folosesc `clientUI(locale)` (doar fișierele `*.client.ts`).
@@ -94,7 +113,7 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-77), `docs/OPEN-QUESTIONS.md`, `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Importul fotografiilor: răspunsurile G13 / Pornește F5 / răspunsuri G12 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-78), `docs/OPEN-QUESTIONS.md` (G14), `docs/PLAN.md` (Faza 5), `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md` și `docs/2026_11_25_Trattoria_Checklist_Lansare.md`. [Răspunsurile G14 / Pornește F5, sesiunea 2 (Resend și domeniul) / altă cerere]
 
 ---
 

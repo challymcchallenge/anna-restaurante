@@ -107,13 +107,15 @@ Efectele sezoniere, animațiile 3D, sunetul de fundal și comutatorul de temă s
 
 **GO primit (D-67, 25.11.2026).** Ordinea: întâi tot ce ține de site și panou; **emailurile prin Resend și domeniul se conectează la final**, când totul e gata (D-36, D-67). Se re-măsoară Lighthouse pe `/zh` pe domeniul final (G11-3).
 
+**Stare (25.11.2026):** **sesiunea 1 gata (D-78)**, raport `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md`: date structurate, sitemap pe limbi, Open Graph pe pagină, redirecționările de pe davittoria.ro (G7-2), ștergerea automată a cererilor (G7-3), auditul de finisare (18/20), proba de navigare (2.288 de clicuri, 0 greșite), ghidul editorului (`docs/2026_11_25_Trattoria_Ghid_Editor.md`), checklist-ul de lansare (`docs/2026_11_25_Trattoria_Checklist_Lansare.md`). Întrebări: G14-1 … G14-5. **Sesiunea 2:** Resend, domeniul, lansarea (GATE 5).
+
 **Se face**
 1. Audit de finisare (Impeccable); se aplică doar modificările listate și explicate.
 2. Accesibilitate, tastatură, lățimi 360, 390, 768, 1280, 1920 px.
 3. Date structurate (Restaurant, cu premiul când este activ), sitemap pe limbi, Open Graph.
 4. Redirecționări (ADR-013). Pagini legale și cookies; consimțământ doar dacă există cookies neesențiale.
-5. Ghid scurt pentru Social Media Manager: `docs/ghid-editor.md`.
-6. `docs/launch-checklist.md`.
+5. Ghid scurt pentru Social Media Manager: `docs/2026_11_25_Trattoria_Ghid_Editor.md` (regula de denumire din `CLAUDE.md`).
+6. `docs/2026_11_25_Trattoria_Checklist_Lansare.md`.
 
 **Checklist de lansare (minim)**
 - [ ] Niciun conținut provizoriu rămas (contorul din panou arată 0).

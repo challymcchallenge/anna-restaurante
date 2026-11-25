@@ -1,0 +1,212 @@
+<title>Ghidul editorului Trattoria</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Belleza&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: o „carte de meniu” — antet pe copertă închisă cu folio, apoi capitole pe hârtie, cu un cuprins lipit sus. */
+:root {
+  --paper: #F5EDE0; --paper-2: #EFE4D2; --ink: #241A17; --ink-2: #5A4A43;
+  --cover: #1C1416; --on-cover: #F3E9DA; --foil: #9A7430; --foil-bright: #D6AE66;
+  --green: #14613F; --line: #D9CBB4; --bad: #A3352B; --good: #14613F;
+  --display: "Belleza", "Optima", "Candara", Georgia, serif;
+  --text: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #1C1416; --paper-2: #261C1E; --ink: #F3E9DA; --ink-2: #C9B9A6; --cover: #120D0E; --on-cover: #F3E9DA;
+  --foil: #D6AE66; --foil-bright: #E2BF7E; --green: #4FB585; --line: #3A2C2C; --bad: #E58B7F; --good: #6FCB9C; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #1C1416; --paper-2: #261C1E; --ink: #F3E9DA; --ink-2: #C9B9A6; --cover: #120D0E; --on-cover: #F3E9DA;
+  --foil: #D6AE66; --foil-bright: #E2BF7E; --green: #4FB585; --line: #3A2C2C; --bad: #E58B7F; --good: #6FCB9C; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--text); }
+.band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 980px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--green); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--foil); outline-offset: 2px; border-radius: 4px; }
+code { font: 500 0.88em/1 ui-monospace, "SFMono-Regular", Menlo, monospace; background: var(--paper-2); padding: 2px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+
+.cover { background: var(--cover); color: var(--on-cover); margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: calc(env(safe-area-inset-top, 0px) + 40px); padding-bottom: 40px; }
+.cover .frame { border: 1px solid var(--foil-bright); outline: 1px solid color-mix(in srgb, var(--foil-bright) 45%, transparent); outline-offset: 5px; padding: 28px 24px; }
+.eyebrow { font: 600 12px/1.3 var(--text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--foil-bright); }
+.cover h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; margin-top: 10px; }
+.cover p.lede { margin-top: 14px; max-width: 60ch; color: color-mix(in srgb, var(--on-cover) 86%, transparent); }
+.stamp { display: inline-block; margin-top: 18px; border: 1px solid var(--foil-bright); color: var(--foil-bright); padding: 4px 12px; border-radius: 999px; font: 600 13px/1.4 var(--text); }
+
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+nav.toc ul { list-style: none; margin: 0 auto; max-width: 980px; padding: 10px 0; display: flex; gap: 6px 18px; flex-wrap: wrap; }
+nav.toc a { color: var(--ink-2); text-decoration: none; font: 500 14px/1.4 var(--text); padding: 4px 0; display: inline-block; }
+nav.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+section.ch { padding-block: 40px; border-bottom: 1px solid var(--line); scroll-margin-top: 56px; }
+section.ch h2 { font-size: clamp(26px, 4vw, 34px); line-height: 1.15; display: flex; align-items: baseline; gap: 12px; }
+section.ch h2 .no { font: 600 13px/1 var(--text); color: var(--foil); letter-spacing: 0.08em; }
+section.ch > .inner > p { margin-top: 12px; max-width: 68ch; color: var(--ink-2); }
+
+.figures { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.fig { border-top: 2px solid var(--foil); padding-top: 10px; }
+.fig b { display: block; font: 400 34px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.fig span { color: var(--ink-2); font-size: 14px; }
+
+.tbl { margin-top: 18px; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 12px/1.3 var(--text); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; padding: 1px 9px; border-radius: 999px; font: 600 12px/1.6 var(--text); border: 1px solid currentColor; white-space: nowrap; }
+.ok { color: var(--good); } .no-ok { color: var(--bad); } .wait { color: var(--foil); }
+
+ol.todo { margin: 18px 0 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+.mermaid-wrap { margin-top: 20px; overflow-x: auto; background: var(--paper-2); border-radius: 12px; padding: 16px; }
+
+footer.credit { padding-block: 32px 40px; text-align: center; color: var(--ink-2); font-size: 14px; line-height: 1.7; }
+footer.credit b { color: var(--ink); font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (max-width: 560px) { .cover .frame { padding: 20px 16px; } th, td { padding: 8px 6px; } }
+</style>
+<style>
+.steps { margin: 16px 0 0; padding-left: 22px; display: grid; gap: 8px; max-width: 70ch; }
+.note { margin-top: 16px; border-left: 3px solid var(--foil); background: var(--paper-2); padding: 12px 14px; border-radius: 0 8px 8px 0; max-width: 70ch; }
+ul.plain { margin: 14px 0 0; padding-left: 20px; display: grid; gap: 6px; max-width: 70ch; }
+</style>
+
+<header class="cover band">
+  <div class="inner frame">
+    <p class="eyebrow">Trattoria da Vittoria · panoul · pentru Social Media Manager</p>
+    <h1>Ghidul editorului</h1>
+    <p class="lede">Cum pui o seară, o fotografie, o recenzie sau o traducere pe site, fără programator. Ce salvezi în panou apare pe site la următoarea încărcare a paginii.</p>
+    <span class="stamp">Panoul: anna-restaurante-alinlabau-9308s-projects.vercel.app/admin</span>
+  </div>
+</header>
+
+<nav class="toc band" aria-label="Cuprins">
+  <ul>
+    <li><a href="#acces">Ce vezi</a></li>
+    <li><a href="#media">Fotografii și clipuri</a></li>
+    <li><a href="#seri">Seri tematice</a></li>
+    <li><a href="#galerie">Galeria</a></li>
+    <li><a href="#recenzii">Recenzii și întrebări</a></li>
+    <li><a href="#traduceri">Traduceri</a></li>
+    <li><a href="#cereri">Cereri</a></li>
+    <li><a href="#probleme">Dacă ceva nu merge</a></li>
+  </ul>
+</nav>
+
+<main>
+<section class="ch band" id="acces">
+  <div class="inner">
+    <h2>Ce vezi și ce nu vezi</h2>
+    <p>Intri cu contul primit de la Alin (rolul „Editor”). Lucrezi în grupul <b>Conținut</b>. Setările restaurantului rămân la Alin.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Vezi și modifici</th><th>Vede doar Alin</th></tr></thead>
+      <tbody>
+        <tr><td>Pagina Acasă, Seri tematice, Galerie, Categorii de galerie, Bibliotecă media, Recenzii, Întrebări frecvente, Saloane, Vinuri, Categorii de preparate, Linkuri grup, Pagini legale, Motive de sesizare</td><td>Premii și distincții, Setări restaurant (telefoane, program, emailuri, limbi), Redirecționări, Utilizatori, Restaurante</td></tr>
+        <tr><td>Cereri primite: cursul de pizza și întrebările (schimbi doar „Stare”)</td><td>Cererile pentru cazare, evenimente private și sesizări</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="ch band" id="media">
+  <div class="inner">
+    <h2>O fotografie sau un clip nou</h2>
+    <ol class="steps">
+      <li><b>Bibliotecă media → Creează → „Alege și convertește”.</b> Merge și cu fotografiile HEIC de pe iPhone; panoul le micșorează și le convertește singur.</li>
+      <li>Scrie <b>textul alternativ</b>: ce se vede, într-o propoziție. De exemplu: „Masă pentru doi, cu pizza și vin roșu, pe terasa cu umbrele”. E obligatoriu.</li>
+      <li>Clipurile: cel mult <b>120 de secunde</b>; pe coperta de pe Acasă, cel mult <b>30 de secunde</b>. La „Codec și sunet” trebuie să scrie „cu sunet”, dacă originalul are sunet.</li>
+      <li><b>Copii în fotografie:</b> bifează „Acordul părinților confirmat” doar dacă ai acordul.</li>
+      <li><b>Originalul rămâne la tine.</b> Pe server se păstrează doar variantele optimizate.</li>
+    </ol>
+    <p class="note">Dacă panoul se poartă ciudat după o actualizare a site-ului, închide fila și deschide-o din nou (sau Ctrl+Shift+R). Panoul nu se reîncarcă singur.</p>
+  </div>
+</section>
+
+<section class="ch band" id="seri">
+  <div class="inner">
+    <h2>O seară tematică</h2>
+    <p>Seri tematice → Creează.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Câmp</th><th>Ce pui</th></tr></thead>
+      <tbody>
+        <tr><td>Numele serii</td><td>Scurt, cum apare pe afiș (cel mult 50 de caractere)</td></tr>
+        <tr><td>Data și ora de început</td><td>Ora României; trebuie să fie în viitor</td></tr>
+        <tr><td>Ora de sfârșit</td><td>Opțională; dacă e după miezul nopții, se înțelege a doua zi</td></tr>
+        <tr><td>Tip, Numele invitatului</td><td>DJ, artist, formație</td></tr>
+        <tr><td>Afiș sau fotografie</td><td>Obligatoriu. E și imaginea care apare când cineva distribuie pagina și în Google</td></tr>
+        <tr><td>Descriere scurtă, Intrare</td><td>De exemplu „Intrare liberă”</td></tr>
+        <tr><td>Rezervare cu data serii</td><td>Lasă bifat: „Rezervă masă” deschide ialoc direct pe data serii</td></tr>
+      </tbody>
+    </table></div>
+    <p>Seara dispare singură din agendă după ce trece. După eveniment, adaugă fotografiile la „Fotografii după eveniment”: apar în arhiva „Cum a fost”.</p>
+  </div>
+</section>
+
+<section class="ch band" id="galerie">
+  <div class="inner">
+    <h2>Galeria</h2>
+    <p>Galerie → Creează: alegi fișierul, categoria și, dacă vrei, o legendă. Bifa <b>„Pe Acasă”</b> pune elementul în secțiunea Galerie de pe prima pagină (cel mult 8). Ordinea se schimbă trăgând rândurile în listă.</p>
+  </div>
+</section>
+
+<section class="ch band" id="recenzii">
+  <div class="inner">
+    <h2>Recenzii și întrebări frecvente</h2>
+    <ul class="plain">
+      <li><b>Recenzii:</b> doar recenzii reale de pe Google, cu prenumele și inițiala („Mihai M.”). Alege corect „Limba recenziei”.</li>
+      <li><b>Întrebări frecvente:</b> alegi grupul (Acasă, Evenimente private, Cursuri de pizza …). Pe Acasă apar cel mult 5. Scrie doar răspunsuri confirmate de manager.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch band" id="traduceri">
+  <div class="inner">
+    <h2>Traducerile</h2>
+    <ol class="steps">
+      <li>Scrii întâi <b>în română</b> și salvezi.</li>
+      <li>Apeși <b>„Tradu automat”</b>: se completează engleza, italiana, franceza, germana, chineza și suedeza, cu starea „tradus automat”.</li>
+      <li>Ca să corectezi o limbă: alegi limba conținutului sus, în panou, corectezi și salvezi. Limba devine <b>„Verificat de om”</b> și nu mai e suprascrisă.</li>
+      <li>Când schimbi româna, limbile „tradus automat” se retraduc singure; cele verificate primesc „de reverificat”.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="ch band" id="cereri">
+  <div class="inner">
+    <h2>Cererile primite</h2>
+    <p>Vezi înscrierile la cursurile de pizza și întrebările. Suni sau scrii omului, apoi schimbi <b>„Stare”</b>. Datele trimise de vizitator nu se modifică.</p>
+    <h3 style="margin-top:24px;font-size:22px">„Provizoriu” și eticheta „Exemplu · de înlocuit”</h3>
+    <p style="margin-top:8px;max-width:68ch;color:var(--ink-2)">Un element bifat „Provizoriu” apare pe site cu eticheta „Exemplu · de înlocuit”. Când pui conținutul real (text și fotografie), debifează „Provizoriu”. Înainte de lansare nu trebuie să rămână niciunul.</p>
+    <h3 style="margin-top:24px;font-size:22px">Ce nu faci</h3>
+    <ul class="plain">
+      <li>Nu scrii recenzii, premii sau cifre inventate.</li>
+      <li>Nu încarci fotografii cu copii fără acordul părinților.</li>
+      <li>Nu ștergi ca să ascunzi: debifezi „Activ”.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch band" id="probleme">
+  <div class="inner">
+    <h2>Dacă ceva nu merge</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Ce vezi</th><th>Ce faci</th></tr></thead>
+      <tbody>
+        <tr><td>Schimbarea nu apare pe site</td><td>Reîncarcă pagina site-ului. Dacă după un minut tot nu apare, scrie-i lui Alin</td></tr>
+        <tr><td>Încărcarea e refuzată</td><td>Citește mesajul: de obicei fișierul e prea mare (peste 50 MB după conversie) sau clipul e prea lung</td></tr>
+        <tr><td>Panoul afișează o eroare</td><td>Fă o captură de ecran și trimite-o lui Alin, cu ce încercai să faci</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+</main>
+
+<footer class="credit band">
+  <div class="inner">
+    <p><b>100% AI Solutions &amp; Agentic Work-Flows for SMEs</b></p>
+    <p>Made with ❤️ by BizTech Consulting SRL</p>
+    <p>Alin Labau - AI Project Manager | +40 772 295 031 | <a href="https://www.biztech.ro">www.biztech.ro</a></p>
+  </div>
+</footer>
