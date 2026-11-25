@@ -76,6 +76,14 @@ type SeedFile = {
     version: string
     subjects: Record<string, { active?: boolean; recipients?: string[]; cc?: string[] }>
   }
+  /**
+   * Fotografiile provizorii scoase de pe site, o singură dată pe versiune (jurnalul `purge:<versiune>`):
+   * fișierele din Biblioteca media al căror titlu începe cu `titlePrefix` și al căror credit conține
+   * `creditContains`. Întâi elementele de galerie „Provizoriu” care le folosesc, apoi fișierele (cu
+   * variantele lor din Storage). Celelalte trimiteri devin goale singure (`ON DELETE set null`).
+   * Ce a încărcat Administratorul (alt titlu sau fără creditul acesta) nu se atinge.
+   */
+  purgeMedia?: { version: string; titlePrefix: string; creditContains: string }
   swaps?: {
     /** Setări, Pagina Acasă sau o colecție (atunci cu `match`, de exemplu întrebarea unei FAQ). */
     collection: CollectionSlug
@@ -567,6 +575,39 @@ export async function seedStarterContent({
           log[`settingsFill:${paths.sort().join(',')}`] = now
         }
       }
+    }
+
+    // D-66: fotografiile demo (Wikimedia) scoase de pe site, la cererea lui Alin. Rulează după tot
+    // restul, ca într-o bază nouă să nu rămână nimic din ele.
+    if (seed.purgeMedia && !log[`purge:${seed.purgeMedia.version}`]) {
+      const { titlePrefix, creditContains } = seed.purgeMedia
+      const { docs: demo } = await payload.find({
+        collection: 'media',
+        where: {
+          and: [
+            { tenant: { equals: tenant.id } },
+            { title: { like: titlePrefix } },
+            { credit: { contains: creditContains } },
+          ],
+        },
+        limit: 100,
+        depth: 0,
+        pagination: false,
+        req,
+      })
+      const ids = demo.filter((m) => String(m.title ?? '').startsWith(titlePrefix)).map((m) => m.id)
+      if (ids.length) {
+        const gallery = await payload.delete({
+          collection: 'gallery',
+          where: { and: [{ tenant: { equals: tenant.id } }, { placeholder: { equals: true } }, { file: { in: ids } }] },
+          req,
+          context: ctx,
+        })
+        const removed = await payload.delete({ collection: 'media', where: { id: { in: ids } }, req, context: ctx, overrideAccess: true })
+        created['purge:gallery'] = gallery.docs.length
+        created['purge:media'] = removed.docs.length
+      }
+      log[`purge:${seed.purgeMedia.version}`] = now
     }
 
     if (Object.keys(log).length === alreadyLogged) {

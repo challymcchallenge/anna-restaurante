@@ -1,4 +1,6 @@
 // @vitest-environment node
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import type { Payload } from 'payload'
 import { getPayload } from 'payload'
 import { beforeAll, describe, expect, it } from 'vitest'
@@ -87,20 +89,14 @@ describe('F3 · pasul 8 · Galerie', () => {
     expect(galleryVisual({ file: photo } as unknown as Gallery)).toEqual({ image: photo, clip: null })
   })
 
-  it('Conținutul de pornire: 5 elemente demo, pe Acasă, cu categoria găsită după nume', async () => {
-    const { docs } = await payload.find({
-      collection: 'gallery',
-      where: { tenant: { equals: tenantId } },
-      sort: '_order',
-      depth: 1,
-      limit: 50,
-    })
-    const demo = docs.filter((d) => d.placeholder)
-    expect(demo.length).toBeGreaterThanOrEqual(5)
-    expect(demo.every((d) => d.onHome)).toBe(true)
-    const cats = demo.map((d) => (typeof d.category === 'object' ? d.category?.name : null))
-    expect(new Set(cats)).toEqual(new Set(['Restaurant', 'Preparate', 'Vinuri']))
-    expect(demo.every((d) => typeof d.file === 'object' && d.file?.credit)).toBe(true)
+  it('D-66: elementele demo ale galeriei au fost scoase; galeria goală nu apare', async () => {
+    const { docs } = await payload.find({ collection: 'gallery', where: { tenant: { equals: tenantId } }, depth: 1, limit: 50 })
+    expect(docs.filter((d) => d.placeholder)).toHaveLength(0)
+    expect(docs.some((d) => typeof d.file === 'object' && /Wikimedia/.test(String(d.file?.credit ?? '')))).toBe(false)
+    const gallery = readFileSync(join(process.cwd(), 'src/components/site/Gallery.tsx'), 'utf8')
+    expect(gallery).toContain('if (!site.galleryCount) return null')
+    const header = readFileSync(join(process.cwd(), 'src/components/site/SiteHeader.tsx'), 'utf8')
+    expect(header).toContain("hidden: site.galleryCount ? [] : ['gallery', 'galerie', 'pageGallery']")
   })
 
   it('Creditele foto și meniul', () => {

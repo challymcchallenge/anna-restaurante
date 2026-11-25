@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import React from 'react'
 import { preload } from 'react-dom'
 
@@ -33,6 +34,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function GalleryPage() {
   const site = await sitePage('gallery')
+  // D-66: galeria goală nu are pagină (404) până se încarcă fotografii reale.
+  if (!site.galleryCount) notFound()
   const s = section(site.home, 'gallery')
   const { items, categories } = await getGallery(site.tenant.id, site.locale)
 

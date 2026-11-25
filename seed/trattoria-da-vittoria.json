@@ -3798,5 +3798,11 @@
         ]
       }
     }
+  },
+  "purgeMedia": {
+    "$comment": "D-66: Alin a cerut scoaterea fotografiilor demo și a notei „Fotografii provizorii” din footer (25.11.2026). Șterge cele 6 fotografii Wikimedia puse în F2/F3 și cele 5 elemente de galerie demo.",
+    "version": "2026-11-25-demo",
+    "titlePrefix": "Exemplu · de înlocuit:",
+    "creditContains": "Wikimedia Commons"
   }
 }

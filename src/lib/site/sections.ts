@@ -126,6 +126,8 @@ export type NavI18n = {
   pageLabels?: Record<string, string>
   /** Chineza: semnele sunt mai late decât literele latine în majuscule. */
   wideGlyphs?: boolean
+  /** Ținte fără conținut acum (de exemplu galeria goală, D-66): nu apar în meniu. */
+  hidden?: string[]
 }
 
 /** Meniul automat: secțiunile pornite, cu etichetă în meniu, în ordinea de pe Acasă. */
@@ -159,7 +161,9 @@ function settingsItems(home: HomePage | null, nav: NavEntry[], i18n: NavI18n): C
 }
 
 export function navItems(home: HomePage | null, nav?: NavEntry[] | null, i18n: NavI18n = {}): NavItem[] {
-  const all = nav?.length ? settingsItems(home, nav, i18n) : autoItems(home)
+  const all = (nav?.length ? settingsItems(home, nav, i18n) : autoItems(home)).filter(
+    (c) => !i18n.hidden?.includes(c.id) && !i18n.hidden?.includes(c.href.replace(/^\/#?/, '')),
+  )
   // Lățimile se socotesc doar pe cele care pot sta în antet; cele „Doar în «Mai mult»” stau în panou.
   const items = all.filter((i) => !i.moreOnly)
 

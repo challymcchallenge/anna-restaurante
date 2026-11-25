@@ -59,6 +59,8 @@ export type SiteData = {
   hotelReviews: Review[]
   /** F3 pasul 8: elementele de galerie bifate „Pe Acasă” (cel mult 8), cu fișierul și categoria. */
   galleryHome: Gallery[]
+  /** D-66: câte elemente active are galeria; la 0, galeria nu apare (Acasă, meniu, /galerie). */
+  galleryCount: number
 }
 
 /** Începutul zilei de azi în ora României, ca o seară de azi să rămână în agendă toată ziua. */
@@ -128,6 +130,7 @@ async function load(hostname: string, locale: LocaleCode): Promise<SiteData | nu
     roomTypes,
     hotelReviews,
     galleryHome,
+    galleryCount,
   ] = await Promise.all([
       payload.find({ locale, collection: 'settings', where: own, limit: 1, depth: 1 }),
       // depth 2: clipurile din hero aduc și varianta eficientă și imaginea de început.
@@ -190,6 +193,7 @@ async function load(hostname: string, locale: LocaleCode): Promise<SiteData | nu
       }),
       // depth 2: clipurile aduc și posterul, cu variantele lui.
       payload.find({ locale, collection: 'gallery', where: of([{ onHome: { equals: true } }]), sort: '_order', limit: 8, depth: 2 }),
+      payload.count({ collection: 'gallery', where: of() }),
     ])
 
 
@@ -211,6 +215,7 @@ async function load(hostname: string, locale: LocaleCode): Promise<SiteData | nu
     roomTypes: roomTypes.docs,
     hotelReviews: hotelReviews.docs,
     galleryHome: galleryHome.docs,
+    galleryCount: galleryCount.totalDocs,
   }
 }
 

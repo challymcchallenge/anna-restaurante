@@ -118,6 +118,8 @@ export function GalleryTile({
 
 /** Acasă · Galerie (content-model 4.10): elementele bifate „Pe Acasă”, apoi „Vezi galeria”. */
 export function GallerySection({ site, id }: { site: SiteData; id: string }) {
+  // D-66: fără niciun element activ (fotografiile demo au fost scoase), secțiunea nu apare.
+  if (!site.galleryCount) return null
   const s = section(site.home, 'gallery')
   const titleId = `${id}-titlu`
   // Doar elementele care au imagine (un clip fără poster nu are ce arăta în mozaic).

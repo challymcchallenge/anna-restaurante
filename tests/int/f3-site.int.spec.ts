@@ -82,40 +82,27 @@ describe('F3 · site public', () => {
     expect(price(37.5)).toBe('37,50 lei')
   })
 
-  it('Conținutul de pornire: fotografiile provizorii intră doar în câmpuri goale, o singură dată', async () => {
+  it('D-66: fotografiile demo (Wikimedia) au fost scoase și nu revin la următorul build', async () => {
     await seedStarterContent({ payload })
-    const { docs } = await payload.find({
-      collection: 'home-page',
-      where: { tenant: { equals: tenantId } },
-      limit: 1,
-      depth: 1,
+    const demo = await payload.find({
+      collection: 'media',
+      where: { and: [{ tenant: { equals: tenantId } }, { credit: { contains: 'Wikimedia Commons' } }] },
+      depth: 0,
+      limit: 50,
     })
+    expect(demo.docs).toHaveLength(0)
+    const { docs } = await payload.find({ collection: 'home-page', where: { tenant: { equals: tenantId } }, limit: 1, depth: 1 })
     const hero: any = docs[0]?.hero
-    expect(hero?.posterDesktop?.title).toMatch(/^Exemplu · de înlocuit/)
-    expect(hero?.posterDesktop?.credit).toMatch(/CC BY 2\.0/)
+    expect(hero?.posterDesktop ?? null).toBeNull()
     // Textele din același grup rămân neatinse.
     expect(hero?.subtitle).toBeTruthy()
-
     const pizza = await payload.find({
       collection: 'dish-categories',
       where: { and: [{ tenant: { equals: tenantId } }, { name: { equals: 'Pizza' } }] },
       limit: 1,
       depth: 0,
     })
-    expect(pizza.docs[0]?.photo).toBeTruthy()
-
-    // Golit intenționat din panou: nu se mai completează la următorul build.
-    await payload.update({ collection: 'dish-categories', id: pizza.docs[0].id, data: { photo: null } as any })
-    await seedStarterContent({ payload })
-    const again = await payload.findByID({ collection: 'dish-categories', id: pizza.docs[0].id, depth: 0 })
-    expect(again.photo ?? null).toBeNull()
-
-    // Starea de dinainte, ca testul să se poată rula din nou pe aceeași bază.
-    await payload.update({
-      collection: 'dish-categories',
-      id: pizza.docs[0].id,
-      data: { photo: pizza.docs[0].photo } as any,
-    })
+    expect(pizza.docs[0]?.photo ?? null).toBeNull()
   })
 
   it('Creditele foto: fiecare o dată, doar pentru imaginile din secțiunile pornite', () => {

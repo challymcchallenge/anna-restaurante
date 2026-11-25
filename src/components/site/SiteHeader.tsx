@@ -61,6 +61,7 @@ export function SiteHeader({ site }: { site: SiteData }) {
     sectionLabels: UI.sectionLabels,
     pageLabels: UI.pageLabels,
     wideGlyphs: site.locale === 'zh',
+    hidden: site.galleryCount ? [] : ['gallery', 'galerie', 'pageGallery'],
   }).map((i) => ({ ...i, href: lp(i.href) }))
   const hasMoreLg = items.some((i) => i.tier > 1)
   const hasMoreXl = items.some((i) => i.tier > 2)
