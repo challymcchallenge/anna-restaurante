@@ -18,7 +18,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat după D-72, la sfârșitul sesiu
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/stoic-johnson-oxvj0z` |
 | Deciziile | `docs/DECISIONS.md` (ultima: D-76) |
-| Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G12-1, G12-2) |
+| Întrebări deschise | `docs/OPEN-QUESTIONS.md` (G12 și G13 rezolvate) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_083644_d71_slideshow_clip_acasa` |
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
@@ -45,10 +45,8 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 1. **PDF-ul listei de vinuri:** Biblioteca media → Creează → „Ce încarci?” → „Document PDF” → „Alege și convertește” → Salvează; apoi Pagina Acasă → Vinuri → „Lista de vinuri în PDF” → Salvează (D-69).
 2. **Clipul cursului de pizza (D-73):** cel de pe site n-are pistă audio. Închide și redeschide fila panoului (codul nou), reîncarcă originalul din Biblioteca media, verifică „Codec și sunet” = „cu sunet”, apoi alege clipul la Pagina Acasă → Cursuri de pizza → „Clip principal” (sau scoate-l pe cel vechi din galerie). Spune din ce browser încarci.
-3. **G12-2, coperta:** clip 16:9 la „Clip desktop” sau înapoi la „Slideshow”.
-4. **G12-1, slideshow pe telefon:** ce telefon și ce browser; dacă vrea schimbarea propusă (cadre fără estompare și cu „Reducere mișcare”).
-5. **Verificarea englezei** (F4-7), **textul juristului** pentru paginile legale (cookies e „Provizoriu”) și **fotografiile reale** pentru galerie, categorii, saloane și camere.
-6. La lansare: **fișierul oficial Wine Spectator**, cu nivelul și anul corecte (D-20, D-68).
+3. **Verificarea englezei** (F4-7), **textul juristului** pentru paginile legale (cookies e „Provizoriu”) și **fotografiile reale** pentru categoriile din Bucătărie, saloane și camere (galeria e gata, D-75; le poți alege din Biblioteca media).
+4. La lansare: **fișierul oficial Wine Spectator**, cu nivelul și anul corecte (D-20, D-68).
 
 ## Ce urmează, pe faze
 
