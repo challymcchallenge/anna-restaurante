@@ -1,4 +1,6 @@
-import type { Access, CollectionConfig, FieldAccess } from 'payload'
+import type { Access, CollectionConfig, Field, FieldAccess } from 'payload'
+
+import { normalizeOldPath } from '@/lib/redirect-path'
 
 import { adminAreaAccess, adminOnly, hiddenForEditors, isAdmin } from '../access/roles'
 import { contentFlags, media, select, text, url } from '../fields'
@@ -93,17 +95,27 @@ export const Redirects: CollectionConfig = {
   },
   access: adminAreaAccess(),
   fields: [
-    text({
-      name: 'from',
-      label: 'De la',
-      required: true,
-      nt: true,
-      description: 'Adresa veche, relativă. Exemplu: /valori-nutritionale',
-      validate: ((value: unknown) =>
-        typeof value === 'string' && /^\/[^\s]*$/.test(value)
-          ? true
-          : 'Adresa trebuie să înceapă cu „/”, fără spații.') as any,
-    }),
+    {
+      ...text({
+        name: 'from',
+        label: 'De la',
+        required: true,
+        nt: true,
+        description:
+          'Adresa veche, relativă. Exemplu: /valori-nutritionale sau /gallery/locatie (se salvează cu litere mici, fără „/” la final).',
+        validate: ((value: unknown) =>
+          typeof value === 'string' && /^\/[^\s]*$/.test(value)
+            ? true
+            : 'Adresa trebuie să înceapă cu „/”, fără spații.') as any,
+      }),
+      // F5 (G7-2): aceeași formă la salvare și la căutare.
+      hooks: {
+        beforeValidate: [
+          ({ value }: { value?: unknown }) =>
+            typeof value === 'string' && value.startsWith('/') ? normalizeOldPath(value) : value,
+        ],
+      },
+    } as Field,
     text({
       name: 'to',
       label: 'Către',

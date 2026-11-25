@@ -88,9 +88,10 @@ describe('F5 · date structurate', () => {
 
   it('premiul intră doar cu nivel și an completate și bifa „În datele pentru Google” (D-20, D-68)', () => {
     const awards = [
-      { name: 'Wine Spectator Restaurant Award', level: 'GRAND AWARD', year: 2027 },
-      { name: 'Fără an', level: 'X', year: null },
+      { name: 'Wine Spectator Restaurant Award', level: 'GRAND AWARD', year: 2027, structuredData: true },
+      { name: 'Fără an', level: 'X', year: null, structuredData: true },
       { name: 'Debifat', level: 'Y', year: 2026, structuredData: false },
+      { name: 'Nebifat (implicit)', level: 'Z', year: 2026 },
     ] as never
     expect(activeAwards(awards)).toEqual(['Wine Spectator Restaurant Award, GRAND AWARD 2027'])
     expect(restaurantLd(fakeSite({ awards }), 'https://x.ro').award).toEqual(['Wine Spectator Restaurant Award, GRAND AWARD 2027'])

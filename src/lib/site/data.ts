@@ -4,6 +4,7 @@ import { cache } from 'react'
 
 import { WINE_TYPES } from '@/collections/Wines'
 import { DEFAULT_LOCALE, isLocale, type LocaleCode } from '@/lib/locales'
+import { normalizeOldPath } from '@/lib/redirect-path'
 import config from '@/payload.config'
 import type {
   Award,
@@ -300,16 +301,29 @@ async function loadSlug(
     depth: 0,
   })
   if (docs[0]) return { page: docs[0], redirect: null }
-  const { docs: redirects } = await payload.find({
-    locale,
+  return { page: null, redirect: await loadRedirect(tenantId, `/${slug}`) }
+}
+
+/**
+ * Redirecționarea activă din panou pentru o adresă veche (R5, G7-2), cu sau fără „/” la final:
+ * `/valori-nutritionale`, dar și adrese cu mai multe segmente de pe site-ul vechi (`/gallery/locatie/`).
+ */
+async function loadRedirect(tenantId: number, path: string): Promise<{ to: string; permanent: boolean } | null> {
+  const payload = await getPayload({ config: await config })
+  const from = normalizeOldPath(path)
+  const { docs } = await payload.find({
     collection: 'redirects',
-    where: { and: [{ tenant: { equals: tenantId } }, active, { from: { in: [`/${slug}`, `/${slug}/`] } }] },
+    where: { and: [{ tenant: { equals: tenantId } }, active, { from: { in: [from, `${from}/`] } }] },
     limit: 1,
     depth: 0,
   })
-  const r = redirects[0]
-  return { page: null, redirect: r ? { to: r.to, permanent: r.permanent !== false } : null }
+  const r = docs[0]
+  return r ? { to: r.to, permanent: r.permanent !== false } : null
 }
+
+const redirectCached = unstable_cache(loadRedirect, ['redirect', BUILD], { tags: [SITE_TAG], revalidate: 600 })
+
+export const getRedirect = cache((tenantId: number, path: string) => redirectCached(tenantId, path))
 
 const slugCached = unstable_cache(loadSlug, ['slug-page', BUILD], { tags: [SITE_TAG], revalidate: 600 })
 

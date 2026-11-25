@@ -67,7 +67,14 @@ type SeedFile = {
    * elementele bifate „Provizoriu” (exemplele de pornire), apoi adaugă rândurile care nu există deja
    * (potrivire pe câmpurile din `matchOn`). Ce a adăugat Administratorul nu se atinge.
    */
-  lists?: { collection: CollectionSlug; version: string; matchOn: string[]; items: Record<string, unknown>[] }[]
+  lists?: {
+    collection: CollectionSlug
+    version: string
+    matchOn: string[]
+    items: Record<string, unknown>[]
+    /** F5: colecții fără „Provizoriu” (de exemplu Redirecționări): nu se șterge nimic, doar se adaugă. */
+    keepPlaceholders?: boolean
+  }[]
   /**
    * Valori schimbate o singură dată și doar dacă au rămas cele puse de conținutul de pornire
    * (jurnalul `swap:<colecție>:<câmp>`): ce a schimbat Administratorul din panou nu se atinge.
@@ -350,12 +357,14 @@ export async function seedStarterContent({
     for (const list of seed.lists ?? []) {
       const key = `list:${list.collection}:${list.version}`
       if (log[key]) continue
-      const { docs: examples } = await payload.delete({
-        collection: list.collection,
-        where: { and: [{ tenant: { equals: tenant.id } }, { placeholder: { equals: true } }] },
-        req,
-        context: ctx,
-      })
+      const { docs: examples } = list.keepPlaceholders
+        ? { docs: [] }
+        : await payload.delete({
+            collection: list.collection,
+            where: { and: [{ tenant: { equals: tenant.id } }, { placeholder: { equals: true } }] },
+            req,
+            context: ctx,
+          })
       const { docs: existing } = await payload.find({
         collection: list.collection,
         where: { tenant: { equals: tenant.id } },

@@ -3056,9 +3056,86 @@
           "placeholder": false
         }
       ]
+    },
+    {
+      "collection": "redirects",
+      "version": "f5-davittoria-2026-11-25",
+      "matchOn": [
+        "from"
+      ],
+      "keepPlaceholders": true,
+      "items": [
+        {
+          "from": "/trattoria",
+          "to": "/",
+          "permanent": true
+        },
+        {
+          "from": "/test",
+          "to": "/",
+          "permanent": true
+        },
+        {
+          "from": "/1hm",
+          "to": "/",
+          "permanent": true
+        },
+        {
+          "from": "/la-multi-ani",
+          "to": "/",
+          "permanent": true
+        },
+        {
+          "from": "/meniu",
+          "to": "https://www.meniudigital.ro/trattoriadavittoria",
+          "permanent": true
+        },
+        {
+          "from": "/meniu-3d-teste",
+          "to": "https://www.meniudigital.ro/trattoriadavittoria",
+          "permanent": true
+        },
+        {
+          "from": "/3d-flip-book/meniu",
+          "to": "https://www.meniudigital.ro/trattoriadavittoria",
+          "permanent": true
+        },
+        {
+          "from": "/3d-flip-book/valori-nutritionale",
+          "to": "https://www.meniudigital.ro/trattoriadavittoria",
+          "permanent": true
+        },
+        {
+          "from": "/3d-flip-book/test",
+          "to": "/",
+          "permanent": true
+        },
+        {
+          "from": "/gallery/evenimente",
+          "to": "/galerie",
+          "permanent": true
+        },
+        {
+          "from": "/gallery/locatie",
+          "to": "/galerie",
+          "permanent": true
+        },
+        {
+          "from": "/gallery/catalog-vinuri",
+          "to": "/catalog-vinuri",
+          "permanent": true
+        }
+      ]
     }
   ],
   "swaps": [
+    {
+      "collection": "awards",
+      "match": { "name": "Wine Spectator Restaurant Award" },
+      "field": "structuredData",
+      "from": false,
+      "to": true
+    },
     {
       "collection": "settings",
       "field": "servesCuisine",

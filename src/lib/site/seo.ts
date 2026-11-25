@@ -124,7 +124,7 @@ function postalAddress(s: Setting | null) {
 /** Premiile cu nivel și an completate (aceeași regulă ca insigna, D-68) și bifate „În datele pentru Google”. */
 export function activeAwards(awards: Award[]): string[] {
   return awards
-    .filter((a) => a.level && a.year && a.structuredData !== false)
+    .filter((a) => a.level && a.year && a.structuredData === true)
     .map((a) => `${a.name}, ${a.level} ${a.year}`)
 }
 

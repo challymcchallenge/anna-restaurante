@@ -1528,7 +1528,7 @@ export interface Redirect {
   id: number;
   tenant?: (number | null) | Tenant;
   /**
-   * Adresa veche, relativă. Exemplu: /valori-nutritionale Nu se traduce: aceeași valoare în toate limbile.
+   * Adresa veche, relativă. Exemplu: /valori-nutritionale sau /gallery/locatie (se salvează cu litere mici, fără „/” la final). Nu se traduce: aceeași valoare în toate limbile.
    */
   from: string;
   /**
