@@ -85,17 +85,19 @@ Ordinea de construcție; după fiecare pas, build + capturi pe telefon și deskt
 
 **Stare (24.11.2026):** pașii 1–6 gata (GO pentru 4–6 primit, D-44; widgetul de cazare după referință, D-45). Lista de vinuri reală, `/catalog-vinuri` (o parte din pasul 10) și logo-ul Grupului ANNA: D-46, raport `docs/2026_11_24_Trattoria_F3_Vinuri.md`. Răspunsurile G4: D-47. Pasul 7 (Cazare · Hotel ANNA) gata: D-48, raport `docs/2026_11_24_Trattoria_F3_Pasul7.md`. Pasul 8 (Galeria, Acasă și `/galerie`) gata: D-49, raport `docs/2026_11_24_Trattoria_F3_Pasul8.md`. Pasul 9 (Contact, sesizări, Acasă · Contact, G4-1 ialoc cu data) gata: D-50, raport `docs/2026_11_24_Trattoria_F3_Pasul9.md`. Răspunsurile G6 (destinatari, hartă schiță, recepția hotelului): D-51. Telefoanele cu prefix internațional: D-52. Pasul 10 (paginile legale cu ciornele pentru jurist, redirecționările din panou) gata: D-53, raport `docs/2026_11_24_Trattoria_F3_Pasul10.md`. Pasul 11 (emailurile) e mutat în F5 (D-36). Pasul 12 (textele finale) gata: D-54. **GATE 3 prezentat** (raport `docs/2026_11_24_Trattoria_GATE3.md`): aștept „GO” pentru F4. **După GATE 3 (24–25.11.2026):** 9 cereri ale lui Alin, D-55…D-63, toate pe producție; predarea către sesiunea următoare: `docs/2026_11_25_Trattoria_Stare_Proiect.md`. Rapoarte: `docs/2026_11_24_Trattoria_F3_Pasii1-3.md`, `docs/2026_11_24_Trattoria_F3_Pasii4-6.md`. Pașii 1–3: Raport: `docs/2026_11_24_Trattoria_F3_Pasii1-3.md`. Pe producție: antet, navigare, footer, bara de jos, hero cu cererea de cazare, Bucătăria, Vinuri, Ce spun oaspeții.
 
-## Faza 4 — Efecte, sunet, traduceri
+## Faza 4 — Traduceri și FAQ
+
+Efectele sezoniere, animațiile 3D, sunetul de fundal și comutatorul de temă sunt mutate după lansare (D-33, R2). Propunerile implicite F4-1 … F4-8 sunt aprobate (D-64).
 
 **Se face**
-1. Efecte sezoniere configurabile din panou (iarnă, toamnă, primăvară, vară), pe mobil și desktop.
-2. Animații 3D pe desktop (după ce Alin definește ce se animă).
-3. Sunet de fundal la buton; administrare sunete din panou.
-4. Comutator de temă deschisă / închisă.
-5. Traduceri (ADR-007): rulare automată pe cele 6 limbi, stare pe limbă, selector de limbă, `hreflang`. Alin verifică engleza; restul rămân „tradus automat” până sunt verificate.
-6. Secțiuni FAQ acolo unde sunt relevante.
+1. Adresele pe limbi: româna la rădăcină, celelalte cu prefix (`/en`, `/it` …), adresele rămân în română (F4-1); `lang` pe pagină; unde lipsește traducerea, apare româna.
+2. Textele fixe ale interfeței (butoane, formulare, mesaje) în cele 7 limbi.
+3. Traduceri (ADR-007, D-34): Claude Haiku 5.5, termenii care nu se traduc protejați cu marcaje `{n}`, stare pe limbă (netradus, tradus automat, verificat de om, de reverificat), „Tradu automat” pe document și „Tradu tot site-ul”, retraducere automată când se schimbă româna (F4-2).
+4. Selectorul de limbă, `hreflang`, canonical; ialoc în ro/en; fontul sistemului pentru chineză (F4-5).
+5. Secțiuni FAQ acolo unde sunt relevante (fără răspunsuri inventate).
+6. Prima rulare pe producție; Alin verifică engleza; restul rămân „tradus automat” până sunt verificate.
 
-**GATE 4:** Lighthouse mobil cu efectele pornite: performanță ≥ 85, accesibilitate ≥ 95, cifre reale. `prefers-reduced-motion` probat.
+**GATE 4:** Lighthouse mobil pe `/`, `/en` și `/zh`: performanță ≥ 85, accesibilitate ≥ 95, cifre reale. `prefers-reduced-motion` probat.
 
 ## Faza 5 — Verificare și lansare
 

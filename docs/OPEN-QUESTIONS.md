@@ -6,9 +6,9 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 |---|---|---|---|
 | ~~1~~ | ~~Materialele de brand~~ — **rezolvat în F2**: logo-uri primite, culori și fonturi decise (D-41, D-42), pictogramă desenată (D-43) | — | — |
 | 2 | Clipul video pentru hero și setul de fotografii pe categorii (amânat la cererea lui Alin; machetele folosesc fotografii provizorii) | F3 | Alin |
-| 3 | Ce anume se animă în 3D pe desktop | F4 | Alin |
-| 4 | Lista de recenzii (restaurant și hotel) | F3 | Alin |
-| 5 | Lista reală de vinuri și câmpurile fiecărui vin. Colecția există, cu 5 exemple provizorii; câmpurile se pot ajusta după lista reală | **F3** (mutat din F1: nu blochează panoul) | Alin |
+| 3 | Ce anume se animă în 3D pe desktop | După lansare (D-33) | Alin |
+| ~~4~~ | ~~Lista de recenzii~~ — **rezolvat: D-55, D-56** | — | — |
+| ~~5~~ | ~~Lista reală de vinuri~~ — **rezolvat: D-46, D-48** | — | — |
 | 6 | Cursurile de pizza: frecvență, vârste, locuri, preț, cum se confirmă înscrierea | F3 | Alin |
 | 7 | Termenul de răspuns promis pe fiecare subiect (cazare, salon, curs, sesizare) | F3 | Alin |
 | 8 | Acordul părinților pentru fotografiile cu copii | F3 | Alin |
@@ -34,7 +34,7 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 | # | Întrebare | Până la | Cine răspunde |
 |---|---|---|---|
 | ~~14~~ | ~~Cererile primite: cine le vede~~ — **rezolvat: D-37** | — | — |
-| 15 | Destinatarii de email pentru Eveniment privat, Curs de pizza, Întrebare, Sesizare și adresa de copie (se pun în panou) | F3 | Alin |
+| ~~15~~ | ~~Destinatarii de email~~ — **rezolvat: D-51** | — | — |
 | ~~16~~ | ~~Cele 9 motive de sesizare~~ — **rezolvat: D-39**, preluate de pe davittoria.ro | — | — |
 | ~~17~~ | ~~Adresele site-urilor grupului~~ — **rezolvat: D-40**, 11 linkuri, inclusiv Fabrica Mezeluri GorjANNA | — | — |
 | 18 | Poziția pe hartă a restaurantului (latitudine, longitudine) | F3 | Alin |
