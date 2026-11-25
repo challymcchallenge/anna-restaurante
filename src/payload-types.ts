@@ -208,6 +208,10 @@ export interface HomePage {
           id?: string | null;
         }[]
       | null;
+    /**
+     * Cât stă fiecare cadru pe ecran înainte de următorul (D-71: 3 s; înainte 6 s).
+     */
+    slideSeconds?: number | null;
     subtitle?: string | null;
     /**
      * Deschide fereastra ialoc.
@@ -372,6 +376,10 @@ export interface HomePage {
      * D-67: apare pe pagina cursului în locul fotografiei, în formatul lui (de exemplu 9:16), cu sunet la apăsare. Gol = primul clip din galerie.
      */
     video?: (number | null) | Media;
+    /**
+     * D-71: clipul principal (sau primul clip din galerie) apare pe Acasă lângă fotografie. Pornește fără sunet doar când ajunge pe ecran; sunetul și pauza au butoane.
+     */
+    videoOnHome?: boolean | null;
     age?: string | null;
     duration?: string | null;
     price?: string | null;
@@ -1730,6 +1738,7 @@ export interface HomePageSelect<T extends boolean = true> {
               mobile?: T;
               id?: T;
             };
+        slideSeconds?: T;
         subtitle?: T;
         bookLabel?: T;
         menuButtonLabel?: T;
@@ -1822,6 +1831,7 @@ export interface HomePageSelect<T extends boolean = true> {
         fullText?: T;
         gallery?: T;
         video?: T;
+        videoOnHome?: T;
         age?: T;
         duration?: T;
         price?: T;

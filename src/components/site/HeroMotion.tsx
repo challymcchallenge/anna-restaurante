@@ -7,7 +7,7 @@ import { clientUI } from '@/lib/site/i18n/client'
 type Source = { src: string; type: string }
 
 /** Mișcarea e permisă doar fără `prefers-reduced-motion` și fără economie de date. Pe server: nu. */
-function useMotionAllowed() {
+export function useMotionAllowed() {
   return useSyncExternalStore(
     (onChange) => {
       const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -23,7 +23,7 @@ function useMotionAllowed() {
 
 /**
  * Mișcarea copertei (D-02, D-29, ADR-005): clipul fără sunet, în buclă, peste poster; sau, în modul
- * slideshow, cadrele care se schimbă la 6 s. Posterul rămâne imaginea principală a primului ecran:
+ * slideshow, cadrele care se schimbă la intervalul din panou (D-71: implicit 3 s; înainte 6 s). Posterul rămâne imaginea principală a primului ecran:
  * clipul pornește doar după încărcarea paginii, ca să nu întârzie afișarea.
  *
  * - `prefers-reduced-motion` sau economia de date: rămâne posterul, fără clip și fără derulare.
@@ -34,10 +34,13 @@ export function HeroMotion({
   video,
   frames,
   locale,
+  interval = 3000,
 }: {
   video: { desktop: Source[]; mobile: Source[] } | null
   frames: number
   locale: string
+  /** Cât stă un cadru pe ecran, în ms (Pagina Acasă → Hero → „Durata unui cadru”, D-71). */
+  interval?: number
 }) {
   const UI = clientUI(locale)
   const ref = useRef<HTMLVideoElement>(null)
@@ -80,7 +83,7 @@ export function HeroMotion({
     return () => window.removeEventListener('load', arm)
   }, [video, frames, allowed])
 
-  // Slideshow: cadrul activ se schimbă la 6 s (clasa `is-active`, tranziția e în CSS).
+  // Slideshow: cadrul activ se schimbă la `interval` (clasa `is-active`, tranziția e în CSS).
   useEffect(() => {
     if (video || frames < 2 || !allowed || paused) return
     const els = Array.from(document.querySelectorAll<HTMLElement>('.hero-frame'))
@@ -89,9 +92,9 @@ export function HeroMotion({
       els[i]?.classList.remove('is-active')
       i = (i + 1) % els.length
       els[i]?.classList.add('is-active')
-    }, 6000)
+    }, interval)
     return () => window.clearInterval(t)
-  }, [video, frames, allowed, paused])
+  }, [video, frames, allowed, paused, interval])
 
   useEffect(() => {
     const v = ref.current

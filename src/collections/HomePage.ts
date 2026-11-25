@@ -100,6 +100,18 @@ export const HomePage: CollectionConfig = {
                 },
               ],
             },
+            {
+              name: 'slideSeconds',
+              label: 'Durata unui cadru (secunde)',
+              type: 'number',
+              min: 2,
+              max: 15,
+              defaultValue: 3,
+              admin: {
+                condition: (_, s) => s?.mediaMode === 'slideshow',
+                description: 'Cât stă fiecare cadru pe ecran înainte de următorul (D-71: 3 s; înainte 6 s).',
+              },
+            },
             text({ name: 'subtitle', label: 'Subtitlu', max: 90, localized: true }),
             {
               type: 'row',
@@ -194,6 +206,16 @@ export const HomePage: CollectionConfig = {
             description:
               'D-67: apare pe pagina cursului în locul fotografiei, în formatul lui (de exemplu 9:16), cu sunet la apăsare. Gol = primul clip din galerie.',
           }),
+          {
+            name: 'videoOnHome',
+            label: 'Arată clipul și pe Acasă, lângă fotografie',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+              description:
+                'D-71: clipul principal (sau primul clip din galerie) apare pe Acasă lângă fotografie. Pornește fără sunet doar când ajunge pe ecran; sunetul și pauza au butoane.',
+            },
+          },
           {
             type: 'row',
             fields: [

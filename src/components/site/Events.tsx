@@ -5,12 +5,13 @@ import React from 'react'
 import type { Event, Faq, Media, Salon } from '@/payload-types'
 import type { SiteData } from '@/lib/site/data'
 import { eventParts, eventWhen, slugify, telHref } from '@/lib/site/format'
-import { asMedia } from '@/lib/site/media'
+import { asMedia, videoSources } from '@/lib/site/media'
 import { requestHref } from '@/lib/site/requests'
 import { section } from '@/lib/site/sections'
-import { lp, UI } from '@/lib/site/i18n/server'
+import { lp, renderLocale, UI } from '@/lib/site/i18n/server'
 
 import { BookButton, ExampleTag } from './Bits'
+import { ClipCard } from './ClipCard'
 import { Icon } from './Icons'
 import { Picture } from './Picture'
 
@@ -361,16 +362,42 @@ export function CourseDetails({ pizza }: { pizza: ReturnType<typeof section<'piz
   )
 }
 
-/** Acasă · Cursuri de pizza (content-model 4.8). */
+/** Acasă · Cursuri de pizza (content-model 4.8). Cu clip (D-71): fotografia și clipul, în colaj. */
 export function Pizza({ site, id }: { site: SiteData; id: string }) {
   const s = section(site.home, 'pizza')
   const photo = asMedia(s?.photo)
   const titleId = `${id}-titlu`
+  // Același clip ca pe pagina cursului (D-67): „Clip principal” sau primul clip din galerie.
+  const gallery = (s?.gallery ?? []).map((m) => asMedia(m)).filter((m): m is Media => Boolean(m))
+  const clip = s?.videoOnHome === false ? null : (asMedia(s?.video) ?? gallery.find((m) => m.kind === 'clip') ?? null)
+  const poster = clip ? asMedia(clip.poster) : null
+  const cw = Number(clip?.width || poster?.width) || 9
+  const ch = Number(clip?.height || poster?.height) || 16
+  const posterUrl = poster ? ((poster.sizes as Record<string, { url?: string | null }> | undefined)?.webp640?.url ?? poster.url ?? undefined) : undefined
   return (
     <section className="pizza paper-section paper-section--warm" id={id} aria-labelledby={titleId}>
       <div className="wrap pizza-grid">
-        <div className="pizza-visual">
-          {photo ? <Picture media={photo} sizes="(min-width: 1024px) 50vw, 100vw" /> : <Chapter>{s?.menuLabel || s?.title}</Chapter>}
+        <div
+          className={`pizza-media${clip ? ' pizza-media--clip' : ''}`}
+          style={clip ? ({ '--clip-r': (ch / cw).toFixed(4) } as React.CSSProperties) : undefined}
+        >
+          <div className="pizza-visual">
+            {photo ? (
+              <Picture media={photo} sizes={clip ? '(min-width: 1024px) 40vw, 72vw' : '(min-width: 1024px) 50vw, 100vw'} />
+            ) : (
+              <Chapter>{s?.menuLabel || s?.title}</Chapter>
+            )}
+          </div>
+          {clip && (
+            <ClipCard
+              className="pizza-clip"
+              sources={videoSources(clip)}
+              poster={posterUrl}
+              ratio={cw / ch}
+              label={clip.alt || s?.title || ''}
+              locale={renderLocale()}
+            />
+          )}
         </div>
         <div className="pizza-text">
           <h2 id={titleId}>{s?.title}</h2>

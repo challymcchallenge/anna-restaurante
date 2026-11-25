@@ -106,7 +106,7 @@ export function Hero({ site, id }: { site: SiteData; id: string }) {
             className={`hero-frame${i === 0 ? ' is-active' : ''}`}
           />
         ))}
-        {(video || frames.length > 1) && <HeroMotion locale={renderLocale()} video={video} frames={frames.length} />}
+        {(video || frames.length > 1) && <HeroMotion locale={renderLocale()} video={video} frames={frames.length} interval={Math.min(15, Math.max(2, Number(hero?.slideSeconds) || 3)) * 1000} />}
       </div>
       <div className="cover-frame" aria-hidden="true" />
       {hero?.placeholder && <ExampleTag floating className="hero-tag" />}
