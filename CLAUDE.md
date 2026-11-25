@@ -4,6 +4,7 @@ Site premium pentru restaurantul Trattoria da Vittoria (Târgu Jiu, Grupul ANNA)
 
 ## Citește întâi
 
+0. `docs/2026_11_25_Trattoria_Stare_Proiect.md` — unde am rămas și ce urmează (actualizat la fiecare predare între sesiuni).
 1. `docs/DECISIONS.md` — deciziile lui Alin. Sursa de adevăr.
 2. `docs/ADR.md` — arhitectura aprobată.
 3. `docs/PLAN.md` — fazele și porțile.
@@ -32,7 +33,7 @@ Dacă două fișiere se contrazic: `DECISIONS.md` câștigă, apoi `ADR.md`, apo
 - Conținutul provizoriu poartă eticheta vizibilă „Exemplu · de înlocuit”. Nu scrie recenzii, premii sau cifre inventate fără această etichetă.
 - Texte de marketing: emoție, cârlig clar, un singur îndemn principal pe secțiune. Fără clișee.
 - Respectă `prefers-reduced-motion`. Text alternativ la fiecare imagine.
-- Footer public: credit discret pe 2 rânduri (ADR-013).
+- Footer public: creditul BizTech centrat, cu logo-ul (cât logo-ul restaurantului) și 3 rânduri (D-63, înlocuiește varianta de 2 rânduri din ADR-013).
 
 ## Securitate
 
