@@ -11,7 +11,8 @@ import { translationAvailable } from '../src/lib/translate/engine'
 import { glossary, incompleteTranslations, translateDocument } from '../src/lib/translate/service'
 import config from '../src/payload.config'
 
-const VERSION = '2026-11-25'
+// „b”: a doua trecere, după ce salvările pe limbi au devenit secvențiale (25.11.2026).
+const VERSION = '2026-11-25b'
 const BUDGET_MS = 240_000
 
 try {
@@ -41,7 +42,10 @@ try {
       }
       const r = await translateDocument(payload, { collection: t.collection, id: t.id, locales: t.locales, terms })
       cost += r.costUsd
-      failed += r.outcomes.filter((o) => !o.ok).length
+      for (const o of r.outcomes.filter((x) => !x.ok)) {
+        failed += 1
+        payload.logger.warn(`[traduceri] ${t.collection}#${t.id} ${o.locale}: ${o.error}`)
+      }
     }
     const left = await incompleteTranslations(payload, tenant.id, locales)
     payload.logger.info(

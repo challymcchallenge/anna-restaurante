@@ -178,7 +178,8 @@ async function translateParts(
   if (long.length) {
     const sh = shorten ? (part: Item[]) => shorten(part, locale, restaurant) : (part: Item[]) => shortenBatch(part, locale)
     await ask(
-      long.map((p) => ({ id: p.key, text: raw.get(p.key) as string, max: p.seg.max })),
+      // Ținta e 85% din limită: modelul numără aproximativ, iar limita câmpului e strictă.
+      long.map((p) => ({ id: p.key, text: raw.get(p.key) as string, max: Math.floor((p.seg.max as number) * 0.85) })),
       20,
       sh,
     )
@@ -261,17 +262,31 @@ export async function translateDocument(
   const terms = args.terms ?? (tenantId ? await glossary(payload, tenantId) : [])
   const doc = prepare(payload, collection, ro, terms, 0)
   const usage = { input: 0, output: 0 }
-  const outcomes = await Promise.all(
-    locales.map(async (locale): Promise<TranslateOutcome> => {
+  // Traducerile pe limbi merg în paralel; salvările, pe rând: două salvări simultane ale aceluiași
+  // document (în limbi diferite) se pot suprascrie una pe alta (listele și grupurile se rescriu întregi).
+  const translated = await Promise.all(
+    locales.map(async (locale) => {
       try {
         const texts = await translateParts([doc], locale, terms[0] ?? 'the restaurant', args.translate ?? translateBatch, usage, args.translate ?? null)
-        const skipped = await writeDoc(payload, doc, locale, texts, args.req)
-        return { locale, ok: true, skipped }
+        return { locale, texts }
       } catch (e) {
-        return { locale, ok: false, error: e instanceof Error ? e.message : String(e) }
+        return { locale, error: e instanceof Error ? e.message : String(e) }
       }
     }),
   )
+  const outcomes: TranslateOutcome[] = []
+  for (const t of translated) {
+    if ('error' in t) {
+      outcomes.push({ locale: t.locale, ok: false, error: t.error })
+      continue
+    }
+    try {
+      const skipped = await writeDoc(payload, doc, t.locale, t.texts as Map<string, string>, args.req)
+      outcomes.push({ locale: t.locale, ok: true, skipped })
+    } catch (e) {
+      outcomes.push({ locale: t.locale, ok: false, error: e instanceof Error ? e.message : String(e) })
+    }
+  }
   return { outcomes, inputTokens: usage.input, outputTokens: usage.output, costUsd: costUsd(usage.input, usage.output) }
 }
 

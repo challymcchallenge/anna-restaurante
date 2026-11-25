@@ -48,4 +48,23 @@ describe('F4 · scurtarea și completarea traducerilor', () => {
     const after = await incompleteTranslations(payload, tenantId, ['sv'])
     expect(after.find((f) => f.collection === 'faqs' && f.id === faq.id)).toBeUndefined()
   })
+
+  it('mai multe limbi pe același document: fiecare limbă își păstrează traducerea (salvări pe rând)', async () => {
+    const home = (await payload.find({ collection: 'home-page', where: { tenant: { equals: tenantId } }, limit: 1, depth: 0 })).docs[0]
+    const tag = async (items: { id: string; text: string }[], locale: string) => ({
+      texts: new Map(items.map((i) => [i.id, `${locale}:${i.text}`.slice(0, 40)])),
+      inputTokens: 0,
+      outputTokens: 0,
+    })
+    const r = await translateDocument(payload, { collection: 'home-page', id: home.id, locales: ['it', 'fr', 'de'], terms: [], translate: tag as never })
+    expect(r.outcomes.every((o) => o.ok)).toBe(true)
+    for (const l of ['it', 'fr', 'de'] as const) {
+      const d = (await payload.findByID({ collection: 'home-page', id: home.id, locale: l, fallbackLocale: false, depth: 0 })) as unknown as {
+        kitchen: { title: string }
+        privateEvents: { eventTypes?: { label: string }[] }
+      }
+      expect(d.kitchen.title.startsWith(`${l}:`), l).toBe(true)
+      for (const t of d.privateEvents.eventTypes ?? []) expect(t.label.startsWith(`${l}:`), `${l} eventTypes`).toBe(true)
+    }
+  })
 })
