@@ -136,3 +136,43 @@
 .translation-panel .btn {
   margin: 0;
 }
+
+// Miniaturile din panou, de 3 ori mai mari (cerut de Alin, 25.11.2026): la 40 px (25 px în galerii)
+// fotografiile nu se recunoșteau la alegere. Sursa e varianta WebP de 640 px (`adminThumbnail`), deci
+// rămân clare. Format 4:3, ca fotografiile. Stilurile Payload stau în `@layer payload-default`, deci
+// regulile de aici (fără strat) au întâietate.
+:root {
+  --media-thumb-w: 160px;
+  --media-thumb-h: 120px;
+  --media-thumb-sm-w: 100px;
+  --media-thumb-sm-h: 75px;
+}
+
+// Lista Bibliotecii media și fereastra „Alege din bibliotecă” (coloana cu fișierul).
+.file__thumbnail {
+  width: var(--media-thumb-w);
+  max-width: var(--media-thumb-w);
+  height: var(--media-thumb-h);
+  max-height: none;
+}
+
+// Fotografia aleasă într-un câmp cu o singură fotografie.
+.upload-field-card--size-medium .thumbnail {
+  width: var(--media-thumb-w);
+  height: var(--media-thumb-h);
+  max-height: none;
+}
+
+// Câmpurile cu mai multe fotografii (galerii, cadrele copertei), unde rândurile se pot trage.
+.upload-field-card--size-small .thumbnail,
+.upload--has-many__dragItem .thumbnail {
+  width: var(--media-thumb-sm-w);
+  height: var(--media-thumb-sm-h);
+  max-height: none;
+}
+
+.file__thumbnail,
+.upload-field-card .thumbnail {
+  border-radius: var(--style-radius-s);
+  background: var(--theme-elevation-100);
+}

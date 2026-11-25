@@ -22,7 +22,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/dazzling-rubin-m26pdx` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-80) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-81) |
 | Întrebări deschise | `docs/OPEN-QUESTIONS.md` (niciuna nouă; rămân cele vechi, pentru Alin) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_134155_f5_requests_retention` |
@@ -101,6 +101,7 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 - **Redirecționări:** `src/app/(frontend)/[lang]/[slug]/[...rest]/page.tsx` (adrese cu mai multe segmente), `getRedirect()` în `data.ts`, `normalizeOldPath()` în `src/lib/redirect-path.ts`. Seed: `lists` acceptă `keepPlaceholders` (colecții fără „Provizoriu”).
 - **Cereri vechi:** `src/lib/requests/cleanup.ts`, `GET /api/cleanup-requests`, `vercel.json` → `crons` (02:23 UTC). `CRON_SECRET` pus de Alin pe 25.11.2026 (Production, Sensitive): fără cod sau cu cod greșit, 401. Raportul fiecărei rulări apare în jurnalul Vercel („[cereri] ștergerea automată”).
 - **Statistici (D-79):** `src/components/site/CookieConsent.tsx` (bannerul, `useSyncExternalStore` peste `localStorage`, gtag.js doar după „Accept”), `src/lib/site/consent.ts` (funcțiile pure: alegerea 12 luni, ID-ul, domeniile permise, ștergerea `_ga`), „Setări cookie-uri” în `SiteFooter.tsx` (`[data-cookie-settings]`). Proba locală: domeniul simulat `davittoria.test` (Chromium cu `--host-resolver-rules`, restaurantul local servit și pe această gazdă), cererile către Google interceptate cu `context.route`. Atenție: `pkill -f "next start"` nu oprește `next-server`; oprește-l separat, altfel portul rămâne la build-ul vechi.
+- **Miniaturile din panou (D-81):** în `src/app/(payload)/custom.scss`, variabilele `--media-thumb-*`. Pentru o probă locală în panou: Postgres local pornit (`pg_ctlcluster 16 main start`; după o repornire a containerului se oprește), un administrator de probă creat cu un script `payload run`, fotografii puse în `media/` și în bază cu `payload.db.create` (ocolește conversia), toate șterse după.
 - **Salturile la secțiuni:** `HeaderController.tsx` → `goToSection()` + `.cv-all` în `styles.css` (secțiunile au `content-visibility: auto`).
 - **Probele de pe producție** (scripturi în scratchpad, de refăcut la nevoie): navigarea prin linkuri (clic JS pe fiecare `a[href]` intern, compară titlul și h1 cu încărcarea directă), salturile din meniul de pe telefon (iPhone 13, atingeri), contrastul copertei cadru cu cadru (slideshow oprit din butonul de pauză, text ascuns, percentila 95), lățimile 360–1920 cu depășiri, ținte, `alt`, focus și cookies.
 - **Mediul local nou:** containerul nu avea `.env.local` și nici bază: rol și bază Postgres `anna` create local, `.env.local` cu valori locale (fără nimic de pe producție), apoi `pnpm payload migrate` și `pnpm payload run scripts/local-tenant.ts`.
