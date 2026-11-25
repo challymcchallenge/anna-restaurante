@@ -8,6 +8,8 @@ const pl = (n: number, one: string, many: string) => (n < 2 ? `${n} ${one}` : `$
 /** Fixed UI strings, French (F4, D-64). Same shape as ro.ts. */
 export const fr: Dict = {
   ...frClient,
+  /** Ghilimelele citatelor (recenzii), după limbă. */
+  quotes: ['«\u00A0', '\u00A0»'] as [string, string],
   ogLocale: 'fr_FR',
   languageNames: {
     ro: 'roumain',

@@ -24,7 +24,11 @@ export function ReviewCard({ review: v, lead = false }: { review: Review; lead?:
     <li className={`review${lead ? ' review--lead' : ''}`}>
       <figure>
         <blockquote lang={lang}>
-          <p>„{v.text}”</p>
+          <p>
+            {UI.quotes[0]}
+            {v.text}
+            {UI.quotes[1]}
+          </p>
         </blockquote>
         {translated && <p className="review-translated">{UI.translatedFrom(UI.languageNames[original] ?? original)}</p>}
         <figcaption>

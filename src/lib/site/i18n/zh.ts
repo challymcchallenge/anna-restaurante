@@ -5,6 +5,8 @@ import { zhClient } from './zh.client'
 /** Fixed UI strings, Simplified Chinese (F4, D-64). Same shape as ro.ts. No plural: measure words (间, 位, 名, 款, 张). */
 export const zh: Dict = {
   ...zhClient,
+  /** Ghilimelele citatelor (recenzii), după limbă. */
+  quotes: ['“', '”'] as [string, string],
   ogLocale: 'zh_CN',
   languageNames: {
     ro: '罗马尼亚语',

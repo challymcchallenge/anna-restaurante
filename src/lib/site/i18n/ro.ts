@@ -14,6 +14,8 @@ export type { ClientDict }
 
 export const ro = {
   ...roClient,
+  /** Ghilimelele citatelor (recenzii), după limbă. */
+  quotes: ['„', '”'] as [string, string],
   /** Open Graph (`og:locale`). */
   ogLocale: 'ro_RO',
   /** Numele limbilor, în limba paginii (mențiunea „tradus din …”). */

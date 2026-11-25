@@ -8,6 +8,8 @@ const pl = (n: number, one: string, many: string) => (n === 1 ? `1 ${one}` : `${
 /** Fixed UI strings, Italian (F4, D-64). Same shape as ro.ts. */
 export const it: Dict = {
   ...itClient,
+  /** Ghilimelele citatelor (recenzii), după limbă. */
+  quotes: ['«', '»'] as [string, string],
   ogLocale: 'it_IT',
   languageNames: {
     ro: 'rumeno',
