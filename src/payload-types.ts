@@ -1462,6 +1462,10 @@ export interface Setting {
       responseTime?: string | null;
     };
   };
+  /**
+   * Cererile primite mai vechi de atâtea luni se șterg automat, o dată pe zi, noaptea. Gol = nu se șterg. Termenul îl stabilește juristul; scrie-l și în pagina Confidențialitate.
+   */
+  requestsRetentionMonths?: number | null;
   i18nStatus?: ('auto' | 'verified') | null;
   i18nSource?: string | null;
   updatedAt: string;
@@ -2433,6 +2437,7 @@ export interface SettingsSelect<T extends boolean = true> {
               responseTime?: T;
             };
       };
+  requestsRetentionMonths?: T;
   i18nStatus?: T;
   i18nSource?: T;
   updatedAt?: T;

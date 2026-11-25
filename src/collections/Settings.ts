@@ -526,6 +526,18 @@ export const Settings: CollectionConfig = {
               label: false,
               fields: REQUEST_SUBJECTS.map((s) => requestSubject(s.value, s.label)),
             },
+            // F5 (G7-3, D-59): termenul de păstrare, ales cu juristul; ștergerea rulează o dată pe zi.
+            {
+              name: 'requestsRetentionMonths',
+              label: 'Păstrează cererile (luni)',
+              type: 'number',
+              min: 1,
+              max: 120,
+              admin: {
+                description:
+                  'Cererile primite mai vechi de atâtea luni se șterg automat, o dată pe zi, noaptea. Gol = nu se șterg. Termenul îl stabilește juristul; scrie-l și în pagina Confidențialitate.',
+              },
+            },
           ],
         },
       ],

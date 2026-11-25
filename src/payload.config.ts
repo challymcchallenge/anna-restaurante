@@ -36,6 +36,7 @@ import { withSiteRevalidation } from './lib/site/revalidate'
 import { withTranslation } from './lib/translate/collection'
 import { translateEndpoint } from './lib/translate/endpoint'
 import { mediaImportEndpoint } from './lib/media-import/endpoint'
+import { cleanupRequestsEndpoint } from './lib/requests/cleanup'
 import type { Config } from './payload-types'
 
 const filename = fileURLToPath(import.meta.url)
@@ -109,7 +110,7 @@ export default buildConfig({
   editor: lexicalEditor(),
   // Traducerile din panou (F4, D-64): /api/translate.
   // D-75: importul temporar al fotografiilor (activ doar cât există MEDIA_IMPORT_TOKEN în Vercel).
-  endpoints: [translateEndpoint, mediaImportEndpoint],
+  endpoints: [translateEndpoint, mediaImportEndpoint, cleanupRequestsEndpoint],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

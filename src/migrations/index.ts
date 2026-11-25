@@ -15,6 +15,7 @@ import * as migration_20261125_065151_d67_categorii_clip from './20261125_065151
 import * as migration_20261125_075251_d69_pdf_vinuri from './20261125_075251_d69_pdf_vinuri';
 import * as migration_20261125_083644_d71_slideshow_clip_acasa from './20261125_083644_d71_slideshow_clip_acasa';
 import * as migration_20261125_133048_f5_seo_settings from './20261125_133048_f5_seo_settings';
+import * as migration_20261125_134155_f5_requests_retention from './20261125_134155_f5_requests_retention';
 
 export const migrations = [
   {
@@ -100,6 +101,11 @@ export const migrations = [
   {
     up: migration_20261125_133048_f5_seo_settings.up,
     down: migration_20261125_133048_f5_seo_settings.down,
-    name: '20261125_133048_f5_seo_settings'
+    name: '20261125_133048_f5_seo_settings',
+  },
+  {
+    up: migration_20261125_134155_f5_requests_retention.up,
+    down: migration_20261125_134155_f5_requests_retention.down,
+    name: '20261125_134155_f5_requests_retention'
   },
 ];
