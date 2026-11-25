@@ -11,8 +11,8 @@ import { translationAvailable } from '../src/lib/translate/engine'
 import { glossary, incompleteTranslations, translateDocument } from '../src/lib/translate/service'
 import config from '../src/payload.config'
 
-// „b”: a doua trecere, după ce salvările pe limbi au devenit secvențiale (25.11.2026).
-const VERSION = '2026-11-25b'
+// „c”: a treia trecere: rezultatele întoarse netraduse se reiau; a doua scurtare (25.11.2026).
+const VERSION = '2026-11-25c'
 const BUDGET_MS = 240_000
 
 try {

@@ -159,27 +159,36 @@ async function translateParts(
     }
   }
   type Part = Prepared['parts'][number]
-  /** De ce nu e bună o bucată: lipsește, termeni sau marcaje pierdute, prea lungă; null = bună. */
-  const problem = (p: Part): 'missing' | 'terms' | 'long' | null => {
+  /** Un text cu cel puțin două cuvinte (fără marcaje) care ar trebui să arate altfel în altă limbă. */
+  const wordy = (p: Part) => /\p{L}{2,}[^\p{L}]+\p{L}{2,}/u.test(stripMarkup(p.text).replace(/\{\d+\}/g, ''))
+  /** De ce nu e bună o bucată: lipsește, termeni pierduți, prea lungă, întoarsă netradusă; null = bună. */
+  const problem = (p: Part): 'missing' | 'terms' | 'long' | 'same' | null => {
     const t = raw.get(p.key)
     if (!t) return 'missing'
     const restored = restoreTerms(t, p.used)
     if (!restored.ok) return 'terms'
     if (p.seg.max && restored.text.length > p.seg.max) return 'long'
+    if (t.trim() === p.text.trim() && wordy(p)) return 'same'
     return null
+  }
+  /** Pentru starea finală: un text identic (de exemplu un nume propriu de două cuvinte) se acceptă. */
+  const usable = (p: Part) => {
+    const why = problem(p)
+    return why === null || why === 'same'
   }
   const tr = (part: Item[]) => translate(part, locale, restaurant)
   await ask(all.map((p) => ({ id: p.key, text: p.text, max: p.seg.max })), 40, tr)
   // A doua încercare, pe bucăți mici: ce lipsește sau a ieșit cu termeni pierduți se traduce din nou.
-  const again = all.filter((p) => problem(p) === 'missing' || problem(p) === 'terms')
+  const again = all.filter((p) => problem(p) === 'missing' || problem(p) === 'terms' || problem(p) === 'same')
   if (again.length) await ask(again.map((p) => ({ id: p.key, text: p.text, max: p.seg.max })), 8, tr)
   // A treia, pentru textele prea lungi: modelul își scurtează propria traducere la limita exactă.
-  const long = all.filter((p) => problem(p) === 'long')
-  if (long.length) {
+  // Scurtarea, de două ori: la 85% din limită, apoi la 70% (modelul numără aproximativ).
+  for (const ratio of [0.85, 0.7]) {
+    const long = all.filter((p) => problem(p) === 'long')
+    if (!long.length) break
     const sh = shorten ? (part: Item[]) => shorten(part, locale, restaurant) : (part: Item[]) => shortenBatch(part, locale)
     await ask(
-      // Ținta e 85% din limită: modelul numără aproximativ, iar limita câmpului e strictă.
-      long.map((p) => ({ id: p.key, text: raw.get(p.key) as string, max: Math.floor((p.seg.max as number) * 0.85) })),
+      long.map((p) => ({ id: p.key, text: raw.get(p.key) as string, max: Math.floor((p.seg.max as number) * ratio) })),
       20,
       sh,
     )
@@ -188,8 +197,8 @@ async function translateParts(
   const left: string[] = []
   for (const p of all) {
     const why = problem(p)
-    if (why === null) out.set(p.key, restoreTerms(raw.get(p.key) as string, p.used).text)
-    else left.push(`${p.seg.path.join('.')} (${why})`)
+    if (usable(p)) out.set(p.key, restoreTerms(raw.get(p.key) as string, p.used).text)
+    if (why !== null) left.push(`${p.seg.path.join('.')} (${why})`)
   }
   if (left.length) {
     // În jurnalele Vercel: ce a rămas în română și de ce.

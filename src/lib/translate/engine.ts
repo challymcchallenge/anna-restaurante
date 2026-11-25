@@ -67,7 +67,7 @@ function systemPrompt(target: LocaleCode, restaurant: string): string {
     '- Tags like <1>…</1>, <2>…</2> mark bold, italic or linked words, and <br/> is a line break. Keep every tag exactly once, around the translated words that correspond to the original, and do not add new tags.',
     '- Italian dish names (pizza, risotto, tiramisù…), wine names, producers and regions stay as they are.',
     '- If an item has "max", the translation must have at most that many characters; shorten wording if needed, never cut words.',
-    '- Translate every item, even short labels. Do not add explanations, quotes or notes.',
+    '- Translate every item, even short labels and headings. Every item is Romanian: never return it unchanged, except a proper name or brand that stays the same in every language. Do not add explanations, quotes or notes.',
     'Reply with JSON only: {"items":[{"id":"…","text":"…"}]} with the same ids, in the same order.',
   ]
     .filter(Boolean)
