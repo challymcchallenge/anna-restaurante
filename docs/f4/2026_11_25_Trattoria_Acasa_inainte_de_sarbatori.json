@@ -1,0 +1,48 @@
+{
+ "onHomeFiles": [
+  86,
+  98,
+  103,
+  120,
+  140,
+  159,
+  170,
+  174
+ ],
+ "heroSlides": [
+  {
+   "desktop": 18,
+   "mobile": 18
+  },
+  {
+   "desktop": 19,
+   "mobile": 19
+  },
+  {
+   "desktop": 20,
+   "mobile": 20
+  },
+  {
+   "desktop": 21,
+   "mobile": 21
+  },
+  {
+   "desktop": 22,
+   "mobile": 22
+  }
+ ],
+ "christmasOrderFiles": [
+  153,
+  154,
+  155,
+  156,
+  157,
+  158,
+  15,
+  159,
+  160,
+  161,
+  162
+ ],
+ "mediaMode": "slideshow"
+}

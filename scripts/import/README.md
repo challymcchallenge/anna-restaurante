@@ -16,3 +16,5 @@ nu stau în repo; se refac în câteva minute:
    HEIC prin heic-to; fotografii ≤ 2560 px, JPEG q0,9; clipuri H.264 + AV1 + imagine de început, cu sunet (D-73).
 4. **Raportul** pentru „GO”: https://claude.ai/artifact/HqvuobpDTZ7g17h5BRzVk6 (privat).
 5. **Încărcarea:** după răspunsul la G13-5 (adresă de import cu token sau fișiere prin seed).
+
+6. **Modificări (D-77)**, prin aceeași adresă și același cod: `{"action":"homeGallery","tenantSlug":"…","fileIds":[…]}` (cel mult 8, în ordinea de pe Acasă), `{"action":"reorderGallery",…,"fileIds":[…]}` (redistribuie cheile de ordine existente ale acelor elemente), `{"action":"heroSlides",…,"slides":[{"desktop":id,"mobile":id}]}` (1–5 cadre). Numerele fișierelor se iau din `/api/media` după titlul intern („Galerie · <folder> · <cod>”).
