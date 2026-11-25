@@ -216,11 +216,26 @@ export type ClipResult = {
   width: number
   height: number
   ms: number
+  /** D-73: sunetul clipului: `none` = originalul n-are sunet; `kept` = păstrat; `lost` = pierdut (motivul în `audioNote`). */
+  audio: 'none' | 'kept' | 'lost'
+  audioNote: string | null
+}
+
+/** Motivele pentru care mediabunny renunță la o pistă, pe înțelesul editorului (D-73). */
+const AUDIO_REASON: Record<string, string> = {
+  undecodable_source_codec: 'browserul acesta nu poate citi sunetul clipului',
+  no_encodable_target_codec: 'browserul acesta nu poate coda sunetul',
+  unknown_source_codec: 'formatul sunetului nu e recunoscut',
+  cannot_copy: 'sunetul nu poate fi copiat în acest format',
 }
 
 export type ClipProgress = { stage: string; progress: number }
 
-/** Clip → MP4 H.264 + variantă eficientă + poster, fără sunet (fundal de hero). */
+/**
+ * Clip → MP4 H.264 + variantă eficientă + poster, **cu sunetul originalului** (D-67, D-73).
+ * Sunetul se copiază ca atare (fără decodare și recodare), deci merge și în browserele care nu au
+ * codor audio; se recodează doar dacă formatul de ieșire nu-l acceptă (de exemplu AAC în WebM).
+ */
 export async function convertClip(file: File, onProgress: (p: ClipProgress) => void): Promise<ClipResult> {
   const t0 = performance.now()
   onProgress({ stage: 'Se încarcă biblioteca de conversie…', progress: 0 })
@@ -235,6 +250,9 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
   }
   const track = await input.getPrimaryVideoTrack()
   if (!track) throw new RejectedFileError('Fișierul nu conține video.')
+  const sourceHasAudio = Boolean(await input.getPrimaryAudioTrack())
+  let audio: ClipResult['audio'] = sourceHasAudio ? 'kept' : 'none'
+  let audioNote: string | null = null
   if (!(await track.canDecode())) {
     throw new RejectedFileError('Browserul acesta nu poate citi clipul. Încearcă din Chrome sau Safari, la zi.')
   }
@@ -288,13 +306,22 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
       input: inp,
       output,
       video: { ...size, codec: job.codec, quality: MB.QUALITY_MEDIUM, forceTranscode: true },
-      // D-67: sunetul se păstrează (copiat ca atare când containerul îl acceptă, altfel recodat).
-      // Pe Acasă clipurile rulează tot fără sunet (muted); pe paginile proprii se aude la apăsare.
-      audio: { quality: MB.QUALITY_MEDIUM },
+      // D-73: fără opțiuni, sunetul se copiază ca atare. Cu `quality` (D-67) trebuia decodat și recodat,
+      // iar unde browserul nu putea, mediabunny renunța la el fără să spună (clipul cursului, 25.11.2026).
+      audio: {},
       showWarnings: false,
     })
     if (!conversion.isValid) {
       throw new Error(`${job.label}: conversie imposibilă pe acest dispozitiv.`)
+    }
+    const lostAudio = sourceHasAudio ? conversion.discardedTracks.find((d) => d.track.type === 'audio') : undefined
+    if (lostAudio && job.codec === 'avc') {
+      audio = 'lost'
+      audioNote = AUDIO_REASON[lostAudio.reason] ?? lostAudio.reason
+    } else if (lostAudio && audio === 'kept') {
+      // Varianta eficientă ar fi mută, deși fișierul principal are sunet: Chrome ar reda varianta, deci o sărim.
+      efficientCodec = null
+      continue
     }
     conversion.onProgress = (p: number) => onProgress({ stage: `Se convertește: ${job.label}…`, progress: offset + p * span })
     await conversion.execute()
@@ -322,6 +349,8 @@ export async function convertClip(file: File, onProgress: (p: ClipProgress) => v
     width: track.displayWidth,
     height: track.displayHeight,
     ms: performance.now() - t0,
+    audio,
+    audioNote,
   }
 }
 

@@ -146,16 +146,24 @@ export const MediaUploadControl: React.FC = () => {
           setField('originalName', file.name)
           setField('originalBytes', file.size)
           setField('durationSeconds', result.durationSeconds)
-          setField('codec', ['H.264', result.efficientCodec?.toUpperCase()].filter(Boolean).join(' + '))
+          // D-73: în panou se vede dacă clipul are sunet, fără să fie ascultat.
+          const sound = result.audio === 'kept' ? 'cu sunet' : result.audio === 'lost' ? 'FĂRĂ SUNET (pierdut la conversie)' : 'fără sunet (originalul n-are)'
+          setField('codec', `${['H.264', result.efficientCodec?.toUpperCase()].filter(Boolean).join(' + ')} · ${sound}`)
           setField('poster', posterId)
           if (efficientId) setField('efficientVariant', efficientId)
           setModified(true)
           setUploadControlFile(result.h264)
           const total = result.h264.size + (result.efficient?.size ?? 0) + result.poster.size
           toast.success(
-            `Clip convertit în ${formatSeconds(result.ms)}: ${formatBytes(file.size)} → ${formatBytes(total)} (H.264${result.efficientCodec ? ` + ${result.efficientCodec.toUpperCase()}` : ''} + imagine de început). Completează textul alternativ și apasă Salvează.`,
+            `Clip convertit în ${formatSeconds(result.ms)}: ${formatBytes(file.size)} → ${formatBytes(total)} (H.264${result.efficientCodec ? ` + ${result.efficientCodec.toUpperCase()}` : ''} + imagine de început, ${result.audio === 'kept' ? 'cu sunet' : 'fără sunet'}). Completează textul alternativ și apasă Salvează.`,
             { duration: 12000 },
           )
+          if (result.audio === 'lost') {
+            toast.warning(
+              `Sunetul nu s-a putut păstra: ${result.audioNote}. Clipul se salvează fără sunet. Pentru sunet, încarcă-l din Chrome sau Edge pe calculator.`,
+              { duration: 20000 },
+            )
+          }
           setState({ status: 'idle' })
           return
         }

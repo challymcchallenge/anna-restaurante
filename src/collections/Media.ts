@@ -280,7 +280,7 @@ export const Media: CollectionConfig = {
         },
         {
           name: 'codec',
-          label: 'Codec',
+          label: 'Codec și sunet',
           type: 'text',
           admin: { readOnly: true, condition: (data) => data?.kind !== 'photo' },
         },

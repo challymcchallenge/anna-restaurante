@@ -226,7 +226,8 @@ describe('D-67 · cererile de după GATE 4', () => {
   it('clipurile își păstrează sunetul; clipul cursului stă în locul fotografiei, fără muted', () => {
     const convert = read('src/components/admin/media/convert.ts')
     expect(convert).not.toContain('discard: true')
-    expect(convert).toContain('audio: { quality: MB.QUALITY_MEDIUM }')
+    // D-73: sunetul se copiază ca atare (`audio: {}`), nu se mai recodează cu `quality`.
+    expect(convert).toContain('audio: {},')
     const page = read('src/app/(frontend)/[lang]/cursuri-pizza-copii/page.tsx')
     expect(page).toContain("allGallery.find((m) => m.kind === 'clip')")
     expect(page).not.toMatch(/<video[^>]*\bmuted\b/)
