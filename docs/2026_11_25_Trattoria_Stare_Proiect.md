@@ -56,6 +56,18 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 - **F5** (2 sesiuni, GO primit): audit de finisare, date structurate, sitemap pe limbi, redirecționările de pe adresele vechi (G7-2), ștergerea automată a cererilor vechi, ghidul pentru editor, checklist de lansare, re-măsurarea `/zh`; **la final** emailurile prin Resend și domeniul (D-36, D-67). În auditul F5 intră și o probă de **navigare prin linkuri pe producție** (nu doar încărcări directe), pe toate paginile și limbile.
 - **La final:** playbook-ul proiectului în vault-ul Obsidian, după standardul de denumire.
 
+## Sesiunea următoare: importul în masă al fotografiilor (cerut de Alin, 25.11.2026)
+
+Alin are multe fotografii într-un dosar local și încărcarea una câte una durează prea mult. Propunerea (de aprobat, întrebările G13 din `docs/OPEN-QUESTIONS.md`):
+
+1. **Transferul** (G13-1): dosar Google Drive citit prin conector, sau dosarul local prin Remote Control, sau .zip.
+2. **Duplicatele:** identice (SHA-256) și aproape identice (amprentă perceptuală, de exemplu dHash), inclusiv față de fotografiile deja în Biblioteca media de pe producție. Se păstrează varianta cu rezoluția cea mai mare.
+3. **Calitatea:** rezoluția față de formatul locului (HERO, CARD-L 1800 × 1200, GAL 1600 px pe latura lungă), fotografii neclare sau întunecate, semnalate.
+4. **Clasificarea:** Claude se uită la fiecare fotografie (planșe cu miniaturi) și propune locul: cadre de copertă, galerie (pe categoriile din panou), categoriile din Bucătărie, saloane, camere, cursul de pizza, seri; plus textul alternativ în română (de verificat) și semnalarea copiilor din imagine (G13-4).
+5. **Raportul pentru aprobare:** o pagină HTML cu miniaturile grupate pe locul propus, duplicatele și semnalările. Nimic nu se încarcă înainte de „GO”.
+6. **Conversia:** cu același cod ca butonul „Alege și convertește” (`convert.ts`, rulat în Chromium; HEIC prin heic-to, clipurile cu sunet, D-73), deci rezultatul e identic cu încărcarea din panou.
+7. **Încărcarea** (G13-5): prin punctul de import temporar cu token, apoi legarea în câmpuri (galerie, categorii …); traducerea textelor alternative merge la build. Tokenul se șterge după import.
+
 ## Note tehnice pentru sesiunea nouă
 
 - **Local:** Postgres 16 în container. Dacă serverul nu pornește cu `ECONNREFUSED 5432`: `pg_ctlcluster 16 main start`. Apoi `pnpm dev` (port 3000). Valorile din `.env.local` nu se citesc și nu se afișează; pentru date se folosesc scripturi temporare `pnpm payload run scripts/tmp-x.ts`, șterse după. Local, fișierele media stau pe disc (`media/`), nu în Supabase.
@@ -78,7 +90,7 @@ Vercel: proiectul `prj_fUZFnSKhbgQ253uFVnheAfPFswnR`, echipa `team_lDyFQlTkuMOZx
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-74), `docs/OPEN-QUESTIONS.md` (G12), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Pornește F5 / răspunsuri G12 / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-74), `docs/OPEN-QUESTIONS.md` (G12, G13), `docs/PLAN.md` (Faza 5) și `docs/2026_11_25_Trattoria_GATE4.md`. GO F5 primit (D-67). [Importul fotografiilor: răspunsurile G13 / Pornește F5 / răspunsuri G12 / altă cerere]
 
 ---
 

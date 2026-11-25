@@ -131,3 +131,13 @@ Niciuna nu blochează faza 0. Coloana „Până la” arată faza înaintea căr
 |---|---|---|---|
 | G12-1 | **Slideshow-ul pe telefoanele cu „Reducere mișcare” / „Eliminare animații” / economie de date.** Acum (D-60) rămâne pe prima fotografie, intenționat. Propunere: cadrele se schimbă și acolo, **fără estompare** (trecere instantanee), cu butonul de pauză. Schimbă D-60, deci cere „DA”. Alin n-a spus încă ce telefon și ce setări are; nu am reprodus problema pe telefoane emulate | înainte de lansare | Alin |
 | G12-2 | **Coperta Acasă:** din panou (25.11.2026, 11:14) e pe **Video**, cu `Evenimente_Trattoria_1.mp4` (9:16, 10 s) doar la „Clip telefon”. Pe desktop se folosește tot clipul vertical, mărit și neclar. Variante: un clip 16:9 de cel mult 30 s la „Clip desktop”, sau înapoi la „Slideshow” (cele 5 fotografii sunt salvate) | înainte de lansare | Alin |
+
+## Importul în masă al fotografiilor (cerut de Alin, 25.11.2026) — propunerea în `docs/2026_11_25_Trattoria_Stare_Proiect.md`, „Sesiunea următoare”
+
+| # | Întrebare | Când trebuie | Cine răspunde |
+|---|---|---|---|
+| G13-1 | **Cum ajung fotografiile la Claude:** (a) un dosar Google Drive, citit prin conectorul Drive (recomandat acum); (b) dosarul local prin Remote Control (dosarele de pe S360ProBook2 nu sunt oferite sesiunilor din cloud: actualizează aplicația Claude și alege un dosar care nu e ascuns); (c) o arhivă .zip atașată în conversație, dacă e mică | înainte de import | Alin |
+| G13-2 | **Cât de multe și ce fel:** număr aproximativ, mărimea totală, formate (JPG, HEIC de pe iPhone, PNG, clipuri) | înainte de import | Alin |
+| G13-3 | **Ce pot înlocui:** doar golurile (galerie, categorii, saloane, camere, seri) sau și ce e acum pe site (cadrele copertei, fotografia cursului) | înainte de import | Alin |
+| G13-4 | **Copii în fotografii:** panoul cere „Acordul părinților confirmat” (Q-25). Confirmi acordul pentru fotografiile cu copii (cursul de pizza) sau le lăsăm deoparte? | înainte de import | Alin |
+| G13-5 | **Încărcarea pe producție:** un punct de import temporar (`/api/media-import`), protejat cu un token pe care îl pui tu în Vercel (`MEDIA_IMPORT_TOKEN`) și în formularul securizat de credențiale; îl ștergem după import. Fără parole în conversație. DA / altă variantă? | înainte de import | Alin |
