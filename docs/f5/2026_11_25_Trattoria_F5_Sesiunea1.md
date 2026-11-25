@@ -10,7 +10,7 @@ Trattoria da Vittoria · 25.11.2026 · Decizia: D-78 · Planul: `docs/2026_11_25
 - **Lighthouse mobil pe producție (mediane):** Acasă 89, `/en` 89, `/zh` 80 (abaterea acceptată în G11-3); accesibilitate 100, CLS 0.
 - **Teste: 155/155** (33 de fișiere). `tsc` și lint: 0 erori.
 - **G14 rezolvate (D-79):** 12 luni pentru cereri; **Google Analytics cu banner de cookies** (`GT-NCLXCCBJ`, doar după „Accept”, doar pe domeniu). Acasă cu bannerul: mediana 86 (ținta 85 atinsă). **Deschis: G15-1** (textele legale Riviera Events pe Trattoria).
-- **De la Alin:** G15-1 și `CRON_SECRET` în Vercel.
+- **De la Alin:** G15-1 rezolvat (D-80); `CRON_SECRET` pus (verificat 401, 25.11.2026).
 
 ## Ce s-a făcut
 
@@ -20,7 +20,7 @@ Trattoria da Vittoria · 25.11.2026 · Decizia: D-78 · Planul: `docs/2026_11_25
 | 2 | **Open Graph pe fiecare pagină** | Înainte: toate paginile aveau titlul de pe Acasă și nicio imagine. Acum: titlul, adresa și imaginea paginii (de exemplu `/galerie` → prima fotografie din galerie, `/petreceri` → afișul serii) |
 | 3 | **Sitemap pe limbi** | `/sitemap.xml`: 77 de adrese (11 pagini × 7 limbi), cu `hreflang` și `x-default`. robots.txt îl anunță abia după lansare |
 | 4 | **Adresele vechi** (G7-2) | Harta davittoria.ro: 16 adrese. 3 rămân pagini, 13 se redirecționează (12 noi). Probate pe adresa Vercel: toate ajung la ținta corectă |
-| 5 | **Ștergerea cererilor vechi** (G7-3) | Termenul în panou; rulare zilnică prin Vercel Cron. Inactivă până pui `CRON_SECRET` (adresa răspunde 404) și termenul |
+| 5 | **Ștergerea cererilor vechi** (G7-3) | Termenul în panou; rulare zilnică prin Vercel Cron. Pornită: termenul de 12 luni pus, `CRON_SECRET` pus de Alin (adresa răspunde 401 fără cod) |
 | 6 | **Auditul de finisare** (Impeccable) | `docs/f5/2026_11_25_Trattoria_Audit_F5.md`: 3 reparații, 0 depășiri la 360–1920 px, focus vizibil, 0 cookies |
 | 7 | **Ghidul editorului** | `docs/2026_11_25_Trattoria_Ghid_Editor.md` |
 | 8 | **Checklist-ul de lansare** | `docs/2026_11_25_Trattoria_Checklist_Lansare.md` (A: conținut, B: tehnic, C: ziua lansării) |

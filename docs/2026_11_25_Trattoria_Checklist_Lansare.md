@@ -19,7 +19,7 @@
 
 | # | Ce | Cine | Stare |
 |---|---|---|---|
-| B1 | **`CRON_SECRET`** în Vercel (Production, Sensitive, cel puțin 16 caractere): pornește ștergerea zilnică a cererilor vechi. Fără el, adresa răspunde 404 și nu se șterge nimic | Alin | deschis |
+| B1 | **`CRON_SECRET`** în Vercel (Production, Sensitive): pornește ștergerea zilnică a cererilor mai vechi de 12 luni | Alin | **gata** (25.11.2026; verificat: adresa răspunde 401 fără cod, înainte 404) |
 | B2 | **Curățenia importului (D-75):** `MEDIA_IMPORT_TOKEN` șters din Vercel (adresa răspunde apoi 404), secretul „Cod import galerie Trattoria” șters din mediul ANNA-Restaurante, folderul Drive pe „Restricted” | Alin | amânat la cererea lui Alin |
 | B3 | **Resend:** domeniul de trimitere verificat în DNS, `RESEND_API_KEY`, `EMAIL_FROM`; emailurile pentru toate formularele (ADR-009); fotografia bonului la sesizări ca atașament (G6-3) | Alin (DNS, cheie) + Claude (cod) | sesiunea 2 |
 | B4 | **Un email real primit** la `rezervari@hotelanna.ro` și la fiecare destinatar (D-51); planul gratuit Resend: 100 de emailuri pe zi, fiecare copie se numără | Claude + Alin | sesiunea 2 |
