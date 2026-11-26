@@ -1,0 +1,1572 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manual Trattoria da Vittoria</title>
+<meta name="description" content="Manual de utilizare pentru site-ul și panoul de administrare Trattoria da Vittoria (Grupul ANNA, Târgu Jiu): fluxuri cu capturi, hărți, funcționalități, instrucțiuni pas cu pas, întrebări frecvente și pașii de dinaintea lansării. De BizTech Consulting SRL.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+
+
+/* Layout: un document lung de citit, o coloană de 1120px; capturile stau în perechi desktop + telefon; prima și ultima pagină sunt
+   ale BizTech; hărțile sunt SVG desenat de mână (identic în HTML și în PDF). Culorile vin din tokenii site-ului K9 Friends. */
+:root {
+  --bg: #FCF9F5;
+  --surface: #FFFFFF;
+  --band: #F6EEE4;
+  --ink: #2A211C;
+  --ink-2: #4A3F38;
+  --muted: #6B5D53;
+  --line: #E7DCCD;
+  --line-strong: #8C7B6E;
+  --brand: #A3412A;
+  --brand-ink: #8E3622;
+  --brand-soft: #F6E6DE;
+  --on-brand: #FFFFFF;
+  --green: #2F5D50;
+  --green-soft: #E4EDE9;
+  --ochre: #8A5A00;
+  --ochre-soft: #F7EBD3;
+  --blue: #1F5F8B;
+  --blue-soft: #E3EEF6;
+  --plum: #7A3E6E;
+  --plum-soft: #F3E6F0;
+  --neutral: #6B5D53;
+  --neutral-soft: #EFE9E2;
+  --night: #2A211C;
+  --night-2: #3A2F28;
+  --on-night: #F3E9DC;
+  --on-night-muted: #D2C4B6;
+  --focus: #1D4ED8;
+  --shadow: rgb(42 33 28 / 0.10);
+  --f-head: 'Fraunces', 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --f-body: 'Nunito Sans', 'Nunito Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --f-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+  --t-display: clamp(2.2rem, 1.5rem + 3vw, 3.8rem);
+  --t-h2: clamp(1.6rem, 1.25rem + 1.4vw, 2.4rem);
+  --t-h3: clamp(1.2rem, 1.08rem + 0.5vw, 1.5rem);
+  --t-body: 1.0625rem;
+  --t-small: 0.9rem;
+  --t-cap: 0.8125rem;
+  --r: 14px;
+  --r-lg: 22px;
+  --max: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17120F; --surface: #211A16; --band: #2A221D; --ink: #F3ECE4; --ink-2: #DDD2C7; --muted: #BBAEA2;
+    --line: #3B312B; --line-strong: #85766A; --brand: #E58B70; --brand-ink: #F0A78F; --brand-soft: #3A231B; --on-brand: #1A120E;
+    --green: #8CC7B3; --green-soft: #1C2D27; --ochre: #E3B661; --ochre-soft: #33281A; --blue: #8EC2E6; --blue-soft: #182A37;
+    --plum: #DBA6CF; --plum-soft: #33222F; --neutral: #C3B5A8; --neutral-soft: #2B241F; --night: #0F0B09; --night-2: #1E1714;
+    --on-night: #EDE3D8; --on-night-muted: #C4B6A9; --focus: #8AB4FF; --shadow: rgb(0 0 0 / 0.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17120F; --surface: #211A16; --band: #2A221D; --ink: #F3ECE4; --ink-2: #DDD2C7; --muted: #BBAEA2;
+  --line: #3B312B; --line-strong: #85766A; --brand: #E58B70; --brand-ink: #F0A78F; --brand-soft: #3A231B; --on-brand: #1A120E;
+  --green: #8CC7B3; --green-soft: #1C2D27; --ochre: #E3B661; --ochre-soft: #33281A; --blue: #8EC2E6; --blue-soft: #182A37;
+  --plum: #DBA6CF; --plum-soft: #33222F; --neutral: #C3B5A8; --neutral-soft: #2B241F; --night: #0F0B09; --night-2: #1E1714;
+  --on-night: #EDE3D8; --on-night-muted: #C4B6A9; --focus: #8AB4FF; --shadow: rgb(0 0 0 / 0.35);
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: var(--t-body); line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--brand-ink); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3, h4 { font-family: var(--f-head); color: var(--ink); line-height: 1.15; text-wrap: balance; letter-spacing: -0.01em; margin: 0; }
+h2 { font-size: var(--t-h2); font-weight: 800; }
+h3 { font-size: var(--t-h3); font-weight: 700; }
+h4 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0; }
+code, .mono { font-family: var(--f-mono); font-size: 0.86em; }
+code { background: var(--neutral-soft); padding: 0.08em 0.38em; border-radius: 6px; overflow-wrap: anywhere; }
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.measure { max-width: 68ch; }
+.eyebrow { font-size: var(--t-cap); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-ink); }
+.muted { color: var(--muted); }
+.small { font-size: var(--t-small); }
+.stack { display: grid; gap: 14px; }
+
+/* Bara de sus (doar pe ecran) */
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--surface); border-bottom: 1px solid var(--line); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; }
+.topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--ink); text-decoration: none; }
+.topbar .brand img { width: 30px; height: 30px; }
+.topbar nav { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.topbar nav a { font-size: var(--t-small); font-weight: 700; text-decoration: none; padding: 8px 12px; border-radius: 999px; color: var(--ink-2); min-height: 44px; display: inline-flex; align-items: center; }
+.topbar nav a:hover { background: var(--band); }
+@media (max-width: 560px) { .topbar nav a.opt { display: none; } .topbar .brand { font-size: 0.95rem; white-space: nowrap; } .topbar nav { flex-wrap: nowrap; gap: 0; } .topbar nav a { padding: 8px 10px; } }
+
+/* Secțiunile */
+.sec { padding-block: clamp(48px, 6vw, 88px); border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+.sec-head p { color: var(--ink-2); max-width: 70ch; }
+.sec-num { font-family: var(--f-head); font-weight: 800; color: var(--brand); font-size: 1rem; letter-spacing: 0.02em; }
+.sub { margin-top: 44px; display: grid; gap: 14px; }
+
+/* BizTech: prima și ultima pagină */
+.bt-page { background: var(--surface); }
+.bt-page .wrap { padding-block: clamp(36px, 5vw, 64px); display: grid; gap: clamp(26px, 3.4vw, 40px); }
+.bt-strip { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.bt-strip .k9 { display: flex; align-items: center; gap: 12px; }
+.bt-strip .k9 img { width: 54px; height: 54px; }
+.bt-strip .k9 strong { display: block; font-family: var(--f-head); font-size: 1.15rem; }
+.bt-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(20px, 4vw, 48px); align-items: center; }
+.bt-hero h1 { font-size: var(--t-display); font-weight: 800; letter-spacing: -0.025em; }
+.bt-hero .lead { font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem); color: var(--ink-2); margin-top: 14px; max-width: 46ch; }
+.bt-badge { width: clamp(120px, 18vw, 200px); filter: drop-shadow(0 10px 24px var(--shadow)); }
+.bt-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(18px, 3vw, 32px); align-items: start; padding: clamp(20px, 3vw, 32px);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: 0 2px 6px var(--shadow); }
+.bt-card .badge { width: clamp(84px, 11vw, 120px); }
+.bt-card h2 { font-family: var(--f-body); font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem); font-weight: 800; letter-spacing: 0; }
+.bt-card p { color: var(--ink-2); margin-top: 10px; max-width: 64ch; }
+.heart { font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; }
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 18px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 14px; font-weight: 800;
+  text-decoration: none; font-size: 1rem; }
+.btn-outline { border: 2px solid var(--line-strong); color: var(--ink); background: var(--surface); }
+.btn-outline:hover { border-color: var(--ink); }
+.btn-brand { background: var(--brand); color: var(--on-brand); border: 2px solid var(--brand); }
+.phone-line { font-size: var(--t-small); color: var(--muted); }
+.phone-line b { color: var(--ink); font-weight: 800; user-select: all; }
+.people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.person { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 18px; align-items: center; align-content: start; padding: 20px; border-radius: var(--r-lg); background: var(--band); }
+.person > ul, .person > .contact-line { grid-column: 1 / -1; }
+.portrait { width: 132px; height: 132px; max-width: 100%; border-radius: 50%; flex: none; }
+.person ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; font-size: var(--t-small); color: var(--ink-2); }
+.contact-line { margin-top: 8px; font-size: var(--t-small); overflow-wrap: anywhere; }
+.contact-line a { color: var(--ink); font-weight: 800; }
+.team-line { font-family: var(--f-head); font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; color: var(--ink); max-width: 72ch; }
+.bt-hero.solo { grid-template-columns: minmax(0, 1fr); }
+.bt-title { font-size: var(--t-display); letter-spacing: -0.025em; font-weight: 800; }
+.case { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; padding: 18px 20px; border-radius: var(--r-lg); background: var(--band); }
+.case-figs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
+.case-figs b { display: block; font-family: var(--f-head); font-size: 1.45rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.case-figs span { display: block; margin-top: 4px; font-size: var(--t-small); color: var(--ink-2); }
+.quote { margin: 0; padding: 14px 16px; border-left: 3px solid var(--brand); background: var(--surface); border-radius: 0 var(--r) var(--r) 0; }
+.quote blockquote { margin: 0; font-family: var(--f-head); font-size: 1.02rem; line-height: 1.4; color: var(--ink); }
+.quote figcaption { margin-top: 8px; font-size: var(--t-cap); color: var(--muted); }
+.howwork { display: grid; gap: 8px; }
+.howwork h3 { font-size: 1.2rem; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; counter-reset: sp; }
+.steps li { counter-increment: sp; padding: 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); display: grid; gap: 4px; align-content: start; min-width: 0; }
+.steps li::before { content: counter(sp); font-family: var(--f-head); font-weight: 800; color: var(--brand); font-size: 1.2rem; line-height: 1; }
+.steps b { font-size: var(--t-small); line-height: 1.3; }
+.steps span { font-size: var(--t-cap); color: var(--muted); line-height: 1.35; }
+.contact-grid .span3 { grid-column: 1 / -1; }
+.contact-grid dd a { color: var(--ink); }
+.btn-ghost-light { border: 2px solid var(--on-night-muted); color: var(--on-night); background: transparent; }
+.bt-close .phone-line a { color: var(--on-night); }
+.person h3 { font-size: 1.25rem; }
+.person .role { font-weight: 700; color: var(--brand-ink); margin-top: 2px; font-size: var(--t-small); }
+.person p { color: var(--ink-2); margin-top: 8px; font-size: var(--t-small); }
+.services { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.svc { padding: 18px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); display: grid; gap: 6px; align-content: start; }
+.svc .ic { width: 38px; height: 38px; border-radius: 10px; background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; }
+.svc .ic svg { width: 22px; height: 22px; }
+.svc h3 { font-family: var(--f-body); font-size: 1.02rem; font-weight: 800; letter-spacing: 0; }
+.svc p { font-size: var(--t-small); color: var(--ink-2); }
+.hooks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hook { padding: 18px 20px; border-radius: var(--r); background: var(--band); }
+.hook strong { display: block; font-family: var(--f-head); font-size: 1.15rem; line-height: 1.25; }
+.hook span { display: block; margin-top: 6px; font-size: var(--t-small); color: var(--ink-2); }
+.proof { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.proof div { padding: 14px 16px; border-left: 3px solid var(--brand); background: var(--surface); }
+.proof b { display: block; font-family: var(--f-head); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.proof span { font-size: var(--t-small); color: var(--ink-2); }
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.contact-grid div { padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); min-width: 0; }
+.contact-grid dt { font-size: var(--t-cap); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.contact-grid dd { margin: 4px 0 0; font-weight: 700; overflow-wrap: anywhere; user-select: text; }
+.bt-close { text-align: left; padding: clamp(22px, 3vw, 36px); border-radius: var(--r-lg); background: var(--night); color: var(--on-night); display: grid; gap: 14px; }
+.bt-close h2 { color: var(--on-night); }
+.bt-close p { color: var(--on-night-muted); max-width: 62ch; }
+.bt-close .btn-light { background: var(--on-night); color: var(--night); border: 2px solid var(--on-night); }
+.bt-close .phone-line, .bt-close .phone-line b { color: var(--on-night); }
+
+/* Prezentat de Alin Lăbău */
+.doc-title { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.3rem) !important; }
+.presenter { display: grid; justify-items: center; gap: 10px; text-align: center; max-width: 230px; }
+.presenter img { width: 150px; height: 150px; border-radius: 50%; }
+.presenter strong { display: block; font-family: var(--f-head); font-size: 1.3rem; }
+.presenter span:not(.eyebrow) { display: block; font-size: var(--t-small); color: var(--ink-2); }
+.foreword { max-width: 72ch; display: grid; gap: 14px; }
+.foreword h2 { margin-bottom: 4px; }
+.foreword p:not(.eyebrow) { font-size: 1.1rem; line-height: 1.7; color: var(--ink); }
+.fw-sign { display: flex; align-items: center; gap: 14px; margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
+.fw-sign img { width: 64px; height: 64px; border-radius: 50%; flex: none; }
+.fw-sign b { display: block; font-family: var(--f-head); font-size: 1.15rem; }
+.fw-sign span { display: block; font-size: var(--t-small); color: var(--ink-2); overflow-wrap: anywhere; }
+.fw-sign a { color: var(--ink); font-weight: 800; }
+.voice { display: flex; align-items: flex-start; gap: 12px; max-width: 70ch; font-family: var(--f-head); font-size: 1.12rem; line-height: 1.45; color: var(--ink) !important; }
+.voice img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+
+/* Cuprinsul */
+.toc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 28px; list-style: none; padding: 0; margin: 0; counter-reset: toc; }
+.toc > li { counter-increment: toc; border-bottom: 1px solid var(--line); }
+.toc > li > a { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); gap: 6px; padding: 12px 0; text-decoration: none; color: var(--ink); font-weight: 700; min-height: 44px; }
+.toc > li > a::before { content: counter(toc, decimal-leading-zero); font-family: var(--f-head); color: var(--brand); font-weight: 800; }
+.toc > li > a:hover span { text-decoration: underline; }
+.toc ul { list-style: none; margin: -4px 0 12px 2.6em; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: var(--t-small); }
+.toc ul a { color: var(--ink-2); }
+
+/* Pe scurt */
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.fact { padding: 16px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.fact b { display: block; font-family: var(--f-head); font-size: 1.6rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.fact span { font-size: var(--t-small); color: var(--ink-2); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.panel { padding: 20px 22px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.panel h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.panel ul, .panel ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.note { padding: 14px 18px; border-radius: var(--r); background: var(--ochre-soft); color: var(--ink); border-left: 4px solid var(--ochre); }
+.note b { color: var(--ink); }
+
+/* Diagramele */
+.fig { margin: 0; display: grid; gap: 10px; }
+.fig-box { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); padding: 14px; }
+.fig-box svg { display: block; width: 100%; min-width: 860px; height: auto; }
+.fig figcaption { font-size: var(--t-small); color: var(--ink-2); max-width: 90ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: var(--t-small); color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lg-dash { width: 26px; height: 14px; border: 1.5px dashed var(--line-strong); border-radius: 8px; }
+.lg-tag { font-family: var(--f-body); font-weight: 800; font-size: 0.72rem; color: var(--surface); background: var(--ink-2); border-radius: 4px; padding: 0 5px; }
+details.src { font-size: var(--t-small); }
+details.src summary { cursor: pointer; color: var(--muted); font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
+details.src pre { overflow-x: auto; background: var(--neutral-soft); padding: 12px; border-radius: 10px; font-family: var(--f-mono); font-size: 0.78rem; line-height: 1.5; }
+
+.dg text { font-family: var(--f-body); }
+.mm-edge { fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.mm-edge.thin { stroke-width: 1.4; opacity: 0.85; }
+.mm-group { stroke-width: 1.8; }
+.mm-leaf { fill: var(--surface); stroke-width: 1.3; }
+.mm-leaf.hidden-page { stroke-dasharray: 5 4; }
+.mm-root { fill: var(--ink); }
+.mm-rt { fill: var(--bg); font-family: var(--f-head) !important; font-weight: 800; font-size: 19px; }
+.mm-rs { fill: var(--bg); font-size: 12px; font-weight: 700; opacity: 0.85; }
+.mm-gt { fill: var(--ink); font-family: var(--f-head) !important; font-weight: 700; font-size: 15px; }
+.mm-lt { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.mm-lt.muted { fill: var(--muted); font-style: italic; }
+.mm-tag { fill: var(--ink-2); }
+.mm-tagt { fill: var(--surface); font-size: 10.5px; font-weight: 800; }
+.h-brand { stroke: var(--brand); } .mm-group.h-brand { fill: var(--brand-soft); }
+.h-green { stroke: var(--green); } .mm-group.h-green { fill: var(--green-soft); }
+.h-ochre { stroke: var(--ochre); } .mm-group.h-ochre { fill: var(--ochre-soft); }
+.h-blue { stroke: var(--blue); } .mm-group.h-blue { fill: var(--blue-soft); }
+.h-plum { stroke: var(--plum); } .mm-group.h-plum { fill: var(--plum-soft); }
+.h-neutral { stroke: var(--neutral); } .mm-group.h-neutral { fill: var(--neutral-soft); }
+.pm-box { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1.3; }
+.pm-box.person { fill: var(--band); }
+.pm-box.accent { fill: var(--brand-soft); stroke: var(--brand); stroke-width: 1.6; }
+.pm-box.accent2 { fill: var(--green-soft); stroke: var(--green); stroke-width: 1.6; }
+.pm-frame { fill: none; stroke: var(--line-strong); stroke-width: 1.3; stroke-dasharray: 6 5; }
+.pm-ft { fill: var(--muted); font-size: 12.5px; font-weight: 800; letter-spacing: 0.02em; }
+.pm-t { fill: var(--ink); font-size: 14px; font-weight: 800; }
+.pm-t.big { font-family: var(--f-head) !important; font-size: 18px; }
+.pm-s { fill: var(--ink-2); font-size: 11.5px; font-weight: 600; }
+.pm-chip { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
+.pm-ct { fill: var(--ink); font-size: 12px; font-weight: 700; }
+.pm-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.6; }
+.pm-edge.dashed { stroke-dasharray: 6 5; }
+.pm-head { fill: var(--ink-2); }
+.pm-l { fill: var(--ink-2); font-size: 11.5px; font-weight: 700; }
+
+/* Fluxurile de navigare (cipuri) */
+.flows { display: grid; gap: 10px; }
+.flow { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 16px; border: 1px solid var(--line);
+  border-radius: var(--r); background: var(--surface); }
+.flow > b { font-family: var(--f-head); font-size: 1.02rem; }
+.flow ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.flow li { display: inline-flex; align-items: center; gap: 6px; font-size: var(--t-small); }
+.flow li + li::before { content: "→"; color: var(--brand); font-weight: 800; }
+.flow li span { padding: 4px 10px; border-radius: 999px; background: var(--band); border: 1px solid var(--line); }
+.flow li span.ext { background: var(--blue-soft); border-color: var(--blue); }
+.flow li span.mail { background: var(--green-soft); border-color: var(--green); }
+.flow li span.adm { background: var(--plum-soft); border-color: var(--plum); }
+.flow-legend span i { display: inline-block; width: 22px; height: 14px; border-radius: 999px; border: 1px solid; vertical-align: -2px; }
+
+/* Tabele */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: var(--t-cap); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); background: var(--band); position: sticky; top: 0; }
+tbody tr:last-child > * { border-bottom: 0; }
+td code { white-space: nowrap; }
+.tbl-pages td:nth-child(2) { white-space: nowrap; }
+.yes, .no { font-weight: 800; text-align: center; width: 6.5rem; }
+.yes { color: var(--green); }
+.no { color: var(--muted); }
+.hidden-row td:first-child::after { content: " (ascunsă în demo)"; color: var(--muted); font-style: italic; font-weight: 400; }
+
+/* Capturile */
+.flow-sec { margin-top: 56px; display: grid; gap: 22px; }
+.flow-sec:first-of-type { margin-top: 8px; }
+.flow-sec > header { display: grid; gap: 6px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.flow-sec > header h3 { font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.8rem); }
+.flow-sec > header p { color: var(--ink-2); max-width: 75ch; }
+.shot { display: grid; gap: 14px; padding: 20px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); }
+.shot-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: baseline; }
+.shot-n { font-family: var(--f-head); font-weight: 800; font-size: 1.5rem; color: var(--brand); line-height: 1; font-variant-numeric: tabular-nums; }
+.shot-head h4 { font-size: 1.15rem; }
+.shot-head .url { grid-column: 2; font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
+.shot-cap { color: var(--ink-2); font-size: 0.98rem; max-width: 92ch; }
+.shot-media { display: grid; grid-template-columns: minmax(0, 1fr) clamp(150px, 19%, 210px); gap: 18px; align-items: start; }
+.desk { margin: 0; border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; background: var(--surface); box-shadow: 0 6px 20px var(--shadow); }
+.chrome { display: flex; align-items: center; gap: 10px; padding: 7px 12px; background: var(--band); border-bottom: 1px solid var(--line); }
+.dots { display: inline-flex; gap: 5px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); opacity: 0.6; }
+.addr { flex: 1; min-width: 0; font-family: var(--f-mono); font-size: 0.72rem; color: var(--ink-2); background: var(--surface); border-radius: 6px; padding: 2px 10px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.phone { margin: 0; border: 6px solid var(--night); border-radius: 26px; overflow: hidden; background: var(--night); box-shadow: 0 6px 20px var(--shadow); }
+.phone img { border-radius: 19px; }
+.cap { font-size: var(--t-cap); color: var(--muted); margin-top: 6px; text-align: center; }
+.demo-chip { display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ochre); border: 1.5px solid var(--ochre);
+  border-radius: 999px; padding: 1px 9px; margin-left: 8px; vertical-align: 2px; font-family: var(--f-body); }
+.shot.wide-el .shot-media { grid-template-columns: minmax(0, 1fr) clamp(150px, 19%, 210px); }
+
+/* Funcționalități */
+.feat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.feat { padding: 18px 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); min-width: 0; break-inside: avoid; }
+.feat h3 { font-size: 1.12rem; display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.feat h3::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--k, var(--brand)); flex: none; }
+.feat ul { margin: 0; padding-left: 1.1em; display: grid; gap: 5px; font-size: var(--t-small); color: var(--ink-2); }
+.feat li b { color: var(--ink); }
+.feat.k-green { --k: var(--green); } .feat.k-ochre { --k: var(--ochre); } .feat.k-blue { --k: var(--blue); } .feat.k-plum { --k: var(--plum); } .feat.k-neutral { --k: var(--neutral); }
+
+/* Instrucțiuni */
+.howto { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.how { padding: 20px 22px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); min-width: 0; break-inside: avoid; }
+.how h3 { font-size: 1.15rem; margin-bottom: 4px; }
+.how .who { font-size: var(--t-cap); font-weight: 800; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
+.how ol { margin: 0; padding: 0; list-style: none; counter-reset: st; display: grid; gap: 8px; }
+.how ol li { counter-increment: st; position: relative; padding-left: 2.35rem; font-size: 0.97rem; min-height: 1.6rem; }
+.how ol li::before { content: counter(st); position: absolute; left: 0; top: 0.1rem; width: 1.55rem; height: 1.55rem; border-radius: 50%; background: var(--brand-soft); color: var(--brand-ink); font-weight: 800;
+  font-size: 0.82rem; display: grid; place-items: center; }
+.how .tip { margin-top: 10px; font-size: var(--t-small); color: var(--ink-2); padding-top: 10px; border-top: 1px dashed var(--line); }
+.kbd { font-weight: 800; color: var(--ink); background: var(--band); border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; white-space: nowrap; }
+
+/* Întrebări */
+.faq { display: grid; gap: 10px; }
+.faq details { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); padding: 0 18px; break-inside: avoid; }
+.faq summary { cursor: pointer; font-weight: 800; padding: 14px 0; min-height: 44px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--brand); font-size: 1.3rem; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details > div { padding: 0 0 16px; color: var(--ink-2); display: grid; gap: 8px; max-width: 80ch; }
+
+/* Recomandări și lista de lansare */
+.recs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.rec { padding: 18px 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); min-width: 0; break-inside: avoid; }
+.rec h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.rec ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 0.96rem; color: var(--ink-2); }
+.prop { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); border: 1.5px solid var(--blue); border-radius: 999px; padding: 0 7px; margin-left: 6px; white-space: nowrap; vertical-align: 1px; }
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: ck; }
+.checklist li { counter-increment: ck; display: grid; grid-template-columns: 2rem minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.checklist li::before { content: counter(ck); font-family: var(--f-head); font-weight: 800; color: var(--brand); font-size: 1.15rem; }
+.checklist .owner { font-size: var(--t-cap); font-weight: 800; color: var(--muted); white-space: nowrap; }
+
+/* Subsolul documentului */
+.doc-foot { background: var(--night); color: var(--on-night); }
+.doc-foot .wrap { padding-block: 40px 48px; display: grid; justify-items: center; gap: 10px; text-align: center; }
+.doc-foot img { width: 96px; height: 96px; }
+.doc-foot p { color: var(--on-night); font-size: var(--t-small); }
+.doc-foot a { color: var(--on-night); }
+.doc-foot .k9line { color: var(--on-night-muted); font-size: var(--t-cap); margin-top: 6px; }
+
+@media screen and (max-width: 900px) {
+  .services, .proof, .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feat-grid, .hooks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case { grid-template-columns: 1fr; }
+  .case-figs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media screen and (max-width: 720px) {
+  .bt-hero { grid-template-columns: 1fr; }
+  .bt-hero .bt-badge { order: -1; width: 120px; }
+  .presenter { justify-items: start; text-align: left; grid-template-columns: auto minmax(0, 1fr); align-items: center; max-width: none; }
+  .presenter img { width: 96px; height: 96px; }
+  .bt-card { grid-template-columns: 1fr; }
+  .people, .two, .howto, .recs, .toc, .feat-grid, .hooks { grid-template-columns: 1fr; }
+  .shot { padding: 14px; }
+  .shot-media { grid-template-columns: 1fr; justify-items: center; }
+  .shot-media .desk { width: 100%; }
+  .shot-media .phone-wrap { width: min(62%, 240px); }
+  .flow { grid-template-columns: 1fr; }
+  .checklist li { grid-template-columns: 2rem minmax(0, 1fr); }
+  .checklist .owner { grid-column: 2; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portrait { width: 112px; height: 112px; }
+}
+@media screen and (max-width: 460px) {
+  .services, .proof, .facts, .contact-grid { grid-template-columns: 1fr; }
+  .person { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+:target { scroll-margin-top: 64px; }
+
+/* Tipărirea (PDF A4) */
+@page { size: A4; margin: 12mm 12mm 22mm; }
+@page wide { size: A4 landscape; margin: 10mm 12mm 20mm; }
+@media print {
+  :root { --t-body: 10pt; --t-small: 9pt; --t-cap: 8pt; --t-h2: 20pt; --t-h3: 13pt; --t-display: 30pt; }
+  body { background: var(--surface); line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body::before, .topbar, .doc-foot, details.src { display: none !important; }
+  .wrap { max-width: none; padding-left: 0; padding-right: 0; }
+  .sec { padding-block: 0; border-top: 0; break-before: page; }
+  .sec-head { margin-bottom: 14px; }
+  .bt-page { break-after: page; }
+  .bt-page .wrap { padding-block: 0; gap: 16px; }
+  #biztech { break-before: page; }
+  .bt-card p { margin-top: 6px; }
+  .cta-row { margin-top: 10px; }
+  .hook strong { font-size: 11pt; }
+  .bt-strip { padding-bottom: 10px; }
+  .bt-badge { width: 42mm; }
+  .portrait { width: 22mm; height: 22mm; }
+  .bt-page .wrap { gap: 8px; }
+  .bt-hero h1, .bt-title { font-size: 22pt; }
+  .bt-hero .lead { font-size: 9.5pt; line-height: 1.4; }
+  #biztech .bt-hero { grid-template-columns: 1fr; }
+  #biztech .bt-hero .bt-badge { display: none; }
+  .bt-card { gap: 12px; padding: 10px 14px; }
+  .bt-card .badge { width: 20mm; }
+  .bt-card h2 { font-size: 11pt; }
+  .bt-card p { font-size: 9pt; line-height: 1.4; }
+  .btn { min-height: 0; padding: 6px 14px; font-size: 9pt; }
+  .person { padding: 8px 12px; gap: 6px 12px; }
+  .person h3 { font-size: 12pt; }
+  .person .role { font-size: 8.5pt; }
+  .svc { gap: 3px; }
+  .svc .ic { width: 26px; height: 26px; }
+  .svc .ic svg { width: 16px; height: 16px; }
+  .svc h3 { font-size: 9.5pt; }
+  .proof div { padding: 5px 10px; }
+  .proof b { font-size: 15pt; }
+  .proof span { font-size: 8pt; }
+  .contact-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .contact-grid .c-addr, .contact-grid .span3 { grid-column: span 2; }
+  .bt-close .phone-line { display: none; }
+  .contact-grid div { padding: 5px 9px; }
+  .contact-grid dt { font-size: 7pt; }
+  .contact-grid dd { font-size: 8.5pt; margin-top: 2px; }
+  .bt-close { padding: 10px 14px; gap: 6px; }
+  .bt-close h2 { font-size: 14pt; }
+  .bt-close p { font-size: 9pt; }
+  .person ul { gap: 2px; font-size: 8.5pt; }
+  .contact-line { font-size: 8.5pt; margin-top: 4px; }
+  .team-line { font-size: 11.5pt; }
+  .bt-title { font-size: 24pt; }
+  .case { padding: 10px 14px; gap: 12px; }
+  .case-figs b { font-size: 14pt; }
+  .case-figs span { font-size: 8pt; }
+  .quote { padding: 8px 12px; }
+  .quote blockquote { font-size: 9.5pt; }
+  .steps li { padding: 7px 8px; }
+  .steps b { font-size: 8.5pt; }
+  .steps span { font-size: 7.5pt; }
+  .svc p { font-size: 8.5pt; }
+  .contact-grid dd { font-size: 9pt; }
+  .people { gap: 10px; }
+  .services, .proof { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .hooks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .svc, .hook { padding: 10px 12px; }
+  .toc { grid-template-columns: 1fr 1fr; }
+  .toc > li > a { padding: 6px 0; min-height: 0; }
+  .wide-page { page: wide; }
+  .fig-box { padding: 6px; border: 0; }
+  .fig-box svg { min-width: 0; max-height: 120mm; }
+  .tbl { overflow: visible; }
+  .tbl-pages td:nth-child(2), td code { white-space: normal; }
+  .tbl-pages table { font-size: 8pt; }
+  .fig figcaption, .legend { font-size: 8.5pt; }
+  .fig, .flow, .shot, .feat, .how, .rec, .faq details, .checklist li, .panel, tr { break-inside: avoid; }
+  .flow-sec { margin-top: 0; gap: 10px; }
+  .flow-sec + .flow-sec { break-before: page; }
+  .flow-sec > header { break-after: avoid; }
+  .shot { padding: 10px 12px; gap: 8px; border-radius: 12px; }
+  .shot-media { grid-template-columns: minmax(0, 124mm) 33mm; gap: 12px; justify-content: start; }
+  .shot-head h4 { font-size: 11pt; }
+  .shot-n { font-size: 15pt; }
+  .shot-cap { font-size: 9pt; }
+  .desk, .phone { box-shadow: none; }
+  .phone { border-width: 4px; border-radius: 16px; }
+  .phone img { border-radius: 12px; }
+  .faq details > div { padding-bottom: 10px; }
+  .faq summary::after { display: none; }
+  .feat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .howto, .recs, .two { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .how, .feat, .rec { padding: 10px 12px; }
+  thead th { position: static; }
+  th, td { padding: 5px 8px; }
+  a { color: var(--ink); }
+}
+
+
+/* Trattoria: bannerele BizTech și mici completări */
+.bt-banner { margin: 34px 0 0; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: #FFFFFF; break-inside: avoid; }
+.bt-banner img { width: 100%; height: auto; display: block; }
+.fw-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; align-items: start; }
+.sq-banner { margin: 0; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: #FFFFFF; }
+.sq-banner img { width: 100%; height: auto; display: block; }
+.shot.only-phone .shot-media { grid-template-columns: clamp(150px, 19%, 210px); }
+.tbl-env td:first-child { font-family: var(--f-mono); font-size: 0.8rem; white-space: nowrap; }
+.bt-strip .k9 img.round { border-radius: 50%; }
+.topbar .brand img { border-radius: 50%; }
+@media screen and (max-width: 720px) { .fw-grid { grid-template-columns: 1fr; } .sq-banner { max-width: 320px; } }
+@media print {
+  .bt-banner { margin-top: 12px; border-radius: 10px; }
+  .fw-grid { grid-template-columns: minmax(0, 1fr) 56mm; gap: 8mm; }
+  .sq-banner { border-radius: 10px; }
+  .doc-foot { display: none !important; }
+  .tbl-env table { font-size: 8pt; }
+  .toc { grid-template-columns: 1fr 1fr; }
+  /* paginile late: titlul și harta pe aceeași pagină */
+  .wide-page .sec-head { margin-bottom: 6px; gap: 6px; }
+  .wide-page .sec-head p { max-width: none; font-size: 9pt; line-height: 1.35; }
+  .wide-page .voice { font-size: 10pt; }
+  .fig-box svg { max-height: 108mm; }
+  /* cuvântul înainte pe o pagină */
+  .foreword { gap: 8px; }
+  .foreword p:not(.eyebrow) { font-size: 9.5pt; line-height: 1.45; }
+  .fw-sign { padding-top: 8px; margin-top: 0; }
+  /* coperta pe o pagină */
+  .bt-page .wrap { gap: 6px; }
+  .bt-hero { gap: 10mm; }
+  .bt-hero .lead { font-size: 9pt; margin-top: 6px; }
+  .presenter img { width: 24mm; height: 24mm; }
+  .presenter strong { font-size: 11pt; }
+  .presenter span:not(.eyebrow) { font-size: 8pt; }
+  .bt-card p { font-size: 8.5pt; line-height: 1.35; }
+  .portrait { width: 17mm; height: 17mm; }
+  .person { padding: 6px 10px; gap: 4px 10px; }
+  .person ul { font-size: 8pt; gap: 1px; }
+  .person h3 { font-size: 11pt; }
+  .svc p { font-size: 8pt; }
+  .svc { padding: 7px 9px; gap: 2px; }
+  .services { gap: 8px; }
+  .team-line { font-size: 10pt; }
+  .bt-strip { padding-bottom: 6px; }
+  .bt-strip .k9 img { width: 36px; height: 36px; }
+  #inceput .bt-hero h1 { font-size: 20pt; }
+  .bt-card p { font-size: 8pt; }
+  .bt-hero .lead { font-size: 8.5pt; }
+  .people { gap: 8px; }
+  .person ul li { line-height: 1.3; }
+  .svc p { font-size: 7.5pt; line-height: 1.3; }
+  .svc h3 { font-size: 9pt; }
+  /* pagina de închidere BizTech, pe o pagină */
+  #biztech .bt-hero .lead { font-size: 8.5pt; }
+  #biztech .bt-title { font-size: 20pt; }
+  .case { padding: 8px 12px; gap: 8px; }
+  .case-figs b { font-size: 13pt; }
+  .quote blockquote { font-size: 9pt; }
+  .steps li { padding: 5px 7px; }
+  .howwork { gap: 4px; }
+  .contact-grid div { padding: 4px 8px; }
+  .contact-grid dd { font-size: 8pt; }
+  .bt-close { padding: 8px 12px; gap: 4px; }
+  .bt-close p { font-size: 8.5pt; }
+  .proof div { padding: 4px 8px; }
+  .proof b { font-size: 13pt; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="#inceput"><img src="img/trattoria-240.png" alt="" width="30" height="30">Manual Trattoria da Vittoria</a>
+  <nav aria-label="Navigare rapidă"><a href="#cuprins">Cuprins</a><a class="opt" href="#fluxuri">Capturi</a><a class="opt" href="#instructiuni">Pași</a><a class="opt" href="#intrebari">Întrebări</a><a href="#biztech">BizTech</a></nav>
+</div></div>
+
+<section class="bt-page" id="inceput" aria-labelledby="titlu">
+  <div class="wrap">
+    <div class="bt-strip">
+      <div class="k9">
+        <img class="round" src="img/trattoria-240.png" alt="Logo Trattoria da Vittoria" width="54" height="54">
+        <div><strong>Trattoria da Vittoria</strong><span class="muted small">Manual de utilizare · 26 noiembrie 2026</span></div>
+      </div>
+      <span class="eyebrow">Dezvoltat de BIZTECH Consulting SRL pentru Grupul ANNA</span>
+    </div>
+    <div class="bt-hero">
+      <div>
+        <p class="eyebrow">Manual de utilizare</p>
+        <h1 id="titlu" class="doc-title">Manual de utilizare · Site și panou de administrare · Trattoria da Vittoria</h1>
+        <p class="lead">Cum folosesc oaspeții site-ul Trattoriei, pe telefon și pe desktop, și cum îl administrează echipa dumneavoastră din panou. Cu capturi reale, hărți și pași simpli.</p>
+      </div>
+      <div class="presenter">
+        <img src="img/alin-320.webp" alt="Alin Lăbău" width="320" height="320">
+        <div><span class="eyebrow">Prezentat de</span><strong>Alin Lăbău</strong><span>Co-fondator BIZTECH Consulting · Consultant IT &amp; AI Project Manager</span></div>
+      </div>
+    </div>
+    <div class="bt-card">
+      <img class="badge" src="img/biztech-logo-400.webp" alt="Insigna BizTech" width="120" height="120">
+      <div>
+        <h2>100% AI Solutions &amp; Agentic Work-Flows made with <span class="heart">❤️</span> by BizTech Consulting SRL</h2>
+        <p>Site-ul și panoul Trattoriei da Vittoria au fost construite de BIZTECH Consulting cu agenți AI și cu oameni care pun suflet în fiecare proiect: un site premium în 7 limbi și un panou refolosibil pentru celelalte restaurante ale Grupului ANNA. Același mod de lucru îl aducem în orice firmă: soluții AI și fluxuri de lucru cu agenți, dashboard-uri de raportare, management de proiect, consultanță IT și dezvoltare software, în România și în Suedia.</p>
+        <div class="cta-row">
+          <a class="btn btn-outline" href="https://www.biztech.ro/" target="_blank" rel="noopener">Programați analiza gratuită</a>
+          <span class="phone-line">sau scrieți-ne pe WhatsApp: <a href="tel:+40772295031"><b>+40 772 295 031</b></a> · <a href="mailto:contact@biztech.ro"><b>contact@biztech.ro</b></a></span>
+        </div>
+      </div>
+    </div>
+    <p class="team-line">„Doi co-fondatori cu perspective complementare — tehnologie, management și medicină — uniți de aceeași convingere: inovația trebuie să producă rezultate măsurabile.”</p>
+    
+<div class="people" id="fondatori">
+  <article class="person">
+    <img class="portrait" src="img/alin-320.webp" alt="Alin Lăbău" width="320" height="320">
+    <div class="who-head"><h3>Alin Lăbău</h3><p class="role">Co-fondator BIZTECH Consulting · Consultant IT &amp; AI Project Manager</p></div>
+    <ul>
+      <li>15+ ani în IT, în companii internaționale: transformă complexitatea tehnologică în soluții simple și eficiente.</li>
+      <li>Nokia (stagiu în Finlanda, apoi cercetare în Lund, Suedia), Microsoft (R&amp;D în Suedia, smartphone-urile Lumia), Hays / Volkswagen (parcarea inteligentă din vehiculele Grupului VAG, pe platforma electrică MEB).</li>
+      <li>Din 2024, proiecte prin BIZTECH Consulting în HoReCa, în România și Suedia. Black Belt Lean Six Sigma.</li>
+      <li>Limbi: română, engleză, suedeză.</li>
+    </ul>
+    <p class="contact-line"><a href="mailto:alin@biztech.ro">alin@biztech.ro</a> · <a href="tel:+40772295031">+40 772 295 031</a> · <a href="https://www.linkedin.com/in/alin-labau" target="_blank" rel="noopener">linkedin.com/in/alin-labau</a></p>
+  </article>
+  <article class="person">
+    <img class="portrait" src="img/george-320.webp" alt="George Lăbău" width="320" height="320">
+    <div class="who-head"><h3>George Lăbău</h3><p class="role">Co-fondator BIZTECH Consulting · Medic specialist ATI &amp; Business Manager</p></div>
+    <ul>
+      <li>Îmbină medicina de înaltă precizie (anestezie și terapie intensivă) cu managementul de business.</li>
+      <li>Coordonează direcția financiară, contractarea și achizițiile, plus relațiile pe termen lung cu clienții.</li>
+      <li>Interese: inovația AI în sănătate, cu sisteme AI în spitalele din România, și robotica medicală și umanoidă.</li>
+      <li>Limbi: română, engleză, italiană.</li>
+    </ul>
+    <p class="contact-line"><a href="mailto:george@biztech.ro">george@biztech.ro</a></p>
+  </article>
+</div>
+  </div>
+</section>
+
+<section class="sec" id="cuvant-inainte" aria-labelledby="cuvant-inainte-h">
+  <div class="wrap">
+    <div class="fw-grid">
+    <div class="foreword">
+      <p class="eyebrow">De la Alin Lăbău</p>
+      <h2 id="cuvant-inainte-h">Cuvânt înainte</h2>
+      <p>Stimate domnule Lemnaru, stimată echipă a Trattoriei da Vittoria,</p>
+      <p>Mă numesc Alin Lăbău și sunt co-fondator al BIZTECH Consulting, consultant IT și AI Project Manager. Colaborăm din 2024, de la dashboard-urile Grupului ANNA, și vă mulțumesc că ne-ați încredințat și noul site al Trattoriei: locul în care un oaspete rezervă o masă, își alege vinul, descoperă serile cu DJ, înscrie copilul la cursul de pizza sau cere o cameră la Hotel ANNA.</p>
+      <p>În manualul acesta vă arăt site-ul public, pas cu pas, așa cum îl vede un oaspete pe telefon și pe desktop, apoi panoul de administrare, din care echipa dumneavoastră schimbă texte, fotografii, seri, recenzii, vinuri, telefoane și destinatari de email, fără să ne sune pentru fiecare virgulă. Tot ce vede oaspetele și se poate schimba în timp se editează din panou; nimic specific Trattoriei nu este scris în cod, așa că același panou va servi și celelalte restaurante ale grupului.</p>
+      <p>Fiecare capitol începe cu câteva rânduri de la mine. Capturile sunt reale și numerotate: desktopul și, alături, telefonul, cu explicația ecranului deasupra. La final găsiți pașii de dinaintea lansării pe davittoria.ro și lista tehnologiilor, fără nicio cheie sau parolă.</p>
+      <p>Dacă aveți întrebări sau vedeți ceva ce poate fi spus mai clar, scrieți-mi sau sunați-mă. Vă răspund cu drag.</p>
+      <div class="fw-sign">
+        <img src="img/alin-320.webp" alt="" width="64" height="64" loading="lazy">
+        <div><b>Alin Lăbău</b><span>Co-fondator BIZTECH Consulting · Consultant IT &amp; AI Project Manager</span><span>Târgu Jiu, 26 noiembrie 2026</span><span><a href="mailto:alin@biztech.ro">alin@biztech.ro</a> · <a href="tel:+40772295031">+40 772 295 031</a></span></div>
+      </div>
+    </div>
+    <figure class="sq-banner"><img src="img/bsq-automatizam.webp" alt="BizTech: Automatizăm ce îți mănâncă timpul. Tu te ocupi de clienți, noi punem agenții AI să facă restul." width="980" height="864" loading="lazy"></figure>
+    </div>
+    <div style="margin-top:30px"><div class="services" aria-label="Serviciile BIZTECH"><div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17V11M11 17V6M16 17v-4M21 17V8"/></svg></span><h3>Dashboard și analiză AI</h3><p>Raportare inteligentă pentru HoReCa, legată de Breeze POS, ExpresSoft POS, Charisma ERP &amp; HCM sau SAGA Web. Primul dashboard în cel mult 10 zile lucrătoare de la contract, termen garantat în contract.</p></div><div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16M4 12h10M4 19h6M17 15l2 2 3-4"/></svg></span><h3>Management de proiect</h3><p>Implementarea sau înlocuirea unui POS, ERP, CRM, HCM sau a unei flote auto, de la A la Z.</p></div><div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></span><h3>Consultanță IT și strategie AI</h3><p>Audit și cazuri de utilizare cu ROI ridicat, inclusiv pentru administrații publice cu fonduri #DigiLocal sau PNRR.</p></div><div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg></span><h3>Software și agenți AI</h3><p>Site-uri, aplicații și automatizări cu fluxuri de lucru cu agenți AI, ca site-ul și panoul Trattoria da Vittoria.</p></div></div></div>
+  </div>
+</section>
+
+<section class="sec" id="cuprins" aria-labelledby="cuprins-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Cuprins</p><h2 id="cuprins-h">Ce găsiți în manual</h2><p>Fiecare capitol se deschide dintr-un clic. Capturile sunt numerotate în ordinea fluxurilor, pe desktop și pe telefon.</p></div>
+    <ol class="toc">
+      <li><a href="#pe-scurt"><span>Pe scurt: site-ul și cum citiți manualul</span></a></li>
+      <li><a href="#structura"><span>Structura site-ului și navigația</span></a><ul><li><a href="#harta-site">Harta mentală a site-ului</a></li><li><a href="#navigatie">Drumurile prin site</a></li><li><a href="#pagini">Toate paginile</a></li><li><a href="#harta-admin">Harta panoului</a></li></ul></li>
+      <li><a href="#harta-produsului"><span>Harta produsului</span></a></li>
+      <li><a href="#fluxuri"><span>Fluxurile de utilizare, cu capturi</span></a><ul><li><a href="#flux-prima-vizita">Prima vizită</a></li><li><a href="#flux-rezervari">Rezervarea mesei și cazarea</a></li><li><a href="#flux-seri">Serile, evenimentele private și cursurile</a></li><li><a href="#flux-galerie-vinuri">Galeria și lista de vinuri</a></li><li><a href="#flux-contact">Contact și sesizări</a></li><li><a href="#flux-limbi">Limbi și paginile legale</a></li><li><a href="#flux-admin">Panoul de administrare</a></li></ul></li>
+      <li><a href="#functionalitati"><span>Lista completă de funcționalități</span></a><ul><li><a href="#roluri">Cine ce poate face</a></li><li><a href="#emailuri">Emailurile automate</a></li></ul></li>
+      <li><a href="#instructiuni"><span>Instrucțiuni pas cu pas</span></a></li>
+      <li><a href="#intrebari"><span>Întrebări frecvente</span></a></li>
+      <li><a href="#recomandari"><span>Recomandări și pașii dinainte de lansare</span></a></li>
+      <li><a href="#tehnologii"><span>Tehnologii, servicii și variabile de mediu</span></a></li>
+      <li><a href="#biztech"><span>BizTech: următorul proiect poate fi al dumneavoastră</span></a></li>
+    </ol>
+    <figure class="bt-banner"><img src="img/bw-idee.webp" alt="BizTech: De la idee până la lansare" width="1860" height="470" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="sec" id="pe-scurt" aria-labelledby="pe-scurt-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2 id="pe-scurt-h">Pe scurt</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Încep cu esențialul: ce face site-ul, pentru cine am scris manualul și cum să citiți capturile.</span></p><p>Trattoria da Vittoria (Strada Victoriei 8, Târgu Jiu, Grupul ANNA) are un site nou, în 7 limbi, și un panou din care echipa îl administrează. Oaspeții rezervă o masă prin ialoc, cer o cameră la Hotel ANNA, văd serile cu DJ, saloanele, cursul de pizza pentru copii, galeria și lista de peste 150 de vinuri. Site-ul rulează pe adresa temporară de mai jos până la mutarea domeniului davittoria.ro.</p></div>
+    <div class="facts">
+      <div class="fact"><b>7 limbi</b><span>română, engleză, italiană, franceză, germană, chineză, suedeză; 77 de adrese în sitemap</span></div>
+      <div class="fact"><b>11 pagini</b><span>Acasă cu 11 secțiuni, 7 pagini proprii, 3 pagini legale</span></div>
+      <div class="fact"><b>5 subiecte</b><span>de cereri din formulare: cazare, eveniment privat, curs de pizza, întrebare, sesizare</span></div>
+      <div class="fact"><b>56 de ecrane</b><span>în capturi, pe desktop și pe telefon</span></div>
+    </div>
+    <div class="two" style="margin-top:18px">
+      <div class="panel"><h3>Pentru cine este manualul</h3><ul>
+        <li><b>Conducerea și managerul restaurantului</b>: ce face site-ul, ce drumuri fac oaspeții și ce se poate schimba fără programator.</li>
+        <li><b>Echipa care administrează</b> (Administrator și Editor): cum arată fiecare ecran din panou și ce face fiecare buton.</li>
+        <li><b>Recepția hotelului și echipa de evenimente</b>: de unde vin cererile și ce primesc pe email.</li>
+      </ul></div>
+      <div class="panel"><h3>Cum citiți capturile</h3><ul>
+        <li>Fiecare captură are un număr, un titlu și adresa paginii, cu explicația deasupra.</li>
+        <li>Desktopul este la 1440 × 900 px, telefonul la 390 × 844 px (iPhone).</li>
+        <li>Site-ul este capturat pe 26 noiembrie 2026, de pe producție (adresa temporară), cu bannerul de cookies refuzat după prima captură. Niciun formular nu a fost trimis.</li>
+        <li>Panoul este capturat pe o copie locală, cu conținutul de pornire și câteva date de probă; adresele de email din Setări sunt estompate.</li>
+      </ul></div>
+    </div>
+    <p class="note" style="margin-top:18px"><b>Adresele:</b> site-ul <a href="https://anna-restaurante-alinlabau-9308s-projects.vercel.app">https://anna-restaurante-alinlabau-9308s-projects.vercel.app</a>, panoul <a href="https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin">https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin</a>. După lansare: <b>davittoria.ro</b> și <b>davittoria.ro/admin</b>.</p>
+  </div>
+</section>
+
+<section class="sec wide-page" id="structura" aria-labelledby="structura-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2 id="structura-h">Structura site-ului și navigația</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>În capitolul acesta vă arăt cum este organizat site-ul: meniul, secțiunile paginii Acasă, paginile proprii și drumurile pe care le face un oaspete.</span></p><p>Pagina Acasă spune toată povestea, de sus până jos, cu 11 secțiuni pe care le porniți, le opriți și le reordonați din panou. Paginile proprii duc mai departe: serile, evenimentele private, cursul de pizza, galeria, lista de vinuri, contactul. Meniul are două intrări directe și „Mai mult” cu restul.</p></div>
+    <figure class="fig" id="harta-site">
+      <div class="fig-box"><svg class="dg mm" viewBox="-539 0 1096 830" role="img" aria-label="Harta mentală a site-ului public: meniul, secțiunile paginii Acasă, subsolul, ce se deschide din pagini și limbile" xmlns="http://www.w3.org/2000/svg">
+<path class="mm-edge h-brand" d="M-85,415.0 C-125,415.0 -125,191.0 -165,191.0"/>
+<path class="mm-edge thin h-brand" d="M-305,191.0 C-335,191.0 -325,116.0 -355,116.0"/>
+<rect class="mm-leaf h-brand" x="-467" y="104" width="112" height="24" rx="12"/>
+<text class="mm-lt" x="-454" y="120.5">Catalog vinuri</text>
+<path class="mm-edge thin h-brand" d="M-305,191.0 C-335,191.0 -325,146.0 -355,146.0"/>
+<rect class="mm-leaf h-brand" x="-503" y="134" width="148" height="24" rx="12"/>
+<text class="mm-lt" x="-490" y="150.5">Il Ritmo della Notte</text>
+<path class="mm-edge thin h-brand" d="M-305,191.0 C-335,191.0 -325,176.0 -355,176.0"/>
+<rect class="mm-leaf h-brand" x="-440" y="164" width="85" height="24" rx="12"/>
+<text class="mm-lt" x="-427" y="180.5">Mai mult ▾</text>
+<path class="mm-edge thin h-brand" d="M-305,191.0 C-335,191.0 -325,206.0 -355,206.0"/>
+<rect class="mm-leaf h-brand" x="-490" y="194" width="135" height="24" rx="12"/>
+<text class="mm-lt" x="-477" y="210.5">Telefon rezervări</text>
+<path class="mm-edge thin h-brand" d="M-305,191.0 C-335,191.0 -325,236.0 -355,236.0"/>
+<rect class="mm-leaf h-brand" x="-438" y="224" width="83" height="24" rx="12"/>
+<text class="mm-lt" x="-425" y="240.5">Limba (7)</text>
+<path class="mm-edge thin h-brand" d="M-305,191.0 C-335,191.0 -325,266.0 -355,266.0"/>
+<rect class="mm-leaf h-brand" x="-472" y="254" width="117" height="24" rx="12"/>
+<text class="mm-lt" x="-459" y="270.5">Rezervă o masă</text>
+<rect class="mm-group h-brand" x="-305" y="173" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="-235" y="196" text-anchor="middle">Meniu</text>
+<path class="mm-edge h-ochre" d="M-85,415.0 C-125,415.0 -125,382.0 -165,382.0"/>
+<path class="mm-edge thin h-ochre" d="M-305,382.0 C-335,382.0 -325,322.0 -355,322.0"/>
+<rect class="mm-leaf h-ochre" x="-497" y="310" width="142" height="24" rx="12"/>
+<text class="mm-lt" x="-484" y="326.5">Evenimente private</text>
+<path class="mm-edge thin h-ochre" d="M-305,382.0 C-335,382.0 -325,352.0 -355,352.0"/>
+<rect class="mm-leaf h-ochre" x="-481" y="340" width="126" height="24" rx="12"/>
+<text class="mm-lt" x="-468" y="356.5">Cursuri de pizza</text>
+<path class="mm-edge thin h-ochre" d="M-305,382.0 C-335,382.0 -325,382.0 -355,382.0"/>
+<rect class="mm-leaf h-ochre" x="-425" y="370" width="70" height="24" rx="12"/>
+<text class="mm-lt" x="-412" y="386.5">Galerie</text>
+<path class="mm-edge thin h-ochre" d="M-305,382.0 C-335,382.0 -325,412.0 -355,412.0"/>
+<rect class="mm-leaf h-ochre" x="-509" y="400" width="154" height="24" rx="12"/>
+<text class="mm-lt" x="-496" y="416.5">Hotel ANNA (extern)</text>
+<path class="mm-edge thin h-ochre" d="M-305,382.0 C-335,382.0 -325,442.0 -355,442.0"/>
+<rect class="mm-leaf h-ochre" x="-430" y="430" width="75" height="24" rx="12"/>
+<text class="mm-lt" x="-417" y="446.5">Contact</text>
+<rect class="mm-group h-ochre" x="-305" y="364" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="-235" y="387" text-anchor="middle">Mai mult</text>
+<path class="mm-edge h-plum" d="M-85,415.0 C-125,415.0 -125,603.0 -165,603.0"/>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,498.0 -355,498.0"/>
+<rect class="mm-leaf h-plum" x="-493" y="486" width="138" height="24" rx="12"/>
+<text class="mm-lt" x="-480" y="502.5">Termeni și condiții</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,528.0 -355,528.0"/>
+<rect class="mm-leaf h-plum" x="-487" y="516" width="132" height="24" rx="12"/>
+<text class="mm-lt" x="-474" y="532.5">Confidențialitate</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,558.0 -355,558.0"/>
+<rect class="mm-leaf h-plum" x="-496" y="546" width="141" height="24" rx="12"/>
+<text class="mm-lt" x="-483" y="562.5">Politica de cookies</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,588.0 -355,588.0"/>
+<rect class="mm-leaf h-plum" x="-431" y="576" width="76" height="24" rx="12"/>
+<text class="mm-lt" x="-418" y="592.5">Sesizări</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,618.0 -355,618.0"/>
+<rect class="mm-leaf h-plum" x="-487" y="606" width="132" height="24" rx="12"/>
+<text class="mm-lt" x="-474" y="622.5">Setări cookie-uri</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,648.0 -355,648.0"/>
+<rect class="mm-leaf h-plum" x="-527" y="636" width="172" height="24" rx="12"/>
+<text class="mm-lt" x="-514" y="652.5">Linkurile Grupului ANNA</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,678.0 -355,678.0"/>
+<rect class="mm-leaf h-plum" x="-467" y="666" width="112" height="24" rx="12"/>
+<text class="mm-lt" x="-454" y="682.5">Rețele sociale</text>
+<path class="mm-edge thin h-plum" d="M-305,603.0 C-335,603.0 -325,708.0 -355,708.0"/>
+<rect class="mm-leaf h-plum" x="-472" y="696" width="117" height="24" rx="12"/>
+<text class="mm-lt" x="-459" y="712.5">Credit BizTech</text>
+<rect class="mm-group h-plum" x="-305" y="585" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="-235" y="608" text-anchor="middle">Subsol</text>
+<path class="mm-edge h-green" d="M85,415.0 C125,415.0 125,191.0 165,191.0"/>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,26.0 355,26.0"/>
+<rect class="mm-leaf h-green" x="355" y="14" width="190" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="30.5">Coperta: clip sau slideshow</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,56.0 355,56.0"/>
+<rect class="mm-leaf h-green" x="355" y="44" width="117" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="60.5">Bara de cazare</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,86.0 355,86.0"/>
+<rect class="mm-leaf h-green" x="355" y="74" width="86" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="90.5">Bucătăria</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,116.0 355,116.0"/>
+<rect class="mm-leaf h-green" x="355" y="104" width="74" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="120.5">Vinurile</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,146.0 355,146.0"/>
+<rect class="mm-leaf h-green" x="355" y="134" width="126" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="150.5">Ce spun oaspeții</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,176.0 355,176.0"/>
+<rect class="mm-leaf h-green" x="355" y="164" width="115" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="180.5">Agenda serilor</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,206.0 355,206.0"/>
+<rect class="mm-leaf h-green" x="355" y="194" width="142" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="210.5">Evenimente private</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,236.0 355,236.0"/>
+<rect class="mm-leaf h-green" x="355" y="224" width="126" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="240.5">Cursuri de pizza</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,266.0 355,266.0"/>
+<rect class="mm-leaf h-green" x="355" y="254" width="95" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="270.5">Hotel ANNA</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,296.0 355,296.0"/>
+<rect class="mm-leaf h-green" x="355" y="284" width="70" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="300.5">Galerie</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,326.0 355,326.0"/>
+<rect class="mm-leaf h-green" x="355" y="314" width="151" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="330.5">Întrebări frecvente</text>
+<path class="mm-edge thin h-green" d="M305,191.0 C335,191.0 325,356.0 355,356.0"/>
+<rect class="mm-leaf h-green" x="355" y="344" width="128" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="360.5">Contact și harta</text>
+<rect class="mm-group h-green" x="165" y="173" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="235" y="196" text-anchor="middle">Acasă</text>
+<path class="mm-edge h-blue" d="M85,415.0 C125,415.0 125,487.0 165,487.0"/>
+<path class="mm-edge thin h-blue" d="M305,487.0 C335,487.0 325,412.0 355,412.0"/>
+<rect class="mm-leaf h-blue" x="355" y="400" width="121" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="416.5">Fereastra ialoc</text>
+<path class="mm-edge thin h-blue" d="M305,487.0 C335,487.0 325,442.0 355,442.0"/>
+<rect class="mm-leaf h-blue" x="355" y="430" width="178" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="446.5">Meniul digital (filă nouă)</text>
+<path class="mm-edge thin h-blue" d="M305,487.0 C335,487.0 325,472.0 355,472.0"/>
+<rect class="mm-leaf h-blue" x="355" y="460" width="190" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="476.5">Formularul, cu subiect ales</text>
+<path class="mm-edge thin h-blue" d="M305,487.0 C335,487.0 325,502.0 355,502.0"/>
+<rect class="mm-leaf h-blue" x="355" y="490" width="151" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="506.5">Harta Google, la clic</text>
+<path class="mm-edge thin h-blue" d="M305,487.0 C335,487.0 325,532.0 355,532.0"/>
+<rect class="mm-leaf h-blue" x="355" y="520" width="163" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="536.5">Descarcă PDF (vinuri)</text>
+<path class="mm-edge thin h-blue" d="M305,487.0 C335,487.0 325,562.0 355,562.0"/>
+<rect class="mm-leaf h-blue" x="355" y="550" width="181" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="566.5">Fereastra mare a galeriei</text>
+<rect class="mm-group h-blue" x="165" y="469" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="235" y="492" text-anchor="middle">Din pagini</text>
+<path class="mm-edge h-neutral" d="M85,415.0 C125,415.0 125,708.0 165,708.0"/>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,618.0 355,618.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="606" width="91" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="622.5">/ (română)</text>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,648.0 355,648.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="636" width="46" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="652.5">/en</text>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,678.0 355,678.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="666" width="44" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="682.5">/it</text>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,708.0 355,708.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="696" width="46" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="712.5">/fr</text>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,738.0 355,738.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="726" width="46" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="742.5">/de</text>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,768.0 355,768.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="756" width="46" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="772.5">/zh</text>
+<path class="mm-edge thin h-neutral" d="M305,708.0 C335,708.0 325,798.0 355,798.0"/>
+<rect class="mm-leaf h-neutral" x="355" y="786" width="46" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="802.5">/sv</text>
+<rect class="mm-group h-neutral" x="165" y="690" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="235" y="713" text-anchor="middle">Limbi</text>
+<rect class="mm-root" x="-85" y="383" width="170" height="64" rx="20"/>
+<text class="mm-rt" x="0" y="412" text-anchor="middle">Trattoria</text>
+<text class="mm-rs" x="0" y="432" text-anchor="middle">davittoria.ro</text>
+</svg></div>
+      <figcaption>Harta mentală a site-ului public. Stânga: ce este în meniu și în subsol. Dreapta: secțiunile paginii Acasă, ce se deschide din pagini și limbile.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="navigatie" aria-labelledby="navigatie-h">
+  <div class="wrap">
+    <div class="sub" style="margin-top:0">
+      <h3 id="navigatie-h">Drumurile prin site</h3>
+      <p class="measure">Fiecare rând este un drum real al unui oaspete, de la prima pagină până unde ajunge cererea lui.</p>
+      <p class="legend flow-legend"><span><i style="background:var(--band);border-color:var(--line)"></i> pagină pe site</span><span><i style="background:var(--blue-soft);border-color:var(--blue)"></i> serviciu extern</span><span><i style="background:var(--green-soft);border-color:var(--green)"></i> email</span><span><i style="background:var(--plum-soft);border-color:var(--plum)"></i> panou</span></p>
+      <div class="flows"><div class="flow"><b>Masă</b><ol><li><span>Acasă sau orice pagină</span></li><li><span>„Rezervă o masă”</span></li><li><span class="ext">fereastra ialoc</span></li><li><span>persoane, data, zona, ora</span></li><li><span class="mail">confirmarea vine de la ialoc</span></li></ol></div><div class="flow"><b>Seară tematică</b><ol><li><span>Agenda de pe Acasă</span></li><li><span>Il Ritmo della Notte</span></li><li><span>„Rezervă masă” pe data serii</span></li><li><span class="ext">ialoc, cu data aleasă</span></li></ol></div><div class="flow"><b>Cazare</b><ol><li><span>Bara de cazare</span></li><li><span>date, camere, oaspeți</span></li><li><span>Contact, subiect „Cazare”, precompletat</span></li><li><span class="mail">email la recepție</span></li><li><span class="adm">Cereri primite</span></li><li><span>recepția confirmă în max 30 min</span></li></ol></div><div class="flow"><b>Eveniment privat</b><ol><li><span>Evenimente private</span></li><li><span>salonul</span></li><li><span>„Cere ofertă”</span></li><li><span>Contact, subiect „Eveniment privat”</span></li><li><span class="mail">email la echipa de evenimente</span></li><li><span class="adm">Cereri primite</span></li></ol></div><div class="flow"><b>Curs de pizza</b><ol><li><span>Cursuri de pizza</span></li><li><span>„Înscrie copilul”</span></li><li><span>Contact, subiect „Curs de pizza”</span></li><li><span class="mail">email</span></li><li><span class="adm">Cereri primite (și Editorul)</span></li></ol></div><div class="flow"><b>Întrebare</b><ol><li><span>Contact</span></li><li><span>subiect „Întrebare”</span></li><li><span class="mail">email</span></li><li><span class="adm">Cereri primite</span></li></ol></div><div class="flow"><b>Sesizare</b><ol><li><span>Subsol sau Contact</span></li><li><span>Sesizări</span></li><li><span>motiv, data vizitei, mesaj</span></li><li><span class="mail">email</span></li><li><span class="adm">Cereri primite (doar Administratorul)</span></li></ol></div><div class="flow"><b>Vinuri</b><ol><li><span>Catalog vinuri</span></li><li><span>căutare și filtre</span></li><li><span>„Descarcă PDF”</span></li></ol></div><div class="flow"><b>Limbă</b><ol><li><span>Selectorul RO</span></li><li><span>/en, /it, /fr, /de, /zh, /sv</span></li><li><span>aceeași adresă, altă limbă</span></li></ol></div><div class="flow"><b>Cookies</b><ol><li><span>Bannerul</span></li><li><span>„Accept” sau „Refuz”</span></li><li><span class="ext">Google Analytics, doar după Accept și doar pe domeniu</span></li><li><span>„Setări cookie-uri” în subsol</span></li></ol></div><div class="flow"><b>Conținut nou</b><ol><li><span class="adm">Panou → Conținut</span></li><li><span>salvare</span></li><li><span>apare la următoarea încărcare a paginii</span></li><li><span class="adm">„Tradu automat” pentru cele 6 limbi</span></li></ol></div></div>
+    </div>
+    <div class="sub" id="pagini">
+      <h3>Toate paginile</h3>
+      <p class="measure">Adresele rămân românești în toate limbile: în engleză, galeria este <code>/en/galerie</code>. Numerele din ultima coloană trimit la capturi.</p>
+      <div class="tbl tbl-pages"><table><thead><tr><th scope="col">Pagina</th><th scope="col">Adresa</th><th scope="col">Unde o găsiți</th><th scope="col">Ce face</th><th scope="col">Capturi</th></tr></thead><tbody><tr><td>Acasă</td><td><code>/</code></td><td>logo, meniu</td><td>Coperta cu clip sau slideshow, bara de cazare, Bucătăria, Vinurile, recenziile, agenda serilor, evenimentele private, cursul de pizza, Hotel ANNA, galeria, întrebările, contactul</td><td>02–16</td></tr><tr><td>Il Ritmo della Notte</td><td><code>/petreceri</code></td><td>meniu, agenda de pe Acasă</td><td>Serile viitoare, „Rezervă masă” pe data serii, arhiva „Cum a fost”</td><td>20</td></tr><tr><td>Evenimente private</td><td><code>/evenimente-private</code></td><td>Mai mult, secțiunea de pe Acasă</td><td>Saloanele cu capacitate și dotări, tipurile de evenimente, cererea de ofertă</td><td>21</td></tr><tr><td>Cursuri de pizza</td><td><code>/cursuri-pizza-copii</code></td><td>Mai mult, secțiunea de pe Acasă</td><td>Textul complet, clipul, galeria, detaliile și înscrierea</td><td>22</td></tr><tr><td>Galerie</td><td><code>/galerie</code></td><td>Mai mult, secțiunea de pe Acasă</td><td>Toate fotografiile și clipurile, pe categorii, cu fereastra mare</td><td>23–24</td></tr><tr><td>Lista de vinuri</td><td><code>/catalog-vinuri</code></td><td>meniu („Catalog vinuri”)</td><td>Căutare, filtre pe tip, insigna Wine Spectator, „Descarcă PDF”</td><td>25–27</td></tr><tr><td>Contact</td><td><code>/contact</code></td><td>Mai mult, subsol, butoanele de pe Acasă</td><td>Formularul unic cu subiect (cazare, eveniment privat, curs de pizza, întrebare), telefoane, program, harta la clic</td><td>28–29, 30</td></tr><tr><td>Sesizări</td><td><code>/formular-de-reclamatie</code></td><td>subsol, linkul din Contact</td><td>Formularul de reclamații, cu motiv, data vizitei și ospătar</td><td>31</td></tr><tr><td>Termeni și condiții</td><td><code>/termeni</code></td><td>subsol</td><td>Pagină legală, editabilă din Pagini legale</td><td>35</td></tr><tr><td>Confidențialitate</td><td><code>/confidentialitate</code></td><td>subsol</td><td>Politica de confidențialitate: operatorul, datele din formulare, 12 luni de păstrare</td><td>—</td></tr><tr><td>Politica de cookies</td><td><code>/cookies</code></td><td>subsol, bannerul</td><td>Cookie-urile folosite și cum se retrage acordul</td><td>36</td></tr><tr><td>Hotel ANNA</td><td><code>site extern</code></td><td>Mai mult, secțiunea Hotel</td><td>Deschide site-ul hotelului, în filă nouă</td><td>—</td></tr><tr><td>Meniul digital</td><td><code>adresă externă</code></td><td>butonul „Meniu Digital”, bara de jos pe telefon, Bucătăria</td><td>Meniul cu prețuri, în filă nouă; adresa se schimbă din Setări → Integrări</td><td>—</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wide-page" id="harta-admin" aria-labelledby="harta-admin-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h3 id="harta-admin-h" style="font-size:var(--t-h2)">Harta panoului</h3>
+      <p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Aici vedeți cum este organizat panoul și ce vede fiecare rol.</span></p>
+      <p>Meniul panoului este în stânga pe desktop și sub butonul cu trei linii pe telefon. Grupul <b>Conținut</b> este al întregii echipe; <b>Setări</b>, <b>Utilizatori</b> și cererile sensibile sunt ale Administratorului. Tabloul de bord arată ce mai este de făcut.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-box"><svg class="dg mm" viewBox="-556 0 1164 624" role="img" aria-label="Harta mentală a panoului: grupurile din meniu, tabloul de bord, cererile, setările și accesul" xmlns="http://www.w3.org/2000/svg">
+<path class="mm-edge h-green" d="M-85,312.0 C-125,312.0 -125,221.0 -165,221.0"/>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,26.0 -355,26.0"/>
+<rect class="mm-leaf h-green" x="-544" y="14" width="188" height="24" rx="12"/>
+<text class="mm-lt" x="-530" y="30.5">Pagina Acasă (11 secțiuni)</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,56.0 -355,56.0"/>
+<rect class="mm-leaf h-green" x="-463" y="44" width="108" height="24" rx="12"/>
+<text class="mm-lt" x="-450" y="60.5">Seri tematice</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,86.0 -355,86.0"/>
+<rect class="mm-leaf h-green" x="-425" y="74" width="70" height="24" rx="12"/>
+<text class="mm-lt" x="-412" y="90.5">Galerie</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,116.0 -355,116.0"/>
+<rect class="mm-leaf h-green" x="-503" y="104" width="148" height="24" rx="12"/>
+<text class="mm-lt" x="-490" y="120.5">Categorii de galerie</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,146.0 -355,146.0"/>
+<rect class="mm-leaf h-green" x="-478" y="134" width="123" height="24" rx="12"/>
+<text class="mm-lt" x="-465" y="150.5">Bibliotecă media</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,176.0 -355,176.0"/>
+<rect class="mm-leaf h-green" x="-431" y="164" width="76" height="24" rx="12"/>
+<text class="mm-lt" x="-418" y="180.5">Recenzii</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,206.0 -355,206.0"/>
+<rect class="mm-leaf h-green" x="-506" y="194" width="151" height="24" rx="12"/>
+<text class="mm-lt" x="-493" y="210.5">Întrebări frecvente</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,236.0 -355,236.0"/>
+<rect class="mm-leaf h-green" x="-427" y="224" width="72" height="24" rx="12"/>
+<text class="mm-lt" x="-414" y="240.5">Saloane</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,266.0 -355,266.0"/>
+<rect class="mm-leaf h-green" x="-481" y="254" width="126" height="24" rx="12"/>
+<text class="mm-lt" x="-468" y="270.5">Tipuri de camere</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,296.0 -355,296.0"/>
+<rect class="mm-leaf h-green" x="-418" y="284" width="63" height="24" rx="12"/>
+<text class="mm-lt" x="-405" y="300.5">Vinuri</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,326.0 -355,326.0"/>
+<rect class="mm-leaf h-green" x="-521" y="314" width="166" height="24" rx="12"/>
+<text class="mm-lt" x="-508" y="330.5">Categorii de preparate</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,356.0 -355,356.0"/>
+<rect class="mm-leaf h-green" x="-456" y="344" width="101" height="24" rx="12"/>
+<text class="mm-lt" x="-443" y="360.5">Linkuri grup</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,386.0 -355,386.0"/>
+<rect class="mm-leaf h-green" x="-458" y="374" width="103" height="24" rx="12"/>
+<text class="mm-lt" x="-445" y="390.5">Pagini legale</text>
+<path class="mm-edge thin h-green" d="M-305,221.0 C-335,221.0 -325,416.0 -355,416.0"/>
+<rect class="mm-leaf h-green" x="-494" y="404" width="139" height="24" rx="12"/>
+<text class="mm-lt" x="-481" y="420.5">Motive de sesizare</text>
+<rect class="mm-group h-green" x="-305" y="203" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="-235" y="226" text-anchor="middle">Conținut</text>
+<path class="mm-edge h-blue" d="M-85,312.0 C-125,312.0 -125,532.0 -165,532.0"/>
+<path class="mm-edge thin h-blue" d="M-305,532.0 C-335,532.0 -325,472.0 -355,472.0"/>
+<rect class="mm-leaf h-blue" x="-539" y="460" width="184" height="24" rx="12"/>
+<text class="mm-lt" x="-526" y="476.5">Conținut provizoriu rămas</text>
+<path class="mm-edge thin h-blue" d="M-305,532.0 C-335,532.0 -325,502.0 -355,502.0"/>
+<rect class="mm-leaf h-blue" x="-442" y="490" width="87" height="24" rx="12"/>
+<text class="mm-lt" x="-429" y="506.5">Cereri noi</text>
+<path class="mm-edge thin h-blue" d="M-305,532.0 C-335,532.0 -325,532.0 -355,532.0"/>
+<rect class="mm-leaf h-blue" x="-470" y="520" width="115" height="24" rx="12"/>
+<text class="mm-lt" x="-457" y="536.5">Seri apropiate</text>
+<path class="mm-edge thin h-blue" d="M-305,532.0 C-335,532.0 -325,562.0 -355,562.0"/>
+<rect class="mm-leaf h-blue" x="-441" y="550" width="86" height="24" rx="12"/>
+<text class="mm-lt" x="-428" y="566.5">Traduceri</text>
+<path class="mm-edge thin h-blue" d="M-305,532.0 C-335,532.0 -325,592.0 -355,592.0"/>
+<rect class="mm-leaf h-blue" x="-500" y="580" width="145" height="24" rx="12"/>
+<text class="mm-lt" x="-487" y="596.5">Lipsește din Setări</text>
+<rect class="mm-group h-blue" x="-305" y="514" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="-235" y="537" text-anchor="middle">Tablou de bord</text>
+<path class="mm-edge h-ochre" d="M85,312.0 C125,312.0 125,118.0 165,118.0"/>
+<path class="mm-edge thin h-ochre" d="M305,118.0 C335,118.0 325,43.0 355,43.0"/>
+<rect class="mm-leaf h-ochre" x="355" y="31" width="68" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="47.5">Cazare</text>
+<path class="mm-edge thin h-ochre" d="M305,118.0 C335,118.0 325,73.0 355,73.0"/>
+<rect class="mm-leaf h-ochre" x="355" y="61" width="128" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="77.5">Eveniment privat</text>
+<path class="mm-edge thin h-ochre" d="M305,118.0 C335,118.0 325,103.0 355,103.0"/>
+<rect class="mm-leaf h-ochre" x="355" y="91" width="186" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="107.5">Curs de pizza pentru copii</text>
+<path class="mm-edge thin h-ochre" d="M305,118.0 C335,118.0 325,133.0 355,133.0"/>
+<rect class="mm-leaf h-ochre" x="355" y="121" width="88" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="137.5">Întrebare</text>
+<path class="mm-edge thin h-ochre" d="M305,118.0 C335,118.0 325,163.0 355,163.0"/>
+<rect class="mm-leaf h-ochre" x="355" y="151" width="79" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="167.5">Sesizare</text>
+<path class="mm-edge thin h-ochre" d="M305,118.0 C335,118.0 325,193.0 355,193.0"/>
+<rect class="mm-leaf h-ochre" x="355" y="181" width="239" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="197.5">Stare: Nouă · În lucru · Rezolvată</text>
+<rect class="mm-group h-ochre" x="165" y="100" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="235" y="123" text-anchor="middle">Cereri primite</text>
+<path class="mm-edge h-brand" d="M85,312.0 C125,312.0 125,339.0 165,339.0"/>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,249.0 355,249.0"/>
+<rect class="mm-leaf h-brand" x="355" y="237" width="212" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="253.5">Setări restaurant: Identitate</text>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,279.0 355,279.0"/>
+<rect class="mm-leaf h-brand" x="355" y="267" width="142" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="283.5">Contact și program</text>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,309.0 355,309.0"/>
+<rect class="mm-leaf h-brand" x="355" y="297" width="132" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="313.5">Meniu de navigare</text>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,339.0 355,339.0"/>
+<rect class="mm-leaf h-brand" x="355" y="327" width="86" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="343.5">Integrări</text>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,369.0 355,369.0"/>
+<rect class="mm-leaf h-brand" x="355" y="357" width="132" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="373.5">Cereri și emailuri</text>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,399.0 355,399.0"/>
+<rect class="mm-leaf h-brand" x="355" y="387" width="140" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="403.5">Premii și distincții</text>
+<path class="mm-edge thin h-brand" d="M305,339.0 C335,339.0 325,429.0 355,429.0"/>
+<rect class="mm-leaf h-brand" x="355" y="417" width="115" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="433.5">Redirecționări</text>
+<rect class="mm-group h-brand" x="165" y="321" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="235" y="344" text-anchor="middle">Setări</text>
+<path class="mm-edge h-plum" d="M85,312.0 C125,312.0 125,530.0 165,530.0"/>
+<path class="mm-edge thin h-plum" d="M305,530.0 C335,530.0 325,485.0 355,485.0"/>
+<rect class="mm-leaf h-plum" x="355" y="473" width="242" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="489.5">Utilizatori (Administrator, Editor)</text>
+<path class="mm-edge thin h-plum" d="M305,530.0 C335,530.0 325,515.0 355,515.0"/>
+<rect class="mm-leaf h-plum" x="355" y="503" width="164" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="519.5">Restaurante (tenanți)</text>
+<path class="mm-edge thin h-plum" d="M305,530.0 C335,530.0 325,545.0 355,545.0"/>
+<rect class="mm-leaf h-plum" x="355" y="533" width="161" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="549.5">Limba conținutului (7)</text>
+<path class="mm-edge thin h-plum" d="M305,530.0 C335,530.0 325,575.0 355,575.0"/>
+<rect class="mm-leaf h-plum" x="355" y="563" width="113" height="24" rx="12"/>
+<text class="mm-lt" x="368" y="579.5">Tradu automat</text>
+<rect class="mm-group h-plum" x="165" y="512" width="140" height="36" rx="18"/>
+<text class="mm-gt" x="235" y="535" text-anchor="middle">Acces</text>
+<rect class="mm-root" x="-85" y="280" width="170" height="64" rx="20"/>
+<text class="mm-rt" x="0" y="309" text-anchor="middle">Panoul</text>
+<text class="mm-rs" x="0" y="329" text-anchor="middle">/admin</text>
+</svg></div>
+      <figcaption>Harta mentală a panoului. Editorul vede grupul Conținut și, din cereri, doar cursurile de pizza și întrebările.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec wide-page" id="harta-produsului" aria-labelledby="harta-produsului-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2 id="harta-produsului-h">Harta produsului</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Pe o singură hartă vă arăt cum lucrează site-ul cu serviciile din spatele lui, de la rezervări la emailuri.</span></p><p>Site-ul și panoul rulează pe Vercel, în Dublin. Datele și fișierele stau la Supabase, în Irlanda. Rezervările de masă trec prin ialoc, în fereastra de pe site. Emailurile pleacă prin Resend, de la lansare. Traducerile le face Claude, la fiecare publicare și la butonul „Tradu automat”. Google primește ceva doar după „Accept” pe banner sau la clic pe hartă.</p></div>
+    <figure class="fig">
+      <div class="fig-box"><svg class="dg pm" viewBox="0 0 884 666" role="img" aria-label="Harta produsului: oaspeții și echipa folosesc site-ul și panoul de pe Vercel, care lucrează cu Supabase, Resend, ialoc, Claude, Google, meniul digital și GitHub" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="pm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="pm-head"/></marker></defs>
+<rect class="pm-box person" x="12" y="90" width="160" height="56" rx="12"/>
+<text class="pm-t" x="92.0" y="115" text-anchor="middle">Oaspete</text>
+<text class="pm-s" x="92.0" y="133" text-anchor="middle">telefon sau desktop</text>
+<rect class="pm-box person" x="12" y="300" width="160" height="56" rx="12"/>
+<text class="pm-t" x="92.0" y="325" text-anchor="middle">Oaspete care rezervă</text>
+<text class="pm-s" x="92.0" y="343" text-anchor="middle">masă sau cameră</text>
+<rect class="pm-box person" x="12" y="510" width="160" height="56" rx="12"/>
+<text class="pm-t" x="92.0" y="535" text-anchor="middle">Echipa</text>
+<text class="pm-s" x="92.0" y="553" text-anchor="middle">Administrator, Editor</text>
+<rect class="pm-frame" x="250" y="34" width="330" height="606" rx="18"/>
+<text class="pm-ft" x="266" y="58">Vercel · Dublin (dub1) · Next.js 16</text>
+<rect class="pm-box accent" x="270" y="70" width="290" height="300" rx="14"/>
+<text class="pm-t big" x="415" y="98" text-anchor="middle">Site public</text>
+<text class="pm-s" x="415" y="118" text-anchor="middle">randat pe server · 7 limbi · 11 pagini</text>
+<rect class="pm-chip" x="284" y="134" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="150" text-anchor="middle">Acasă</text>
+<rect class="pm-chip" x="418" y="134" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="150" text-anchor="middle">Serile</text>
+<rect class="pm-chip" x="284" y="168" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="184" text-anchor="middle">Evenimente private</text>
+<rect class="pm-chip" x="418" y="168" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="184" text-anchor="middle">Cursuri de pizza</text>
+<rect class="pm-chip" x="284" y="202" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="218" text-anchor="middle">Galerie</text>
+<rect class="pm-chip" x="418" y="202" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="218" text-anchor="middle">Lista de vinuri</text>
+<rect class="pm-chip" x="284" y="236" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="252" text-anchor="middle">Contact</text>
+<rect class="pm-chip" x="418" y="236" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="252" text-anchor="middle">Sesizări</text>
+<rect class="pm-chip" x="284" y="270" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="286" text-anchor="middle">Pagini legale</text>
+<rect class="pm-chip" x="418" y="270" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="286" text-anchor="middle">Cookies + GA</text>
+<text class="pm-s" x="415" y="352" text-anchor="middle">sitemap · Open Graph · date pentru Google · redirecționări</text>
+<rect class="pm-box accent2" x="270" y="388" width="290" height="160" rx="14"/>
+<text class="pm-t big" x="415" y="416" text-anchor="middle">Panoul /admin</text>
+<text class="pm-s" x="415" y="436" text-anchor="middle">Payload 3 · multi-restaurant · în română</text>
+<rect class="pm-chip" x="284" y="452" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="468" text-anchor="middle">Conținut</text>
+<rect class="pm-chip" x="418" y="452" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="468" text-anchor="middle">Cereri primite</text>
+<rect class="pm-chip" x="284" y="482" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="498" text-anchor="middle">Setări</text>
+<rect class="pm-chip" x="418" y="482" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="498" text-anchor="middle">Utilizatori</text>
+<rect class="pm-chip" x="284" y="512" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="348.0" y="528" text-anchor="middle">Tradu automat</text>
+<rect class="pm-chip" x="418" y="512" width="128" height="24" rx="12"/>
+<text class="pm-ct" x="482.0" y="528" text-anchor="middle">Alege și convertește</text>
+<rect class="pm-box" x="270" y="566" width="290" height="56" rx="12"/>
+<text class="pm-t" x="415" y="590" text-anchor="middle">Vercel Cron · 02:23 UTC</text>
+<text class="pm-s" x="415" y="608" text-anchor="middle">șterge cererile mai vechi de 12 luni</text>
+<rect class="pm-box" x="650" y="60" width="222" height="60" rx="12"/>
+<text class="pm-t" x="761.0" y="85" text-anchor="middle">Supabase</text>
+<text class="pm-s" x="761.0" y="103" text-anchor="middle">Postgres 17 + fișiere media · Irlanda</text>
+<rect class="pm-box" x="650" y="150" width="222" height="60" rx="12"/>
+<text class="pm-t" x="761.0" y="175" text-anchor="middle">Resend</text>
+<text class="pm-s" x="761.0" y="193" text-anchor="middle">emailurile formularelor · la lansare</text>
+<rect class="pm-box" x="650" y="240" width="222" height="60" rx="12"/>
+<text class="pm-t" x="761.0" y="265" text-anchor="middle">ialoc</text>
+<text class="pm-s" x="761.0" y="283" text-anchor="middle">rezervările de masă, în fereastră</text>
+<rect class="pm-box" x="650" y="330" width="222" height="60" rx="12"/>
+<text class="pm-t" x="761.0" y="355" text-anchor="middle">Claude Haiku 5.5</text>
+<text class="pm-s" x="761.0" y="373" text-anchor="middle">traducerile, la build și din panou</text>
+<rect class="pm-box" x="650" y="420" width="222" height="60" rx="12"/>
+<text class="pm-t" x="761.0" y="445" text-anchor="middle">Google</text>
+<text class="pm-s" x="761.0" y="463" text-anchor="middle">Analytics după „Accept” · harta la clic</text>
+<rect class="pm-box" x="650" y="510" width="222" height="60" rx="12"/>
+<text class="pm-t" x="761.0" y="535" text-anchor="middle">Meniul digital</text>
+<text class="pm-s" x="761.0" y="553" text-anchor="middle">serviciu extern, în filă nouă</text>
+<rect class="pm-box" x="650" y="600" width="222" height="56" rx="12"/>
+<text class="pm-t" x="761.0" y="625" text-anchor="middle">GitHub + Vercel build</text>
+<text class="pm-s" x="761.0" y="643" text-anchor="middle">codul; fiecare push publică site-ul</text>
+<path class="pm-edge" d="M172,118 L250,118" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="211" y="108" text-anchor="middle">citește</text>
+<path class="pm-edge" d="M172,328 L250,328" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="211" y="318" text-anchor="middle">formulare, ialoc</text>
+<path class="pm-edge" d="M172,538 L270,538" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="221" y="528" text-anchor="middle">editează</text>
+<path class="pm-edge" d="M580,90 L650,90" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="615" y="80" text-anchor="middle">date, media</text>
+<path class="pm-edge" d="M580,180 L650,180" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="615" y="170" text-anchor="middle">trimite</text>
+<path class="pm-edge" d="M560,270 L650,270" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="605" y="260" text-anchor="middle">fereastră</text>
+<path class="pm-edge dashed" d="M560,360 L650,360" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="605" y="350" text-anchor="middle">traduce</text>
+<path class="pm-edge dashed" d="M580,450 L650,450" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="615" y="440" text-anchor="middle">doar cu acord</text>
+<path class="pm-edge dashed" d="M560,540 L650,540" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="605" y="530" text-anchor="middle">link</text>
+<path class="pm-edge dashed" d="M580,628 L650,628" marker-end="url(#pm-arrow)"/>
+<text class="pm-l" x="615" y="618" text-anchor="middle">migrații, seed</text>
+</svg></div>
+      <figcaption>Săgețile pline sunt drumurile de fiecare zi; cele punctate, serviciile chemate la nevoie. Nimic de la Google nu se încarcă fără acordul oaspetelui.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="fluxuri" aria-labelledby="fluxuri-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2 id="fluxuri-h">Fluxurile de utilizare, cu capturi</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Vă duc pe drumul unui oaspete, ecran cu ecran. La final găsiți și ecranele de lucru din panou.</span></p><p>Capturile urmează drumul unui oaspete: întâi desktopul, alături telefonul. Ce scrie sub fiecare titlu este ce poate face omul pe ecranul acela și ce se întâmplă după.</p></div>
+    <section class="flow-sec" id="flux-prima-vizita" aria-labelledby="flux-prima-vizita-h">
+<header><h3 id="flux-prima-vizita-h">Prima vizită</h3><p>Ce vede un oaspete care deschide site-ul pentru prima dată, de sus până jos pe pagina Acasă.</p></header>
+<article class="shot" id="captura-01">
+  <div class="shot-head"><span class="shot-n">01</span><h4>Bannerul de cookies</h4><p class="url">/</p></div>
+  <p class="shot-cap">Prima dată apare bannerul: „Accept” pornește statisticile Google (doar pe domeniul davittoria.ro), „Refuz” le lasă oprite. Până la o alegere, site-ul nu trimite nimic către Google. Alegerea se ține minte 12 luni și se poate schimba din „Setări cookie-uri”, în subsol.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/</span></div><img src="capturi/desktop-00-cookies.webp" alt="Captură pe desktop: Bannerul de cookies" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-00-cookies.webp" alt="Captură pe telefon: Bannerul de cookies" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-02">
+  <div class="shot-head"><span class="shot-n">02</span><h4>Coperta</h4><p class="url">/</p></div>
+  <p class="shot-cap">Titlul, subtitlul, butoanele „Rezervă o masă” (deschide ialoc) și „Meniu Digital” (filă nouă), peste clipul sau slideshow-ul copertei. Medalionul cu logo-ul stă în mijlocul meniului. Butonul rotund din dreapta oprește mișcarea. Jos, bara de cazare. Toate textele vin din Pagina Acasă → Hero.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/</span></div><img src="capturi/desktop-01-acasa.webp" alt="Captură pe desktop: Coperta" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-01-acasa.webp" alt="Captură pe telefon: Coperta" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-03">
+  <div class="shot-head"><span class="shot-n">03</span><h4>Meniul</h4><p class="url">/</p></div>
+  <p class="shot-cap">Pe desktop: „Catalog vinuri”, „Il Ritmo della Notte”, „Mai mult” cu restul paginilor, telefonul de rezervări, limba și „Rezervă o masă”. Pe telefon, același meniu se deschide într-un panou lateral. Ordinea și etichetele se schimbă din Setări restaurant → Meniu de navigare.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/</span></div><img src="capturi/desktop-14-meniu.webp" alt="Captură pe desktop: Meniul" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-14-meniu.webp" alt="Captură pe telefon: Meniul" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-04">
+  <div class="shot-head"><span class="shot-n">04</span><h4>Alegerea limbii</h4><p class="url">/</p></div>
+  <p class="shot-cap">Site-ul vorbește 7 limbi: română, engleză, italiană, franceză, germană, chineză și suedeză. Adresa rămâne în română (de exemplu /en/galerie), ca linkurile să nu se rupă niciodată.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/</span></div><img src="capturi/desktop-15-limba.webp" alt="Captură pe desktop: Alegerea limbii" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-15-limba.webp" alt="Captură pe telefon: Alegerea limbii" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-05">
+  <div class="shot-head"><span class="shot-n">05</span><h4>Bara de cazare</h4><p class="url">/#cazare</p></div>
+  <p class="shot-cap">„Cazare la Hotel ANNA”: sosire, plecare, camere și oaspeți, apoi „Cere ofertă de cazare”. Nu este o rezervare automată: cererea ajunge la recepție, care confirmă disponibilitatea (textul de sub bară este editabil). Limitele de adulți și copii se setează din panou.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#cazare</span></div><img src="capturi/desktop-02-cazare.webp" alt="Captură pe desktop: Bara de cazare" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-02-cazare.webp" alt="Captură pe telefon: Bara de cazare" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-06">
+  <div class="shot-head"><span class="shot-n">06</span><h4>Bucătăria</h4><p class="url">/#bucataria</p></div>
+  <p class="shot-cap">Categoriile de preparate într-un slider cu fotografii (până la 20 de categorii), cu titlul și textul introductiv editabile. Fiecare categorie poate duce la meniul digital.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#bucataria</span></div><img src="capturi/desktop-03-bucataria.webp" alt="Captură pe desktop: Bucătăria" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-03-bucataria.webp" alt="Captură pe telefon: Bucătăria" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-07">
+  <div class="shot-head"><span class="shot-n">07</span><h4>Vinurile</h4><p class="url">/#vinuri</p></div>
+  <p class="shot-cap">Lista de vinuri pe scurt: insigna Wine Spectator (din Premii și distincții), filtrele pe tip și câteva vinuri, cu buton către lista completă. Insigna intră și în datele pentru Google, cât timp are nivelul și anul completate.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#vinuri</span></div><img src="capturi/desktop-04-vinuri.webp" alt="Captură pe desktop: Vinurile" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-04-vinuri.webp" alt="Captură pe telefon: Vinurile" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-08">
+  <div class="shot-head"><span class="shot-n">08</span><h4>Ce spun oaspeții</h4><p class="url">/#recenzii</p></div>
+  <p class="shot-cap">Recenziile reale de pe Google, cu prenume și inițială, și butonul „Lasă o recenzie”. Se adaugă din Recenzii, cu limba recenziei aleasă corect; nu se scriu recenzii inventate.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#recenzii</span></div><img src="capturi/desktop-05-recenzii.webp" alt="Captură pe desktop: Ce spun oaspeții" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-05-recenzii.webp" alt="Captură pe telefon: Ce spun oaspeții" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-09">
+  <div class="shot-head"><span class="shot-n">09</span><h4>Weekendul începe la Trattoria</h4><p class="url">/#petreceri</p></div>
+  <p class="shot-cap">Agenda serilor tematice: afișele serilor viitoare, cu data, tipul (DJ, artist, formație) și invitatul. O seară trecută iese singură din agendă. Butonul duce la pagina „Il Ritmo della Notte”.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#petreceri</span></div><img src="capturi/desktop-06-petreceri.webp" alt="Captură pe desktop: Weekendul începe la Trattoria" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-06-petreceri.webp" alt="Captură pe telefon: Weekendul începe la Trattoria" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-10">
+  <div class="shot-head"><span class="shot-n">10</span><h4>Un salon doar al vostru</h4><p class="url">/#evenimente-private</p></div>
+  <p class="shot-cap">Saloanele (fotografie, capacitate, dotări), tipurile de evenimente și butonul „Cere ofertă”. Saloanele se editează din Saloane; tipurile, din Pagina Acasă → Evenimente private.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#evenimente-private</span></div><img src="capturi/desktop-07-evenimente-private.webp" alt="Captură pe desktop: Un salon doar al vostru" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-07-evenimente-private.webp" alt="Captură pe telefon: Un salon doar al vostru" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-11">
+  <div class="shot-head"><span class="shot-n">11</span><h4>Azi gătesc cei mici</h4><p class="url">/#cursuri-pizza</p></div>
+  <p class="shot-cap">Cursul de pizza pentru copii: fotografia (și clipul, când este pornit), vârsta, durata, prețul, locurile, butonul de înscriere și linkul către pagina cursului.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#cursuri-pizza</span></div><img src="capturi/desktop-08-cursuri-pizza.webp" alt="Captură pe desktop: Azi gătesc cei mici" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-08-cursuri-pizza.webp" alt="Captură pe telefon: Azi gătesc cei mici" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-12">
+  <div class="shot-head"><span class="shot-n">12</span><h4>După cină, rămâi peste noapte</h4><p class="url">/#hotel</p></div>
+  <p class="shot-cap">Hotel ANNA: fotografiile, adresa, telefonul recepției și butonul „Cere ofertă de cazare”. Datele hotelului vin din Pagina Acasă → Hotel.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#hotel</span></div><img src="capturi/desktop-09-hotel.webp" alt="Captură pe desktop: După cină, rămâi peste noapte" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-09-hotel.webp" alt="Captură pe telefon: După cină, rămâi peste noapte" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-13">
+  <div class="shot-head"><span class="shot-n">13</span><h4>Trattoria, în imagini</h4><p class="url">/#galerie</p></div>
+  <p class="shot-cap">Cel mult 8 fotografii sau clipuri bifate „Pe Acasă” în Galerie, cu linkul către galeria completă. Până după sărbători, secțiunea arată fotografiile de Crăciun (D-77).</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#galerie</span></div><img src="capturi/desktop-10-galerie.webp" alt="Captură pe desktop: Trattoria, în imagini" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-10-galerie.webp" alt="Captură pe telefon: Trattoria, în imagini" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-14">
+  <div class="shot-head"><span class="shot-n">14</span><h4>Întrebările frecvente</h4><p class="url">/#intrebari</p></div>
+  <p class="shot-cap">Întrebările din grupul „Acasă” (cel mult 5), cu răspunsul care se deschide la clic. Se editează din Întrebări frecvente; fiecare grup apare pe pagina lui.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#intrebari</span></div><img src="capturi/desktop-12-intrebari.webp" alt="Captură pe desktop: Întrebările frecvente" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-12-intrebari.webp" alt="Captură pe telefon: Întrebările frecvente" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-15">
+  <div class="shot-head"><span class="shot-n">15</span><h4>Spune-ne ce plănuiești</h4><p class="url">/#contact</p></div>
+  <p class="shot-cap">Butoanele către formularul de contact, cu subiectul deja ales (Rezervă o masă, Eveniment privat, Curs de pizza pentru copii, Cazare), linkul către Sesizări, telefoanele și programul. Harta Google se încarcă doar la clic pe „Arată harta”, ca să nu pună cookie-uri.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#contact</span></div><img src="capturi/desktop-11-contact.webp" alt="Captură pe desktop: Spune-ne ce plănuiești" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-11-contact.webp" alt="Captură pe telefon: Spune-ne ce plănuiești" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-16">
+  <div class="shot-head"><span class="shot-n">16</span><h4>Subsolul</h4><p class="url">/</p></div>
+  <p class="shot-cap">Contact și program, linkurile Grupului ANNA (din Linkuri grup), paginile legale, Sesizări, „Setări cookie-uri”, rețelele sociale și, centrat, creditul BizTech cu logo-ul și cele 3 rânduri (D-63).</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/</span></div><img src="capturi/desktop-13-footer.webp" alt="Captură pe desktop: Subsolul" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-13-footer.webp" alt="Captură pe telefon: Subsolul" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<figure class="bt-banner"><img src="img/bw-agent.webp" alt="BizTech: Un agent AI care răspunde și la 3 noaptea" width="1860" height="470" loading="lazy"></figure></section>
+<section class="flow-sec" id="flux-rezervari" aria-labelledby="flux-rezervari-h">
+<header><h3 id="flux-rezervari-h">Rezervarea mesei și cazarea</h3><p>Cele două drumuri care aduc oaspeți: masa, prin ialoc, și camera, prin cererea către recepție.</p></header>
+<article class="shot" id="captura-17">
+  <div class="shot-head"><span class="shot-n">17</span><h4>Fereastra ialoc</h4><p class="url">/</p></div>
+  <p class="shot-cap">„Rezervă o masă” deschide fereastra ialoc peste pagină: numărul de persoane, data, durata, zona (terasă, fumători, nefumători), ora liberă și confirmarea. Rezervarea ajunge direct la restaurant, în contul ialoc. De la o seară tematică, fereastra se deschide pe data serii.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/</span></div><img src="capturi/desktop-17-ialoc.webp" alt="Captură pe desktop: Fereastra ialoc" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-17-ialoc.webp" alt="Captură pe telefon: Fereastra ialoc" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-18">
+  <div class="shot-head"><span class="shot-n">18</span><h4>Calendarul din bara de cazare</h4><p class="url">/#cazare</p></div>
+  <p class="shot-cap">Sosirea și plecarea se aleg dintr-un calendar; nopțile se numără singure. Camerele, adulții și copiii au limitele setate în panou (implicit 6 adulți, 4 copii).</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/#cazare</span></div><img src="capturi/desktop-16-cazare-calendar.webp" alt="Captură pe desktop: Calendarul din bara de cazare" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-16-cazare-calendar.webp" alt="Captură pe telefon: Calendarul din bara de cazare" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-19">
+  <div class="shot-head"><span class="shot-n">19</span><h4>Cererea de cazare</h4><p class="url">/contact?subiect=cazare</p></div>
+  <p class="shot-cap">Butonul „Cere ofertă de cazare” deschide formularul de contact cu subiectul „Cazare” și datele deja completate: sosire, plecare, adulți, copii, tipul de cameră. După trimitere, oaspetele vede termenul de răspuns, iar cererea apare în Cereri primite.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/contact?subiect=cazare</span></div><img src="capturi/desktop-27-contact-cazare.webp" alt="Captură pe desktop: Cererea de cazare" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-27-contact-cazare.webp" alt="Captură pe telefon: Cererea de cazare" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+</section>
+<section class="flow-sec" id="flux-seri" aria-labelledby="flux-seri-h">
+<header><h3 id="flux-seri-h">Serile, evenimentele private și cursurile</h3><p>Paginile proprii pentru ce se întâmplă în Trattoria dincolo de masa de fiecare zi.</p></header>
+<article class="shot" id="captura-20">
+  <div class="shot-head"><span class="shot-n">20</span><h4>Il Ritmo della Notte</h4><p class="url">/petreceri</p></div>
+  <p class="shot-cap">Serile viitoare, fiecare cu afiș, dată, oră, tip, invitat, text și „Rezervă masă” pe data serii. Jos, arhiva „Cum a fost”, cu fotografiile de după eveniment. Serile sunt și evenimente în datele pentru Google (Event).</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/petreceri</span></div><img src="capturi/desktop-18-petreceri.webp" alt="Captură pe desktop: Il Ritmo della Notte" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-18-petreceri.webp" alt="Captură pe telefon: Il Ritmo della Notte" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-21">
+  <div class="shot-head"><span class="shot-n">21</span><h4>Evenimente private</h4><p class="url">/evenimente-private</p></div>
+  <p class="shot-cap">Fiecare salon cu fotografie, capacitate la masă și la cocktail, dotări și text. Tipurile de evenimente ca etichete. Butonul duce la formular, cu subiectul „Eveniment privat” și salonul ales.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/evenimente-private</span></div><img src="capturi/desktop-19-evenimente-private.webp" alt="Captură pe desktop: Evenimente private" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-19-evenimente-private.webp" alt="Captură pe telefon: Evenimente private" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-22">
+  <div class="shot-head"><span class="shot-n">22</span><h4>Cursuri de pizza</h4><p class="url">/cursuri-pizza-copii</p></div>
+  <p class="shot-cap">Textul complet al cursului, clipul principal (9:16, cu sunet, pornește la cerere), galeria foto-video, vârsta, durata, prețul, locurile și butonul de înscriere, care deschide formularul cu subiectul „Curs de pizza pentru copii”.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/cursuri-pizza-copii</span></div><img src="capturi/desktop-20-cursuri-pizza.webp" alt="Captură pe desktop: Cursuri de pizza" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-20-cursuri-pizza.webp" alt="Captură pe telefon: Cursuri de pizza" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+</section>
+<section class="flow-sec" id="flux-galerie-vinuri" aria-labelledby="flux-galerie-vinuri-h">
+<header><h3 id="flux-galerie-vinuri-h">Galeria și lista de vinuri</h3><p>Două pagini de răsfoit: fotografiile locului și cele peste 150 de vinuri.</p></header>
+<article class="shot" id="captura-23">
+  <div class="shot-head"><span class="shot-n">23</span><h4>Galeria</h4><p class="url">/galerie</p></div>
+  <p class="shot-cap">Toate fotografiile și clipurile, filtrate pe categorii (Local, Restaurant, Saloane private, Catering, Il Ritmo della Notte, Seri de Crăciun…). Categoriile și ordinea se schimbă din panou. Pe producție sunt 122 de elemente.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/galerie</span></div><img src="capturi/desktop-21-galerie.webp" alt="Captură pe desktop: Galeria" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-21-galerie.webp" alt="Captură pe telefon: Galeria" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-24">
+  <div class="shot-head"><span class="shot-n">24</span><h4>Fereastra mare</h4><p class="url">/galerie</p></div>
+  <p class="shot-cap">Clic pe o fotografie: se deschide mare, cu legenda și săgețile pentru următoarea. Se închide cu Escape sau cu X. Clipurile pornesc aici, cu sunetul lor.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/galerie</span></div><img src="capturi/desktop-22-galerie-fereastra.webp" alt="Captură pe desktop: Fereastra mare" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-22-galerie-fereastra.webp" alt="Captură pe telefon: Fereastra mare" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-25">
+  <div class="shot-head"><span class="shot-n">25</span><h4>Lista de vinuri</h4><p class="url">/catalog-vinuri</p></div>
+  <p class="shot-cap">Insigna Wine Spectator, căutarea, filtrele pe tip (Spumant, Alb, Roșu, Rosé, Desert) și lista: nume, producător, regiune, an, preț pe sticlă și la pahar. Butonul „Descarcă PDF” apare când lista în PDF este încărcată în Pagina Acasă → Vinuri.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/catalog-vinuri</span></div><img src="capturi/desktop-23-catalog-vinuri.webp" alt="Captură pe desktop: Lista de vinuri" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-23-catalog-vinuri.webp" alt="Captură pe telefon: Lista de vinuri" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-26">
+  <div class="shot-head"><span class="shot-n">26</span><h4>Căutarea în listă</h4><p class="url">/catalog-vinuri</p></div>
+  <p class="shot-cap">Căutarea filtrează lista pe măsură ce scrieți (aici: „barolo”), după nume, producător sau regiune, fără reîncărcarea paginii.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/catalog-vinuri</span></div><img src="capturi/desktop-24-vinuri-cautare.webp" alt="Captură pe desktop: Căutarea în listă" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-24-vinuri-cautare.webp" alt="Captură pe telefon: Căutarea în listă" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-27">
+  <div class="shot-head"><span class="shot-n">27</span><h4>Filtrul pe tip</h4><p class="url">/catalog-vinuri</p></div>
+  <p class="shot-cap">Un clic pe un tip (aici: Roșu) arată doar vinurile lui; filtrele se combină cu căutarea. Tipul fiecărui vin se alege în panou, la Vinuri.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/catalog-vinuri</span></div><img src="capturi/desktop-25-vinuri-filtru.webp" alt="Captură pe desktop: Filtrul pe tip" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-25-vinuri-filtru.webp" alt="Captură pe telefon: Filtrul pe tip" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+</section>
+<section class="flow-sec" id="flux-contact" aria-labelledby="flux-contact-h">
+<header><h3 id="flux-contact-h">Contact și sesizări</h3><p>Un singur formular cu subiect, plus formularul separat de sesizări. Nimic nu se pierde: fiecare trimitere se salvează în panou.</p></header>
+<article class="shot" id="captura-28">
+  <div class="shot-head"><span class="shot-n">28</span><h4>Formularul de contact</h4><p class="url">/contact</p></div>
+  <p class="shot-cap">„Cu ce te putem ajuta?”: Rezervă o masă (deschide ialoc), Eveniment privat, Curs de pizza pentru copii, Cazare și Întrebare. Câmpurile se schimbă după subiect. Alături, telefoanele pe subiecte, adresa și programul. Fiecare subiect are destinatarii lui de email, setați în panou.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/contact</span></div><img src="capturi/desktop-26-contact.webp" alt="Captură pe desktop: Formularul de contact" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-26-contact.webp" alt="Captură pe telefon: Formularul de contact" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-29">
+  <div class="shot-head"><span class="shot-n">29</span><h4>Greșelile din formular</h4><p class="url">/contact?subiect=eveniment-privat</p></div>
+  <p class="shot-cap">La trimitere fără câmpurile obligatorii, formularul le marchează pe fiecare, cu mesajul lângă câmp, și mută focusul pe prima greșeală. Acordul pentru prelucrarea datelor este obligatoriu și se salvează cu ora lui.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/contact?subiect=eveniment-privat</span></div><img src="capturi/desktop-28-contact-erori.webp" alt="Captură pe desktop: Greșelile din formular" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-28-contact-erori.webp" alt="Captură pe telefon: Greșelile din formular" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-30">
+  <div class="shot-head"><span class="shot-n">30</span><h4>Harta, la clic</h4><p class="url">/contact</p></div>
+  <p class="shot-cap">Harta Google apare doar după „Arată harta”, ca pagina să nu încarce nimic de la Google înainte de acordul oaspetelui. Coordonatele și adresa vin din Setări restaurant → Contact și program.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/contact</span></div><img src="capturi/desktop-35-harta.webp" alt="Captură pe desktop: Harta, la clic" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-35-harta.webp" alt="Captură pe telefon: Harta, la clic" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-31">
+  <div class="shot-head"><span class="shot-n">31</span><h4>Sesizări</h4><p class="url">/formular-de-reclamatie</p></div>
+  <p class="shot-cap">Formularul de reclamații păstrat de pe vechiul site, la aceeași adresă: data vizitei, motivul (din lista „Motive de sesizare”), ospătarul (opțional), mesajul. Sesizările le vede doar Administratorul, în Cereri primite.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/formular-de-reclamatie</span></div><img src="capturi/desktop-29-sesizari.webp" alt="Captură pe desktop: Sesizări" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-29-sesizari.webp" alt="Captură pe telefon: Sesizări" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+</section>
+<section class="flow-sec" id="flux-limbi" aria-labelledby="flux-limbi-h">
+<header><h3 id="flux-limbi-h">Limbi și paginile legale</h3><p>Aceleași pagini, în 7 limbi, și paginile pe care le cere legea.</p></header>
+<article class="shot" id="captura-32">
+  <div class="shot-head"><span class="shot-n">32</span><h4>Acasă în engleză</h4><p class="url">/en</p></div>
+  <p class="shot-cap">Textele, butoanele, meniul și bannerul de cookies, toate în engleză. Traducerile se fac automat din română și se pot corecta manual în panou; o limbă corectată de om nu mai este suprascrisă.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/en</span></div><img src="capturi/desktop-32-en.webp" alt="Captură pe desktop: Acasă în engleză" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-32-en.webp" alt="Captură pe telefon: Acasă în engleză" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-33">
+  <div class="shot-head"><span class="shot-n">33</span><h4>Serile în italiană</h4><p class="url">/it/petreceri</p></div>
+  <p class="shot-cap">Pagina „Il Ritmo della Notte” în italiană. Numele serilor și ale invitaților nu se traduc; descrierile, da.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/it/petreceri</span></div><img src="capturi/desktop-34-it-petreceri.webp" alt="Captură pe desktop: Serile în italiană" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-34-it-petreceri.webp" alt="Captură pe telefon: Serile în italiană" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-34">
+  <div class="shot-head"><span class="shot-n">34</span><h4>Lista de vinuri în chineză</h4><p class="url">/zh/catalog-vinuri</p></div>
+  <p class="shot-cap">Lista de vinuri în chineză: numele vinurilor rămân ca în original, tipurile și etichetele se traduc. Fontul pentru chineză se încarcă doar pe paginile /zh.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/zh/catalog-vinuri</span></div><img src="capturi/desktop-33-zh-vinuri.webp" alt="Captură pe desktop: Lista de vinuri în chineză" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-33-zh-vinuri.webp" alt="Captură pe telefon: Lista de vinuri în chineză" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-35">
+  <div class="shot-head"><span class="shot-n">35</span><h4>Termeni și condiții</h4><p class="url">/termeni</p></div>
+  <p class="shot-cap">Paginile legale (Termeni, Confidențialitate, Cookies) se editează din Pagini legale, cu titluri și liste, și au „Actualizat la” automat. Textele juristului se completează înainte de lansare.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/termeni</span></div><img src="capturi/desktop-30-termeni.webp" alt="Captură pe desktop: Termeni și condiții" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-30-termeni.webp" alt="Captură pe telefon: Termeni și condiții" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-36">
+  <div class="shot-head"><span class="shot-n">36</span><h4>Politica de cookies</h4><p class="url">/cookies</p></div>
+  <p class="shot-cap">Politica adaptată pentru Trattoria: ce cookie-uri există (statisticile Google după acord, ialoc în fereastra de rezervare, harta la clic), cât țin și cum se retrage acordul. Până completează juristul parantezele drepte, pagina poartă eticheta „Exemplu · de înlocuit”.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/cookies</span></div><img src="capturi/desktop-31-cookies.webp" alt="Captură pe desktop: Politica de cookies" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-31-cookies.webp" alt="Captură pe telefon: Politica de cookies" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+</section>
+<section class="flow-sec" id="flux-admin" aria-labelledby="flux-admin-h">
+<header><h3 id="flux-admin-h">Panoul de administrare</h3><p>Ecranele din care echipa schimbă site-ul. Capturile sunt făcute pe o copie locală a panoului, cu conținutul de pornire și câteva date de probă; pe producție listele sunt pline.</p></header>
+<article class="shot" id="captura-37">
+  <div class="shot-head"><span class="shot-n">37</span><h4>Intrarea în panou</h4><p class="url">/admin/login</p></div>
+  <p class="shot-cap">Adresa panoului este /admin (după lansare: davittoria.ro/admin). Email și parolă; fiecare om are contul lui, cu rolul Administrator sau Editor. Parola se schimbă din propriul cont.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/login</span></div><img src="capturi/desktop-50-login.webp" alt="Captură pe desktop: Intrarea în panou" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-50-login.webp" alt="Captură pe telefon: Intrarea în panou" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-38">
+  <div class="shot-head"><span class="shot-n">38</span><h4>Tabloul de bord</h4><p class="url">/admin</p></div>
+  <p class="shot-cap">Prima pagină după intrare: conținutul provizoriu rămas (cu linkuri către fiecare element), cererile noi, serile apropiate, ce lipsește din Setări și starea traducerilor. Când contorul „Conținut provizoriu” ajunge la 0, site-ul este gata de lansare.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin</span></div><img src="capturi/desktop-51-tablou.webp" alt="Captură pe desktop: Tabloul de bord" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-51-tablou.webp" alt="Captură pe telefon: Tabloul de bord" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-39">
+  <div class="shot-head"><span class="shot-n">39</span><h4>Pagina Acasă</h4><p class="url">/admin/collections/home-page</p></div>
+  <p class="shot-cap">O filă pe secțiune (Hero, Bară de cazare, Bucătăria, Vinuri, Ce spun oaspeții, Petreceri și agenda, Evenimente private, Cursuri de pizza, Hotel, Galerie, Contact). Fiecare are „Pornită” (oprită = dispare de pe site și din meniu), „Provizoriu” și „Ordine”. În dreapta, starea traducerilor și butonul „Tradu automat”.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/home-page</span></div><img src="capturi/desktop-52-pagina-acasa.webp" alt="Captură pe desktop: Pagina Acasă" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-52-pagina-acasa.webp" alt="Captură pe telefon: Pagina Acasă" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-40">
+  <div class="shot-head"><span class="shot-n">40</span><h4>Limba conținutului</h4><p class="url">/admin</p></div>
+  <p class="shot-cap">Selectorul din dreapta sus schimbă limba în care editați: alegeți Engleză, corectați, salvați, și acea limbă devine „Verificat de om”. Textele marcate „Nu se traduce” (nume proprii, numere de telefon) sunt aceleași în toate limbile.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin</span></div><img src="capturi/desktop-69-limba-continut.webp" alt="Captură pe desktop: Limba conținutului" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-69-limba-continut.webp" alt="Captură pe telefon: Limba conținutului" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-41">
+  <div class="shot-head"><span class="shot-n">41</span><h4>Seri tematice</h4><p class="url">/admin/collections/events</p></div>
+  <p class="shot-cap">Lista serilor, cu data, tipul și starea (viitoare sau trecută). „Creați unul nou” adaugă o seară. Căutarea, coloanele și filtrele sunt deasupra listei.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/events</span></div><img src="capturi/desktop-53-seri-lista.webp" alt="Captură pe desktop: Seri tematice" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-53-seri-lista.webp" alt="Captură pe telefon: Seri tematice" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-42">
+  <div class="shot-head"><span class="shot-n">42</span><h4>O seară tematică</h4><p class="url">/admin/collections/events/…</p></div>
+  <p class="shot-cap">Numele serii, data și ora de început (ora României), ora de sfârșit, tipul, invitatul, afișul (4:5, minimum 1080 × 1350 px; este și imaginea de distribuire), descrierea, intrarea, „Rezervare cu data serii” și, după eveniment, „Fotografii după eveniment”. „Activ” oprit = nu apare pe site, dar rămâne în panou.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/events/…</span></div><img src="capturi/desktop-54-seara.webp" alt="Captură pe desktop: O seară tematică" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-54-seara.webp" alt="Captură pe telefon: O seară tematică" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-43">
+  <div class="shot-head"><span class="shot-n">43</span><h4>Biblioteca media</h4><p class="url">/admin/collections/media</p></div>
+  <p class="shot-cap">Toate fotografiile, clipurile și PDF-urile, cu miniaturi de 160 × 120 px (D-81), tipul, textul alternativ și mărimea. Originalul rămâne la dumneavoastră: pe server stau doar variantele optimizate (D-27).</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/media</span></div><img src="capturi/desktop-55-biblioteca.webp" alt="Captură pe desktop: Biblioteca media" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-55-biblioteca.webp" alt="Captură pe telefon: Biblioteca media" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-44">
+  <div class="shot-head"><span class="shot-n">44</span><h4>Încărcarea unui fișier</h4><p class="url">/admin/collections/media/create</p></div>
+  <p class="shot-cap">„Ce încarci?” (fotografie, clip sau document PDF), apoi „Alege și convertește”: panoul micșorează și convertește fișierul în browser, înainte de încărcare (merge și cu HEIC de pe iPhone). Textul alternativ este obligatoriu; pentru copii în fotografie, bifa „Acordul părinților confirmat”.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/media/create</span></div><img src="capturi/desktop-56-biblioteca-creeaza.webp" alt="Captură pe desktop: Încărcarea unui fișier" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-56-biblioteca-creeaza.webp" alt="Captură pe telefon: Încărcarea unui fișier" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-45">
+  <div class="shot-head"><span class="shot-n">45</span><h4>Galerie</h4><p class="url">/admin/collections/gallery</p></div>
+  <p class="shot-cap">Elementele galeriei: fișierul, categoria, legenda și bifa „Pe Acasă” (cel mult 8). Ordinea se schimbă trăgând rândurile. Categoriile se gestionează din Categorii de galerie.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/gallery</span></div><img src="capturi/desktop-57-galerie.webp" alt="Captură pe desktop: Galerie" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-57-galerie.webp" alt="Captură pe telefon: Galerie" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-46">
+  <div class="shot-head"><span class="shot-n">46</span><h4>Recenzii</h4><p class="url">/admin/collections/reviews</p></div>
+  <p class="shot-cap">Numele (prenume și inițială), textul, nota, sursa (Google), limba recenziei, „Pe Acasă” și „Activ”. Doar recenzii reale, copiate de pe Google.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/reviews</span></div><img src="capturi/desktop-58-recenzii.webp" alt="Captură pe desktop: Recenzii" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-58-recenzii.webp" alt="Captură pe telefon: Recenzii" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-47">
+  <div class="shot-head"><span class="shot-n">47</span><h4>Vinuri</h4><p class="url">/admin/collections/wines</p></div>
+  <p class="shot-cap">Lista vinurilor: nume, tip, preț pe sticlă și la pahar, producător, regiune, an, „Recomandat” și „Activ”. Pe site, lista se filtrează după tip și se caută după nume, producător și regiune.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/wines</span></div><img src="capturi/desktop-59-vinuri.webp" alt="Captură pe desktop: Vinuri" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-59-vinuri.webp" alt="Captură pe telefon: Vinuri" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-48">
+  <div class="shot-head"><span class="shot-n">48</span><h4>Întrebări frecvente</h4><p class="url">/admin/collections/faqs</p></div>
+  <p class="shot-cap">Întrebarea, răspunsul și grupul (Acasă, Evenimente private, Cursuri de pizza, Cazare, Restaurant). Pe Acasă apar cel mult 5. Doar răspunsuri confirmate de manager.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/faqs</span></div><img src="capturi/desktop-60-intrebari.webp" alt="Captură pe desktop: Întrebări frecvente" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-60-intrebari.webp" alt="Captură pe telefon: Întrebări frecvente" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-49">
+  <div class="shot-head"><span class="shot-n">49</span><h4>Saloane</h4><p class="url">/admin/collections/salons</p></div>
+  <p class="shot-cap">Fiecare salon: nume, capacitate la masă și la cocktail, dotări, fotografii, text. Apar pe Acasă și pe pagina Evenimente private, și ca opțiune în formularul de eveniment privat. Tipurile de camere ale hotelului stau în Tipuri de camere.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/salons</span></div><img src="capturi/desktop-61-saloane.webp" alt="Captură pe desktop: Saloane" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-61-saloane.webp" alt="Captură pe telefon: Saloane" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-50">
+  <div class="shot-head"><span class="shot-n">50</span><h4>Setări restaurant · Identitate</h4><p class="url">/admin/collections/settings/…</p></div>
+  <p class="shot-cap">Un document pe restaurant: tagline, logo-urile (principal, pe fundal închis, grup, pictograma de filă), culorile, fonturile, tema implicită, formele decorative și imaginea de distribuire implicită. Nimic specific Trattoriei nu este scris în cod (ADR-002).</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/settings/…</span></div><img src="capturi/desktop-62-setari.webp" alt="Captură pe desktop: Setări restaurant · Identitate" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-62-setari.webp" alt="Captură pe telefon: Setări restaurant · Identitate" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-51">
+  <div class="shot-head"><span class="shot-n">51</span><h4>Setări restaurant · Integrări</h4><p class="url">/admin/collections/settings/…</p></div>
+  <p class="shot-cap">ID-ul ialoc, ID-ul statisticilor Google (G-… sau GT-…; gol = fără statistici și fără banner), adresa meniului digital, bucătăria și nivelul de preț pentru Google. Fila „Contact și program” are adresa, coordonatele, telefoanele pe subiecte, programul pe zile și rețelele sociale.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/settings/…</span></div><img src="capturi/desktop-63-setari-integrari.webp" alt="Captură pe desktop: Setări restaurant · Integrări" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-63-setari-integrari.webp" alt="Captură pe telefon: Setări restaurant · Integrări" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-52">
+  <div class="shot-head"><span class="shot-n">52</span><h4>Setări restaurant · Cereri și emailuri</h4><p class="url">/admin/collections/settings/…</p></div>
+  <p class="shot-cap">Un rând pe subiect (Eveniment privat, Curs de pizza pentru copii, Cazare, Întrebare, Sesizare): „Subiect activ”, destinatarii (cel mult 5), copia (nu apare pe site și nu stă în cod, D-15) și termenul de răspuns afișat. Tot aici: „Păstrează cererile (luni)”, setat la 12 luni. Adresele din captură sunt estompate.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/settings/…</span></div><img src="capturi/desktop-64-setari-cereri.webp" alt="Captură pe desktop: Setări restaurant · Cereri și emailuri" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-64-setari-cereri.webp" alt="Captură pe telefon: Setări restaurant · Cereri și emailuri" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-53">
+  <div class="shot-head"><span class="shot-n">53</span><h4>Cereri primite</h4><p class="url">/admin/collections/submissions</p></div>
+  <p class="shot-cap">Fiecare trimitere din formulare: subiectul, numele, telefonul, emailul, mesajul, detaliile pe subiect, acordul GDPR cu ora lui și starea (Nouă, În lucru, Rezolvată). Datele trimise nu se modifică; se schimbă doar starea (D-37). Editorul vede doar cursurile de pizza și întrebările.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/submissions</span></div><img src="capturi/desktop-65-cereri.webp" alt="Captură pe desktop: Cereri primite" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-65-cereri.webp" alt="Captură pe telefon: Cereri primite" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-54">
+  <div class="shot-head"><span class="shot-n">54</span><h4>Premii și distincții</h4><p class="url">/admin/collections/awards</p></div>
+  <p class="shot-cap">Premiul Wine Spectator: numele, nivelul, anul, insigna (orice imagine, cu transparență), legătura către sursă și bifa „În datele pentru Google”. Apare pe copertă, în secțiunea Vinuri și în subsol.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/awards</span></div><img src="capturi/desktop-66-premii.webp" alt="Captură pe desktop: Premii și distincții" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-66-premii.webp" alt="Captură pe telefon: Premii și distincții" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-55">
+  <div class="shot-head"><span class="shot-n">55</span><h4>Redirecționări</h4><p class="url">/admin/collections/redirects</p></div>
+  <p class="shot-cap">Adresele vechiului site davittoria.ro (16, citite din harta lui) și unde duc acum, ca linkurile din Google și din rețele să nu dea eroare după mutarea domeniului. Se pot adăuga oricând altele: „De la” și „Către”.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/redirects</span></div><img src="capturi/desktop-67-redirectionari.webp" alt="Captură pe desktop: Redirecționări" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-67-redirectionari.webp" alt="Captură pe telefon: Redirecționări" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+<article class="shot" id="captura-56">
+  <div class="shot-head"><span class="shot-n">56</span><h4>Utilizatori</h4><p class="url">/admin/collections/users</p></div>
+  <p class="shot-cap">Conturile echipei, fiecare cu rolul lui și cu restaurantele la care are acces. Doar Administratorul creează conturi și atribuie restaurante. Un Editor nu se poate adăuga singur la alt restaurant.</p>
+  <div class="shot-media"><figure class="desk"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="addr">/admin/collections/users</span></div><img src="capturi/desktop-68-utilizatori.webp" alt="Captură pe desktop: Utilizatori" width="1800" height="1125" loading="lazy" decoding="async"></figure><div class="phone-wrap"><figure class="phone"><img src="capturi/telefon-68-utilizatori.webp" alt="Captură pe telefon: Utilizatori" width="780" height="1688" loading="lazy" decoding="async"></figure><p class="cap">telefon</p></div></div>
+</article>
+</section>
+  </div>
+</section>
+
+<section class="sec" id="functionalitati" aria-labelledby="functionalitati-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2 id="functionalitati-h">Lista completă de funcționalități</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Am adunat aici tot ce face site-ul, pe zone, și cine ce poate face în panou.</span></p><p>Funcționalitățile sunt cele de la data capturilor, 26 noiembrie 2026, după F5 sesiunea 1 (D-78 … D-81). Ce este planificat pentru lansare este marcat ca atare.</p></div>
+    <div class="feat-grid"><div class="feat "><h3>Acasă și coperta</h3><ul><li>Coperta cu <b>clip</b> (desktop 16:9, telefon 9:16, cel mult 30 s) sau <b>slideshow</b> cu durata cadrului editabilă (implicit 3 s); poster înaintea clipului; buton de pauză.</li><li>11 secțiuni, fiecare cu „Pornită”, „Provizoriu” și „Ordine”; o secțiune oprită dispare și din meniu.</li><li>Pe telefon, bara fixă de jos cu „Rezervă o masă” și „Meniu”.</li><li>Respectă „Reducere mișcare”: clipul stă, cadrele se schimbă fără animație.</li></ul></div><div class="feat k-green"><h3>Rezervări și cazare</h3><ul><li>Fereastra <b>ialoc</b> pe orice pagină și pe data serii, din agenda serilor.</li><li>Bara de cazare cu calendar, camere, adulți și copii (limite din panou) → cerere precompletată către recepție.</li><li>Textul „recepția confirmă în max 30 min” editabil.</li></ul></div><div class="feat k-ochre"><h3>Seri, evenimente, cursuri</h3><ul><li>Seri tematice cu afiș 4:5, dată și oră, tip, invitat, intrare; ies singure din agendă; arhiva „Cum a fost”.</li><li>Saloane cu capacități și dotări; tipuri de evenimente; salonul ales ajunge în cerere.</li><li>Cursul de pizza cu text complet, clip 9:16 cu sunet, galerie, detalii și înscriere.</li></ul></div><div class="feat k-blue"><h3>Galerie și vinuri</h3><ul><li>Galeria pe categorii, cel mult 8 pe Acasă, fereastră mare cu legende; clipurile cu sunetul lor.</li><li>Lista de vinuri cu căutare, filtre pe tip, preț pe sticlă și la pahar, „Recomandat”, insigna Wine Spectator, PDF de descărcat.</li><li>Categoriile de preparate într-un slider, cu link către meniul digital.</li></ul></div><div class="feat k-plum"><h3>Formulare și cereri</h3><ul><li>Un formular cu 5 subiecte (cazare, eveniment privat, curs de pizza, întrebare; sesizările pe pagina lor), câmpuri care se schimbă după subiect, validare pe loc, acord GDPR cu oră.</li><li>Fiecare trimitere se salvează în Cereri primite, cu stare (Nouă, În lucru, Rezolvată); datele trimise nu se modifică.</li><li>Emailuri către destinatarii fiecărui subiect (cel mult 5 + copie), cu subiectul „[Subiect] de pe site-ul [Restaurant]”; se conectează la lansare, prin Resend.</li><li>Ștergerea automată a cererilor mai vechi de 12 luni, zilnic.</li></ul></div><div class="feat k-neutral"><h3>Limbi, Google, viteză</h3><ul><li>7 limbi, adrese românești, selector în meniu; traduceri automate cu Claude, corectură în panou, stări „Netradus / Tradus automat / Verificat de om / De reverificat”.</li><li>Date pentru Google: Restaurant (adresă, program, meniu, rezervări, premiul), WebSite, Event pentru seri; sitemap cu 77 de adrese și <code>hreflang</code>; Open Graph pe fiecare pagină.</li><li>16 adrese vechi redirecționate (301) după mutarea domeniului.</li><li>Lighthouse mobil: Acasă 89, /en 89, /zh 80; accesibilitate 100; 0 depășiri la 360–1920 px.</li></ul></div><div class="feat "><h3>Cookies și statistici</h3><ul><li>Banner cu „Accept” și „Refuz” de aceeași greutate; nimic către Google înainte de alegere.</li><li>Google Analytics (eticheta site-ului vechi) doar după „Accept”, doar pe davittoria.ro; Consent Mode cu reclamele refuzate; cookie-urile <code>_ga</code> țin 13 luni.</li><li>Alegerea stă 12 luni; „Setări cookie-uri” în subsol; retragerea șterge cookie-urile.</li><li>Harta Google se încarcă doar la clic.</li></ul></div><div class="feat k-green"><h3>Panoul: conținut</h3><ul><li>Totul ce vede oaspetele se editează din panou: texte, fotografii, clipuri, seri, recenzii, întrebări, saloane, camere, vinuri, premii, linkuri, pagini legale, meniul de navigare, telefoane, program, destinatari.</li><li>Biblioteca media cu „Alege și convertește” (HEIC, clipuri până la 120 s, PDF), text alternativ obligatoriu, acordul părinților pentru copii, miniaturi de 160 × 120 px.</li><li>„Provizoriu” = eticheta „Exemplu · de înlocuit” pe site; contorul din Tabloul de bord.</li><li>Butonul „Tradu automat” pe fiecare document; limba conținutului din dreapta sus.</li></ul></div><div class="feat k-ochre"><h3>Panoul: administrare</h3><ul><li>Roluri: Administrator (tot) și Editor (grupul Conținut + cursuri de pizza și întrebări din cereri).</li><li>Multi-restaurant (ADR-002): același panou servește alte restaurante ale grupului, ca tenanți separați, cu propriile setări, culori și fonturi.</li><li>Setări restaurant pe file: Identitate, Contact și program, Meniu de navigare, Integrări, Cereri și emailuri.</li><li>Redirecționări, Premii și distincții, Utilizatori, Restaurante.</li></ul></div></div>
+    <div class="sub" id="roluri"><h3>Cine ce poate face</h3><div class="tbl"><table><thead><tr><th scope="col">Acțiunea</th><th scope="col" class="yes">Administrator</th><th scope="col" class="yes">Editor</th></tr></thead><tbody><tr><td>Pagina Acasă, Seri tematice, Galerie și categorii, Bibliotecă media, Recenzii, Întrebări frecvente, Saloane, Tipuri de camere, Vinuri, Categorii de preparate, Linkuri grup, Pagini legale, Motive de sesizare</td><td class="yes">✓ da</td><td class="yes">✓ da</td></tr><tr><td>„Tradu automat” și corectura traducerilor, în toate limbile</td><td class="yes">✓ da</td><td class="yes">✓ da</td></tr><tr><td>Cereri primite: curs de pizza și întrebări (doar „Stare”)</td><td class="yes">✓ da</td><td class="yes">✓ da</td></tr><tr><td>Cereri primite: cazare, evenimente private, sesizări</td><td class="yes">✓ da</td><td class="no">– nu</td></tr><tr><td>Premii și distincții (insigna Wine Spectator)</td><td class="yes">✓ da</td><td class="no">– nu</td></tr><tr><td>Setări restaurant: identitate, culori, fonturi, telefoane, program, meniu, integrări, destinatari de email, păstrarea cererilor</td><td class="yes">✓ da</td><td class="no">– nu</td></tr><tr><td>Redirecționări</td><td class="yes">✓ da</td><td class="no">– nu</td></tr><tr><td>Utilizatori și Restaurante (conturi, roluri, atribuirea restaurantelor)</td><td class="yes">✓ da</td><td class="no">– nu</td></tr><tr><td>Variabilele din Vercel, domeniul, cheile serviciilor (în afara panoului)</td><td class="yes">BizTech</td><td class="no">– nu</td></tr></tbody></table></div></div>
+    <div class="sub" id="emailuri"><h3>Emailurile automate</h3><p class="measure">Pleacă prin Resend, de pe domeniul davittoria.ro, după conectarea de la lansare (pasul B3 din lista de lansare). Până atunci, cererile se salvează în panou, iar „Email trimis” rămâne nebifat.</p><div class="tbl"><table><thead><tr><th scope="col">Când</th><th scope="col">Cine primește</th><th scope="col">Ce conține</th></tr></thead><tbody><tr><td>Cerere de cazare din bara de cazare sau din Contact</td><td>destinatarii subiectului „Cazare” (recepția), cu copie</td><td>„Cazare de pe site-ul Trattoria da Vittoria”: sosire, plecare, adulți, copii, tipul de cameră, mesajul, datele de contact</td></tr><tr><td>Cerere de eveniment privat</td><td>destinatarii subiectului „Eveniment privat”, cu copie</td><td>tipul de eveniment, data, numărul de invitați, salonul, mesajul</td></tr><tr><td>Înscriere la cursul de pizza</td><td>destinatarii subiectului „Curs de pizza pentru copii”</td><td>numărul de copii, vârstele, data dorită</td></tr><tr><td>Întrebare</td><td>destinatarii subiectului „Întrebare”</td><td>mesajul și datele de contact</td></tr><tr><td>Sesizare</td><td>destinatarii subiectului „Sesizare”</td><td>data vizitei, motivul, ospătarul, mesajul; fotografia bonului ca atașament (planificat, G6-3)</td></tr><tr><td>Oaspetele</td><td>pe ecran</td><td>confirmarea și termenul de răspuns afișat, setat pe subiect</td></tr></tbody></table></div></div>
+    <figure class="bt-banner"><img src="img/bw-rapoarte.webp" alt="BizTech: Rapoarte inteligente din POS și ERP" width="1860" height="470" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="sec" id="instructiuni" aria-labelledby="instructiuni-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><h2 id="instructiuni-h">Instrucțiuni pas cu pas</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Pentru echipa dumneavoastră am scris pașii pentru treburile de fiecare zi din panou.</span></p><p>Numele butoanelor sunt scrise exact cum apar pe ecran. Pașii sunt aceiași pe telefon și pe desktop.</p></div>
+    <div class="howto"><article class="how" id="cum-intrati"><h3>Intrați în panou</h3><p class="who">Toată echipa</p><ol><li>Deschideți <code>https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin</code> (după lansare: <code>davittoria.ro/admin</code>).</li><li>Introduceți emailul și parola primite de la Alin. Fiecare om are contul lui; nu împărțiți parola.</li><li>În dreapta sus vedeți <b>Limba conținutului</b>: lăsați „Română” când scrieți conținut nou.</li><li>Când terminați, apăsați pe avatar, apoi <span class="kbd">Deconectare</span>.</li></ol><p class="tip">Dacă panoul se poartă ciudat după o actualizare a site-ului, închideți fila și deschideți-o din nou (sau Ctrl+Shift+R).</p></article><article class="how" id="cum-fotografie"><h3>Încărcați o fotografie sau un clip</h3><p class="who">Toată echipa</p><ol><li><b>Bibliotecă media</b> → <span class="kbd">Creați unul nou</span> → alegeți „Ce încarci?” (fotografie, clip sau document PDF).</li><li><span class="kbd">Alege și convertește</span>: panoul micșorează și convertește fișierul în browser, înainte de încărcare. Merge și cu HEIC de pe iPhone.</li><li>Scrieți <b>textul alternativ</b>: ce se vede, într-o propoziție („Masă pentru doi, cu pizza și vin roșu, pe terasă”). Este obligatoriu.</li><li>Clipuri: cel mult 120 s; pe copertă intră doar clipuri de cel mult 30 s. Verificați „Codec și sunet”: trebuie să scrie „cu sunet” dacă originalul are sunet.</li><li>Copii în fotografie: bifați „Acordul părinților confirmat” doar dacă aveți acordul. Apoi <span class="kbd">Salvează</span>.</li></ol><p class="tip">Originalul rămâne la dumneavoastră: pe server se păstrează doar variantele optimizate. Păstrați-l într-un dosar al restaurantului.</p></article><article class="how" id="cum-seara"><h3>Publicați o seară tematică</h3><p class="who">Toată echipa</p><ol><li><b>Seri tematice</b> → <span class="kbd">Creați unul nou</span>.</li><li>Numele serii (cel mult 50 de caractere), data și ora de început (ora României, în viitor), ora de sfârșit (opțională), tipul și numele invitatului.</li><li>Afișul (4:5, minimum 1080 × 1350 px): este și imaginea care apare când cineva distribuie pagina. Descrierea scurtă și „Intrare” (de exemplu „Intrare liberă”).</li><li>Lăsați bifat „Rezervare cu data serii”: „Rezervă masă” deschide ialoc direct pe data serii.</li><li><span class="kbd">Salvează</span>, apoi <span class="kbd">Tradu automat</span> pentru cele 6 limbi. Seara apare în agenda de pe Acasă și pe „Il Ritmo della Notte”.</li></ol><p class="tip">După eveniment, adăugați fotografiile la „Fotografii după eveniment”: intră în arhiva „Cum a fost”. Seara trecută iese singură din agendă.</p></article><article class="how" id="cum-galerie"><h3>Adăugați în galerie sau pe Acasă</h3><p class="who">Toată echipa</p><ol><li><b>Galerie</b> → <span class="kbd">Creați unul nou</span>: alegeți fișierul din Biblioteca media (sau încărcați-l pe loc), categoria și, opțional, o legendă.</li><li>Bifați <b>„Pe Acasă”</b> ca elementul să apară în secțiunea Galerie de pe prima pagină (cel mult 8).</li><li>Ordinea se schimbă trăgând rândurile în listă. Categoriile noi se fac din <b>Categorii de galerie</b>.</li></ol><p class="tip">După sărbători, galeria de pe Acasă revine la cea de dinainte, la cererea dumneavoastră (D-77).</p></article><article class="how" id="cum-recenzie"><h3>O recenzie sau o întrebare frecventă</h3><p class="who">Toată echipa</p><ol><li><b>Recenzii</b> → <span class="kbd">Creați unul nou</span>: numele cu prenume și inițială („Mihai M.”), textul exact de pe Google, nota, limba recenziei, „Pe Acasă”.</li><li><b>Întrebări frecvente</b> → <span class="kbd">Creați unul nou</span>: întrebarea, răspunsul și grupul (Acasă, Evenimente private, Cursuri de pizza, Cazare, Restaurant).</li><li>Pe Acasă apar cel mult 5 întrebări. Scrieți doar răspunsuri confirmate de manager. Fără recenzii inventate.</li></ol></article><article class="how" id="cum-acasa"><h3>Schimbați un text de pe Acasă</h3><p class="who">Toată echipa</p><ol><li><b>Pagina Acasă</b> → fila secțiunii (Hero, Bucătăria, Vinuri, Hotel …).</li><li>Schimbați titlul, textul introductiv, etichetele butoanelor sau fotografiile. Fiecare câmp arată câte caractere mai aveți.</li><li>„Pornită” oprită ascunde secțiunea de pe site și din meniu; „Ordine” o mută. Când înlocuiți un text-exemplu cu cel real, debifați „Provizoriu”.</li><li><span class="kbd">Salvează</span>. Schimbarea apare pe site la următoarea încărcare a paginii.</li></ol><p class="tip">Hero: „Mod media” alege între clip și slideshow; „Durata unui cadru” este în secunde. Clipurile lungi merg pe paginile proprii, nu pe copertă.</p></article><article class="how" id="cum-traducere"><h3>Traduceți și corectați o limbă</h3><p class="who">Toată echipa</p><ol><li>Scrieți întâi <b>în română</b> și apăsați <span class="kbd">Salvează</span>.</li><li>Apăsați <span class="kbd">Tradu automat</span> (în dreapta): cele 6 limbi primesc textul, cu starea „Tradus automat”.</li><li>Ca să corectați o limbă: alegeți-o din <b>Limba conținutului</b> (dreapta sus), corectați, salvați. Limba devine „Verificat de om” și nu mai este suprascrisă.</li><li>Când schimbați româna, limbile „Tradus automat” se retraduc singure; cele verificate primesc „De reverificat”.</li></ol><p class="tip">Numele proprii, telefoanele și numele italienești ale preparatelor sunt marcate „Nu se traduce” și rămân la fel peste tot.</p></article><article class="how" id="cum-cerere"><h3>Răspundeți la o cerere</h3><p class="who">Administrator; Editor pentru cursuri și întrebări</p><ol><li><b>Cereri primite</b>: cererile noi sunt primele; Tabloul de bord arată câte sunt.</li><li>Deschideți cererea: subiectul, datele de contact, mesajul și detaliile (date, camere, salon, copii, motiv).</li><li>Sunați sau scrieți omului, apoi schimbați <b>„Stare”</b> în „În lucru” sau „Rezolvată” și <span class="kbd">Salvează</span>. Datele trimise nu se pot modifica.</li><li>Emailul către destinatari pleacă singur la fiecare cerere (după conectarea Resend, la lansare); câmpul „Email trimis” arată dacă a plecat.</li></ol><p class="tip">Cererile mai vechi de 12 luni se șterg singure, în fiecare noapte. Termenul se schimbă din Setări restaurant → Cereri și emailuri.</p></article><article class="how" id="cum-setari"><h3>Schimbați telefoane, program, destinatari</h3><p class="who">Administrator</p><ol><li><b>Setări restaurant</b> → <b>Contact și program</b>: adresa, coordonatele, telefoanele pe subiecte (rezervări, evenimente, curs de pizza), programul pe zile și nota la program, rețelele sociale, linkul de recenzie Google.</li><li><b>Cereri și emailuri</b>: pe fiecare subiect, „Subiect activ” (oprit = butonul dispare din formular), destinatarii (cel mult 5), copia și termenul de răspuns afișat.</li><li><b>Integrări</b>: ID-ul ialoc, ID-ul statisticilor Google, adresa meniului digital, bucătăria și nivelul de preț pentru Google.</li><li><b>Meniu de navigare</b>: elementele din meniu și ordinea lor. <span class="kbd">Salvează</span>.</li></ol><p class="tip">Un număr de telefon sau o adresă de email nu se scrie niciodată în cod: totul vine de aici.</p></article><article class="how" id="cum-vin"><h3>Adăugați un vin și lista în PDF</h3><p class="who">Toată echipa (PDF-ul: Administrator)</p><ol><li><b>Vinuri</b> → <span class="kbd">Creați unul nou</span>: numele, tipul, producătorul, regiunea, anul, prețul pe sticlă și la pahar, „Recomandat”, „Activ”.</li><li>Lista în PDF: <b>Bibliotecă media</b> → „Ce încarci?” → „Document PDF” → „Alege și convertește” → Salvează.</li><li>Apoi <b>Pagina Acasă</b> → <b>Vinuri</b> → „Lista de vinuri în PDF” → alegeți fișierul → <span class="kbd">Salvează</span>. Butonul „Descarcă PDF” apare pe /catalog-vinuri, în toate limbile.</li></ol></article><article class="how" id="cum-premiu"><h3>Premiul, redirecționările, un cont nou</h3><p class="who">Administrator</p><ol><li><b>Premii și distincții</b> → premiul Wine Spectator: numele, nivelul, anul, insigna oficială (orice imagine, cu transparență), legătura către sursă și „În datele pentru Google”. Nivelul și anul goale = premiul nu intră în datele pentru Google.</li><li><b>Redirecționări</b> → <span class="kbd">Creați unul nou</span>: „De la” (adresa veche, fără domeniu) și „Către” (pagina nouă). Au efect după mutarea domeniului.</li><li><b>Utilizatori</b> → <span class="kbd">Creați unul nou</span>: numele, emailul, o parolă temporară, rolul (Administrator sau Editor) și restaurantele la care are acces. Trimiteți-i omului parola pe alt canal decât emailul contului.</li></ol><p class="tip">Nu ștergeți elemente ca să le „ascundeți”: debifați „Activ” sau „Pornită”. Ștergerea nu se poate anula.</p></article></div>
+    <figure class="bt-banner"><img src="img/bw-automatizam.webp" alt="BizTech: Automatizăm ce îți mănâncă timpul" width="1860" height="470" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="sec" id="intrebari" aria-labelledby="intrebari-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07</span><h2 id="intrebari-h">Întrebări frecvente</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Aici găsiți răspunsuri scurte la întrebările practice despre site și panou.</span></p></div>
+    <div class="faq"><details open><summary>De ce nu apare pe site ce am salvat?</summary><div><p>Reîncărcați pagina site-ului: schimbările apar la următoarea încărcare. Dacă după un minut tot nu apar, verificați „Activ” sau „Pornită” pe element și scrieți-i lui Alin.</p></div></details><details open><summary>Ce înseamnă „Provizoriu” și eticheta „Exemplu · de înlocuit”?</summary><div><p>Un element bifat „Provizoriu” apare pe site cu eticheta vizibilă „Exemplu · de înlocuit”: este conținut de pornire, scris ca să se vadă cum arată pagina. Când puneți textul și fotografia reale, debifați „Provizoriu”. Tabloul de bord numără ce a mai rămas; înainte de lansare contorul trebuie să fie 0.</p></div></details><details open><summary>Cum ascund o secțiune de pe Acasă?</summary><div><p>Pagina Acasă → fila secțiunii → debifați „Pornită”. Secțiunea dispare de pe Acasă și din meniu; conținutul rămâne în panou și o puteți porni oricând.</p></div></details><details open><summary>De ce nu merge „Tradu automat” pe copia locală din capturi?</summary><div><p>Pe copia locală folosită pentru capturi, cheia de traducere nu este setată, de aceea butonul este gri. Pe producție butonul este activ și traduce cele 6 limbi în câteva secunde.</p></div></details><details open><summary>Rezervările de masă ajung în panou?</summary><div><p>Nu. Rezervările de masă se fac în fereastra ialoc și ajung în contul ialoc al restaurantului, ca până acum. În panou ajung doar cererile din formulare: cazare, evenimente private, cursuri de pizza, întrebări, sesizări.</p></div></details><details open><summary>Cine primește emailul când cineva trimite o cerere?</summary><div><p>Destinatarii setați pe subiect în Setări restaurant → Cereri și emailuri (cel mult 5, plus copie). Subiectul emailului se compune singur: „[Subiect] de pe site-ul [Nume restaurant]”. Emailurile se conectează la lansare, prin Resend; până atunci cererile se salvează în panou, iar câmpul „Email trimis” rămâne nebifat.</p></div></details><details open><summary>Ce se întâmplă cu datele oaspeților?</summary><div><p>Se păstrează în Cereri primite, cu acordul și ora acordului, și se șterg automat după 12 luni (termen ales cu juristul). Datele trimise nu se pot modifica, doar starea cererii. Baza de date stă la Supabase, în Irlanda; site-ul rulează la Vercel, în Dublin.</p></div></details><details open><summary>Ce vede un Editor și ce nu?</summary><div><p>Editorul lucrează în grupul Conținut (Pagina Acasă, seri, galerie, media, recenzii, întrebări, saloane, vinuri, linkuri, pagini legale) și vede, din cereri, doar cursurile de pizza și întrebările, unde schimbă doar „Stare”. Setările, premiile, redirecționările, utilizatorii și cererile de cazare, evenimente și sesizări le vede doar Administratorul.</p></div></details><details open><summary>Pot încărca fotografii direct de pe iPhone?</summary><div><p>Da. „Alege și convertește” citește și fișierele HEIC și le convertește în browser, înainte de încărcare. Clipurile se convertesc la fel, cu sunetul păstrat (cel mult 120 s).</p></div></details><details open><summary>De ce sunt adresele în română și în engleză?</summary><div><p>Ca linkurile să nu se rupă niciodată: /en/galerie este galeria în engleză, /de/petreceri serile în germană. Google primește, pentru fiecare pagină, lista variantelor în cele 7 limbi (hreflang), deci arată varianta potrivită fiecărui vizitator.</p></div></details><details open><summary>Când pornesc statisticile Google?</summary><div><p>Pe domeniul davittoria.ro, după lansare, și doar pentru vizitatorii care apasă „Accept” pe bannerul de cookies. Pe adresa temporară bannerul apare, dar statisticile nu se încarcă, ca vizitele de probă să nu intre în rapoarte.</p></div></details><details open><summary>Cum adaug al doilea restaurant al grupului?</summary><div><p>Panoul este făcut pentru mai multe restaurante (ADR-002): fiecare este un „Restaurant” separat, cu setările, culorile, fonturile, conținutul și utilizatorii lui. Al doilea restaurant este Etapa 2 a planului; se adaugă din Restaurante, apoi se completează setările și conținutul de pornire.</p></div></details><details open><summary>Ce fac dacă panoul arată o eroare?</summary><div><p>Faceți o captură de ecran și trimiteți-o lui Alin, cu ce încercați să faceți. Dacă încărcarea unui fișier este refuzată, citiți mesajul: de obicei fișierul e prea mare (peste 50 MB după conversie) sau clipul e prea lung.</p></div></details></div>
+    <figure class="bt-banner"><img src="img/bw-imm.webp" alt="BizTech: Primul proiect AI pentru IMM-ul dumneavoastră" width="1860" height="470" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="sec" id="recomandari" aria-labelledby="recomandari-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">08</span><h2 id="recomandari-h">Recomandări și pașii dinainte de lansare</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Câteva sfaturi din experiența celorlalte proiecte și lista exactă pentru ziua în care site-ul trece pe davittoria.ro.</span></p><p>Site-ul este gata tehnic (F0–F5 sesiunea 1). Rămân conținutul real în locul exemplelor, textele juristului, emailurile și domeniul. Ordinea de mai jos este cea din checklist-ul de lansare.</p></div>
+    <div class="recs"><div class="rec"><h3>Conținutul, înainte de domeniu</h3><ul><li><b>0 elemente provizorii</b> în Tabloul de bord: categoriile din Bucătărie, saloanele, camerele, serile-exemplu, paginile legale.</li><li>Textul juristului pentru Termeni, Confidențialitate și Cookies: parantezele drepte (operatorul de date, adresa pentru datele personale) se completează din Pagini legale.</li><li>Verificarea englezei; celelalte limbi se corectează pe măsură ce le citiți.</li><li>Fotografiile reale pentru categoriile din Bucătărie, saloane și camere; clipul cursului cu sunet; PDF-ul listei de vinuri; insigna oficială Wine Spectator, cu nivelul și anul corecte.</li></ul></div><div class="rec"><h3>Fotografii și clipuri bune</h3><ul><li>Fotografii orizontale pentru copertă și carduri, verticale (4:5) pentru afișele serilor; lumină naturală, fără filtre puternice.</li><li>Clipuri scurte, fără sunet pe copertă (cel mult 30 s), cu sunet pe paginile proprii (cel mult 120 s).</li><li>Textul alternativ scris pentru fiecare imagine: ajută la accesibilitate și la Google.</li><li>Nu încărcați fotografii cu copii fără acordul părinților.</li></ul></div><div class="rec"><h3>Conturi și siguranță</h3><ul><li>Un cont pe om, cu rolul potrivit; parole lungi, nefolosite în altă parte; conturile oamenilor plecați se dezactivează.</li><li>Cheile serviciilor (Vercel, Supabase, Resend, ialoc, Google) nu se scriu în panou, în cod sau în emailuri; le ține Alin, în Vercel.</li><li>Recenzii doar reale, premii doar cu sursă; nimic inventat pe site.</li></ul></div><div class="rec"><h3>După lansare</h3><ul><li>Prima săptămână: erorile din Vercel verificate zilnic; un email real primit pe fiecare subiect.</li><li>Google Search Console cu domeniul și sitemap-ul; Google Business Profile cu adresa site-ului.</li><li>Reveniți periodic în Tabloul de bord: cereri noi, seri apropiate, traduceri de reverificat.</li><li>Etapa următoare (R2): efectele sezoniere, sunetul de fundal, comutatorul de temă, al doilea restaurant în panou.</li></ul></div></div><div class="sub"><h3>Ziua lansării, pas cu pas</h3><p class="measure">Lista din <code>docs/2026_11_25_Trattoria_Checklist_Lansare.md</code>, secțiunile B și C. Se bifează în ordine; <code>CRON_SECRET</code> este deja pus (25.11.2026).</p><ol class="checklist"><li><span>Domeniul <code>davittoria.ro</code> și <code>www</code> adăugate în proiectul Vercel; DNS mutat de pe vechiul hosting; <code>www</code> → <code>davittoria.ro</code></span><span class="owner">Alin + BizTech</span></li><li><span>Panou → Restaurante → Trattoria → „Adrese pe care se servește site-ul”: <code>davittoria.ro</code>, <code>www.davittoria.ro</code></span><span class="owner">BizTech</span></li><li><span>Resend: domeniul de trimitere verificat în DNS; <code>RESEND_API_KEY</code> și <code>EMAIL_FROM</code> în Vercel; un email real primit pe fiecare subiect</span><span class="owner">Alin + BizTech</span></li><li><span><code>ALLOW_INDEXING=true</code> în Vercel (Production), apoi republicare: fără <code>noindex</code> pe domeniu, <code>robots.txt</code> cu <code>Sitemap</code>; adresa <code>*.vercel.app</code> rămâne neindexată</span><span class="owner">Alin + BizTech</span></li><li><span>Redirecționările de pe cele 16 adrese vechi, probate pe domeniu</span><span class="owner">BizTech</span></li><li><span>ialoc pe domeniul final: fereastra și rezervarea cu data serii; domeniul permis în configurarea widgetului, dacă ialoc o cere</span><span class="owner">BizTech + Alin</span></li><li><span>Lighthouse mobil pe domeniu: <code>/</code>, <code>/en</code>, <code>/zh</code> (ținte ≥ 85 / ≥ 95)</span><span class="owner">BizTech</span></li><li><span>Toate formularele probate cap-coadă, cu emailul primit</span><span class="owner">BizTech + Alin</span></li><li><span>Google: Rich Results Test pe Acasă (Restaurant) și pe serile (Event); Search Console cu sitemap-ul; Google Business Profile cu adresa site-ului</span><span class="owner">Alin + BizTech</span></li><li><span>Statisticile: 0 cereri către Google înainte de „Accept”, apoi pagina vizualizată în Google Analytics → În timp real; numele cookie-ului <code>_ga_…</code> trecut în politica de cookies</span><span class="owner">BizTech + Alin</span></li><li><span>Curățenia importului de fotografii: tokenul de import șters din Vercel, folderul Drive pe „Restricted”</span><span class="owner">Alin + BizTech</span></li><li><span>Vechiul hosting oprit abia după ce DNS-ul s-a propagat și redirecționările merg</span><span class="owner">Alin</span></li></ol></div>
+  </div>
+</section>
+
+<section class="sec" id="tehnologii" aria-labelledby="tehnologii-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">09</span><h2 id="tehnologii-h">Tehnologii, servicii și variabile de mediu</h2><p class="voice"><img src="img/alin-320.webp" alt="" width="40" height="40" loading="lazy"><span>Pentru cine vrea să știe ce este sub capotă: componentele, serviciile și, doar cu numele, variabilele de configurare.</span></p><p>Versiunile sunt cele din repo la 26.11.2026 (<code>docs/versions.md</code>, verificate în registrul npm și în documentațiile oficiale). Nicio cheie, parolă sau adresă privată nu apare în acest manual.</p></div>
+    <div class="two"><div><h3 style="margin-bottom:10px">Componentele</h3><div class="tbl"><table><thead><tr><th scope="col">Componentă</th><th scope="col">Versiune</th><th scope="col">Rol</th></tr></thead><tbody><tr><td>Next.js</td><td>16.4.6</td><td>Site-ul public și panoul, randate pe server; rutele pe limbi; rescrierea adreselor românești</td></tr><tr><td>Payload CMS</td><td>3.94.1</td><td>Panoul de administrare, colecțiile, rolurile, multi-restaurant, interfața în română</td></tr><tr><td>React</td><td>19.2.9</td><td>Componentele interfeței</td></tr><tr><td>PostgreSQL (Supabase)</td><td>17.12</td><td>Baza de date: conținut, setări, cereri; migrații la fiecare publicare</td></tr><tr><td>Supabase Storage</td><td>bucket „media”</td><td>Fotografiile, clipurile și PDF-urile, în variantele optimizate</td></tr><tr><td>Node.js / pnpm</td><td>22.23.5 / 10.28</td><td>Mediul de rulare și gestionarul de pachete</td></tr><tr><td>sharp</td><td>0.35.4</td><td>Variantele de imagine pe server</td></tr><tr><td>heic-to / mediabunny</td><td>1.6.7 / 1.66.3</td><td>„Alege și convertește”: HEIC și clipuri, în browser, doar în panou</td></tr><tr><td>Playwright / Vitest</td><td>1.63.0 / —</td><td>Teste: 166 de verificări automate, probe de navigare și capturi</td></tr></tbody></table></div></div><div><h3 style="margin-bottom:10px">Serviciile</h3><div class="tbl"><table><thead><tr><th scope="col">Serviciu</th><th scope="col">Ce face</th></tr></thead><tbody><tr><td>Vercel</td><td>Găzduirea site-ului și a panoului, în Dublin (dub1); publicare automată la fiecare push; variabilele de mediu; Cron pentru ștergerea cererilor (02:23 UTC)</td></tr><tr><td>Supabase</td><td>Postgres 17 și fișierele media, proiectul anna-restaurante, regiunea eu-west-1 (Irlanda)</td></tr><tr><td>GitHub</td><td>Codul, în challymcchallenge/anna-restaurante, ramura main (D-08)</td></tr><tr><td>Resend</td><td>Emailurile formularelor, de pe domeniul davittoria.ro; se conectează la lansare (planul gratuit: 100 de emailuri pe zi)</td></tr><tr><td>ialoc</td><td>Rezervările de masă, în fereastra ialoc (ID-ul în Setări → Integrări)</td></tr><tr><td>Claude (Anthropic), modelul Haiku 5.5</td><td>Traducerile automate în 6 limbi, la build și la butonul „Tradu automat”</td></tr><tr><td>Google Analytics</td><td>Statistici de vizitare, doar după „Accept”, doar pe domeniu, cu eticheta site-ului vechi</td></tr><tr><td>Google Maps</td><td>Harta din Contact, încărcată la clic</td></tr><tr><td>Meniul digital</td><td>Serviciu extern al restaurantului; adresa se schimbă din Setări → Integrări</td></tr></tbody></table></div></div></div><div class="sub"><h3>Variabilele de mediu (doar numele)</h3><p class="measure">Valorile stau doar în Vercel (Settings → Environment Variables) și le pune Alin. Nu apar în cod, în repo, în panou sau în acest manual.</p><div class="tbl tbl-env"><table><thead><tr><th scope="col">Variabilă</th><th scope="col">La ce folosește</th></tr></thead><tbody><tr><td>DATABASE_URI</td><td>Conexiunea la baza de date Supabase (pooler, portul 6543)</td></tr><tr><td>PAYLOAD_SECRET</td><td>Cheia cu care panoul semnează sesiunile de autentificare</td></tr><tr><td>S3_ENDPOINT, S3_REGION, S3_BUCKET, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY</td><td>Accesul la fișierele media din Supabase Storage</td></tr><tr><td>RESEND_API_KEY, EMAIL_FROM</td><td>Trimiterea emailurilor și adresa expeditorului (la lansare)</td></tr><tr><td>NEXT_PUBLIC_SITE_URL</td><td>Adresa publică a site-ului, folosită în sitemap, Open Graph și emailuri</td></tr><tr><td>ALLOW_INDEXING</td><td>„true” doar pe domeniul final: permite indexarea în Google</td></tr><tr><td>TRANSLATE_API_KEY</td><td>Cheia pentru traducerile automate</td></tr><tr><td>MEDIA_IMPORT_TOKEN</td><td>Importul în masă al fotografiilor (temporar; se șterge la lansare)</td></tr><tr><td>CRON_SECRET</td><td>Protejează adresa de ștergere a cererilor; pus pe 25.11.2026</td></tr></tbody></table></div><p class="note" style="margin-top:14px"><b>Unde este totul:</b> deciziile în <code>docs/DECISIONS.md</code> (D-01 … D-81), arhitectura în <code>docs/ADR.md</code>, starea proiectului în <code>docs/2026_11_25_Trattoria_Stare_Proiect.md</code>, ghidul editorului și checklist-ul de lansare în <code>docs/</code>, playbook-ul în <code>docs/playbooks/</code>. Versiunile și limitele verificate, cu data, în <code>docs/versions.md</code>.</p></div>
+  </div>
+</section>
+
+<section class="bt-page" id="biztech" aria-labelledby="biztech-h">
+  <div class="wrap">
+    <div class="bt-strip">
+      <div class="k9"><img src="img/biztech-logo-400.webp" alt="Insigna BizTech" width="54" height="54"><div><strong>BIZTECH Consulting SRL</strong><span class="muted small">Business &amp; Technology · 100% AI Solutions &amp; Agentic Work-Flows for SMEs</span></div></div>
+      <span class="eyebrow">Colaborări comerciale</span>
+    </div>
+    <div class="bt-hero">
+      <div>
+        <p class="eyebrow">Ați citit manualul unui site construit de BIZTECH</p>
+        <h2 id="biztech-h" class="bt-title">Următorul proiect poate fi al dumneavoastră</h2>
+        <p class="lead">Am construit site-ul și panoul Trattoriei da Vittoria cu agenți AI și cu oameni care pun suflet în fiecare proiect. Pentru celelalte restaurante ale grupului, pentru firme și administrații publice lucrăm la fel: o discuție, o analiză gratuită, apoi rezultate pe care le puteți măsura.</p>
+      </div>
+      <img class="bt-badge" src="img/biztech-logo-400.webp" alt="" width="200" height="200">
+    </div>
+    <div class="proof" aria-label="Pe scurt despre BIZTECH">
+      <div><b>15+</b><span>ani în IT, la Nokia, Microsoft și Volkswagen</span></div>
+      <div><b>10</b><span>zile lucrătoare, cel mult, de la contract la primul dashboard</span></div>
+      <div><b>2</b><span>țări: România și Suedia</span></div>
+      <div><b>7</b><span>limbi pe site-ul Trattoria da Vittoria, cu traduceri automate</span></div>
+    </div>
+    <div class="case" id="studiu-de-caz">
+      <div>
+        <p class="eyebrow">Studiu de caz · Grupul ANNA, Târgu Jiu · HoReCa, colaborare din 2024</p>
+        <div class="case-figs">
+          <div><b>4</b><span>locații într-un singur dashboard</span></div>
+          <div><b>163.000</b><span>comenzi pe an, analizate automat</span></div>
+          <div><b>7</b><span>centre de profit, comparate lună de lună</span></div>
+          <div><b>3,4% → 1,25%</b><span>retururi, după expunerea anomaliei</span></div>
+        </div>
+      </div>
+      <figure class="quote">
+        <blockquote>„Pe plan personal, Alin s-a dovedit un colaborator excelent — de încredere, serios și mereu orientat spre soluții. Îl recomand cu toată încrederea!”</blockquote>
+        <figcaption>Călin Lemnaru, Administrator, Grupul ANNA · LinkedIn, 31 octombrie 2025, tradus din engleză</figcaption>
+      </figure>
+    </div>
+    <div class="howwork">
+      <h3>Cum lucrăm</h3>
+      <ol class="steps">
+        <li><b>Discuție inițială</b><span>pe WhatsApp sau 30 de minute pe Google Meet</span></li>
+        <li><b>Analiză gratuită și ofertare</b></li>
+        <li><b>Contractare</b><span>NDA, acord GDPR, avans 10%</span></li>
+        <li><b>Implementare</b></li>
+        <li><b>Livrare și rafinare</b></li>
+        <li><b>Mentenanță și suport</b><span>abonament lunar, urgențe 24/7</span></li>
+      </ol>
+      <p class="small muted">Datele dumneavoastră rămân ale dumneavoastră.</p>
+    </div>
+    <dl class="contact-grid">
+      <div><dt>E-mail</dt><dd><a href="mailto:contact@biztech.ro">contact@biztech.ro</a></dd></div>
+      <div><dt>Alin Lăbău</dt><dd><a href="mailto:alin@biztech.ro">alin@biztech.ro</a></dd></div>
+      <div><dt>George Lăbău</dt><dd><a href="mailto:george@biztech.ro">george@biztech.ro</a></dd></div>
+      <div><dt>Telefon România și WhatsApp</dt><dd><a href="tel:+40772295031">+40 772 295 031</a></dd></div>
+      <div><dt>Telefon Suedia</dt><dd><a href="tel:+46720123475">+46 720 123 475</a></dd></div>
+      <div><dt>Program</dt><dd>Luni–Duminică, 09:00–18:00 · Urgențe 24/7</dd></div>
+      <div><dt>Web</dt><dd><a href="https://www.biztech.ro/" target="_blank" rel="noopener">www.biztech.ro</a></dd></div>
+      <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/alin-labau" target="_blank" rel="noopener">linkedin.com/in/alin-labau</a></dd></div>
+      <div class="c-addr"><dt>Adresa</dt><dd>B-dul Republicii, Bloc 30, Scara 1, Parter, Târgu Jiu, Gorj, 210153, România</dd></div>
+      <div class="span3"><dt>Firma</dt><dd>BIZTECH CONSULTING SRL · Cod fiscal RO35626946 · Reg. Com. J2016000138184 · EUID ROONRC.J2016000138184</dd></div>
+    </dl>
+    <div class="bt-close">
+      <h2>Programați analiza gratuită</h2>
+      <p>Începem cu o discuție pe WhatsApp sau cu un apel video de 30 de minute pe Google Meet. Apoi primiți analiza gratuită și oferta.</p>
+      <div class="cta-row" style="margin-top:4px">
+        <a class="btn btn-light" href="https://www.biztech.ro/" target="_blank" rel="noopener">Programați analiza gratuită</a>
+        <a class="btn btn-ghost-light" href="https://wa.me/40772295031" target="_blank" rel="noopener">Scrieți-ne pe WhatsApp</a>
+      </div>
+      <p class="phone-line"><b>+40 772 295 031</b> · <b>contact@biztech.ro</b> · <b>www.biztech.ro</b></p>
+    </div>
+  </div>
+</section>
+
+<footer class="doc-foot" aria-label="BizTech">
+  <div class="wrap">
+    <img src="img/biztech-logo-400.webp" alt="Insigna BizTech" width="96" height="96">
+    <p>100% AI Solutions &amp; Agentic Work-Flows for SMEs</p>
+    <p>Made with <span class="heart">❤️</span> by BizTech Consulting SRL</p>
+    <p>Alin Labau - AI Project Manager | <a href="tel:+40772295031">+40 772 295 031</a> | <a href="https://www.biztech.ro/" target="_blank" rel="noopener">www.biztech.ro</a></p>
+    <p class="k9line">Manual de utilizare · Site și panou de administrare · Trattoria da Vittoria · Grupul ANNA, Târgu Jiu · 26 noiembrie 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>

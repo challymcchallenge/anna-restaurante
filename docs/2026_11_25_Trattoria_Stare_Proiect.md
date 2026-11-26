@@ -22,7 +22,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D
 | Site (producție) | https://anna-restaurante-alinlabau-9308s-projects.vercel.app |
 | Panou | https://anna-restaurante-alinlabau-9308s-projects.vercel.app/admin |
 | Cod | GitHub `challymcchallenge/anna-restaurante`, ramura `main` (D-08); copia sesiunii: `biztech/dazzling-rubin-m26pdx` |
-| Deciziile | `docs/DECISIONS.md` (ultima: D-81) |
+| Deciziile | `docs/DECISIONS.md` (ultima: D-82) |
 | Întrebări deschise | `docs/OPEN-QUESTIONS.md` (niciuna nouă; rămân cele vechi, pentru Alin) |
 | Ce lipsește de la Alin | `docs/materiale-necesare.md`, secțiunea „Ce așteaptă de la Alin” de mai jos |
 | Ultima migrație | `20261125_134155_f5_requests_retention` |
@@ -31,6 +31,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
 | Raportul F5, sesiunea 1 (HTML, privat) | https://claude.ai/artifact/WPqR2GLALuLnmtKHexFkhZ |
 | Ghidul editorului (HTML, privat) | https://claude.ai/artifact/45BL6VdJMtaUea1bxX3Ujp |
+| Manualul de utilizare (26.11.2026, D-82) | `docs/manual/2026_11_26_Trattoria_Manual_Utilizare.html` și `.pdf` (57 de pagini); generatorul în `scripts/manual/` |
 | Playbook-ul proiectului (26.11.2026) | `docs/playbooks/2026_11_26_Trattoria_Playbook_Proiect.md` (+ `.html`); pagina: https://claude.ai/artifact/UtWSXDK2rGUhp9sV5nsndU |
 | Raportul GATE 4 | `docs/2026_11_25_Trattoria_GATE4.md` și pagina HTML privată https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM |
 | Raportul GATE 3 (pagină HTML, privată) | https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP |
