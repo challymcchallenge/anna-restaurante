@@ -542,6 +542,7 @@ Pentru următorul restaurant al grupului (Citybar & Josper Grill, SuperBistro, T
 - `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md`, `docs/f5/2026_11_25_Trattoria_Audit_F5.md`, `docs/f5/2026_11_25_Trattoria_Adrese_vechi.md`, `docs/f5/2026_11_25_Trattoria_Texte_legale_propunere.md`
 - `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/2026_11_25_Trattoria_Ghid_Editor.md`, `docs/2026_11_25_Trattoria_Checklist_Lansare.md`
 - `src/lib/translate/engine.ts` (promptul de traducere)
+- Playbook-urile de fază: `docs/playbooks/2026_11_24_Trattoria_Playbook_F1.md` și `docs/playbooks/2026_11_24_Trattoria_Playbook_F2.md`
 - Rapoarte HTML: GATE 3 https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP · GATE 4 https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM · F5 https://claude.ai/artifact/WPqR2GLALuLnmtKHexFkhZ · Ghidul editorului https://claude.ai/artifact/45BL6VdJMtaUea1bxX3Ujp
 
 [[#Playbook — Trattoria da Vittoria|↑ Sus]]
