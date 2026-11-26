@@ -31,6 +31,7 @@ Trattoria da Vittoria · 25.11.2026 (actualizat la sfârșitul F5, sesiunea 1, D
 | Raportul F4 | `docs/2026_11_25_Trattoria_F4.md` |
 | Raportul F5, sesiunea 1 (HTML, privat) | https://claude.ai/artifact/WPqR2GLALuLnmtKHexFkhZ |
 | Ghidul editorului (HTML, privat) | https://claude.ai/artifact/45BL6VdJMtaUea1bxX3Ujp |
+| Playbook-ul proiectului (26.11.2026) | `docs/playbooks/2026_11_26_Trattoria_Playbook_Proiect.md` (+ `.html`); pagina: https://claude.ai/artifact/UtWSXDK2rGUhp9sV5nsndU |
 | Raportul GATE 4 | `docs/2026_11_25_Trattoria_GATE4.md` și pagina HTML privată https://claude.ai/artifact/YTzaimKk6noRhFqDrDRgmM |
 | Raportul GATE 3 (pagină HTML, privată) | https://claude.ai/artifact/Jz61TqNb2Mzskz1B34ZXUP |
 
@@ -116,7 +117,7 @@ Alin are multe fotografii într-un dosar local și încărcarea una câte una du
 
 Textul de lipit la începutul sesiunii:
 
-> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-78), `docs/OPEN-QUESTIONS.md` (G14), `docs/PLAN.md` (Faza 5), `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md` și `docs/2026_11_25_Trattoria_Checklist_Lansare.md`. [Răspunsurile G14 / Pornește F5, sesiunea 2 (Resend și domeniul) / altă cerere]
+> Continuăm proiectul Trattoria da Vittoria. Citește întâi `CLAUDE.md`, apoi `docs/2026_11_25_Trattoria_Stare_Proiect.md`, `docs/DECISIONS.md` (până la D-81), `docs/OPEN-QUESTIONS.md`, `docs/PLAN.md` (Faza 5), `docs/f5/2026_11_25_Trattoria_F5_Sesiunea1.md` și `docs/2026_11_25_Trattoria_Checklist_Lansare.md`. [Pornește F5, sesiunea 2 (Resend și domeniul) / altă cerere]
 
 ---
 
